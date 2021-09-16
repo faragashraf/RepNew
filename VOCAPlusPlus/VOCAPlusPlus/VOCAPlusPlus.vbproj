@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0F3EA912-C6E9-4EE9-A93C-0ADBBEC40430}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>VOCAPlusPlus.My.MyApplication</StartupObject>
+    <RootNamespace>VOCAPlusPlus</RootNamespace>
+    <AssemblyName>VOCAPlusPlus</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>VOCAPlusPlus.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>VOCAPlusPlus.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.95.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.95.4\lib\net40\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.6.0\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Exchange.WebServices, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Exchange.WebServices.2.2\lib\40\Microsoft.Exchange.WebServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Exchange.WebServices.Auth, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Exchange.WebServices.2.2\lib\40\Microsoft.Exchange.WebServices.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Runtime.WinForms.12.0.2402.15\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Data.SqlClient" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="APblicClss.vb" />
+    <Compile Include="EnDe.vb" />
+    <Compile Include="IntUtly.vb" />
+    <Compile Include="Login.Designer.vb">
+      <DependentUpon>Login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="MyProfile.designer.vb">
+      <DependentUpon>MyProfile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MyProfile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PublicCode.vb" />
+    <Compile Include="ReLogin.Designer.vb">
+      <DependentUpon>ReLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Start.Designer.vb">
+      <DependentUpon>Start.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Start.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Strc.vb" />
+    <Compile Include="TikFrmRep.Designer.vb">
+      <DependentUpon>TikFrmRep.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TikFrmRep.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TikUpdate.Designer.vb">
+      <DependentUpon>TikUpdate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TikUpdate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VCtheme.vb" />
+    <Compile Include="vocaplusDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>vocaplusDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="vocaplusDataSet1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>vocaplusDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="WelcomeScreen.Designer.vb">
+      <DependentUpon>WelcomeScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="WelcomeScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyProfile.resx">
+      <DependentUpon>MyProfile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReLogin.resx">
+      <DependentUpon>ReLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Start.resx">
+      <DependentUpon>Start.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TikFrmRep.resx">
+      <DependentUpon>TikFrmRep.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TikUpdate.resx">
+      <DependentUpon>TikUpdate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WelcomeScreen.resx">
+      <DependentUpon>WelcomeScreen.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="vocaplusDataSet.xsc">
+      <DependentUpon>vocaplusDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="vocaplusDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>vocaplusDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="vocaplusDataSet.xss">
+      <DependentUpon>vocaplusDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="vocaplusDataSet1.xsc">
+      <DependentUpon>vocaplusDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="vocaplusDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>vocaplusDataSet1.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="vocaplusDataSet1.xss">
+      <DependentUpon>vocaplusDataSet1.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Artiix2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Back1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Back2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browse-button-png-th.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Catch1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ChangePass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Check_Marks1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Check_Marks2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Collapse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CpAdd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CpClose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CpOpen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CpTrns.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DbGet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DBOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DBOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DbUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Demo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dublicte1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Egyptpost.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Empty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\escalate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\escalate1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Expand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Export.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Export1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Format1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Frstaid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FTP.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LandLine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Language for Non Unicode Programs.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Load.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoadFl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mobile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewFolder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paprNtf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paste1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Phone1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pin1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Prev.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Preview1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recblue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recgreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recgrey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recorange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recpurple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recred.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recred1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rectan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recyellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rename.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Reset1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RstPass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SaveFl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Search1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tckoff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tckon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UC-Flashing.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\upload-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Upload-Transparent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UPU.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UserC48.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UserCreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\usersLogin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UsrResm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UsrSusp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VOCAIntro3.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VocaWtr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Yes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DBOff.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DBOn.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Frstaid.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Minus.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VCOff48.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VCOn48.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VocaIcon2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WSOff032.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WSOff048.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WSOn032.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WSOn048.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlServerTypes\Loader.cs" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>
