@@ -12,6 +12,7 @@ Public Class TikFrmRep
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ''XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
         'TikIDRep_ = 307226
+        Dim Def As New APblicClss.Defntion
         Me.Text = "شكوى رقم " & TikIDRep_
         Dim datasource As ReportDataSource
         Dim datasource1 As ReportDataSource
@@ -25,7 +26,7 @@ Public Class TikFrmRep
         '                         OffNm1, OffArea, TkDetails, TkClsStatus , TkFolw, TikCreat, TikCreatTeam, UsrRealNm, UCatNm, TkReOp , TkRecieveDt  
         'FROM  TicketsAll WHERE (TkID = 307226)", Users, "")
 
-        suppliersCommand.Connection = sqlCon
+        suppliersCommand.Connection = Def.CONSQL
         suppliersCommand.CommandText = "SELECT        TkKind, TkDtStart, TkID, SrcNm, TkClNm, TkClPh, TkClPh1, TkMail, TkClAdr, TkClNtID, TkShpNo, TkGBNo, TkCardNo, TkAmount, TkTransDate, PrdKind, ProdKNm, PrdNm, CompNm, CounNmSender, CounNmConsign, OffNm1, 
                          OffArea, TkDetails, TkClsStatus, TkFolw, UsrRealNm, TkReOp, TikCreat, TikCreatTeam, TkRecieveDt, TkDtClose, TkDuration
 FROM            TicketsAll WHERE (TkID = " & TikIDRep_ & ")"
@@ -55,7 +56,7 @@ WHERE (TkupTkSql =" & TikIDRep_ & ") ORDER BY TkupSQL DESC"
         ''lpar1(0) = lpar
         'ReportViewer1.LocalReport.SetParameters(lpar)
         Me.ReportViewer1.RefreshReport()
-        sqlCon.Close()
+        Def.CONSQL.Close()
         'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     End Sub
 End Class

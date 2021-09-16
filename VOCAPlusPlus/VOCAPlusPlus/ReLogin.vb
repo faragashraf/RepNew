@@ -41,6 +41,8 @@ Public Class ReLogin
     End Sub
 
     Private Sub BtSub_Click(sender As Object, e As EventArgs) Handles BtSub.Click
+        Dim Fn As New APblicClss.Func
+        Dim Def As New APblicClss.Defntion
         Randomize()
         Dim sqlCommA As New SqlCommand
         Dim ReaderA As SqlDataReader
@@ -63,7 +65,10 @@ Public Class ReLogin
 ExitSec:
         LblHint.Text = "كلمة السر ناجحة"
         Try
-            sqlCommA.Connection = sqlCon
+            If Def.CONSQL.State = ConnectionState.Closed Then
+                Def.CONSQL.Open()
+            End If
+            sqlCommA.Connection = Def.CONSQL
             sqlCommA.CommandText = "SELECT PRGUID, GUID, Id, (SUBSTRING(GUID, 26, 11)) AS PassKey From dbo.IntGuid Where (IndexOf =" & CInt(Int((250 * Rnd()) + 1)) & ");" 'Select Random key
             sqlCommA.CommandType = CommandType.Text
             ReaderA = sqlCommA.ExecuteReader
@@ -76,13 +81,13 @@ ExitSec:
             Usr.PUsrSltKy = Strings.Right(SPRGUID, Int(CType(Strings.Left(SId, 2), Int16) / 2)) &
                         SGUID &
                         Strings.Left(SPRGUID, Int(CType(Strings.Right(SId, 2), Int16) / 2))
-            Usr.PUsrPWrd = PassEncoding(TxtUsrPass.Text, Usr.PUsrSltKy)
+            Usr.PUsrPWrd = Fn.PassEncoding(TxtUsrPass.Text, Usr.PUsrSltKy)
             ' got the SaltKey
             '   ****** Construct SaltKey
-            PublicCode.InsUpd("UPDATE Int_user SET UsrPass ='" & Usr.PUsrPWrd & "' , UsrKey ='" & SPassKey & "' WHERE (UsrNm = '" & Usr.PUsrNm & "');", "1020&H")   'Update User Pass   
+            Fn.InsUpdate("UPDATE Int_user SET UsrPass ='" & Usr.PUsrPWrd & "' , UsrKey ='" & SPassKey & "' WHERE (UsrNm = '" & Usr.PUsrNm & "');", "1020&H")   'Update User Pass   
 
             If Cnt_ = 32107 Then
-                WelcomeScreen.Show()
+                Login.Show()
             End If
             Cnt_ = 0
             WelcomeScreen.StatBrPnlAr.Text = "تم تغير كلمة السر بنجاح"
@@ -90,7 +95,6 @@ ExitSec:
         Catch ex As Exception
             MsgInf(ex.Message)
         End Try
-
     End Sub
 
     Private Sub TextBox1_Enter(sender As Object, e As EventArgs) Handles TxtUsrPass.Enter
@@ -111,7 +115,8 @@ ExitSec:
     End Sub
 
     Private Sub TxtUsrOPass_Leave(sender As Object, e As EventArgs) Handles TxtUsrOPass.Leave
-        If TxtUsrOPass.Text = PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy) Then 'check user name and password status
+        Dim Fn As New APblicClss.Func
+        If TxtUsrOPass.Text = Fn.PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy) Then 'check user name and password status
 
             LblUsrPass.Visible = True
             TxtUsrPass.Visible = True

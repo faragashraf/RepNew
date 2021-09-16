@@ -11,7 +11,7 @@ Public Class Login
         Dim worker As System.ComponentModel.BackgroundWorker
         worker = CType(sender, System.ComponentModel.BackgroundWorker)
         ' Get the Words object and call the main method.
-        Dim WC As APblicClss.Func = CType(e.Argument, APblicClss.Func)
+        Dim WC As APblicClss.FuncWorker = CType(e.Argument, APblicClss.FuncWorker)
         WC.ConStrFn(worker)
         WC.HrdWre(worker)
     End Sub
@@ -107,7 +107,7 @@ GoodVer:  '       *****      End Check Ver.
         '    Close()
         'End If
         Invoke(Sub()
-                   Dim WC As New APblicClss.Func
+                   Dim WC As New APblicClss.FuncWorker
                    If HrdWrWrkr.IsBusy = False Then
                        HrdWrWrkr.RunWorkerAsync(WC)
                    End If
@@ -134,7 +134,7 @@ GoodVer:  '       *****      End Check Ver.
         LblLogin.Refresh()
         Timer1.Stop()
         '                              0       1       2      3       4            5        6           7           8          9          10        11     as SaltKey                                                                                                                                                                     ,   12                        13         14       15      16        17        18         19         20         21         22         23        24              ************
-        If GetTbl("SELECT UsrId, UsrCat, UsrNm, UsrPass, UsrLevel, UsrRealNm, UsrGender, UsrActive, UsrLastSeen, UsrSusp, UsrTkCount, RIGHT(dbo.IntGuid.PRGUID, CAST(LEFT(dbo.IntGuid.Id, 2) AS int) / 2) + SUBSTRING(dbo.IntGuid.GUID, 3, 5) + LEFT(dbo.IntGuid.PRGUID, CAST(RIGHT(dbo.IntGuid.Id, 2) AS int) / 2) AS SaltKey, UCatNm, UsrSisco, UsrGsm, UsrCalCntr, UsrClsN, UsrFlN, UsrReOpY, UsrUnRead, UsrEvDy, UsrClsYDy, UsrReadYDy, UCatLvl, UsrRecevDy, UsrClsUpdtd, UsrTikFlowDy, UsrEmail FROM int_user INNER JOIN dbo.IntGuid ON int_user.UsrKey = SUBSTRING(dbo.IntGuid.GUID, 26, 11) INNER JOIN dbo.IntUserCat ON int_user.UsrCat = dbo.IntUserCat.UCatId Where (UsrNm = N'" & Me.TxtUsrNm.Text & "');", UserTable, "1001&H") = Nothing Then
+        If Fn.GetTblXX("SELECT UsrId, UsrCat, UsrNm, UsrPass, UsrLevel, UsrRealNm, UsrGender, UsrActive, UsrLastSeen, UsrSusp, UsrTkCount, RIGHT(dbo.IntGuid.PRGUID, CAST(LEFT(dbo.IntGuid.Id, 2) AS int) / 2) + SUBSTRING(dbo.IntGuid.GUID, 3, 5) + LEFT(dbo.IntGuid.PRGUID, CAST(RIGHT(dbo.IntGuid.Id, 2) AS int) / 2) AS SaltKey, UCatNm, UsrSisco, UsrGsm, UsrCalCntr, UsrClsN, UsrFlN, UsrReOpY, UsrUnRead, UsrEvDy, UsrClsYDy, UsrReadYDy, UCatLvl, UsrRecevDy, UsrClsUpdtd, UsrTikFlowDy, UsrEmail FROM int_user INNER JOIN dbo.IntGuid ON int_user.UsrKey = SUBSTRING(dbo.IntGuid.GUID, 26, 11) INNER JOIN dbo.IntUserCat ON int_user.UsrCat = dbo.IntUserCat.UCatId Where (UsrNm = N'" & Me.TxtUsrNm.Text & "');", UserTable, "1001&H") = Nothing Then
             StatusBarPanel1.Text = "Online"
             StatusBarPanel1.Icon = My.Resources.WSOn032
         Else
@@ -198,34 +198,30 @@ GoodVer:  '       *****      End Check Ver.
         If MacStr = "6479F03979BB" Or MacStr = "020000000100" Or MacStr = "7C8AE174167C" Then
             TxtUsrPass.Text = Fn.PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy)
         End If
-
-        'If OsIP() = "10.10.26.4" Or OsIP() = "10.11.51.232" Or OsIP() = "10.11.51.233" Or OsIP() = "10.10.220.128" Or OsIP() = "10.10.220.129" Then
-        '    TxtUsrPass.Text = (PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy))
-        'End If
-        If TxtUsrNm.Text = Usr.PUsrNm And TxtUsrPass.Text = PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy) Then 'check user name and password status
+        If TxtUsrNm.Text = Usr.PUsrNm And TxtUsrPass.Text = Fn.PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy) Then 'check user name and password status
             LblLogin.Text = "          Login has been succeeded"
             LblLogin.Image = My.Resources.Check_Marks1
             LblLogin.ForeColor = Color.Green
             LblLogin.Refresh()
             If Usr.PUsrActv = True Or Usr.PUsrActv = False Then              'XXXXXXXXXXX to cancel this delete   *** Or Usr.PUsrActv = 1  ***     'if user Not Active
                 If Deployment.Application.ApplicationDeployment.IsNetworkDeployed Then
-                    If PublicCode.InsUpd("UPDATE Int_user SET UsrActive = 1, UsrIP ='" & OsIP() & "', UsrVer = '" & Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4) & "', UsrLastSeen = '" & Format(ServrTime(), "yyyy-MM-dd HH:mm:ss") & "' WHERE (UsrNm = '" & TxtUsrNm.Text & "');", "1007&H") <> Nothing Then  'Update User Active =  True    
+                    If Fn.InsUpdate("UPDATE Int_user SET UsrActive = 1, UsrIP ='" & OsIP() & "', UsrVer = '" & Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4) & "', UsrLastSeen = '" & Format(Fn.ServrTime(), "yyyy-MM-dd HH:mm:ss") & "' WHERE (UsrNm = '" & TxtUsrNm.Text & "');", "1007&H") <> Nothing Then  'Update User Active =  True    
                         StatusBarPanel1.Icon = My.Resources.WSOff032
                         Exit Sub
                     End If
                 Else
-                    If PublicCode.InsUpd("UPDATE Int_user SET UsrActive = 1, UsrIP ='" & OsIP() & "', UsrVer = '" & "Not Publsh" & "', UsrLastSeen = '" & Format(ServrTime(), "yyyy-MM-dd HH:mm:ss") & "' WHERE (UsrId = " & Usr.PUsrID & ");", "1007&H") <> Nothing Then  'Update User Active =  True    
+                    If Fn.InsUpdate("UPDATE Int_user SET UsrActive = 1, UsrIP ='" & OsIP() & "', UsrVer = '" & "Not Publsh" & "', UsrLastSeen = '" & Format(Fn.ServrTime(), "yyyy-MM-dd HH:mm:ss") & "' WHERE (UsrId = " & Usr.PUsrID & ");", "1007&H") <> Nothing Then  'Update User Active =  True    
                         StatusBarPanel1.Icon = My.Resources.WSOff032
                         Exit Sub
                     End If
                 End If
-                If PublicCode.InsUpd("insert into Int_access (UaccNm, UaccUsrID, UaccUsrIP, UaccStat)  values ('" & TxtUsrNm.Text & "','" & Usr.PUsrID & "','" & OsIP() & "','" & "OK" & "');", "1008&H") <> Nothing Then 'Append access Record
+                If Fn.InsUpdate("insert into Int_access (UaccNm, UaccUsrID, UaccUsrIP, UaccStat)  values ('" & TxtUsrNm.Text & "','" & Usr.PUsrID & "','" & OsIP() & "','" & "OK" & "');", "1008&H") <> Nothing Then 'Append access Record
                     LogInBtn.Enabled = True
                     StatusBarPanel1.Icon = My.Resources.WSOff032
                     Exit Sub
                 End If
                 GC.Collect()
-                If PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy) = "0000" Then  '     obstacle  user to Change the default Pass with the new on
+                If Fn.PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy) = "0000" Then  '     obstacle  user to Change the default Pass with the new on
                     Cnt_ = 32107 ' pass code to close the exit buttom
                     ReLogin.Show()
                     Me.Close()
@@ -238,14 +234,14 @@ UpdtMobil_:
                             If Usr.PUsrGsm.Length = 0 Then
                                 GoTo UpdtMobil_
                             Else
-                                Dim Cn As New APblicClss.Func
+                                Dim Cn As New APblicClss.FuncWorker
                                 If WrkrLogin.IsBusy = False Then
                                     WrkrLogin.RunWorkerAsync(Cn)
                                 End If
                                 Exit Sub
                             End If
                         Else
-                            Dim Cn As New APblicClss.Func
+                            Dim Cn As New APblicClss.FuncWorker
                             If WrkrLogin.IsBusy = False Then
                                 WrkrLogin.RunWorkerAsync(Cn)
                             End If
@@ -272,9 +268,8 @@ UpdtMobil_:
 
 sec_UsrErr_:
         LogInBtn.Enabled = True
-        If PublicCode.InsUpd(SQLSTR, "1010&H") <> Nothing Then
+        If Fn.InsUpdate(SQLSTR, "1010&H") <> Nothing Then
         End If
-        'MessageBox.Show(Msgs, "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         LblLogin.Text = Msgs
         LblLogin.Image = LblImg
         LblLogin.Refresh()
@@ -282,15 +277,7 @@ sec_UsrErr_:
         Timer1.Start()
     End Sub
     Private Sub ExitBtn_Click(sender As Object, e As EventArgs) Handles ExitBtn.Click  ', Me.FormClosing
-        'Dim frmCollection = Application.OpenForms
-        'If frmCollection.OfType(Of WelcomeScreen).Any And frmCollection.OfType(Of Login).Any Then
-
-        'Else
-
-        'End If
         WelcomeScreen.CntxtMnuStrp.Close()
-        'Invoke(Sub() LodngFrm.Close())
-        'Invoke(Sub() LodngFrm.Dispose())
         On Error Resume Next
         For Each f As Form In My.Application.OpenForms
             f.Close()
@@ -323,7 +310,7 @@ sec_UsrErr_:
         Invoke(Sub()
                    Timer1.Start()
                    Dim Def As New APblicClss
-                   Dim Cn As New APblicClss.Func
+                   Dim Cn As New APblicClss.FuncWorker
                    ServerCD = Cmbo.SelectedItem
                    If ConStrWrkr.IsBusy = False Then
                        ConStrWrkr.RunWorkerAsync(Cn)
@@ -334,21 +321,7 @@ sec_UsrErr_:
         MsgBox(GetMACAddressNew())
         Clipboard.SetText(GetMACAddressNew())
     End Sub
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        Dim tes As New DataTable
-        If LogCollect() > 0 Then
-            Dim FF As New Form
-            Dim hh As New DataGridView
-            FF.Controls.Add(hh)
-            hh.DataSource = LogOfflinTbl
-            FF.WindowState = FormWindowState.Maximized
-            hh.Dock = DockStyle.Fill
-            FF.ShowDialog()
-        Else
-            MsgBox("there is No Records to Display")
-        End If
-    End Sub
     Private Sub TimerClose_Tick(sender As Object, e As EventArgs) Handles TimerClose.Tick
         If Opacity > 0.1 Then
             Opacity -= 0.1
@@ -357,7 +330,6 @@ sec_UsrErr_:
             Invoke(Sub() Me.Close())
         End If
     End Sub
-
     Private Sub Login_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         RemoveHandler Cmbo.SelectedIndexChanged, AddressOf Cmbo_SelectedIndexChanged
         For Each CTRL In Me.Controls
@@ -367,9 +339,7 @@ sec_UsrErr_:
                 CTRL.CancelAsync()
             End If
         Next
-
         Invoke(Sub() Me.Dispose())
-
     End Sub
     Private Sub Login_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         FrmAllSub(Me)
@@ -379,19 +349,19 @@ sec_UsrErr_:
             Invoke(Sub()
                        Dim state As New APblicClss.Defntion
                        'WChckConn.CancelAsync()
-                       Dim Cn As New APblicClss.Func
+                       Dim Cn As New APblicClss.FuncWorker
                        If WChckConn.IsBusy = False Then
                            Invoke(Sub() WChckConn.RunWorkerAsync(Cn))
                        End If
                    End Sub)
         End If
-
     End Sub
     Private Sub ConStrWrkr_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles ConStrWrkr.DoWork
         Dim worker1 As System.ComponentModel.BackgroundWorker
         worker1 = CType(sender, System.ComponentModel.BackgroundWorker)
-        Dim WC1 As APblicClss.Func = CType(e.Argument, APblicClss.Func)
+        Dim WC1 As APblicClss.FuncWorker = CType(e.Argument, APblicClss.FuncWorker)
         WC1.ConStrFn(worker1)
+
         'WC1.Conoff(worker1)
         'WC1.MacTblSub(worker1)
     End Sub
@@ -407,12 +377,11 @@ sec_UsrErr_:
 
     End Sub
 
-
 #Region "Check Connection"
     Private Sub WChckConn_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles WChckConn.DoWork
         Dim worker1 As System.ComponentModel.BackgroundWorker
         worker1 = CType(sender, System.ComponentModel.BackgroundWorker)
-        Dim WC1 As APblicClss.Func = CType(e.Argument, APblicClss.Func)
+        Dim WC1 As APblicClss.FuncWorker = CType(e.Argument, APblicClss.FuncWorker)
         'WC1.ConStrFn(worker1)
         'WC1.MacTblSub(worker1)
         WC1.Conoff(worker1)
@@ -449,7 +418,7 @@ sec_UsrErr_:
         Invoke(Sub() WelcomeScreen.FlowLayoutPanel1.Visible = False)
         Dim worker As System.ComponentModel.BackgroundWorker
         worker = CType(sender, System.ComponentModel.BackgroundWorker)
-        Dim WC As APblicClss.Func = CType(e.Argument, APblicClss.Func)
+        Dim WC As APblicClss.FuncWorker = CType(e.Argument, APblicClss.FuncWorker)
         Invoke(Sub() Timer1.Stop())
         Invoke(Sub() Me.Enabled = False)
         Invoke(Sub() WC.SwitchBoard(worker))
@@ -457,8 +426,6 @@ sec_UsrErr_:
         If PrciTblCnt = 7 Then
             PreciFlag = True
             Invoke(Sub() WelcomeScreen.LblSrvrNm.Text = ServerNm)
-
-
             If ServerNm = "VOCA Server" Then
                 Invoke(Sub() WelcomeScreen.BackgroundImage = My.Resources.VocaWtr)
                 Invoke(Sub() WelcomeScreen.BackgroundImageLayout = ImageLayout.Stretch)
@@ -471,7 +438,6 @@ sec_UsrErr_:
                 Invoke(Sub() WelcomeScreen.BackgroundImageLayout = ImageLayout.Tile)
                 Invoke(Sub() WelcomeScreen.BackColor = Color.White)
             End If
-            Invoke(Sub() WelcomeScreen.LblLanguage.Visible = False)
             Invoke(Sub() WelcomeScreen.DbStat.BackgroundImage = My.Resources.DBOn)
             Invoke(Sub() WelcomeScreen.DbStat.Tag = "تم تحميل قواعد البيانات الأساسية بنجـــاح")
             Invoke(Sub() WelcomeScreen.LblLstSeen.Text = "Last Seen : " & Nw) 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -523,7 +489,7 @@ sec_UsrErr_:
 
             Invoke(Sub() NonEditableLbl(WelcomeScreen.LblUsrRNm))
             Invoke(Sub() WelcomeScreen.Show())
-            Invoke(Sub() LodUsrPic())
+            'Invoke(Sub() LodUsrPic())
             Invoke(Sub() TimerClose.Start())
         Else
             Invoke(Sub() Timer1.Start())
@@ -556,9 +522,8 @@ sec_UsrErr_:
     End Sub
     Private Sub WrkrLogin_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles WrkrLogin.ProgressChanged
         Dim state As APblicClss.Defntion = CType(e.UserState, APblicClss.Defntion)
-        Invoke(Sub() Me.StatusBarPanel1.Text = state.StatStr)
-        'Invoke(Sub() Me.Refresh())
-
+        Invoke(Sub() Me.StatusBarPanel1.Text = state.Str)
+        Invoke(Sub() Me.Refresh())
     End Sub
 #End Region
 #Region "Event"

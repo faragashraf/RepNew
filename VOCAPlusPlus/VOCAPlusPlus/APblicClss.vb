@@ -2,6 +2,7 @@
 Imports System.Management
 Imports System.Net
 Imports System.Threading
+Imports ClosedXML.Excel
 Imports Microsoft.Exchange.WebServices.Data
 Imports VOCAPlusPlus.Strc
 
@@ -16,7 +17,6 @@ Module Public_
     Public ServerCD As String = "Eg Server"
     Public ServerNm As String = "VOCA Server"
     Public strConn As String = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaplus21;Password=@VocaPlus$21-4"
-    Public sqlCon As New SqlConnection(strConn) ' I Have assigned conn STR here and delete this row from all project
     Public Bol As Boolean
 
     Public HardTable As DataTable = New DataTable
@@ -70,11 +70,9 @@ Module Public_
     Public Reader_ As SqlDataReader                     'SQL Reader
     Public SQLTblAdptr As New SqlDataAdapter            'SQL Table Adapter
 
-
-
-
     Public ExpDTable As New DataTable                   'Export data Function to use its count every time i use this function
     Public ExpTrFlseTable As New DataTable
+
     Public ExpStr As String
     Public Rws As Integer
     Public Col As Integer
@@ -85,14 +83,11 @@ Module Public_
     Public LblSecLvl_ As String = "" 'FOR SEC fORM
     'Public Const strConn As String = "Data Source=sql5041.site4now.net;Initial Catalog=DB_A49C49_vocaplus;Persist Security Info=True;User ID=DB_A49C49_vocaplus_admin;Password=Hemonad105046"
     'Public Const strConn As String = "Server=tcp:egyptpostazure.database.windows.net,1433;Initial Catalog=vocaplus;Persist Security Info=False;User ID=sw;Password=Hemonad105046;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
-
     'Public strConnCssys As String = "Data Source=10.10.26.4;Initial Catalog=CSSYS;Persist Security Info=True;User ID=import;Password=ASD_asd123"
     'Public Const strConn As String = "Data Source=HOSPC\HOSPCSQLSRV;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
-
-
     Public Distin As String = ""
     Public StrFileName As String = "X"
-    Public Nw As DateTime = ServrTime()
+    Public Nw As DateTime
     Public TikIDRep_ As Integer
     Public Rslt As DialogResult
     Public Property MousePosition As Object
@@ -109,7 +104,6 @@ Module Public_
     Public gridview_ As DataGridView
 End Module
 Public Class APblicClss
-
     Public Class Defntion
         Public Thread_ As Thread
         Public Str As String
@@ -141,9 +135,10 @@ Public Class APblicClss
         Public CompList As New List(Of String) 'list of tickets to get tickets updates
 
     End Class
-    Public Class Func
+    Public Class FuncWorker
         Public Function ConStrFn(worker As System.ComponentModel.BackgroundWorker) As String
             Dim state As New Defntion
+            Dim Fn As New APblicClss.Func
             state.Errmsg = Nothing
             strConn = Nothing
             If ServerCD = "Eg Server" Then
@@ -161,19 +156,19 @@ Public Class APblicClss
             End If
             Try
                 'sqlCon = New SqlConnection
-                sqlCon.ConnectionString = strConn
+                state.CONSQL.ConnectionString = strConn
             Catch ex As Exception
                 state.Errmsg = ex.Message
-                AppLog("0000&H", ex.Message, "Conecting String")
+                Fn.AppLog("0000&H", ex.Message, "Conecting String")
             End Try
             worker.ReportProgress(0, state)
             Return strConn
         End Function
         Public Sub MacTblSub(worker As System.ComponentModel.BackgroundWorker)
             Dim Def As New APblicClss.Defntion
-            Dim Fn As New APblicClss.Func
+            Dim FnW As New APblicClss.FuncWorker
             Def.MacTable = New DataTable
-            If (Fn.GetTbl("select Mac, Admin from AMac where Mac ='" & GetMACAddressNew() & "'", Def.MacTable, "8888&H", worker)) = Nothing Then
+            If (FnW.GetTbl("select Mac, Admin from AMac where Mac ='" & GetMACAddressNew() & "'", Def.MacTable, "8888&H", worker)) = Nothing Then
                 Def.RwCnt = Def.MacTable.Rows.Count
                 worker.ReportProgress(0, Def)
                 If Def.MacTable.Rows.Count > 0 Then
@@ -192,6 +187,7 @@ Public Class APblicClss
         End Sub
         Public Sub Conoff(worker As System.ComponentModel.BackgroundWorker)
             Dim state As New Defntion
+            Dim Fn As New APblicClss.Func
             Dim TimeTble As New DataTable
             Dim SQLGetAdptr As New SqlDataAdapter            'SQL Table Adapter
             Try
@@ -211,7 +207,7 @@ Public Class APblicClss
                 state.StatStr = "Error"
                 state.BolString = False
                 worker.ReportProgress(0, state)
-                AppLog("0000&H", ex.Message, "Select GetDate() as Now_")
+                Fn.AppLog("0000&H", ex.Message, "Select GetDate() as Now_")
             End Try
             state.CONSQL.Close()
             SqlConnection.ClearPool(state.CONSQL)
@@ -220,6 +216,7 @@ Public Class APblicClss
         End Sub
         Public Function GetTbl(SSqlStr As String, SqlTbl As DataTable, ErrHndl As String, worker As System.ComponentModel.BackgroundWorker) As String
             Dim state As New Defntion
+            Dim Fn As New APblicClss.Func
             state.StatStr = Nothing
             Dim StW As New Stopwatch
             StW.Start()
@@ -242,37 +239,7 @@ Public Class APblicClss
                     SqlConnection.ClearPool(state.CONSQL)
                 End If
                 state.StatStr = ex.Message
-                AppLog(ErrHndl, ex.Message, SSqlStr)
-            End Try
-            state.CONSQL.Close()
-            SqlConnection.ClearPool(state.CONSQL)
-            state.sqlComm.Dispose()
-            Return state.StatStr
-        End Function
-        Public Function GetTblXX(SSqlStr As String, SqlTbl As DataTable, ErrHndl As String) As String
-            Dim state As New Defntion
-            state.StatStr = Nothing
-            Dim StW As New Stopwatch
-            StW.Start()
-            state.CONSQL = New SqlConnection(strConn)
-            Dim sqlCommW As New SqlCommand(SSqlStr, state.CONSQL)
-            Try
-                If state.CONSQL.State = ConnectionState.Closed Or state.CONSQL.State = ConnectionState.Broken Then
-                    state.CONSQL.Open()
-                End If
-
-                state.reader = sqlCommW.ExecuteReader
-                SqlTbl.Load(state.reader)
-                StW.Stop()
-                Dim TimSpn As TimeSpan = (StW.Elapsed)
-                ElapsedTimeSpan = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimSpn.Hours, TimSpn.Minutes, TimSpn.Seconds, TimSpn.Milliseconds / 10)
-            Catch ex As Exception
-                If ex.Message.Contains("The connection is broken and recovery is not possible") Then
-                    state.CONSQL.Close()
-                    SqlConnection.ClearPool(state.CONSQL)
-                End If
-                state.StatStr = ex.Message
-                AppLog(ErrHndl, ex.Message, SSqlStr)
+                Fn.AppLog(ErrHndl, ex.Message, SSqlStr)
             End Try
             state.CONSQL.Close()
             SqlConnection.ClearPool(state.CONSQL)
@@ -282,6 +249,7 @@ Public Class APblicClss
         Public Function InsUpd(SSqlStr As String, ErrHndl As String, worker As System.ComponentModel.BackgroundWorker) As String
             Errmsg = Nothing
             Dim state As New Defntion
+            Dim Fn As New APblicClss.Func
             state.CONSQL = New SqlConnection(strConn)
             sqlComm = New SqlCommand(SSqlStr, state.CONSQL)
             sqlComm.Connection = state.CONSQL
@@ -293,119 +261,12 @@ Public Class APblicClss
                 sqlComm.ExecuteNonQuery()
             Catch ex As Exception
                 Errmsg = ex.Message
-                AppLog(ErrHndl, ex.Message, SSqlStr)
+                Fn.AppLog(ErrHndl, ex.Message, SSqlStr)
             End Try
             state.CONSQL.Close()
             SqlConnection.ClearPool(state.CONSQL)
             Return Errmsg
         End Function
-        Public Function InsUpdate(SSqlStr As String, ErrHndl As String) As String
-            Errmsg = Nothing
-            Dim state As New Defntion
-            state.CONSQL = New SqlConnection(strConn)
-            sqlComm = New SqlCommand(SSqlStr, state.CONSQL)
-            sqlComm.Connection = state.CONSQL
-            sqlComm.CommandType = CommandType.Text
-            Try
-                If state.CONSQL.State = ConnectionState.Closed Then
-                    state.CONSQL.Open()
-                End If
-                sqlComm.ExecuteNonQuery()
-            Catch ex As Exception
-                Errmsg = ex.Message
-                AppLog(ErrHndl, ex.Message, SSqlStr)
-            End Try
-            state.CONSQL.Close()
-            SqlConnection.ClearPool(state.CONSQL)
-            Return Errmsg
-        End Function
-        Public Function InsTrans(TranStr1 As String, TranStr2 As String, ErrHndl As String) As String
-            Dim state As New APblicClss.Defntion
-            state.StatStr = Nothing
-            Try
-                If state.CONSQL.State = ConnectionState.Closed Then
-                    state.CONSQL.Open()
-                End If
-                state.sqlComminsert_1.Connection = state.CONSQL
-                state.sqlComminsert_2.Connection = state.CONSQL
-                state.sqlComminsert_1.CommandType = CommandType.Text
-                state.sqlComminsert_2.CommandType = CommandType.Text
-                state.sqlComminsert_1.CommandText = TranStr1
-                state.sqlComminsert_2.CommandText = TranStr2
-                state.Tran = state.CONSQL.BeginTransaction()
-                state.sqlComminsert_1.Transaction = Tran
-                state.sqlComminsert_2.Transaction = Tran
-                state.sqlComminsert_1.ExecuteNonQuery()
-                state.sqlComminsert_2.ExecuteNonQuery()
-                state.Tran.Commit()
-            Catch ex As Exception
-                state.Tran.Rollback()
-
-                Dim frmCollection = Application.OpenForms
-                If frmCollection.OfType(Of WelcomeScreen).Any Then
-                    WelcomeScreen.TimerCon.Start()
-                    WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
-                End If
-                AppLog(ErrHndl, ex.Message, TranStr1 & "_" & TranStr2)
-            End Try
-            state.CONSQL.Close()
-            SqlConnection.ClearPool(state.CONSQL)
-            Return state.StatStr
-        End Function
-        Public Sub AppLog(ErrHndls As String, LogMsg As String, SSqlStrs As String)
-            On Error Resume Next
-            My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) _
-          & "\VOCALog" & Format(Now, "yyyyMM") & ".Vlg", Format(Now, "yyyyMMdd HH:mm:ss") & " ," & ErrHndls & LogMsg & " &H" & PassEncoding(SSqlStrs, GenSaltKey) & vbCrLf, True)
-        End Sub
-        Function OsIP() As String              'Returns the Ip address 
-#Disable Warning BC40000 ' Type or member is obsolete
-            OsIP = System.Net.Dns.GetHostByName("").AddressList(0).ToString()
-#Enable Warning BC40000 ' Type or member is obsolete
-        End Function
-        Public Function CalDate(StDt As Date, ByRef EnDt As Date, ErrHndl As String) As Integer    ' Returns the number of CalDate between StDt and EnDt Using the table CDHolDay
-            Dim WdyCount As Integer = 0
-            Dim SQLcalDtAdptr As New SqlDataAdapter
-            Dim CaldtTbl As New DataTable
-            Dim Def As New APblicClss.Defntion
-            Try
-
-                StDt = DateValue(StDt)     ' DateValue returns the date part only if U use stamptime as example.
-                EnDt = DateValue(EnDt)
-                Def.sqlComm.Connection = sqlCon ' Get ID & Date & UserID                        
-                Def.sqlComm.CommandText = "SELECT Count(HDate) AS WDaysCount FROM CDHolDay WHERE (HDy = 1) AND (HDate BETWEEN CONVERT(DATETIME, '" & Format(StDt, "dd/MM/yyyy") & "', 103) AND CONVERT(DATETIME, '" & Format(EnDt, "dd/MM/yyyy") & "', 103));"
-                Def.sqlComm.CommandType = CommandType.Text
-                SQLcalDtAdptr.SelectCommand = Def.sqlComm
-                'If sqlCon.State = ConnectionState.Closed Then
-                '    sqlCon.Open()
-                'End If
-                SQLcalDtAdptr.Fill(CaldtTbl)
-                WdyCount = CaldtTbl.Rows(0).Item("WDaysCount")
-            Catch ex As Exception
-                Def.StatStr = ex.Message
-                WdyCount = 1
-            End Try
-            Return WdyCount
-        End Function
-        Function PassEncoding(password As String, FSaltKey As String) As String
-            Dim Wrapper As New Simple3Des(FSaltKey)
-            EncDecTxt = Wrapper.EncryptData(password)
-            Return EncDecTxt
-        End Function
-        Function PassDecoding(password As String, FSaltKey As String) As String
-            Dim wrapper As New Simple3Des(FSaltKey)
-            Try '        DecryptData throws if the wrong password is used.
-                EncDecTxt = wrapper.DecryptData(password)
-            Catch ex As System.Security.Cryptography.CryptographicException
-                EncDecTxt = "false"
-            End Try
-            Return EncDecTxt
-        End Function
-        Public Sub MsgInf(MsgBdy As String)
-            MessageBox.Show(MsgBdy, "رسالة معلومات", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading Or MessageBoxOptions.RightAlign)
-        End Sub
-        Public Sub MsgErr(MsgBdy As String)
-            MessageBox.Show(MsgBdy, "رسالة خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading Or MessageBoxOptions.RightAlign)
-        End Sub
         Public Function ServrTime(worker As System.ComponentModel.BackgroundWorker) As DateTime
             Dim Def As New APblicClss.Defntion
             Def.StatStr = Nothing
@@ -413,7 +274,7 @@ Public Class APblicClss
             Dim TimeTble As New DataTable
             Dim SQLGetAdptr As New SqlDataAdapter            'SQL Table Adapter
             Try
-                sqlComm.Connection = sqlCon
+                sqlComm.Connection = Def.CONSQL
                 SQLGetAdptr.SelectCommand = sqlComm
                 sqlComm.CommandType = CommandType.Text
                 sqlComm.CommandText = "Select GetDate() as Now_"
@@ -433,45 +294,23 @@ Public Class APblicClss
             worker.ReportProgress(0, Def)
             SQLGetAdptr.Dispose()
         End Function
-        Function HrdCol() As Strc.HrdColc
-            Dim MyOBJ As Object
-            Dim Items As New Strc.HrdColc
-            MyOBJ = GetObject("WinMgmts:").instancesof("Win32_Processor") ' Proccessor Information
-            For Each Device In MyOBJ
-                Items.HProcc &= Device.Name.ToString + " " + Device.CurrentClockSpeed.ToString + " Mhz"
-            Next
-            MyOBJ = GetObject("WinMgmts:").instancesof("Win32_NetworkAdapter") ' Network Information
-            For Each Device In MyOBJ
-                Items.HNetwrk &= Device.Name.ToString & " & "
-            Next
-
-            MyOBJ = GetObject("WinMgmts:").instancesof("Win32_PhysicalMemory")  ' Ram Information
-            For Each Device In MyOBJ
-                Items.HRam &= " Ram Capacity : " & Device.Capacity / 1024 / 1024 / 1024 & " Giga " & "Manufacturer : " & Device.Manufacturer
-            Next
-
-            MyOBJ = GetObject("WinMgmts:").instancesof("Win32_bios")  ' Bios Information
-            For Each Device In MyOBJ
-                Items.HSerNo &= "Serial Number: " & Device.serialNumber & " Manufacturer : " & Device.Manufacturer
-            Next
-            Return Items
-        End Function
         Public Sub HrdWre(worker As System.ComponentModel.BackgroundWorker)
             Dim Def As New APblicClss.Defntion
+            Dim FnW As New APblicClss.FuncWorker
             Dim Fn As New APblicClss.Func
             On Error Resume Next
             HardTable = New DataTable
             Def.StatStr = "Not Updated"
             worker.ReportProgress(0, Def)
-            If (Fn.GetTbl("select IpId, IpStime FROM SdHardCollc WHERE ((IpId= '" & OsIP() & "'));", HardTable, "1000&H", worker)) = Nothing Then
+            If (FnW.GetTbl("select IpId, IpStime FROM SdHardCollc WHERE ((IpId= '" & OsIP() & "'));", HardTable, "1000&H", worker)) = Nothing Then
                 If HardTable.Rows.Count = 0 Then 'insert new computer hardware information if not founded into Hardware Table
                     Fn.HrdCol()
-                    Fn.InsUpd("insert into SdHardCollc (IpId, IpLocation, IpProsseccor, IpRam, IpNetwork, IpSerialNo, IpCollect) values ('" & Fn.OsIP() & "','" & "Location" & "','" & Fn.HrdCol.HProcc & "','" & Fn.HrdCol.HRam & "','" & Fn.HrdCol.HNetwrk & "','" & Fn.HrdCol.HSerNo & "','" & True & "');", "1000&H", worker) 'Append access Record
+                    FnW.InsUpd("insert into SdHardCollc (IpId, IpLocation, IpProsseccor, IpRam, IpNetwork, IpSerialNo, IpCollect) values ('" & OsIP() & "','" & "Location" & "','" & Fn.HrdCol.HProcc & "','" & Fn.HrdCol.HRam & "','" & Fn.HrdCol.HNetwrk & "','" & Fn.HrdCol.HSerNo & "','" & True & "');", "1000&H", worker) 'Append access Record
                     Def.StatStr = "Inserted"
                     worker.ReportProgress(0, Def)
                 ElseIf Math.Abs(DateTime.Parse(Today).Subtract(DateTime.Parse(HardTable.Rows(0).Item(1))).TotalDays) > 30 Then
                     Fn.HrdCol()
-                    Fn.InsUpd("UPDATE SdHardCollc SET IpProsseccor ='" & Fn.HrdCol.HProcc & "', IpRam ='" & Fn.HrdCol.HRam & "', IpNetwork ='" & Fn.HrdCol.HNetwrk & "', IpSerialNo ='" & Fn.HrdCol.HSerNo & "', IpStime ='" & Format(Fn.ServrTime(worker), "yyyy-MM-dd") & "' where IpId='" & Fn.OsIP() & "';", "1000&H", worker)
+                    FnW.InsUpd("UPDATE SdHardCollc SET IpProsseccor ='" & Fn.HrdCol.HProcc & "', IpRam ='" & Fn.HrdCol.HRam & "', IpNetwork ='" & Fn.HrdCol.HNetwrk & "', IpSerialNo ='" & Fn.HrdCol.HSerNo & "', IpStime ='" & Format(FnW.ServrTime(worker), "yyyy-MM-dd") & "' where IpId='" & OsIP() & "';", "1000&H", worker)
                     Def.StatStr = "Updated"
                     worker.ReportProgress(0, Def)
                 End If
@@ -481,15 +320,16 @@ Sec2:
             GC.Collect()
         End Sub
         Public Sub SwitchBoard(worker As System.ComponentModel.BackgroundWorker)
-            Dim SwichTabTable As DataTable = New DataTable
-            Dim SwichButTable As DataTable = New DataTable
+            Dim SwichTabTable As New DataTable
+            Dim SwichButTable As New DataTable
             Dim Def As New APblicClss.Defntion
+            Dim Fnw As New APblicClss.FuncWorker
             Dim Fn As New APblicClss.Func
 
             Menu_ = New MenuStrip
             CntxMenu = New ContextMenuStrip
 
-            If (Fn.GetTbl("SELECT SwNm, SwSer, SwID, SwObjNew,SwObjNm, SwObjImg, SwType FROM ASwitchboard ORDER BY SwID", SwichTabTable, "1002&H", worker)) = Nothing Then
+            If (Fnw.GetTbl("SELECT SwNm, SwSer, SwID, SwObjNew,SwObjNm, SwObjImg, SwType FROM ASwitchboard ORDER BY SwID", SwichTabTable, "1002&H", worker)) = Nothing Then
                 Def.Str = " Building Main Menu ..."
                 worker.ReportProgress(0, Def)
                 SwichButTable = SwichTabTable.Copy
@@ -558,7 +398,7 @@ Sec2:
                     UpdateKTable = New DataTable
                     Def.Str = "جاري تحميل أسماء المناطق ..."
                     worker.ReportProgress(0, Def)
-                    If (Fn.GetTbl("SELECT OffArea FROM PostOff GROUP BY OffArea ORDER BY OffArea;", AreaTable, "1012&H", worker)) = Nothing Then
+                    If (Fnw.GetTbl("SELECT OffArea FROM PostOff GROUP BY OffArea ORDER BY OffArea;", AreaTable, "1012&H", worker)) = Nothing Then
                         PrciTblCnt += 1
                     Else
                         Def.Str = "لم يتم تحميل  أسماء المناطق "
@@ -568,7 +408,7 @@ Sec2:
                     Def.Str = "جاري تحميل أسماء المكاتب ..."
                     worker.ReportProgress(0, Def)
 
-                    If (Fn.GetTbl("select OffNm1, OffFinCd, OffArea from PostOff ORDER BY OffNm1;", OfficeTable, "1012&H", worker)) = Nothing Then
+                    If (Fnw.GetTbl("select OffNm1, OffFinCd, OffArea from PostOff ORDER BY OffNm1;", OfficeTable, "1012&H", worker)) = Nothing Then
                         PrciTblCnt += 1
                     Else
                         Def.Str = "لم يتم تحميل  أسماء المكاتب  "
@@ -584,7 +424,7 @@ Sec2:
                     Def.Str = "جاري تحميل مصادر الشكوى ..."
                     worker.ReportProgress(0, Def)
 
-                    If (Fn.GetTbl(SrcStr, CompSurceTable, "1012&H", worker)) = Nothing Then
+                    If (Fnw.GetTbl(SrcStr, CompSurceTable, "1012&H", worker)) = Nothing Then
                         PrciTblCnt += 1
                     Else
                         Def.Str = "لم يتم تحميل  مصادر الشكوى  "
@@ -595,7 +435,7 @@ Sec2:
                     Def.Str = "جاري تحميل أسماء الدول ..."
                     worker.ReportProgress(0, Def)
 
-                    If (Fn.GetTbl("select CounCd,CounNm from CDCountry order by CounNm", CountryTable, "1012&H", worker)) = Nothing Then
+                    If (Fnw.GetTbl("select CounCd,CounNm from CDCountry order by CounNm", CountryTable, "1012&H", worker)) = Nothing Then
                         primaryKey(0) = CountryTable.Columns("CounCd")
                         CountryTable.PrimaryKey = primaryKey
                         PrciTblCnt += 1
@@ -608,7 +448,7 @@ Sec2:
                     Def.Str = "جاري تحميل أنواع الخدمات ..."
                     worker.ReportProgress(0, Def)
 
-                    If (Fn.GetTbl("select ProdKCd, ProdKNm, ProdKClr from CDProdK where ProdKSusp = 0 order by ProdKCd", ProdKTable, "1012&H", worker)) = Nothing Then
+                    If (Fnw.GetTbl("select ProdKCd, ProdKNm, ProdKClr from CDProdK where ProdKSusp = 0 order by ProdKCd", ProdKTable, "1012&H", worker)) = Nothing Then
                         primaryKey(0) = ProdKTable.Columns("ProdKNm")
                         ProdKTable.PrimaryKey = primaryKey
                         PrciTblCnt += 1
@@ -621,7 +461,7 @@ Sec2:
                     Def.Str = "جاري تحميل أنواع المنتجات ..."
                     worker.ReportProgress(0, Def)
 
-                    If (Fn.GetTbl("SELECT FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
+                    If (Fnw.GetTbl("SELECT FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
                         primaryKey(0) = ProdCompTable.Columns("FnSQL")
                         ProdCompTable.PrimaryKey = primaryKey
                         PrciTblCnt += 1
@@ -633,14 +473,14 @@ Sec2:
                     Def.Str = "جاري تحميل أنواع التحديثات ..."
                     worker.ReportProgress(0, Def)
                     If Usr.PUsrUCatLvl >= 3 And Usr.PUsrUCatLvl <= 5 Then
-                        If (Fn.GetTbl("SELECT EvId, EvNm FROM CDEvent where EvSusp = 0 and EvBkOfic = 1 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
+                        If (Fnw.GetTbl("SELECT EvId, EvNm FROM CDEvent where EvSusp = 0 and EvBkOfic = 1 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
                             PrciTblCnt += 1
                         Else
                             Def.Str = "لم يتم تحميل  أنواع التحديثات "
                             worker.ReportProgress(0, Def)
                         End If
                     Else
-                        If (Fn.GetTbl("SELECT EvId, EvNm FROM CDEvent where EvSusp = 0 and EvBkOfic = 0 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
+                        If (Fnw.GetTbl("SELECT EvId, EvNm FROM CDEvent where EvSusp = 0 and EvBkOfic = 0 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
                             PrciTblCnt += 1
                         Else
                             Def.Str = " أنواع التحديثات / "
@@ -648,187 +488,9 @@ Sec2:
                         End If
                     End If
                 End If
-
-                'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
             Else
                 worker.ReportProgress(0, Def)
-                Fn.MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf)
-            End If
-        End Sub
-        Public Sub SwitchBoardXXXXXXXXXXXXXXXXXXXX(worker As System.ComponentModel.BackgroundWorker)
-            Dim SwichTabTable As DataTable = New DataTable
-            Dim SwichButTable As DataTable = New DataTable
-            Dim Def As New APblicClss.Defntion
-            Dim Fn As New APblicClss.Func
-
-            Menu_ = New MenuStrip
-            CntxMenu = New ContextMenuStrip
-
-            If (Fn.GetTbl("SELECT SwNm, SwSer, SwID, SwObjNew FROM ASwitchboard WHERE (SwType = N'Tab') AND (SwNm <> N'NA') ORDER BY SwID", SwichTabTable, "1002&H", worker)) = Nothing Then
-                Def.Str = " Building Main Menu ..."
-                worker.ReportProgress(0, Def)
-                For Cnt_ = 0 To SwichTabTable.Rows.Count - 1
-                    Dim NewTab As New ToolStripMenuItem(SwichTabTable.Rows(Cnt_).Item(0).ToString)
-                    Dim NewTabCx As New ToolStripMenuItem(SwichTabTable.Rows(Cnt_).Item(0).ToString)  'YYYYYYYYYYY
-
-                    If Mid(Usr.PUsrLvl, SwichTabTable.Rows(Cnt_).Item(2).ToString, 1) = "A" Or
-                        Mid(Usr.PUsrLvl, SwichTabTable.Rows(Cnt_).Item(2).ToString, 1) = "H" Then
-                        Menu_.Items.Add(NewTab)
-                        CntxMenu.Items.Add(NewTabCx)                     'YYYYYYYYYYY
-
-                        Def.Str = " Adding Menu " & NewTab.Text
-                        worker.ReportProgress(0, Def)
-                        SwichButTable.Rows.Clear()
-                        If (Fn.GetTbl("SELECT SwNm, SwSer, SwID, SwObjNm, SwObjImg, SwObjNew FROM ASwitchboard WHERE (SwType <> N'Tab') AND (SwNm <> N'NA') AND (SwSer ='" & SwichTabTable.Rows(Cnt_).Item(1).ToString & "') ORDER BY SwID;", SwichButTable, "1002&H", worker)) = Nothing Then
-                            Def.Str = " Building Menu " & NewTab.Text
-                            worker.ReportProgress(0, Def)
-                            For Cnt_1 = 0 To SwichButTable.Rows.Count - 1
-                                Dim subItem As New ToolStripMenuItem(SwichButTable.Rows(Cnt_1).Item(0).ToString)
-                                Dim subItemCx As New ToolStripMenuItem(SwichButTable.Rows(Cnt_1).Item(0).ToString)  'YYYYYYYYYYY
-                                If Mid(Usr.PUsrLvl, SwichButTable.Rows(Cnt_1).Item(2).ToString, 1) = "A" Or
-                                   Mid(Usr.PUsrLvl, SwichButTable.Rows(Cnt_1).Item(2).ToString, 1) = "H" Then
-
-                                    Def.Str = " Adding Button " & NewTab.Text
-                                    worker.ReportProgress(0, Def)
-                                    subItem.Tag = SwichButTable.Rows(Cnt_1).Item(3).ToString
-                                    If Mid(Usr.PUsrLvl, SwichButTable.Rows(Cnt_1).Item(2).ToString, 1) = "H" Then
-                                        subItem.AccessibleName = "True"
-                                        subItemCx.AccessibleName = "True"
-                                    End If
-                                    If DBNull.Value.Equals(SwichButTable.Rows(Cnt_1).Item("SwObjImg")) = False Then
-                                        Dim imglst As New ImageList
-                                        Dim Cnt_ = imglst.Images(SwichButTable.Rows(Cnt_1).Item("SwObjImg"))
-                                        Dim dd = My.Resources.ResourceManager.GetObject(SwichButTable.Rows(Cnt_1).Item("SwObjImg"))
-                                        NewTab.Image = Cnt_
-                                    End If
-                                    subItemCx.Tag = SwichButTable.Rows(Cnt_1).Item(3).ToString  'YYYYYYYYYYY
-                                    NewTab.DropDownItems.Add(subItem)
-                                    NewTabCx.DropDownItems.Add(subItemCx)    'YYYYYYYYYYY
-                                End If
-                                If Mid(Usr.PUsrLvl, SwichTabTable.Rows(Cnt_).Item(2).ToString, 1) = "H" Then
-                                    NewTab.AccessibleName = "True"
-                                    NewTabCx.AccessibleName = "True"
-                                End If
-                            Next Cnt_1
-                        Else
-                            MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
-                        End If
-                    End If
-                    NewTab = Nothing
-                Next Cnt_
-                PrciTblCnt = 0
-                SwichTabTable.Dispose()
-                SwichButTable.Dispose()
-                Def.Str = " Menu has been builded  "
-                worker.ReportProgress(0, Def)
-                Def.Str = "جاري تحميل البيانات ..."
-                worker.ReportProgress(0, Def)
-                If Def.Str = "جاري تحميل البيانات ..." Then
-                    Dim primaryKey(0) As DataColumn
-                    AreaTable = New DataTable
-                    OfficeTable = New DataTable
-                    CompSurceTable = New DataTable
-                    CountryTable = New DataTable
-                    ProdKTable = New DataTable
-                    ProdCompTable = New DataTable
-                    UpdateKTable = New DataTable
-                    Def.Str = "جاري تحميل أسماء المناطق ..."
-                    worker.ReportProgress(0, Def)
-                    If (Fn.GetTbl("SELECT OffArea FROM PostOff GROUP BY OffArea ORDER BY OffArea;", AreaTable, "1012&H", worker)) = Nothing Then
-                        PrciTblCnt += 1
-                    Else
-                        Def.Str = "لم يتم تحميل  أسماء المناطق "
-                        worker.ReportProgress(0, Def)
-                    End If
-
-                    Def.Str = "جاري تحميل أسماء المكاتب ..."
-                    worker.ReportProgress(0, Def)
-
-                    If (Fn.GetTbl("select OffNm1, OffFinCd, OffArea from PostOff ORDER BY OffNm1;", OfficeTable, "1012&H", worker)) = Nothing Then
-                        PrciTblCnt += 1
-                    Else
-                        Def.Str = "لم يتم تحميل  أسماء المكاتب  "
-                        worker.ReportProgress(0, Def)
-                    End If
-
-                    Dim SrcStr As String = ""
-                    If Usr.PUsrUCatLvl = 7 Then
-                        SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1"
-                    Else
-                        SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd > 1 ORDER BY SrcNm"
-                    End If
-                    Def.Str = "جاري تحميل مصادر الشكوى ..."
-                    worker.ReportProgress(0, Def)
-
-                    If (Fn.GetTbl(SrcStr, CompSurceTable, "1012&H", worker)) = Nothing Then
-                        PrciTblCnt += 1
-                    Else
-                        Def.Str = "لم يتم تحميل  مصادر الشكوى  "
-                        worker.ReportProgress(0, Def)
-                    End If
-
-
-                    Def.Str = "جاري تحميل أسماء الدول ..."
-                    worker.ReportProgress(0, Def)
-
-                    If (Fn.GetTbl("select CounCd,CounNm from CDCountry order by CounNm", CountryTable, "1012&H", worker)) = Nothing Then
-                        primaryKey(0) = CountryTable.Columns("CounCd")
-                        CountryTable.PrimaryKey = primaryKey
-                        PrciTblCnt += 1
-                    Else
-                        Def.Str = "لم يتم تحميل  أسماء الدول  "
-                        worker.ReportProgress(0, Def)
-                    End If
-
-
-                    Def.Str = "جاري تحميل أنواع الخدمات ..."
-                    worker.ReportProgress(0, Def)
-
-                    If (Fn.GetTbl("select ProdKCd, ProdKNm, ProdKClr from CDProdK where ProdKSusp = 0 order by ProdKCd", ProdKTable, "1012&H", worker)) = Nothing Then
-                        primaryKey(0) = ProdKTable.Columns("ProdKNm")
-                        ProdKTable.PrimaryKey = primaryKey
-                        PrciTblCnt += 1
-                    Else
-                        Def.Str = "لم يتم تحميل  أنواع الخدمات "
-                        worker.ReportProgress(0, Def)
-                    End If
-
-
-                    Def.Str = "جاري تحميل أنواع المنتجات ..."
-                    worker.ReportProgress(0, Def)
-
-                    If (Fn.GetTbl("SELECT FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
-                        primaryKey(0) = ProdCompTable.Columns("FnSQL")
-                        ProdCompTable.PrimaryKey = primaryKey
-                        PrciTblCnt += 1
-                    Else
-                        Def.Str = "لم يتم تحميل أنواع المنتجات  "
-                        worker.ReportProgress(0, Def)
-                    End If
-
-                    Def.Str = "جاري تحميل أنواع التحديثات ..."
-                    worker.ReportProgress(0, Def)
-                    If Usr.PUsrUCatLvl >= 3 And Usr.PUsrUCatLvl <= 5 Then
-                        If (Fn.GetTbl("SELECT EvId, EvNm FROM CDEvent where EvSusp = 0 and EvBkOfic = 1 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
-                            PrciTblCnt += 1
-                        Else
-                            Def.Str = "لم يتم تحميل  أنواع التحديثات "
-                            worker.ReportProgress(0, Def)
-                        End If
-                    Else
-                        If (Fn.GetTbl("SELECT EvId, EvNm FROM CDEvent where EvSusp = 0 and EvBkOfic = 0 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
-                            PrciTblCnt += 1
-                        Else
-                            Def.Str = " أنواع التحديثات / "
-                            worker.ReportProgress(0, Def)
-                        End If
-                    End If
-                End If
-
-                'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-            Else
-                worker.ReportProgress(0, Def)
-                Fn.MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf)
+                MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf)
             End If
         End Sub
         Public Sub TikCntrSub(worker As System.ComponentModel.BackgroundWorker)
@@ -838,14 +500,214 @@ Sec2:
             If GetTbl("select UsrClsN, UsrFlN, UsrReOpY, UsrUnRead, UsrEvDy, UsrClsYDy, UsrReadYDy, UsrRecevDy, UsrClsUpdtd, UsrLastSeen, UsrTikFlowDy, UsrActive,UsrLogSnd from Int_user where UsrId = " & Usr.PUsrID & ";", TicTable, "0000&H", worker) = Nothing Then
             End If
         End Sub
+    End Class
+    Public Class Func
+        Public Function ServrTime() As DateTime
+            Dim Def As New APblicClss.Defntion
+            Def.StatStr = Nothing
+            Dim TimeTble As New DataTable
+            Dim SQLGetAdptr As New SqlDataAdapter            'SQL Table Adapter
+            Try
+                sqlComm.Connection = Def.CONSQL
+                SQLGetAdptr.SelectCommand = sqlComm
+                sqlComm.CommandType = CommandType.Text
+                sqlComm.CommandText = "Select GetDate() as Now_"
+                SQLGetAdptr.Fill(TimeTble)
+                Def.Nw = Format(TimeTble.Rows(0).Item(0), "yyyy/MMM/dd hh:mm:ss tt")
+
+            Catch ex As Exception
+                Def.StatStr = "X"
+                Dim frmCollection = Application.OpenForms
+                If frmCollection.OfType(Of WelcomeScreen).Any Then
+                    WelcomeScreen.TimerCon.Start()
+                    WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+                End If
+            End Try
+            Return Def.Nw
+            SQLGetAdptr.Dispose()
+        End Function
+        Public Function GetTblXX(SSqlStr As String, SqlTbl As DataTable, ErrHndl As String) As String
+            Dim state As New Defntion
+            state.StatStr = Nothing
+            Dim StW As New Stopwatch
+            StW.Start()
+            state.CONSQL = New SqlConnection(strConn)
+            Dim sqlCommW As New SqlCommand(SSqlStr, state.CONSQL)
+            Try
+                If state.CONSQL.State = ConnectionState.Closed Or state.CONSQL.State = ConnectionState.Broken Then
+                    state.CONSQL.Open()
+                End If
+
+                state.reader = sqlCommW.ExecuteReader
+                SqlTbl.Load(state.reader)
+                StW.Stop()
+                Dim TimSpn As TimeSpan = (StW.Elapsed)
+                ElapsedTimeSpan = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimSpn.Hours, TimSpn.Minutes, TimSpn.Seconds, TimSpn.Milliseconds / 10)
+            Catch ex As Exception
+                If ex.Message.Contains("The connection is broken and recovery is not possible") Then
+                    state.CONSQL.Close()
+                    SqlConnection.ClearPool(state.CONSQL)
+                End If
+                state.StatStr = ex.Message
+                AppLog(ErrHndl, ex.Message, SSqlStr)
+            End Try
+            state.CONSQL.Close()
+            SqlConnection.ClearPool(state.CONSQL)
+            state.sqlComm.Dispose()
+            Return state.StatStr
+        End Function
+        Public Function InsUpdate(SSqlStr As String, ErrHndl As String) As String
+            Errmsg = Nothing
+            Dim state As New Defntion
+            state.CONSQL = New SqlConnection(strConn)
+            sqlComm = New SqlCommand(SSqlStr, state.CONSQL)
+            sqlComm.Connection = state.CONSQL
+            sqlComm.CommandType = CommandType.Text
+            Try
+                If state.CONSQL.State = ConnectionState.Closed Then
+                    state.CONSQL.Open()
+                End If
+                sqlComm.ExecuteNonQuery()
+            Catch ex As Exception
+                Errmsg = ex.Message
+                AppLog(ErrHndl, ex.Message, SSqlStr)
+            End Try
+            state.CONSQL.Close()
+            SqlConnection.ClearPool(state.CONSQL)
+            Return Errmsg
+        End Function
+        Public Function InsTrans(TranStr1 As String, TranStr2 As String, ErrHndl As String) As String
+            Dim state As New APblicClss.Defntion
+            state.StatStr = Nothing
+            Try
+                If state.CONSQL.State = ConnectionState.Closed Then
+                    state.CONSQL.Open()
+                End If
+                state.sqlComminsert_1.Connection = state.CONSQL
+                state.sqlComminsert_2.Connection = state.CONSQL
+                state.sqlComminsert_1.CommandType = CommandType.Text
+                state.sqlComminsert_2.CommandType = CommandType.Text
+                state.sqlComminsert_1.CommandText = TranStr1
+                state.sqlComminsert_2.CommandText = TranStr2
+                state.Tran = state.CONSQL.BeginTransaction()
+                state.sqlComminsert_1.Transaction = Tran
+                state.sqlComminsert_2.Transaction = Tran
+                state.sqlComminsert_1.ExecuteNonQuery()
+                state.sqlComminsert_2.ExecuteNonQuery()
+                state.Tran.Commit()
+            Catch ex As Exception
+                state.Tran.Rollback()
+
+                Dim frmCollection = Application.OpenForms
+                If frmCollection.OfType(Of WelcomeScreen).Any Then
+                    WelcomeScreen.TimerCon.Start()
+                    WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+                End If
+                AppLog(ErrHndl, ex.Message, TranStr1 & "_" & TranStr2)
+            End Try
+            state.CONSQL.Close()
+            SqlConnection.ClearPool(state.CONSQL)
+            Return state.StatStr
+        End Function
+        Public Sub AppLog(ErrHndls As String, LogMsg As String, SSqlStrs As String)
+            On Error Resume Next
+            My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) _
+          & "\VOCALog" & Format(Now, "yyyyMM") & ".Vlg", Format(Now, "yyyyMMdd HH:mm:ss") & " ," & ErrHndls & LogMsg & " &H" & PassEncoding(SSqlStrs, GenSaltKey) & vbCrLf, True)
+        End Sub
+        Public Function CalDate(StDt As Date, ByRef EnDt As Date, ErrHndl As String) As Integer    ' Returns the number of CalDate between StDt and EnDt Using the table CDHolDay
+            Dim WdyCount As Integer = 0
+            Dim SQLcalDtAdptr As New SqlDataAdapter
+            Dim CaldtTbl As New DataTable
+            Dim Def As New APblicClss.Defntion
+            Try
+
+                StDt = DateValue(StDt)     ' DateValue returns the date part only if U use stamptime as example.
+                EnDt = DateValue(EnDt)
+                Def.sqlComm.Connection = Def.CONSQL ' Get ID & Date & UserID                        
+                Def.sqlComm.CommandText = "SELECT Count(HDate) AS WDaysCount FROM CDHolDay WHERE (HDy = 1) AND (HDate BETWEEN CONVERT(DATETIME, '" & Format(StDt, "dd/MM/yyyy") & "', 103) AND CONVERT(DATETIME, '" & Format(EnDt, "dd/MM/yyyy") & "', 103));"
+                Def.sqlComm.CommandType = CommandType.Text
+                SQLcalDtAdptr.SelectCommand = Def.sqlComm
+                'If sqlCon.State = ConnectionState.Closed Then
+                '    sqlCon.Open()
+                'End If
+                SQLcalDtAdptr.Fill(CaldtTbl)
+                WdyCount = CaldtTbl.Rows(0).Item("WDaysCount")
+            Catch ex As Exception
+                Def.StatStr = ex.Message
+                WdyCount = 1
+            End Try
+            Return WdyCount
+        End Function
+        Function PassEncoding(password As String, FSaltKey As String) As String
+            Dim Wrapper As New Simple3Des(FSaltKey)
+            EncDecTxt = Wrapper.EncryptData(password)
+            Return EncDecTxt
+        End Function
+        Function PassDecoding(password As String, FSaltKey As String) As String
+            Dim wrapper As New Simple3Des(FSaltKey)
+            Try '        DecryptData throws if the wrong password is used.
+                EncDecTxt = wrapper.DecryptData(password)
+            Catch ex As System.Security.Cryptography.CryptographicException
+                EncDecTxt = "false"
+            End Try
+            Return EncDecTxt
+        End Function
+        Function HrdCol() As Strc.HrdColc
+            Dim MyOBJ As Object
+            Dim Items As New Strc.HrdColc
+            MyOBJ = GetObject("WinMgmts:").instancesof("Win32_Processor") ' Proccessor Information
+            For Each Device In MyOBJ
+                Items.HProcc &= Device.Name.ToString + " " + Device.CurrentClockSpeed.ToString + " Mhz"
+            Next
+            MyOBJ = GetObject("WinMgmts:").instancesof("Win32_NetworkAdapter") ' Network Information
+            For Each Device In MyOBJ
+                Items.HNetwrk &= Device.Name.ToString & " & "
+            Next
+
+            MyOBJ = GetObject("WinMgmts:").instancesof("Win32_PhysicalMemory")  ' Ram Information
+            For Each Device In MyOBJ
+                Items.HRam &= " Ram Capacity : " & Device.Capacity / 1024 / 1024 / 1024 & " Giga " & "Manufacturer : " & Device.Manufacturer
+            Next
+
+            MyOBJ = GetObject("WinMgmts:").instancesof("Win32_bios")  ' Bios Information
+            For Each Device In MyOBJ
+                Items.HSerNo &= "Serial Number: " & Device.serialNumber & " Manufacturer : " & Device.Manufacturer
+            Next
+            Return Items
+        End Function
+        Public Function Exprt(FileNm As String, Tbl As DataTable) As String
+            Dim ExrtErr As String = Nothing
+            Dim D As SaveFileDialog = New SaveFileDialog
+            With D
+                .Title = "Save Excel File"
+                .InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                .Filter = "Excel File|*.xlsx"
+                .FilterIndex = 1
+                .RestoreDirectory = True
+            End With
+            D.FileName = FileNm & "_" & Format(Now, "yyyy-MM-dd_HHmm") '& GroupBox1.Tag & GroupBox2.Tag & GroupBox3.Tag & GrpDtKnd.Tag
+            If D.ShowDialog() = DialogResult.OK Then
+                Try
+                    Dim Workbook As XLWorkbook = New XLWorkbook()
+                    Workbook.Worksheets.Add(Tbl, "FileNm")
+                    Workbook.SaveAs(D.FileName)
+                    MsgBox("Done")
+                Catch ex As Exception
+
+                    Exprt = "X"
+                    MsgBox(ex.Message)
+                End Try
+            End If
+            Return ExrtErr
+        End Function
 #Region "Tik"
         Public Sub GetUpdtEvnt_(worker As System.ComponentModel.BackgroundWorker)
-            Dim Fn As New APblicClss.Func
+            Dim Fnw As New APblicClss.Func
             Dim Def As New APblicClss.Defntion
             UpdtCurrTbl = New DataTable
             '                                 0        1         2         3         4        5        6         7         8         9
             'If Fn.GetTbl("SELECT TkupSTime, TkupTxt, UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread FROM TkEvent INNER JOIN Int_user ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON Int_user.UsrCat = IntUserCat.UCatId Where ( " & CompIds & ") ORDER BY TkupTkSql,TkupSQL DESC", UpdtCurrTbl, "1019&H", worker) = Nothing Then
-            If Fn.GetTbl("SELECT TkupSTime, TkupTxt, UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread FROM TkEvent inner join Tickets on Tickets.TkSQL = TkEvent.TkupTkSql INNER JOIN Int_user ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON Int_user.UsrCat = IntUserCat.UCatId   " & FltrStr & " ORDER BY TkupTkSql,TkupSQL DESC", UpdtCurrTbl, "1019&H", worker) = Nothing Then
+            If Fnw.GetTblXX("SELECT TkupSTime, TkupTxt, UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread FROM TkEvent inner join Tickets on Tickets.TkSQL = TkEvent.TkupTkSql INNER JOIN Int_user ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON Int_user.UsrCat = IntUserCat.UCatId   " & FltrStr & " ORDER BY TkupTkSql,TkupSQL DESC", UpdtCurrTbl, "1019&H") = Nothing Then
                 UpdtCurrTbl.Columns.Add("File")        ' Add files Columns 
             Else
                 MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & Errmsg)
@@ -1089,5 +951,80 @@ Sec2:
             Return Errmsg
         End Function
 #End Region
+        Public Function SndExchngMil(To_ As String, Optional Cc_ As String = "", Optional Bcc_ As String = "" _
+                             , Optional Suj As String = "", Optional Body_ As String = "", Optional Import As Integer = 0) As String
+            Dim MailRsult As String = Nothing
+
+            Dim exchange As ExchangeService
+            exchange = New ExchangeService(ExchangeVersion.Exchange2007_SP1)
+            exchange.Credentials = New WebCredentials("egyptpost\voca-support", "asd_ASD123")
+            exchange.Url() = New Uri("https://mail.egyptpost.org/ews/exchange.asmx")
+            Dim message As New EmailMessage(exchange)
+            message.ToRecipients.Add(To_)
+            If Cc_.Length > 0 Then message.CcRecipients.Add(Cc_)
+            If Bcc_.Length > 0 Then message.BccRecipients.Add(Bcc_)
+            message.Subject = Suj
+            message.Body = Body_
+            'message.Attachments.AddFileAttachment(AttchNam, AttchLction)
+            'message.Attachments(0).ContentId = AttchNam
+            message.Importance = Import
+            Try
+                message.SendAndSaveCopy()
+            Catch ex As Exception
+                MailRsult = "X"
+            End Try
+            Return MailRsult
+        End Function
+        Public Function SelctSerchTxt(richtxtbx As RichTextBox, Strng As String, Optional bL As Boolean = True) As String
+            Dim HH As String = Nothing
+            Try
+                RemoveHandler richtxtbx.FindForm.Activated, AddressOf Frm_Activated
+                AddHandler richtxtbx.FindForm.Activated, AddressOf Frm_Activated
+                'richtxtbx = New RichTextBox
+                Dim starttxt As Integer = 0
+                Dim endtxt As Integer
+                endtxt = richtxtbx.Text.LastIndexOf(Strng)
+                'richtxtbx.SelectAll()
+                'richtxtbx.SelectionBackColor = Color.White
+                While starttxt < endtxt
+                    If richtxtbx.Find(Strng, starttxt, richtxtbx.TextLength, RichTextBoxFinds.MatchCase) > 0 Then
+                        If bL = False Then
+                            richtxtbx.SelectionBackColor = Color.GreenYellow
+                        Else
+                            richtxtbx.SelectionBackColor = Color.Red
+                            richtxtbx.SelectionColor = Color.Yellow
+                            richtxtbx.SelectionFont = New Font("Times New Roman", 14, FontStyle.Bold)
+                        End If
+
+                    End If
+                    starttxt += 1
+                End While
+            Catch ex As Exception
+                HH = "X"
+                MsgBox(ex.Message)
+            End Try
+            Return HH
+        End Function
+        Public Function ClorTxt(richtxtbx As RichTextBox, Strng As String, Clr As Color) As String
+            Dim HH As String = Nothing
+            Try
+                'richtxtbx = New RichTextBox
+                Dim starttxt As Integer = 0
+                Dim endtxt As Integer
+                endtxt = richtxtbx.Text.LastIndexOf(Strng)
+                'richtxtbx.SelectAll()
+                'richtxtbx.SelectionBackColor = Color.White
+                While starttxt < endtxt
+                    If richtxtbx.Find(Strng, starttxt, richtxtbx.TextLength, RichTextBoxFinds.MatchCase) > 0 Then
+                        richtxtbx.SelectionColor = Clr
+                        'richtxtbx.SelectionFont = New Font("Times New Roman", 14, FontStyle.Bold)
+                    End If
+                    starttxt += 1
+                End While
+            Catch ex As Exception
+                HH = "X"
+            End Try
+            Return HH
+        End Function
     End Class
 End Class

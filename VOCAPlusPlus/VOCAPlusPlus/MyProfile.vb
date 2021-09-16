@@ -51,8 +51,9 @@ Public Class MyProfile
         End If
     End Sub
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Dim Fn As New APblicClss.Func
         If txtMobile.TextLength = 11 Then
-            If InsUpd("Update Int_User set UsrSisco = '" & txtSisco.Text & "', UsrGsm = '" & txtMobile.Text & "', UsrEmail = '" & txtMail.Text & "' where UsrId = " & Usr.PUsrID, "0000&H") = Nothing Then
+            If Fn.InsUpdate("Update Int_User set UsrSisco = '" & txtSisco.Text & "', UsrGsm = '" & txtMobile.Text & "', UsrEmail = '" & txtMail.Text & "' where UsrId = " & Usr.PUsrID, "0000&H") = Nothing Then
                 Usr.PUsrSisco = txtSisco.Text
                 Usr.PUsrGsm = txtMobile.Text
                 Usr.PUsrMail = txtMail.Text
@@ -167,6 +168,7 @@ Public Class MyProfile
         SndMailTsk.Start()
     End Sub
     Private Sub SndMail()
+        Dim Fn As New APblicClss.Func
 #Region "Email Body"
         Dim Bdy As String = "<p><span style= " & Chr(34) & "text-align: left;" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & ">Dear " & Usr.PUsrRlNm & ",</span></p>
 <p><span style =  " & Chr(34) & "text-align: left;" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & " > You recieved this message because you have confirmed your email address on <strong><span style=" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & "><span style=" & Chr(34) & " color: #339966;" & Chr(34) & ">VOCA Plus</span>&nbsp;</span></strong></span><span style=" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & ">Application, and you will not recieve this mail again.</span></p>
@@ -189,18 +191,19 @@ Public Class MyProfile
 <p><strong><span style=" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & " data-mce-mark=" & Chr(34) & "1" & Chr(34) & ">VOCA Plus Team</span></strong></p>" & "<img src=" & Chr(34) & "ftp://10.10.26.4/CallCenter/Attch/VocaIcon1.jpg" & Chr(34) & "width=" & Chr(34) & "64" & Chr(34) & " height=" & Chr(34) & "64" & Chr(34) & " />"
 #End Region
         If RadioRght.Checked = True Then
-            If SndExchngMil("voca-support@egyptpost.org", Usr.PUsrMail,, "Verification Mail From VOCA Plus Application", Bdy, 2) = Nothing Then
+            If Fn.SndExchngMil("voca-support@egyptpost.org", Usr.PUsrMail,, "Verification Mail From VOCA Plus Application", Bdy, 2) = Nothing Then
                 MsgInf("لقد تم ارسال ايميل لك للتأكيد صحة بريدك الإلكتروني" & vbNewLine & "يرجى عدم الرد على الأيميل")
             End If
         ElseIf RadioWrng.Checked = True Then
-            If SndExchngMil("voca-support@egyptpost.org",,, "Email Verification failure Of " & Usr.PUsrRlNm & " _ " & "User ID : " & Usr.PUsrID, "", 2) = Nothing Then
+            If Fn.SndExchngMil("voca-support@egyptpost.org",,, "Email Verification failure Of " & Usr.PUsrRlNm & " _ " & "User ID : " & Usr.PUsrID, "", 2) = Nothing Then
                 MsgInf("تم ارسال ايميل بعدم صحة بريدك الإلكتروني لفرق الدعم الخاص بالتطبيق" & vbNewLine & "وسيتم التواصل معك في أقرب وقت" & vbNewLine & "يمكنك التواصل مباشرة ايضا مع فريق RTM وذلك لتقديم المساعده")
             End If
         End If
     End Sub
     Private Sub txtMobile_TextChanged(sender As Object, e As EventArgs) Handles txtMobile.TextChanged
+        Dim Fn As New APblicClss.Func
         If txtMobile.TextLength = 11 Then
-            If InsUpd("Update Int_User set UsrGsm = '" & txtMobile.Text & "' where UsrId = " & Usr.PUsrID, "0000&H") = Nothing Then
+            If Fn.InsUpdate("Update Int_User set UsrGsm = '" & txtMobile.Text & "' where UsrId = " & Usr.PUsrID, "0000&H") = Nothing Then
                 Usr.PUsrGsm = txtMobile.Text
             Else
                 txtMobile.Text = ""

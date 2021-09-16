@@ -11,7 +11,7 @@ Public Class Start
             Invoke(Sub() PubVerLbl.Text = "Publish Ver. : This isn't a Publish version")
         End If
         Invoke(Sub()
-                   Dim WC As New APblicClss.Func
+                   Dim WC As New APblicClss.FuncWorker
                    If MacWrWrkr.IsBusy = False Then
                        MacWrWrkr.RunWorkerAsync(WC)
                    End If
@@ -29,7 +29,7 @@ Public Class Start
         Dim worker As System.ComponentModel.BackgroundWorker
         worker = CType(sender, System.ComponentModel.BackgroundWorker)
         ' Get the Words object and call the main method.
-        Dim WC As APblicClss.Func = CType(e.Argument, APblicClss.Func)
+        Dim WC As APblicClss.FuncWorker = CType(e.Argument, APblicClss.FuncWorker)
         WC.MacTblSub(worker)
     End Sub
 

@@ -52,7 +52,7 @@ Public Class WelcomeScreen
     Private Sub TimerTikCoun_Tick(sender As Object, e As EventArgs) Handles TimerTikCoun.Tick
         If IsHandleCreated = True Then
             Invoke(Sub()
-                       Dim WC As New APblicClss.Func
+                       Dim WC As New APblicClss.FuncWorker
                        If WkrTikCount.IsBusy = False Then
                            Invoke(Sub() WkrTikCount.RunWorkerAsync(WC))
                        End If
@@ -89,16 +89,18 @@ Public Class WelcomeScreen
         Application.Exit()
     End Sub
     Private Sub SinOutEvent()
+        Dim Fn As New APblicClss.Func
         CntxtMnuStrp.Close()
         FlushMemory()
-        PublicCode.InsUpd("UPDATE Int_user SET UsrActive = 0" & " WHERE (UsrId = " & Usr.PUsrID & ");", "1006&H")  'Update User Active = false
+        Fn.InsUpdate("UPDATE Int_user SET UsrActive = 0" & " WHERE (UsrId = " & Usr.PUsrID & ");", "1006&H")  'Update User Active = false
     End Sub
     Private Sub TimerCon_Tick(sender As Object, e As EventArgs) Handles TimerCon.Tick
+        Dim Def As New APblicClss.Defntion
         If IsHandleCreated = True Then
             Invoke(Sub()
-                       If sqlCon.State = ConnectionState.Closed Then
+                       If Def.CONSQL.State = ConnectionState.Closed Then
                            Dim state As New APblicClss.Defntion
-                           Dim Cn As New APblicClss.Func
+                           Dim Cn As New APblicClss.FuncWorker
                            If WChckConn.IsBusy = False Then
                                Invoke(Sub() WChckConn.RunWorkerAsync(Cn))
                            End If
@@ -111,7 +113,7 @@ Public Class WelcomeScreen
     Private Sub WChckConn_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles WChckConn.DoWork
         Dim worker1 As System.ComponentModel.BackgroundWorker
         worker1 = CType(sender, System.ComponentModel.BackgroundWorker)
-        Dim WC1 As APblicClss.Func = CType(e.Argument, APblicClss.Func)
+        Dim WC1 As APblicClss.FuncWorker = CType(e.Argument, APblicClss.FuncWorker)
         WC1.Conoff(worker1)
     End Sub
     Private Sub WChckConn_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles WChckConn.ProgressChanged
@@ -243,57 +245,6 @@ Public Class WelcomeScreen
 
         Return True
     End Function
-    Private Sub TimerColctLog_Tick(sender As Object, e As EventArgs) Handles TimerColctLog.Tick
-        TimerColctLog.Interval = 600000
-        If LogCollect() > 0 Then
-        End If
-        'If CompOffLine() > 0 Then
-        'End If
-    End Sub
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Frm.Controls.Add(Btn1)
-        Frm.Controls.Add(Btn2)
-        Frm.Controls.Add(Btn3)
-        Frm.Controls.Add(Grid1)
-        'Frm.Controls.Add(Grid2)
-        Frm.WindowState = FormWindowState.Maximized
-        AddHandler Btn1.Click, AddressOf Button_Click
-        AddHandler Btn2.Click, AddressOf ButtonXX_Click
-        AddHandler Btn3.Click, AddressOf ButtonRefill_Click
-        Btn1.Text = "Fill"
-        Btn2.Text = "Update"
-        Btn3.Text = "ReFill"
-        Btn1.Location = New Point(0, 10)
-        Btn2.Location = New Point(80, 10)
-        Btn3.Location = New Point(160, 10)
-        Grid1.Location = New Point(35, 40)
-        Grid1.Dock = DockStyle.Bottom
-        Grid1.Size = New Point(350, 650)
-        Frm.ShowDialog()
-        RemoveHandler Btn1.Click, AddressOf Button_Click
-        RemoveHandler Btn2.Click, AddressOf ButtonXX_Click
-        RemoveHandler Btn3.Click, AddressOf ButtonRefill_Click
-    End Sub
-    Private Sub Button_Click(sender As Object, e As EventArgs)
-
-        Try
-            cmdSelectCommand = New SqlCommand("select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd > 1 ORDER BY SrcNm", sqlCon)
-            cmdSelectCommand.CommandTimeout = 30
-
-            dadPurchaseInfo.SelectCommand = cmdSelectCommand
-            'UpdtCmd.UpdateCommand = cmdSelectCommand
-            'InsrtCmd.InsertCommand = cmdSelectCommand
-            builder = New SqlCommandBuilder(dadPurchaseInfo)
-
-            CompSurceTable.Rows.Clear()
-            CompSurceTable.Columns.Clear()
-            dadPurchaseInfo.Fill(CompSurceTable)
-            Grid1.DataSource = CompSurceTable
-
-        Catch ex As Exception
-            MsgBox("Error : " & ex.Message)
-        End Try
-    End Sub
     Private Sub ButtonXX_Click(sender As Object, e As EventArgs)
 
         Try
@@ -319,14 +270,6 @@ Public Class WelcomeScreen
 
 
     End Sub
-    Private Sub ButtonRefill_Click(sender As Object, e As EventArgs)
-        Try
-            CompSurceTable.Rows.Clear()
-            dadPurchaseInfo.Fill(CompSurceTable)
-        Catch ex As Exception
-            MsgBox("Error : " & ex.Message)
-        End Try
-    End Sub
     Private Sub WelcomeScreen_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Invoke(Sub()
                    For Each CTRL In Me.Controls
@@ -349,8 +292,11 @@ Public Class WelcomeScreen
             GroupBox1.Visible = False
             GrpCounters.Visible = False
             Me.BackgroundImage = My.Resources.Language_for_Non_Unicode_Programs
+            Invoke(Sub() Me.LblLanguage.Visible = True)
+            MenuSw.Visible = False
         Else
-            'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            MenuSw.Visible = True
+            Invoke(Sub() Me.LblLanguage.Visible = False)
             Dim Ext_ As Boolean = False
             For Each N As ToolStripMenuItem In CntxtMnuStrp.Items
                 If N.Text = "Sign Out" Then
@@ -404,7 +350,7 @@ Public Class WelcomeScreen
     Private Sub WkrTikCount_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles WkrTikCount.DoWork
         Dim worker1 As System.ComponentModel.BackgroundWorker
         worker1 = CType(sender, System.ComponentModel.BackgroundWorker)
-        Dim WC1 As APblicClss.Func = CType(e.Argument, APblicClss.Func)
+        Dim WC1 As APblicClss.FuncWorker = CType(e.Argument, APblicClss.FuncWorker)
         WC1.TikCntrSub(worker1)
     End Sub
 
@@ -413,7 +359,7 @@ Public Class WelcomeScreen
     End Sub
 
     Private Sub WkrTikCount_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles WkrTikCount.RunWorkerCompleted
-        Dim Fn As New APblicClss.Func
+        Dim Fn As New APblicClss.FuncWorker
         If e.Error IsNot Nothing Then
             MessageBox.Show("Error: " & e.Error.Message)
         ElseIf e.Cancelled Then

@@ -4,7 +4,6 @@ Imports System.Net
 Imports System.Net.Mail
 Imports System.Net.NetworkInformation
 Imports System.Text.RegularExpressions
-Imports ClosedXML.Excel
 Imports Microsoft.Exchange.WebServices.Data
 Imports VOCAPlusPlus.Strc
 Module PublicCode
@@ -43,43 +42,17 @@ Module PublicCode
     Public Sub Frm_Activated(sender As Object, e As EventArgs)
         FrmAllSub(sender)
     End Sub
-    'Public Function ConStrFn(tt As String) As String
-    '    '@VocaPlus$21-2
-
-    '    If tt = "Eg Server" Then
-    '        strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaplus21;Password=@VocaPlus$21-4"
-    '        ServerNm = "Egypt Post Server"
-    '    ElseIf tt = "My Labtop" Then
-    '        strConn = "Data Source=ASHRAF-PC\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
-    '        ServerNm = "My Labtop"
-    '    ElseIf tt = "Test Database" Then
-    '        strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaplus21;Password=@VocaPlus$21-4"
-    '        ServerNm = "Test Database"
-    '    End If
-    '    'If sqlCon.State = ConnectionState.Connecting Or sqlCon.State = ConnectionState.Open Then
-
-    '    Try
-    '        sqlCon = New SqlConnection
-    '        sqlCon.ConnectionString = strConn
-    '    Catch ex As Exception
-    '        sqlCon.Close()
-    '        SqlConnection.ClearPool(sqlCon)
-    '        sqlCon.ConnectionString = strConn
-    '    End Try
-    '    'Else
-    '    '    sqlCon.ConnectionString = strConn
-    '    'End If
-    '    Return strConn
-    'End Function
     Function OsIP() As String              'Returns the Ip address 
 #Disable Warning BC40000 ' Type or member is obsolete
         OsIP = System.Net.Dns.GetHostByName("").AddressList(0).ToString()
 #Enable Warning BC40000 ' Type or member is obsolete
     End Function
-    Function getMacAddress() As String      'Returns the Mac address 
-        Dim nics() As NetworkInterface = NetworkInterface.GetAllNetworkInterfaces()
-        Return nics(0).GetPhysicalAddress.ToString
-    End Function
+    Public Sub MsgInf(MsgBdy As String)
+        MessageBox.Show(MsgBdy, "رسالة معلومات", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading Or MessageBoxOptions.RightAlign)
+    End Sub
+    Public Sub MsgErr(MsgBdy As String)
+        MessageBox.Show(MsgBdy, "رسالة خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading Or MessageBoxOptions.RightAlign)
+    End Sub
     Public Function GetMACAddressNew() As String
         Dim mc As ManagementClass = New ManagementClass("Win32_NetworkAdapterConfiguration")
         Dim moc As ManagementObjectCollection = mc.GetInstances()
@@ -93,31 +66,6 @@ Module PublicCode
             End If
         Next
         Return MACAddress
-    End Function
-    Public Function CalDate(StDt As Date, ByRef EnDt As Date, ErrHndl As String) As Integer    ' Returns the number of CalDate between StDt and EnDt Using the table CDHolDay
-        Dim WdyCount As Integer = 0
-        Dim SQLcalDtAdptr As New SqlDataAdapter
-        Dim CaldtTbl As New DataTable
-        Try
-
-            StDt = DateValue(StDt)     ' DateValue returns the date part only if U use stamptime as example.
-            EnDt = DateValue(EnDt)
-            sqlComm.Connection = sqlCon ' Get ID & Date & UserID                        
-            sqlComm.CommandText = "SELECT Count(HDate) AS WDaysCount FROM CDHolDay WHERE (HDy = 1) AND (HDate BETWEEN CONVERT(DATETIME, '" & Format(StDt, "dd/MM/yyyy") & "', 103) AND CONVERT(DATETIME, '" & Format(EnDt, "dd/MM/yyyy") & "', 103));"
-            sqlComm.CommandType = CommandType.Text
-            SQLcalDtAdptr.SelectCommand = sqlComm
-            'If sqlCon.State = ConnectionState.Closed Then
-            '    sqlCon.Open()
-            'End If
-            SQLcalDtAdptr.Fill(CaldtTbl)
-            WdyCount = CaldtTbl.Rows(0).Item("WDaysCount")
-            AppLogTbl(Split(ErrHndl, "&H")(0), 0,, sqlComm.CommandText, CaldtTbl.Rows.Count)
-        Catch ex As Exception
-            AppLog(ErrHndl, ex.Message, sqlComm.CommandText)
-            AppLogTbl(Split(ErrHndl, "&H")(0), 1, ex.Message, sqlComm.CommandText, CaldtTbl.Rows.Count)
-            WdyCount = 1
-        End Try
-        Return WdyCount
     End Function
     Public Sub DataExp(sQlfLNm As String)
         Dim XLApp As Microsoft.Office.Interop.Excel.Application
@@ -219,68 +167,6 @@ Module PublicCode
 End_:
 
     End Sub
-    Public Function Exprt(FileNm As String, Tbl As DataTable) As String
-        Dim ExrtErr As String = Nothing
-        Dim D As SaveFileDialog = New SaveFileDialog
-        With D
-            .Title = "Save Excel File"
-            .InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-            .Filter = "Excel File|*.xlsx"
-            .FilterIndex = 1
-            .RestoreDirectory = True
-        End With
-        D.FileName = FileNm & "_" & Format(Now, "yyyy-MM-dd_HHmm") '& GroupBox1.Tag & GroupBox2.Tag & GroupBox3.Tag & GrpDtKnd.Tag
-        If D.ShowDialog() = DialogResult.OK Then
-            Try
-                Dim Workbook As XLWorkbook = New XLWorkbook()
-                Workbook.Worksheets.Add(Tbl, "FileNm")
-                Workbook.SaveAs(D.FileName)
-                MsgBox("Done")
-            Catch ex As Exception
-
-                Exprt = "X"
-                MsgBox(ex.Message)
-            End Try
-        End If
-        Return ExrtErr
-    End Function
-    Function PassEncoding(password As String, FSaltKey As String) As String
-        Dim Wrapper As New Simple3Des(FSaltKey)
-        EncDecTxt = Wrapper.EncryptData(password)
-        Return EncDecTxt
-    End Function
-    Function PassDecoding(password As String, FSaltKey As String) As String
-        Dim wrapper As New Simple3Des(FSaltKey)
-        Try '        DecryptData throws if the wrong password is used.
-            EncDecTxt = wrapper.DecryptData(password)
-        Catch ex As System.Security.Cryptography.CryptographicException
-            EncDecTxt = "false"
-        End Try
-        Return EncDecTxt
-    End Function
-    Function HrdCol() As Strc.HrdColc
-        Dim MyOBJ As Object
-        Dim Items As New Strc.HrdColc
-        MyOBJ = GetObject("WinMgmts:").instancesof("Win32_Processor") ' Proccessor Information
-        For Each Device In MyOBJ
-            Items.HProcc &= Device.Name.ToString + " " + Device.CurrentClockSpeed.ToString + " Mhz"
-        Next
-        MyOBJ = GetObject("WinMgmts:").instancesof("Win32_NetworkAdapter") ' Network Information
-        For Each Device In MyOBJ
-            Items.HNetwrk &= Device.Name.ToString & " & "
-        Next
-
-        MyOBJ = GetObject("WinMgmts:").instancesof("Win32_PhysicalMemory")  ' Ram Information
-        For Each Device In MyOBJ
-            Items.HRam &= " Ram Capacity : " & Device.Capacity / 1024 / 1024 / 1024 & " Giga " & "Manufacturer : " & Device.Manufacturer
-        Next
-
-        MyOBJ = GetObject("WinMgmts:").instancesof("Win32_bios")  ' Bios Information
-        For Each Device In MyOBJ
-            Items.HSerNo &= "Serial Number: " & Device.serialNumber & " Manufacturer : " & Device.Manufacturer
-        Next
-        Return Items
-    End Function
     Function TrckNo(ByVal source As String) As String 'Extract Email Addresses From String
         Dim mc As MatchCollection
         Dim i As Integer
@@ -295,141 +181,8 @@ End_:
         Emails = Left(Emails, Emails.Length - 2)
         Return Emails
     End Function
-    Public Sub AppLog(ErrHndls As String, LogMsg As String, SSqlStrs As String)
-        On Error Resume Next
-        My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) _
-          & "\VOCALog" & Format(Now, "yyyyMM") & ".Vlg", Format(Now, "yyyyMMdd HH:mm:ss") & " ," & ErrHndls & LogMsg & " &H" & PassEncoding(SSqlStrs, GenSaltKey) & vbCrLf, True)
-    End Sub
-    Public Sub AppLogTbl(ErrCd As Integer, Typ As Integer, Optional EXMsg As String = "", Optional SSqlStrs As String = "", Optional rwCnt As Integer = -1)
-        'Dim Now_ As DateTime
-        'Dim sqlComm1 As New SqlCommand
-        'Try
-        '    Dim OfflineCon As New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\OfflineDB.mdf;Integrated Security=True")
-        '    sqlComm1.Connection = OfflineCon
-        '    If OfflineCon.State = ConnectionState.Closed Then
-        '        OfflineCon.Open()
-        '    End If
-        '    sqlComm1.CommandType = CommandType.Text
-        '    If ServrTime() = "00:00:00" Then
-        '        Now_ = Format(Now, "yyyy/MMM/dd hh:mm:ss tt")
-        '    Else
-        '        Now_ = Nw
-        '    End If
-        '    sqlComm1.CommandText = "insert into ALog ([LogDt],[LogErrCD],[Logtype],[LogExMsg],[LogSQLStr],[LogRwCnt],[LogIP],LogUsrID) Values ('" & Format(Now, "yyyy/MMM/dd hh:mm:ss tt") & "'," & ErrCd & "," & Typ & ",'" & Replace(EXMsg, "'", "$") & "','" & Replace(SSqlStrs, "'", "$") & "'," & rwCnt & ",'" & OsIP() & "'," & Usr.PUsrID &
-        '    ");"
-        '    sqlComm1.ExecuteNonQuery()
-        'Catch ex As Exception
-        '    AppLog("0000&H", ex.Message, sqlComm1.CommandText)
-        'End Try
-    End Sub
-    Public Sub MsgInf(MsgBdy As String)
-        MessageBox.Show(MsgBdy, "رسالة معلومات", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading Or MessageBoxOptions.RightAlign)
-    End Sub
-    Public Sub MsgErr(MsgBdy As String)
-        MessageBox.Show(MsgBdy, "رسالة خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading Or MessageBoxOptions.RightAlign)
-    End Sub
-    Public Function GetTbl(SSqlStr As String, SqlTbl As DataTable, ErrHndl As String) As String
-        Dim StW As New Stopwatch
-        StW.Start()
-        Errmsg = Nothing
-        Dim sqlCommW As New SqlCommand
-        Try
-            sqlCon = New SqlConnection(strConn)
-            sqlComm = New SqlCommand(SSqlStr, sqlCon)
-            sqlComm.CommandType = CommandType.Text
-            If sqlCon.State = ConnectionState.Closed Then
-                sqlCon.Open()
-            End If
-            Dim SQLGetAdptr As New SqlDataAdapter            'SQL Table Adapter
-            SQLGetAdptr.SelectCommand = sqlComm
-            SQLGetAdptr.Fill(SqlTbl)
-            AppLogTbl(Split(ErrHndl, "&H")(0), 0, "", SSqlStr, SqlTbl.Rows.Count)
-            If PreciFlag = True Then
-                If ErrHndl <> "1005&H" And ErrHndl <> "9999&H" And ErrHndl <> "8888&H" Then
-                    If PublicCode.InsUpd("UPDATE Int_user SET UsrLastSeen = (Select GetDate()) WHERE (UsrId = " & Usr.PUsrID & ");", "1006&H") = Nothing Then  'Update User Active = false = 
-                        'WelcomeScreen.LblLstSeen.Text = "Last Seen : " & ServrTime()
-                    End If
-                End If
-            End If
-            StW.Stop()
-            Dim TimSpn As TimeSpan = (StW.Elapsed)
-            ElapsedTimeSpan = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimSpn.Hours, TimSpn.Minutes, TimSpn.Seconds, TimSpn.Milliseconds / 10)
-        Catch ex As Exception
-            My.Application.Log.WriteException(ex, TraceEventType.Error, "")
 
-            Dim frmCollection = Application.OpenForms
-            If frmCollection.OfType(Of WelcomeScreen).Any Then
-                WelcomeScreen.TimerCon.Start()
-                WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
-            End If
-            AppLog(ErrHndl, ex.Message, SSqlStr)
-            AppLogTbl(Split(ErrHndl, "&H")(0), 1, ex.Message, SSqlStr, SqlTbl.Rows.Count)
-            Errmsg = ex.Message
-        End Try
-        SqlTbl.Dispose()
-        sqlCon.Close()
-        SqlConnection.ClearPool(sqlCon)
-        Return Errmsg
-    End Function
-    Public Function InsUpd(SSqlStr As String, ErrHndl As String) As String
-        Errmsg = Nothing
-        sqlComm.Connection = sqlCon
-        sqlComm.CommandType = CommandType.Text
-        sqlComm.CommandText = SSqlStr
-        Try
-            If sqlCon.State = ConnectionState.Closed Then
-                sqlCon.Open()
-            End If
-            sqlComm.ExecuteNonQuery()
-            AppLogTbl(Split(ErrHndl, "&H")(0), 0,, SSqlStr)
-        Catch ex As Exception
-            Dim frmCollection = Application.OpenForms
-            If frmCollection.OfType(Of WelcomeScreen).Any Then
-                WelcomeScreen.TimerCon.Start()
-                WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
-            End If
-            AppLog(ErrHndl, ex.Message, SSqlStr)
-            Errmsg = ex.Message
-            AppLogTbl(Split(ErrHndl, "&H")(0), 1, ex.Message, SSqlStr)
-        End Try
-        sqlCon.Close()
-        SqlConnection.ClearPool(sqlCon)
-        Return Errmsg
-    End Function
-    Public Function InsTrans(TranStr1 As String, TranStr2 As String, ErrHndl As String) As String
-        Errmsg = Nothing
-        Try
-            If sqlCon.State = ConnectionState.Closed Then
-                sqlCon.Open()
-            End If
-            sqlComminsert_1.Connection = sqlCon
-            sqlComminsert_2.Connection = sqlCon
-            sqlComminsert_1.CommandType = CommandType.Text
-            sqlComminsert_2.CommandType = CommandType.Text
-            sqlComminsert_1.CommandText = TranStr1
-            sqlComminsert_2.CommandText = TranStr2
-            Tran = sqlCon.BeginTransaction()
-            sqlComminsert_1.Transaction = Tran
-            sqlComminsert_2.Transaction = Tran
-            sqlComminsert_1.ExecuteNonQuery()
-            sqlComminsert_2.ExecuteNonQuery()
-            Tran.Commit()
-            AppLogTbl(Split(ErrHndl, "&H")(0), 0, , TranStr1 & "_" & TranStr2)
-        Catch ex As Exception
-            Tran.Rollback()
-            AppLog(ErrHndl, ex.Message, TranStr1 & "_" & TranStr2)
-            AppLogTbl(Split(ErrHndl, "&H")(0), 1, ex.Message, TranStr1 & "_" & TranStr2)
-            Dim frmCollection = Application.OpenForms
-            If frmCollection.OfType(Of WelcomeScreen).Any Then
-                WelcomeScreen.TimerCon.Start()
-                WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
-            End If
-            Errmsg = ex.Message
-        End Try
-        sqlCon.Close()
-        SqlConnection.ClearPool(sqlCon)
-        Return Errmsg
-    End Function
+
     Public Function CompGrdTikFill(GrdTick As DataGridView, Tbl As DataTable, ProgBar As ProgressBar) As String
         Errmsg = Nothing
         Try
@@ -486,7 +239,6 @@ End_:
         ProgBar.Visible = False
         Return Errmsg
     End Function
-
     Public Function UpdateFormt(GridUpd As DataGridView, Optional StrTick As String = "") As String
         Errmsg = Nothing
 
@@ -835,8 +587,10 @@ End_:
         GridUpd.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         GridUpd.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False
     End Sub
-    Public Function MyTeam(LedrCat As Integer, LedrId As Integer, UsrCas As String, Optional OnlyBckOff As Boolean = False) As String
 
+
+    Public Function MyTeam(LedrCat As Integer, LedrId As Integer, UsrCas As String, Optional OnlyBckOff As Boolean = False) As String
+        Dim Fn As New APblicClss.Func
         Dim UsrTable As DataTable = New DataTable
         Dim UsrStr As String = Nothing
         Dim BckOff As String = ""
@@ -851,7 +605,7 @@ End_:
         UsrStr = UsrCas & " = " & Usr.PUsrID & " OR "
         'TkEmpNm
         '                   0  ,    1  ,     2     ***   
-        If GetTbl("Select UsrId, UCatId, UCatIdSub From Int_user RIGHT OUTER Join IntUserCat On UsrCat = UCatId Where (UsrSusp = 0) " & BckOff & " Order By UCatIdSub, UsrRealNm", UsrTable, "1048&H") = Nothing Then
+        If Fn.GetTblXX("Select UsrId, UCatId, UCatIdSub From Int_user RIGHT OUTER Join IntUserCat On UsrCat = UCatId Where (UsrSusp = 0) " & BckOff & " Order By UCatIdSub, UsrRealNm", UsrTable, "1048&H") = Nothing Then
             For Cnt_ = 0 To UsrTable.Rows.Count - 1
                 TempNode = TreeTemp.Nodes.Find(UsrTable(Cnt_).Item(2).ToString, True)
                 If TempNode.Length > 0 Then
@@ -1145,8 +899,6 @@ End_:
         Dim Botn As Control = sender
         BtnDecrease(Botn)
     End Sub
-
-
     Private Sub SndCntls(Ctrl As Control)
         If Ctrl.Dock = DockStyle.None Then
             Ctrl.ContextMenuStrip = DefCmStrip
@@ -1210,7 +962,8 @@ End_:
         End If
     End Sub
     Private Sub UpdtCtrl(UpdtCtrl As Control)
-        InsUpd("Update AUsrControls set UCtlX = " & UpdtCtrl.Location.X & ", UCtlY = " & UpdtCtrl.Location.Y & ", UCtlFntSize = " & UpdtCtrl.Font.Size & ", UCtlFntWidth = " & UpdtCtrl.Width & ", UCtlFntHeight = " & UpdtCtrl.Height &
+        Dim Fn As New APblicClss.Func
+        Fn.InsUpdate("Update AUsrControls set UCtlX = " & UpdtCtrl.Location.X & ", UCtlY = " & UpdtCtrl.Location.Y & ", UCtlFntSize = " & UpdtCtrl.Font.Size & ", UCtlFntWidth = " & UpdtCtrl.Width & ", UCtlFntHeight = " & UpdtCtrl.Height &
              " Where UCtlUsrId = " & Usr.PUsrID & " AND UCtlFormName = '" & Form_.Name & "' AND UCtlControlName = '" & UpdtCtrl.Name & "'", "0000&H")
     End Sub
     Private Sub TxtSlctOn_Click(sender As Object, e As EventArgs)
@@ -1326,31 +1079,6 @@ End_:
             request.Abort()
         End Try
     End Sub ' Attached Table
-    Public Function ServrTime() As DateTime
-        Dim TimeTble As New DataTable
-        TimeTble.Rows.Clear()
-        TimeTble.Columns.Clear()
-        Dim SQLGetAdptr As New SqlDataAdapter            'SQL Table Adapter
-        Try
-            'sqlComm.CommandTimeout = 90
-            sqlComm.Connection = sqlCon
-            SQLGetAdptr.SelectCommand = sqlComm
-            sqlComm.CommandType = CommandType.Text
-            sqlComm.CommandText = "Select GetDate() as Now_"
-            SQLGetAdptr.Fill(TimeTble)
-            Nw = Format(TimeTble.Rows(0).Item(0), "yyyy/MMM/dd hh:mm:ss tt")
-
-        Catch ex As Exception
-            Errmsg = "X"
-            Dim frmCollection = Application.OpenForms
-            If frmCollection.OfType(Of WelcomeScreen).Any Then
-                WelcomeScreen.TimerCon.Start()
-                WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
-            End If
-        End Try
-        Return Nw
-        SQLGetAdptr.Dispose()
-    End Function
     Public Sub FlushMemory()
         GC.Collect()
         GC.WaitForPendingFinalizers()
@@ -1382,202 +1110,8 @@ End_:
             CtrlTree.Add(Contl)
         Loop
     End Function
-    Public Function SndExchngMil(To_ As String, Optional Cc_ As String = "", Optional Bcc_ As String = "" _
-                                 , Optional Suj As String = "", Optional Body_ As String = "", Optional Import As Integer = 0) As String
-        Dim MailRsult As String = Nothing
 
-        Dim exchange As ExchangeService
-        exchange = New ExchangeService(ExchangeVersion.Exchange2007_SP1)
-        exchange.Credentials = New WebCredentials("egyptpost\voca-support", "asd_ASD123")
-        exchange.Url() = New Uri("https://mail.egyptpost.org/ews/exchange.asmx")
-        Dim message As New EmailMessage(exchange)
-        message.ToRecipients.Add(To_)
-        If Cc_.Length > 0 Then message.CcRecipients.Add(Cc_)
-        If Bcc_.Length > 0 Then message.BccRecipients.Add(Bcc_)
-        message.Subject = Suj
-        message.Body = Body_
-        'message.Attachments.AddFileAttachment(AttchNam, AttchLction)
-        'message.Attachments(0).ContentId = AttchNam
-        message.Importance = Import
-        Try
-            message.SendAndSaveCopy()
-        Catch ex As Exception
-            MailRsult = "X"
-        End Try
-        Return MailRsult
-    End Function
-    Public Function LogCollect() As Integer
-        Dim Colecrslt As Integer = 0
-        Dim Transction As SqlTransaction = Nothing             'SQL Transaction
-        Dim OfflineCon As New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\OfflineDB.mdf;Integrated Security=True")
-        Dim SQLGetAdptr1 As New SqlDataAdapter            'SQL Table Adapter
-        Dim SQLComX As New SqlCommand
-        SQLComX.Connection = OfflineCon
-        SQLGetAdptr1.SelectCommand = SQLComX
-        SQLComX.CommandType = CommandType.Text
-        SQLComX.CommandText = "select [LogSer],[LogDt],[LogErrCD],[Logtype],[LogExMsg],[LogSQLStr],[LogRwCnt],[LogIP],[LogUsrID],[VErrFrm],[VErrSub],[VErrDetails],[VErrRmrk] from ALog LEFT OUTER JOIN AErrApdx on VErrId = LogErrCD order by LogSer"
-        Try
-            LogOfflinTbl.Rows.Clear()
-            LogOfflinTbl.Columns.Clear()
-            SQLGetAdptr1.Fill(LogOfflinTbl)
-            Dim Max_ As New Integer
-            If LogOfflinTbl.Rows.Count > 0 Then
-                Colecrslt = LogOfflinTbl.Rows.Count
-                Max_ = LogOfflinTbl.Rows(LogOfflinTbl.Rows.Count - 1).Item(0)
-                If sqlCon.State = ConnectionState.Closed Then
-                    sqlCon.Open()
-                End If
-                Transction = sqlCon.BeginTransaction()
-                Dim SQLBulkCopy As SqlBulkCopy = New SqlBulkCopy(sqlCon, SqlBulkCopyOptions.Default, Transction)
-                SQLBulkCopy.DestinationTableName = "ALog"
-                'Try
-                For PP = 0 To 8
-                    SQLBulkCopy.ColumnMappings.Add(LogOfflinTbl.Columns(PP).ColumnName, LogOfflinTbl.Columns(PP).ColumnName)
-                Next
-                SQLBulkCopy.WriteToServer(LogOfflinTbl)
-                Transction.Commit()
-                'Try
-                Dim SQLCom As New SqlCommand
-                SQLCom.Connection = OfflineCon
-                SQLCom.CommandType = CommandType.Text
-                SQLCom.CommandText = "Delete from ALog Where LogSer <=" & Max_
-                If OfflineCon.State = ConnectionState.Closed Then
-                    OfflineCon.Open()
-                End If
-                SQLCom.ExecuteNonQuery()
-                '    Catch ex As Exception
-                '        MsgBox(ex.Message.ToString)
-                '    End Try
-                'Catch ex As Exception
-                '    Transction.Rollback()
-                '    MsgBox(ex.Message.ToString)
-                'End Try
-            Else
-                AppLogTbl(1000000, 0, "", "There is No records To Collect", LogOfflinTbl.Rows.Count)
-            End If
-            AppLogTbl(1000000, 0, "", "Log has been collected from " & LogOfflinTbl.Rows(0).Item(0) & " To " & LogOfflinTbl.Rows(LogOfflinTbl.Rows.Count - 1).Item(0), LogOfflinTbl.Rows.Count)
-        Catch ex As Exception
-            Colecrslt = -1
-            AppLogTbl(1000001, 1, ex.Message, SQLComX.CommandText)
-        End Try
-        Return Colecrslt
-    End Function
-    Public Function CompOffLine() As Integer
-        Dim Colecrslt As Integer = 0
-        Dim Transction As SqlTransaction = Nothing             'SQL Transaction
-        Dim OfflineCon As New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\OfflineDB.mdf;Integrated Security=True")
-        'Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\SharedVB\NewVOCAPlus\VOCAPlus\OfflineDB.mdf;Integrated Security=True
-        Dim SQLGetAdptr1 As New SqlDataAdapter            'SQL Table Adapter
-        Dim SQLComX As New SqlCommand
-        SQLComX.Connection = OfflineCon
-        SQLGetAdptr1.SelectCommand = SQLComX
-        SQLComX.CommandType = CommandType.Text
-        SQLComX.CommandText = "select [TkSQL],[TkID],[TkDtStart],[TkDtClose],[TkDuration],[TkKind],[TkFnPrdCd],[TkCompSrc],[TkClNm],[TkClPh],[TkClPh1],[TkClAdr],[TkClNtID],[TkShpNo],[TkGBNo],[TkCardNo],[TkAmount],[TkTransDate],[TkDetails],[TkSndrCoun],[TkConsigCoun],[TkTaskOwnr],[TkOffNm],[TkEmpNm0],[TkEmpNm],[TkRecieveDt],[TkSatLv],[TkFolw],[TkClsStatus],[TkMail],[TkMailYN],[TkReOp],[TkQlity],[TkEscTyp],[TkReAssign],TkRegisOff,TkRegisOffAprvd from Tickets order by TkSQL"
-        Try
-            CompfflinTbl.Rows.Clear()
-            CompfflinTbl.Columns.Clear()
-            SQLGetAdptr1.Fill(CompfflinTbl)
-            Dim Max_ As New Integer
-            If CompfflinTbl.Rows.Count > 0 Then
-                Colecrslt = CompfflinTbl.Rows.Count
-                Max_ = CompfflinTbl.Rows(CompfflinTbl.Rows.Count - 1).Item(0)
-                If sqlCon.State = ConnectionState.Closed Then
-                    sqlCon.Open()
-                End If
-                Transction = sqlCon.BeginTransaction()
-                Dim SQLStr As String = ""
-                For FF = 0 To CompfflinTbl.Rows.Count - 1
-                    SQLStr &= "[TkID] = " & CompfflinTbl.Rows(FF).Item(0) & " Or "
-                Next
-                sqlComminsert_1.Connection = sqlCon
-                sqlComminsert_1.Transaction = Transction
-                sqlComminsert_1.CommandText = "update Tickets set Tickets.TkID = Tickets.TkSQL, TkRegisOff = 1 where " & Mid(SQLStr, 1, SQLStr.Length - 4)
 
-                Dim SQLBulkCopy As SqlBulkCopy = New SqlBulkCopy(sqlCon, SqlBulkCopyOptions.Default, Transction)
-                SQLBulkCopy.DestinationTableName = "Tickets"
-                Try
-                    For PP = 0 To CompfflinTbl.Columns.Count - 1
-                        SQLBulkCopy.ColumnMappings.Add(CompfflinTbl.Columns(PP).ColumnName, CompfflinTbl.Columns(PP).ColumnName)
-                    Next
-                    SQLBulkCopy.WriteToServer(CompfflinTbl)
-                    sqlComminsert_1.ExecuteNonQuery()
-                    Transction.Commit()
-                    Try
-                        Dim SQLCom As New SqlCommand
-                        SQLCom.Connection = OfflineCon
-                        SQLCom.CommandType = CommandType.Text
-                        SQLCom.CommandText = "Delete from Tickets Where TkID <=" & Max_
-                        If OfflineCon.State = ConnectionState.Closed Then
-                            OfflineCon.Open()
-                        End If
-                        SQLCom.ExecuteNonQuery()
-                    Catch ex As Exception
-                        MsgBox(ex.Message.ToString)
-                    End Try
-                Catch ex As Exception
-                    Transction.Rollback()
-                    MsgBox(ex.Message.ToString)
-                End Try
-            Else
-                AppLogTbl(1000000, 0, "", "There is No Complaints To Collect", CompfflinTbl.Rows.Count)
-            End If
-            AppLogTbl(1000000, 0, "", "Log has been collected from ", CompfflinTbl.Rows.Count)
-        Catch ex As Exception
-            Colecrslt = -1
-            AppLogTbl(1000001, 1, ex.Message, SQLComX.CommandText)
-        End Try
-        Return Colecrslt
-    End Function
-    Public Function SelctSerchTxt(richtxtbx As RichTextBox, Strng As String, Optional bL As Boolean = True) As String
-        Dim HH As String = Nothing
-        Try
-            RemoveHandler richtxtbx.FindForm.Activated, AddressOf Frm_Activated
-            AddHandler richtxtbx.FindForm.Activated, AddressOf Frm_Activated
-            'richtxtbx = New RichTextBox
-            Dim starttxt As Integer = 0
-            Dim endtxt As Integer
-            endtxt = richtxtbx.Text.LastIndexOf(Strng)
-            'richtxtbx.SelectAll()
-            'richtxtbx.SelectionBackColor = Color.White
-            While starttxt < endtxt
-                If richtxtbx.Find(Strng, starttxt, richtxtbx.TextLength, RichTextBoxFinds.MatchCase) > 0 Then
-                    If bL = False Then
-                        richtxtbx.SelectionBackColor = Color.GreenYellow
-                    Else
-                        richtxtbx.SelectionBackColor = Color.Red
-                        richtxtbx.SelectionColor = Color.Yellow
-                        richtxtbx.SelectionFont = New Font("Times New Roman", 14, FontStyle.Bold)
-                    End If
 
-                End If
-                starttxt += 1
-            End While
-        Catch ex As Exception
-            HH = "X"
-            MsgBox(ex.Message)
-        End Try
-        Return HH
-    End Function
-    Public Function ClorTxt(richtxtbx As RichTextBox, Strng As String, Clr As Color) As String
-        Dim HH As String = Nothing
-        Try
-            'richtxtbx = New RichTextBox
-            Dim starttxt As Integer = 0
-            Dim endtxt As Integer
-            endtxt = richtxtbx.Text.LastIndexOf(Strng)
-            'richtxtbx.SelectAll()
-            'richtxtbx.SelectionBackColor = Color.White
-            While starttxt < endtxt
-                If richtxtbx.Find(Strng, starttxt, richtxtbx.TextLength, RichTextBoxFinds.MatchCase) > 0 Then
-                    richtxtbx.SelectionColor = Clr
-                    'richtxtbx.SelectionFont = New Font("Times New Roman", 14, FontStyle.Bold)
-                End If
-                starttxt += 1
-            End While
-        Catch ex As Exception
-            HH = "X"
-        End Try
-        Return HH
-    End Function
 End Module
 

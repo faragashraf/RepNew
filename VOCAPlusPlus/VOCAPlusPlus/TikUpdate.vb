@@ -73,17 +73,18 @@ Public Class TikUpdate
         End If
     End Sub
     Private Sub BtnSubmt_Click(sender As Object, e As EventArgs) Handles BtnSubmt.Click
+        Dim Fn As New APblicClss.Func
         Dim EsStr As String = ""
         Dim Done_ As String = Nothing
         If CmbEvent.SelectedIndex > -1 Then
             If TxtUpdt.TextLength > 0 Then
                 If Usr.PUsrID = StruGrdTk.UserId Then
-                    If PublicCode.InsTrans("update Tickets set TkFolw = 1, TkEscTyp = 0" & " where (TkSQL = " & StruGrdTk.Sql & ");", "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" & StruGrdTk.Sql & "','" & TxtUpdt.Text & "','" & "1" & "','" & CmbEvent.SelectedValue & "','" & OsIP() & "','" & Usr.PUsrID & "')", "1034&H") = Nothing Then
+                    If Fn.InsTrans("update Tickets set TkFolw = 1, TkEscTyp = 0" & " where (TkSQL = " & StruGrdTk.Sql & ");", "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" & StruGrdTk.Sql & "','" & TxtUpdt.Text & "','" & "1" & "','" & CmbEvent.SelectedValue & "','" & OsIP() & "','" & Usr.PUsrID & "')", "1034&H") = Nothing Then
                         Done_ = "Done"
                     End If
                 Else
                     If CmbEvent.SelectedValue = 902 Then
-                        If PublicCode.InsUpd("update Tickets set TkEscTyp = 1" & " where (TkSQL = " & StruGrdTk.Sql & ");", "1034&H") = Nothing Then
+                        If Fn.InsUpdate("update Tickets set TkEscTyp = 1" & " where (TkSQL = " & StruGrdTk.Sql & ");", "1034&H") = Nothing Then
                             If StruGrdTk.FlwStat = False Then
                                 EsStr = "متابعه 1 جديد" & vbCrLf & TxtUpdt.Text
                             Else
@@ -93,7 +94,7 @@ Public Class TikUpdate
                     Else
                         EsStr = TxtUpdt.Text
                     End If
-                    If PublicCode.InsUpd("insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" & StruGrdTk.Sql & "','" & Trim(EsStr) & "','" & "0" & "','" & CmbEvent.SelectedValue & "','" & OsIP() & "','" & Usr.PUsrID & "')", "1034&H") = Nothing Then
+                    If Fn.InsUpdate("insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" & StruGrdTk.Sql & "','" & Trim(EsStr) & "','" & "0" & "','" & CmbEvent.SelectedValue & "','" & OsIP() & "','" & Usr.PUsrID & "')", "1034&H") = Nothing Then
                         Done_ = "Done"
                     End If
                 End If
@@ -156,9 +157,10 @@ Public Class TikUpdate
         End If
     End Sub
     Private Sub GetUpdtEvnt_()
+        Dim Fn As New APblicClss.Func
         UpGetSql = New DataTable
         '                                 0        1         2         3         4        5        6         7         8         9
-        If PublicCode.GetTbl("SELECT TkupSTime, TkupTxt, UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread FROM TkEvent INNER JOIN Int_user ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON Int_user.UsrCat = IntUserCat.UCatId Where ( TkupTkSql = " & StruGrdTk.Sql & ") ORDER BY TkupTkSql,TkupSQL DESC", UpGetSql, "1019&H") = Nothing Then
+        If Fn.GetTblXX("SELECT TkupSTime, TkupTxt, UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread FROM TkEvent INNER JOIN Int_user ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON Int_user.UsrCat = IntUserCat.UCatId Where ( TkupTkSql = " & StruGrdTk.Sql & ") ORDER BY TkupTkSql,TkupSQL DESC", UpGetSql, "1019&H") = Nothing Then
             UpGetSql.Columns.Add("File")        ' Add files Columns 
         Else
             MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
@@ -369,12 +371,13 @@ fileStream As Stream = File.Create(Environment.GetFolderPath(Environment.Special
         BtnBrws.Enabled = True
     End Sub
     Private Sub TimerEscOpen_Tick(sender As Object, e As EventArgs) Handles TimerEscOpen.Tick
+        Dim Fn As New APblicClss.Func
         If EscTable.Rows.Count = 0 Then
             EscTable.Rows.Clear()
-            GetTbl("select EscID, EscCC, EscDur from EscProcess where escID = " & StruGrdTk.LstUpEvId - 901, EscTable, "0000&H")
+            Fn.GetTblXX("select EscID, EscCC, EscDur from EscProcess where escID = " & StruGrdTk.LstUpEvId - 901, EscTable, "0000&H")
         End If
-        Dim Minutws As DateTime = ServrTime()
-        Dim Minuts As Double = ServrTime().Subtract(StruGrdTk.LstUpDt).TotalMinutes
+        Dim Minutws As DateTime = Fn.ServrTime()
+        Dim Minuts As Double = Fn.ServrTime().Subtract(StruGrdTk.LstUpDt).TotalMinutes
         Dim MinutsDef As Integer = EscTable.Rows(0).Item("EscDur") - Minuts
 
         If StruGrdTk.LstUpEvId = 902 Or StruGrdTk.LstUpEvId = 903 Or StruGrdTk.LstUpEvId = 904 Then
