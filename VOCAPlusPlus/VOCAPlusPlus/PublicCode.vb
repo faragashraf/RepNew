@@ -587,8 +587,6 @@ End_:
         GridUpd.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         GridUpd.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False
     End Sub
-
-
     Public Function MyTeam(LedrCat As Integer, LedrId As Integer, UsrCas As String, Optional OnlyBckOff As Boolean = False) As String
         Dim Fn As New APblicClss.Func
         Dim UsrTable As DataTable = New DataTable

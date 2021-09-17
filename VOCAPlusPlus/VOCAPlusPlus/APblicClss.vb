@@ -269,6 +269,7 @@ Public Class APblicClss
         End Function
         Public Function ServrTime(worker As System.ComponentModel.BackgroundWorker) As DateTime
             Dim Def As New APblicClss.Defntion
+            Dim Fn As New APblicClss.Func
             Def.StatStr = Nothing
             worker.ReportProgress(0, Def)
             Dim TimeTble As New DataTable
@@ -289,6 +290,7 @@ Public Class APblicClss
                     WelcomeScreen.TimerCon.Start()
                     WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
                 End If
+                Fn.AppLog("0000&H", ex.Message, "Conecting String")
             End Try
             Return Def.Nw
             worker.ReportProgress(0, Def)
@@ -461,7 +463,7 @@ Sec2:
                     Def.Str = "جاري تحميل أنواع المنتجات ..."
                     worker.ReportProgress(0, Def)
 
-                    If (Fnw.GetTbl("SELECT FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
+                    If (Fnw.GetTbl("SELECT FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp,FnMendNew FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
                         primaryKey(0) = ProdCompTable.Columns("FnSQL")
                         ProdCompTable.PrimaryKey = primaryKey
                         PrciTblCnt += 1
@@ -504,6 +506,7 @@ Sec2:
     Public Class Func
         Public Function ServrTime() As DateTime
             Dim Def As New APblicClss.Defntion
+            Dim Fn As New APblicClss.Func
             Def.StatStr = Nothing
             Dim TimeTble As New DataTable
             Dim SQLGetAdptr As New SqlDataAdapter            'SQL Table Adapter
@@ -522,6 +525,7 @@ Sec2:
                     WelcomeScreen.TimerCon.Start()
                     WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
                 End If
+                Fn.AppLog("0000&H", ex.Message, "Conecting String")
             End Try
             Return Def.Nw
             SQLGetAdptr.Dispose()
@@ -635,6 +639,7 @@ Sec2:
             Catch ex As Exception
                 Def.StatStr = ex.Message
                 WdyCount = 1
+                AppLog(ErrHndl, ex.Message, "SELECT Count(HDate) AS WDaysCount FROM CDHolDay WHERE (HDy = 1) AND (HDate BETWEEN CONVERT(DATETIME, '" & Format(StDt, "dd/MM/yyyy") & "', 103) AND CONVERT(DATETIME, '" & Format(EnDt, "dd/MM/yyyy") & "', 103));")
             End Try
             Return WdyCount
         End Function
@@ -693,8 +698,8 @@ Sec2:
                     Workbook.SaveAs(D.FileName)
                     MsgBox("Done")
                 Catch ex As Exception
-
                     Exprt = "X"
+                    AppLog("&H0000", ex.Message, "")
                     MsgBox(ex.Message)
                 End Try
             End If

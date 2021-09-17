@@ -537,7 +537,7 @@ sec_UsrErr_:
     Public Sub ClkEvntClick(sender As System.Object, e As System.EventArgs)
         Dim Fn As New APblicClss.Func
         Dim Def As New APblicClss.Defntion
-        Dim formName As String = "VOCAPlus." & sender.tag
+        Dim formName As String = "VOCAPlusPlus." & sender.tag
         Dim form_ = CType(Activator.CreateInstance(Type.GetType(formName)), Form)
         'sender.AccessibleName = "False"
         'sender.backcolor = Color.White
