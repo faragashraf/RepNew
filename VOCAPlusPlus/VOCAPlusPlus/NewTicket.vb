@@ -149,12 +149,14 @@ Public Class NewTicket
 
         Dim CTRLLst As New List(Of Control)
         DetailsTxtBx.Text = ""
+
         GetAll(Me).ToList.ForEach(Sub(c)
                                       If c.TabIndex <= 15 Then
                                           DetailsTxtBx.Text += c.Name & "_"
                                           CTRLLst.Add(c)
                                       End If
                                   End Sub)
+
 
         Dim gg As String = MendRw.ItemArray(12).ToString
         gg = MendRw.ItemArray(12)
