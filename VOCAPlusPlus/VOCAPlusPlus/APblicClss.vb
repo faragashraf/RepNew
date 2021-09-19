@@ -28,6 +28,7 @@ Module Public_
     Public CountryTable As DataTable = New DataTable
     Public ProdKTable As DataTable = New DataTable
     Public ProdCompTable As DataTable = New DataTable
+    Public MendFildsTable As DataTable = New DataTable
     Public UpdateKTable As DataTable = New DataTable
     Public FTPTable As New DataTable
     Public CtrlsTbl As DataTable = New DataTable
@@ -398,17 +399,13 @@ Sec2:
                     ProdKTable = New DataTable
                     ProdCompTable = New DataTable
                     UpdateKTable = New DataTable
-                    Def.Str = "جاري تحميل أسماء المناطق ..."
-                    worker.ReportProgress(0, Def)
+
                     If (Fnw.GetTbl("SELECT OffArea FROM PostOff GROUP BY OffArea ORDER BY OffArea;", AreaTable, "1012&H", worker)) = Nothing Then
                         PrciTblCnt += 1
                     Else
                         Def.Str = "لم يتم تحميل  أسماء المناطق "
                         worker.ReportProgress(0, Def)
                     End If
-
-                    Def.Str = "جاري تحميل أسماء المكاتب ..."
-                    worker.ReportProgress(0, Def)
 
                     If (Fnw.GetTbl("select OffNm1, OffFinCd, OffArea from PostOff ORDER BY OffNm1;", OfficeTable, "1012&H", worker)) = Nothing Then
                         PrciTblCnt += 1
@@ -423,8 +420,6 @@ Sec2:
                     Else
                         SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd > 1 ORDER BY SrcNm"
                     End If
-                    Def.Str = "جاري تحميل مصادر الشكوى ..."
-                    worker.ReportProgress(0, Def)
 
                     If (Fnw.GetTbl(SrcStr, CompSurceTable, "1012&H", worker)) = Nothing Then
                         PrciTblCnt += 1
@@ -433,9 +428,6 @@ Sec2:
                         worker.ReportProgress(0, Def)
                     End If
 
-
-                    Def.Str = "جاري تحميل أسماء الدول ..."
-                    worker.ReportProgress(0, Def)
 
                     If (Fnw.GetTbl("select CounCd,CounNm from CDCountry order by CounNm", CountryTable, "1012&H", worker)) = Nothing Then
                         primaryKey(0) = CountryTable.Columns("CounCd")
@@ -446,10 +438,6 @@ Sec2:
                         worker.ReportProgress(0, Def)
                     End If
 
-
-                    Def.Str = "جاري تحميل أنواع الخدمات ..."
-                    worker.ReportProgress(0, Def)
-
                     If (Fnw.GetTbl("select ProdKCd, ProdKNm, ProdKClr from CDProdK where ProdKSusp = 0 order by ProdKCd", ProdKTable, "1012&H", worker)) = Nothing Then
                         primaryKey(0) = ProdKTable.Columns("ProdKNm")
                         ProdKTable.PrimaryKey = primaryKey
@@ -459,11 +447,7 @@ Sec2:
                         worker.ReportProgress(0, Def)
                     End If
 
-
-                    Def.Str = "جاري تحميل أنواع المنتجات ..."
-                    worker.ReportProgress(0, Def)
-
-                    If (Fnw.GetTbl("SELECT FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp,FnMendNew FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
+                    If (Fnw.GetTbl("SELECT FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
                         primaryKey(0) = ProdCompTable.Columns("FnSQL")
                         ProdCompTable.PrimaryKey = primaryKey
                         PrciTblCnt += 1
@@ -472,8 +456,15 @@ Sec2:
                         worker.ReportProgress(0, Def)
                     End If
 
-                    Def.Str = "جاري تحميل أنواع التحديثات ..."
-                    worker.ReportProgress(0, Def)
+                    If (Fnw.GetTbl("SELECT CdFnMend.MendSQL, CdFnMend.MendCdFn, CdFnMend.MendField, CDMend.CDMendType, CDMend.CDMendMskd, CDMend.CDMendLength, CDMend.CDMendTbl, CDMend.CDMendDisply, CDMend.CDMendValue, CDMend.CDMendNm, CDMend.CDMendTxt, CDMendAccessNm FROM CdFnMend INNER JOIN CDMend ON CdFnMend.MendField = CDMend.CDMendTxt order by CdFnMend.MendSQL", MendFildsTable, "1012&H", worker)) = Nothing Then
+                        primaryKey(0) = MendFildsTable.Columns("CdFnMend.MendSQL")
+                        MendFildsTable.PrimaryKey = primaryKey
+                        PrciTblCnt += 1
+                    Else
+                        Def.Str = "لم يتم تحميل أنواع الحقول  "
+                        worker.ReportProgress(0, Def)
+                    End If
+
                     If Usr.PUsrUCatLvl >= 3 And Usr.PUsrUCatLvl <= 5 Then
                         If (Fnw.GetTbl("SELECT EvId, EvNm FROM CDEvent where EvSusp = 0 and EvBkOfic = 1 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
                             PrciTblCnt += 1

@@ -212,6 +212,12 @@
     <Compile Include="TikFrmRep.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TikNew.Designer.vb">
+      <DependentUpon>TikNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TikNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TikSearchNew.Designer.vb">
       <DependentUpon>TikSearchNew.vb</DependentUpon>
     </Compile>
@@ -278,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TikFrmRep.resx">
       <DependentUpon>TikFrmRep.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TikNew.resx">
+      <DependentUpon>TikNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TikSearchNew.resx">
       <DependentUpon>TikSearchNew.vb</DependentUpon>

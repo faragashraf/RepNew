@@ -158,8 +158,8 @@ Public Class NewTicket
                                   End Sub)
 
 
-        Dim gg As String = MendRw.ItemArray(12).ToString
-        gg = MendRw.ItemArray(12)
+        'Dim gg As String = MendRw.ItemArray(12).ToString
+        'gg = MendRw.ItemArray(12)
         'If TickKind = 1 Then         '-----------If Complaint True ---------------
         '    For Cnt_ = 0 To 11
         '        For Each c As Control In FlowLayoutPanel4.Controls

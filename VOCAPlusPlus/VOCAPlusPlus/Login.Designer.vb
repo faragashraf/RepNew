@@ -165,7 +165,7 @@ Partial Class Login
         Me.LblUsrIP.BackColor = System.Drawing.Color.Transparent
         Me.LblUsrIP.Font = New System.Drawing.Font("Times New Roman", 9.0!)
         Me.LblUsrIP.ForeColor = System.Drawing.Color.Red
-        Me.LblUsrIP.Location = New System.Drawing.Point(345, 261)
+        Me.LblUsrIP.Location = New System.Drawing.Point(345, 262)
         Me.LblUsrIP.Name = "LblUsrIP"
         Me.LblUsrIP.Size = New System.Drawing.Size(235, 20)
         Me.LblUsrIP.TabIndex = 68
@@ -190,7 +190,7 @@ Partial Class Login
         Me.PubVerLbl.BackColor = System.Drawing.Color.Transparent
         Me.PubVerLbl.Font = New System.Drawing.Font("Times New Roman", 9.0!)
         Me.PubVerLbl.ForeColor = System.Drawing.Color.Red
-        Me.PubVerLbl.Location = New System.Drawing.Point(348, 278)
+        Me.PubVerLbl.Location = New System.Drawing.Point(348, 279)
         Me.PubVerLbl.Name = "PubVerLbl"
         Me.PubVerLbl.Size = New System.Drawing.Size(232, 24)
         Me.PubVerLbl.TabIndex = 74
@@ -262,7 +262,7 @@ Partial Class Login
         '
         Me.Panel2.BackColor = System.Drawing.Color.Transparent
         Me.Panel2.Controls.Add(Me.LogInBtn)
-        Me.Panel2.Location = New System.Drawing.Point(283, 212)
+        Me.Panel2.Location = New System.Drawing.Point(282, 212)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(99, 36)
         Me.Panel2.TabIndex = 79

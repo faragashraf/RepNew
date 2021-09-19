@@ -423,7 +423,7 @@ sec_UsrErr_:
         Invoke(Sub() Me.Enabled = False)
         Invoke(Sub() WC.SwitchBoard(worker))
 
-        If PrciTblCnt = 7 Then
+        If PrciTblCnt = 8 Then
             PreciFlag = True
             Invoke(Sub() WelcomeScreen.LblSrvrNm.Text = ServerNm)
             If ServerNm = "VOCA Server" Then

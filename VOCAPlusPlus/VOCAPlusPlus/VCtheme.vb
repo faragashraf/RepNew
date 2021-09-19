@@ -27,7 +27,7 @@
         VCBtn.TextAlign = ContentAlignment.MiddleCenter
         VCBtn.FlatStyle = FlatStyle.Flat
         VCBtn.FlatAppearance.BorderSize = 0
-        VCBtn.BringToFront()
+        'VCBtn.BringToFront()
         'If BttonCtrl.Name.Contains("Submit") Then       'Format all button if contains Name
         'End If
     End Sub
