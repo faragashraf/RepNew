@@ -23,7 +23,7 @@ Partial Class TikNew
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(TikNew))
         Me.FlwMain = New System.Windows.Forms.FlowLayoutPanel()
         Me.FlwTree = New System.Windows.Forms.FlowLayoutPanel()
@@ -48,6 +48,8 @@ Partial Class TikNew
         Me.RadioButton9 = New System.Windows.Forms.RadioButton()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Phon1TxtBx = New System.Windows.Forms.MaskedTextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.DateTxtBx = New System.Windows.Forms.TextBox()
         Me.MyGroupBox1 = New System.Windows.Forms.Panel()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
@@ -62,6 +64,7 @@ Partial Class TikNew
         Me.MailTxtBx = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.AddTxtBx = New System.Windows.Forms.TextBox()
+        Me.DetailsTxtBx = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.SrcCmbBx = New System.Windows.Forms.ComboBox()
@@ -185,11 +188,11 @@ Partial Class TikNew
         Me.TreeView1.ImageKey = "Add.ico"
         Me.TreeView1.Location = New System.Drawing.Point(11, 51)
         Me.TreeView1.Name = "TreeView1"
-        TreeNode2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        TreeNode2.ForeColor = System.Drawing.Color.Red
-        TreeNode2.Name = "Rooting"
-        TreeNode2.Text = "Rooting"
-        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode2})
+        TreeNode1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        TreeNode1.ForeColor = System.Drawing.Color.Red
+        TreeNode1.Name = "Rooting"
+        TreeNode1.Text = "Rooting"
+        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
         Me.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TreeView1.RightToLeftLayout = True
         Me.TreeView1.ShowNodeToolTips = True
@@ -257,6 +260,8 @@ Partial Class TikNew
         Me.FlowLayoutPanel6.Controls.Add(Me.MyGroupBox2)
         Me.FlowLayoutPanel6.Controls.Add(Me.Label20)
         Me.FlowLayoutPanel6.Controls.Add(Me.Phon1TxtBx)
+        Me.FlowLayoutPanel6.Controls.Add(Me.Label1)
+        Me.FlowLayoutPanel6.Controls.Add(Me.DateTxtBx)
         Me.FlowLayoutPanel6.Controls.Add(Me.MyGroupBox1)
         Me.FlowLayoutPanel6.Controls.Add(Me.Label22)
         Me.FlowLayoutPanel6.Controls.Add(Me.Phon2TxtBx)
@@ -267,6 +272,7 @@ Partial Class TikNew
         Me.FlowLayoutPanel6.Controls.Add(Me.MailTxtBx)
         Me.FlowLayoutPanel6.Controls.Add(Me.Label3)
         Me.FlowLayoutPanel6.Controls.Add(Me.AddTxtBx)
+        Me.FlowLayoutPanel6.Controls.Add(Me.DetailsTxtBx)
         Me.FlowLayoutPanel6.Controls.Add(Me.Label16)
         Me.FlowLayoutPanel6.Controls.Add(Me.Label24)
         Me.FlowLayoutPanel6.Controls.Add(Me.SrcCmbBx)
@@ -307,6 +313,7 @@ Partial Class TikNew
         '
         'IDTxtBx
         '
+        Me.IDTxtBx.AccessibleName = ""
         Me.IDTxtBx.Location = New System.Drawing.Point(770, 0)
         Me.IDTxtBx.Margin = New System.Windows.Forms.Padding(3, 0, 3, 0)
         Me.IDTxtBx.Mask = "AAAAAAAAAAAAA"
@@ -314,7 +321,7 @@ Partial Class TikNew
         Me.IDTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.IDTxtBx.Size = New System.Drawing.Size(286, 32)
         Me.IDTxtBx.TabIndex = 9
-        Me.IDTxtBx.Tag = "الرقم القومي"
+        Me.IDTxtBx.Tag = "English-Number"
         '
         'RadNID
         '
@@ -420,15 +427,47 @@ Partial Class TikNew
         '
         'Phon1TxtBx
         '
+        Me.Phon1TxtBx.AccessibleName = ""
         Me.Phon1TxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlowLayoutPanel6.SetFlowBreak(Me.Phon1TxtBx, True)
         Me.Phon1TxtBx.Location = New System.Drawing.Point(770, 53)
         Me.Phon1TxtBx.Margin = New System.Windows.Forms.Padding(3, 13, 3, 3)
         Me.Phon1TxtBx.Mask = "00000000000"
         Me.Phon1TxtBx.Name = "Phon1TxtBx"
         Me.Phon1TxtBx.Size = New System.Drawing.Size(286, 32)
         Me.Phon1TxtBx.TabIndex = 0
-        Me.Phon1TxtBx.Tag = "رقم التليفون 1"
+        Me.Phon1TxtBx.Tag = "English-Number"
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label1.Font = New System.Drawing.Font("Times New Roman", 14.0!)
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(646, 53)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(3, 13, 3, 3)
+        Me.Label1.MinimumSize = New System.Drawing.Size(70, 15)
+        Me.Label1.Name = "Label1"
+        Me.Label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Label1.Size = New System.Drawing.Size(118, 27)
+        Me.Label1.TabIndex = 2044
+        Me.Label1.Text = "التاريخ :"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'DateTxtBx
+        '
+        Me.DateTxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DateTxtBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.DateTxtBx.Enabled = False
+        Me.FlowLayoutPanel6.SetFlowBreak(Me.DateTxtBx, True)
+        Me.DateTxtBx.Location = New System.Drawing.Point(290, 53)
+        Me.DateTxtBx.Margin = New System.Windows.Forms.Padding(3, 13, 3, 3)
+        Me.DateTxtBx.Name = "DateTxtBx"
+        Me.DateTxtBx.ReadOnly = True
+        Me.DateTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.DateTxtBx.Size = New System.Drawing.Size(350, 32)
+        Me.DateTxtBx.TabIndex = 2043
+        Me.DateTxtBx.TabStop = False
+        Me.DateTxtBx.Tag = "Date"
+        Me.ToolTip1.SetToolTip(Me.DateTxtBx, "تاريخ الشكوى")
         '
         'MyGroupBox1
         '
@@ -499,6 +538,7 @@ Partial Class TikNew
         '
         'Phon2TxtBx
         '
+        Me.Phon2TxtBx.AccessibleName = ""
         Me.Phon2TxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FlowLayoutPanel6.SetFlowBreak(Me.Phon2TxtBx, True)
         Me.Phon2TxtBx.Location = New System.Drawing.Point(770, 109)
@@ -507,7 +547,7 @@ Partial Class TikNew
         Me.Phon2TxtBx.Name = "Phon2TxtBx"
         Me.Phon2TxtBx.Size = New System.Drawing.Size(286, 32)
         Me.Phon2TxtBx.TabIndex = 2
-        Me.Phon2TxtBx.Tag = "رقم التليفون 2"
+        Me.Phon2TxtBx.Tag = "English-Number"
         '
         'Label2
         '
@@ -538,7 +578,7 @@ Partial Class TikNew
         '
         'NameTxtBx
         '
-        Me.NameTxtBx.AccessibleName = "Arabic-"
+        Me.NameTxtBx.AccessibleName = ""
         Me.NameTxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NameTxtBx.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.NameTxtBx.Location = New System.Drawing.Point(770, 155)
@@ -547,41 +587,41 @@ Partial Class TikNew
         Me.NameTxtBx.Size = New System.Drawing.Size(286, 32)
         Me.NameTxtBx.TabIndex = 1
         Me.NameTxtBx.TabStop = False
-        Me.NameTxtBx.Tag = "اسم العميل"
+        Me.NameTxtBx.Tag = "English-Text"
         '
         'Label15
         '
         Me.Label15.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label15.Font = New System.Drawing.Font("Times New Roman", 12.0!)
+        Me.Label15.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label15.ForeColor = System.Drawing.Color.Black
-        Me.Label15.Location = New System.Drawing.Point(607, 155)
-        Me.Label15.Margin = New System.Windows.Forms.Padding(35, 3, 3, 3)
+        Me.Label15.Location = New System.Drawing.Point(644, 155)
+        Me.Label15.Margin = New System.Windows.Forms.Padding(3)
         Me.Label15.Name = "Label15"
         Me.Label15.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label15.Size = New System.Drawing.Size(125, 40)
+        Me.Label15.Size = New System.Drawing.Size(120, 27)
         Me.Label15.TabIndex = 87
         Me.Label15.Text = "البريد الإلكتروني :"
         Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'MailTxtBx
         '
-        Me.MailTxtBx.AccessibleName = "English"
+        Me.MailTxtBx.AccessibleName = ""
         Me.MailTxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FlowLayoutPanel6.SetFlowBreak(Me.MailTxtBx, True)
-        Me.MailTxtBx.Location = New System.Drawing.Point(253, 155)
+        Me.MailTxtBx.Location = New System.Drawing.Point(290, 155)
         Me.MailTxtBx.Name = "MailTxtBx"
         Me.MailTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.MailTxtBx.Size = New System.Drawing.Size(348, 32)
         Me.MailTxtBx.TabIndex = 73
         Me.MailTxtBx.TabStop = False
-        Me.MailTxtBx.Tag = "Email Address"
+        Me.MailTxtBx.Tag = "English-TextNumber"
         '
         'Label3
         '
         Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.Font = New System.Drawing.Font("Times New Roman", 16.0!)
         Me.Label3.ForeColor = System.Drawing.Color.Black
-        Me.Label3.Location = New System.Drawing.Point(1096, 198)
+        Me.Label3.Location = New System.Drawing.Point(1096, 190)
         Me.Label3.MinimumSize = New System.Drawing.Size(70, 15)
         Me.Label3.Name = "Label3"
         Me.Label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -592,24 +632,33 @@ Partial Class TikNew
         '
         'AddTxtBx
         '
+        Me.AddTxtBx.AccessibleName = ""
         Me.AddTxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.AddTxtBx.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.FlowLayoutPanel6.SetFlowBreak(Me.AddTxtBx, True)
-        Me.AddTxtBx.Location = New System.Drawing.Point(32, 201)
+        Me.AddTxtBx.Location = New System.Drawing.Point(554, 193)
         Me.AddTxtBx.Margin = New System.Windows.Forms.Padding(35, 3, 3, 3)
         Me.AddTxtBx.Multiline = True
         Me.AddTxtBx.Name = "AddTxtBx"
         Me.AddTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.AddTxtBx.Size = New System.Drawing.Size(1026, 179)
+        Me.AddTxtBx.Size = New System.Drawing.Size(504, 179)
         Me.AddTxtBx.TabIndex = 68
-        Me.AddTxtBx.Tag = "Address"
+        Me.AddTxtBx.Tag = "Arabic-TextNumber"
+        '
+        'DetailsTxtBx
+        '
+        Me.FlowLayoutPanel6.SetFlowBreak(Me.DetailsTxtBx, True)
+        Me.DetailsTxtBx.Location = New System.Drawing.Point(46, 193)
+        Me.DetailsTxtBx.Multiline = True
+        Me.DetailsTxtBx.Name = "DetailsTxtBx"
+        Me.DetailsTxtBx.Size = New System.Drawing.Size(502, 179)
+        Me.DetailsTxtBx.TabIndex = 2045
         '
         'Label16
         '
         Me.Label16.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label16.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label16.ForeColor = System.Drawing.Color.Black
-        Me.Label16.Location = New System.Drawing.Point(1096, 388)
+        Me.Label16.Location = New System.Drawing.Point(1096, 380)
         Me.Label16.Margin = New System.Windows.Forms.Padding(3, 5, 3, 0)
         Me.Label16.Name = "Label16"
         Me.Label16.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -623,7 +672,7 @@ Partial Class TikNew
         Me.Label24.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
         Me.Label24.ForeColor = System.Drawing.Color.Red
-        Me.Label24.Location = New System.Drawing.Point(1062, 383)
+        Me.Label24.Location = New System.Drawing.Point(1062, 375)
         Me.Label24.Name = "Label24"
         Me.Label24.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label24.Size = New System.Drawing.Size(28, 30)
@@ -643,7 +692,7 @@ Partial Class TikNew
         Me.FlowLayoutPanel6.SetFlowBreak(Me.SrcCmbBx, True)
         Me.SrcCmbBx.FormattingEnabled = True
         Me.SrcCmbBx.ItemHeight = 23
-        Me.SrcCmbBx.Location = New System.Drawing.Point(778, 386)
+        Me.SrcCmbBx.Location = New System.Drawing.Point(778, 378)
         Me.SrcCmbBx.Name = "SrcCmbBx"
         Me.SrcCmbBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.SrcCmbBx.Size = New System.Drawing.Size(278, 31)
@@ -657,7 +706,7 @@ Partial Class TikNew
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.Font = New System.Drawing.Font("Times New Roman", 16.0!)
         Me.Label4.ForeColor = System.Drawing.Color.Black
-        Me.Label4.Location = New System.Drawing.Point(1096, 430)
+        Me.Label4.Location = New System.Drawing.Point(1096, 422)
         Me.Label4.Margin = New System.Windows.Forms.Padding(3, 8, 3, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -669,7 +718,7 @@ Partial Class TikNew
         'Prdct
         '
         Me.Prdct.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Prdct.Location = New System.Drawing.Point(710, 425)
+        Me.Prdct.Location = New System.Drawing.Point(710, 417)
         Me.Prdct.Margin = New System.Windows.Forms.Padding(35, 3, 31, 3)
         Me.Prdct.Name = "Prdct"
         Me.Prdct.ReadOnly = True
@@ -683,7 +732,7 @@ Partial Class TikNew
         Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(528, 430)
+        Me.Label5.Location = New System.Drawing.Point(528, 422)
         Me.Label5.Margin = New System.Windows.Forms.Padding(3, 8, 3, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -695,7 +744,7 @@ Partial Class TikNew
         'Comp
         '
         Me.Comp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Comp.Location = New System.Drawing.Point(32, 425)
+        Me.Comp.Location = New System.Drawing.Point(32, 417)
         Me.Comp.Name = "Comp"
         Me.Comp.ReadOnly = True
         Me.Comp.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -996,4 +1045,7 @@ Partial Class TikNew
     Friend WithEvents Label16 As Label
     Friend WithEvents Label24 As Label
     Friend WithEvents SrcCmbBx As ComboBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents DateTxtBx As TextBox
+    Friend WithEvents DetailsTxtBx As TextBox
 End Class

@@ -15,7 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>E:\RepNew\VOCAPlusPlus\VOCAPlusPlus\متابعة الشكاوى\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -25,10 +25,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ProductName>VOCA++</ProductName>
+    <ProductName>متابعة الشكاوى</ProductName>
     <PublisherName>Ashraf Farag</PublisherName>
-    <SuiteName>VOCA++</SuiteName>
-    <ApplicationRevision>1</ApplicationRevision>
+    <SuiteName>متابعة الشكاوى</SuiteName>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

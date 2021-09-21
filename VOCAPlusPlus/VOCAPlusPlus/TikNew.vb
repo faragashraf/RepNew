@@ -1,9 +1,14 @@
-﻿Public Class TikNew
+﻿Imports System.Threading
+
+Public Class TikNew
     Private RelatedTable As DataTable = New DataTable
     Private TxtBx As New TextBox
     Private GV As New DataGridView
     Private TickKind As Integer = 0       'ticket kind      0=Inquiry and 1=Complaint
     Private PrdKind As String = ""        'Product kind     1=Financial and 2=Postal   3=Governmental and 4=Social and 5=Other
+    Private TickSubmt As Thread
+    Private SqlCuCnt_ As Integer = 0         'Sql of Last New Ticket
+    Private DubStr As String = ""
     Private Sub TikNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If PreciFlag = False Then
             Me.Close()
@@ -87,7 +92,10 @@
             TickKind = 1
             Me.Text = "تسجيل شكوى جديدة"
         End If
-
+        If SrcCmbBx.Items.Count = 0 Then
+            SrcCmbBx.DataSource = CompSurceTable
+            SrcCmbBx.SelectedIndex = -1
+        End If
 Popul_:
         If TreeView1.Nodes.Count = 1 Or TreeView1.Nodes.Count = Nothing Then
             Dim Root As String = ""
@@ -219,7 +227,7 @@ Popul_:
                     Ctrl.Font = New Font("Times New Roman", 12, FontStyle.Bold)
                     Ctrl.Size = New Point(150, 25)
                     Ctrl.Name = MendFildsTable.DefaultView(uu).Item("CDMendNm").ToString
-                    Ctrl.AccessibleName = MendFildsTable.DefaultView(uu).Item("CDMendAccessNm").ToString
+                    Ctrl.Tag = MendFildsTable.DefaultView(uu).Item("CDMendAccessNm").ToString
                     FlwMend.Controls.Add(Ctrl)
                 ElseIf MendFildsTable.DefaultView(uu).Item("CDMendType").ToString = "TextBox!" Then
                     Dim Ctrl As New TextBox
@@ -228,7 +236,7 @@ Popul_:
                     Ctrl.Font = New Font("Times New Roman", 12, FontStyle.Bold)
                     Ctrl.Size = New Point(150, 25)
                     Ctrl.Name = MendFildsTable.DefaultView(uu).Item("CDMendNm").ToString
-                    Ctrl.AccessibleName = MendFildsTable.DefaultView(uu).Item("CDMendAccessNm").ToString
+                    Ctrl.Tag = MendFildsTable.DefaultView(uu).Item("CDMendAccessNm").ToString
                     FlwMend.Controls.Add(Ctrl)
                     Ctrl.ReadOnly = True
                     AddHandler Ctrl.KeyDown, AddressOf TextBox_KeyDown
@@ -239,7 +247,8 @@ Popul_:
                     Ctrl.Size = New Point(150, 25)
                     Ctrl.Mask = MendFildsTable.DefaultView(uu).Item("CDMendMskd").ToString
                     Ctrl.Name = MendFildsTable.DefaultView(uu).Item("CDMendNm").ToString
-                    Ctrl.AccessibleName = MendFildsTable.DefaultView(uu).Item("CDMendAccessNm").ToString
+                    Ctrl.Tag = MendFildsTable.DefaultView(uu).Item("CDMendAccessNm").ToString
+                    AddHandler Ctrl.Enter, AddressOf Masked_Enter
                     FlwMend.Controls.Add(Ctrl)
                 ElseIf MendFildsTable.DefaultView(uu).Item("CDMendType").ToString = "DateTimePicker" Then
                     Dim Ctrl As New DateTimePicker
@@ -249,7 +258,7 @@ Popul_:
                     Ctrl.Format = DateTimePickerFormat.Short
                     Ctrl.Name = MendFildsTable.DefaultView(uu).Item("CDMendNm").ToString
                     Ctrl.Value = Today.AddDays(1)
-                    Ctrl.AccessibleName = MendFildsTable.DefaultView(uu).Item("CDMendAccessNm").ToString
+                    Ctrl.Tag = MendFildsTable.DefaultView(uu).Item("CDMendAccessNm").ToString
                     FlwMend.Controls.Add(Ctrl)
 
                 End If
@@ -270,6 +279,7 @@ Popul_:
         End If
         If Split(TreeView1.SelectedNode.FullPath.ToString, "\")(0) <> PrdKind Then PrdKind = ""
     End Sub
+
 #Region "Buttons"
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         Dim Lbl As New Label
@@ -299,6 +309,7 @@ Popul_:
         BtnClr.Enabled = False
     End Sub
 #End Region
+
     Private Sub TextBox_KeyDown(sender As Object, e As KeyEventArgs)
         'NOTE: set form's KeyPreview property to True
         Select Case e.KeyCode
@@ -316,8 +327,7 @@ Popul_:
         End Select
     End Sub
     Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs)
-        'MsgBox(GV.CurrentCell.Value)
-        TxtBx.Text = GV.CurrentCell.Value
+        TxtBx.Text = GV.CurrentRow.Cells(0).Value
         sender.parent.Close()
     End Sub
     Private Sub TimrPhons_Tick(sender As Object, e As EventArgs) Handles TimrPhons.Tick
@@ -357,5 +367,194 @@ Popul_:
                 PictureBox4.Location = New Point(PictureBox4.Location.X - 0.5, PictureBox4.Location.Y - 1)
             End If
         End If
+    End Sub
+    Private Sub Masked_Enter(sender As Object, e As EventArgs)
+        'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    End Sub
+    Public Sub ClntData()
+        Dim Fn As New APblicClss.Func
+        Dim primaryKey(0) As DataColumn
+        RelatedTable.Rows.Clear()
+        '  Table            0       1        2       3      4       5       6       7        8      9        10       11       12       13        14         15         16       17        18       19             20         21      22        23         24          25      26       27         28         29           30       31          32       33    34       35
+        '  Grid             1        2       3      4       5       6       7        8       9      10       11       12       13        14       15          16         17      18        19       20             21         22      23        24         25          26      27       28         29         30           31       32          33       34    35       36
+        If Fn.GetTblXX("SELECT TkSQL, TkKind, TkDtStart, TkID, SrcNm, TkClNm, TkClPh, TkClPh1, TkMail, TkClAdr, TkCardNo, TkShpNo, TkGBNo, TkClNtID, TkAmount, TkTransDate, PrdKind, PrdNm, CompNm, CounNmSender, CounNmConsign, OffNm1, OffArea, TkDetails, TkClsStatus, TkFolw, TkEmpNm, UsrRealNm, 0 AS LstSqlEv, '1/1/0001 12:00:00 AM' AS LstUpdtTime, '' AS TkupTxt, 0 AS TkupUnread, 0 AS TkupEvtId, '' AS EvNm, 0 AS EvSusp, 0 AS TkupUser, TkReOp FROM dbo.TicketsAll  WHERE (TkClPh = '" & Phon1TxtBx.Text & "') ORDER BY TkSQL DESC;", RelatedTable, "1013&H") = Nothing Then
+            primaryKey(0) = RelatedTable.Columns("TkSQL")
+            RelatedTable.PrimaryKey = primaryKey
+
+            If RelatedTable.Rows.Count > 0 Then
+                Invoke(Sub() NameTxtBx.Text = RelatedTable(0).Item(5).ToString)
+                Invoke(Sub() AddTxtBx.Text = RelatedTable(0).Item(9).ToString)
+                Invoke(Sub() Phon2TxtBx.Text = RelatedTable(0).Item(7).ToString)
+                If DBNull.Value.Equals(RelatedTable(0).Item(8).ToString) = False Then
+                    Invoke(Sub() MailTxtBx.Text = RelatedTable(0).Item(8).ToString)
+                Else
+
+                End If
+
+
+
+                Dim Comp As Integer = 0
+                Invoke(Sub() WelcomeScreen.StatBrPnlAr.Text = "")
+            Else
+                MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
+            End If
+        End If
+        FltrStr = ""
+        Invoke(Sub() RelatedTable.DefaultView.RowFilter = String.Empty)
+        Invoke(Sub() Me.Enabled = True)
+        Invoke(Sub() Me.Activate())
+
+    End Sub
+    Private Sub Phon1TxtBx_TextChanged(sender As Object, e As EventArgs) Handles Phon1TxtBx.TextChanged
+        Cnt_ = 0
+        For cnt_1 = 1 To Phon1TxtBx.TextLength
+            If Mid(Phon1TxtBx.Text, cnt_1, 1).CompareTo("[0-9]*") = 1 Then
+                Cnt_ += 1
+            End If
+        Next
+        If Cnt_ = Phon1TxtBx.TextLength Then
+
+            Dim ClntThrd As New Thread(AddressOf ClntData)
+            ClntThrd.IsBackground = True
+            Phon1TxtBx.BackColor = Color.FromArgb(128, 255, 128)
+            Phon1TxtBx.ForeColor = Color.Black
+            WelcomeScreen.StatBrPnlAr.Text = "جاري تحميل البيانات ..........."
+            TreeView1.Visible = True
+            ClntThrd.Start()
+            Me.Enabled = False
+        Else
+            Phon1TxtBx.BackColor = Color.OrangeRed
+            Phon1TxtBx.ForeColor = Color.Yellow
+            TreeView1.Visible = False
+            NameTxtBx.Text = ""
+            AddTxtBx.Text = ""
+            Phon2TxtBx.Text = ""
+            MailTxtBx.Text = ""
+        End If
+    End Sub
+    Private Sub SubmtTick()
+        Dim Def As New APblicClss.Defntion
+        Dim Trck As String = ""
+        Dim lodingStr As String = ""
+
+        lodingStr = "جاري تسجيل البيانات ..."
+
+        'For Cnt_ = 1 To TrackMskBx.TextLength
+        '    If Mid(TrackMskBx.Text, Cnt_, 1) <> " " Then
+        '        Trck &= Mid(TrackMskBx.Text, Cnt_, 1)
+        '    End If
+        'Next
+        'If TransDtPicker.Value = Today.AddDays(1) Then
+        '    TranDt = ""
+        'Else
+        '    TranDt = Format(TransDtPicker.Value, "yyyy/MM/dd").ToString
+        'End If
+
+        Dim sqlComminsert_3 As New SqlCommand            'SQL Command
+        Dim sqlComminsert_4 As New SqlCommand            'SQL Command
+        Def.sqlComminsert_1 = New SqlCommand
+        Def.sqlComminsert_2 = New SqlCommand
+        Try
+            If Def.CONSQL.State = ConnectionState.Closed Then
+                Def.CONSQL.Open()
+            End If
+            Def.sqlComminsert_1.Connection = Def.CONSQL
+        Def.sqlComminsert_2.Connection = Def.CONSQL            'insert Update into Update Table
+        sqlComminsert_3.Connection = Def.CONSQL
+        sqlComminsert_4.Connection = Def.CONSQL
+        sqlComm.Connection = Def.CONSQL                    'Get ID & Date & UserID
+        Def.sqlComminsert_1.CommandType = CommandType.Text
+        Def.sqlComminsert_2.CommandType = CommandType.Text
+        sqlComminsert_3.CommandType = CommandType.Text
+        sqlComminsert_4.CommandType = CommandType.Text
+        sqlComm.CommandType = CommandType.Text
+            TickKind = 0  'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX To Adjust
+
+            If TickKind = 0 Then                            'Ticket Will be closed & Usr.ID will be the same User
+            Invoke(Sub() Def.sqlComminsert_1.CommandText = "INSERT INTO Tickets(TkID, TkKind, TkFnPrdCd, TkCompSrc, TkClNm, TkClPh, TkClPh1, TkClAdr, TkClNtID,TkDetails, TkEmpNm0, TkMail, TkClsStatus, TkEmpNm, TkFolw) VALUES (0, '" & TickKind & "','" &
+                                               TreeView1.SelectedNode.Name & "','" & SrcCmbBx.SelectedValue & "','" & Trim(NameTxtBx.Text) & "','" & Phon1TxtBx.Text & "','" & Phon2TxtBx.Text & "','" & AddTxtBx.Text & "','" & IDTxtBx.Text & "','" & DetailsTxtBx.Text & DubStr & "','" & Usr.PUsrID & "','" & MailTxtBx.Text & "','" & 1 & "','" & Usr.PUsrID & "','" & "1" & "');")
+
+            Invoke(Sub() Def.sqlComminsert_2.CommandText = "INSERT into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES 
+                                                               ((Select Max(TkSQL) As RelationTkID FROM Tickets where TkEmpNm0 = " & Usr.PUsrID & "),'" & "The Inquiry has been Recieved" & "','" & "1" & "','" & "0" & "','" & OsIP() & "','" & Usr.PUsrID & "');")
+        Else
+            'If Usr.PUsrCalCntr = True Then
+            '    Invoke(Sub() Def.sqlComminsert_1.CommandText = "INSERT INTO Tickets(TkID, TkKind, TkFnPrdCd, TkCompSrc, TkClNm, TkClPh, TkClPh1, TkClAdr, TkClNtID, TkShpNo, TkGBNo, TkCardNo, TkAmount, TkTransDate, TkDetails, TkSndrCoun, TkConsigCoun, TkOffNm, TkEmpNm0, TkMail) VALUES (0, '" & TickKind & "','" &
+            '                      TreeView1.SelectedNode.Name & "','" & SrcCmbBx.SelectedValue & "','" & Trim(NameTxtBx.Text) & "','" & Phon1TxtBx.Text & "','" & Phon2TxtBx.Text & "','" & AddTxtBx.Text & "','" & IDTxtBx.Text & "','" & Trck & "','" & GBTxtBx.Text & "','" & Trim(Mid(AccMskdBx.Text, 1, 4)) & Trim(Mid(AccMskdBx.Text, 6, 4)) & Trim(Mid(AccMskdBx.Text, 11, 4)) & Trim(Mid(AccMskdBx.Text, 16, 4)) & "','" & AmountTxtBx.Text & "','" & TranDt & "','" & DetailsTxtBx.Text & DubStr & "','" & Trim(Mid(TrackMskBx.Text, 14, 2)) & "','" & DistCmbBx.SelectedValue & "','" & OffCmbBx.SelectedValue & "','" & Usr.PUsrID & "','" & MailTxtBx.Text & "');")
+            'Else
+            '    Invoke(Sub() Def.sqlComminsert_1.CommandText = "INSERT INTO Tickets(TkID, TkKind, TkFnPrdCd, TkCompSrc, TkClNm, TkClPh, TkClPh1, TkClAdr, TkClNtID, TkShpNo, TkGBNo, TkCardNo, TkAmount, TkTransDate, TkDetails, TkSndrCoun, TkConsigCoun, TkOffNm, TkEmpNm0, TkMail, TkEmpNm) VALUES (0, '" & TickKind & "','" &
+            '                  TreeView1.SelectedNode.Name & "','" & SrcCmbBx.SelectedValue & "','" & Trim(NameTxtBx.Text) & "','" & Phon1TxtBx.Text & "','" & Phon2TxtBx.Text & "','" & AddTxtBx.Text & "','" & IDTxtBx.Text & "','" & Trck & "','" & GBTxtBx.Text & "','" & Trim(Mid(AccMskdBx.Text, 1, 4)) & Trim(Mid(AccMskdBx.Text, 6, 4)) & Trim(Mid(AccMskdBx.Text, 11, 4)) & Trim(Mid(AccMskdBx.Text, 16, 4)) & "','" & AmountTxtBx.Text & "','" & TranDt & "','" & DetailsTxtBx.Text & DubStr & "','" & Trim(Mid(TrackMskBx.Text, 14, 2)) & "','" & DistCmbBx.SelectedValue & "','" & OffCmbBx.SelectedValue & "','" & Usr.PUsrID & "','" & MailTxtBx.Text & "','" & Usr.PUsrID & "');")
+            'End If
+            Def.sqlComminsert_2.CommandText = "INSERT into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES 
+                                                               ((Select Max(TkSQL) As RelationTkID FROM Tickets where TkEmpNm0 = " & Usr.PUsrID & "),'" & "The Complaint has been Recieved" & "','" & "1" & "','" & "0" & "','" & OsIP() & "','" & Usr.PUsrID & "');"
+        End If
+        sqlComminsert_3.CommandText = "update Tickets set TkID = MaxID from (select MAX(TkSQL) AS MaxID, MAX(TkDtStart) AS MaxDt, TkEmpNm0 from Tickets where TkEmpNm0  = " & Usr.PUsrID & " GROUP BY TkEmpNm0) As MaxTable INNER JOIN Tickets ON Tickets.TkSQL = MaxTable.MaxID;"
+        sqlComminsert_4.CommandText = "select MAX(TkSQL) AS MaxID, MAX(TkDtStart) AS MaxDt, MAX(TkID) AS Max_ from TkEvent INNER JOIN Tickets ON TkEvent.TkupTkSql = Tickets.TkSQL GROUP BY TkupUser HAVING (TkupUser  = " & Usr.PUsrID & ");"
+        Tran = Def.CONSQL.BeginTransaction()
+        Def.sqlComminsert_1.Transaction = Tran
+        Def.sqlComminsert_2.Transaction = Tran
+        sqlComminsert_3.Transaction = Tran
+        sqlComminsert_4.Transaction = Tran
+        sqlComm.Transaction = Tran
+        Def.sqlComminsert_1.ExecuteNonQuery()
+        Def.sqlComminsert_2.ExecuteNonQuery()
+        sqlComminsert_3.ExecuteNonQuery()
+            Reader_ = sqlComminsert_4.ExecuteReader
+
+            Reader_.Read()
+            SqlCuCnt_ = Reader_!MaxID
+            If TickKind = 0 Then
+                Invoke(Sub() ComRefLbl.Text = "Inquiry No.:  " & Reader_!Max_)
+            Else
+                Invoke(Sub() ComRefLbl.Text = "Complaint No.: " & Reader_!Max_)
+            End If
+
+            Invoke(Sub() DateTxtBx.Text = Reader_!MaxDt)
+            Reader_.Close()
+            Tran.Commit()
+            'Def.CONSQL.Close()
+            'SqlConnection.ClearPool(Def.CONSQL)
+
+            TreeView1.Enabled = False
+            Invoke(Sub() SubmitBtn.Visible = False)
+            Invoke(Sub() WelcomeScreen.StatBrPnlAr.Text = "تم تسجيل البيان بنجاح")
+            Invoke(Sub() BtnDublicate.Visible = True)
+            DubStr = ""
+            Invoke(Sub() Me.Enabled = True)
+            Invoke(Sub() Me.Activate())
+            Invoke(Sub() TimrPhons.Stop())
+        Catch ex As Exception
+        'Tran.Rollback()
+        'Invoke(Sub() WelcomeScreen.TimerCon.Start())
+        'Invoke(Sub() WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032)
+        'Invoke(Sub() WelcomeScreen.StatBrPnlAr.Text = "لم ينجح الإتصال بالخادم .. سيتم تسجيل الشكوى بالوضع الغير متصل بالشبكة")
+        'Dim Rslt As DialogResult
+        'Rslt = MessageBox.Show("كود خطأ : " & "1011&H" & vbCrLf & "لم ينجح الإتصال بالخادم .. سيتم تسجيل الشكوى بالوضع الغير متصل بالشبكة" & vbCrLf & "هل تريد الإستمرار؟", "رسالة معلومات", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading Or MessageBoxOptions.RightAlign)
+        'If Rslt = DialogResult.Yes Then
+        '    TickOffSubmt = New Thread(AddressOf SubmtOfflineTick)
+        '    TickOffSubmt.IsBackground = True
+        '    Invoke(Sub() WelcomeScreen.StatBrPnlAr.Text = "جاري تسجيل البيانات ...........")
+        '    Invoke(Sub() TreeView1.Visible = True)
+        '    TickOffSubmt.Start()
+        '    TickSubmt.Abort()
+        'End If
+
+        'TickSubmt.Abort()
+        MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & "لم ينجح الإتصال بالخادم .. سيتم تسجيل الشكوى بالوضع الغير متصل بالشبكة")
+        End Try
+        Invoke(Sub() Me.Enabled = True)
+        Invoke(Sub() Me.Activate())
+        Invoke(Sub() TimrPhons.Stop())
+    End Sub
+    Private Sub SubmitBtn_Click(sender As Object, e As EventArgs) Handles SubmitBtn.Click
+        TickSubmt = New Thread(AddressOf SubmtTick)
+        TickSubmt.IsBackground = True
+        WelcomeScreen.StatBrPnlAr.Text = "جاري تسجيل البيانات ..........."
+        TreeView1.Visible = True
+        TickSubmt.Start()
+        Me.Enabled = False
+    End Sub
+
+    Private Sub SrcCmbBx_SelectedIndexChanged(sender As Object, e As EventArgs) Handles SrcCmbBx.SelectedIndexChanged
+        SubmitBtn.Enabled = True
     End Sub
 End Class

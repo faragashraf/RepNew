@@ -300,6 +300,7 @@ End_:
         Return Errmsg
     End Function
     Public Function TikFormat(TblTicket As DataTable, TblUpdt As DataTable, ProgBar As ProgressBar) As TickInfo ' Function to Adjust Ticket Gridview
+        Dim Def As New APblicClss.Defntion
         GridCuntRtrn = New TickInfo
         ProgBar.Visible = True
         For Rws = 0 To TblTicket.Rows.Count - 1
@@ -860,12 +861,12 @@ End_:
     Public Sub CalIfTxt(TxtBox As TextBox)
         RemoveHandler TxtBox.Click, (AddressOf TxtSlctOn_Click)
         AddHandler TxtBox.Click, (AddressOf TxtSlctOn_Click)
-        RemoveHandler TxtBox.KeyDown, (AddressOf TxtBox_KeyDown)
-        AddHandler TxtBox.KeyDown, (AddressOf TxtBox_KeyDown)
         RemoveHandler TxtBox.Enter, (AddressOf Text_Enter)
         AddHandler TxtBox.Enter, (AddressOf Text_Enter)
-        RemoveHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)
-        AddHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)
+        'RemoveHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)
+        'AddHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)
+        RemoveHandler TxtBox.KeyDown, (AddressOf TxtBox_KeyDown)
+        AddHandler TxtBox.KeyDown, (AddressOf TxtBox_KeyDown)
     End Sub
     Public Sub Ctrl_MouseEnter(sender As Object, e As EventArgs)
         If Slctd = False Then
@@ -979,32 +980,41 @@ End_:
             bolyy = False
         End If
     End Sub
-    Private Sub Txt_KeyPress(sender As Object, e As KeyPressEventArgs)
-        Dim TxtBox As TextBox = sender
-        If Not e.KeyChar = ChrW(Keys.Control) And e.KeyChar = ChrW(Keys.V) Then
-
-        End If
-
-        If Trim(Split(TxtBox.AccessibleName, "-")(1)) = "Number" Then
-            IntUtly.ValdtInt(e)
-        ElseIf Trim(Split(TxtBox.AccessibleName, "-")(1)) = "Amount" Then
-            IntUtly.ValdtNumber(TxtBox, e)
-        ElseIf Trim(Split(TxtBox.AccessibleName, "-")(1)) = "TextNumber" Then
-            IntUtly.ValdtIntLetter(e)
-        End If
-    End Sub
     Private Sub TxtBox_KeyDown(sender As Object, e As KeyEventArgs)
         Dim TxtBox As TextBox = sender
-        If e.Modifiers = Keys.Control Mod e.KeyCode = Keys.V Then
-            TxtBox.Text = Clipboard.GetText()
+        If e.Modifiers = Keys.Control And e.KeyCode = Keys.V Then
+            TxtBox.Text += Clipboard.GetText()
+        ElseIf e.Modifiers = Keys.Control And e.KeyCode = Keys.C Then
+            Clipboard.SetText(TxtBox.Text)
+        Else
+            RemoveHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)
+            AddHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)
+        End If
+    End Sub
+    Private Sub Txt_KeyPress(sender As Object, e As KeyPressEventArgs)
+        Dim TxtBox As TextBox = sender
+        If TxtBox.ReadOnly = False Then
+            If Trim(Split(TxtBox.Tag, "-")(1)) = "Number" Then
+                IntUtly.ValdtInt(e)
+            ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "Amount" Then
+                IntUtly.ValdtNumber(TxtBox, e)
+            ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "TextNumber" Then
+                IntUtly.ValdtIntLetter(e)
+            ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "Text" Then
+                IntUtly.ValdtLetter(e)
+            ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "All" Then
+                'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            End If
         End If
     End Sub
     Private Sub Text_Enter(sender As Object, e As EventArgs)
         Dim TxtBox As TextBox = sender
-        If Trim(Split(TxtBox.AccessibleName, "-")(0)) = "English" Then
-            InputLanguage.CurrentInputLanguage = EnglishInput            'Tansfer writing to English
-        ElseIf Trim(Split(TxtBox.AccessibleName, "-")(0)) = "Arabic" Then
-            InputLanguage.CurrentInputLanguage = ArabicInput
+        If TxtBox.ReadOnly = False Then
+            If Trim(Split(TxtBox.AccessibleName, "-")(0)) = "English" Then
+                InputLanguage.CurrentInputLanguage = EnglishInput            'Tansfer writing to English
+            ElseIf Trim(Split(TxtBox.AccessibleName, "-")(0)) = "Arabic" Then
+                InputLanguage.CurrentInputLanguage = ArabicInput
+            End If
         End If
     End Sub
     Public Sub GettAttchUpdtesFils()

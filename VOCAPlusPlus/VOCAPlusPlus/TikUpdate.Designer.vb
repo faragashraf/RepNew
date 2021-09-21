@@ -134,6 +134,7 @@ Partial Class TikUpdate
         Me.TxtUpdt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TxtUpdt.Size = New System.Drawing.Size(632, 104)
         Me.TxtUpdt.TabIndex = 2054
+        Me.TxtUpdt.Tag = "Arabic-All"
         '
         'BtnSubmt
         '

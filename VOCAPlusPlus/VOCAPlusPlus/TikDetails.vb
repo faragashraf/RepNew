@@ -4,6 +4,7 @@ Public Class TikDetails
     Dim Fn As New APblicClss.Func
     Private Sub TikDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Point(screenWidth, screenHeight - 120)
+        FrmAllSub(Me)
         If StruGrdTk.FlwStat = True Then
             TcktImg.BackgroundImage = My.Resources.Tckoff
             TcktImg.BackgroundImageLayout = ImageLayout.Stretch

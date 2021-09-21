@@ -17,6 +17,7 @@ Public Class Login
     End Sub
     <Obsolete>
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'FrmAllSub(Me)
         'CheckForIllegalCrossThreadCalls = False
         'Dim Forms As New List(Of Form)()
         'For Each t As Type In Me.GetType().Assembly.GetTypes()
@@ -195,7 +196,7 @@ GoodVer:  '       *****      End Check Ver.
 
         'Admin Login For Every user Related to Mac address
 
-        If MacStr = "6479F03979BB" Or MacStr = "020000000100" Or MacStr = "7C8AE174167C" Then
+        If MacStr = "6479F03979BB" Or MacStr = "00155DC80B2B" Or MacStr = "7C8AE174167C" Or MacStr = "10E7C6189F9E" Then
             TxtUsrPass.Text = Fn.PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy)
         End If
         If TxtUsrNm.Text = Usr.PUsrNm And TxtUsrPass.Text = Fn.PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy) Then 'check user name and password status
@@ -295,9 +296,6 @@ sec_UsrErr_:
             Me.BtnShow.Text = "Show PassWord"
         End If
     End Sub
-    Private Sub TextBox1_Enter(sender As Object, e As EventArgs) Handles TxtUsrNm.Enter
-        InputLanguage.CurrentInputLanguage = EnglishInput            'Tansfer writing to English
-    End Sub
     Private Sub TextBox2_Enter(sender As Object, e As EventArgs) Handles TxtUsrPass.Enter
         InputLanguage.CurrentInputLanguage = EnglishInput            'Tansfer writing to English
     End Sub
@@ -389,7 +387,7 @@ sec_UsrErr_:
     Private Sub WChckConn_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles WChckConn.ProgressChanged
         If Me.IsHandleCreated = True Then
             Invoke(Sub()
-                       If MacStr = "6479F03979BB" Or MacStr = "020000000100" Or MacStr = "7C8AE174167C" Then
+                       If MacStr = "6479F03979BB" Or MacStr = "00155DC80B2B" Or MacStr = "7C8AE174167C" Or MacStr = "10E7C6189F9E" Then
                            Invoke(Sub() Cmbo.Visible = True)
                        End If
                        Dim state As APblicClss.Defntion = CType(e.UserState, APblicClss.Defntion)
@@ -415,6 +413,7 @@ sec_UsrErr_:
 
 #Region "Login"
     Private Sub WrkrLogin_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles WrkrLogin.DoWork
+        Dim Def As New APblicClss.Defntion
         Invoke(Sub() WelcomeScreen.FlowLayoutPanel1.Visible = False)
         Dim worker As System.ComponentModel.BackgroundWorker
         worker = CType(sender, System.ComponentModel.BackgroundWorker)
@@ -542,7 +541,7 @@ sec_UsrErr_:
         'sender.AccessibleName = "False"
         'sender.backcolor = Color.White
         'sender.font = New Font("Times New Roman", 14, FontStyle.Regular)
-        'Fn.InsUpd("update Int_user set UsrLevel = SUBSTRING(UsrLevel,1,(select SwID from ASwitchboard where SwObjNm = '" & sender.tag & "')-1) + 'A' + SUBSTRING(UsrLevel,(select SwID from ASwitchboard where SwObjNm = '" & sender.tag & "') + 1,100) where UsrId = " & Usr.PUsrID, "0000&H")
+        Fn.InsUpdate("update Int_user set UsrLevel = SUBSTRING(UsrLevel,1,(select SwID from ASwitchboard where SwObjNm = '" & sender.tag & "')-1) + 'A' + SUBSTRING(UsrLevel,(select SwID from ASwitchboard where SwObjNm = '" & sender.tag & "') + 1,100) where UsrId = " & Usr.PUsrID, "0000&H")
 
         If Application.OpenForms.Count > 2 Then
             MsgInf("لا يمكن فتح أكثر من شاشتين في نفس الوقت" & vbCrLf & "يرجى إغلاق أحد الشاشات المفتوحة وإعادة المحاولة")

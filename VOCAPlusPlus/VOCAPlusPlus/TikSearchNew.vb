@@ -111,6 +111,7 @@ Public Class TikSearchNew
     End Sub
     Private Sub Filtr()
         Dim Fn As New APblicClss.Func
+        Dim Def As New APblicClss.Defntion
         Dim primaryKey(0) As DataColumn
         GridCuntRtrn = New TickInfo
         TickSrchTable = New DataTable

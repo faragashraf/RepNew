@@ -2,10 +2,11 @@
 Imports System.Text.RegularExpressions
 
 Public NotInheritable Class IntUtly
-
     Public Shared Sub ValdtInt(ByVal e As KeyPressEventArgs) ' numeric only integer
         If Not Char.IsControl(e.KeyChar) AndAlso (Not Char.IsDigit(e.KeyChar)) Then
             e.Handled = True
+        Else
+            Beep()
         End If
     End Sub
     ' ***************************************
@@ -13,17 +14,21 @@ Public NotInheritable Class IntUtly
         Dim TempNum As TextBox = sender
         If (Not e.KeyChar = ChrW(Keys.Back) And ("0123456789.").IndexOf(e.KeyChar) = -1) Or (e.KeyChar = "." And TempNum.Text.ToCharArray().Count(Function(c) c = ".") > 0) Then
             e.Handled = True
+            Beep()
+        Else
         End If
     End Sub
     Public Shared Sub ValdtIntLetter(ByVal e As KeyPressEventArgs) ' numeric & Letters & White Space & Backspace
         If Not Char.IsControl(e.KeyChar) AndAlso (Char.IsDigit(e.KeyChar)) OrElse (Char.IsLetter(e.KeyChar)) OrElse (Char.IsWhiteSpace(e.KeyChar)) OrElse (e.KeyChar = ChrW(Keys.Back)) OrElse (e.KeyChar = ChrW(Keys.ShiftKey)) AndAlso (Char.IsLetter(e.KeyChar)) Then
         Else
+            Beep()
             e.Handled = True
         End If
     End Sub
     Public Shared Sub ValdtLetter(ByVal e As KeyPressEventArgs) ' numeric & Letters & White Space & Backspace
         If Not Char.IsControl(e.KeyChar) AndAlso (Char.IsLetter(e.KeyChar)) OrElse (Char.IsWhiteSpace(e.KeyChar)) OrElse (e.KeyChar = ChrW(Keys.Back)) OrElse (e.KeyChar = ChrW(Keys.ShiftKey)) AndAlso (Char.IsLetter(e.KeyChar)) Then
         Else
+            Beep()
             e.Handled = True
         End If
     End Sub

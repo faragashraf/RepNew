@@ -52,10 +52,12 @@ Public Class WelcomeScreen
     Private Sub TimerTikCoun_Tick(sender As Object, e As EventArgs) Handles TimerTikCoun.Tick
         If IsHandleCreated = True Then
             Invoke(Sub()
+                       Dim Def As New APblicClss.Defntion
                        Dim WC As New APblicClss.FuncWorker
                        If WkrTikCount.IsBusy = False Then
                            Invoke(Sub() WkrTikCount.RunWorkerAsync(WC))
                        End If
+                       LblLstSeen.Text = Nw
                    End Sub)
         End If
     End Sub
@@ -138,7 +140,7 @@ Public Class WelcomeScreen
     Private Sub MenuSw_Click(sender As Object, e As EventArgs) Handles MenuSw.Click
         Dim Fn As New APblicClss.Func
         If PreciFlag = True Then
-            'Fn.InsUpd("UPDATE Int_user SET UsrLastSeen = '" & Format(Now, "yyyy/MM/dd h:mm:ss") & "' WHERE (UsrId = " & Usr.PUsrID & ");", "1006&H", worker)  'Update User Active = false
+            Fn.InsUpdate("UPDATE Int_user SET UsrLastSeen = '" & Format(Now, "yyyy/MM/dd h:mm:ss") & "' WHERE (UsrId = " & Usr.PUsrID & ");", "1006&H")  'Update User Active = false
         End If
     End Sub
     Private Sub TimrFlsh_Tick(sender As Object, e As EventArgs) Handles TimrFlsh.Tick
@@ -240,7 +242,7 @@ Public Class WelcomeScreen
                 End If
             End Using
         Catch ex As Exception
-            StartServer()
+            'StartServer()
         End Try
 
         Return True
@@ -344,7 +346,6 @@ Public Class WelcomeScreen
             LblLstSeen.Margin = New Padding(LblLstSeen.Margin.Left, LblLstSeen.Margin.Top, FlowLayoutPanel1.ClientRectangle.Width - (LblLstSeen.Width + LblUsrRNm.Margin.Left), LblLstSeen.Margin.Bottom)
             TimerTikCoun.Start()
             TimrFlsh.Start()
-
         End If
     End Sub
     Private Sub WkrTikCount_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles WkrTikCount.DoWork
@@ -494,5 +495,9 @@ Public Class WelcomeScreen
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         TikNew.Show()
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        TikFolow.ShowDialog()
     End Sub
 End Class

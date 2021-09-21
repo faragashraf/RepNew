@@ -41,7 +41,7 @@ Module Public_
     Public PreciFlag As Boolean = False                 'Load princible tables
     Public PrciTblCnt As Integer = 0                    'Counter for Thread
     'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
+    Public Nw As DateTime
 
 
     Public MLXX As String = ""       ' Mail Password From Lib Table
@@ -61,7 +61,7 @@ Module Public_
     Public SQLSTR As String
     Public Cnt_ As Integer                              'Counter
     Public EncDecTxt As String                          'Encoding decoding string
-    Public Tran As SqlTransaction = Nothing             'SQL Transaction
+    Public Tran As SqlTransaction              'SQL Transaction
     Public sqlComm As New SqlCommand                    'SQL Command
     Public sqlCommUpddate_ As New SqlCommand            'SQL Command
     Public sqlComminsert_1 As New SqlCommand            'SQL Command
@@ -88,7 +88,6 @@ Module Public_
     'Public Const strConn As String = "Data Source=HOSPC\HOSPCSQLSRV;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
     Public Distin As String = ""
     Public StrFileName As String = "X"
-    Public Nw As DateTime
     Public TikIDRep_ As Integer
     Public Rslt As DialogResult
     Public Property MousePosition As Object
@@ -119,9 +118,7 @@ Public Class APblicClss
         Public sqlComminsert_3 As New SqlCommand            'SQL Command
         Public sqlComminsert_4 As New SqlCommand            'SQL Command
 
-        Public Tran As SqlTransaction
         Public cntXXX As Integer
-        Public Nw As DateTime
         Public TickKind As Integer = 0       'ticket kind      0=Inquiry and 1=Complaint
         Public PrdKind As String = ""        'Product kind     1=Financial and 2=Postal   3=Governmental and 4=Social and 5=Other
         Public TickKindFltr As Integer = 2   'ticket kind      0=Inquiry and 1=Complaint
@@ -281,7 +278,7 @@ Public Class APblicClss
                 sqlComm.CommandType = CommandType.Text
                 sqlComm.CommandText = "Select GetDate() as Now_"
                 SQLGetAdptr.Fill(TimeTble)
-                Def.Nw = Format(TimeTble.Rows(0).Item(0), "yyyy/MMM/dd hh:mm:ss tt")
+                Nw = Format(TimeTble.Rows(0).Item(0), "yyyy/MMM/dd hh:mm:ss tt")
 
             Catch ex As Exception
                 Def.StatStr = "X"
@@ -293,7 +290,7 @@ Public Class APblicClss
                 End If
                 Fn.AppLog("0000&H", ex.Message, "Conecting String")
             End Try
-            Return Def.Nw
+            Return Nw
             worker.ReportProgress(0, Def)
             SQLGetAdptr.Dispose()
         End Function
@@ -507,7 +504,7 @@ Sec2:
                 sqlComm.CommandType = CommandType.Text
                 sqlComm.CommandText = "Select GetDate() as Now_"
                 SQLGetAdptr.Fill(TimeTble)
-                Def.Nw = Format(TimeTble.Rows(0).Item(0), "yyyy/MMM/dd hh:mm:ss tt")
+                Nw = Format(TimeTble.Rows(0).Item(0), "yyyy/MMM/dd hh:mm:ss tt")
 
             Catch ex As Exception
                 Def.StatStr = "X"
@@ -518,11 +515,12 @@ Sec2:
                 End If
                 Fn.AppLog("0000&H", ex.Message, "Conecting String")
             End Try
-            Return Def.Nw
+            Return Nw
             SQLGetAdptr.Dispose()
         End Function
         Public Function GetTblXX(SSqlStr As String, SqlTbl As DataTable, ErrHndl As String) As String
             Dim state As New Defntion
+            Dim Fn As New Func
             state.StatStr = Nothing
             Dim StW As New Stopwatch
             StW.Start()
@@ -538,6 +536,7 @@ Sec2:
                 StW.Stop()
                 Dim TimSpn As TimeSpan = (StW.Elapsed)
                 ElapsedTimeSpan = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimSpn.Hours, TimSpn.Minutes, TimSpn.Seconds, TimSpn.Milliseconds / 10)
+                Fn.ServrTime()
             Catch ex As Exception
                 If ex.Message.Contains("The connection is broken and recovery is not possible") Then
                     state.CONSQL.Close()
@@ -554,6 +553,7 @@ Sec2:
         Public Function InsUpdate(SSqlStr As String, ErrHndl As String) As String
             Errmsg = Nothing
             Dim state As New Defntion
+            Dim Fn As New Func
             state.CONSQL = New SqlConnection(strConn)
             sqlComm = New SqlCommand(SSqlStr, state.CONSQL)
             sqlComm.Connection = state.CONSQL
@@ -563,6 +563,7 @@ Sec2:
                     state.CONSQL.Open()
                 End If
                 sqlComm.ExecuteNonQuery()
+                Fn.ServrTime()
             Catch ex As Exception
                 Errmsg = ex.Message
                 AppLog(ErrHndl, ex.Message, SSqlStr)
@@ -573,25 +574,29 @@ Sec2:
         End Function
         Public Function InsTrans(TranStr1 As String, TranStr2 As String, ErrHndl As String) As String
             Dim state As New APblicClss.Defntion
+            Dim Fn As New Func
             state.StatStr = Nothing
             Try
                 If state.CONSQL.State = ConnectionState.Closed Then
                     state.CONSQL.Open()
                 End If
+                state.sqlComminsert_1 = New SqlCommand
+                state.sqlComminsert_2 = New SqlCommand
                 state.sqlComminsert_1.Connection = state.CONSQL
                 state.sqlComminsert_2.Connection = state.CONSQL
                 state.sqlComminsert_1.CommandType = CommandType.Text
                 state.sqlComminsert_2.CommandType = CommandType.Text
                 state.sqlComminsert_1.CommandText = TranStr1
                 state.sqlComminsert_2.CommandText = TranStr2
-                state.Tran = state.CONSQL.BeginTransaction()
+                Tran = state.CONSQL.BeginTransaction()
                 state.sqlComminsert_1.Transaction = Tran
                 state.sqlComminsert_2.Transaction = Tran
                 state.sqlComminsert_1.ExecuteNonQuery()
                 state.sqlComminsert_2.ExecuteNonQuery()
-                state.Tran.Commit()
+                Tran.Commit()
+                Fn.ServrTime()
             Catch ex As Exception
-                state.Tran.Rollback()
+                Tran.Rollback()
 
                 Dim frmCollection = Application.OpenForms
                 If frmCollection.OfType(Of WelcomeScreen).Any Then
@@ -840,6 +845,7 @@ Sec2:
             Return Errmsg
         End Function
         Public Function TikFormat1(TblTicket As DataTable, TblUpdt As DataTable, ProgBar As ProgressBar) As TickInfo ' Function to Adjust Ticket Gridview
+            Dim Def As New Defntion
             GridCuntRtrn = New TickInfo
             ProgBar.Visible = True
             For Rws = 0 To TblTicket.Rows.Count - 1

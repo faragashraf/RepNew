@@ -23,6 +23,7 @@ Public Class TikFolow
             Beep()
             Me.Close()
         Else
+            FrmAllSub(Me)
             Me.Size = New Point(screenWidth, screenHeight - 120)
             Me.GridTicket.Width = Me.Size.Width - 30
             Me.GridTicket.Height = Me.Size.Height - 200
@@ -91,6 +92,7 @@ Public Class TikFolow
     End Sub
     Private Sub NewFill_()
         Dim Fn As New APblicClss.Func
+        Dim Def As New APblicClss.Defntion
         Dim primaryKey(0) As DataColumn
         GridCuntRtrn = New TickInfo
         TickTblMain = New DataTable
@@ -192,8 +194,8 @@ Public Class TikFolow
             Invoke(Sub() StatBrPnlAr.Text = "لم ينجح البحث - يرجى المحاولة مرة أخرى")
             Invoke(Sub() Beep())
         End If
-            FltrStr = Nothing
-            Invoke(Sub() BtnRefrsh.Enabled = True)
+        FltrStr = Nothing
+        Invoke(Sub() BtnRefrsh.Enabled = True)
         Invoke(Sub() BtnCncl.Enabled = False)
         Invoke(Sub() GroupBox1.Enabled = True)
         Invoke(Sub() FilterComb.Enabled = True)

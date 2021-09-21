@@ -68,10 +68,9 @@ Partial Class TikFolow
         'ProgressBar1
         '
         Me.ProgressBar1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ProgressBar1.Location = New System.Drawing.Point(941, 15)
-        Me.ProgressBar1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ProgressBar1.Location = New System.Drawing.Point(807, 12)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(360, 28)
+        Me.ProgressBar1.Size = New System.Drawing.Size(309, 23)
         Me.ProgressBar1.TabIndex = 2033
         Me.ProgressBar1.Visible = False
         '
@@ -80,12 +79,12 @@ Partial Class TikFolow
         Me.SerchTxt.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SerchTxt.Font = New System.Drawing.Font("Times New Roman", 12.0!)
         Me.SerchTxt.ForeColor = System.Drawing.Color.Silver
-        Me.SerchTxt.Location = New System.Drawing.Point(544, 12)
-        Me.SerchTxt.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.SerchTxt.Location = New System.Drawing.Point(466, 10)
         Me.SerchTxt.Name = "SerchTxt"
         Me.SerchTxt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.SerchTxt.Size = New System.Drawing.Size(254, 30)
+        Me.SerchTxt.Size = New System.Drawing.Size(218, 26)
         Me.SerchTxt.TabIndex = 2024
+        Me.SerchTxt.Tag = "English-TextNumber"
         Me.SerchTxt.Text = "برجاء ادخال كلمات البحث"
         Me.SerchTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -94,11 +93,10 @@ Partial Class TikFolow
         Me.FilterComb.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FilterComb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.FilterComb.FormattingEnabled = True
-        Me.FilterComb.Location = New System.Drawing.Point(308, 15)
-        Me.FilterComb.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.FilterComb.MinimumSize = New System.Drawing.Size(81, 0)
+        Me.FilterComb.Location = New System.Drawing.Point(264, 12)
+        Me.FilterComb.MinimumSize = New System.Drawing.Size(70, 0)
         Me.FilterComb.Name = "FilterComb"
-        Me.FilterComb.Size = New System.Drawing.Size(228, 24)
+        Me.FilterComb.Size = New System.Drawing.Size(196, 21)
         Me.FilterComb.TabIndex = 2023
         '
         'GridTicket
@@ -109,14 +107,13 @@ Partial Class TikFolow
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GridTicket.BackgroundColor = System.Drawing.Color.White
         Me.GridTicket.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.GridTicket.Location = New System.Drawing.Point(14, 69)
-        Me.GridTicket.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.GridTicket.Location = New System.Drawing.Point(12, 56)
         Me.GridTicket.MultiSelect = False
         Me.GridTicket.Name = "GridTicket"
         Me.GridTicket.ReadOnly = True
         Me.GridTicket.RowHeadersWidth = 51
         Me.GridTicket.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.GridTicket.Size = New System.Drawing.Size(1547, 570)
+        Me.GridTicket.Size = New System.Drawing.Size(1326, 463)
         Me.GridTicket.TabIndex = 123
         '
         'ContextMenuStrip2
@@ -126,7 +123,7 @@ Partial Class TikFolow
         Me.ContextMenuStrip2.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ContextMenuStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ContextMenuStrip2.Size = New System.Drawing.Size(221, 82)
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(189, 82)
         '
         'CopyToolStripitem
         '
@@ -135,7 +132,7 @@ Partial Class TikFolow
         Me.CopyToolStripitem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.CopyToolStripitem.Name = "CopyToolStripitem"
         Me.CopyToolStripitem.RightToLeftAutoMirrorImage = True
-        Me.CopyToolStripitem.Size = New System.Drawing.Size(220, 26)
+        Me.CopyToolStripitem.Size = New System.Drawing.Size(188, 26)
         Me.CopyToolStripitem.Text = "Copy Selected Cell"
         '
         'UplodAtchToolStripitem
@@ -146,7 +143,7 @@ Partial Class TikFolow
         Me.UplodAtchToolStripitem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.UplodAtchToolStripitem.Name = "UplodAtchToolStripitem"
         Me.UplodAtchToolStripitem.RightToLeftAutoMirrorImage = True
-        Me.UplodAtchToolStripitem.Size = New System.Drawing.Size(220, 26)
+        Me.UplodAtchToolStripitem.Size = New System.Drawing.Size(188, 26)
         Me.UplodAtchToolStripitem.Text = "Upload Attachement"
         Me.UplodAtchToolStripitem.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
@@ -159,7 +156,7 @@ Partial Class TikFolow
         Me.DonlodAttchToolStripitem.Name = "DonlodAttchToolStripitem"
         Me.DonlodAttchToolStripitem.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DonlodAttchToolStripitem.RightToLeftAutoMirrorImage = True
-        Me.DonlodAttchToolStripitem.Size = New System.Drawing.Size(220, 26)
+        Me.DonlodAttchToolStripitem.Size = New System.Drawing.Size(188, 26)
         Me.DonlodAttchToolStripitem.Text = "Download attached"
         Me.DonlodAttchToolStripitem.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
@@ -167,13 +164,12 @@ Partial Class TikFolow
         '
         Me.StatusBar1.Enabled = False
         Me.StatusBar1.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.StatusBar1.Location = New System.Drawing.Point(0, 816)
-        Me.StatusBar1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.StatusBar1.Location = New System.Drawing.Point(0, 663)
         Me.StatusBar1.Name = "StatusBar1"
         Me.StatusBar1.Panels.AddRange(New System.Windows.Forms.StatusBarPanel() {Me.StatBrPnlEn, Me.StatBrPnlAr})
         Me.StatusBar1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.StatusBar1.ShowPanels = True
-        Me.StatusBar1.Size = New System.Drawing.Size(1751, 41)
+        Me.StatusBar1.Size = New System.Drawing.Size(1501, 33)
         Me.StatusBar1.SizingGrip = False
         Me.StatusBar1.TabIndex = 126
         '
@@ -182,23 +178,22 @@ Partial Class TikFolow
         Me.StatBrPnlEn.Alignment = System.Windows.Forms.HorizontalAlignment.Center
         Me.StatBrPnlEn.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring
         Me.StatBrPnlEn.Name = "StatBrPnlEn"
-        Me.StatBrPnlEn.Width = 875
+        Me.StatBrPnlEn.Width = 750
         '
         'StatBrPnlAr
         '
         Me.StatBrPnlAr.Alignment = System.Windows.Forms.HorizontalAlignment.Right
         Me.StatBrPnlAr.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring
         Me.StatBrPnlAr.Name = "StatBrPnlAr"
-        Me.StatBrPnlAr.Width = 875
+        Me.StatBrPnlAr.Width = 750
         '
         'BtnRefrsh
         '
         Me.BtnRefrsh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnRefrsh.BackgroundImage = Global.VOCAPlusPlus.My.Resources.Resources.recgreen
-        Me.BtnRefrsh.Location = New System.Drawing.Point(817, 11)
-        Me.BtnRefrsh.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.BtnRefrsh.Location = New System.Drawing.Point(700, 9)
         Me.BtnRefrsh.Name = "BtnRefrsh"
-        Me.BtnRefrsh.Size = New System.Drawing.Size(105, 36)
+        Me.BtnRefrsh.Size = New System.Drawing.Size(90, 29)
         Me.BtnRefrsh.TabIndex = 2034
         Me.BtnRefrsh.Text = "تحديث"
         Me.BtnRefrsh.UseVisualStyleBackColor = True
@@ -227,11 +222,9 @@ Partial Class TikFolow
         Me.GroupBox1.Controls.Add(Me.ChckTrnsDy)
         Me.GroupBox1.Controls.Add(Me.ChckUpdColeg)
         Me.GroupBox1.Controls.Add(Me.ChckUpdOther)
-        Me.GroupBox1.Location = New System.Drawing.Point(364, 719)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.GroupBox1.Location = New System.Drawing.Point(312, 584)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.GroupBox1.Size = New System.Drawing.Size(1146, 81)
+        Me.GroupBox1.Size = New System.Drawing.Size(982, 66)
         Me.GroupBox1.TabIndex = 2093
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "تصفيه"
@@ -240,10 +233,10 @@ Partial Class TikFolow
         '
         Me.Lbl6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl6.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl6.Location = New System.Drawing.Point(700, 54)
+        Me.Lbl6.Location = New System.Drawing.Point(600, 44)
         Me.Lbl6.Name = "Lbl6"
         Me.Lbl6.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Lbl6.Size = New System.Drawing.Size(105, 24)
+        Me.Lbl6.Size = New System.Drawing.Size(90, 20)
         Me.Lbl6.TabIndex = 2048
         Me.Lbl6.Text = "Label3"
         Me.Lbl6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -252,10 +245,9 @@ Partial Class TikFolow
         '
         Me.ChckEsc1.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckEsc1.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckEsc1.Location = New System.Drawing.Point(700, 20)
-        Me.ChckEsc1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ChckEsc1.Location = New System.Drawing.Point(600, 16)
         Me.ChckEsc1.Name = "ChckEsc1"
-        Me.ChckEsc1.Size = New System.Drawing.Size(105, 31)
+        Me.ChckEsc1.Size = New System.Drawing.Size(90, 25)
         Me.ChckEsc1.TabIndex = 2047
         Me.ChckEsc1.TabStop = True
         Me.ChckEsc1.Text = "متابعة 1"
@@ -266,10 +258,10 @@ Partial Class TikFolow
         '
         Me.Lbl7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl7.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl7.Location = New System.Drawing.Point(588, 54)
+        Me.Lbl7.Location = New System.Drawing.Point(504, 44)
         Me.Lbl7.Name = "Lbl7"
         Me.Lbl7.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Lbl7.Size = New System.Drawing.Size(105, 24)
+        Me.Lbl7.Size = New System.Drawing.Size(90, 20)
         Me.Lbl7.TabIndex = 2046
         Me.Lbl7.Text = "Label3"
         Me.Lbl7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -278,10 +270,9 @@ Partial Class TikFolow
         '
         Me.ChckEsc2.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckEsc2.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckEsc2.Location = New System.Drawing.Point(588, 20)
-        Me.ChckEsc2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ChckEsc2.Location = New System.Drawing.Point(504, 16)
         Me.ChckEsc2.Name = "ChckEsc2"
-        Me.ChckEsc2.Size = New System.Drawing.Size(105, 31)
+        Me.ChckEsc2.Size = New System.Drawing.Size(90, 25)
         Me.ChckEsc2.TabIndex = 2045
         Me.ChckEsc2.TabStop = True
         Me.ChckEsc2.Text = "متابعة 2"
@@ -292,10 +283,10 @@ Partial Class TikFolow
         '
         Me.Lbl8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl8.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl8.Location = New System.Drawing.Point(476, 54)
+        Me.Lbl8.Location = New System.Drawing.Point(408, 44)
         Me.Lbl8.Name = "Lbl8"
         Me.Lbl8.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Lbl8.Size = New System.Drawing.Size(105, 24)
+        Me.Lbl8.Size = New System.Drawing.Size(90, 20)
         Me.Lbl8.TabIndex = 2044
         Me.Lbl8.Text = "Label3"
         Me.Lbl8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -304,10 +295,9 @@ Partial Class TikFolow
         '
         Me.ChckEsc3.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckEsc3.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckEsc3.Location = New System.Drawing.Point(476, 20)
-        Me.ChckEsc3.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ChckEsc3.Location = New System.Drawing.Point(408, 16)
         Me.ChckEsc3.Name = "ChckEsc3"
-        Me.ChckEsc3.Size = New System.Drawing.Size(105, 31)
+        Me.ChckEsc3.Size = New System.Drawing.Size(90, 25)
         Me.ChckEsc3.TabIndex = 2043
         Me.ChckEsc3.TabStop = True
         Me.ChckEsc3.Text = "متابعة 3"
@@ -318,10 +308,10 @@ Partial Class TikFolow
         '
         Me.Lbl5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl5.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl5.Location = New System.Drawing.Point(1032, 54)
+        Me.Lbl5.Location = New System.Drawing.Point(885, 44)
         Me.Lbl5.Name = "Lbl5"
         Me.Lbl5.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Lbl5.Size = New System.Drawing.Size(105, 24)
+        Me.Lbl5.Size = New System.Drawing.Size(90, 20)
         Me.Lbl5.TabIndex = 2042
         Me.Lbl5.Text = "Label3"
         Me.Lbl5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -330,10 +320,9 @@ Partial Class TikFolow
         '
         Me.ChckRead.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckRead.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckRead.Location = New System.Drawing.Point(1032, 20)
-        Me.ChckRead.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ChckRead.Location = New System.Drawing.Point(885, 16)
         Me.ChckRead.Name = "ChckRead"
-        Me.ChckRead.Size = New System.Drawing.Size(105, 31)
+        Me.ChckRead.Size = New System.Drawing.Size(90, 25)
         Me.ChckRead.TabIndex = 2041
         Me.ChckRead.TabStop = True
         Me.ChckRead.Text = "غير مقروء"
@@ -344,10 +333,10 @@ Partial Class TikFolow
         '
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label4.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Label4.Location = New System.Drawing.Point(7, 54)
+        Me.Label4.Location = New System.Drawing.Point(6, 44)
         Me.Label4.Name = "Label4"
         Me.Label4.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Label4.Size = New System.Drawing.Size(113, 24)
+        Me.Label4.Size = New System.Drawing.Size(97, 20)
         Me.Label4.TabIndex = 2039
         Me.Label4.Text = "Label4"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -356,10 +345,10 @@ Partial Class TikFolow
         '
         Me.Lbl3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl3.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl3.Location = New System.Drawing.Point(920, 54)
+        Me.Lbl3.Location = New System.Drawing.Point(789, 44)
         Me.Lbl3.Name = "Lbl3"
         Me.Lbl3.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Lbl3.Size = New System.Drawing.Size(105, 24)
+        Me.Lbl3.Size = New System.Drawing.Size(90, 20)
         Me.Lbl3.TabIndex = 2040
         Me.Lbl3.Text = "Label3"
         Me.Lbl3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -368,10 +357,10 @@ Partial Class TikFolow
         '
         Me.Lbl4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl4.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl4.Location = New System.Drawing.Point(812, 54)
+        Me.Lbl4.Location = New System.Drawing.Point(696, 44)
         Me.Lbl4.Name = "Lbl4"
         Me.Lbl4.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Lbl4.Size = New System.Drawing.Size(105, 24)
+        Me.Lbl4.Size = New System.Drawing.Size(90, 20)
         Me.Lbl4.TabIndex = 2039
         Me.Lbl4.Text = "Label4"
         Me.Lbl4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -380,10 +369,10 @@ Partial Class TikFolow
         '
         Me.Lbl2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl2.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl2.Location = New System.Drawing.Point(124, 54)
+        Me.Lbl2.Location = New System.Drawing.Point(106, 44)
         Me.Lbl2.Name = "Lbl2"
         Me.Lbl2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Lbl2.Size = New System.Drawing.Size(105, 24)
+        Me.Lbl2.Size = New System.Drawing.Size(90, 20)
         Me.Lbl2.TabIndex = 2038
         Me.Lbl2.Text = "Label2"
         Me.Lbl2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -392,10 +381,10 @@ Partial Class TikFolow
         '
         Me.Lbl0.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl0.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl0.Location = New System.Drawing.Point(355, 54)
+        Me.Lbl0.Location = New System.Drawing.Point(304, 44)
         Me.Lbl0.Name = "Lbl0"
         Me.Lbl0.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Lbl0.Size = New System.Drawing.Size(116, 24)
+        Me.Lbl0.Size = New System.Drawing.Size(100, 20)
         Me.Lbl0.TabIndex = 2030
         Me.Lbl0.Text = "Label0"
         Me.Lbl0.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -404,10 +393,10 @@ Partial Class TikFolow
         '
         Me.Lbl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl1.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl1.Location = New System.Drawing.Point(233, 54)
+        Me.Lbl1.Location = New System.Drawing.Point(200, 44)
         Me.Lbl1.Name = "Lbl1"
         Me.Lbl1.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Lbl1.Size = New System.Drawing.Size(119, 24)
+        Me.Lbl1.Size = New System.Drawing.Size(102, 20)
         Me.Lbl1.TabIndex = 2032
         Me.Lbl1.Text = "Label1"
         Me.Lbl1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -416,10 +405,9 @@ Partial Class TikFolow
         '
         Me.ChckUpdAll.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckUpdAll.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckUpdAll.Location = New System.Drawing.Point(7, 20)
-        Me.ChckUpdAll.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ChckUpdAll.Location = New System.Drawing.Point(6, 16)
         Me.ChckUpdAll.Name = "ChckUpdAll"
-        Me.ChckUpdAll.Size = New System.Drawing.Size(113, 31)
+        Me.ChckUpdAll.Size = New System.Drawing.Size(97, 25)
         Me.ChckUpdAll.TabIndex = 2037
         Me.ChckUpdAll.TabStop = True
         Me.ChckUpdAll.Text = "الكل"
@@ -430,10 +418,9 @@ Partial Class TikFolow
         '
         Me.ChckUpdMe.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckUpdMe.Font = New System.Drawing.Font("Times New Roman", 8.0!)
-        Me.ChckUpdMe.Location = New System.Drawing.Point(352, 20)
-        Me.ChckUpdMe.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ChckUpdMe.Location = New System.Drawing.Point(302, 16)
         Me.ChckUpdMe.Name = "ChckUpdMe"
-        Me.ChckUpdMe.Size = New System.Drawing.Size(119, 31)
+        Me.ChckUpdMe.Size = New System.Drawing.Size(102, 25)
         Me.ChckUpdMe.TabIndex = 2036
         Me.ChckUpdMe.TabStop = True
         Me.ChckUpdMe.Text = "تحديثات المتابع"
@@ -444,10 +431,9 @@ Partial Class TikFolow
         '
         Me.ChckFlN.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckFlN.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckFlN.Location = New System.Drawing.Point(920, 20)
-        Me.ChckFlN.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ChckFlN.Location = New System.Drawing.Point(789, 16)
         Me.ChckFlN.Name = "ChckFlN"
-        Me.ChckFlN.Size = New System.Drawing.Size(105, 31)
+        Me.ChckFlN.Size = New System.Drawing.Size(90, 25)
         Me.ChckFlN.TabIndex = 2035
         Me.ChckFlN.TabStop = True
         Me.ChckFlN.Text = "بدون متابعة"
@@ -458,10 +444,9 @@ Partial Class TikFolow
         '
         Me.ChckTrnsDy.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckTrnsDy.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckTrnsDy.Location = New System.Drawing.Point(812, 20)
-        Me.ChckTrnsDy.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ChckTrnsDy.Location = New System.Drawing.Point(696, 16)
         Me.ChckTrnsDy.Name = "ChckTrnsDy"
-        Me.ChckTrnsDy.Size = New System.Drawing.Size(105, 31)
+        Me.ChckTrnsDy.Size = New System.Drawing.Size(90, 25)
         Me.ChckTrnsDy.TabIndex = 2034
         Me.ChckTrnsDy.TabStop = True
         Me.ChckTrnsDy.Text = "استلام اليوم"
@@ -472,10 +457,9 @@ Partial Class TikFolow
         '
         Me.ChckUpdColeg.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckUpdColeg.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckUpdColeg.Location = New System.Drawing.Point(232, 20)
-        Me.ChckUpdColeg.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ChckUpdColeg.Location = New System.Drawing.Point(199, 16)
         Me.ChckUpdColeg.Name = "ChckUpdColeg"
-        Me.ChckUpdColeg.Size = New System.Drawing.Size(119, 31)
+        Me.ChckUpdColeg.Size = New System.Drawing.Size(102, 25)
         Me.ChckUpdColeg.TabIndex = 2033
         Me.ChckUpdColeg.TabStop = True
         Me.ChckUpdColeg.Text = "تحديثات الزملاء"
@@ -486,10 +470,9 @@ Partial Class TikFolow
         '
         Me.ChckUpdOther.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckUpdOther.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckUpdOther.Location = New System.Drawing.Point(124, 20)
-        Me.ChckUpdOther.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ChckUpdOther.Location = New System.Drawing.Point(106, 16)
         Me.ChckUpdOther.Name = "ChckUpdOther"
-        Me.ChckUpdOther.Size = New System.Drawing.Size(105, 31)
+        Me.ChckUpdOther.Size = New System.Drawing.Size(90, 25)
         Me.ChckUpdOther.TabIndex = 2032
         Me.ChckUpdOther.TabStop = True
         Me.ChckUpdOther.Text = "تحديثات الغير"
@@ -503,21 +486,20 @@ Partial Class TikFolow
         Me.BtnCncl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnCncl.FlatAppearance.BorderSize = 0
         Me.BtnCncl.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.BtnCncl.Location = New System.Drawing.Point(1324, 9)
-        Me.BtnCncl.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.BtnCncl.Location = New System.Drawing.Point(1135, 7)
         Me.BtnCncl.Name = "BtnCncl"
         Me.BtnCncl.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnCncl.Size = New System.Drawing.Size(80, 42)
+        Me.BtnCncl.Size = New System.Drawing.Size(69, 34)
         Me.BtnCncl.TabIndex = 2169
         Me.BtnCncl.Text = "Cancel"
         Me.BtnCncl.UseVisualStyleBackColor = True
         '
         'TikFolow
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1751, 857)
+        Me.ClientSize = New System.Drawing.Size(1501, 696)
         Me.Controls.Add(Me.BtnCncl)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.BtnRefrsh)
@@ -526,10 +508,9 @@ Partial Class TikFolow
         Me.Controls.Add(Me.SerchTxt)
         Me.Controls.Add(Me.StatusBar1)
         Me.Controls.Add(Me.FilterComb)
-        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.MinimumSize = New System.Drawing.Size(1588, 801)
+        Me.MinimumSize = New System.Drawing.Size(1363, 658)
         Me.Name = "TikFolow"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.RightToLeftLayout = True

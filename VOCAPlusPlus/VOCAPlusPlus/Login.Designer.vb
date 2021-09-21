@@ -58,6 +58,7 @@ Partial Class Login
         '
         'TxtUsrPass
         '
+        Me.TxtUsrPass.AccessibleDescription = "English-TextNumber"
         Me.TxtUsrPass.BackColor = System.Drawing.Color.WhiteSmoke
         Me.TxtUsrPass.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TxtUsrPass.Enabled = False
@@ -66,11 +67,13 @@ Partial Class Login
         Me.TxtUsrPass.Name = "TxtUsrPass"
         Me.TxtUsrPass.Size = New System.Drawing.Size(232, 19)
         Me.TxtUsrPass.TabIndex = 1
+        Me.TxtUsrPass.Tag = "English-TextNumber"
         Me.ToolTip1.SetToolTip(Me.TxtUsrPass, "كلمة المرور")
         Me.TxtUsrPass.UseSystemPasswordChar = True
         '
         'TxtUsrNm
         '
+        Me.TxtUsrNm.AccessibleDescription = ""
         Me.TxtUsrNm.BackColor = System.Drawing.Color.WhiteSmoke
         Me.TxtUsrNm.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TxtUsrNm.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -78,6 +81,7 @@ Partial Class Login
         Me.TxtUsrNm.Name = "TxtUsrNm"
         Me.TxtUsrNm.Size = New System.Drawing.Size(232, 19)
         Me.TxtUsrNm.TabIndex = 0
+        Me.TxtUsrNm.Tag = "English-All"
         Me.ToolTip1.SetToolTip(Me.TxtUsrNm, "اسم المستخدم")
         '
         'StatusBar1
@@ -165,7 +169,7 @@ Partial Class Login
         Me.LblUsrIP.BackColor = System.Drawing.Color.Transparent
         Me.LblUsrIP.Font = New System.Drawing.Font("Times New Roman", 9.0!)
         Me.LblUsrIP.ForeColor = System.Drawing.Color.Red
-        Me.LblUsrIP.Location = New System.Drawing.Point(345, 262)
+        Me.LblUsrIP.Location = New System.Drawing.Point(345, 239)
         Me.LblUsrIP.Name = "LblUsrIP"
         Me.LblUsrIP.Size = New System.Drawing.Size(235, 20)
         Me.LblUsrIP.TabIndex = 68
@@ -190,7 +194,7 @@ Partial Class Login
         Me.PubVerLbl.BackColor = System.Drawing.Color.Transparent
         Me.PubVerLbl.Font = New System.Drawing.Font("Times New Roman", 9.0!)
         Me.PubVerLbl.ForeColor = System.Drawing.Color.Red
-        Me.PubVerLbl.Location = New System.Drawing.Point(348, 279)
+        Me.PubVerLbl.Location = New System.Drawing.Point(348, 256)
         Me.PubVerLbl.Name = "PubVerLbl"
         Me.PubVerLbl.Size = New System.Drawing.Size(232, 24)
         Me.PubVerLbl.TabIndex = 74

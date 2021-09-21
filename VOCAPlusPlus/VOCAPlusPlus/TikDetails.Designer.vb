@@ -815,7 +815,7 @@ Partial Class TikDetails
         Me.TxtDetailsAdd.Size = New System.Drawing.Size(614, 86)
         Me.TxtDetailsAdd.TabIndex = 2111
         Me.TxtDetailsAdd.TabStop = False
-        Me.TxtDetailsAdd.Tag = "Details"
+        Me.TxtDetailsAdd.Tag = "Arabic-TextNumber"
         '
         'Panel2
         '

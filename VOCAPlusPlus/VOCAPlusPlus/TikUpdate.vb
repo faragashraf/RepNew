@@ -10,6 +10,7 @@ Public Class TikUpdate
     Dim Fn As New APblicClss.Func
     Private Sub TikUpdate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Point(screenWidth, screenHeight - 120)
+        FrmAllSub(Me)
         GridUpdt.Size = New Point(Me.Size.Width, Me.Size.Height - 185)
         If StruGrdTk.Tick = 0 Then
             CmbEvent.Enabled = False
@@ -188,6 +189,7 @@ Public Class TikUpdate
         GridUpdate.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub 'Compare attached Table With Update Table
     Private Sub Uploadsub()
+        Dim Def As New APblicClss.Defntion
         LblMsg.Text = "جاري التحميل ...."
         LblMsg.Refresh()
         'Create Req
