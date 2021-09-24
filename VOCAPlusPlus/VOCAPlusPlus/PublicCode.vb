@@ -7,10 +7,6 @@ Imports System.Text.RegularExpressions
 Imports Microsoft.Exchange.WebServices.Data
 Imports VOCAPlusPlus.Strc
 Module PublicCode
-
-    'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-
 #Region "Form Adjust"
     Dim Form_ As Form
     Dim BttonCtrl As Button
@@ -31,14 +27,12 @@ Module PublicCode
     Dim CmstripItemTmp2 As New ToolStripMenuItem
     Dim CmstripItemTmp3 As New ToolStripMenuItem
 #End Region
-
     Dim CtlCnt As Integer = 0
     Dim CTTTRL As Control
     Dim BacCtrl As Control
     Dim Slctd As Boolean = False
     Dim bolyy As Boolean = False
     Dim CompList As New List(Of String) 'list of tickets to get tickets updates
-
     Public Sub Frm_Activated(sender As Object, e As EventArgs)
         FrmAllSub(sender)
     End Sub
@@ -181,8 +175,6 @@ End_:
         Emails = Left(Emails, Emails.Length - 2)
         Return Emails
     End Function
-
-
     Public Function CompGrdTikFill(GrdTick As DataGridView, Tbl As DataTable, ProgBar As ProgressBar) As String
         Errmsg = Nothing
         Try
@@ -628,7 +620,6 @@ End_:
         If Frm.Name <> "Login" Then
             Frm.Location = New Point(0, 52)
         End If
-        'MsgBox(Frm.Name)
         Slctd = False
 #Region "Default ContextMenuStrip"
         DefCmStrip = New ContextMenuStrip
@@ -982,10 +973,12 @@ End_:
     End Sub
     Private Sub TxtBox_KeyDown(sender As Object, e As KeyEventArgs)
         Dim TxtBox As TextBox = sender
-        If e.Modifiers = Keys.Control And e.KeyCode = Keys.V Then
-            TxtBox.Text += Clipboard.GetText()
-        ElseIf e.Modifiers = Keys.Control And e.KeyCode = Keys.C Then
-            Clipboard.SetText(TxtBox.Text)
+        If e.Modifiers = Keys.Control Mod e.KeyCode = Keys.V Then
+            If TxtBox.ReadOnly = False Then
+                TxtBox.Text += Clipboard.GetText()
+            End If
+        ElseIf e.Modifiers = Keys.Control Mod e.KeyCode = Keys.C Then
+            If Trim(TxtBox.Text).Length > 0 Then Clipboard.SetText(TxtBox.Text)
         Else
             RemoveHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)
             AddHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)

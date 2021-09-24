@@ -191,6 +191,7 @@ Partial Class TikSearchNew
         Me.SerchTxt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.SerchTxt.Size = New System.Drawing.Size(187, 26)
         Me.SerchTxt.TabIndex = 0
+        Me.SerchTxt.Tag = "Arabic-All"
         Me.SerchTxt.Text = "برجاء ادخال كلمات البحث"
         Me.SerchTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '

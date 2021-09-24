@@ -42,7 +42,7 @@ Public Class Login
         Cmbo.Items.Add("My Labtop")
         Cmbo.Items.Add("Test Database")
         Cmbo.Items.Add("OnLine")
-        Cmbo.SelectedItem = "Eg Server"
+        Cmbo.SelectedItem = "Test Database"
         ServerCD = Cmbo.SelectedItem
 
         MacStr = GetMACAddressNew()
@@ -434,7 +434,7 @@ sec_UsrErr_:
                 Invoke(Sub() WelcomeScreen.BackColor = Color.White)
             ElseIf ServerNm = "Test Database" Then
                 Invoke(Sub() WelcomeScreen.BackgroundImage = My.Resources.Demo)
-                Invoke(Sub() WelcomeScreen.BackgroundImageLayout = ImageLayout.Tile)
+                Invoke(Sub() WelcomeScreen.BackgroundImageLayout = ImageLayout.Center)
                 Invoke(Sub() WelcomeScreen.BackColor = Color.White)
             End If
             Invoke(Sub() WelcomeScreen.DbStat.BackgroundImage = My.Resources.DBOn)

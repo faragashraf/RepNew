@@ -25,10 +25,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ProductName>متابعة الشكاوى</ProductName>
+    <ProductName>VOCA++</ProductName>
     <PublisherName>Ashraf Farag</PublisherName>
-    <SuiteName>متابعة الشكاوى</SuiteName>
-    <ApplicationRevision>3</ApplicationRevision>
+    <SuiteName>VOCA++</SuiteName>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -632,6 +632,10 @@
     <None Include="Resources\WSOn048.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\SaveRed1.png" />
+    <None Include="Resources\SaveGreen1.png" />
+    <None Include="Resources\SaveRed.png" />
+    <None Include="Resources\SaveGreen.png" />
     <Content Include="SqlServerTypes\Loader.cs" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">

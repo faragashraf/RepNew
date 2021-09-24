@@ -14,9 +14,9 @@ Module Public_
     Public FltrStr As String = ""
     Public screenWidth As Integer = Screen.PrimaryScreen.Bounds.Width
     Public screenHeight As Integer = Screen.PrimaryScreen.Bounds.Height
-    Public ServerCD As String = "Eg Server"
-    Public ServerNm As String = "VOCA Server"
-    Public strConn As String = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaplus21;Password=@VocaPlus$21-4"
+    Public ServerCD As String = "Test Database"
+    Public ServerNm As String = "Test Database"
+    Public strConn As String = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=test;Password=Hemonad105046"
     Public Bol As Boolean
 
     Public HardTable As DataTable = New DataTable
@@ -138,9 +138,10 @@ Public Class APblicClss
             Dim state As New Defntion
             Dim Fn As New APblicClss.Func
             state.Errmsg = Nothing
+            '@VocaPlus$21-4
             strConn = Nothing
             If ServerCD = "Eg Server" Then
-                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaplus21;Password=@VocaPlus$21-4"
+                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=test;Password=Hemonad105046"
                 ServerNm = "VOCA Server"
             ElseIf ServerCD = "My Labtop" Then
                 strConn = "Data Source=MyThinkbook\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
@@ -329,7 +330,7 @@ Sec2:
             Menu_ = New MenuStrip
             CntxMenu = New ContextMenuStrip
 
-            If (Fnw.GetTbl("SELECT SwNm, SwSer, SwID, SwObjNew,SwObjNm, SwObjImg, SwType FROM ASwitchboard ORDER BY SwID", SwichTabTable, "1002&H", worker)) = Nothing Then
+            If (Fnw.GetTbl("SELECT SwNm, SwSer, SwID, SwObjNew,SwObjNm, SwObjImg, SwType,NewNew,SwObjNm1 FROM ASwitchboard where NewNew  = 1 ORDER BY SwID", SwichTabTable, "1002&H", worker)) = Nothing Then
                 Def.Str = " Building Main Menu ..."
                 worker.ReportProgress(0, Def)
                 SwichButTable = SwichTabTable.Copy
@@ -357,7 +358,7 @@ Sec2:
 
                                 Def.Str = " Adding Button " & NewTab.Text
                                 worker.ReportProgress(0, Def)
-                                subItem.Tag = SwichButTable.DefaultView(Cnt_1).Item("SwObjNm").ToString
+                                subItem.Tag = SwichButTable.DefaultView(Cnt_1).Item("SwObjNm1").ToString
                                 If Mid(Usr.PUsrLvl, SwichButTable.DefaultView(Cnt_1).Item("SwID").ToString, 1) = "H" Then
                                     subItem.AccessibleName = "True"
                                     subItemCx.AccessibleName = "True"
@@ -368,7 +369,7 @@ Sec2:
                                     Dim dd = My.Resources.ResourceManager.GetObject(SwichButTable.DefaultView(Cnt_1).Item("SwObjImg"))
                                     NewTab.Image = Cnt_
                                 End If
-                                subItemCx.Tag = SwichButTable.DefaultView(Cnt_1).Item("SwObjNm").ToString  'YYYYYYYYYYY
+                                subItemCx.Tag = SwichButTable.DefaultView(Cnt_1).Item("SwObjNm1").ToString  'YYYYYYYYYYY
                                 NewTab.DropDownItems.Add(subItem)
                                 NewTabCx.DropDownItems.Add(subItemCx)    'YYYYYYYYYYY
                             End If
@@ -396,7 +397,7 @@ Sec2:
                     ProdKTable = New DataTable
                     ProdCompTable = New DataTable
                     UpdateKTable = New DataTable
-
+                    MendFildsTable = New DataTable
                     If (Fnw.GetTbl("SELECT OffArea FROM PostOff GROUP BY OffArea ORDER BY OffArea;", AreaTable, "1012&H", worker)) = Nothing Then
                         PrciTblCnt += 1
                     Else
@@ -444,7 +445,7 @@ Sec2:
                         worker.ReportProgress(0, Def)
                     End If
 
-                    If (Fnw.GetTbl("SELECT FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
+                    If (Fnw.GetTbl("SELECT FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp,CompReqst FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
                         primaryKey(0) = ProdCompTable.Columns("FnSQL")
                         ProdCompTable.PrimaryKey = primaryKey
                         PrciTblCnt += 1
@@ -935,12 +936,12 @@ Sec2:
                 StruGrdTk.NID = GrdTick.CurrentRow.Cells("TkClNtID").Value.ToString
                 StruGrdTk.Amnt = GrdTick.CurrentRow.Cells("TkAmount").Value
                 If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkTransDate").Value) = False Then StruGrdTk.TransDt = GrdTick.CurrentRow.Cells("TkTransDate").Value
-                StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("UsrRealNm").Value
-                StruGrdTk.Help_ = GrdTick.CurrentRow.Cells("CompHelp").Value.ToString
+            If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("UsrRealNm").Value) = False Then StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("UsrRealNm").Value
+            StruGrdTk.Help_ = GrdTick.CurrentRow.Cells("CompHelp").Value.ToString
                 StruGrdTk.ProdK = GrdTick.CurrentRow.Cells("PrdKind").Value
-                StruGrdTk.UserId = GrdTick.CurrentRow.Cells("TkEmpNm").Value
+            If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkEmpNm").Value) = False Then StruGrdTk.UserId = GrdTick.CurrentRow.Cells("TkEmpNm").Value
 
-                StruGrdTk.LstUpDt = GrdTick.CurrentRow.Cells("تاريخ آخر تحديث").Value
+            StruGrdTk.LstUpDt = GrdTick.CurrentRow.Cells("تاريخ آخر تحديث").Value
                 StruGrdTk.LstUpTxt = GrdTick.CurrentRow.Cells("نص آخر تحديث").Value
                 StruGrdTk.LstUpUsrNm = GrdTick.CurrentRow.Cells("محرر آخر تحديث").Value
                 StruGrdTk.LstUpEvId = GrdTick.CurrentRow.Cells("LastUpdateID").Value
@@ -948,7 +949,7 @@ Sec2:
                 frm__ = GrdTick.FindForm
                 gridview_ = GrdTick
             Catch ex As Exception
-                Errmsg = ex.Message
+            Errmsg = ex.Message
             End Try
             Return Errmsg
         End Function

@@ -23,7 +23,7 @@ Partial Class TikNew
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
+        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(TikNew))
         Me.FlwMain = New System.Windows.Forms.FlowLayoutPanel()
         Me.FlwTree = New System.Windows.Forms.FlowLayoutPanel()
@@ -62,16 +62,18 @@ Partial Class TikNew
         Me.NameTxtBx = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.MailTxtBx = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.AddTxtBx = New System.Windows.Forms.TextBox()
-        Me.DetailsTxtBx = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.SrcCmbBx = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label24 = New System.Windows.Forms.Label()
         Me.Prdct = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Comp = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.AddTxtBx = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.DetailsTxtBx = New System.Windows.Forms.TextBox()
         Me.FlwMend = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.BtnClr = New System.Windows.Forms.Button()
@@ -89,6 +91,7 @@ Partial Class TikNew
         Me.ImgLst = New System.Windows.Forms.ImageList(Me.components)
         Me.TimrPhons = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.FlwMain.SuspendLayout()
         Me.FlwTree.SuspendLayout()
         Me.MyGroupBox3.SuspendLayout()
@@ -120,7 +123,7 @@ Partial Class TikNew
         Me.FlwMain.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
         Me.FlwMain.Location = New System.Drawing.Point(0, 0)
         Me.FlwMain.Name = "FlwMain"
-        Me.FlwMain.Size = New System.Drawing.Size(1796, 759)
+        Me.FlwMain.Size = New System.Drawing.Size(1796, 847)
         Me.FlwMain.TabIndex = 0
         '
         'FlwTree
@@ -160,7 +163,7 @@ Partial Class TikNew
         Me.RadioButton4.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.RadioButton4.Size = New System.Drawing.Size(75, 22)
         Me.RadioButton4.TabIndex = 500
-        Me.RadioButton4.Text = "استفسار"
+        Me.RadioButton4.Text = "طلب"
         Me.RadioButton4.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.RadioButton4.UseVisualStyleBackColor = True
         '
@@ -188,11 +191,11 @@ Partial Class TikNew
         Me.TreeView1.ImageKey = "Add.ico"
         Me.TreeView1.Location = New System.Drawing.Point(11, 51)
         Me.TreeView1.Name = "TreeView1"
-        TreeNode1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        TreeNode1.ForeColor = System.Drawing.Color.Red
-        TreeNode1.Name = "Rooting"
-        TreeNode1.Text = "Rooting"
-        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
+        TreeNode9.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        TreeNode9.ForeColor = System.Drawing.Color.Red
+        TreeNode9.Name = "Rooting"
+        TreeNode9.Text = "Rooting"
+        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode9})
         Me.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TreeView1.RightToLeftLayout = True
         Me.TreeView1.ShowNodeToolTips = True
@@ -211,9 +214,9 @@ Partial Class TikNew
         Me.FlwSubMain.Controls.Add(Me.Panel5)
         Me.FlwSubMain.Controls.Add(Me.FlowLayoutPanel5)
         Me.FlwSubMain.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.FlwSubMain.Location = New System.Drawing.Point(27, 3)
+        Me.FlwSubMain.Location = New System.Drawing.Point(106, 3)
         Me.FlwSubMain.Name = "FlwSubMain"
-        Me.FlwSubMain.Size = New System.Drawing.Size(1339, 744)
+        Me.FlwSubMain.Size = New System.Drawing.Size(1260, 744)
         Me.FlwSubMain.TabIndex = 2034
         '
         'ComRefLbl
@@ -221,21 +224,25 @@ Partial Class TikNew
         Me.ComRefLbl.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.FlwSubMain.SetFlowBreak(Me.ComRefLbl, True)
         Me.ComRefLbl.Font = New System.Drawing.Font("Times New Roman", 16.0!)
-        Me.ComRefLbl.Location = New System.Drawing.Point(385, 3)
+        Me.ComRefLbl.Location = New System.Drawing.Point(31, 3)
+        Me.ComRefLbl.Margin = New System.Windows.Forms.Padding(3, 3, 20, 3)
         Me.ComRefLbl.Name = "ComRefLbl"
-        Me.ComRefLbl.Size = New System.Drawing.Size(937, 25)
+        Me.ComRefLbl.ReadOnly = True
+        Me.ComRefLbl.Size = New System.Drawing.Size(1192, 25)
         Me.ComRefLbl.TabIndex = 2034
+        Me.ComRefLbl.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TabControl2
         '
         Me.TabControl2.Controls.Add(Me.TabPage3)
         Me.TabControl2.Font = New System.Drawing.Font("Times New Roman", 16.0!)
-        Me.TabControl2.Location = New System.Drawing.Point(3, 34)
+        Me.TabControl2.Location = New System.Drawing.Point(41, 34)
+        Me.TabControl2.Margin = New System.Windows.Forms.Padding(3, 3, 20, 3)
         Me.TabControl2.Name = "TabControl2"
         Me.TabControl2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TabControl2.RightToLeftLayout = True
         Me.TabControl2.SelectedIndex = 0
-        Me.TabControl2.Size = New System.Drawing.Size(1319, 518)
+        Me.TabControl2.Size = New System.Drawing.Size(1182, 528)
         Me.TabControl2.TabIndex = 2033
         '
         'TabPage3
@@ -244,7 +251,7 @@ Partial Class TikNew
         Me.TabPage3.Location = New System.Drawing.Point(4, 32)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(1311, 482)
+        Me.TabPage3.Size = New System.Drawing.Size(1174, 492)
         Me.TabPage3.TabIndex = 0
         Me.TabPage3.Text = "البيانات الأساسية"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -270,27 +277,29 @@ Partial Class TikNew
         Me.FlowLayoutPanel6.Controls.Add(Me.NameTxtBx)
         Me.FlowLayoutPanel6.Controls.Add(Me.Label15)
         Me.FlowLayoutPanel6.Controls.Add(Me.MailTxtBx)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label3)
-        Me.FlowLayoutPanel6.Controls.Add(Me.AddTxtBx)
-        Me.FlowLayoutPanel6.Controls.Add(Me.DetailsTxtBx)
         Me.FlowLayoutPanel6.Controls.Add(Me.Label16)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label24)
+        Me.FlowLayoutPanel6.Controls.Add(Me.Label7)
         Me.FlowLayoutPanel6.Controls.Add(Me.SrcCmbBx)
         Me.FlowLayoutPanel6.Controls.Add(Me.Label4)
+        Me.FlowLayoutPanel6.Controls.Add(Me.Label24)
         Me.FlowLayoutPanel6.Controls.Add(Me.Prdct)
         Me.FlowLayoutPanel6.Controls.Add(Me.Label5)
         Me.FlowLayoutPanel6.Controls.Add(Me.Comp)
+        Me.FlowLayoutPanel6.Controls.Add(Me.Label3)
+        Me.FlowLayoutPanel6.Controls.Add(Me.AddTxtBx)
+        Me.FlowLayoutPanel6.Controls.Add(Me.Label6)
+        Me.FlowLayoutPanel6.Controls.Add(Me.DetailsTxtBx)
         Me.FlowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel6.Location = New System.Drawing.Point(3, 3)
         Me.FlowLayoutPanel6.Name = "FlowLayoutPanel6"
         Me.FlowLayoutPanel6.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.FlowLayoutPanel6.Size = New System.Drawing.Size(1305, 476)
+        Me.FlowLayoutPanel6.Size = New System.Drawing.Size(1168, 486)
         Me.FlowLayoutPanel6.TabIndex = 0
         '
         'Label11
         '
         Me.Label11.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label11.Location = New System.Drawing.Point(1096, 3)
+        Me.Label11.Location = New System.Drawing.Point(959, 3)
         Me.Label11.Margin = New System.Windows.Forms.Padding(3)
         Me.Label11.Name = "Label11"
         Me.Label11.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -304,17 +313,18 @@ Partial Class TikNew
         Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
         Me.Label29.ForeColor = System.Drawing.Color.Red
         Me.Label29.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label29.Location = New System.Drawing.Point(1062, 0)
+        Me.Label29.Location = New System.Drawing.Point(925, 0)
         Me.Label29.Name = "Label29"
         Me.Label29.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label29.Size = New System.Drawing.Size(28, 30)
         Me.Label29.TabIndex = 2010
         Me.Label29.Text = "*"
+        Me.Label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'IDTxtBx
         '
         Me.IDTxtBx.AccessibleName = ""
-        Me.IDTxtBx.Location = New System.Drawing.Point(770, 0)
+        Me.IDTxtBx.Location = New System.Drawing.Point(633, 0)
         Me.IDTxtBx.Margin = New System.Windows.Forms.Padding(3, 0, 3, 0)
         Me.IDTxtBx.Mask = "AAAAAAAAAAAAA"
         Me.IDTxtBx.Name = "IDTxtBx"
@@ -328,7 +338,7 @@ Partial Class TikNew
         Me.RadNID.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RadNID.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.RadNID.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RadNID.Location = New System.Drawing.Point(662, 0)
+        Me.RadNID.Location = New System.Drawing.Point(525, 0)
         Me.RadNID.Margin = New System.Windows.Forms.Padding(0)
         Me.RadNID.Name = "RadNID"
         Me.RadNID.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -342,7 +352,7 @@ Partial Class TikNew
         Me.RadPss.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RadPss.Cursor = System.Windows.Forms.Cursors.Default
         Me.FlowLayoutPanel6.SetFlowBreak(Me.RadPss, True)
-        Me.RadPss.Location = New System.Drawing.Point(446, 0)
+        Me.RadPss.Location = New System.Drawing.Point(309, 0)
         Me.RadPss.Margin = New System.Windows.Forms.Padding(0)
         Me.RadPss.Name = "RadPss"
         Me.RadPss.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -358,7 +368,7 @@ Partial Class TikNew
         Me.MyGroupBox2.Controls.Add(Me.PictureBox1)
         Me.MyGroupBox2.Controls.Add(Me.RadioButton8)
         Me.MyGroupBox2.Controls.Add(Me.RadioButton9)
-        Me.MyGroupBox2.Location = New System.Drawing.Point(1096, 43)
+        Me.MyGroupBox2.Location = New System.Drawing.Point(959, 43)
         Me.MyGroupBox2.Name = "MyGroupBox2"
         Me.MyGroupBox2.Size = New System.Drawing.Size(206, 50)
         Me.MyGroupBox2.TabIndex = 2034
@@ -416,7 +426,7 @@ Partial Class TikNew
         Me.Label20.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
         Me.Label20.ForeColor = System.Drawing.Color.Red
-        Me.Label20.Location = New System.Drawing.Point(1062, 53)
+        Me.Label20.Location = New System.Drawing.Point(925, 53)
         Me.Label20.Margin = New System.Windows.Forms.Padding(3, 13, 3, 0)
         Me.Label20.Name = "Label20"
         Me.Label20.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -429,7 +439,7 @@ Partial Class TikNew
         '
         Me.Phon1TxtBx.AccessibleName = ""
         Me.Phon1TxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Phon1TxtBx.Location = New System.Drawing.Point(770, 53)
+        Me.Phon1TxtBx.Location = New System.Drawing.Point(633, 53)
         Me.Phon1TxtBx.Margin = New System.Windows.Forms.Padding(3, 13, 3, 3)
         Me.Phon1TxtBx.Mask = "00000000000"
         Me.Phon1TxtBx.Name = "Phon1TxtBx"
@@ -442,7 +452,7 @@ Partial Class TikNew
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(646, 53)
+        Me.Label1.Location = New System.Drawing.Point(509, 53)
         Me.Label1.Margin = New System.Windows.Forms.Padding(3, 13, 3, 3)
         Me.Label1.MinimumSize = New System.Drawing.Size(70, 15)
         Me.Label1.Name = "Label1"
@@ -458,12 +468,12 @@ Partial Class TikNew
         Me.DateTxtBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.DateTxtBx.Enabled = False
         Me.FlowLayoutPanel6.SetFlowBreak(Me.DateTxtBx, True)
-        Me.DateTxtBx.Location = New System.Drawing.Point(290, 53)
+        Me.DateTxtBx.Location = New System.Drawing.Point(11, 53)
         Me.DateTxtBx.Margin = New System.Windows.Forms.Padding(3, 13, 3, 3)
         Me.DateTxtBx.Name = "DateTxtBx"
         Me.DateTxtBx.ReadOnly = True
         Me.DateTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.DateTxtBx.Size = New System.Drawing.Size(350, 32)
+        Me.DateTxtBx.Size = New System.Drawing.Size(492, 32)
         Me.DateTxtBx.TabIndex = 2043
         Me.DateTxtBx.TabStop = False
         Me.DateTxtBx.Tag = "Date"
@@ -475,7 +485,7 @@ Partial Class TikNew
         Me.MyGroupBox1.Controls.Add(Me.PictureBox3)
         Me.MyGroupBox1.Controls.Add(Me.RadioButton11)
         Me.MyGroupBox1.Controls.Add(Me.RadioButton12)
-        Me.MyGroupBox1.Location = New System.Drawing.Point(1096, 99)
+        Me.MyGroupBox1.Location = New System.Drawing.Point(959, 99)
         Me.MyGroupBox1.Name = "MyGroupBox1"
         Me.MyGroupBox1.Size = New System.Drawing.Size(206, 50)
         Me.MyGroupBox1.TabIndex = 2035
@@ -528,7 +538,7 @@ Partial Class TikNew
         Me.Label22.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
         Me.Label22.ForeColor = System.Drawing.Color.Red
-        Me.Label22.Location = New System.Drawing.Point(1062, 109)
+        Me.Label22.Location = New System.Drawing.Point(925, 109)
         Me.Label22.Margin = New System.Windows.Forms.Padding(3, 13, 3, 0)
         Me.Label22.Name = "Label22"
         Me.Label22.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -541,7 +551,7 @@ Partial Class TikNew
         Me.Phon2TxtBx.AccessibleName = ""
         Me.Phon2TxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FlowLayoutPanel6.SetFlowBreak(Me.Phon2TxtBx, True)
-        Me.Phon2TxtBx.Location = New System.Drawing.Point(770, 109)
+        Me.Phon2TxtBx.Location = New System.Drawing.Point(633, 109)
         Me.Phon2TxtBx.Margin = New System.Windows.Forms.Padding(3, 13, 3, 3)
         Me.Phon2TxtBx.Mask = "00000000000"
         Me.Phon2TxtBx.Name = "Phon2TxtBx"
@@ -554,7 +564,7 @@ Partial Class TikNew
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.Font = New System.Drawing.Font("Times New Roman", 16.0!)
         Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(1096, 152)
+        Me.Label2.Location = New System.Drawing.Point(959, 152)
         Me.Label2.MinimumSize = New System.Drawing.Size(70, 15)
         Me.Label2.Name = "Label2"
         Me.Label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -568,20 +578,20 @@ Partial Class TikNew
         Me.Label21.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
         Me.Label21.ForeColor = System.Drawing.Color.Red
-        Me.Label21.Location = New System.Drawing.Point(1062, 152)
+        Me.Label21.Location = New System.Drawing.Point(925, 152)
         Me.Label21.Name = "Label21"
         Me.Label21.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label21.Size = New System.Drawing.Size(28, 30)
         Me.Label21.TabIndex = 2002
         Me.Label21.Text = "*"
-        Me.Label21.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'NameTxtBx
         '
         Me.NameTxtBx.AccessibleName = ""
         Me.NameTxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NameTxtBx.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.NameTxtBx.Location = New System.Drawing.Point(770, 155)
+        Me.NameTxtBx.Location = New System.Drawing.Point(633, 155)
         Me.NameTxtBx.Name = "NameTxtBx"
         Me.NameTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.NameTxtBx.Size = New System.Drawing.Size(286, 32)
@@ -594,7 +604,7 @@ Partial Class TikNew
         Me.Label15.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label15.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label15.ForeColor = System.Drawing.Color.Black
-        Me.Label15.Location = New System.Drawing.Point(644, 155)
+        Me.Label15.Location = New System.Drawing.Point(507, 155)
         Me.Label15.Margin = New System.Windows.Forms.Padding(3)
         Me.Label15.Name = "Label15"
         Me.Label15.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -608,58 +618,20 @@ Partial Class TikNew
         Me.MailTxtBx.AccessibleName = ""
         Me.MailTxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FlowLayoutPanel6.SetFlowBreak(Me.MailTxtBx, True)
-        Me.MailTxtBx.Location = New System.Drawing.Point(290, 155)
+        Me.MailTxtBx.Location = New System.Drawing.Point(165, 155)
         Me.MailTxtBx.Name = "MailTxtBx"
         Me.MailTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.MailTxtBx.Size = New System.Drawing.Size(348, 32)
+        Me.MailTxtBx.Size = New System.Drawing.Size(336, 32)
         Me.MailTxtBx.TabIndex = 73
         Me.MailTxtBx.TabStop = False
-        Me.MailTxtBx.Tag = "English-TextNumber"
-        '
-        'Label3
-        '
-        Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label3.Font = New System.Drawing.Font("Times New Roman", 16.0!)
-        Me.Label3.ForeColor = System.Drawing.Color.Black
-        Me.Label3.Location = New System.Drawing.Point(1096, 190)
-        Me.Label3.MinimumSize = New System.Drawing.Size(70, 15)
-        Me.Label3.Name = "Label3"
-        Me.Label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label3.Size = New System.Drawing.Size(206, 34)
-        Me.Label3.TabIndex = 79
-        Me.Label3.Text = "العنوان :"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'AddTxtBx
-        '
-        Me.AddTxtBx.AccessibleName = ""
-        Me.AddTxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.AddTxtBx.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.AddTxtBx.Location = New System.Drawing.Point(554, 193)
-        Me.AddTxtBx.Margin = New System.Windows.Forms.Padding(35, 3, 3, 3)
-        Me.AddTxtBx.Multiline = True
-        Me.AddTxtBx.Name = "AddTxtBx"
-        Me.AddTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.AddTxtBx.Size = New System.Drawing.Size(504, 179)
-        Me.AddTxtBx.TabIndex = 68
-        Me.AddTxtBx.Tag = "Arabic-TextNumber"
-        '
-        'DetailsTxtBx
-        '
-        Me.FlowLayoutPanel6.SetFlowBreak(Me.DetailsTxtBx, True)
-        Me.DetailsTxtBx.Location = New System.Drawing.Point(46, 193)
-        Me.DetailsTxtBx.Multiline = True
-        Me.DetailsTxtBx.Name = "DetailsTxtBx"
-        Me.DetailsTxtBx.Size = New System.Drawing.Size(502, 179)
-        Me.DetailsTxtBx.TabIndex = 2045
+        Me.MailTxtBx.Tag = "English-Special"
         '
         'Label16
         '
         Me.Label16.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label16.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label16.ForeColor = System.Drawing.Color.Black
-        Me.Label16.Location = New System.Drawing.Point(1096, 380)
-        Me.Label16.Margin = New System.Windows.Forms.Padding(3, 5, 3, 0)
+        Me.Label16.Location = New System.Drawing.Point(959, 190)
         Me.Label16.Name = "Label16"
         Me.Label16.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label16.Size = New System.Drawing.Size(206, 34)
@@ -667,18 +639,18 @@ Partial Class TikNew
         Me.Label16.Text = "مصدر الشكوى :"
         Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Label24
+        'Label7
         '
-        Me.Label24.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
-        Me.Label24.ForeColor = System.Drawing.Color.Red
-        Me.Label24.Location = New System.Drawing.Point(1062, 375)
-        Me.Label24.Name = "Label24"
-        Me.Label24.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label24.Size = New System.Drawing.Size(28, 30)
-        Me.Label24.TabIndex = 2042
-        Me.Label24.Text = "*"
-        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
+        Me.Label7.ForeColor = System.Drawing.Color.Red
+        Me.Label7.Location = New System.Drawing.Point(925, 190)
+        Me.Label7.Name = "Label7"
+        Me.Label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Label7.Size = New System.Drawing.Size(28, 30)
+        Me.Label7.TabIndex = 2047
+        Me.Label7.Text = "*"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'SrcCmbBx
         '
@@ -692,10 +664,10 @@ Partial Class TikNew
         Me.FlowLayoutPanel6.SetFlowBreak(Me.SrcCmbBx, True)
         Me.SrcCmbBx.FormattingEnabled = True
         Me.SrcCmbBx.ItemHeight = 23
-        Me.SrcCmbBx.Location = New System.Drawing.Point(778, 378)
+        Me.SrcCmbBx.Location = New System.Drawing.Point(633, 193)
         Me.SrcCmbBx.Name = "SrcCmbBx"
         Me.SrcCmbBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.SrcCmbBx.Size = New System.Drawing.Size(278, 31)
+        Me.SrcCmbBx.Size = New System.Drawing.Size(286, 31)
         Me.SrcCmbBx.TabIndex = 2040
         Me.SrcCmbBx.Tag = "مصدر الشكوى"
         Me.ToolTip1.SetToolTip(Me.SrcCmbBx, "مصدر الشكوى")
@@ -706,8 +678,7 @@ Partial Class TikNew
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.Font = New System.Drawing.Font("Times New Roman", 16.0!)
         Me.Label4.ForeColor = System.Drawing.Color.Black
-        Me.Label4.Location = New System.Drawing.Point(1096, 422)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(3, 8, 3, 0)
+        Me.Label4.Location = New System.Drawing.Point(959, 227)
         Me.Label4.Name = "Label4"
         Me.Label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label4.Size = New System.Drawing.Size(206, 34)
@@ -715,15 +686,26 @@ Partial Class TikNew
         Me.Label4.Text = "نوع الخدمة :"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'Label24
+        '
+        Me.Label24.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
+        Me.Label24.ForeColor = System.Drawing.Color.Red
+        Me.Label24.Location = New System.Drawing.Point(925, 227)
+        Me.Label24.Name = "Label24"
+        Me.Label24.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Label24.Size = New System.Drawing.Size(28, 30)
+        Me.Label24.TabIndex = 2042
+        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Prdct
         '
         Me.Prdct.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Prdct.Location = New System.Drawing.Point(710, 417)
-        Me.Prdct.Margin = New System.Windows.Forms.Padding(35, 3, 31, 3)
+        Me.Prdct.Location = New System.Drawing.Point(633, 230)
         Me.Prdct.Name = "Prdct"
         Me.Prdct.ReadOnly = True
         Me.Prdct.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Prdct.Size = New System.Drawing.Size(348, 32)
+        Me.Prdct.Size = New System.Drawing.Size(286, 32)
         Me.Prdct.TabIndex = 2038
         Me.Prdct.Tag = "نوع الخدمة"
         '
@@ -732,11 +714,11 @@ Partial Class TikNew
         Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(528, 422)
+        Me.Label5.Location = New System.Drawing.Point(507, 235)
         Me.Label5.Margin = New System.Windows.Forms.Padding(3, 8, 3, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label5.Size = New System.Drawing.Size(148, 25)
+        Me.Label5.Size = New System.Drawing.Size(120, 27)
         Me.Label5.TabIndex = 2037
         Me.Label5.Text = "نوع الشكوى :"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -744,7 +726,8 @@ Partial Class TikNew
         'Comp
         '
         Me.Comp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Comp.Location = New System.Drawing.Point(32, 417)
+        Me.FlowLayoutPanel6.SetFlowBreak(Me.Comp, True)
+        Me.Comp.Location = New System.Drawing.Point(11, 230)
         Me.Comp.Name = "Comp"
         Me.Comp.ReadOnly = True
         Me.Comp.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -752,11 +735,66 @@ Partial Class TikNew
         Me.Comp.TabIndex = 2039
         Me.Comp.Tag = "نوع الشكوى"
         '
+        'Label3
+        '
+        Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label3.Font = New System.Drawing.Font("Times New Roman", 16.0!)
+        Me.Label3.ForeColor = System.Drawing.Color.Black
+        Me.Label3.Location = New System.Drawing.Point(959, 265)
+        Me.Label3.MinimumSize = New System.Drawing.Size(70, 15)
+        Me.Label3.Name = "Label3"
+        Me.Label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Label3.Size = New System.Drawing.Size(206, 34)
+        Me.Label3.TabIndex = 79
+        Me.Label3.Text = "العنوان :"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'AddTxtBx
+        '
+        Me.AddTxtBx.AccessibleName = ""
+        Me.AddTxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.AddTxtBx.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.FlowLayoutPanel6.SetFlowBreak(Me.AddTxtBx, True)
+        Me.AddTxtBx.Location = New System.Drawing.Point(11, 268)
+        Me.AddTxtBx.Margin = New System.Windows.Forms.Padding(35, 3, 3, 3)
+        Me.AddTxtBx.Multiline = True
+        Me.AddTxtBx.Name = "AddTxtBx"
+        Me.AddTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.AddTxtBx.Size = New System.Drawing.Size(910, 86)
+        Me.AddTxtBx.TabIndex = 68
+        Me.AddTxtBx.Tag = "Arabic-All"
+        '
+        'Label6
+        '
+        Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label6.Font = New System.Drawing.Font("Times New Roman", 16.0!)
+        Me.Label6.ForeColor = System.Drawing.Color.Black
+        Me.Label6.Location = New System.Drawing.Point(959, 357)
+        Me.Label6.MinimumSize = New System.Drawing.Size(70, 15)
+        Me.Label6.Name = "Label6"
+        Me.Label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Label6.Size = New System.Drawing.Size(206, 34)
+        Me.Label6.TabIndex = 2046
+        Me.Label6.Text = "تفاصيل الشكوى :"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'DetailsTxtBx
+        '
+        Me.FlowLayoutPanel6.SetFlowBreak(Me.DetailsTxtBx, True)
+        Me.DetailsTxtBx.Location = New System.Drawing.Point(11, 360)
+        Me.DetailsTxtBx.Margin = New System.Windows.Forms.Padding(35, 3, 3, 3)
+        Me.DetailsTxtBx.Multiline = True
+        Me.DetailsTxtBx.Name = "DetailsTxtBx"
+        Me.DetailsTxtBx.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.DetailsTxtBx.Size = New System.Drawing.Size(910, 114)
+        Me.DetailsTxtBx.TabIndex = 2045
+        Me.DetailsTxtBx.Tag = "Arabic-All"
+        '
         'FlwMend
         '
         Me.FlwMend.AutoScroll = True
         Me.FlwMend.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.FlwMend.Location = New System.Drawing.Point(771, 558)
+        Me.FlwMend.Location = New System.Drawing.Point(689, 568)
         Me.FlwMend.Name = "FlwMend"
         Me.FlwMend.Size = New System.Drawing.Size(551, 266)
         Me.FlwMend.TabIndex = 1
@@ -765,10 +803,11 @@ Partial Class TikNew
         '
         Me.Panel6.BackColor = System.Drawing.Color.Transparent
         Me.Panel6.Controls.Add(Me.BtnClr)
-        Me.Panel6.Location = New System.Drawing.Point(653, 558)
+        Me.Panel6.Location = New System.Drawing.Point(571, 568)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(112, 55)
         Me.Panel6.TabIndex = 2037
+        Me.Panel6.Visible = False
         '
         'BtnClr
         '
@@ -788,10 +827,11 @@ Partial Class TikNew
         '
         Me.Panel5.BackColor = System.Drawing.Color.Transparent
         Me.Panel5.Controls.Add(Me.BtnAdd)
-        Me.Panel5.Location = New System.Drawing.Point(540, 558)
+        Me.Panel5.Location = New System.Drawing.Point(458, 568)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(107, 55)
         Me.Panel5.TabIndex = 2036
+        Me.Panel5.Visible = False
         '
         'BtnAdd
         '
@@ -813,7 +853,7 @@ Partial Class TikNew
         Me.FlowLayoutPanel5.Controls.Add(Me.Panel1)
         Me.FlowLayoutPanel5.Controls.Add(Me.Panel2)
         Me.FlowLayoutPanel5.Controls.Add(Me.Panel3)
-        Me.FlowLayoutPanel5.Location = New System.Drawing.Point(270, 555)
+        Me.FlowLayoutPanel5.Location = New System.Drawing.Point(188, 565)
         Me.FlowLayoutPanel5.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel5.Name = "FlowLayoutPanel5"
         Me.FlowLayoutPanel5.Size = New System.Drawing.Size(267, 202)
@@ -948,13 +988,17 @@ Partial Class TikNew
         '
         Me.ToolTip1.IsBalloon = True
         '
+        'Timer1
+        '
+        Me.Timer1.Enabled = True
+        '
         'TikNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1796, 759)
+        Me.ClientSize = New System.Drawing.Size(1796, 847)
         Me.Controls.Add(Me.FlwMain)
         Me.Name = "TikNew"
         Me.Text = "TikNew"
@@ -1048,4 +1092,7 @@ Partial Class TikNew
     Friend WithEvents Label1 As Label
     Friend WithEvents DateTxtBx As TextBox
     Friend WithEvents DetailsTxtBx As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Timer1 As Timer
 End Class

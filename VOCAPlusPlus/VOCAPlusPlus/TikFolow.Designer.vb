@@ -84,7 +84,7 @@ Partial Class TikFolow
         Me.SerchTxt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.SerchTxt.Size = New System.Drawing.Size(218, 26)
         Me.SerchTxt.TabIndex = 2024
-        Me.SerchTxt.Tag = "English-TextNumber"
+        Me.SerchTxt.Tag = "Arabic-All"
         Me.SerchTxt.Text = "برجاء ادخال كلمات البحث"
         Me.SerchTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '

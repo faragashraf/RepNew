@@ -1,6 +1,5 @@
 ﻿
 Public Class TikDetails
-    Dim Def As New APblicClss.Defntion
     Dim Fn As New APblicClss.Func
     Private Sub TikDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Point(screenWidth, screenHeight - 120)
@@ -69,7 +68,14 @@ Public Class TikDetails
             GroupBox4.Visible = False
         End If
         LblHelp.Text = StruGrdTk.Help_
-        TxtTikID.Text = "شكوى رقم : " & StruGrdTk.Sql
+        If StruGrdTk.Tick = 0 Then
+            TxtTikID.Text = "طلب رقم : " & StruGrdTk.Sql
+            Me.Text = "طلب رقم  " & StruGrdTk.Sql
+        ElseIf StruGrdTk.Tick = -1 Then
+            TxtTikID.Text = "شكوى رقم : " & StruGrdTk.Sql
+            Me.Text = "شكوى رقم  " & StruGrdTk.Sql
+        End If
+
         TxtTikID.RightToLeft = RightToLeft.Yes
         TxtTikID.Font = New Font("Times New Roman", 14, FontStyle.Bold)
         TxtTikID.TextAlign = ContentAlignment.BottomCenter

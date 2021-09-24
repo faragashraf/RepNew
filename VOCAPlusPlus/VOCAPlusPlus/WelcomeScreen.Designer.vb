@@ -40,8 +40,6 @@ Partial Class WelcomeScreen
         Me.LblUsrRNm = New System.Windows.Forms.Label()
         Me.DbStat = New System.Windows.Forms.PictureBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.LblClrSys = New System.Windows.Forms.Label()
         Me.LblClrUsr = New System.Windows.Forms.Label()
         Me.LblClrNotUsr = New System.Windows.Forms.Label()
@@ -79,8 +77,6 @@ Partial Class WelcomeScreen
         Me.LblLstSeen = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Panel4 = New System.Windows.Forms.Panel()
         Me.TimerColctLog = New System.Windows.Forms.Timer(Me.components)
         Me.WChckConn = New System.ComponentModel.BackgroundWorker()
         Me.WkrTikCount = New System.ComponentModel.BackgroundWorker()
@@ -93,8 +89,6 @@ Partial Class WelcomeScreen
         Me.FlowLayoutPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.Panel3.SuspendLayout()
-        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'TimerOp
@@ -249,30 +243,6 @@ Partial Class WelcomeScreen
         'ToolTip1
         '
         Me.ToolTip1.IsBalloon = True
-        '
-        'Button1
-        '
-        Me.Button1.BackgroundImage = Global.VOCAPlusPlus.My.Resources.Resources.recyellow
-        Me.Button1.Location = New System.Drawing.Point(5, 4)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(5)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(114, 29)
-        Me.Button1.TabIndex = 59
-        Me.Button1.Text = "تسجيل شكوى"
-        Me.ToolTip1.SetToolTip(Me.Button1, "تسجيل الخروج")
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.BackgroundImage = Global.VOCAPlusPlus.My.Resources.Resources.recyellow
-        Me.Button2.Location = New System.Drawing.Point(5, 4)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(5)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(114, 29)
-        Me.Button2.TabIndex = 59
-        Me.Button2.Text = "متابعة الشكاوى"
-        Me.ToolTip1.SetToolTip(Me.Button2, "تسجيل الخروج")
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'LblClrSys
         '
@@ -726,8 +696,6 @@ Partial Class WelcomeScreen
         Me.FlowLayoutPanel1.Controls.Add(Me.PubVerLbl)
         Me.FlowLayoutPanel1.Controls.Add(Me.Panel2)
         Me.FlowLayoutPanel1.Controls.Add(Me.Panel1)
-        Me.FlowLayoutPanel1.Controls.Add(Me.Panel3)
-        Me.FlowLayoutPanel1.Controls.Add(Me.Panel4)
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 4)
@@ -768,24 +736,6 @@ Partial Class WelcomeScreen
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(124, 39)
         Me.Panel1.TabIndex = 96
-        '
-        'Panel3
-        '
-        Me.Panel3.BackColor = System.Drawing.Color.Transparent
-        Me.Panel3.Controls.Add(Me.Button1)
-        Me.Panel3.Location = New System.Drawing.Point(936, 582)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(124, 39)
-        Me.Panel3.TabIndex = 97
-        '
-        'Panel4
-        '
-        Me.Panel4.BackColor = System.Drawing.Color.Transparent
-        Me.Panel4.Controls.Add(Me.Button2)
-        Me.Panel4.Location = New System.Drawing.Point(806, 582)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(124, 39)
-        Me.Panel4.TabIndex = 98
         '
         'TimerColctLog
         '
@@ -829,8 +779,6 @@ Partial Class WelcomeScreen
         Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
-        Me.Panel4.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -891,8 +839,4 @@ Partial Class WelcomeScreen
     Friend WithEvents TimerColctLog As Timer
     Friend WithEvents WChckConn As System.ComponentModel.BackgroundWorker
     Friend WithEvents WkrTikCount As System.ComponentModel.BackgroundWorker
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Panel4 As Panel
-    Friend WithEvents Button2 As Button
 End Class
