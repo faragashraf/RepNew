@@ -636,6 +636,7 @@
     <None Include="Resources\SaveGreen1.png" />
     <None Include="Resources\SaveRed.png" />
     <None Include="Resources\SaveGreen.png" />
+    <None Include="Resources\VOCAIntro.gif" />
     <Content Include="SqlServerTypes\Loader.cs" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">

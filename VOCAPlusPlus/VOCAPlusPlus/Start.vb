@@ -4,12 +4,6 @@ Imports System.Threading
 Public Class Start
     Private Sub Start_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         MacStr = GetMACAddressNew()
-        Invoke(Sub() LblUsrIP.Text = "IP: " & OsIP())
-        If Deployment.Application.ApplicationDeployment.IsNetworkDeployed Then
-            Invoke(Sub() PubVerLbl.Text = "Ver. : " + Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4))
-        Else
-            Invoke(Sub() PubVerLbl.Text = "Publish Ver. : This isn't a Publish version")
-        End If
         Invoke(Sub()
                    Dim WC As New APblicClss.FuncWorker
                    If MacWrWrkr.IsBusy = False Then
@@ -33,7 +27,4 @@ Public Class Start
         WC.MacTblSub(worker)
     End Sub
 
-    Private Sub MacWrWrkr_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles MacWrWrkr.ProgressChanged
-
-    End Sub
 End Class

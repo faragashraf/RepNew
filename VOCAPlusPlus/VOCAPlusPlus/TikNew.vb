@@ -68,6 +68,8 @@ Public Class TikNew
                 End If
             ElseIf TypeOf Ctrol Is ComboBox Then
                 Ctrol.Enabled = True
+                Dim TxtBox As ComboBox = Ctrol
+                TxtBox.SelectedIndex = -1
             ElseIf TypeOf Ctrol Is RadioButton Then
                 Ctrol.Enabled = True
             End If
@@ -143,7 +145,7 @@ Public Class TikNew
                 End If
             End If
         Next
-        'Dim gg As Double = Complete_ / (5 + (FlwMend.Controls.Count) / 2)
+        Dim gg As Double = Complete_ / (5 + (FlwMend.Controls.Count) / 2)
         'If Complete_ / (5 + (FlwMend.Controls.Count) / 2) < 0.7 Then
         '    SubmitBtn.BackgroundImage = My.Resources.SaveRed1
         'ElseIf Complete_ / (5 + (FlwMend.Controls.Count) / 2) > 0.5 Then
@@ -152,9 +154,15 @@ Public Class TikNew
         If Complete_ = 5 + (FlwMend.Controls.Count) / 2 Then
             SubmitBtn.Enabled = True
             SubmitBtn.BackgroundImage = My.Resources.SaveGreen1
-        Else
-            SubmitBtn.Enabled = False
+        ElseIf Complete_ / (5 + (FlwMend.Controls.Count) / 2) <= 0.5 Then
             SubmitBtn.BackgroundImage = My.Resources.SaveRed
+            SubmitBtn.Enabled = False
+        ElseIf Complete_ / (5 + (FlwMend.Controls.Count) / 2) > 0.5 Then
+            SubmitBtn.BackgroundImage = My.Resources.SaveGreen
+            SubmitBtn.Enabled = False
+            'Else
+            '    SubmitBtn.Enabled = False
+            'SubmitBtn.BackgroundImage = My.Resources.SaveRed1
         End If
         Timer1.Start()
     End Sub
