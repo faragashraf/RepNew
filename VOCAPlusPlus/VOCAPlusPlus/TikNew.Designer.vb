@@ -23,7 +23,7 @@ Partial Class TikNew
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
+        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(TikNew))
         Me.FlwMain = New System.Windows.Forms.FlowLayoutPanel()
         Me.FlwTree = New System.Windows.Forms.FlowLayoutPanel()
@@ -35,7 +35,7 @@ Partial Class TikNew
         Me.ComRefLbl = New System.Windows.Forms.TextBox()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.FlowLayoutPanel6 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.FlwMainData = New System.Windows.Forms.FlowLayoutPanel()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.IDTxtBx = New System.Windows.Forms.MaskedTextBox()
@@ -98,7 +98,7 @@ Partial Class TikNew
         Me.FlwSubMain.SuspendLayout()
         Me.TabControl2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
-        Me.FlowLayoutPanel6.SuspendLayout()
+        Me.FlwMainData.SuspendLayout()
         Me.MyGroupBox2.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -191,11 +191,11 @@ Partial Class TikNew
         Me.TreeView1.ImageKey = "Add.ico"
         Me.TreeView1.Location = New System.Drawing.Point(11, 51)
         Me.TreeView1.Name = "TreeView1"
-        TreeNode9.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        TreeNode9.ForeColor = System.Drawing.Color.Red
-        TreeNode9.Name = "Rooting"
-        TreeNode9.Text = "Rooting"
-        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode9})
+        TreeNode2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        TreeNode2.ForeColor = System.Drawing.Color.Red
+        TreeNode2.Name = "Rooting"
+        TreeNode2.Text = "Rooting"
+        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode2})
         Me.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TreeView1.RightToLeftLayout = True
         Me.TreeView1.ShowNodeToolTips = True
@@ -247,7 +247,7 @@ Partial Class TikNew
         '
         'TabPage3
         '
-        Me.TabPage3.Controls.Add(Me.FlowLayoutPanel6)
+        Me.TabPage3.Controls.Add(Me.FlwMainData)
         Me.TabPage3.Location = New System.Drawing.Point(4, 32)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
@@ -256,45 +256,45 @@ Partial Class TikNew
         Me.TabPage3.Text = "البيانات الأساسية"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
-        'FlowLayoutPanel6
+        'FlwMainData
         '
-        Me.FlowLayoutPanel6.AutoScroll = True
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label11)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label29)
-        Me.FlowLayoutPanel6.Controls.Add(Me.IDTxtBx)
-        Me.FlowLayoutPanel6.Controls.Add(Me.RadNID)
-        Me.FlowLayoutPanel6.Controls.Add(Me.RadPss)
-        Me.FlowLayoutPanel6.Controls.Add(Me.MyGroupBox2)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label20)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Phon1TxtBx)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label1)
-        Me.FlowLayoutPanel6.Controls.Add(Me.DateTxtBx)
-        Me.FlowLayoutPanel6.Controls.Add(Me.MyGroupBox1)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label22)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Phon2TxtBx)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label2)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label21)
-        Me.FlowLayoutPanel6.Controls.Add(Me.NameTxtBx)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label15)
-        Me.FlowLayoutPanel6.Controls.Add(Me.MailTxtBx)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label16)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label7)
-        Me.FlowLayoutPanel6.Controls.Add(Me.SrcCmbBx)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label4)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label24)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Prdct)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label5)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Comp)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label3)
-        Me.FlowLayoutPanel6.Controls.Add(Me.AddTxtBx)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label6)
-        Me.FlowLayoutPanel6.Controls.Add(Me.DetailsTxtBx)
-        Me.FlowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlowLayoutPanel6.Location = New System.Drawing.Point(3, 3)
-        Me.FlowLayoutPanel6.Name = "FlowLayoutPanel6"
-        Me.FlowLayoutPanel6.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.FlowLayoutPanel6.Size = New System.Drawing.Size(1168, 486)
-        Me.FlowLayoutPanel6.TabIndex = 0
+        Me.FlwMainData.AutoScroll = True
+        Me.FlwMainData.Controls.Add(Me.Label11)
+        Me.FlwMainData.Controls.Add(Me.Label29)
+        Me.FlwMainData.Controls.Add(Me.IDTxtBx)
+        Me.FlwMainData.Controls.Add(Me.RadNID)
+        Me.FlwMainData.Controls.Add(Me.RadPss)
+        Me.FlwMainData.Controls.Add(Me.MyGroupBox2)
+        Me.FlwMainData.Controls.Add(Me.Label20)
+        Me.FlwMainData.Controls.Add(Me.Phon1TxtBx)
+        Me.FlwMainData.Controls.Add(Me.Label1)
+        Me.FlwMainData.Controls.Add(Me.DateTxtBx)
+        Me.FlwMainData.Controls.Add(Me.MyGroupBox1)
+        Me.FlwMainData.Controls.Add(Me.Label22)
+        Me.FlwMainData.Controls.Add(Me.Phon2TxtBx)
+        Me.FlwMainData.Controls.Add(Me.Label2)
+        Me.FlwMainData.Controls.Add(Me.Label21)
+        Me.FlwMainData.Controls.Add(Me.NameTxtBx)
+        Me.FlwMainData.Controls.Add(Me.Label15)
+        Me.FlwMainData.Controls.Add(Me.MailTxtBx)
+        Me.FlwMainData.Controls.Add(Me.Label16)
+        Me.FlwMainData.Controls.Add(Me.Label7)
+        Me.FlwMainData.Controls.Add(Me.SrcCmbBx)
+        Me.FlwMainData.Controls.Add(Me.Label4)
+        Me.FlwMainData.Controls.Add(Me.Label24)
+        Me.FlwMainData.Controls.Add(Me.Prdct)
+        Me.FlwMainData.Controls.Add(Me.Label5)
+        Me.FlwMainData.Controls.Add(Me.Comp)
+        Me.FlwMainData.Controls.Add(Me.Label3)
+        Me.FlwMainData.Controls.Add(Me.AddTxtBx)
+        Me.FlwMainData.Controls.Add(Me.Label6)
+        Me.FlwMainData.Controls.Add(Me.DetailsTxtBx)
+        Me.FlwMainData.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FlwMainData.Location = New System.Drawing.Point(3, 3)
+        Me.FlwMainData.Name = "FlwMainData"
+        Me.FlwMainData.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.FlwMainData.Size = New System.Drawing.Size(1168, 486)
+        Me.FlwMainData.TabIndex = 0
         '
         'Label11
         '
@@ -351,7 +351,7 @@ Partial Class TikNew
         '
         Me.RadPss.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RadPss.Cursor = System.Windows.Forms.Cursors.Default
-        Me.FlowLayoutPanel6.SetFlowBreak(Me.RadPss, True)
+        Me.FlwMainData.SetFlowBreak(Me.RadPss, True)
         Me.RadPss.Location = New System.Drawing.Point(309, 0)
         Me.RadPss.Margin = New System.Windows.Forms.Padding(0)
         Me.RadPss.Name = "RadPss"
@@ -467,7 +467,7 @@ Partial Class TikNew
         Me.DateTxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DateTxtBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.DateTxtBx.Enabled = False
-        Me.FlowLayoutPanel6.SetFlowBreak(Me.DateTxtBx, True)
+        Me.FlwMainData.SetFlowBreak(Me.DateTxtBx, True)
         Me.DateTxtBx.Location = New System.Drawing.Point(11, 53)
         Me.DateTxtBx.Margin = New System.Windows.Forms.Padding(3, 13, 3, 3)
         Me.DateTxtBx.Name = "DateTxtBx"
@@ -550,7 +550,7 @@ Partial Class TikNew
         '
         Me.Phon2TxtBx.AccessibleName = ""
         Me.Phon2TxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlowLayoutPanel6.SetFlowBreak(Me.Phon2TxtBx, True)
+        Me.FlwMainData.SetFlowBreak(Me.Phon2TxtBx, True)
         Me.Phon2TxtBx.Location = New System.Drawing.Point(633, 109)
         Me.Phon2TxtBx.Margin = New System.Windows.Forms.Padding(3, 13, 3, 3)
         Me.Phon2TxtBx.Mask = "00000000000"
@@ -617,7 +617,7 @@ Partial Class TikNew
         '
         Me.MailTxtBx.AccessibleName = ""
         Me.MailTxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlowLayoutPanel6.SetFlowBreak(Me.MailTxtBx, True)
+        Me.FlwMainData.SetFlowBreak(Me.MailTxtBx, True)
         Me.MailTxtBx.Location = New System.Drawing.Point(165, 155)
         Me.MailTxtBx.Name = "MailTxtBx"
         Me.MailTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.No
@@ -661,7 +661,7 @@ Partial Class TikNew
         Me.SrcCmbBx.BackColor = System.Drawing.Color.White
         Me.SrcCmbBx.DisplayMember = "SrcNm"
         Me.SrcCmbBx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.FlowLayoutPanel6.SetFlowBreak(Me.SrcCmbBx, True)
+        Me.FlwMainData.SetFlowBreak(Me.SrcCmbBx, True)
         Me.SrcCmbBx.FormattingEnabled = True
         Me.SrcCmbBx.ItemHeight = 23
         Me.SrcCmbBx.Location = New System.Drawing.Point(633, 193)
@@ -726,7 +726,7 @@ Partial Class TikNew
         'Comp
         '
         Me.Comp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlowLayoutPanel6.SetFlowBreak(Me.Comp, True)
+        Me.FlwMainData.SetFlowBreak(Me.Comp, True)
         Me.Comp.Location = New System.Drawing.Point(11, 230)
         Me.Comp.Name = "Comp"
         Me.Comp.ReadOnly = True
@@ -754,7 +754,7 @@ Partial Class TikNew
         Me.AddTxtBx.AccessibleName = ""
         Me.AddTxtBx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.AddTxtBx.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.FlowLayoutPanel6.SetFlowBreak(Me.AddTxtBx, True)
+        Me.FlwMainData.SetFlowBreak(Me.AddTxtBx, True)
         Me.AddTxtBx.Location = New System.Drawing.Point(11, 268)
         Me.AddTxtBx.Margin = New System.Windows.Forms.Padding(35, 3, 3, 3)
         Me.AddTxtBx.Multiline = True
@@ -780,7 +780,7 @@ Partial Class TikNew
         '
         'DetailsTxtBx
         '
-        Me.FlowLayoutPanel6.SetFlowBreak(Me.DetailsTxtBx, True)
+        Me.FlwMainData.SetFlowBreak(Me.DetailsTxtBx, True)
         Me.DetailsTxtBx.Location = New System.Drawing.Point(11, 360)
         Me.DetailsTxtBx.Margin = New System.Windows.Forms.Padding(35, 3, 3, 3)
         Me.DetailsTxtBx.Multiline = True
@@ -1009,8 +1009,8 @@ Partial Class TikNew
         Me.FlwSubMain.PerformLayout()
         Me.TabControl2.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
-        Me.FlowLayoutPanel6.ResumeLayout(False)
-        Me.FlowLayoutPanel6.PerformLayout()
+        Me.FlwMainData.ResumeLayout(False)
+        Me.FlwMainData.PerformLayout()
         Me.MyGroupBox2.ResumeLayout(False)
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1040,7 +1040,7 @@ Partial Class TikNew
     Friend WithEvents FlwSubMain As FlowLayoutPanel
     Friend WithEvents TabControl2 As TabControl
     Friend WithEvents TabPage3 As TabPage
-    Friend WithEvents FlowLayoutPanel6 As FlowLayoutPanel
+    Friend WithEvents FlwMainData As FlowLayoutPanel
     Friend WithEvents Label11 As Label
     Friend WithEvents Label29 As Label
     Friend WithEvents IDTxtBx As MaskedTextBox

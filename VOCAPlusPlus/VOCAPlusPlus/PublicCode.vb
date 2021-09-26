@@ -688,8 +688,8 @@ End_:
                 CalIfBtn(CTRLLst(UU))
             ElseIf TypeOf CTRLLst(UU) Is TextBox Then
                 CalIfTxt(CTRLLst(UU))
-            ElseIf TypeOf CTRLLst(UU) Is TextBox Then
-                CalIfTxt(CTRLLst(UU))
+            ElseIf TypeOf CTRLLst(UU) Is MaskedTextBox Then
+                CalIfMskdTxt(CTRLLst(UU))
             End If
             CmstripAsgn(CTRLLst(UU))
         Next
@@ -859,6 +859,16 @@ End_:
         RemoveHandler TxtBox.KeyDown, (AddressOf TxtBox_KeyDown)
         AddHandler TxtBox.KeyDown, (AddressOf TxtBox_KeyDown)
     End Sub
+    Public Sub CalIfMskdTxt(MskfdTxtBox As MaskedTextBox)
+        RemoveHandler MskfdTxtBox.Click, (AddressOf TxtSlctOn_Click)
+        AddHandler MskfdTxtBox.Click, (AddressOf TxtSlctOn_Click)
+        RemoveHandler MskfdTxtBox.Enter, (AddressOf Text_Enter)
+        AddHandler MskfdTxtBox.Enter, (AddressOf Text_Enter)
+        'RemoveHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)
+        'AddHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)
+        RemoveHandler MskfdTxtBox.KeyDown, (AddressOf TxtBox_KeyDown)
+        AddHandler MskfdTxtBox.KeyDown, (AddressOf TxtBox_KeyDown)
+    End Sub
     Public Sub Ctrl_MouseEnter(sender As Object, e As EventArgs)
         If Slctd = False Then
             CTTTRL = sender
@@ -963,52 +973,108 @@ End_:
              " Where UCtlUsrId = " & Usr.PUsrID & " AND UCtlFormName = '" & Form_.Name & "' AND UCtlControlName = '" & UpdtCtrl.Name & "'", "0000&H")
     End Sub
     Private Sub TxtSlctOn_Click(sender As Object, e As EventArgs)
-        Dim TxtBox As TextBox = sender
-        If bolyy = False Then
-            bolyy = True
-            TxtBox.SelectAll()
-        Else
-            bolyy = False
+        If TypeOf sender Is TextBox Then
+            Dim TxtBox As TextBox = sender
+            If bolyy = False Then
+                bolyy = True
+                TxtBox.SelectAll()
+            Else
+                bolyy = False
+            End If
+        ElseIf TypeOf sender Is MaskedTextBox Then
+            Dim TxtBox As MaskedTextBox = sender
+            If bolyy = False Then
+                bolyy = True
+                TxtBox.SelectAll()
+            Else
+                bolyy = False
+            End If
         End If
+
     End Sub
     Private Sub TxtBox_KeyDown(sender As Object, e As KeyEventArgs)
-        Dim TxtBox As TextBox = sender
-        If e.Modifiers = Keys.Control Mod e.KeyCode = Keys.V Then
-            If TxtBox.ReadOnly = False Then
-                TxtBox.Text += Clipboard.GetText()
+        If TypeOf sender Is TextBox Then
+            Dim TxtBox As TextBox = sender
+            If e.Modifiers = Keys.Control Mod e.KeyCode = Keys.V Then
+                If TxtBox.ReadOnly = False Then
+                    TxtBox.Text += Clipboard.GetText()
+                End If
+            ElseIf e.Modifiers = Keys.Control Mod e.KeyCode = Keys.C Then
+                If Trim(TxtBox.Text).Length > 0 Then Clipboard.SetText(TxtBox.Text)
+            Else
+                RemoveHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)
+                AddHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)
             End If
-        ElseIf e.Modifiers = Keys.Control Mod e.KeyCode = Keys.C Then
-            If Trim(TxtBox.Text).Length > 0 Then Clipboard.SetText(TxtBox.Text)
-        Else
-            RemoveHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)
-            AddHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)
+        ElseIf TypeOf sender Is MaskedTextBox Then
+            Dim TxtBox As MaskedTextBox = sender
+            If e.Modifiers = Keys.Control Mod e.KeyCode = Keys.V Then
+                If TxtBox.ReadOnly = False Then
+                    TxtBox.Text += Clipboard.GetText()
+                End If
+            ElseIf e.Modifiers = Keys.Control Mod e.KeyCode = Keys.C Then
+                If Trim(TxtBox.Text).Length > 0 Then Clipboard.SetText(TxtBox.Text)
+            Else
+                RemoveHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)
+                AddHandler TxtBox.KeyPress, (AddressOf Txt_KeyPress)
+            End If
         End If
+
     End Sub
     Private Sub Txt_KeyPress(sender As Object, e As KeyPressEventArgs)
-        Dim TxtBox As TextBox = sender
-        If TxtBox.ReadOnly = False Then
-            If Trim(Split(TxtBox.Tag, "-")(1)) = "Number" Then
-                IntUtly.ValdtInt(e)
-            ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "Amount" Then
-                IntUtly.ValdtNumber(TxtBox, e)
-            ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "TextNumber" Then
-                IntUtly.ValdtIntLetter(e)
-            ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "Text" Then
-                IntUtly.ValdtLetter(e)
-            ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "All" Then
-                'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        If TypeOf sender Is TextBox Then
+            Dim TxtBox As TextBox = sender
+            If TxtBox.ReadOnly = False Then
+                If Trim(Split(TxtBox.Tag, "-")(1)) = "Number" Then
+                    IntUtly.ValdtInt(e)
+                ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "Amount" Then
+                    IntUtly.ValdtNumber(TxtBox, e)
+                ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "TextNumber" Then
+                    IntUtly.ValdtIntLetter(e)
+                ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "Text" Then
+                    IntUtly.ValdtLetter(e)
+                ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "All" Then
+                    'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                End If
+            End If
+        ElseIf TypeOf sender Is MaskedTextBox Then
+            Dim TxtBox As MaskedTextBox = sender
+            If TxtBox.ReadOnly = False Then
+                If Trim(Split(TxtBox.Tag, "-")(1)) = "Number" Then
+                    IntUtly.ValdtInt(e)
+                ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "Amount" Then
+                    IntUtly.ValdtNumber(TxtBox, e)
+                ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "TextNumber" Then
+                    IntUtly.ValdtIntLetter(e)
+                ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "Text" Then
+                    IntUtly.ValdtLetter(e)
+                ElseIf Trim(Split(TxtBox.Tag, "-")(1)) = "All" Then
+                    'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                End If
             End If
         End If
+
     End Sub
     Private Sub Text_Enter(sender As Object, e As EventArgs)
-        Dim TxtBox As TextBox = sender
-        If TxtBox.ReadOnly = False Then
-            If Trim(Split(TxtBox.AccessibleName, "-")(0)) = "English" Then
-                InputLanguage.CurrentInputLanguage = EnglishInput            'Tansfer writing to English
-            ElseIf Trim(Split(TxtBox.AccessibleName, "-")(0)) = "Arabic" Then
-                InputLanguage.CurrentInputLanguage = ArabicInput
+        If TypeOf sender Is TextBox Then
+            Dim TxtBox As TextBox = sender
+            If TxtBox.ReadOnly = False Then
+                If Trim(Split(TxtBox.Tag, "-")(0)) = "English" Then
+                    InputLanguage.CurrentInputLanguage = EnglishInput            'Tansfer writing to English
+                ElseIf Trim(Split(TxtBox.Tag, "-")(0)) = "Arabic" Then
+                    InputLanguage.CurrentInputLanguage = ArabicInput
+                End If
+            End If
+        ElseIf TypeOf sender Is MaskedTextBox Then
+            Dim TxtBox As MaskedTextBox = sender
+            If TxtBox.ReadOnly = False Then
+                If Trim(Split(TxtBox.Tag, "-")(0)) = "English" Then
+                    InputLanguage.CurrentInputLanguage = EnglishInput            'Tansfer writing to English
+                ElseIf Trim(Split(TxtBox.Tag, "-")(0)) = "Arabic" Then
+                    InputLanguage.CurrentInputLanguage = ArabicInput
+                End If
             End If
         End If
+
     End Sub
     Public Sub GettAttchUpdtesFils()
         Dim lol As String

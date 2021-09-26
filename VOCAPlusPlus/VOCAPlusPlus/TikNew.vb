@@ -8,6 +8,7 @@ Public Class TikNew
     Private PrdKind As String = ""        'Product kind     1=Financial and 2=Postal   3=Governmental and 4=Social and 5=Other
     Private TickSubmt As Thread
     Private SqlCuCnt_ As Integer = 0         'Sql of Last New Ticket
+    Private Dt_ As DateTime          'Date of Last New Ticket
     Private DubStr As String = ""
     Dim Frm As New Form
     Dim TxBox As New TextBox
@@ -33,7 +34,8 @@ Public Class TikNew
     End Sub
 #Region "Sub"
     Private Sub NewTickSub()
-        FlowLayoutPanel6.Enabled = False
+        FlwMainData.Enabled = False
+        FlwMend.Enabled = True
         FlwMend.Controls.Clear()
         WelcomeScreen.StatBrPnlAr.Text = ""
         TreeView1.Enabled = True
@@ -101,13 +103,15 @@ Public Class TikNew
     Private Sub Mendatory()
         Timer1.Stop()
         Dim Complete_ As Integer = 0
-
-        'Check Customer ID
-        If RadNID.Checked = True And Trim(Replace(IDTxtBx.Text, " ", "")).Length = 14 Then
-            Complete_ += 1
-        ElseIf RadPss.Checked = True And Trim(Replace(IDTxtBx.Text, " ", "")).Length > 0 Then
-            Complete_ += 1
+        If PrdKind = "مالية" Then
+            'Check Customer ID
+            If RadNID.Checked = True And Trim(Replace(IDTxtBx.Text, " ", "")).Length = 14 Then
+                Complete_ += 1
+            ElseIf RadPss.Checked = True And Trim(Replace(IDTxtBx.Text, " ", "")).Length > 0 Then
+                Complete_ += 1
+            End If
         End If
+
         'Check Customer Phone 1
         If Phon1TxtBx.Mask.Length = Trim(Replace(Phon1TxtBx.Text, " ", "")).Length Then
             Complete_ += 1
@@ -145,24 +149,43 @@ Public Class TikNew
                 End If
             End If
         Next
-        Dim gg As Double = Complete_ / (5 + (FlwMend.Controls.Count) / 2)
+        Dim gg As Double = Complete_ / (4 + (FlwMend.Controls.Count) / 2)
         'If Complete_ / (5 + (FlwMend.Controls.Count) / 2) < 0.7 Then
         '    SubmitBtn.BackgroundImage = My.Resources.SaveRed1
         'ElseIf Complete_ / (5 + (FlwMend.Controls.Count) / 2) > 0.5 Then
         '    SubmitBtn.BackgroundImage = My.Resources.SaveGreen1
         'End If
-        If Complete_ = 5 + (FlwMend.Controls.Count) / 2 Then
-            SubmitBtn.Enabled = True
-            SubmitBtn.BackgroundImage = My.Resources.SaveGreen1
-        ElseIf Complete_ / (5 + (FlwMend.Controls.Count) / 2) <= 0.5 Then
+        If PrdKind = "مالية" Then
+            If Complete_ = 5 + (FlwMend.Controls.Count) / 2 Then
+                SubmitBtn.Enabled = True
+                SubmitBtn.BackgroundImage = My.Resources.SaveGreen1
+            ElseIf Complete_ / (5 + (FlwMend.Controls.Count) / 2) <= 0.5 Then
+                SubmitBtn.BackgroundImage = My.Resources.SaveRed
+                SubmitBtn.Enabled = False
+            ElseIf Complete_ / (5 + (FlwMend.Controls.Count) / 2) > 0.5 Then
+                SubmitBtn.BackgroundImage = My.Resources.SaveGreen
+                SubmitBtn.Enabled = False
+                'Else
+                '    SubmitBtn.Enabled = False
+                'SubmitBtn.BackgroundImage = My.Resources.SaveRed1
+            End If
+        ElseIf PrdKind = "بريدية" Then
+            If Complete_ = 4 + (FlwMend.Controls.Count) / 2 Then
+                SubmitBtn.Enabled = True
+                SubmitBtn.BackgroundImage = My.Resources.SaveGreen1
+            ElseIf Complete_ / (4 + (FlwMend.Controls.Count) / 2) <= 0.5 Then
+                SubmitBtn.BackgroundImage = My.Resources.SaveRed
+                SubmitBtn.Enabled = False
+            ElseIf Complete_ / (4 + (FlwMend.Controls.Count) / 2) > 0.5 Then
+                SubmitBtn.BackgroundImage = My.Resources.SaveGreen
+                SubmitBtn.Enabled = False
+                'Else
+                '    SubmitBtn.Enabled = False
+                'SubmitBtn.BackgroundImage = My.Resources.SaveRed1
+            End If
+        ElseIf PrdKind = "" Then
             SubmitBtn.BackgroundImage = My.Resources.SaveRed
             SubmitBtn.Enabled = False
-        ElseIf Complete_ / (5 + (FlwMend.Controls.Count) / 2) > 0.5 Then
-            SubmitBtn.BackgroundImage = My.Resources.SaveGreen
-            SubmitBtn.Enabled = False
-            'Else
-            '    SubmitBtn.Enabled = False
-            'SubmitBtn.BackgroundImage = My.Resources.SaveRed1
         End If
         Timer1.Start()
     End Sub
@@ -288,7 +311,7 @@ Popul_:
         TreeView1.Visible = True
         TreeView1.SelectedNode = Nothing
         MyGroupBox2.Enabled = True
-        FlowLayoutPanel6.Enabled = True
+        FlwMainData.Enabled = True
     End Sub
     Private Sub Phone1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton9.Click, RadioButton8.Click
         TimrPhons.Start()
@@ -588,6 +611,7 @@ Popul_:
     End Sub
     Private Sub SubmtTick()
         Dim Def As New APblicClss.Defntion
+        Dim Fn As New APblicClss.Func
         Dim Trck As String = ""
         Dim lodingStr As String = ""
 
@@ -665,12 +689,15 @@ Popul_:
 
             Reader_.Read()
             SqlCuCnt_ = Reader_!MaxID
-            If TickKind = 0 Then
-                Invoke(Sub() ComRefLbl.Text = "طلب رقم :  " & Reader_!Max_)
-            Else
-                Invoke(Sub() ComRefLbl.Text = "شكوى رقم : " & Reader_!Max_)
-            End If
+            Dt_ = Reader_!MaxDt
             Reader_.Close()
+
+            If TickKind = 0 Then
+                Invoke(Sub() ComRefLbl.Text = "طلب رقم :  " & SqlCuCnt_)
+            Else
+                Invoke(Sub() ComRefLbl.Text = "شكوى رقم : " & SqlCuCnt_)
+            End If
+
 
             SQLBulkCopy.DestinationTableName = "TKMendFields"
 
@@ -699,7 +726,8 @@ Popul_:
             SQLBulkCopy.WriteToServer(MedTbl)
             Tran.Commit()
             SQLBulkCopy.Close()
-            Invoke(Sub() DateTxtBx.Text = SqlCuCnt_)
+            Invoke(Sub() DateTxtBx.Text = Dt_)
+
             'Def.CONSQL.Close()
             'SqlConnection.ClearPool(Def.CONSQL)
 
@@ -711,24 +739,11 @@ Popul_:
             Invoke(Sub() Me.Enabled = True)
             Invoke(Sub() Me.Activate())
             Invoke(Sub() TimrPhons.Stop())
+            Invoke(Sub() FlwMainData.Enabled = False)
+            Invoke(Sub() FlwMend.Enabled = False)
         Catch ex As Exception
             Tran.Rollback()
-
-            'Invoke(Sub() WelcomeScreen.TimerCon.Start())
-            'Invoke(Sub() WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032)
-            'Invoke(Sub() WelcomeScreen.StatBrPnlAr.Text = "لم ينجح الإتصال بالخادم .. سيتم تسجيل الشكوى بالوضع الغير متصل بالشبكة")
-            'Dim Rslt As DialogResult
-            'Rslt = MessageBox.Show("كود خطأ : " & "1011&H" & vbCrLf & "لم ينجح الإتصال بالخادم .. سيتم تسجيل الشكوى بالوضع الغير متصل بالشبكة" & vbCrLf & "هل تريد الإستمرار؟", "رسالة معلومات", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading Or MessageBoxOptions.RightAlign)
-            'If Rslt = DialogResult.Yes Then
-            '    TickOffSubmt = New Thread(AddressOf SubmtOfflineTick)
-            '    TickOffSubmt.IsBackground = True
-            '    Invoke(Sub() WelcomeScreen.StatBrPnlAr.Text = "جاري تسجيل البيانات ...........")
-            '    Invoke(Sub() TreeView1.Visible = True)
-            '    TickOffSubmt.Start()
-            '    TickSubmt.Abort()
-            'End If
-
-            'TickSubmt.Abort()
+            Fn.AppLog("0000&H", ex.Message, sqlComminsert_1.CommandText & "_" & sqlComminsert_2.CommandText & "_" & sqlComminsert_3.CommandText & "_" & sqlComminsert_4.CommandText)
             MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & ex.Message)
         End Try
         Invoke(Sub() Me.Enabled = True)
@@ -777,5 +792,19 @@ Popul_:
     End Sub
     Private Sub NewBtn_Click(sender As Object, e As EventArgs) Handles NewBtn.Click
         NewTickSub()
+    End Sub
+    Private Sub CloseBtn_Click(sender As Object, e As EventArgs) Handles CloseBtn.Click
+        Close()
+    End Sub
+    Private Sub BtnDublicate_Click(sender As Object, e As EventArgs) Handles BtnDublicate.Click
+        DubStr = vbCrLf & vbCrLf & "إضافة تلقائية من النظام: " & vbCrLf & "تم تسجيل هذه الشكوى للعميل عن طريق استخدم زر التكرار"
+        ComRefLbl.Text = ""
+        Invoke(Sub() FlwMainData.Enabled = True)
+        Invoke(Sub() FlwMend.Enabled = True)
+        TreeView1.Enabled = True
+        Invoke(Sub() SubmitBtn.Visible = True)
+        Invoke(Sub() WelcomeScreen.StatBrPnlAr.Text = "")
+        Timer1.Start()
+        Invoke(Sub() BtnDublicate.Visible = False)
     End Sub
 End Class

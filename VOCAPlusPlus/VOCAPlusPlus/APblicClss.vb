@@ -29,6 +29,8 @@ Module Public_
     Public ProdKTable As DataTable = New DataTable
     Public ProdCompTable As DataTable = New DataTable
     Public MendFildsTable As DataTable = New DataTable
+    Public MendPvtTable As DataTable = New DataTable
+    Public FildList As List(Of String)
     Public UpdateKTable As DataTable = New DataTable
     Public FTPTable As New DataTable
     Public CtrlsTbl As DataTable = New DataTable
@@ -398,6 +400,8 @@ Sec2:
                     ProdCompTable = New DataTable
                     UpdateKTable = New DataTable
                     MendFildsTable = New DataTable
+                    MendPvtTable = New DataTable
+
                     If (Fnw.GetTbl("SELECT OffArea FROM PostOff GROUP BY OffArea ORDER BY OffArea;", AreaTable, "1012&H", worker)) = Nothing Then
                         PrciTblCnt += 1
                     Else
@@ -458,6 +462,19 @@ Sec2:
                         primaryKey(0) = MendFildsTable.Columns("CdFnMend.MendSQL")
                         MendFildsTable.PrimaryKey = primaryKey
                         PrciTblCnt += 1
+                    Else
+                        Def.Str = "لم يتم تحميل إنشاء الحقول  "
+                        worker.ReportProgress(0, Def)
+                    End If
+
+                    If (Fnw.GetTbl("select TKMendFields.FildKind from TKMendFields group by TKMendFields.FildKind", MendPvtTable, "1012&H", worker)) = Nothing Then
+                        primaryKey(0) = MendPvtTable.Columns("FildKind")
+                        MendPvtTable.PrimaryKey = primaryKey
+                        PrciTblCnt += 1
+                        FildList = New List(Of String)
+                        For YY = 0 To MendPvtTable.Rows.Count - 1
+                            FildList.Add("[" & MendPvtTable.Rows(YY).Item("FildKind") & "]")
+                        Next
                     Else
                         Def.Str = "لم يتم تحميل أنواع الحقول  "
                         worker.ReportProgress(0, Def)
@@ -913,9 +930,10 @@ Sec2:
             Errmsg = Nothing
             Dim Def As New APblicClss.Defntion
             Try
+                '[رقم الكارت],[مبلغ العملية],[تاريخ العملية],[رقم أمر الدفع],[اسم المكتب],[رقم الشحنة],[بلد الراسل],[بلد المرسل إلية]
                 StruGrdTk.Tick = GrdTick.CurrentRow.Cells("TkKind").Value
                 StruGrdTk.FlwStat = GrdTick.CurrentRow.Cells("TkClsStatus").Value
-                StruGrdTk.Sql = GrdTick.CurrentRow.Cells("TkSQL").Value
+                StruGrdTk.Sql = GrdTick.CurrentRow.Cells("TkID").Value
                 StruGrdTk.Ph1 = GrdTick.CurrentRow.Cells("TkClPh").Value
                 StruGrdTk.Ph2 = GrdTick.CurrentRow.Cells("TkClPh1").Value.ToString
                 StruGrdTk.DtStrt = GrdTick.CurrentRow.Cells("TkDtStart").Value
@@ -923,25 +941,25 @@ Sec2:
                 StruGrdTk.Adress = GrdTick.CurrentRow.Cells("TkClAdr").Value.ToString
                 StruGrdTk.Email = GrdTick.CurrentRow.Cells("TkMail").Value.ToString
                 StruGrdTk.Detls = GrdTick.CurrentRow.Cells("TkDetails").Value.ToString
-                StruGrdTk.Area = GrdTick.CurrentRow.Cells("OffArea").Value.ToString
-                StruGrdTk.Offic = GrdTick.CurrentRow.Cells("OffNm1").Value.ToString
+                'StruGrdTk.Area = GrdTick.CurrentRow.Cells("OffArea").Value.ToString
+                StruGrdTk.Offic = GrdTick.CurrentRow.Cells("[اسم المكتب]").Value.ToString
                 StruGrdTk.ProdNm = GrdTick.CurrentRow.Cells("PrdNm").Value
                 StruGrdTk.CompNm = GrdTick.CurrentRow.Cells("CompNm").Value
                 StruGrdTk.Src = GrdTick.CurrentRow.Cells("SrcNm").Value
-                StruGrdTk.Trck = GrdTick.CurrentRow.Cells("TkShpNo").Value.ToString
-                StruGrdTk.Orig = GrdTick.CurrentRow.Cells("CounNmSender").Value.ToString
-                StruGrdTk.Dist = GrdTick.CurrentRow.Cells("CounNmConsign").Value.ToString
-                StruGrdTk.Card = GrdTick.CurrentRow.Cells("TkCardNo").Value.ToString
-                StruGrdTk.Gp = GrdTick.CurrentRow.Cells("TkGBNo").Value.ToString
+                StruGrdTk.Trck = GrdTick.CurrentRow.Cells("[رقم الشحنة]").Value.ToString
+                StruGrdTk.Orig = GrdTick.CurrentRow.Cells("[بلد الراسل]").Value.ToString
+                StruGrdTk.Dist = GrdTick.CurrentRow.Cells("[بلد المرسل إلية]").Value.ToString
+                StruGrdTk.Card = GrdTick.CurrentRow.Cells("[رقم الكارت]").Value.ToString
+                StruGrdTk.Gp = GrdTick.CurrentRow.Cells("[رقم أمر الدفع]").Value.ToString
                 StruGrdTk.NID = GrdTick.CurrentRow.Cells("TkClNtID").Value.ToString
-                StruGrdTk.Amnt = GrdTick.CurrentRow.Cells("TkAmount").Value
+                StruGrdTk.Amnt = GrdTick.CurrentRow.Cells("[مبلغ العملية]").Value
                 If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkTransDate").Value) = False Then StruGrdTk.TransDt = GrdTick.CurrentRow.Cells("TkTransDate").Value
-            If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("UsrRealNm").Value) = False Then StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("UsrRealNm").Value
-            StruGrdTk.Help_ = GrdTick.CurrentRow.Cells("CompHelp").Value.ToString
+                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("UsrRealNm").Value) = False Then StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("UsrRealNm").Value
+                StruGrdTk.Help_ = GrdTick.CurrentRow.Cells("CompHelp").Value.ToString
                 StruGrdTk.ProdK = GrdTick.CurrentRow.Cells("PrdKind").Value
-            If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkEmpNm").Value) = False Then StruGrdTk.UserId = GrdTick.CurrentRow.Cells("TkEmpNm").Value
+                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkEmpNm").Value) = False Then StruGrdTk.UserId = GrdTick.CurrentRow.Cells("TkEmpNm").Value
 
-            StruGrdTk.LstUpDt = GrdTick.CurrentRow.Cells("تاريخ آخر تحديث").Value
+                StruGrdTk.LstUpDt = GrdTick.CurrentRow.Cells("تاريخ آخر تحديث").Value
                 StruGrdTk.LstUpTxt = GrdTick.CurrentRow.Cells("نص آخر تحديث").Value
                 StruGrdTk.LstUpUsrNm = GrdTick.CurrentRow.Cells("محرر آخر تحديث").Value
                 StruGrdTk.LstUpEvId = GrdTick.CurrentRow.Cells("LastUpdateID").Value
@@ -949,7 +967,7 @@ Sec2:
                 frm__ = GrdTick.FindForm
                 gridview_ = GrdTick
             Catch ex As Exception
-            Errmsg = ex.Message
+                Errmsg = ex.Message
             End Try
             Return Errmsg
         End Function

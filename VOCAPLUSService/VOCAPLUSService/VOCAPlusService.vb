@@ -12,6 +12,7 @@ Public Class VOCAPlusService
     Dim FolwStr As String = ""
     Dim EscCount As Integer = 0
     Dim EsclTsk As New Thread(AddressOf EscSub)
+    Dim EvTsk As New Thread(AddressOf EvMail)
     Dim sss As Integer = 0
     Dim MailTbl As New DataTable
     Public Mail_ As New Stru.StruMail
@@ -151,7 +152,77 @@ SendMail_:
         If TxtErr.TextLength = TxtErr.MaxLength Then
             TxtErr.Text = "Empty Again"
         End If
+        'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        If CheckBox1.Checked = True Then
+            EvTsk = New Thread(AddressOf EvMail)
+            EvTsk.IsBackground = True
+            EvTsk.Start()
+            'CheckBox1.Checked = False
+            'Me.Refresh()
+        End If
+    End Sub
 
+    'Send Smart Agrisive Mail
+    Private Sub EvMail()
+        Dim Tbl As New DataTable
+        Dim SQLTblAdpterXX As New SqlDataAdapter
+        Dim sqlCconXX As New SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046")
+        sqlComnd.Connection = sqlCconXX
+        SQLTblAdpterXX.SelectCommand = sqlComnd
+        sqlComnd.CommandType = CommandType.Text
+        If sqlCconXX.State = ConnectionState.Closed Then
+            sqlCconXX.Open()
+        End If
+        sqlComnd.CommandText = "SELECT TkupSQL, TkupTkSql, TkupSTime, TkupTxt, TkupReDt, TkupUserIP, Int_user.UsrRealNm, UCatNm
+FROM            TkEvent INNER JOIN
+                         CDEvent ON TkupEvtId = EvId INNER JOIN
+                         Int_user ON TkupUser = Int_user.UsrId INNER JOIN
+                         IntUserCat ON Int_user.UsrCat = UCatId
+WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
+
+        Try
+            SQLTblAdpterXX.Fill(Tbl)
+            If Tbl.Rows.Count > 0 Then
+                For YY = 0 To Tbl.Rows.Count - 1
+                    Dim Lction As String
+                    Try '10.11.58
+                        If Mid(Tbl.Rows(YY).Item("TkupUserIP").ToString, 1, 9) = "10.10.200" Then
+                            Lction = "المعادي"
+                        ElseIf Mid(Tbl.Rows(YY).Item("TkupUserIP").ToString, 1, 5) = "10.11" Then
+                            Lction = "السبيل"
+                        Else
+                            Lction = "غير معروف"
+                        End If
+                        Dim exchange As ExchangeService
+                        exchange = New ExchangeService(ExchangeVersion.Exchange2010)
+                        exchange.Credentials = New WebCredentials(My.Settings.MlUsr, My.Settings.MlPss)
+                        exchange.Url() = New Uri("https://mail.egyptpost.org/ews/exchange.asmx")
+                        Dim message As New EmailMessage(exchange)
+
+                        message.ToRecipients.Add("a.farag@egyptpost.org")
+                        'message.CcRecipients.Add(Trim(Split(Mail_.CC_, ";")(LL)))
+                        message.Subject = "تم عمل تحديث بواسطة " & Tbl.Rows(YY).Item("UsrRealNm") & " للشكوى رقم " & Tbl.Rows(YY).Item("TkupTkSql") & " عن طريق الجهاز " & Tbl.Rows(YY).Item("TkupUserIP") & " من مبني " & Lction & " الساعة : " & Tbl.Rows(YY).Item("TkupSTime")
+                        message.Body = Tbl.Rows(YY).Item("TkupTxt").ToString
+                        'message.Attachments.AddFileAttachment(FileExported)
+                        'message.Attachments(0).ContentId = Mail_.Sub_ & "_" & Format(Now, "yyyy-MM-dd")
+                        message.Importance = 1
+                        If YY = Tbl.Rows.Count - 1 Then
+                            Invoke(Sub() TextBox1.Text = Tbl.Rows(YY).Item("TkupSQL") + 1)
+                        End If
+                        message.SendAndSaveCopy()
+                    Catch exs As Exception
+                        Invoke(Sub() TxtErr.Text += Now & exs.Message & vbCrLf)
+                        Invoke(Sub() TxtErr.Refresh())
+                    End Try
+                Next
+            End If
+        Catch ex As Exception
+            Invoke(Sub() TxtErr.Text += Now & " Mail ___" & Tbl.TableName & ex.Message & vbCrLf)
+            Invoke(Sub() TxtErr.Refresh())
+        End Try
+        If CheckBox2.Checked = True Then ThreadPool.QueueUserWorkItem(AddressOf EvMail)
+        sqlCconXX.Close()
+        SqlConnection.ClearPool(sqlCconXX)
     End Sub
     Private Sub TimerEsc_Tick(sender As Object, e As EventArgs) Handles TimerEsc.Tick
         Dim WW = ServrTime()
@@ -352,7 +423,7 @@ SendMail_:
             For ggg As Integer = 0 To DataGridView1.Columns.Count - 1
                 Invoke(Sub() DataGridView1.Columns(ggg).Width = 50)
             Next
-            Invoke(Sub() DataGridView1.Columns(7).Width = 130)
+            'Invoke(Sub() DataGridView1.Columns(7).Width = 130)
             If EscAtoTable.Rows.Count > 0 Then
                 WdysTable.Rows.Clear()
                 If GetTbl("select HDate, HDay, HDayW, HDy from CDHolDay where HDate = (Select CONVERT(nvarchar, GetDate(),111) as Now_)", WdysTable) = Nothing Then

@@ -15,7 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>E:\RepNew\VOCAPlusPlus\VOCAPlusPlus\متابعة الشكاوى\</PublishUrl>
+    <PublishUrl>E:\RepNew\VOCAPlusPlus\VOCAPlusPlus\VOCA++\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -28,7 +28,7 @@
     <ProductName>VOCA++</ProductName>
     <PublisherName>Ashraf Farag</PublisherName>
     <SuiteName>VOCA++</SuiteName>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

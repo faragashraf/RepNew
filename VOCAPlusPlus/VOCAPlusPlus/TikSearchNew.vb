@@ -153,7 +153,23 @@ Public Class TikSearchNew
             If FltrStr.Length > 0 Then
                 FltrStr = " Where " & FltrStr
                 Invoke(Sub() GridTicket.Visible = False)
-                If Fn.GetTblXX("SELECT TkSQL, TkKind, TkDtStart, TkID, SrcNm, TkClNm, TkClPh, TkClPh1, TkMail, TkClAdr, TkCardNo, TkShpNo, TkGBNo, TkClNtID, TkAmount, TkTransDate, PrdKind, PrdNm, CompNm, CounNmSender, CounNmConsign, OffNm1, OffArea, TkDetails, TkClsStatus, TkFolw, TkEmpNm, UsrRealNm, TkReOp, TkRecieveDt, TkEscTyp, ProdKNm, CompHelp FROM dbo.TicketsAll " & FltrStr & " ORDER BY TkSQL DESC;", TickSrchTable, "1042&H") = Nothing Then
+                If Fn.GetTblXX("SELECT * from 
+(select [TkID]
+      ,[TkDtStart]
+      ,[TkDtClose]
+      ,[TkDuration]
+      ,[TkKind]
+      ,[TkFnPrdCd]
+      ,[SrcNm]
+      ,[TkClNm]
+      ,[TkClPh]
+      ,[TkClPh1]
+      ,[TkMail]
+      ,[TkClAdr]
+      ,[TkDetails]
+      ,[TkClNtID], TkFolw, TkRecieveDt, TkClsStatus, UsrRealNm, TkReOp, TkQlity, TkEscTyp, TkReAssign,TkRegisOff, TkRegisOffAprvd,
+	  TKMendFields.FildKind,TKMendFields.FildTxt from Tickets left outer join TKMendFields on TKMendFields.FildRelted = Tickets.TkID inner join Int_user ON TkEmpNm0 = UsrId inner join CDSrc ON CDSrc.SrcCd = [TkCompSrc]) ps
+pivot (max(FildTxt) for FildKind in (" & String.Join(",", FildList) & ")) as pvt " & FltrStr & " ORDER BY TkID DESC;", TickSrchTable, "1042&H") = Nothing Then
                     Invoke(Sub() Me.Text = "بحث الشكاوى والاستفسارات" & "_" & ElapsedTimeSpan)
                     If TickSrchTable.Rows.Count > 0 Then
                         Invoke(Sub() LblMsg.Text = "جاري تحميل التحديثات ...........")
@@ -184,7 +200,7 @@ Public Class TikSearchNew
                             ProgressBar1.Maximum = TickSrchTable.Rows.Count
                             Invoke(Sub() ProgressBar1.Value = GridCuntRtrn.TickCount)
                             Try
-                                UpdtCurrTbl.DefaultView.RowFilter = "[TkupTkSql]" & " = " & TickSrchTable.Rows(Rws).Item("TkSQL")
+                                UpdtCurrTbl.DefaultView.RowFilter = "[TkupTkSql]" & " = " & TickSrchTable.Rows(Rws).Item("TkID")
                                 TickSrchTable.Rows(Rws).Item("تاريخ آخر تحديث") = UpdtCurrTbl.DefaultView(0).Item("TkupSTime")
                                 TickSrchTable.Rows(Rws).Item("نص آخر تحديث") = UpdtCurrTbl.DefaultView(0).Item("TkupTxt")
                                 TickSrchTable.Rows(Rws).Item("محرر آخر تحديث") = UpdtCurrTbl.DefaultView(0).Item("UsrRealNm")
@@ -205,7 +221,7 @@ Public Class TikSearchNew
                         Next Rws
                         Invoke(Sub() ProgressBar1.Visible = False)
 
-                        GridCuntRtrn.CompCount = Convert.ToInt32(TickSrchTable.Compute("count(TkSQL)", String.Empty))
+                        GridCuntRtrn.CompCount = Convert.ToInt32(TickSrchTable.Compute("count(TkID)", String.Empty))
                         GridCuntRtrn.NoFlwCount = Convert.ToInt32(TickSrchTable.Compute("count(TkFolw)", "TkFolw = 'False'"))
                         GridCuntRtrn.Recved = Convert.ToInt32(TickSrchTable.Compute("count(TkRecieveDt)", "TkRecieveDt = '" & Format(Nw, "yyyy/MM/dd").ToString & "'"))
                         GridCuntRtrn.ClsCount = Convert.ToInt32(TickSrchTable.Compute("count(TkClsStatus)", "TkClsStatus = 'True' And TkKind = 'True'"))
