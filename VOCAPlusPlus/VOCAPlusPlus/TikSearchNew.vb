@@ -167,14 +167,13 @@ Public Class TikSearchNew
       ,[TkMail]
       ,[TkClAdr]
       ,[TkDetails]
-      ,[TkClNtID], TkFolw, TkRecieveDt, TkClsStatus, UsrRealNm, TkReOp, TkQlity, TkEscTyp, TkReAssign,TkRegisOff, TkRegisOffAprvd,
-	  TKMendFields.FildKind,TKMendFields.FildTxt from Tickets left outer join TKMendFields on TKMendFields.FildRelted = Tickets.TkID inner join Int_user ON TkEmpNm0 = UsrId inner join CDSrc ON CDSrc.SrcCd = [TkCompSrc]) ps
+      ,[TkClNtID], TkFolw, TkRecieveDt, TkClsStatus, UsrRealNm, TkReOp, TkQlity, TkEscTyp, TkReAssign,TkRegisOff, TkRegisOffAprvd,	ProdKNm, PrdNm, CompNm, CompHlp,
+	  TKMendFields.FildKind,TKMendFields.FildTxt from Tickets left outer join TKMendFields on TKMendFields.FildRelted = Tickets.TkID inner join Int_user ON TkEmpNm0 = UsrId inner join CDSrc ON CDSrc.SrcCd = [TkCompSrc] INNER JOIN VwFnProd ON TkFnPrdCd = FnSQL) ps
 pivot (max(FildTxt) for FildKind in (" & String.Join(",", FildList) & ")) as pvt " & FltrStr & " ORDER BY TkID DESC;", TickSrchTable, "1042&H") = Nothing Then
                     Invoke(Sub() Me.Text = "بحث الشكاوى والاستفسارات" & "_" & ElapsedTimeSpan)
                     If TickSrchTable.Rows.Count > 0 Then
                         Invoke(Sub() LblMsg.Text = "جاري تحميل التحديثات ...........")
                         Invoke(Sub() LblMsg.ForeColor = Color.Blue)
-
                         Invoke(Sub() Fn.CompGrdTikFill1(GridTicket, TickSrchTable, ProgressBar1)) 'Adjust Fill Table and assign Grid Data source of Ticket Gridview
                         Invoke(Sub() Fn.GetUpdtEvnt_1())
                         If Me.IsHandleCreated = True Then
@@ -189,9 +188,6 @@ pivot (max(FildTxt) for FildKind in (" & String.Join(",", FildList) & ")) as pvt
                             Invoke(Sub() GridTicket.Columns("UCatLvl").Visible = False)
                             Invoke(Sub() GridTicket.Columns("TkupUnread").Visible = False)
                         End If
-
-
-
                         Invoke(Sub() ProgressBar1.Visible = True)
 
                         For Rws = 0 To TickSrchTable.Rows.Count - 1
@@ -282,6 +278,12 @@ pivot (max(FildTxt) for FildKind in (" & String.Join(",", FildList) & ")) as pvt
         If (GridTicket.SelectedCells.Count) > 0 Then
             If GridTicket.CurrentRow.Index <> -1 Then
                 CurrRw = GridTicket.CurrentRow.Index
+                SlctdFldLst = New List(Of String)
+                For UU = 30 To GridTicket.Columns.GetColumnCount(DataGridViewElementStates.None) - 10
+                    If (GridTicket.CurrentRow.Cells(UU).Value.ToString).Length > 0 Then
+                        SlctdFldLst.Add(GridTicket.Columns(UU).Name.ToString & "_" & GridTicket.CurrentRow.Cells(UU).Value.ToString)
+                    End If
+                Next
                 If Fn.TikGVDblClck(GridTicket) = Nothing Then
                     TikDetails.Text = "شكوى رقم " & StruGrdTk.Sql
                     TikDetails.ShowDialog()

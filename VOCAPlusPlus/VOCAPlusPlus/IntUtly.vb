@@ -5,8 +5,9 @@ Public NotInheritable Class IntUtly
     Public Shared Sub ValdtInt(ByVal e As KeyPressEventArgs) ' numeric only integer
         If Not Char.IsControl(e.KeyChar) AndAlso (Not Char.IsDigit(e.KeyChar)) Then
             e.Handled = True
-        Else
             Beep()
+        Else
+
         End If
     End Sub
     ' ***************************************

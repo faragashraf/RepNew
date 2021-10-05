@@ -52,24 +52,8 @@ Partial Class TikDetails
         Me.TxtFolw = New System.Windows.Forms.TextBox()
         Me.Label43 = New System.Windows.Forms.Label()
         Me.TxtDetails = New System.Windows.Forms.RichTextBox()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.TxtTrck = New System.Windows.Forms.TextBox()
-        Me.Label45 = New System.Windows.Forms.Label()
-        Me.Label46 = New System.Windows.Forms.Label()
-        Me.Label47 = New System.Windows.Forms.Label()
-        Me.TxtDist = New System.Windows.Forms.TextBox()
-        Me.TxtOrgin = New System.Windows.Forms.TextBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.TxtCard = New System.Windows.Forms.TextBox()
-        Me.Label33 = New System.Windows.Forms.Label()
         Me.Label35 = New System.Windows.Forms.Label()
-        Me.Label38 = New System.Windows.Forms.Label()
-        Me.Label40 = New System.Windows.Forms.Label()
-        Me.Label42 = New System.Windows.Forms.Label()
-        Me.TxtTransDt = New System.Windows.Forms.TextBox()
         Me.TxtNId = New System.Windows.Forms.TextBox()
-        Me.TxtAmount = New System.Windows.Forms.TextBox()
-        Me.TxtGP = New System.Windows.Forms.TextBox()
         Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.BtnClos = New System.Windows.Forms.Button()
@@ -83,10 +67,9 @@ Partial Class TikDetails
         Me.LblHelp = New System.Windows.Forms.Label()
         Me.TimerVisInvs = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.FlowLayoutPanel3 = New System.Windows.Forms.FlowLayoutPanel()
         Me.FlowDetls.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
         Me.FlowLayoutPanel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.TcktImg, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,7 +88,7 @@ Partial Class TikDetails
         Me.FlowDetls.Location = New System.Drawing.Point(0, 0)
         Me.FlowDetls.Name = "FlowDetls"
         Me.FlowDetls.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.FlowDetls.Size = New System.Drawing.Size(1448, 621)
+        Me.FlowDetls.Size = New System.Drawing.Size(1526, 753)
         Me.FlowDetls.TabIndex = 2121
         '
         'TxtTikID
@@ -113,7 +96,7 @@ Partial Class TikDetails
         Me.FlowDetls.SetFlowBreak(Me.TxtTikID, True)
         Me.TxtTikID.Font = New System.Drawing.Font("Times New Roman", 12.0!)
         Me.TxtTikID.ForeColor = System.Drawing.Color.Red
-        Me.TxtTikID.Location = New System.Drawing.Point(103, 0)
+        Me.TxtTikID.Location = New System.Drawing.Point(181, 0)
         Me.TxtTikID.Name = "TxtTikID"
         Me.TxtTikID.Size = New System.Drawing.Size(1325, 23)
         Me.TxtTikID.TabIndex = 2122
@@ -148,13 +131,14 @@ Partial Class TikDetails
         Me.FlowLayoutPanel1.Controls.Add(Me.TxtFolw)
         Me.FlowLayoutPanel1.Controls.Add(Me.Label43)
         Me.FlowLayoutPanel1.Controls.Add(Me.TxtDetails)
-        Me.FlowLayoutPanel1.Controls.Add(Me.GroupBox4)
-        Me.FlowLayoutPanel1.Controls.Add(Me.GroupBox3)
+        Me.FlowLayoutPanel1.Controls.Add(Me.Label35)
+        Me.FlowLayoutPanel1.Controls.Add(Me.TxtNId)
+        Me.FlowLayoutPanel1.Controls.Add(Me.FlowLayoutPanel3)
         Me.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(726, 26)
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(804, 26)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(702, 598)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(702, 673)
         Me.FlowLayoutPanel1.TabIndex = 2115
         '
         'Label37
@@ -516,130 +500,10 @@ Partial Class TikDetails
         Me.TxtDetails.TabIndex = 2164
         Me.TxtDetails.Text = ""
         '
-        'GroupBox4
-        '
-        Me.GroupBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox4.Controls.Add(Me.TxtTrck)
-        Me.GroupBox4.Controls.Add(Me.Label45)
-        Me.GroupBox4.Controls.Add(Me.Label46)
-        Me.GroupBox4.Controls.Add(Me.Label47)
-        Me.GroupBox4.Controls.Add(Me.TxtDist)
-        Me.GroupBox4.Controls.Add(Me.TxtOrgin)
-        Me.GroupBox4.Location = New System.Drawing.Point(176, 418)
-        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(3, 3, 110, 3)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(416, 160)
-        Me.GroupBox4.TabIndex = 2084
-        Me.GroupBox4.TabStop = False
-        '
-        'TxtTrck
-        '
-        Me.TxtTrck.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.TxtTrck.Location = New System.Drawing.Point(42, 21)
-        Me.TxtTrck.Name = "TxtTrck"
-        Me.TxtTrck.ReadOnly = True
-        Me.TxtTrck.Size = New System.Drawing.Size(250, 26)
-        Me.TxtTrck.TabIndex = 1010
-        Me.TxtTrck.TabStop = False
-        '
-        'Label45
-        '
-        Me.Label45.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Label45.Location = New System.Drawing.Point(298, 46)
-        Me.Label45.Name = "Label45"
-        Me.Label45.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label45.Size = New System.Drawing.Size(103, 16)
-        Me.Label45.TabIndex = 29
-        Me.Label45.Text = "بلد الراسل :"
-        Me.Label45.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'Label46
-        '
-        Me.Label46.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Label46.Location = New System.Drawing.Point(298, 73)
-        Me.Label46.Name = "Label46"
-        Me.Label46.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label46.Size = New System.Drawing.Size(103, 16)
-        Me.Label46.TabIndex = 1007
-        Me.Label46.Text = "بلد المرسل إلية :"
-        Me.Label46.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'Label47
-        '
-        Me.Label47.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Label47.Location = New System.Drawing.Point(298, 24)
-        Me.Label47.Name = "Label47"
-        Me.Label47.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label47.Size = New System.Drawing.Size(103, 16)
-        Me.Label47.TabIndex = 1006
-        Me.Label47.Text = "رقم الشحنة :"
-        Me.Label47.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'TxtDist
-        '
-        Me.TxtDist.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.TxtDist.Location = New System.Drawing.Point(42, 75)
-        Me.TxtDist.Name = "TxtDist"
-        Me.TxtDist.ReadOnly = True
-        Me.TxtDist.Size = New System.Drawing.Size(250, 26)
-        Me.TxtDist.TabIndex = 1008
-        Me.TxtDist.TabStop = False
-        '
-        'TxtOrgin
-        '
-        Me.TxtOrgin.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.TxtOrgin.Location = New System.Drawing.Point(42, 48)
-        Me.TxtOrgin.Name = "TxtOrgin"
-        Me.TxtOrgin.ReadOnly = True
-        Me.TxtOrgin.Size = New System.Drawing.Size(250, 26)
-        Me.TxtOrgin.TabIndex = 35
-        Me.TxtOrgin.TabStop = False
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox3.Controls.Add(Me.TxtCard)
-        Me.GroupBox3.Controls.Add(Me.Label33)
-        Me.GroupBox3.Controls.Add(Me.Label35)
-        Me.GroupBox3.Controls.Add(Me.Label38)
-        Me.GroupBox3.Controls.Add(Me.Label40)
-        Me.GroupBox3.Controls.Add(Me.Label42)
-        Me.GroupBox3.Controls.Add(Me.TxtTransDt)
-        Me.GroupBox3.Controls.Add(Me.TxtNId)
-        Me.GroupBox3.Controls.Add(Me.TxtAmount)
-        Me.GroupBox3.Controls.Add(Me.TxtGP)
-        Me.GroupBox3.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.GroupBox3.Location = New System.Drawing.Point(176, 584)
-        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(3, 3, 110, 3)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(416, 197)
-        Me.GroupBox3.TabIndex = 2083
-        Me.GroupBox3.TabStop = False
-        '
-        'TxtCard
-        '
-        Me.TxtCard.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.TxtCard.Location = New System.Drawing.Point(36, 19)
-        Me.TxtCard.Name = "TxtCard"
-        Me.TxtCard.ReadOnly = True
-        Me.TxtCard.Size = New System.Drawing.Size(250, 26)
-        Me.TxtCard.TabIndex = 1012
-        '
-        'Label33
-        '
-        Me.Label33.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Label33.Location = New System.Drawing.Point(292, 21)
-        Me.Label33.Name = "Label33"
-        Me.Label33.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label33.Size = New System.Drawing.Size(106, 16)
-        Me.Label33.TabIndex = 1008
-        Me.Label33.Text = "رقم الكارت/الحساب :"
-        Me.Label33.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
         'Label35
         '
         Me.Label35.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Label35.Location = New System.Drawing.Point(292, 75)
+        Me.Label35.Location = New System.Drawing.Point(596, 415)
         Me.Label35.Name = "Label35"
         Me.Label35.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label35.Size = New System.Drawing.Size(103, 16)
@@ -647,54 +511,11 @@ Partial Class TikDetails
         Me.Label35.Text = "الرقم القومي :"
         Me.Label35.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
-        'Label38
-        '
-        Me.Label38.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Label38.Location = New System.Drawing.Point(292, 103)
-        Me.Label38.Name = "Label38"
-        Me.Label38.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label38.Size = New System.Drawing.Size(103, 16)
-        Me.Label38.TabIndex = 32
-        Me.Label38.Text = "مبلغ العملية :"
-        Me.Label38.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'Label40
-        '
-        Me.Label40.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Label40.Location = New System.Drawing.Point(292, 132)
-        Me.Label40.Name = "Label40"
-        Me.Label40.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label40.Size = New System.Drawing.Size(103, 16)
-        Me.Label40.TabIndex = 34
-        Me.Label40.Text = "تاريخ العملية :"
-        Me.Label40.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'Label42
-        '
-        Me.Label42.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Label42.Location = New System.Drawing.Point(292, 50)
-        Me.Label42.Name = "Label42"
-        Me.Label42.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label42.Size = New System.Drawing.Size(103, 16)
-        Me.Label42.TabIndex = 1009
-        Me.Label42.Text = "رقم أمر الدفع :"
-        Me.Label42.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'TxtTransDt
-        '
-        Me.TxtTransDt.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.TxtTransDt.Location = New System.Drawing.Point(36, 129)
-        Me.TxtTransDt.MaxLength = 16
-        Me.TxtTransDt.Name = "TxtTransDt"
-        Me.TxtTransDt.ReadOnly = True
-        Me.TxtTransDt.Size = New System.Drawing.Size(250, 26)
-        Me.TxtTransDt.TabIndex = 1011
-        Me.TxtTransDt.Tag = "مبلغ العملية"
-        '
         'TxtNId
         '
+        Me.FlowLayoutPanel1.SetFlowBreak(Me.TxtNId, True)
         Me.TxtNId.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.TxtNId.Location = New System.Drawing.Point(36, 73)
+        Me.TxtNId.Location = New System.Drawing.Point(340, 418)
         Me.TxtNId.MaxLength = 14
         Me.TxtNId.Name = "TxtNId"
         Me.TxtNId.ReadOnly = True
@@ -702,30 +523,6 @@ Partial Class TikDetails
         Me.TxtNId.TabIndex = 9
         Me.TxtNId.Tag = "الرقم القومي"
         Me.TxtNId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'TxtAmount
-        '
-        Me.TxtAmount.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.TxtAmount.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.TxtAmount.Location = New System.Drawing.Point(36, 101)
-        Me.TxtAmount.MaxLength = 16
-        Me.TxtAmount.Name = "TxtAmount"
-        Me.TxtAmount.ReadOnly = True
-        Me.TxtAmount.Size = New System.Drawing.Size(250, 26)
-        Me.TxtAmount.TabIndex = 10
-        Me.TxtAmount.Tag = "مبلغ العملية"
-        '
-        'TxtGP
-        '
-        Me.TxtGP.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.TxtGP.Location = New System.Drawing.Point(36, 46)
-        Me.TxtGP.MaxLength = 16
-        Me.TxtGP.Name = "TxtGP"
-        Me.TxtGP.ReadOnly = True
-        Me.TxtGP.Size = New System.Drawing.Size(250, 26)
-        Me.TxtGP.TabIndex = 8
-        Me.TxtGP.Tag = "رقم أمر الدفع"
-        Me.TxtGP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'FlowLayoutPanel2
         '
@@ -738,7 +535,7 @@ Partial Class TikDetails
         Me.FlowLayoutPanel2.Controls.Add(Me.LblWDays)
         Me.FlowLayoutPanel2.Controls.Add(Me.LblHelp)
         Me.FlowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(93, 26)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(171, 26)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
         Me.FlowLayoutPanel2.Size = New System.Drawing.Size(627, 598)
         Me.FlowLayoutPanel2.TabIndex = 2116
@@ -872,12 +669,20 @@ Partial Class TikDetails
         Me.TimerVisInvs.Enabled = True
         Me.TimerVisInvs.Interval = 500
         '
+        'FlowLayoutPanel3
+        '
+        Me.FlowLayoutPanel3.Location = New System.Drawing.Point(148, 450)
+        Me.FlowLayoutPanel3.Name = "FlowLayoutPanel3"
+        Me.FlowLayoutPanel3.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.FlowLayoutPanel3.Size = New System.Drawing.Size(551, 266)
+        Me.FlowLayoutPanel3.TabIndex = 2165
+        '
         'TikDetails
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1448, 621)
+        Me.ClientSize = New System.Drawing.Size(1526, 753)
         Me.Controls.Add(Me.FlowDetls)
         Me.Location = New System.Drawing.Point(0, 52)
         Me.Name = "TikDetails"
@@ -885,10 +690,6 @@ Partial Class TikDetails
         Me.FlowDetls.ResumeLayout(False)
         Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.FlowLayoutPanel1.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
         Me.FlowLayoutPanel2.ResumeLayout(False)
         Me.FlowLayoutPanel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
@@ -926,24 +727,8 @@ Partial Class TikDetails
     Friend WithEvents Label1 As Label
     Friend WithEvents TxtFolw As TextBox
     Friend WithEvents Label43 As Label
-    Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents TxtTrck As TextBox
-    Friend WithEvents Label45 As Label
-    Friend WithEvents Label46 As Label
-    Friend WithEvents Label47 As Label
-    Friend WithEvents TxtDist As TextBox
-    Friend WithEvents TxtOrgin As TextBox
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents TxtCard As TextBox
-    Friend WithEvents Label33 As Label
     Friend WithEvents Label35 As Label
-    Friend WithEvents Label38 As Label
-    Friend WithEvents Label40 As Label
-    Friend WithEvents Label42 As Label
-    Friend WithEvents TxtTransDt As TextBox
     Friend WithEvents TxtNId As TextBox
-    Friend WithEvents TxtAmount As TextBox
-    Friend WithEvents TxtGP As TextBox
     Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
     Friend WithEvents TcktImg As PictureBox
     Friend WithEvents TxtDetailsAdd As TextBox
@@ -959,4 +744,5 @@ Partial Class TikDetails
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents TxtTikID As Label
+    Friend WithEvents FlowLayoutPanel3 As FlowLayoutPanel
 End Class

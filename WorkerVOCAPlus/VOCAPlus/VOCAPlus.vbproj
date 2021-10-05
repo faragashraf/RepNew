@@ -26,10 +26,11 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>http://10.10.26.4:80/</UpdateUrl>
-    <ProductName>VOCA Plus</ProductName>
+    <ProductName>VOCA Plus New</ProductName>
     <PublisherName>Ashaf Farag</PublisherName>
+    <SuiteName>VOCA Plus New</SuiteName>
     <MinimumRequiredVersion>4.0.0.1</MinimumRequiredVersion>
-    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationRevision>16</ApplicationRevision>
     <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

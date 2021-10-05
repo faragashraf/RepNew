@@ -28,7 +28,7 @@ Public Class TikNew
             ComRefLbl.Size = New Point(TabControl2.Width, ComRefLbl.Size.Height)
             FlwTree.Size = New Point((Me.Size.Width * 0.3), Me.Height - 100)
             TreeView1.Size = New Point((Me.Size.Width * 0.3) - 20, Me.Height - 200)
-            FlwMend.Size = New Point(FlwMend.Width, Me.Size.Height - TabControl2.Height - ComRefLbl.Height - 200)
+            FlwMend.Size = New Point(FlwMend.Width, Me.Size.Height - TabControl2.Height - ComRefLbl.Height - 100)
             IDTxtBx.Focus()
         End If
     End Sub
@@ -95,7 +95,7 @@ Public Class TikNew
 
         TickKind = 0
         PrdKind = ""
-
+        MyGroupBox3.Enabled = True
         MyGroupBox2.Enabled = False
         SubmitBtn.BackgroundImage = My.Resources.SaveRed
 
@@ -110,6 +110,9 @@ Public Class TikNew
             ElseIf RadPss.Checked = True And Trim(Replace(IDTxtBx.Text, " ", "")).Length > 0 Then
                 Complete_ += 1
             End If
+            Label29.Visible = True
+        Else
+            Label29.Visible = False
         End If
 
         'Check Customer Phone 1
@@ -595,7 +598,7 @@ Popul_:
             ClntThrd.IsBackground = True
             Phon1TxtBx.BackColor = Color.FromArgb(128, 255, 128)
             Phon1TxtBx.ForeColor = Color.Black
-            WelcomeScreen.StatBrPnlAr.Text = "جاري تحميل البيانات ..........."
+            WelcomeScreen.StatBrPnlAr.Text = "جاري تحميل البيانات ............."
             TreeView1.Visible = True
             ClntThrd.Start()
             Me.Enabled = False
@@ -603,6 +606,7 @@ Popul_:
             Phon1TxtBx.BackColor = Color.OrangeRed
             Phon1TxtBx.ForeColor = Color.Yellow
             TreeView1.Visible = False
+            WelcomeScreen.StatBrPnlAr.Text = ""
             NameTxtBx.Text = ""
             AddTxtBx.Text = ""
             Phon2TxtBx.Text = ""
@@ -741,6 +745,7 @@ Popul_:
             Invoke(Sub() TimrPhons.Stop())
             Invoke(Sub() FlwMainData.Enabled = False)
             Invoke(Sub() FlwMend.Enabled = False)
+            Invoke(Sub() MyGroupBox3.Enabled = False)
         Catch ex As Exception
             Tran.Rollback()
             Fn.AppLog("0000&H", ex.Message, sqlComminsert_1.CommandText & "_" & sqlComminsert_2.CommandText & "_" & sqlComminsert_3.CommandText & "_" & sqlComminsert_4.CommandText)
@@ -806,5 +811,6 @@ Popul_:
         Invoke(Sub() WelcomeScreen.StatBrPnlAr.Text = "")
         Timer1.Start()
         Invoke(Sub() BtnDublicate.Visible = False)
+        Invoke(Sub() MyGroupBox3.Enabled = True)
     End Sub
 End Class

@@ -40,33 +40,26 @@ Public Class TikDetails
         TxtProd.Text = StruGrdTk.ProdNm
         TxtComp.Text = StruGrdTk.CompNm
         TxtSrc.Text = StruGrdTk.Src
-        TxtTrck.Text = StruGrdTk.Trck
-        TxtOrgin.Text = StruGrdTk.Orig
-        TxtDist.Text = StruGrdTk.Dist
-        TxtCard.Text = StruGrdTk.Card
-        TxtGP.Text = StruGrdTk.Gp
         TxtNId.Text = StruGrdTk.NID
-        TxtAmount.Text = StruGrdTk.Amnt
-        If Year(StruGrdTk.TransDt) < 2000 Then
-            TxtTransDt.Text = ""
-        Else
-            TxtTransDt.Text = StruGrdTk.TransDt
-        End If
-
         TxtFolw.Text = StruGrdTk.UsrNm
-
+        For YY = 0 To SlctdFldLst.Count - 1
+            Dim Lbl As New Label
+            Dim TxtBx As New TextBox
+            Lbl.Font = New Font("Times New Roman", 12, FontStyle.Bold)
+            Lbl.Size = New Point(100, 25)
+            Lbl.TextAlign = ContentAlignment.MiddleRight
+            TxtBx.TextAlign = HorizontalAlignment.Center
+            TxtBx.Font = New Font("Times New Roman", 12, FontStyle.Bold)
+            TxtBx.Size = New Point(150, 25)
+            Lbl.Text = Split(SlctdFldLst(YY), "_")(0) & " : "
+            TxtBx.Text = Split(SlctdFldLst(YY), "_")(1)
+            FlowLayoutPanel3.Controls.Add(Lbl)
+            FlowLayoutPanel3.Controls.Add(TxtBx)
+            TxtBx.ReadOnly = True
+        Next
 
         LblWDays.Text = "تم تسجيل الشكوى منذ : " & Fn.CalDate(StruGrdTk.DtStrt, Nw, "0000&H") & " يوم عمل"
-        If StruGrdTk.ProdK = 1 Then
-            GroupBox3.Visible = True
-            GroupBox4.Visible = False
-        ElseIf StruGrdTk.ProdK = 2 Then
-            GroupBox3.Visible = False
-            GroupBox4.Visible = True
-        Else
-            GroupBox3.Visible = False
-            GroupBox4.Visible = False
-        End If
+
         LblHelp.Text = StruGrdTk.Help_
         If StruGrdTk.Tick = 0 Then
             TxtTikID.Text = "طلب رقم : " & StruGrdTk.Sql

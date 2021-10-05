@@ -31,6 +31,7 @@ Module Public_
     Public MendFildsTable As DataTable = New DataTable
     Public MendPvtTable As DataTable = New DataTable
     Public FildList As List(Of String)
+    Public SlctdFldLst As List(Of String)
     Public UpdateKTable As DataTable = New DataTable
     Public FTPTable As New DataTable
     Public CtrlsTbl As DataTable = New DataTable
@@ -942,22 +943,22 @@ Sec2:
                 StruGrdTk.Email = GrdTick.CurrentRow.Cells("TkMail").Value.ToString
                 StruGrdTk.Detls = GrdTick.CurrentRow.Cells("TkDetails").Value.ToString
                 'StruGrdTk.Area = GrdTick.CurrentRow.Cells("OffArea").Value.ToString
-                StruGrdTk.Offic = GrdTick.CurrentRow.Cells("[اسم المكتب]").Value.ToString
+                'StruGrdTk.Offic = GrdTick.CurrentRow.Cells("[اسم المكتب]").Value.ToString
                 StruGrdTk.ProdNm = GrdTick.CurrentRow.Cells("PrdNm").Value
                 StruGrdTk.CompNm = GrdTick.CurrentRow.Cells("CompNm").Value
                 StruGrdTk.Src = GrdTick.CurrentRow.Cells("SrcNm").Value
-                StruGrdTk.Trck = GrdTick.CurrentRow.Cells("[رقم الشحنة]").Value.ToString
-                StruGrdTk.Orig = GrdTick.CurrentRow.Cells("[بلد الراسل]").Value.ToString
-                StruGrdTk.Dist = GrdTick.CurrentRow.Cells("[بلد المرسل إلية]").Value.ToString
-                StruGrdTk.Card = GrdTick.CurrentRow.Cells("[رقم الكارت]").Value.ToString
-                StruGrdTk.Gp = GrdTick.CurrentRow.Cells("[رقم أمر الدفع]").Value.ToString
-                StruGrdTk.NID = GrdTick.CurrentRow.Cells("TkClNtID").Value.ToString
-                StruGrdTk.Amnt = GrdTick.CurrentRow.Cells("[مبلغ العملية]").Value
-                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkTransDate").Value) = False Then StruGrdTk.TransDt = GrdTick.CurrentRow.Cells("TkTransDate").Value
+                'StruGrdTk.Trck = GrdTick.CurrentRow.Cells("[رقم الشحنة]").Value.ToString
+                'StruGrdTk.Orig = GrdTick.CurrentRow.Cells("[بلد الراسل]").Value.ToString
+                'StruGrdTk.Dist = GrdTick.CurrentRow.Cells("[بلد المرسل إلية]").Value.ToString
+                'StruGrdTk.Card = GrdTick.CurrentRow.Cells("[رقم الكارت]").Value.ToString
+                'StruGrdTk.Gp = GrdTick.CurrentRow.Cells("[رقم أمر الدفع]").Value.ToString
+                'StruGrdTk.NID = GrdTick.CurrentRow.Cells("TkClNtID").Value.ToString
+                'StruGrdTk.Amnt = GrdTick.CurrentRow.Cells("[مبلغ العملية]").Value
+                'If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkTransDate").Value) = False Then StruGrdTk.TransDt = GrdTick.CurrentRow.Cells("TkTransDate").Value
                 If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("UsrRealNm").Value) = False Then StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("UsrRealNm").Value
-                StruGrdTk.Help_ = GrdTick.CurrentRow.Cells("CompHelp").Value.ToString
-                StruGrdTk.ProdK = GrdTick.CurrentRow.Cells("PrdKind").Value
-                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkEmpNm").Value) = False Then StruGrdTk.UserId = GrdTick.CurrentRow.Cells("TkEmpNm").Value
+                StruGrdTk.Help_ = GrdTick.CurrentRow.Cells("CompHlp").Value.ToString
+                StruGrdTk.ProdK = GrdTick.CurrentRow.Cells("ProdKNm").Value
+                'If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkEmpNm").Value) = False Then StruGrdTk.UserId = GrdTick.CurrentRow.Cells("TkEmpNm").Value
 
                 StruGrdTk.LstUpDt = GrdTick.CurrentRow.Cells("تاريخ آخر تحديث").Value
                 StruGrdTk.LstUpTxt = GrdTick.CurrentRow.Cells("نص آخر تحديث").Value

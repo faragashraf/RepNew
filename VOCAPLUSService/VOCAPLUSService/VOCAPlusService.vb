@@ -170,9 +170,7 @@ SendMail_:
         sqlComnd.Connection = sqlCconXX
         SQLTblAdpterXX.SelectCommand = sqlComnd
         sqlComnd.CommandType = CommandType.Text
-        If sqlCconXX.State = ConnectionState.Closed Then
-            sqlCconXX.Open()
-        End If
+
         sqlComnd.CommandText = "SELECT TkupSQL, TkupTkSql, TkupSTime, TkupTxt, TkupReDt, TkupUserIP, Int_user.UsrRealNm, UCatNm
 FROM            TkEvent INNER JOIN
                          CDEvent ON TkupEvtId = EvId INNER JOIN
@@ -181,39 +179,42 @@ FROM            TkEvent INNER JOIN
 WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
 
         Try
+            If sqlCconXX.State = ConnectionState.Closed Or sqlCconXX.State <> ConnectionState.Connecting Then
+                sqlCconXX.Open()
+            End If
             SQLTblAdpterXX.Fill(Tbl)
             If Tbl.Rows.Count > 0 Then
                 For YY = 0 To Tbl.Rows.Count - 1
                     Dim Lction As String
-                    Try '10.11.58
-                        If Mid(Tbl.Rows(YY).Item("TkupUserIP").ToString, 1, 9) = "10.10.200" Then
-                            Lction = "المعادي"
-                        ElseIf Mid(Tbl.Rows(YY).Item("TkupUserIP").ToString, 1, 5) = "10.11" Then
-                            Lction = "السبيل"
-                        Else
-                            Lction = "غير معروف"
-                        End If
-                        Dim exchange As ExchangeService
-                        exchange = New ExchangeService(ExchangeVersion.Exchange2010)
-                        exchange.Credentials = New WebCredentials(My.Settings.MlUsr, My.Settings.MlPss)
-                        exchange.Url() = New Uri("https://mail.egyptpost.org/ews/exchange.asmx")
-                        Dim message As New EmailMessage(exchange)
+                    'Try
+                    If Mid(Tbl.Rows(YY).Item("TkupUserIP").ToString, 1, 9) = "10.10.200" Then
+                        Lction = "المعادي"
+                    ElseIf Mid(Tbl.Rows(YY).Item("TkupUserIP").ToString, 1, 5) = "10.11" Then
+                        Lction = "السبيل"
+                    Else
+                        Lction = "غير معروف"
+                    End If
+                    Dim exchange As ExchangeService
+                    exchange = New ExchangeService(ExchangeVersion.Exchange2010)
+                    exchange.Credentials = New WebCredentials(My.Settings.MlUsr, My.Settings.MlPss)
+                    exchange.Url() = New Uri("https://mail.egyptpost.org/ews/exchange.asmx")
+                    Dim message As New EmailMessage(exchange)
 
-                        message.ToRecipients.Add("a.farag@egyptpost.org")
-                        'message.CcRecipients.Add(Trim(Split(Mail_.CC_, ";")(LL)))
-                        message.Subject = "تم عمل تحديث بواسطة " & Tbl.Rows(YY).Item("UsrRealNm") & " للشكوى رقم " & Tbl.Rows(YY).Item("TkupTkSql") & " عن طريق الجهاز " & Tbl.Rows(YY).Item("TkupUserIP") & " من مبني " & Lction & " الساعة : " & Tbl.Rows(YY).Item("TkupSTime")
-                        message.Body = Tbl.Rows(YY).Item("TkupTxt").ToString
-                        'message.Attachments.AddFileAttachment(FileExported)
-                        'message.Attachments(0).ContentId = Mail_.Sub_ & "_" & Format(Now, "yyyy-MM-dd")
-                        message.Importance = 1
-                        If YY = Tbl.Rows.Count - 1 Then
-                            Invoke(Sub() TextBox1.Text = Tbl.Rows(YY).Item("TkupSQL") + 1)
-                        End If
-                        message.SendAndSaveCopy()
-                    Catch exs As Exception
-                        Invoke(Sub() TxtErr.Text += Now & exs.Message & vbCrLf)
-                        Invoke(Sub() TxtErr.Refresh())
-                    End Try
+                    message.ToRecipients.Add("a.farag@egyptpost.org")
+                    'message.CcRecipients.Add(Trim(Split(Mail_.CC_, ";")(LL)))
+                    message.Subject = "تم عمل تحديث بواسطة " & Tbl.Rows(YY).Item("UsrRealNm") & " للشكوى رقم " & Tbl.Rows(YY).Item("TkupTkSql") & " عن طريق الجهاز " & Tbl.Rows(YY).Item("TkupUserIP") & " من مبني " & Lction & " الساعة : " & Tbl.Rows(YY).Item("TkupSTime")
+                    message.Body = Tbl.Rows(YY).Item("TkupTxt").ToString
+                    'message.Attachments.AddFileAttachment(FileExported)
+                    'message.Attachments(0).ContentId = Mail_.Sub_ & "_" & Format(Now, "yyyy-MM-dd")
+                    message.Importance = 1
+                    If YY = Tbl.Rows.Count - 1 Then
+                        Invoke(Sub() TextBox1.Text = Tbl.Rows(YY).Item("TkupSQL") + 1)
+                    End If
+                    message.SendAndSaveCopy()
+                    'Catch exs As Exception
+                    '    Invoke(Sub() TxtErr.Text += Now & exs.Message & vbCrLf)
+                    '    Invoke(Sub() TxtErr.Refresh())
+                    'End Try
                 Next
             End If
         Catch ex As Exception
