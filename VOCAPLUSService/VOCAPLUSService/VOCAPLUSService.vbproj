@@ -29,7 +29,7 @@
     <ProductName>VOCA Plus Service</ProductName>
     <PublisherName>Ashraf Farag</PublisherName>
     <SuiteName>VOCA Plus Service</SuiteName>
-    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationRevision>16</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -161,6 +161,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Stru.vb" />
+    <Compile Include="EventMail.Designer.vb">
+      <DependentUpon>EventMail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EventMail.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="VOCAPlusService.Designer.vb">
       <DependentUpon>VOCAPlusService.vb</DependentUpon>
     </Compile>
@@ -177,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Settings_.resx">
       <DependentUpon>Settings_.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventMail.resx">
+      <DependentUpon>EventMail.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VOCAPlusService.resx">
       <DependentUpon>VOCAPlusService.vb</DependentUpon>

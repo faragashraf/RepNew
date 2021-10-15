@@ -159,10 +159,39 @@ SendMail_:
             EvTsk.Start()
             'CheckBox1.Checked = False
             'Me.Refresh()
+        ElseIf CheckBox2.Checked = False Then
+            EvTsk = New Thread(AddressOf MaxEvnt)
+            EvTsk.IsBackground = True
+            EvTsk.Start()
         End If
     End Sub
 
     'Send Smart Agrisive Mail
+    Private Sub MaxEvnt()
+        Dim Tbl As New DataTable
+        Dim SQLTblAdpterXX As New SqlDataAdapter
+        Dim sqlCconXX As New SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046")
+        sqlComnd.Connection = sqlCconXX
+        SQLTblAdpterXX.SelectCommand = sqlComnd
+        sqlComnd.CommandType = CommandType.Text
+
+        sqlComnd.CommandText = "select max( TkEvent.TkupSQL) from TkEvent"
+
+        Try
+            If sqlCconXX.State = ConnectionState.Closed Or sqlCconXX.State <> ConnectionState.Connecting Then
+                sqlCconXX.Open()
+            End If
+            SQLTblAdpterXX.Fill(Tbl)
+            If Tbl.Rows.Count > 0 Then
+                Invoke(Sub() TextBox1.Text = Tbl.Rows(0).Item(0))
+            End If
+        Catch ex As Exception
+            Invoke(Sub() TxtErr.Text += Now & " Max Event ___" & Tbl.TableName & ex.Message & vbCrLf)
+            Invoke(Sub() TxtErr.Refresh())
+        End Try
+        sqlCconXX.Close()
+        SqlConnection.ClearPool(sqlCconXX)
+    End Sub
     Private Sub EvMail()
         Dim Tbl As New DataTable
         Dim SQLTblAdpterXX As New SqlDataAdapter
@@ -200,8 +229,13 @@ WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
                     exchange.Url() = New Uri("https://mail.egyptpost.org/ews/exchange.asmx")
                     Dim message As New EmailMessage(exchange)
 
-                    message.ToRecipients.Add("a.farag@egyptpost.org")
-                    'message.CcRecipients.Add(Trim(Split(Mail_.CC_, ";")(LL)))
+                    '
+                    message.ToRecipients.Add("RTM_TEAM@EgyptPost.Org")
+                    message.ToRecipients.Add("WFM_RTM@EgyptPost.Org")
+                    message.CcRecipients.Add("sameh_gharabawy@EgyptPost.Org")
+                    message.CcRecipients.Add("VOCA-SUPPORT@EgyptPost.Org")
+                    message.CcRecipients.Add("a.farag@egyptpost.org")
+
                     message.Subject = "تم عمل تحديث بواسطة " & Tbl.Rows(YY).Item("UsrRealNm") & " للشكوى رقم " & Tbl.Rows(YY).Item("TkupTkSql") & " عن طريق الجهاز " & Tbl.Rows(YY).Item("TkupUserIP") & " من مبني " & Lction & " الساعة : " & Tbl.Rows(YY).Item("TkupSTime")
                     message.Body = Tbl.Rows(YY).Item("TkupTxt").ToString
                     'message.Attachments.AddFileAttachment(FileExported)
