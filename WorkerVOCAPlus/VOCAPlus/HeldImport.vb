@@ -251,7 +251,6 @@ Public Class HeldImport
     End Sub
     Private Function CSYSGetTbl(SSqlStr As String, SqlTbl As DataTable) As String
         Errmsg = Nothing
-        'LoadFrm("جاري تحميل البيانات ...", 500, 350)
         sqlComm.Connection = sqlCon
         SQLTblAdptr.SelectCommand = sqlComm
         sqlComm.CommandType = CommandType.Text
@@ -271,13 +270,11 @@ Public Class HeldImport
         Label2.Text = DataGridView1.CurrentRow.Index + 1 & " Of " & DataGridView1.Rows.Count.ToString("N0")
     End Sub
     Private Function PrInsUpd(SSqlStr As String) As String
-        'LoadFrm("جاري تحميل البيانات ...", 500, 350)
         Errmsg = Nothing
         sqlComm.Connection = sqlCon
         sqlComm.CommandType = CommandType.Text
         sqlComm.CommandText = SSqlStr
         Try
-            'LoadFrm("", 500, 350)
             If sqlCon.State = ConnectionState.Closed Then
                 sqlCon.Open()
             End If

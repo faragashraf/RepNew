@@ -12,7 +12,6 @@ Public Class PostalInt
     Dim Taax As Double = 0
     Private Function GetTbl1(SSqlStr As String, SqlTbl As DataTable, ErrHndl As String) As String
         Errmsg = Nothing
-        'LoadFrm("جاري تحميل البيانات ...", 500, 350)
         sqlCon.ConnectionString = strConn
         sqlComm.CommandTimeout = 90
         sqlComm.Connection = sqlCon

@@ -13,8 +13,6 @@ Public Class EventMail
             EvTsk = New Thread(AddressOf EvMail)
             EvTsk.IsBackground = True
             EvTsk.Start()
-            'CheckBox1.Checked = False
-            'Me.Refresh()
         ElseIf CheckBox2.Checked = False Then
             EvTsk = New Thread(AddressOf MaxEvnt)
             EvTsk.IsBackground = True
@@ -24,15 +22,16 @@ Public Class EventMail
 
     'Send Smart Agrisive Mail
     Private Sub MaxEvnt()
+        Dim Def As New APblicClss.Defntion
         Invoke(Sub() Label1.Text = Now)
         Dim Tbl As New DataTable
         Dim SQLTblAdpterXX As New SqlDataAdapter
         Dim sqlCconXX As New SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046")
-        sqlComnd.Connection = sqlCconXX
-        SQLTblAdpterXX.SelectCommand = sqlComnd
-        sqlComnd.CommandType = CommandType.Text
+        Def.sqlComnd.Connection = sqlCconXX
+        SQLTblAdpterXX.SelectCommand = Def.sqlComnd
+        Def.sqlComnd.CommandType = CommandType.Text
 
-        sqlComnd.CommandText = "select max( TkEvent.TkupSQL) from TkEvent"
+        Def.sqlComnd.CommandText = "select max( TkEvent.TkupSQL) from TkEvent"
 
         Try
             If sqlCconXX.State = ConnectionState.Closed Or sqlCconXX.State <> ConnectionState.Connecting Then
@@ -50,21 +49,17 @@ Public Class EventMail
         SqlConnection.ClearPool(sqlCconXX)
     End Sub
     Private Sub EvMail()
+        Dim Def As New APblicClss.Defntion
         Invoke(Sub() Label1.Text = Now)
         Dim Tbl As New DataTable
         Dim SQLTblAdpterXX As New SqlDataAdapter
         Dim sqlCconXX As New SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046")
-        sqlComnd.Connection = sqlCconXX
-        SQLTblAdpterXX.SelectCommand = sqlComnd
-        sqlComnd.CommandType = CommandType.Text
-
-        sqlComnd.CommandText = "SELECT TkupSQL, TkupTkSql, TkupSTime, TkupTxt, TkupReDt, TkupUserIP, Int_user.UsrRealNm, UCatNm
-FROM            TkEvent INNER JOIN
-                         CDEvent ON TkupEvtId = EvId INNER JOIN
-                         Int_user ON TkupUser = Int_user.UsrId INNER JOIN
-                         IntUserCat ON Int_user.UsrCat = UCatId
-WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
-
+        Def.sqlComnd.Connection = sqlCconXX
+        SQLTblAdpterXX.SelectCommand = Def.sqlComnd
+        Def.sqlComnd.CommandType = CommandType.Text
+        Def.sqlComnd.CommandText = "SELECT TkupSQL, TkupTkSql, TkupSTime, TkupTxt, TkupReDt, TkupUserIP, Int_user.UsrRealNm, UCatNm
+                                FROM TkEvent INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN Int_user ON TkupUser = Int_user.UsrId INNER JOIN
+                                IntUserCat ON Int_user.UsrCat = UCatId WHERE(TkupSQL > " & TextBox1.Text & ")"
         Try
             If sqlCconXX.State = ConnectionState.Closed Or sqlCconXX.State <> ConnectionState.Connecting Then
                 sqlCconXX.Open()
@@ -78,6 +73,8 @@ WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
                         Lction = "المعادي"
                     ElseIf Mid(Tbl.Rows(YY).Item("TkupUserIP").ToString, 1, 5) = "10.11" Then
                         Lction = "السبيل"
+                    ElseIf Tbl.Rows(YY).Item("TkupUserIP").ToString = "10.10.26.4" Then
+                        Lction = "Server"
                     Else
                         Lction = "غير معروف"
                     End If
@@ -117,15 +114,11 @@ WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
         sqlCconXX.Close()
         SqlConnection.ClearPool(sqlCconXX)
     End Sub
+    Private Sub EventMail_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        TxtErr.Size = New Point(TxtErr.Width, Screen.PrimaryScreen.Bounds.Height - 100)
+    End Sub
     Private Sub BtnAbort_Click(sender As Object, e As EventArgs) Handles BtnAbort.Click
         Settings_.ShowDialog()
     End Sub
 
-    Private Sub EventMail_MaximumSizeChanged(sender As Object, e As EventArgs) Handles MyBase.MaximumSizeChanged
-
-    End Sub
-
-    Private Sub EventMail_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
-        TxtErr.Size = New Point(TxtErr.Width, Screen.PrimaryScreen.Bounds.Height - 100)
-    End Sub
 End Class

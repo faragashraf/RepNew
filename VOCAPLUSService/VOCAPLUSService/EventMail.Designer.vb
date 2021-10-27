@@ -49,14 +49,13 @@ Partial Class EventMail
         '
         'CheckBox1
         '
-        Me.CheckBox1.Appearance = System.Windows.Forms.Appearance.Button
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.BackColor = System.Drawing.Color.White
         Me.CheckBox1.FlatAppearance.CheckedBackColor = System.Drawing.Color.Lime
-        Me.CheckBox1.Location = New System.Drawing.Point(318, 85)
+        Me.CheckBox1.Location = New System.Drawing.Point(298, 84)
         Me.CheckBox1.Margin = New System.Windows.Forms.Padding(6)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(68, 37)
+        Me.CheckBox1.Size = New System.Drawing.Size(77, 31)
         Me.CheckBox1.TabIndex = 94
         Me.CheckBox1.Text = "Start"
         Me.CheckBox1.UseVisualStyleBackColor = False
@@ -72,14 +71,13 @@ Partial Class EventMail
         '
         'CheckBox2
         '
-        Me.CheckBox2.Appearance = System.Windows.Forms.Appearance.Button
         Me.CheckBox2.AutoSize = True
         Me.CheckBox2.BackColor = System.Drawing.Color.White
         Me.CheckBox2.FlatAppearance.CheckedBackColor = System.Drawing.Color.Lime
         Me.CheckBox2.Location = New System.Drawing.Point(298, 127)
         Me.CheckBox2.Margin = New System.Windows.Forms.Padding(6)
         Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(107, 37)
+        Me.CheckBox2.Size = New System.Drawing.Size(116, 31)
         Me.CheckBox2.TabIndex = 96
         Me.CheckBox2.Text = "Continue"
         Me.CheckBox2.UseVisualStyleBackColor = False

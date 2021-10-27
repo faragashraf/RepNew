@@ -63,6 +63,9 @@ Public Class ReLogin
 ExitSec:
         LblHint.Text = "كلمة السر ناجحة"
         Try
+            If sqlCon.State = ConnectionState.Closed Then
+                sqlCon.Open()
+            End If
             sqlCommA.Connection = sqlCon
             sqlCommA.CommandText = "SELECT PRGUID, GUID, Id, (SUBSTRING(GUID, 26, 11)) AS PassKey From dbo.IntGuid Where (IndexOf =" & CInt(Int((250 * Rnd()) + 1)) & ");" 'Select Random key
             sqlCommA.CommandType = CommandType.Text
@@ -82,7 +85,7 @@ ExitSec:
             PublicCode.InsUpd("UPDATE Int_user SET UsrPass ='" & Usr.PUsrPWrd & "' , UsrKey ='" & SPassKey & "' WHERE (UsrNm = '" & Usr.PUsrNm & "');", "1020&H")   'Update User Pass   
 
             If Cnt_ = 32107 Then
-                WelcomeScreen.Show()
+                Login.Show()
             End If
             Cnt_ = 0
             WelcomeScreen.StatBrPnlAr.Text = "تم تغير كلمة السر بنجاح"

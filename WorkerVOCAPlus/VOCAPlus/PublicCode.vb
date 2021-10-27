@@ -276,9 +276,6 @@ End_:
         End With
         D.FileName = FileNm & "_" & Format(Now, "yyyy-MM-dd_HHmm") '& GroupBox1.Tag & GroupBox2.Tag & GroupBox3.Tag & GrpDtKnd.Tag
         If D.ShowDialog() = DialogResult.OK Then
-            LoadFrm(350, 500)
-            LodngFrm.LblMsg.Text += vbCrLf & "جاري استخراج البيانات ..."
-            LodngFrm.LblMsg.Refresh()
             Try
                 Dim Workbook As XLWorkbook = New XLWorkbook()
                 Workbook.Worksheets.Add(Tbl, "FileNm")

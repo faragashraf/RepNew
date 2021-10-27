@@ -23,7 +23,7 @@ Partial Class NewTicket
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(NewTicket))
         Me.TreeView1 = New System.Windows.Forms.TreeView()
         Me.ImgLst = New System.Windows.Forms.ImageList(Me.components)
@@ -250,19 +250,19 @@ Partial Class NewTicket
         Me.TreeView1.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold)
         Me.TreeView1.ImageKey = "Add.ico"
         Me.TreeView1.ImageList = Me.ImgLst
-        Me.TreeView1.Location = New System.Drawing.Point(3, 51)
+        Me.TreeView1.Location = New System.Drawing.Point(55, 51)
         Me.TreeView1.Name = "TreeView1"
-        TreeNode2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        TreeNode2.ForeColor = System.Drawing.Color.Red
-        TreeNode2.Name = "Rooting"
-        TreeNode2.Text = "Rooting"
-        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode2})
+        TreeNode1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        TreeNode1.ForeColor = System.Drawing.Color.Red
+        TreeNode1.Name = "Rooting"
+        TreeNode1.Text = "Rooting"
+        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
         Me.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TreeView1.RightToLeftLayout = True
         Me.TreeView1.SelectedImageIndex = 0
         Me.TreeView1.ShowNodeToolTips = True
         Me.TreeView1.ShowPlusMinus = False
-        Me.TreeView1.Size = New System.Drawing.Size(280, 548)
+        Me.TreeView1.Size = New System.Drawing.Size(240, 548)
         Me.TreeView1.TabIndex = 48
         Me.TreeView1.Tag = "نوع الخدمة & نوع الشكوى"
         '
@@ -651,7 +651,7 @@ Partial Class NewTicket
         Me.ECnt_Label.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ECnt_Label.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.ECnt_Label.ForeColor = System.Drawing.Color.Red
-        Me.ECnt_Label.Location = New System.Drawing.Point(204, 439)
+        Me.ECnt_Label.Location = New System.Drawing.Point(204, 551)
         Me.ECnt_Label.MaximumSize = New System.Drawing.Size(600, 50)
         Me.ECnt_Label.MinimumSize = New System.Drawing.Size(100, 15)
         Me.ECnt_Label.Name = "ECnt_Label"
@@ -2188,7 +2188,7 @@ Partial Class NewTicket
         Me.TabControl1.RightToLeftLayout = True
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.ShowToolTips = True
-        Me.TabControl1.Size = New System.Drawing.Size(1370, 652)
+        Me.TabControl1.Size = New System.Drawing.Size(1380, 764)
         Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight
         Me.TabControl1.TabIndex = 2020
         Me.TabControl1.TabStop = False
@@ -2204,7 +2204,7 @@ Partial Class NewTicket
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TabPage1.Size = New System.Drawing.Size(1362, 614)
+        Me.TabPage1.Size = New System.Drawing.Size(1372, 726)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "بيانات الشكوى"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -2220,7 +2220,7 @@ Partial Class NewTicket
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(3, 3)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1356, 608)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1366, 720)
         Me.FlowLayoutPanel1.TabIndex = 2035
         '
         'FlowLayoutPanel2
@@ -2229,10 +2229,10 @@ Partial Class NewTicket
         Me.FlowLayoutPanel2.Controls.Add(Me.MyGroupBox3)
         Me.FlowLayoutPanel2.Controls.Add(Me.TreeView1)
         Me.FlowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(1095, 0)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(1068, 0)
         Me.FlowLayoutPanel2.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(244, 622)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(298, 622)
         Me.FlowLayoutPanel2.TabIndex = 2029
         '
         'MyGroupBox3
@@ -2241,7 +2241,7 @@ Partial Class NewTicket
         Me.MyGroupBox3.Controls.Add(Me.RadioButton5)
         Me.MyGroupBox3.Dock = System.Windows.Forms.DockStyle.Top
         Me.FlowLayoutPanel2.SetFlowBreak(Me.MyGroupBox3, True)
-        Me.MyGroupBox3.Location = New System.Drawing.Point(100, 3)
+        Me.MyGroupBox3.Location = New System.Drawing.Point(112, 3)
         Me.MyGroupBox3.Margin = New System.Windows.Forms.Padding(3, 3, 10, 3)
         Me.MyGroupBox3.Name = "MyGroupBox3"
         Me.MyGroupBox3.Size = New System.Drawing.Size(176, 42)
@@ -2295,7 +2295,7 @@ Partial Class NewTicket
         Me.FlowLayoutPanel3.Controls.Add(Me.LblDublicate)
         Me.FlowLayoutPanel3.Controls.Add(Me.Label18)
         Me.FlowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.FlowLayoutPanel3.Location = New System.Drawing.Point(903, 0)
+        Me.FlowLayoutPanel3.Location = New System.Drawing.Point(876, 0)
         Me.FlowLayoutPanel3.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel3.Name = "FlowLayoutPanel3"
         Me.FlowLayoutPanel3.Size = New System.Drawing.Size(192, 622)
@@ -2396,7 +2396,7 @@ Partial Class NewTicket
         Me.FlowLayoutPanel4.Controls.Add(Me.LblHelp)
         Me.FlowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
         Me.FlowLayoutPanel4.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.FlowLayoutPanel4.Location = New System.Drawing.Point(78, 0)
+        Me.FlowLayoutPanel4.Location = New System.Drawing.Point(51, 0)
         Me.FlowLayoutPanel4.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel4.Name = "FlowLayoutPanel4"
         Me.FlowLayoutPanel4.Size = New System.Drawing.Size(825, 645)
@@ -2664,7 +2664,7 @@ Partial Class NewTicket
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1370, 652)
+        Me.ClientSize = New System.Drawing.Size(1380, 764)
         Me.Controls.Add(Me.TabControl1)
         Me.Location = New System.Drawing.Point(-3, 50)
         Me.MaximizeBox = False

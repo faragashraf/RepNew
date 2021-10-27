@@ -122,7 +122,6 @@ Public Class UsrCreat
     End Sub
     Private Function CSYSGetTbl(SSqlStr As String, SqlTbl As DataTable) As String
         Errmsg = Nothing
-        'LoadFrm("جاري تحميل البيانات ...", 500, 350)
         sqlComm.Connection = sqlCon
         SQLTblAdptr.SelectCommand = sqlComm
         sqlComm.CommandType = CommandType.Text

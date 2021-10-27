@@ -8,5 +8,20 @@
     <Setting Name="MlPss" Type="System.String" Scope="User">
       <Value Profile="(Default)">asd.ASD123</Value>
     </Setting>
+    <Setting Name="TimeStart" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">08/05/2021 08:00:00</Value>
+    </Setting>
+    <Setting Name="TimeEnd" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">08/05/2021 23:00:00</Value>
+    </Setting>
+    <Setting Name="ACBStart" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">08/05/2021 09:00:00</Value>
+    </Setting>
+    <Setting Name="ACBEnd" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">08/05/2021 16:00:00</Value>
+    </Setting>
+    <Setting Name="Min" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">08/05/2021 10:30:00</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

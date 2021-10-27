@@ -746,9 +746,6 @@ Popul_:
             ECnt_Label.Text = "رقم التليفون مكتمل"
             WelcomeScreen.StatBrPnlAr.Text = "جاري تحميل البيانات ..........."
             TreeView1.Visible = True
-            PublicCode.LoadFrm(500, 350)
-            Invoke(Sub() LodngFrm.LblMsg.Text += vbCrLf & "جاري تحميل بيانات العميل ...")
-            Invoke(Sub() LodngFrm.LblMsg.Refresh())
             ClntThrd.Start()
             Me.Enabled = False
         Else
@@ -878,9 +875,6 @@ Popul_:
     Private Sub SubmtOfflineTick()
         Dim TranDt As String
         Dim Trck As String = ""
-        Invoke(Sub() PublicCode.LoadFrm(340, 330))
-        Invoke(Sub() LodngFrm.LblMsg.Text = "جاري تسجيل البيانات ...")
-        Invoke(Sub() LodngFrm.LblMsg.Refresh())
         Dim Transction As SqlTransaction = Nothing             'SQL Transaction
         Dim OfflineCon As New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\OfflineDB.mdf;Integrated Security=True")
         For Cnt_ = 1 To TrackMskBx.TextLength
@@ -1082,8 +1076,6 @@ Popul_:
         Dim lodingStr As String = ""
 
         lodingStr = "جاري تسجيل البيانات ..."
-        'Invoke(Sub() PublicCode.LoadFrm(lodingStr, 340, 330))
-
         For Cnt_ = 1 To TrackMskBx.TextLength
             If Mid(TrackMskBx.Text, Cnt_, 1) <> " " Then
                 Trck &= Mid(TrackMskBx.Text, Cnt_, 1)
@@ -1229,9 +1221,6 @@ Popul_:
         TickSubmt.IsBackground = True
         WelcomeScreen.StatBrPnlAr.Text = "جاري تسجيل البيانات ..........."
         TreeView1.Visible = True
-        PublicCode.LoadFrm(340, 330)
-        Invoke(Sub() LodngFrm.LblMsg.Text += vbCrLf & "جاري تسجيل البيانات ...")
-        Invoke(Sub() LodngFrm.LblMsg.Refresh())
         TickSubmt.Start()
         Me.Enabled = False
     End Sub

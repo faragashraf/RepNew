@@ -45,8 +45,6 @@ Module Public_
     Public PrciTblCnt As Integer = 0                    'Counter for Thread
     'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Public Nw As DateTime
-
-
     Public MLXX As String = ""       ' Mail Password From Lib Table
     Public Errmsg As String          ' Handel error message
     Public Esc As String = ""
@@ -94,7 +92,6 @@ Module Public_
     Public TikIDRep_ As Integer
     Public Rslt As DialogResult
     Public Property MousePosition As Object
-
     Public CompIds As String ' tickets to get tickets updates
     Public TickTblMain As New DataTable
     Public UpdtCurrTbl As DataTable

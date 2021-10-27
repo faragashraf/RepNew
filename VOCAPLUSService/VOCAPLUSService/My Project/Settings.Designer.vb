@@ -77,6 +77,66 @@ Namespace My
                 Me("MlPss") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("08/05/2021 08:00:00")>  _
+        Public Property TimeStart() As Date
+            Get
+                Return CType(Me("TimeStart"),Date)
+            End Get
+            Set
+                Me("TimeStart") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("08/05/2021 23:00:00")>  _
+        Public Property TimeEnd() As Date
+            Get
+                Return CType(Me("TimeEnd"),Date)
+            End Get
+            Set
+                Me("TimeEnd") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("08/05/2021 09:00:00")>  _
+        Public Property ACBStart() As Date
+            Get
+                Return CType(Me("ACBStart"),Date)
+            End Get
+            Set
+                Me("ACBStart") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("08/05/2021 16:00:00")>  _
+        Public Property ACBEnd() As Date
+            Get
+                Return CType(Me("ACBEnd"),Date)
+            End Get
+            Set
+                Me("ACBEnd") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("08/05/2021 10:30:00")>  _
+        Public Property Min() As Date
+            Get
+                Return CType(Me("Min"),Date)
+            End Get
+            Set
+                Me("Min") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

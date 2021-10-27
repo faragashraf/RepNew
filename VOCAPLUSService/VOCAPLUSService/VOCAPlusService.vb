@@ -34,6 +34,8 @@ Public Class VOCAPlusService
         nxt = " On " & Now.Add(TimeSpan.Parse("00:01:00"))
     End Sub
     Private Function SendMailEx(Coun_ As Integer) As Integer
+        Dim Def As New APblicClss.Defntion
+        Dim Fn As New APblicClss.Func
         Dim MailRslt As Integer = 0
         If EscCnt > 4 Then EscCnt = 4
         'Try
@@ -43,7 +45,7 @@ SendMail_:
         'Invoke(Sub() DataGridView3.DataSource = Nothing)
         escTable.Rows.Clear()
         escTable.Columns.Clear()
-        If GetTbl("select EscID, EscCC, EscDur, EscUCatLvl from EscProcess where escID = " & EscCnt & " and EscUCatLvl = " & AcbDataTable.Rows(0).Item("CCUCatLvl").ToString(), escTable) = Nothing Then
+        If Fn.GetTbl("select EscID, EscCC, EscDur, EscUCatLvl from EscProcess where escID = " & EscCnt & " and EscUCatLvl = " & AcbDataTable.Rows(0).Item("CCUCatLvl").ToString(), escTable) = Nothing Then
             exchange = New ExchangeService(ExchangeVersion.Exchange2013_SP1)
             exchange.Credentials = New WebCredentials("egyptpost\acb", "ASD_asd123")
             exchange.Url() = New Uri("https://mail.egyptpost.org/ews/exchange.asmx")
@@ -79,14 +81,13 @@ SendMail_:
                 file = "C:\Tckon.png"
                 StatPic = "Tckon.png"
             End If
-
             message.Attachments.AddFileAttachment(StatPic, file)
             'message.Attachments(0).IsInline = True
             message.Attachments(0).ContentId = StatPic
             Dim colr As String
             If WdNo = True Then colr = "Green" Else colr = "Red"
 #Region "Body Message"
-            message.Body = "<p Style=" & Chr(34) & "text-align: center;" & Chr(34) & "><Span style=" & Chr(34) & "color: rgb(65, 168, 95); font-family:Times New Roman; font-size: 20px;text-align: center" & Chr(34) & "><strong>تشغيل تجريبي لنظام المتابعات التلقائي</strong></span></p><br>" &
+            message.Body = "<p Style=" & Chr(34) & "text-align: center;" & Chr(34) & "><Span style=" & Chr(34) & "color: rgb(65, 168, 95); font-family:Times New Roman; font-size: 20px;text-align: center" & Chr(34) & "><strong></strong></span></p><br>" &
                                         "<p Style=" & Chr(34) & "text-align: right;direction: rtl" & Chr(34) & "><Span style=" & Chr(34) & "color: Black ; font-family:Times New Roman; font-size: 14px;text-align: right;direction: rtl" & Chr(34) & "><strong>جميع البيانات الوارده في هذا الإيميل مطابقه للواقع، والمتابعه صحيحة، طبقاً لقواعد المتابعات المعلنة.<br>في حالة ظهور أي أخطاء من أي نوع يرجى التواصل على  voca-support@egyptpost.org</strong></span></p><br>" &
                                         "<table style=" & Chr(34) & " width:100%;direction: rtl;" & Chr(34) & "><tbody><tr><td style=" & Chr(34) & "width: 70.0000%;" & Chr(34) & "<div style=" & Chr(34) & "text-align: right;vertical-align:text-top;font-size: 18px;" & Chr(34) & " >استاذ (ه) / " & AcbDataTable.Rows(0).Item(5).ToString & "<br> نص التحديث : <Span Style=" & Chr(34) & "color:" & colr & Chr(34) & ";>" & Esc & "</span><br><br><br><Span Style=" & Chr(34) & "color:Black;font-family:Courier New" & Chr(34) & ";>" & FolwStr & "</span></div></td><td style=" & Chr(34) & "width: 30.0000%;" & Chr(34) & ">" & "<div style=" & Chr(34) & "text-align: left;" & Chr(34) & "><img src=" & Chr(34) & StatPic & Chr(34) & " style=" & Chr(34) & "width: 172px;" & Chr(34) & " class=" & Chr(34) & "fr-fic fr-dib fr-fil" & Chr(34) & "></td></tr></tbody></table>" &
                                         "<table style=“ & Chr(34) & “width: 100%; direction: rtl; border-style: solid; border-color:" & colr & Chr(34) & “><tbody><tr><td><div style=“ & Chr(34) & “text-align: left; margin-Left: 10px;” & Chr(34) &
@@ -133,9 +134,6 @@ SendMail_:
                 Invoke(Sub() TxtErr.Text = Now & " Error : " & ex.Message & vbCrLf & TxtErr.Text)
                 GoTo SendMail_
             End Try
-
-            Invoke(Sub() TxtErr.Text = Now & " : " & "Mail has been set " & vbCrLf & TxtErr.Text)
-
         End If
         'Catch ex As Exception
         '    MailRslt = 1
@@ -165,17 +163,18 @@ SendMail_:
             EvTsk.Start()
         End If
     End Sub
-
     'Send Smart Agrisive Mail
     Private Sub MaxEvnt()
+        Dim Def As New APblicClss.Defntion
+        Invoke(Sub() Label1.Text = "Now Is : " & Now)
         Dim Tbl As New DataTable
         Dim SQLTblAdpterXX As New SqlDataAdapter
         Dim sqlCconXX As New SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046")
-        sqlComnd.Connection = sqlCconXX
-        SQLTblAdpterXX.SelectCommand = sqlComnd
-        sqlComnd.CommandType = CommandType.Text
+        Def.sqlComnd.Connection = sqlCconXX
+        SQLTblAdpterXX.SelectCommand = Def.sqlComnd
+        Def.sqlComnd.CommandType = CommandType.Text
 
-        sqlComnd.CommandText = "select max( TkEvent.TkupSQL) from TkEvent"
+        Def.sqlComnd.CommandText = "select max( TkEvent.TkupSQL) from TkEvent"
 
         Try
             If sqlCconXX.State = ConnectionState.Closed Or sqlCconXX.State <> ConnectionState.Connecting Then
@@ -193,20 +192,17 @@ SendMail_:
         SqlConnection.ClearPool(sqlCconXX)
     End Sub
     Private Sub EvMail()
+        Dim Def As New APblicClss.Defntion
+        Invoke(Sub() Label1.Text = "Now Is : " & Now)
         Dim Tbl As New DataTable
         Dim SQLTblAdpterXX As New SqlDataAdapter
         Dim sqlCconXX As New SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046")
-        sqlComnd.Connection = sqlCconXX
-        SQLTblAdpterXX.SelectCommand = sqlComnd
-        sqlComnd.CommandType = CommandType.Text
-
-        sqlComnd.CommandText = "SELECT TkupSQL, TkupTkSql, TkupSTime, TkupTxt, TkupReDt, TkupUserIP, Int_user.UsrRealNm, UCatNm
-FROM            TkEvent INNER JOIN
-                         CDEvent ON TkupEvtId = EvId INNER JOIN
-                         Int_user ON TkupUser = Int_user.UsrId INNER JOIN
-                         IntUserCat ON Int_user.UsrCat = UCatId
-WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
-
+        Def.sqlComnd.Connection = sqlCconXX
+        SQLTblAdpterXX.SelectCommand = Def.sqlComnd
+        Def.sqlComnd.CommandType = CommandType.Text
+        Def.sqlComnd.CommandText = "SELECT TkupSQL, TkupTkSql, TkupSTime, TkupTxt, TkupReDt, TkupUserIP, Int_user.UsrRealNm, UCatNm
+                                FROM TkEvent INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN Int_user ON TkupUser = Int_user.UsrId INNER JOIN
+                                IntUserCat ON Int_user.UsrCat = UCatId WHERE(TkupSQL > " & TextBox1.Text & ")"
         Try
             If sqlCconXX.State = ConnectionState.Closed Or sqlCconXX.State <> ConnectionState.Connecting Then
                 sqlCconXX.Open()
@@ -220,6 +216,8 @@ WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
                         Lction = "المعادي"
                     ElseIf Mid(Tbl.Rows(YY).Item("TkupUserIP").ToString, 1, 5) = "10.11" Then
                         Lction = "السبيل"
+                    ElseIf Tbl.Rows(YY).Item("TkupUserIP").ToString = "10.10.26.4" Then
+                        Lction = "Server"
                     Else
                         Lction = "غير معروف"
                     End If
@@ -260,10 +258,16 @@ WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
         SqlConnection.ClearPool(sqlCconXX)
     End Sub
     Private Sub TimerEsc_Tick(sender As Object, e As EventArgs) Handles TimerEsc.Tick
-        Dim WW = ServrTime()
+        Dim Fn As New APblicClss.Func
+        Dim WW = Fn.ServrTime()
         Dim WWq = Format(WW, "HH")
         Dim WWwq = Format(WW, "mm")
 
+        Dim _Now As Date = Format(Fn.ServrTime(), "hh:mm tt")
+        Dim _StrtTime As Date = Format(My.Settings.TimeStart, "hh:mm tt")
+        Dim _EndTime As Date = Format(My.Settings.TimeEnd, "hh:mm tt")
+        Dim HourMin As DateTime = (My.Settings.Min)
+        Dim HourMin_ As Integer = Minute(HourMin)
 #Region "Body"
         BdyStrt = "<p dir=" & Chr(34) & "RTL" & Chr(34) & " style='margin-top:0cm;margin-right:36.0pt;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:" & Chr(34) & "Calibri" & Chr(34) & ",sans-serif;text-align:right;text-indent:-18.0pt;'><strong><span style='font-size:19px;line-height:107%;font-family:" & Chr(34) & "Times New Roman" & Chr(34) & ",serif;'>نظام البريد التلقائي لتطبيق&nbsp;</span></strong><strong><span dir=" & Chr(34) & "LTR" & Chr(34) & " style='font-size:24px;line-height:107%;font-family:" & Chr(34) & "Bahnschrift Condensed" & Chr(34) & ",sans-serif;color:#0070C0;'>VOCA Plus</span></strong></p>
 <p dir= " & Chr(34) & "RTL" & Chr(34) & " style='margin-top:0cm;margin-right:36.0pt;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:" & Chr(34) & "Calibri" & Chr(34) & ",sans-serif;text-align:right;text-indent:-18.0pt;'><strong><span dir=" & Chr(34) & "RTL" & Chr(34) & " style='font-size:19px;line-height:107%;font-family:" & Chr(34) & "Times New Roman" & Chr(34) & ",serif;'>&nbsp;</span></strong></p>
@@ -316,9 +320,10 @@ WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:" & Chr(34) & "Calibri" & Chr(34) & ",sans-serif;'><span style=" & Chr(34) & "font-size:15px;color:black;" & Chr(34) & ">&nbsp;</span></p>
 <p dir=" & Chr(34) & "RTL" & Chr(34) & " style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:" & Chr(34) & "Calibri" & Chr(34) & ",sans-serif;text-align:right;'><span dir=" & Chr(34) & "LTR" & Chr(34) & ">&nbsp;</span></p>"
 #End Region
-        If Format(WW, "HH:mm:ss") < #1/1/0001 11:00:00 PM# And Format(WW, "HH:mm:ss") > #1/1/0001 09:00:00 AM# Then
-            If Format(WW, "mm") = CombMin.Text Then
-                If GetTbl("select * from AutoMail where AutoMail.MailRule = 'H'", MailTbl) = Nothing Then
+
+        If _Now < _EndTime And _Now > _StrtTime Then 'Every Hour Send Hourly Report During The Working Hours
+            If Format(_Now, "mm") = HourMin_ Then
+                If Fn.GetTbl("select * from AutoMail where AutoMail.MailRule = 'H'", MailTbl) = Nothing Then
                     If MailTbl.Rows.Count > 0 Then
                         Invoke(Sub() TxtErr.Text = Now & " :  Starting Auto Mail ..." & vbCrLf & TxtErr.Text)
                         Invoke(Sub() TxtErr.Refresh())
@@ -332,7 +337,7 @@ WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
                                 Mail_.To_ = MailTbl.Rows(YY).Item(2).ToString
                                 Mail_.CC_ = MailTbl.Rows(YY).Item(3).ToString
                                 Mail_.BCc_ = ""
-                                Mail_.Sub_ = MailTbl.Rows(YY).Item(4).ToString & "_" & Format(WW, "HH") & "_" & Format(WW, "yyyy/MM/dd,dddd")
+                                Mail_.Sub_ = MailTbl.Rows(YY).Item(4).ToString & "_" & Hour(_Now) & "_" & Format(WW, "yyyy/MM/dd,dddd")
                                 Mail_.Body_ = BdyStrt & MailTbl.Rows(YY).Item(5).ToString & Format(WW, "HH:mm") & BdyEnd
                                 Invoke(Sub() TxtErr.Text = Now & " :  Exporting " & Mail_.Sub_ & vbCrLf & TxtErr.Text)
                                 Invoke(Sub() TxtErr.Refresh())
@@ -365,8 +370,8 @@ WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
                     Exit Sub
                 End If
             End If
-        ElseIf Format(WW, "HH") = 23 And Format(WW, "mm") = CombMin.Text Then
-            If GetTbl("select * from AutoMail where AutoMail.MailRule = 'D'", MailTbl) = Nothing Then
+        ElseIf Format(_Now, "HH") = Format(_EndTime, "HH") And Format(_Now, "mm") = HourMin_ Then 'Send Daily Report On The End Working Day Time
+            If Fn.GetTbl("select * from AutoMail where AutoMail.MailRule = 'D'", MailTbl) = Nothing Then
                 If MailTbl.Rows.Count > 0 Then
                     Invoke(Sub() TxtErr.Text = Now & " :  Starting Auto Mail ..." & vbCrLf & TxtErr.Text)
                     Invoke(Sub() TxtErr.Refresh())
@@ -413,16 +418,24 @@ WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
         End If
 
         'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        'Dim GGTT As DateTime = Format(ServrTime(), "HH:mm:ss")
 
-        WdysTable.Rows.Clear()
-        If GetTbl("select HDate, HDay, HDayW, HDy from CDHolDay where HDate = (Select CONVERT(nvarchar, GetDate(),111) as Now_)", WdysTable) = Nothing Then
+        Dim _ACBStrt As Date = Format(My.Settings.ACBStart, "hh:mm tt")
+        Dim _ACBEnd As Date = Format(My.Settings.ACBEnd, "hh:mm tt")
+
+
+
+        'WdysTable.Rows.Clear()
+        'If Fn.GetTbl("select HDate, HDay, HDayW, HDy from CDHolDay where HDate = (Select CONVERT(nvarchar, GetDate(),111) as Now_)", WdysTable) = Nothing Then
+        'End If
+
+        WdysTable.Rows.Clear() 'Esclation Proccess
+        If Fn.GetTbl("select HDate, HDay, HDayW, HDy from CDHolDay where HDate = (Select CONVERT(nvarchar, GetDate(),111) as Now_)", WdysTable) = Nothing Then
             If WdysTable.Rows(0).Item("HDy") = 1 Then
-                If Format(WW, "HH:mm:ss") < #1/1/0001 04:00:00 PM# And Format(WW, "HH:mm:ss") > #1/1/0001 09:00:00 AM# Then
+                If _Now < _ACBEnd And _Now > _ACBStrt Then
                     TimerEsc.Stop()
                     ''    DataGridView1.DataSource = ""
                     ''    EscAtoTable.Rows.Clear()
-                    ''    If GetTbl("SELECT TkID, TkClNm, TkDtStart, TkRecieveDt, TkClsStatus, SrcNm, TkEscTyp, LstUpdtTime, TkupTxt, dbo.Int_user.UsrRealNm AS LstUpUsr, ProdKNm, PrdNm, CompNm, TkupEvtId, TkFolw, TkupSendEsc, TkupSQL FROM dbo.TicketsAll INNER JOIN dbo.TkEvent ON TkSQL = TkupTkSql INNER JOIN dbo.TicLstEv ON TkupSQL = dbo.TicLstEv.LstSqlEv INNER JOIN dbo.CDEvent ON TkupEvtId = dbo.CDEvent.EvId INNER JOIN dbo.Int_user ON TkupUser = dbo.Int_user.UsrId
+                    ''    If Fn.GetTbl("SELECT TkID, TkClNm, TkDtStart, TkRecieveDt, TkClsStatus, SrcNm, TkEscTyp, LstUpdtTime, TkupTxt, dbo.Int_user.UsrRealNm AS LstUpUsr, ProdKNm, PrdNm, CompNm, TkupEvtId, TkFolw, TkupSendEsc, TkupSQL FROM dbo.TicketsAll INNER JOIN dbo.TkEvent ON TkSQL = TkupTkSql INNER JOIN dbo.TicLstEv ON TkupSQL = dbo.TicLstEv.LstSqlEv INNER JOIN dbo.CDEvent ON TkupEvtId = dbo.CDEvent.EvId INNER JOIN dbo.Int_user ON TkupUser = dbo.Int_user.UsrId
                     ''WHERE (TkupEvtId = 902) OR (TkupEvtId = 903)", EscAtoTable) = Nothing Then
                     ''        If EscAtoTable.Rows.Count > 0 Then
                     ''            Invoke(Sub() DataGridView1.DataSource = EscAtoTable)
@@ -448,11 +461,16 @@ WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
         End If
     End Sub
     Private Sub EscSub()
-        Invoke(Sub() TxtErr.Text = Now & " :  Starting Job ............" & vbCrLf & TxtErr.Text)
-        Invoke(Sub() TxtErr.Text = Now & " :  Get Esclation Data ..." & vbCrLf & TxtErr.Text)
+        Dim Def As New APblicClss.Defntion
+        Dim Fn As New APblicClss.Func
+
+
+        Dim _ACBStrt As Date = Format(My.Settings.ACBStart, "hh:mm tt")
+        Dim _ACBEnd As Date = Format(My.Settings.ACBEnd, "hh:mm tt")
+
         Invoke(Sub() DataGridView1.DataSource = Nothing)
         EscAtoTable.Rows.Clear()
-        If GetTbl("SELECT TkID, TkClNm, TkDtStart, TkRecieveDt, TkClsStatus, SrcNm, TkEscTyp, LstUpdtTime, TkupTxt, dbo.Int_user.UsrRealNm AS LstUpUsr, ProdKNm, PrdNm, CompNm, TkupEvtId, TkFolw, TkupSendEsc, TkupSQL FROM dbo.TicketsAll INNER JOIN dbo.TkEvent ON TkSQL = TkupTkSql INNER JOIN dbo.TicLstEv ON TkupSQL = dbo.TicLstEv.LstSqlEv INNER JOIN dbo.CDEvent ON TkupEvtId = dbo.CDEvent.EvId INNER JOIN dbo.Int_user ON TkupUser = dbo.Int_user.UsrId
+        If Fn.GetTbl("SELECT TkID, TkClNm, TkDtStart, TkRecieveDt, TkClsStatus, SrcNm, TkEscTyp, LstUpdtTime, TkupTxt, dbo.Int_user.UsrRealNm AS LstUpUsr, ProdKNm, PrdNm, CompNm, TkupEvtId, TkFolw, TkupSendEsc, TkupSQL FROM dbo.TicketsAll INNER JOIN dbo.TkEvent ON TkSQL = TkupTkSql INNER JOIN dbo.TicLstEv ON TkupSQL = dbo.TicLstEv.LstSqlEv INNER JOIN dbo.CDEvent ON TkupEvtId = dbo.CDEvent.EvId INNER JOIN dbo.Int_user ON TkupUser = dbo.Int_user.UsrId
                 WHERE (TkupEvtId = 902) OR (TkupEvtId = 903)", EscAtoTable) = Nothing Then
             Invoke(Sub() DataGridView1.DataSource = EscAtoTable)
             For ggg As Integer = 0 To DataGridView1.Columns.Count - 1
@@ -460,19 +478,14 @@ WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
             Next
             'Invoke(Sub() DataGridView1.Columns(7).Width = 130)
             If EscAtoTable.Rows.Count > 0 Then
-                WdysTable.Rows.Clear()
-                If GetTbl("select HDate, HDay, HDayW, HDy from CDHolDay where HDate = (Select CONVERT(nvarchar, GetDate(),111) as Now_)", WdysTable) = Nothing Then
-
-                    For Cnt = 0 To EscAtoTable.Rows.Count - 1
 
 
-                        Dim Minuts As Double
-                        Dim MinutsDef As Integer
-                        Invoke(Sub() TxtErr.Text = Now & " :  Trying With : " & Cnt + 1 & " Of " & EscAtoTable.Rows.Count & vbCrLf & TxtErr.Text)
-                        Invoke(Sub() DataGridView2.DataSource = Nothing)
-                        AcbDataTable.Rows.Clear()
-                        Invoke(Sub() TxtErr.Text = Now & " : " & vbCrLf & "Trying To Get Data " & vbCrLf & TxtErr.Text)
-                        If GetTbl("SELECT TkSQL, MAX(DISTINCT dbo.Int_user.UsrRealNm) AS UsrEsc, MAX(DISTINCT dbo.Int_user.UsrEmail) AS UsrEscEmail, MAX(DISTINCT Int_user_3.UsrRealNm) AS CSTL, MAX(DISTINCT Int_user_3.UsrEmail) 
+                For Cnt = 0 To EscAtoTable.Rows.Count - 1
+                    Dim Minuts As Double
+                    Dim MinutsDef As Integer
+                    Invoke(Sub() DataGridView2.DataSource = Nothing)
+                    AcbDataTable.Rows.Clear()
+                    If Fn.GetTbl("SELECT TkSQL, MAX(DISTINCT dbo.Int_user.UsrRealNm) AS UsrEsc, MAX(DISTINCT dbo.Int_user.UsrEmail) AS UsrEscEmail, MAX(DISTINCT Int_user_3.UsrRealNm) AS CSTL, MAX(DISTINCT Int_user_3.UsrEmail) 
                                  AS CSTLMail, Int_user_1.UsrRealNm AS FolwUsr, Int_user_1.UsrSisco AS CCFlwPh, Int_user_1.UsrEmail AS FLWMail, Int_user_2.UsrRealNm AS CCTL, Int_user_2.UsrEmail AS CCTLMail, 
                                  Int_user_2.UsrSisco AS CCTLPh, IntUserCat_1.UCatNm AS TeamNm, IntUserCat_1.UCatLvl AS CCUCatLvl
                                  FROM dbo.IntUserCat AS IntUserCat_1 INNER JOIN
@@ -486,78 +499,60 @@ WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
                                  dbo.Int_user AS Int_user_3 ON dbo.IntUserCat.UCatIdSub = Int_user_3.UsrCat ON dbo.TkEvent.TkupUser = dbo.Int_user.UsrId
                                  GROUP BY TkSQL, Int_user_1.UsrRealNm, Int_user_1.UsrSisco, Int_user_1.UsrEmail, Int_user_2.UsrRealNm, Int_user_2.UsrEmail, Int_user_2.UsrSisco, IntUserCat_1.UCatNm,  IntUserCat_1.UCatLvl
                                  HAVING TkSQL = " & EscAtoTable.Rows(Cnt).Item("TkID"), AcbDataTable) = Nothing Then
-                            Invoke(Sub() DataGridView2.DataSource = AcbDataTable)
-                            Invoke(Sub() DataGridView1.Rows(Cnt).Selected = True)
-                        Else
-                            Invoke(Sub() TxtErr.Text = Now & " : " & "There is No Tickets " & vbCrLf & TxtErr.Text)
-                            Exit Sub
-                        End If
-                        If EscAtoTable.Rows(Cnt).Item("TkFolw") = 0 Then FolwStr = "جديد : لم يتم عمل أي تحديثات من متابع الشكوى" Else FolwStr = ""
-
-                        Invoke(Sub() TxtErr.Text = Now & " : " & "Esclatio 1 Of Ticket No.: " & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
-
-                        If EscAtoTable.Rows(Cnt).Item("TkupEvtId") = 902 Then
-                            EscCnt = 1
-                            Esc = "تم عمل متابعة 1 من خلال التطبيق"
-                            Dim WW = ServrTime()
-                            If EscAtoTable.Rows(Cnt).Item("TkupSendEsc") = False Then
-
-                                If Format(WW, "HH:mm:ss") < #1/1/0001 04:00:00 PM# AndAlso Format(WW, "HH:mm:ss") > #1/1/0001 09:00:00 AM# AndAlso WdysTable.Rows(0).Item("HDy") = 1 Then
-                                    WeekTable.Rows.Clear()
-                                    GetTbl("select HDate, HDay, HDayW, HDy from CDHolDay where HDate = '" & Format(EscAtoTable.Rows(Cnt).Item("LstUpdtTime"), "yyyy/MM/dd") & "'", WeekTable)
-                                    If EscAtoTable.Rows(Cnt).Item("LstUpdtTime") > #1/1/0001 04:00:00 PM# Or EscAtoTable.Rows(Cnt).Item("LstUpdtTime") < #1/1/0001 09:00:00 AM# Or WeekTable.Rows(0).Item("HDy") = 1 Then
-                                        If InsTrans("update TkEvent Set TkupSendEsc = 1, TkupTxt = TkupTxt + Char(13)  + ' تم تعديل وقت تسجيل المتابعة من ' + CONVERT(VARCHAR, (select TkupSTime from TkEvent  where TkupSQL = " & EscAtoTable.Rows(Cnt).Item("TkupSQL") & ") , 120) + ' إلى الوقت الحالى', TkupSTime = (Select GetDate()) where TkupSQL = " & EscAtoTable.Rows(Cnt).Item("TkupSQL"),
-                                                        "update Tickets set TkEscTyp = 1 Where TkSQL = " & EscAtoTable.Rows(Cnt).Item("TkID")) = Nothing Then
-                                            SendMailEx(Cnt)
-                                        Else
-                                            Invoke(Sub() TxtErr.Text = Now & " : " & "Faild To Update Esclation Time Of Ticket No." & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
-                                        End If
+                        Invoke(Sub() DataGridView2.DataSource = AcbDataTable)
+                        Invoke(Sub() DataGridView1.Rows(Cnt).Selected = True)
+                    Else
+                        Invoke(Sub() TxtErr.Text = Now & " : " & "There is No Tickets " & vbCrLf & TxtErr.Text)
+                        Exit Sub
+                    End If
+                    If EscAtoTable.Rows(Cnt).Item("TkFolw") = 0 Then FolwStr = "جديد : لم يتم عمل أي تحديثات من متابع الشكوى" Else FolwStr = ""
+                    If EscAtoTable.Rows(Cnt).Item("TkupEvtId") = 902 Then
+                        EscCnt = 1
+                        Esc = "تم عمل متابعة 1 من خلال التطبيق"
+                        Dim WW = Fn.ServrTime()
+                        If EscAtoTable.Rows(Cnt).Item("TkupSendEsc") = False Then
+                            Invoke(Sub() TxtErr.Text = Now & " : " & "Esclation Of Ticket No.: " & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
+                            WeekTable.Rows.Clear()
+                            Fn.GetTbl("select HDate, HDay, HDayW, HDy from CDHolDay where HDate = '" & Format(EscAtoTable.Rows(Cnt).Item("LstUpdtTime"), "yyyy/MM/dd") & "'", WeekTable)
+                            If Format(EscAtoTable.Rows(Cnt).Item("LstUpdtTime"), "hh:mm tt") > _ACBEnd Or Format(EscAtoTable.Rows(Cnt).Item("LstUpdtTime"), "hh:mm tt") < _ACBStrt Or WeekTable.Rows(0).Item("HDy") = 0 Then
+                                If Fn.InsTrans("update TkEvent Set TkupSendEsc = 1, TkupTxt = TkupTxt + Char(13)  + ' تم تعديل وقت تسجيل المتابعة من ' + CONVERT(VARCHAR, (select TkupSTime from TkEvent  where TkupSQL = " & EscAtoTable.Rows(Cnt).Item("TkupSQL") & ") , 120) + ' إلى الوقت الحالى', TkupSTime = (Select GetDate()) where TkupSQL = " & EscAtoTable.Rows(Cnt).Item("TkupSQL"),
+                                                            "update Tickets set TkEscTyp = 1 Where TkSQL = " & EscAtoTable.Rows(Cnt).Item("TkID")) = Nothing Then
+                                    If SendMailEx(Cnt) = 0 Then                     ' Send Mail
+                                        Invoke(Sub() TxtErr.Text = Now & " : " & "Mail has been Sent " & vbCrLf & TxtErr.Text)
                                     Else
-                                        InsTrans("update TkEvent set TkupSendEsc = 1 where TkupSQL = " & EscAtoTable.Rows(Cnt).Item("TkupSQL"),
-                                                        "update Tickets set TkEscTyp = 1 Where TkSQL = " & EscAtoTable.Rows(Cnt).Item("TkID"))
-                                        SendMailEx(Cnt)
+                                        Invoke(Sub() TxtErr.Text = Now & " : " & "Faild To Sending mail Of Ticket No." & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
                                     End If
+                                Else
+                                    Invoke(Sub() TxtErr.Text = Now & " : " & "Faild To Update Esclation Time Of Ticket No." & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
                                 End If
-
-                            ElseIf EscAtoTable.Rows(Cnt).Item("TkupSendEsc") = True Then
-                                escTable.Rows.Clear()
-                                GetTbl("select EscID, EscCC, EscDur from EscProcess where escID = " & EscAtoTable.Rows(Cnt).Item("TkEscTyp"), escTable)
-                                Minuts = WW.Subtract(EscAtoTable.Rows(Cnt).Item("LstUpdtTime")).TotalMinutes
-                                MinutsDef = escTable.Rows(0).Item("EscDur") - Minuts
-                                If Minuts > escTable.Rows(0).Item("EscDur") Then
-                                    If EscAtoTable.Rows(Cnt).Item("TkEscTyp") = 1 Then
-                                        Esc = "تم عمل متابعة 2 بشكل آلى من خلال التطبيق"
-                                        EscID = 903
-                                        EscCnt = 2
-                                        Invoke(Sub() TxtErr.Text = Now & " : " & "Trying To Insert Update " & vbCrLf & TxtErr.Text)
-                                        If InsTrans("update Tickets set TkEscTyp = " & EscCnt & " where (TkSQL = " & EscAtoTable.Rows(Cnt).Item("TkID") & ")",
-                                                             "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser, TkupSendEsc) VALUES ('" & EscAtoTable.Rows(Cnt).Item("TkID") & "','" & Esc & "','" & "0" & "','" & EscID & "','" & OsIP() & "','" & "32000" & "','" & 1 & "')") = Nothing Then
-                                            If SendMailEx(Cnt) = 0 Then                     ' Send Mail
-                                                Invoke(Sub() TxtErr.Text = Now & " : " & "Escalation has been done " & vbCrLf & TxtErr.Text)
-                                            Else
-                                                Invoke(Sub() TxtErr.Text = Now & " : " & "Faild To Sending mail Of Ticket No." & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
-                                            End If
-                                        Else
-                                            Invoke(Sub() TxtErr.Text = Now & " : " & "Faild To insert Update and sending mail Of Ticket No." & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
-                                        End If
+                            Else
+                                If Fn.InsTrans("update TkEvent set TkupSendEsc = 1 where TkupSQL = " & EscAtoTable.Rows(Cnt).Item("TkupSQL"),
+                                                            "update Tickets set TkEscTyp = 1 Where TkSQL = " & EscAtoTable.Rows(Cnt).Item("TkID")) = Nothing Then
+                                    If SendMailEx(Cnt) = 0 Then                     ' Send Mail
+                                        Invoke(Sub() TxtErr.Text = Now & " : " & "Mail has been Sent " & vbCrLf & TxtErr.Text)
+                                    Else
+                                        Invoke(Sub() TxtErr.Text = Now & " : " & "Faild To Sending mail Of Ticket No." & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
                                     End If
+                                Else
+                                    Invoke(Sub() TxtErr.Text = Now & " : " & "Faild To insert Update and sending mail Of Ticket No." & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
                                 End If
                             End If
-                        ElseIf EscAtoTable.Rows(Cnt).Item("TkupEvtId") = 903 Then
+                        ElseIf EscAtoTable.Rows(Cnt).Item("TkupSendEsc") = True Then
                             escTable.Rows.Clear()
-                            GetTbl("select EscID, EscCC, EscDur from EscProcess where escID = " & EscAtoTable.Rows(Cnt).Item("TkEscTyp"), escTable)
-                            Minuts = ServrTime().Subtract(EscAtoTable.Rows(Cnt).Item("LstUpdtTime")).TotalMinutes
+                            Fn.GetTbl("select EscID, EscCC, EscDur from EscProcess where escID = " & EscAtoTable.Rows(Cnt).Item("TkEscTyp"), escTable)
+                            Minuts = WW.Subtract(EscAtoTable.Rows(Cnt).Item("LstUpdtTime")).TotalMinutes
                             MinutsDef = escTable.Rows(0).Item("EscDur") - Minuts
                             If Minuts > escTable.Rows(0).Item("EscDur") Then
-                                If EscAtoTable.Rows(Cnt).Item("TkEscTyp") = 2 Then
-                                    Esc = "تم عمل متابعة 3 بشكل آلى من خلال التطبيق"
-                                    EscID = 904
-                                    EscCnt = 3
+                                Invoke(Sub() TxtErr.Text = Now & " : " & "Esclation Of Ticket No.: " & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
+                                If EscAtoTable.Rows(Cnt).Item("TkEscTyp") = 1 Then
+                                    Esc = "تم عمل متابعة 2 بشكل آلى من خلال التطبيق"
+                                    EscID = 903
+                                    EscCnt = 2
                                     Invoke(Sub() TxtErr.Text = Now & " : " & "Trying To Insert Update " & vbCrLf & TxtErr.Text)
-                                    If InsTrans("update Tickets set TkEscTyp = " & EscCnt & " where (TkSQL = " & EscAtoTable.Rows(Cnt).Item("TkID") & ")",
-                                                         "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser, TkupSendEsc) VALUES ('" & EscAtoTable.Rows(Cnt).Item("TkID") & "','" & Esc & "','" & "0" & "','" & EscID & "','" & OsIP() & "','" & "32000" & "','" & 1 & "')") = Nothing Then
+                                    If Fn.InsTrans("update Tickets set TkEscTyp = " & EscCnt & " where (TkSQL = " & EscAtoTable.Rows(Cnt).Item("TkID") & ")",
+                                                             "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser, TkupSendEsc) VALUES ('" & EscAtoTable.Rows(Cnt).Item("TkID") & "','" & Esc & "','" & "0" & "','" & EscID & "','" & OsIP() & "','" & "32000" & "','" & 1 & "')") = Nothing Then
                                         If SendMailEx(Cnt) = 0 Then                     ' Send Mail
-                                            Invoke(Sub() TxtErr.Text = Now & " : " & "Escalation has been done " & vbCrLf & TxtErr.Text)
+                                            Invoke(Sub() TxtErr.Text = Now & " : " & "Mail has been Sent " & vbCrLf & TxtErr.Text)
                                         Else
                                             Invoke(Sub() TxtErr.Text = Now & " : " & "Faild To Sending mail Of Ticket No." & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
                                         End If
@@ -567,11 +562,35 @@ WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
                                 End If
                             End If
                         End If
-                        Esc = ""
-                        EscCnt = 0
-                        EscID = 0
-                    Next Cnt
-                End If
+                    ElseIf EscAtoTable.Rows(Cnt).Item("TkupEvtId") = 903 Then
+                        escTable.Rows.Clear()
+                        Fn.GetTbl("select EscID, EscCC, EscDur from EscProcess where escID = " & EscAtoTable.Rows(Cnt).Item("TkEscTyp"), escTable)
+                        Minuts = Fn.ServrTime().Subtract(EscAtoTable.Rows(Cnt).Item("LstUpdtTime")).TotalMinutes
+                        MinutsDef = escTable.Rows(0).Item("EscDur") - Minuts
+                        If Minuts > escTable.Rows(0).Item("EscDur") Then
+                            Invoke(Sub() TxtErr.Text = Now & " : " & "Esclation Of Ticket No.: " & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
+                            If EscAtoTable.Rows(Cnt).Item("TkEscTyp") = 2 Then
+                                Esc = "تم عمل متابعة 3 بشكل آلى من خلال التطبيق"
+                                EscID = 904
+                                EscCnt = 3
+                                Invoke(Sub() TxtErr.Text = Now & " : " & "Trying To Insert Update " & vbCrLf & TxtErr.Text)
+                                If Fn.InsTrans("update Tickets set TkEscTyp = " & EscCnt & " where (TkSQL = " & EscAtoTable.Rows(Cnt).Item("TkID") & ")",
+                                                         "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser, TkupSendEsc) VALUES ('" & EscAtoTable.Rows(Cnt).Item("TkID") & "','" & Esc & "','" & "0" & "','" & EscID & "','" & OsIP() & "','" & "32000" & "','" & 1 & "')") = Nothing Then
+                                    If SendMailEx(Cnt) = 0 Then                     ' Send Mail
+                                        Invoke(Sub() TxtErr.Text = Now & " : " & "Escalation has been done " & vbCrLf & TxtErr.Text)
+                                    Else
+                                        Invoke(Sub() TxtErr.Text = Now & " : " & "Faild To Sending mail Of Ticket No." & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
+                                    End If
+                                Else
+                                    Invoke(Sub() TxtErr.Text = Now & " : " & "Faild To insert Update and sending mail Of Ticket No." & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
+                                End If
+                            End If
+                        End If
+                    End If
+                    Esc = ""
+                    EscCnt = 0
+                    EscID = 0
+                Next Cnt
             Else
                 'MsgInf(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
                 'Exit Sub
@@ -579,11 +598,8 @@ WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
         Else
             Invoke(Sub() TxtErr.Text = Now & " : Failed To Fill Esclation Table" & vbCrLf & TxtErr.Text)
         End If
-
-
-        Invoke(Sub() TxtErr.Text = Now & " :  Job has been finished " & vbCrLf & TxtErr.Text)
-        sqlCcon.Close()
-        SqlConnection.ClearPool(sqlCcon)
+        Def.sqlCcon.Close()
+        SqlConnection.ClearPool(Def.sqlCcon)
         Span_ = TimeSpan.Parse("00:01:00")
         nxt = " On " & Now.Add(TimeSpan.Parse("00:01:00"))
         Invoke(Sub() CombHour.Text = Now.Hour)
@@ -591,13 +607,6 @@ WHERE        (TkupSQL > " & TextBox1.Text & ") AND (EvSusp = 0)"
         Invoke(Sub() TimerSecnods.Start())
         Invoke(Sub() TxtErr.Text = Now & " :  Waiting For Next Job" & nxt & vbCrLf & TxtErr.Text)
         Exit Sub
-Done_:
-        Invoke(Sub() TxtErr.Text = Now & " :  Job has been finished : " & vbCrLf & TxtErr.Text)
-        Span_ = TimeSpan.Parse("00:01:00")
-        nxt = " On " & Now.Add(TimeSpan.Parse("00:01:00"))
-        Invoke(Sub() TimerEsc.Start())
-        Invoke(Sub() TimerSecnods.Start())
-        Invoke(Sub() LblTimer.Text = "Next Job Will Be After : " & (Span_ - TimeSpan.Parse("00:00:01")).ToString & nxt)
     End Sub
     Private Function SndMail() As String
         ExrtErr = Nothing
@@ -629,6 +638,7 @@ Done_:
         Return ExrtErr
     End Function
     Private Function Exprt(FileNm As String) As String
+        Dim Fn As New APblicClss.Func
         ExrtErr = Nothing
         FileExported = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\" & FileNm & ".xlsx"
 
@@ -636,7 +646,7 @@ Done_:
 
         For JJ = 0 To Split(Mail_.Slct_, "$").Count - 1
             ExpoTbl = New DataTable
-            If GetTbl(Split(Mail_.Slct_, "$")(JJ), ExpoTbl) = Nothing Then
+            If Fn.GetTbl(Split(Mail_.Slct_, "$")(JJ), ExpoTbl) = Nothing Then
                 'If ExpoTbl.Rows.Count > 0 Then
                 ExpoTbl.Rows.Add()
                 'For UU = 0 To ExpoTbl.Columns.Count - 1
@@ -674,7 +684,6 @@ Done_:
         End Try
         Return ExrtErr
     End Function
-
     Private Sub BtnAbort_Click(sender As Object, e As EventArgs) Handles BtnAbort.Click
         Settings_.ShowDialog()
     End Sub
