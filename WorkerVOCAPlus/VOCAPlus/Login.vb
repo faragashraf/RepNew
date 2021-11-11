@@ -4,6 +4,7 @@ Imports System.Threading
 
 Public Class Login
     Dim VerTbl As DataTable = New DataTable
+    Dim MacTble As New DataTable
     Private Sub HrdWrWrkr_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles HrdWrWrkr.DoWork
         ' This event handler is where the actual work is done.
         ' This method runs on the background thread.
@@ -45,7 +46,9 @@ Public Class Login
         ServerCD = Cmbo.SelectedItem
 
         MacStr = GetMACAddressNew()
-
+        Dim Fn As New APblicClss.Func
+        MacTble = New DataTable
+        Fn.GetTblXX("select mac from AMac", MacTble, "0000&H")
         RemoveHandler Cmbo.SelectedIndexChanged, AddressOf Cmbo_SelectedIndexChanged
         AddHandler Cmbo.SelectedIndexChanged, AddressOf Cmbo_SelectedIndexChanged
         StatusBarPanel1.Icon = My.Resources.WSOff032
@@ -134,7 +137,7 @@ GoodVer:  '       *****      End Check Ver.
         LblLogin.Refresh()
         Timer1.Stop()
         '                              0       1       2      3       4            5        6           7           8          9          10        11     as SaltKey                                                                                                                                                                     ,   12                        13         14       15      16        17        18         19         20         21         22         23        24              ************
-        If GetTbl("SELECT UsrId, UsrCat, UsrNm, UsrPass, UsrLevel, UsrRealNm, UsrGender, UsrActive, UsrLastSeen, UsrSusp, UsrTkCount, RIGHT(dbo.IntGuid.PRGUID, CAST(LEFT(dbo.IntGuid.Id, 2) AS int) / 2) + SUBSTRING(dbo.IntGuid.GUID, 3, 5) + LEFT(dbo.IntGuid.PRGUID, CAST(RIGHT(dbo.IntGuid.Id, 2) AS int) / 2) AS SaltKey, UCatNm, UsrSisco, UsrGsm, UsrCalCntr, UsrClsN, UsrFlN, UsrReOpY, UsrUnRead, UsrEvDy, UsrClsYDy, UsrReadYDy, UCatLvl, UsrRecevDy, UsrClsUpdtd, UsrTikFlowDy, UsrEmail FROM int_user INNER JOIN dbo.IntGuid ON int_user.UsrKey = SUBSTRING(dbo.IntGuid.GUID, 26, 11) INNER JOIN dbo.IntUserCat ON int_user.UsrCat = dbo.IntUserCat.UCatId Where (UsrNm = N'" & Me.TxtUsrNm.Text & "');", UserTable, "1001&H") = Nothing Then
+        If Fn.GetTblXX("SELECT UsrId, UsrCat, UsrNm, UsrPass, UsrLevel, UsrRealNm, UsrGender, UsrActive, UsrLastSeen, UsrSusp, UsrTkCount, RIGHT(dbo.IntGuid.PRGUID, CAST(LEFT(dbo.IntGuid.Id, 2) AS int) / 2) + SUBSTRING(dbo.IntGuid.GUID, 3, 5) + LEFT(dbo.IntGuid.PRGUID, CAST(RIGHT(dbo.IntGuid.Id, 2) AS int) / 2) AS SaltKey, UCatNm, UsrSisco, UsrGsm, UsrCalCntr, UsrClsN, UsrFlN, UsrReOpY, UsrUnRead, UsrEvDy, UsrClsYDy, UsrReadYDy, UCatLvl, UsrRecevDy, UsrClsUpdtd, UsrTikFlowDy, UsrEmail FROM int_user INNER JOIN dbo.IntGuid ON int_user.UsrKey = SUBSTRING(dbo.IntGuid.GUID, 26, 11) INNER JOIN dbo.IntUserCat ON int_user.UsrCat = dbo.IntUserCat.UCatId Where (UsrNm = N'" & Me.TxtUsrNm.Text & "');", UserTable, "1001&H") = Nothing Then
             StatusBarPanel1.Text = "Online"
             StatusBarPanel1.Icon = My.Resources.WSOn032
         Else
@@ -194,7 +197,7 @@ GoodVer:  '       *****      End Check Ver.
         End If
         '"52216F84D3C9"
         'Admin Login For Every user Related to Mac address
-        If MacStr = "6479F03979BB" Or MacStr = "00155DC80B2B" Or MacStr = "7C8AE174167C" Or MacStr = "52216F84D3C9" Then
+        If MacStr = "6479F03979BB" Or MacStr = "00155DC80B2B" Or MacStr = "7C8AE174167C" Or MacStr = "9651AED8A986" Then
             TxtUsrPass.Text = Fn.PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy)
         End If
 
@@ -419,9 +422,12 @@ sec_UsrErr_:
     Private Sub WChckConn_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles WChckConn.ProgressChanged
         If Me.IsHandleCreated = True Then
             Invoke(Sub()
-                       If MacStr = "6479F03979BB" Or MacStr = "020000000100" Or MacStr = "7C8AE174167C" Or MacStr = "00155DC80B2B" Then
-                           Invoke(Sub() Cmbo.Visible = True)
-                       End If
+                       For YYT = 0 To MacTble.Rows.Count - 1
+                           If MacStr = MacTble.Rows(YYT).Item(0).ToString Then
+                               Invoke(Sub() Cmbo.Visible = True)
+                               Exit For
+                           End If
+                       Next
                        Dim state As APblicClss.Defntion = CType(e.UserState, APblicClss.Defntion)
 
                        If Bol = True Then

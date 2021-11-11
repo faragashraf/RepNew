@@ -11,22 +11,22 @@ Public Class TikUpdate
     Private Sub TikUpdate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Point(screenWidth, screenHeight - 120)
         GridUpdt.Size = New Point(Me.Size.Width, Me.Size.Height - 185)
-        If StruGrdTk.Tick = 0 Then
-            CmbEvent.Enabled = False
-            BtnSubmt.Enabled = False
-            TxtUpdt.Text = ""
+        'If StruGrdTk.Tick = 0 Then
+        '    CmbEvent.Enabled = False
+        '    BtnSubmt.Enabled = False
+        '    TxtUpdt.Text = ""
+        '    TxtUpdt.ReadOnly = True
+        '    MsgInf("لا يمكن عمل تحديث على الاستفسار")
+        '    Me.Close()
+        '    Exit Sub
+        'Else
+        CmbEvent.Enabled = True
+        BtnSubmt.Enabled = True
+        If TxtUpdt.TextLength = 0 Then
             TxtUpdt.ReadOnly = True
-            MsgInf("لا يمكن عمل تحديث على الاستفسار")
-            Me.Close()
-            Exit Sub
-        Else
-            CmbEvent.Enabled = True
-            BtnSubmt.Enabled = True
-            If TxtUpdt.TextLength = 0 Then
-                TxtUpdt.ReadOnly = True
-            End If
-            LblMsg.Text = ""
         End If
+        LblMsg.Text = ""
+        'End If
         CmbEvent.DataSource = UpdateKTable
         CmbEvent.DisplayMember = "EvNm"
         CmbEvent.ValueMember = "EvId"
@@ -436,4 +436,5 @@ fileStream As Stream = File.Create(Environment.GetFolderPath(Environment.Special
             End If
         End If
     End Sub
+
 End Class

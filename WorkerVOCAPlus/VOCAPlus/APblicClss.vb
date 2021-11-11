@@ -625,7 +625,7 @@ Sec2:
                     Def.Str = "جاري تحميل أنواع المنتجات ..."
                     worker.ReportProgress(0, Def)
 
-                    If (Fn.GetTbl("SELECT FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
+                    If (Fn.GetTbl("SELECT FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp,CompReqst FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
                         primaryKey(0) = ProdCompTable.Columns("FnSQL")
                         ProdCompTable.PrimaryKey = primaryKey
                         PrciTblCnt += 1
@@ -1075,12 +1075,14 @@ Sec2:
                 StruGrdTk.NID = GrdTick.CurrentRow.Cells("TkClNtID").Value.ToString
                 StruGrdTk.Amnt = GrdTick.CurrentRow.Cells("TkAmount").Value
                 If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkTransDate").Value) = False Then StruGrdTk.TransDt = GrdTick.CurrentRow.Cells("TkTransDate").Value
-                StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("UsrRealNm").Value
+                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("UsrRealNm").Value) = False Then StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("UsrRealNm").Value
+                'StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("UsrRealNm").Value
                 StruGrdTk.Help_ = GrdTick.CurrentRow.Cells("CompHelp").Value.ToString
-                StruGrdTk.ProdK = GrdTick.CurrentRow.Cells("PrdKind").Value
-                StruGrdTk.UserId = GrdTick.CurrentRow.Cells("TkEmpNm").Value
+            StruGrdTk.ProdK = GrdTick.CurrentRow.Cells("PrdKind").Value
+            If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkEmpNm").Value) = False Then StruGrdTk.UserId = GrdTick.CurrentRow.Cells("TkEmpNm").Value
+            'StruGrdTk.UserId = GrdTick.CurrentRow.Cells("TkEmpNm").Value
 
-                StruGrdTk.LstUpDt = GrdTick.CurrentRow.Cells("تاريخ آخر تحديث").Value
+            StruGrdTk.LstUpDt = GrdTick.CurrentRow.Cells("تاريخ آخر تحديث").Value
                 StruGrdTk.LstUpTxt = GrdTick.CurrentRow.Cells("نص آخر تحديث").Value
                 StruGrdTk.LstUpUsrNm = GrdTick.CurrentRow.Cells("محرر آخر تحديث").Value
                 StruGrdTk.LstUpEvId = GrdTick.CurrentRow.Cells("LastUpdateID").Value
@@ -1088,7 +1090,7 @@ Sec2:
                 frm__ = GrdTick.FindForm
                 gridview_ = GrdTick
             Catch ex As Exception
-                Errmsg = ex.Message
+            Errmsg = ex.Message
             End Try
             Return Errmsg
         End Function

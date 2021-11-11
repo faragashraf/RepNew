@@ -151,8 +151,13 @@
     <Content Include="History.html" />
     <Content Include="Global.asax" />
     <Content Include="Home.html" />
+    <Content Include="images\VocaIcon2.ico" />
+    <Content Include="VOCAMon.aspx" />
+    <Content Include="vocamonitor.aspx" />
     <Content Include="WebForm2.aspx" />
     <Content Include="ZTest.aspx" />
+    <Content Include="ZZTest.aspx" />
+    <Content Include="ZZZTest.aspx" />
     <None Include="images\1.jpg" />
     <None Include="images\2.jpg" />
     <None Include="images\3.jpg" />
@@ -213,9 +218,6 @@
     <Content Include="obj\Debug\VOCAPlus.pdb" />
     <Content Include="obj\Debug\VOCAPlus.vbproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\VOCAPlus.xml" />
-    <Content Include="obj\Debug\WebApplication1.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\WebApplication1.dll" />
-    <Content Include="obj\Debug\WebApplication1.pdb" />
     <Content Include="ContactUS.aspx" />
     <Content Include="CustomSearch.aspx" />
     <None Include="My Project\PublishProfiles\CustomProfile.pubxml" />
@@ -315,6 +317,20 @@
       <DependentUpon>SmSActivation.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="VOCAMon.aspx.designer.vb">
+      <DependentUpon>VOCAMon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VOCAMon.aspx.vb">
+      <DependentUpon>VOCAMon.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="vocamonitor.aspx.designer.vb">
+      <DependentUpon>vocamonitor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vocamonitor.aspx.vb">
+      <DependentUpon>vocamonitor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="VOCAPlus.aspx.designer.vb">
       <DependentUpon>VOCAPlus.aspx</DependentUpon>
     </Compile>
@@ -357,6 +373,20 @@
       <DependentUpon>ZTest.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="ZZTest.aspx.designer.vb">
+      <DependentUpon>ZZTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ZZTest.aspx.vb">
+      <DependentUpon>ZZTest.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ZZZTest.aspx.designer.vb">
+      <DependentUpon>ZZZTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ZZZTest.aspx.vb">
+      <DependentUpon>ZZZTest.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -387,12 +417,8 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <Content Include="packages.config" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Debug\VOCAPlus.vbproj.GenerateResource.Cache" />
-    <Content Include="obj\Debug\VOCAPlus.vbprojResolveAssemblyReference.cache" />
-    <Content Include="obj\Debug\WebApplication1.csproj.CopyComplete" />
-    <Content Include="obj\Debug\WebApplication1.csprojAssemblyReference.cache" />
     <Content Include="prepros-6.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

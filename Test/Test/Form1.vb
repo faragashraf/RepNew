@@ -1,4 +1,8 @@
-﻿Public Class Form1
+﻿Imports System.Data.SqlClient
+
+Public Class Form1
+    Private strConn As String = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046" ' "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
+    Private CONSQL As New SqlConnection(strConn) ' I Have assigned conn STR here and delete this row from all project
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         MsgBox(Replace(MaskedTextBox1.Text, " ", "") & vbCrLf & Replace(MaskedTextBox1.Text, " ", "").Length)
     End Sub
@@ -35,5 +39,29 @@
             Case Keys.F11
             Case Keys.F12
         End Select
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim TimeTble As New DataTable
+        Dim sqlComminsert_1 As New SqlCommand            'SQL Command
+        Dim Tran As SqlTransaction = Nothing             'SQL Transaction
+        Dim TimeReder As SqlDataReader                     'SQL Reader
+        Try
+            If CONSQL.State = ConnectionState.Closed Then
+                CONSQL.Open()
+            End If
+            sqlComminsert_1.Connection = CONSQL
+            sqlComminsert_1.CommandType = CommandType.Text
+            sqlComminsert_1.CommandText = "Select GetDate() as Now_"
+            Tran = CONSQL.BeginTransaction()
+            sqlComminsert_1.Transaction = Tran
+            TimeReder = sqlComminsert_1.ExecuteReader
+            TimeTble.Load(TimeReder)
+            Tran.Commit()
+            Label5.Text = "Server Time : " & Format(TimeTble.Rows(0).Item(0), "yyyy/MM/dd hh:mm:ss tt")
+        Catch ex As Exception
+            Label5.Text = ex.Message
+            Tran.Rollback()
+        End Try
     End Sub
 End Class

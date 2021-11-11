@@ -137,6 +137,30 @@ Namespace My
                 Me("Min") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("RTM_TEAM@EgyptPost.Org;WFM_RTM@EgyptPost.Org")>  _
+        Public Property TO_() As String
+            Get
+                Return CType(Me("TO_"),String)
+            End Get
+            Set
+                Me("TO_") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("sameh_gharabawy@EgyptPost.Org;VOCA-SUPPORT@EgyptPost.Org;a.farag@egyptpost.org")>  _
+        Public Property Cc_() As String
+            Get
+                Return CType(Me("Cc_"),String)
+            End Get
+            Set
+                Me("Cc_") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

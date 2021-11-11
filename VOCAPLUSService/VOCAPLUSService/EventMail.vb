@@ -84,12 +84,18 @@ Public Class EventMail
                     exchange.Url() = New Uri("https://mail.egyptpost.org/ews/exchange.asmx")
                     Dim message As New EmailMessage(exchange)
 
-                    '
-                    message.ToRecipients.Add("RTM_TEAM@EgyptPost.Org")
-                    message.ToRecipients.Add("WFM_RTM@EgyptPost.Org")
-                    message.CcRecipients.Add("sameh_gharabawy@EgyptPost.Org")
-                    message.CcRecipients.Add("VOCA-SUPPORT@EgyptPost.Org")
-                    message.CcRecipients.Add("a.farag@egyptpost.org")
+                    For UU = 0 To Split(My.Settings.TO_, ";").Count - 1
+                        If Trim(Split(My.Settings.TO_, ";")(UU)).Length > 0 Then
+                            message.ToRecipients.Add(Trim(Split(My.Settings.TO_, ";")(UU)))
+                        End If
+                    Next
+
+                    For PP = 0 To Split(My.Settings.Cc_, ";").Count - 1
+                        If Trim(Split(My.Settings.Cc_, ";")(PP)).Length > 0 Then
+                            message.CcRecipients.Add(Trim(Split(My.Settings.Cc_, ";")(PP)))
+                        End If
+                    Next
+
 
                     message.Subject = "تم عمل تحديث بواسطة " & Tbl.Rows(YY).Item("UsrRealNm") & " للشكوى رقم " & Tbl.Rows(YY).Item("TkupTkSql") & " عن طريق الجهاز " & Tbl.Rows(YY).Item("TkupUserIP") & " من مبني " & Lction & " الساعة : " & Tbl.Rows(YY).Item("TkupSTime")
                     message.Body = Tbl.Rows(YY).Item("TkupTxt").ToString

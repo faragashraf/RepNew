@@ -91,7 +91,7 @@ Partial Class TikSearchNew
         Me.RadioButton1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.RadioButton1.Size = New System.Drawing.Size(75, 22)
         Me.RadioButton1.TabIndex = 500
-        Me.RadioButton1.Text = "استفسار"
+        Me.RadioButton1.Text = "طلب"
         Me.RadioButton1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.RadioButton1.UseVisualStyleBackColor = True
         '

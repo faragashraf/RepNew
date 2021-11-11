@@ -298,7 +298,7 @@ Public Class TikSearchNew
         Me.Dispose()
     End Sub
     Private Sub BtnCncl_Click(sender As Object, e As EventArgs) Handles BtnCncl.Click
-        Def.Thread_.Abort()
+        If IsNothing(Def.Thread_) = False Then Def.Thread_.Abort()
         Invoke(Sub() GroupBox1.Enabled = True)
         Invoke(Sub() GroupBox2.Enabled = True)
         ProgressBar1.Value = 0

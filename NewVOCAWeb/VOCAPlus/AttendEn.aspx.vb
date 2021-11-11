@@ -14,17 +14,17 @@ Public Class AttendEn
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         TextBox1.Focus()
         IP_ = Request.UserHostAddress
-        If Left(IP_, 9) = "10.10.200" Then
-            Label1.Text = "Maadi Technology Village"
-        ElseIf Left(IP_, 8) = "10.11.51" _
-            Or Left(IP_, 8) = "10.11.56" _
-            Or Left(IP_, 8) = "10.11.58" Then
-            Label1.Text = "Sabeel Building"
-        ElseIf Left(IP_, 9) = "10.10.220" Then
-            Label1.Text = "Home"
-        Else
-            Server.Transfer("~/NotAllowed.aspx")
-        End If
+        'If Left(IP_, 9) = "10.10.200" Then
+        '    Label1.Text = "Maadi Technology Village"
+        'ElseIf Left(IP_, 8) = "10.11.51" _
+        '    Or Left(IP_, 8) = "10.11.56" _
+        '    Or Left(IP_, 8) = "10.11.58" Then
+        '    Label1.Text = "Sabeel Building"
+        'ElseIf Left(IP_, 9) = "10.10.220" Then
+        '    Label1.Text = "Home"
+        'Else
+        '    Server.Transfer("~/NotAllowed.aspx")
+        'End If
     End Sub
     Private Function GetTbl(SSqlStr As String, SqlTbl As DataTable) As String
         Errmsg = Nothing

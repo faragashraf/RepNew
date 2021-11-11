@@ -28,6 +28,7 @@ Partial Class Form1
         Me.Button2 = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'MaskedTextBox1
@@ -79,11 +80,21 @@ Partial Class Form1
         Me.DateTimePicker1.Size = New System.Drawing.Size(200, 20)
         Me.DateTimePicker1.TabIndex = 5
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(111, 318)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(38, 13)
+        Me.Label5.TabIndex = 6
+        Me.Label5.Text = "Label1"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1171, 645)
+        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.DateTimePicker1)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Button2)
@@ -104,4 +115,5 @@ Partial Class Form1
     Friend WithEvents Button2 As Button
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents Label5 As Label
 End Class

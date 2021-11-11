@@ -23,7 +23,7 @@ Partial Class NewTicket
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
+        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(NewTicket))
         Me.TreeView1 = New System.Windows.Forms.TreeView()
         Me.ImgLst = New System.Windows.Forms.ImageList(Me.components)
@@ -252,11 +252,11 @@ Partial Class NewTicket
         Me.TreeView1.ImageList = Me.ImgLst
         Me.TreeView1.Location = New System.Drawing.Point(55, 51)
         Me.TreeView1.Name = "TreeView1"
-        TreeNode1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        TreeNode1.ForeColor = System.Drawing.Color.Red
-        TreeNode1.Name = "Rooting"
-        TreeNode1.Text = "Rooting"
-        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
+        TreeNode2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        TreeNode2.ForeColor = System.Drawing.Color.Red
+        TreeNode2.Name = "Rooting"
+        TreeNode2.Text = "Rooting"
+        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode2})
         Me.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TreeView1.RightToLeftLayout = True
         Me.TreeView1.SelectedImageIndex = 0
@@ -483,7 +483,7 @@ Partial Class NewTicket
         Me.Label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label7.Size = New System.Drawing.Size(100, 20)
         Me.Label7.TabIndex = 84
-        Me.Label7.Text = "المنطقة البريدية :"
+        Me.Label7.Text = "المنطقة :"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'OffCmbBx
@@ -904,14 +904,14 @@ Partial Class NewTicket
         Me.TabPage2.Controls.Add(Me.GridTicket)
         Me.TabPage2.Location = New System.Drawing.Point(4, 34)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Size = New System.Drawing.Size(1362, 614)
+        Me.TabPage2.Size = New System.Drawing.Size(1372, 726)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "شكاوى مرتبطة"
         '
         'Label32
         '
         Me.Label32.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label32.Location = New System.Drawing.Point(1053, 19)
+        Me.Label32.Location = New System.Drawing.Point(984, 19)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(111, 23)
         Me.Label32.TabIndex = 2022
@@ -924,7 +924,7 @@ Partial Class NewTicket
         Me.GroupBox2.Controls.Add(Me.Rdiocls)
         Me.GroupBox2.Controls.Add(Me.RdioOpen)
         Me.GroupBox2.Controls.Add(Me.RdioAll)
-        Me.GroupBox2.Location = New System.Drawing.Point(1178, 49)
+        Me.GroupBox2.Location = New System.Drawing.Point(1109, 49)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(250, 35)
         Me.GroupBox2.TabIndex = 2021
@@ -983,7 +983,7 @@ Partial Class NewTicket
         Me.GroupBox1.Controls.Add(Me.RadioButton3)
         Me.GroupBox1.Controls.Add(Me.RadioButton1)
         Me.GroupBox1.Controls.Add(Me.RadioButton2)
-        Me.GroupBox1.Location = New System.Drawing.Point(1178, 7)
+        Me.GroupBox1.Location = New System.Drawing.Point(1109, 7)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(250, 36)
         Me.GroupBox1.TabIndex = 2020
@@ -1017,7 +1017,7 @@ Partial Class NewTicket
         Me.RadioButton1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.RadioButton1.Size = New System.Drawing.Size(75, 22)
         Me.RadioButton1.TabIndex = 500
-        Me.RadioButton1.Text = "استفسار"
+        Me.RadioButton1.Text = "طلبات"
         Me.RadioButton1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.RadioButton1.UseVisualStyleBackColor = True
         '
@@ -1041,7 +1041,7 @@ Partial Class NewTicket
         Me.PrdKComb.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PrdKComb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.PrdKComb.FormattingEnabled = True
-        Me.PrdKComb.Location = New System.Drawing.Point(1053, 48)
+        Me.PrdKComb.Location = New System.Drawing.Point(984, 48)
         Me.PrdKComb.Name = "PrdKComb"
         Me.PrdKComb.Size = New System.Drawing.Size(111, 27)
         Me.PrdKComb.TabIndex = 8
@@ -1052,7 +1052,7 @@ Partial Class NewTicket
         Me.SerchTxt.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SerchTxt.Font = New System.Drawing.Font("Times New Roman", 12.0!)
         Me.SerchTxt.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.SerchTxt.Location = New System.Drawing.Point(860, 48)
+        Me.SerchTxt.Location = New System.Drawing.Point(791, 48)
         Me.SerchTxt.Name = "SerchTxt"
         Me.SerchTxt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.SerchTxt.Size = New System.Drawing.Size(187, 26)
@@ -1065,7 +1065,7 @@ Partial Class NewTicket
         Me.FilterComb.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FilterComb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.FilterComb.FormattingEnabled = True
-        Me.FilterComb.Location = New System.Drawing.Point(860, 18)
+        Me.FilterComb.Location = New System.Drawing.Point(791, 18)
         Me.FilterComb.Name = "FilterComb"
         Me.FilterComb.Size = New System.Drawing.Size(187, 27)
         Me.FilterComb.TabIndex = 6
@@ -1085,7 +1085,7 @@ Partial Class NewTicket
         Me.GridTicket.Name = "GridTicket"
         Me.GridTicket.ReadOnly = True
         Me.GridTicket.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.GridTicket.Size = New System.Drawing.Size(1436, 524)
+        Me.GridTicket.Size = New System.Drawing.Size(1363, 524)
         Me.GridTicket.TabIndex = 0
         '
         'TabPage3
@@ -1127,7 +1127,7 @@ Partial Class NewTicket
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage3.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TabPage3.Size = New System.Drawing.Size(1362, 614)
+        Me.TabPage3.Size = New System.Drawing.Size(1372, 726)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "TabPage3"
         '
@@ -1693,7 +1693,7 @@ Partial Class NewTicket
         Me.TabPage5.Location = New System.Drawing.Point(4, 34)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(1362, 614)
+        Me.TabPage5.Size = New System.Drawing.Size(1372, 726)
         Me.TabPage5.TabIndex = 3
         Me.TabPage5.Text = "TabPage5"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -2261,7 +2261,7 @@ Partial Class NewTicket
         Me.RadioButton4.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.RadioButton4.Size = New System.Drawing.Size(75, 22)
         Me.RadioButton4.TabIndex = 500
-        Me.RadioButton4.Text = "استفسار"
+        Me.RadioButton4.Text = "طلب"
         Me.RadioButton4.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.RadioButton4.UseVisualStyleBackColor = True
         '
@@ -2305,18 +2305,20 @@ Partial Class NewTicket
         '
         Me.Label58.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label58.Font = New System.Drawing.Font("Times New Roman", 12.0!)
+        Me.Label58.ForeColor = System.Drawing.Color.Blue
         Me.Label58.Location = New System.Drawing.Point(89, 0)
         Me.Label58.Name = "Label58"
         Me.Label58.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label58.Size = New System.Drawing.Size(100, 23)
         Me.Label58.TabIndex = 2027
-        Me.Label58.Text = "عدد الاستفسارات :"
+        Me.Label58.Text = "عدد الطلبات :"
         Me.Label58.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label57
         '
         Me.Label57.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label57.Font = New System.Drawing.Font("Times New Roman", 12.0!)
+        Me.Label57.ForeColor = System.Drawing.Color.Blue
         Me.Label57.Location = New System.Drawing.Point(89, 23)
         Me.Label57.Name = "Label57"
         Me.Label57.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -2329,6 +2331,7 @@ Partial Class NewTicket
         '
         Me.Label49.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label49.Font = New System.Drawing.Font("Times New Roman", 12.0!)
+        Me.Label49.ForeColor = System.Drawing.Color.Blue
         Me.Label49.Location = New System.Drawing.Point(144, 46)
         Me.Label49.Margin = New System.Windows.Forms.Padding(0, 0, 3, 0)
         Me.Label49.Name = "Label49"
@@ -2342,6 +2345,7 @@ Partial Class NewTicket
         '
         Me.Label59.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label59.Font = New System.Drawing.Font("Times New Roman", 12.0!)
+        Me.Label59.ForeColor = System.Drawing.Color.Blue
         Me.Label59.Location = New System.Drawing.Point(65, 46)
         Me.Label59.Margin = New System.Windows.Forms.Padding(0)
         Me.Label59.Name = "Label59"
@@ -2558,12 +2562,14 @@ Partial Class NewTicket
         '
         'LblHelp
         '
+        Me.LblHelp.AutoSize = True
         Me.LblHelp.ForeColor = System.Drawing.Color.Green
-        Me.LblHelp.Location = New System.Drawing.Point(7, 753)
+        Me.LblHelp.Location = New System.Drawing.Point(805, 753)
         Me.LblHelp.Name = "LblHelp"
-        Me.LblHelp.Size = New System.Drawing.Size(798, 52)
+        Me.LblHelp.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.LblHelp.Size = New System.Drawing.Size(0, 21)
         Me.LblHelp.TabIndex = 2036
-        Me.LblHelp.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LblHelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'TabPage4
         '
@@ -2577,7 +2583,7 @@ Partial Class NewTicket
         Me.TabPage4.Location = New System.Drawing.Point(4, 34)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(1362, 614)
+        Me.TabPage4.Size = New System.Drawing.Size(1372, 726)
         Me.TabPage4.TabIndex = 4
         Me.TabPage4.Text = "TabPage4"
         Me.TabPage4.UseVisualStyleBackColor = True

@@ -46,10 +46,10 @@ Public Class NewTicket
             NewTickSub()
             'Me.Width = screenWidth - 200
             Me.Size = New Point(WelcomeScreen.Width, WelcomeScreen.Height - 110)
-            FlowLayoutPanel4.Size = New Point((Me.Size.Width * 0.6), Me.Height - 100)
+            FlowLayoutPanel4.Size = New Point((Me.Size.Width * 0.55), Me.Height - 100)
             FlowLayoutPanel2.Size = New Point((Me.Size.Width * 0.2), Me.Height - 100)
             FlowLayoutPanel3.Size = New Point((Me.Size.Width * 0.16), Me.Height - 100)
-            'TreeView1.Size = New Point(WelcomeScreen.Width - (FlowLayoutPanel4.Width + FlowLayoutPanel3.Width + 45), Me.Height - (130 + MyGroupBox3.Height + MyGroupBox3.Margin.Top + MyGroupBox3.Margin.Bottom))
+            TreeView1.Size = New Point((FlowLayoutPanel2.Width), FlowLayoutPanel2.Height - 100)
             IDTxtBx.Focus()
         End If
     End Sub
@@ -84,39 +84,43 @@ Public Class NewTicket
 
         RelatedTable.Rows.Clear()
 
-        For Each ctrl In TabPage1.Controls
-            If TypeOf ctrl Is TextBox Or TypeOf ctrl Is MaskedTextBox Then
-                ctrl.Enabled = True
-                ctrl.text = ""
-            ElseIf TypeOf ctrl Is ComboBox Then
-                ctrl.Enabled = True
-            ElseIf TypeOf ctrl Is GroupBox Then
-                ctrl.Enabled = True
-                Invoke(Sub() ctrl.backcolor = Color.FromArgb(BKClr(0), BKClr(1), BKClr(2)))
-            ElseIf TypeOf ctrl Is FlowLayoutPanel Then
-                For Each C In ctrl.Controls
-                    If TypeOf C Is FlowLayoutPanel Then
-                        For Each H In C.Controls
-                            If TypeOf H Is TextBox Or TypeOf H Is MaskedTextBox Then
-                                H.text = ""
-                                H.Enabled = True
-                            ElseIf TypeOf H Is ComboBox Then
-                                H.Enabled = True
-                            ElseIf TypeOf H Is GroupBox Then
-                                H.Enabled = True
-                                Invoke(Sub() H.backcolor = Color.FromArgb(BKClr(0), BKClr(1), BKClr(2)))
-                            ElseIf TypeOf H Is Panel Then
-                                For Each G In H.Controls
-                                    If TypeOf G Is RadioButton Then
-                                        G.Enabled = True
-                                    End If
-                                Next
-                            End If
-                        Next
-                    End If
-                Next
+
+        Dim CTRLLst As New List(Of Control)
+        GetAll(Me).ToList.ForEach(Sub(c)
+                                      CTRLLst.Add(c)
+                                  End Sub)
+
+        For Each Ctrol As Control In CTRLLst
+            If TypeOf Ctrol Is TextBox Then
+                Dim TxtBox As TextBox = Ctrol
+                Ctrol.Enabled = True
+                Ctrol.Text = ""
+                If TxtBox.ReadOnly = False Then
+                    Ctrol.BackColor = Color.White
+                    Ctrol.ForeColor = Color.Black
+                End If
+            ElseIf TypeOf Ctrol Is MaskedTextBox Then
+                Dim TxtBox As MaskedTextBox = Ctrol
+                Ctrol.Enabled = True
+                Ctrol.Text = ""
+                If TxtBox.ReadOnly = False Then
+                    Ctrol.BackColor = Color.White
+                    Ctrol.ForeColor = Color.Black
+                End If
+            ElseIf TypeOf Ctrol Is ComboBox Then
+                Ctrol.Enabled = True
+                Dim TxtBox As ComboBox = Ctrol
+                TxtBox.SelectedIndex = -1
+            ElseIf TypeOf Ctrol Is RadioButton Then
+                Ctrol.Enabled = True
+            ElseIf TypeOf Ctrol Is DateTimePicker Then
+                Ctrol.Enabled = True
             End If
         Next
+
+
+
+
         DateTxtBx.Enabled = False
         RadioButton4.Checked = False
         RadioButton5.Checked = False
@@ -151,7 +155,7 @@ Public Class NewTicket
         LblClsCls.Text = 0
         LblDublicate.Text = "Ticket(s) Before :"
         LblDublicate.ForeColor = Color.Black
-
+        OfficeTable.DefaultView.RowFilter = String.Empty
     End Sub
     Private Sub Mendatory()
         Dim Cnt_1 As Integer = 0
@@ -173,8 +177,8 @@ Public Class NewTicket
 
         End If
         LblHelp.Text = MendRw.ItemArray(11).ToString
-        If TickKind = 1 Then         '-----------If Complaint True ---------------
-            For Cnt_ = 0 To 11
+        'If TickKind = 1 Then         '-----------If Complaint True ---------------
+        For Cnt_ = 0 To 11
                 For Each c As Control In FlowLayoutPanel4.Controls
                     If c.TabIndex <= 4 And c.TabIndex > 0 Then
                         If Trim(c.Text).Length = 0 Then
@@ -276,6 +280,12 @@ Public Class NewTicket
 
             If Mid(MendRw.ItemArray(6), 8, 1) = "Y" Then
                 AccMskdBx.Enabled = True
+
+                'If CombProdRef.Text <> Mid(Replace(AccMskdBx.Text, " ", ""), 1, CombProdRef.Text.Length) Then
+                '    MsgBox(Replace(Trim(Mid(AccMskdBx.Text, 1, CombProdRef.Text.Length)), " ", ""))
+                'End If
+
+
                 If DBNull.Value.Equals(MendRw.ItemArray(7)) = False Then
                     'Put ProdRef Value in Acc No No Start
                     AccMskdBx.Text = CombProdRef.Text + Mid(AccMskdBx.Text, CombProdRef.Text.Length + 2, 19 - CombProdRef.Text.Length + 1)
@@ -297,6 +307,12 @@ Public Class NewTicket
                 AccMskdBx.Enabled = False
                 AccMskdBx.Text = ""
             End If
+
+
+
+
+
+
             If Mid(MendRw.ItemArray(6), 9, 1) = "Y" Then
                 Cnt_ = 0
                 For Cnt_1 = 1 To 2
@@ -318,18 +334,17 @@ Public Class NewTicket
                 GBTxtBx.AccessibleName = "None"
             End If
             If Mid(MendRw.ItemArray(6), 10, 1) = "Y" Then
-                Cnt_ = 0
-                For Cnt_1 = 1 To 14
-                    If Mid(IDTxtBx.Text, Cnt_1, 1).CompareTo("[0-9]*") = 1 Then
-                        Cnt_ += 1
-                    End If
-                Next
-                If Cnt_ < 14 Then
+
+            If IsNothing(Replace(IDTxtBx.Text, " ", "")) = True Then
+                IDTxtBx.AccessibleName = "Mendatory"
+            Else
+                If Replace(IDTxtBx.Text, " ", "").Length <> 14 Then
                     IDTxtBx.AccessibleName = "Mendatory"
                 Else
                     IDTxtBx.AccessibleName = "None"
                 End If
-            Else
+            End If
+        Else
                 IDTxtBx.AccessibleName = "None"
             End If
 
@@ -351,46 +366,46 @@ Public Class NewTicket
             Else
                 TransDtPicker.AccessibleName = "None"
             End If
-        Else
-            For Cnt_ = 0 To 11
-                For Each c As Control In TabPage1.Controls
-                    If c.TabIndex > 0 And c.TabIndex <= 2 Or c.TabIndex = 4 Then
-                        If c.Text.Length = 0 Then
-                            If Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "Y" And c.TabIndex = Cnt_ Then
-                                c.AccessibleName = "Mendatory"
-                            ElseIf Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "X" And c.TabIndex = Cnt_ Then
-                                c.AccessibleName = "None"
-                            End If
-                        Else
-                            c.AccessibleName = "None"
-                        End If
-                    ElseIf c.TabIndex = 3 Then
-                        c.AccessibleName = "None"
-                    End If
-                Next c
-            Next Cnt_
-            If Mid(MendRw.ItemArray(6), 1, 1) = "Y" Then
-                Cnt_ = 0
-                For Cnt_1 = 1 To 11
-                    If Mid(Phon1TxtBx.Text, Cnt_1, 1).CompareTo("[0-9]*") = 1 Then
-                        Cnt_ += 1
-                    End If
-                Next
-                If Cnt_ < Phon1TxtBx.TextLength Then
-                    Phon1TxtBx.AccessibleName = "Mendatory"
-                Else
-                    Phon1TxtBx.AccessibleName = "None"
-                End If
-            Else
-                Phon1TxtBx.AccessibleName = "None"
-            End If
-            For Each c As Control In FinancialGroup.Controls
-                c.AccessibleName = "None"
-            Next
-            For Each c As Control In PostalGroup.Controls
-                c.AccessibleName = "None"
-            Next
-        End If
+            'Else
+            '    For Cnt_ = 0 To 11
+            '        For Each c As Control In TabPage1.Controls
+            '            If c.TabIndex > 0 And c.TabIndex <= 2 Or c.TabIndex = 4 Then
+            '                If c.Text.Length = 0 Then
+            '                    If Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "Y" And c.TabIndex = Cnt_ Then
+            '                        c.AccessibleName = "Mendatory"
+            '                    ElseIf Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "X" And c.TabIndex = Cnt_ Then
+            '                        c.AccessibleName = "None"
+            '                    End If
+            '                Else
+            '                    c.AccessibleName = "None"
+            '                End If
+            '            ElseIf c.TabIndex = 3 Then
+            '                c.AccessibleName = "None"
+            '            End If
+            '        Next c
+            '    Next Cnt_
+            '    If Mid(MendRw.ItemArray(6), 1, 1) = "Y" Then
+            '        Cnt_ = 0
+            '        For Cnt_1 = 1 To 11
+            '            If Mid(Phon1TxtBx.Text, Cnt_1, 1).CompareTo("[0-9]*") = 1 Then
+            '                Cnt_ += 1
+            '            End If
+            '        Next
+            '        If Cnt_ < Phon1TxtBx.TextLength Then
+            '            Phon1TxtBx.AccessibleName = "Mendatory"
+            '        Else
+            '            Phon1TxtBx.AccessibleName = "None"
+            '        End If
+            '    Else
+            '        Phon1TxtBx.AccessibleName = "None"
+            '    End If
+            '    For Each c As Control In FinancialGroup.Controls
+            '        c.AccessibleName = "None"
+            '    Next
+            '    For Each c As Control In PostalGroup.Controls
+            '        c.AccessibleName = "None"
+            '    Next
+            'End If
 Ckeck_:
         Dim TTT As String = ""
         Dim TTTCount As Integer = 0
@@ -449,10 +464,18 @@ Ckeck_:
         End If
         If (RadioButton4.Checked) Then
             TickKind = 0
-            Me.Text = "تسجيل استفسار جديد"
+            Me.Text = "تسجيل طلب جديد"
+            Label16.Text = "مصدر الطلب :"
+            Label5.Text = "نوع الطلب :"
+            SrcCmbBx.Tag = "مصدر الطلب"
+            Comp.Tag = "نوع الطلب"
         ElseIf (RadioButton5.Checked) Then
             TickKind = 1
             Me.Text = "تسجيل شكوى جديدة"
+            Label16.Text = "مصدر الشكوى :"
+            Label5.Text = "نوع الشكوى :"
+            SrcCmbBx.Tag = "مصدر الشكوى"
+            Comp.Tag = "نوع الشكوى"
         End If
 
         If AreaCmbBx.Items.Count = 0 Then
@@ -477,36 +500,44 @@ Ckeck_:
         End If
 
 Popul_:
+        TreeView1.Visible = True
+        TreeView1.Nodes.Clear()
         If TreeView1.Nodes.Count = 1 Or TreeView1.Nodes.Count = Nothing Then
             Dim Root As String = ""
             Dim Child1 As String = ""
             TreeView1.ImageList = ImgLst
             ' Populate Main Root
-            TreeView1.Nodes.Clear()
 
             For Cnt_ = 0 To ProdKTable.Rows.Count - 1
                 TreeView1.Nodes.Add(ProdKTable.Rows(Cnt_).Item(0).ToString, ProdKTable.Rows(Cnt_).Item(1).ToString, 1, 3)
             Next
+            If TickKind = 0 Then
+                ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " & True
+            Else
+                ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " & False
+            End If
 
             'Populate Products Nodes
-            For Cnt_ = 0 To ProdCompTable.Rows.Count - 1
+            For Cnt_ = 0 To ProdCompTable.DefaultView.Count - 1
                 For Each n As TreeNode In Me.TreeView1.Nodes
-                    If n.Name = ProdCompTable.Rows(Cnt_).Item(1).ToString Then
+                    If n.Name = ProdCompTable.DefaultView(Cnt_).Item(1).ToString Then
                         TreeView1.SelectedNode = n
                     End If
                 Next
-                If Child1 <> ProdCompTable.Rows(Cnt_).Item("PrdNm").ToString Then
-                    TreeView1.SelectedNode.Nodes.Add(ProdCompTable.Rows(Cnt_).Item("FnProdCd").ToString(), ProdCompTable.Rows(Cnt_).Item("PrdNm").ToString(), 1, 3)
+                If Child1 <> ProdCompTable.DefaultView(Cnt_).Item("PrdNm").ToString Then
+                    TreeView1.SelectedNode.Nodes.Add(ProdCompTable.Rows(Cnt_).Item("FnProdCd").ToString(), ProdCompTable.DefaultView(Cnt_).Item("PrdNm").ToString(), 1, 3)
                 End If
-                Child1 = ProdCompTable.Rows(Cnt_).Item("PrdNm").ToString
+                Child1 = ProdCompTable.DefaultView(Cnt_).Item("PrdNm").ToString
             Next
 
+
+
             ' Populate Complaints Nodes
-            For Cnt_ = 0 To ProdCompTable.Rows.Count - 1
+            For Cnt_ = 0 To ProdCompTable.DefaultView.Count - 1
                 For Cnt_1 = 0 To TreeView1.Nodes.Count - 1
                     For Cnt_2 = 0 To TreeView1.Nodes(Cnt_1).Nodes.Count - 1
-                        If Split(TreeView1.Nodes(Cnt_1).Nodes.Item(Cnt_2).ToString, ": ")(1) = (ProdCompTable.Rows(Cnt_).Item("PrdNm").ToString) Then
-                            TreeView1.Nodes(Cnt_1).Nodes.Item(Cnt_2).Nodes.Add(ProdCompTable.Rows(Cnt_).Item("FnSQL").ToString(), ProdCompTable.Rows(Cnt_).Item("CompNm").ToString(), 0, 2)
+                        If Split(TreeView1.Nodes(Cnt_1).Nodes.Item(Cnt_2).ToString, ": ")(1) = (ProdCompTable.DefaultView(Cnt_).Item("PrdNm").ToString) Then
+                            TreeView1.Nodes(Cnt_1).Nodes.Item(Cnt_2).Nodes.Add(ProdCompTable.DefaultView(Cnt_).Item("FnSQL").ToString(), ProdCompTable.DefaultView(Cnt_).Item("CompNm").ToString(), 0, 2)
                             For Cont As Integer = 0 To TreeView1.Nodes(Cnt_1).Nodes.Item(Cnt_2).GetNodeCount(True) - 1
                                 TreeView1.Nodes(Cnt_1).Nodes.Item(Cnt_2).Nodes.Item(Cont).ForeColor = Color.Green
                             Next Cont
@@ -951,6 +982,7 @@ Popul_:
             Transction.Commit()
             Invoke(Sub() LodngFrm.LblMsg.Text += vbCrLf & "Done")
             Invoke(Sub() LodngFrm.LblMsg.Refresh())
+
             For Each ctrl In TabPage1.Controls
                 If TypeOf ctrl Is TextBox Or TypeOf ctrl Is MaskedTextBox Then
                     ctrl.Enabled = False
@@ -1075,6 +1107,28 @@ Popul_:
         Dim Trck As String = ""
         Dim lodingStr As String = ""
 
+
+        Invoke(Sub()
+                   Dim CTRLLst As New List(Of Control)
+                   GetAll(Me).ToList.ForEach(Sub(c)
+                                                 CTRLLst.Add(c)
+                                             End Sub)
+
+                   For Each Ctrol As Control In CTRLLst
+                       If TypeOf Ctrol Is TextBox Then
+                           If Ctrol.Text.Contains("'") Then
+                               WelcomeScreen.StatBrPnlAr.Text = ""
+                               MsgBox("غير مسموح بوضح رمز " & "' " & "بحقل " & Ctrol.Tag & " .... يرجى التأكد من البيان مرة أخرى")
+                               Invoke(Sub() Me.Enabled = True)
+                               Invoke(Sub() Me.Activate())
+                               TickSubmt.Abort()
+                           End If
+                       End If
+
+                   Next
+               End Sub)
+
+
         lodingStr = "جاري تسجيل البيانات ..."
         For Cnt_ = 1 To TrackMskBx.TextLength
             If Mid(TrackMskBx.Text, Cnt_, 1) <> " " Then
@@ -1102,23 +1156,23 @@ Popul_:
             sqlComminsert_3.CommandType = CommandType.Text
             sqlComminsert_4.CommandType = CommandType.Text
             sqlComm.CommandType = CommandType.Text
-            If TickKind = 0 Then                            'Ticket Will be closed & Usr.ID will be the same User
-                Invoke(Sub() sqlComminsert_1.CommandText = "INSERT INTO Tickets(TkID, TkKind, TkFnPrdCd, TkCompSrc, TkClNm, TkClPh, TkClPh1, TkClAdr, TkClNtID, TkShpNo, TkGBNo, TkCardNo, TkAmount, TkTransDate, TkDetails, TkSndrCoun, TkConsigCoun, TkOffNm, TkEmpNm0, TkMail, TkClsStatus, TkEmpNm, TkFolw) VALUES (0, '" & TickKind & "','" &
-                                               TreeView1.SelectedNode.Name & "','" & SrcCmbBx.SelectedValue & "','" & Trim(NameTxtBx.Text) & "','" & Phon1TxtBx.Text & "','" & Phon2TxtBx.Text & "','" & AddTxtBx.Text & "','" & IDTxtBx.Text & "','" & Trck & "','" & GBTxtBx.Text & "','" & Trim(Mid(AccMskdBx.Text, 1, 4)) & Trim(Mid(AccMskdBx.Text, 6, 4)) & Trim(Mid(AccMskdBx.Text, 11, 4)) & Trim(Mid(AccMskdBx.Text, 16, 4)) & "','" & AmountTxtBx.Text & "','" & TranDt & "','" & DetailsTxtBx.Text & DubStr & "','" & Trim(Mid(TrackMskBx.Text, 14, 2)) & "','" & DistCmbBx.SelectedValue & "','" & OffCmbBx.SelectedValue & "','" & Usr.PUsrID & "','" & MailTxtBx.Text & "','" & 1 & "','" & Usr.PUsrID & "','" & "1" & "');")
+            'If TickKind = 0 Then                            'Ticket Will be closed & Usr.ID will be the same User
+            '    Invoke(Sub() sqlComminsert_1.CommandText = "INSERT INTO Tickets(TkID, TkKind, TkFnPrdCd, TkCompSrc, TkClNm, TkClPh, TkClPh1, TkClAdr, TkClNtID, TkShpNo, TkGBNo, TkCardNo, TkAmount, TkTransDate, TkDetails, TkSndrCoun, TkConsigCoun, TkOffNm, TkEmpNm0, TkMail, TkClsStatus, TkEmpNm, TkFolw) VALUES (0, '" & TickKind & "','" &
+            '                                   TreeView1.SelectedNode.Name & "','" & SrcCmbBx.SelectedValue & "','" & Trim(NameTxtBx.Text) & "','" & Phon1TxtBx.Text & "','" & Phon2TxtBx.Text & "','" & AddTxtBx.Text & "','" & IDTxtBx.Text & "','" & Trck & "','" & GBTxtBx.Text & "','" & Trim(Mid(AccMskdBx.Text, 1, 4)) & Trim(Mid(AccMskdBx.Text, 6, 4)) & Trim(Mid(AccMskdBx.Text, 11, 4)) & Trim(Mid(AccMskdBx.Text, 16, 4)) & "','" & AmountTxtBx.Text & "','" & TranDt & "','" & DetailsTxtBx.Text & DubStr & "','" & Trim(Mid(TrackMskBx.Text, 14, 2)) & "','" & DistCmbBx.SelectedValue & "','" & OffCmbBx.SelectedValue & "','" & Usr.PUsrID & "','" & MailTxtBx.Text & "','" & 1 & "','" & Usr.PUsrID & "','" & "1" & "');")
 
-                sqlComminsert_2.CommandText = "INSERT into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES 
-                                                               ((Select Max(TkSQL) As RelationTkID FROM Tickets where TkEmpNm0 = " & Usr.PUsrID & "),'" & "The Inquiry has been Recieved" & "','" & "1" & "','" & "0" & "','" & OsIP() & "','" & Usr.PUsrID & "');"
+            '    sqlComminsert_2.CommandText = "INSERT into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES 
+            '                                                   ((Select Max(TkSQL) As RelationTkID FROM Tickets where TkEmpNm0 = " & Usr.PUsrID & "),'" & "The Inquiry has been Recieved" & "','" & "1" & "','" & "0" & "','" & OsIP() & "','" & Usr.PUsrID & "');"
+            'Else
+            If Usr.PUsrCalCntr = True Then
+                Invoke(Sub() sqlComminsert_1.CommandText = "INSERT INTO Tickets(TkID, TkKind, TkFnPrdCd, TkCompSrc, TkClNm, TkClPh, TkClPh1, TkClAdr, TkClNtID, TkShpNo, TkGBNo, TkCardNo, TkAmount, TkTransDate, TkDetails, TkSndrCoun, TkConsigCoun, TkOffNm, TkEmpNm0, TkMail) VALUES (0, '" & TickKind & "','" &
+                                          TreeView1.SelectedNode.Name & "','" & SrcCmbBx.SelectedValue & "','" & Trim(NameTxtBx.Text) & "','" & Phon1TxtBx.Text & "','" & Phon2TxtBx.Text & "','" & AddTxtBx.Text & "','" & IDTxtBx.Text & "','" & Trck & "','" & GBTxtBx.Text & "','" & Trim(Mid(AccMskdBx.Text, 1, 4)) & Trim(Mid(AccMskdBx.Text, 6, 4)) & Trim(Mid(AccMskdBx.Text, 11, 4)) & Trim(Mid(AccMskdBx.Text, 16, 4)) & "','" & AmountTxtBx.Text & "','" & TranDt & "','" & DetailsTxtBx.Text & DubStr & "','" & Trim(Mid(TrackMskBx.Text, 14, 2)) & "','" & DistCmbBx.SelectedValue & "','" & OffCmbBx.SelectedValue & "','" & Usr.PUsrID & "','" & MailTxtBx.Text & "');")
             Else
-                If Usr.PUsrCalCntr = True Then
-                    Invoke(Sub() sqlComminsert_1.CommandText = "INSERT INTO Tickets(TkID, TkKind, TkFnPrdCd, TkCompSrc, TkClNm, TkClPh, TkClPh1, TkClAdr, TkClNtID, TkShpNo, TkGBNo, TkCardNo, TkAmount, TkTransDate, TkDetails, TkSndrCoun, TkConsigCoun, TkOffNm, TkEmpNm0, TkMail) VALUES (0, '" & TickKind & "','" &
-                                      TreeView1.SelectedNode.Name & "','" & SrcCmbBx.SelectedValue & "','" & Trim(NameTxtBx.Text) & "','" & Phon1TxtBx.Text & "','" & Phon2TxtBx.Text & "','" & AddTxtBx.Text & "','" & IDTxtBx.Text & "','" & Trck & "','" & GBTxtBx.Text & "','" & Trim(Mid(AccMskdBx.Text, 1, 4)) & Trim(Mid(AccMskdBx.Text, 6, 4)) & Trim(Mid(AccMskdBx.Text, 11, 4)) & Trim(Mid(AccMskdBx.Text, 16, 4)) & "','" & AmountTxtBx.Text & "','" & TranDt & "','" & DetailsTxtBx.Text & DubStr & "','" & Trim(Mid(TrackMskBx.Text, 14, 2)) & "','" & DistCmbBx.SelectedValue & "','" & OffCmbBx.SelectedValue & "','" & Usr.PUsrID & "','" & MailTxtBx.Text & "');")
-                Else
-                    Invoke(Sub() sqlComminsert_1.CommandText = "INSERT INTO Tickets(TkID, TkKind, TkFnPrdCd, TkCompSrc, TkClNm, TkClPh, TkClPh1, TkClAdr, TkClNtID, TkShpNo, TkGBNo, TkCardNo, TkAmount, TkTransDate, TkDetails, TkSndrCoun, TkConsigCoun, TkOffNm, TkEmpNm0, TkMail, TkEmpNm) VALUES (0, '" & TickKind & "','" &
-                                  TreeView1.SelectedNode.Name & "','" & SrcCmbBx.SelectedValue & "','" & Trim(NameTxtBx.Text) & "','" & Phon1TxtBx.Text & "','" & Phon2TxtBx.Text & "','" & AddTxtBx.Text & "','" & IDTxtBx.Text & "','" & Trck & "','" & GBTxtBx.Text & "','" & Trim(Mid(AccMskdBx.Text, 1, 4)) & Trim(Mid(AccMskdBx.Text, 6, 4)) & Trim(Mid(AccMskdBx.Text, 11, 4)) & Trim(Mid(AccMskdBx.Text, 16, 4)) & "','" & AmountTxtBx.Text & "','" & TranDt & "','" & DetailsTxtBx.Text & DubStr & "','" & Trim(Mid(TrackMskBx.Text, 14, 2)) & "','" & DistCmbBx.SelectedValue & "','" & OffCmbBx.SelectedValue & "','" & Usr.PUsrID & "','" & MailTxtBx.Text & "','" & Usr.PUsrID & "');")
-                End If
-                sqlComminsert_2.CommandText = "INSERT into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES 
-                                                               ((Select Max(TkSQL) As RelationTkID FROM Tickets where TkEmpNm0 = " & Usr.PUsrID & "),'" & "The Complaint has been Recieved" & "','" & "1" & "','" & "0" & "','" & OsIP() & "','" & Usr.PUsrID & "');"
+                Invoke(Sub() sqlComminsert_1.CommandText = "INSERT INTO Tickets(TkID, TkKind, TkFnPrdCd, TkCompSrc, TkClNm, TkClPh, TkClPh1, TkClAdr, TkClNtID, TkShpNo, TkGBNo, TkCardNo, TkAmount, TkTransDate, TkDetails, TkSndrCoun, TkConsigCoun, TkOffNm, TkEmpNm0, TkMail, TkEmpNm) VALUES (0, '" & TickKind & "','" &
+                                      TreeView1.SelectedNode.Name & "','" & SrcCmbBx.SelectedValue & "','" & Trim(NameTxtBx.Text) & "','" & Phon1TxtBx.Text & "','" & Phon2TxtBx.Text & "','" & AddTxtBx.Text & "','" & IDTxtBx.Text & "','" & Trck & "','" & GBTxtBx.Text & "','" & Trim(Mid(AccMskdBx.Text, 1, 4)) & Trim(Mid(AccMskdBx.Text, 6, 4)) & Trim(Mid(AccMskdBx.Text, 11, 4)) & Trim(Mid(AccMskdBx.Text, 16, 4)) & "','" & AmountTxtBx.Text & "','" & TranDt & "','" & DetailsTxtBx.Text & DubStr & "','" & Trim(Mid(TrackMskBx.Text, 14, 2)) & "','" & DistCmbBx.SelectedValue & "','" & OffCmbBx.SelectedValue & "','" & Usr.PUsrID & "','" & MailTxtBx.Text & "','" & Usr.PUsrID & "');")
             End If
+            sqlComminsert_2.CommandText = "INSERT into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES 
+                                                                   ((Select Max(TkSQL) As RelationTkID FROM Tickets where TkEmpNm0 = " & Usr.PUsrID & "),'" & "The Complaint has been Recieved" & "','" & "1" & "','" & "0" & "','" & OsIP() & "','" & Usr.PUsrID & "');"
+            'End If
             sqlComminsert_3.CommandText = "update Tickets set TkID = MaxID from (select MAX(TkSQL) AS MaxID, MAX(TkDtStart) AS MaxDt, TkEmpNm0 from Tickets where TkEmpNm0  = " & Usr.PUsrID & " GROUP BY TkEmpNm0) As MaxTable INNER JOIN Tickets ON Tickets.TkSQL = MaxTable.MaxID;"
             sqlComminsert_4.CommandText = "select MAX(TkSQL) AS MaxID, MAX(TkDtStart) AS MaxDt, MAX(TkID) AS Max_ from TkEvent INNER JOIN Tickets ON TkEvent.TkupTkSql = Tickets.TkSQL GROUP BY TkupUser HAVING (TkupUser  = " & Usr.PUsrID & ");"
             Tran = sqlCon.BeginTransaction()
@@ -1135,7 +1189,7 @@ Popul_:
             Reader_.Read()
             SqlCuCnt_ = Reader_!MaxID
             If TickKind = 0 Then
-                Invoke(Sub() ComRefLbl.Text = "Inquiry No.:  " & Reader_!Max_)
+                Invoke(Sub() ComRefLbl.Text = "Request No.:  " & Reader_!Max_)
             Else
                 Invoke(Sub() ComRefLbl.Text = "Complaint No.: " & Reader_!Max_)
             End If
@@ -1145,39 +1199,38 @@ Popul_:
             Tran.Commit()
             'sqlCon.Close()
             'SqlConnection.ClearPool(sqlCon)
-            For Each ctrl In TabPage1.Controls
-                If TypeOf ctrl Is TextBox Or TypeOf ctrl Is MaskedTextBox Then
-                    ctrl.Enabled = False
-                ElseIf TypeOf ctrl Is ComboBox Then
-                    ctrl.Enabled = False
-                ElseIf TypeOf ctrl Is GroupBox Then
-                    ctrl.Enabled = False
-                    Invoke(Sub() ctrl.backcolor = Color.FromArgb(105, 255, 123))
-                ElseIf TypeOf ctrl Is FlowLayoutPanel Then
-                    For Each C In ctrl.Controls
-                        If TypeOf C Is FlowLayoutPanel Then
-                            For Each H In C.Controls
-                                If TypeOf H Is TextBox Or TypeOf H Is MaskedTextBox Then
-                                    H.Enabled = False
-                                ElseIf TypeOf H Is ComboBox Then
-                                    H.Enabled = False
-                                    Invoke(Sub() H.backcolor = Color.FromArgb(105, 255, 123))
-                                ElseIf TypeOf H Is GroupBox Then
-                                    H.Enabled = False
-                                    H.backcolor = Color.FromArgb(BKClr(0), BKClr(1), BKClr(2))
-                                ElseIf TypeOf H Is Panel Then
-                                    For Each G In H.Controls
-                                        If TypeOf G Is RadioButton Then
-                                            G.Enabled = False
-                                        End If
-                                    Next
-                                End If
-                            Next
-                        End If
+            Invoke(Sub()
+                       Dim CTRLLst As New List(Of Control)
+                       GetAll(Me).ToList.ForEach(Sub(c)
+                                                     CTRLLst.Add(c)
+                                                 End Sub)
 
-                    Next
-                End If
-            Next
+                       For Each Ctrol As Control In CTRLLst
+                           If TypeOf Ctrol Is TextBox Then
+                               Dim TxtBox As TextBox = Ctrol
+                               Ctrol.Enabled = False
+                               If TxtBox.ReadOnly = False Then
+                                   Ctrol.BackColor = Color.White
+                                   Ctrol.ForeColor = Color.Black
+                               End If
+                           ElseIf TypeOf Ctrol Is MaskedTextBox Then
+                               Dim TxtBox As MaskedTextBox = Ctrol
+                               Ctrol.Enabled = False
+                               If TxtBox.ReadOnly = False Then
+                                   Ctrol.BackColor = Color.White
+                                   Ctrol.ForeColor = Color.Black
+                               End If
+                           ElseIf TypeOf Ctrol Is ComboBox Then
+                               Ctrol.Enabled = False
+                               Dim TxtBox As ComboBox = Ctrol
+                           ElseIf TypeOf Ctrol Is RadioButton Then
+                               Ctrol.Enabled = False
+                           ElseIf TypeOf Ctrol Is DateTimePicker Then
+                               Ctrol.Enabled = False
+                           End If
+                       Next
+                   End Sub)
+
             TreeView1.Enabled = False
             Invoke(Sub() SubmitBtn.Visible = False)
             Invoke(Sub() Me.BackColor = Color.FromArgb(105, 255, 123))
@@ -1191,7 +1244,7 @@ Popul_:
             Invoke(Sub() Me.Activate())
             Invoke(Sub() TimrPhons.Stop())
         Catch ex As Exception
-            'Tran.Rollback()
+            Tran.Rollback()
             'Invoke(Sub() WelcomeScreen.TimerCon.Start())
             'Invoke(Sub() WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032)
             Invoke(Sub() LodngFrm.Close())
@@ -1209,9 +1262,8 @@ Popul_:
             'End If
 
             'TickSubmt.Abort()
-            MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & "لم ينجح الإتصال بالخادم .. سيتم تسجيل الشكوى بالوضع الغير متصل بالشبكة")
+            MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
         End Try
-        Invoke(Sub() LodngFrm.Close())
         Invoke(Sub() Me.Enabled = True)
         Invoke(Sub() Me.Activate())
         Invoke(Sub() TimrPhons.Stop())
@@ -1366,6 +1418,7 @@ Popul_:
             Comp.Text = ""
             AccMskdBx.Text = ""
             TrackMskBx.Text = ""
+            Label18.Text = ""
         End If
 
         If Split(TreeView1.SelectedNode.FullPath.ToString, "\")(0) <> PrdKind Then PrdKind = ""
@@ -1939,31 +1992,37 @@ Popul_:
     Private Sub BtnDublicate_Click(sender As Object, e As EventArgs) Handles BtnDublicate.Click
         DubStr = vbCrLf & vbCrLf & "إضافة تلقائية من النظام: " & vbCrLf & "تم تسجيل هذه الشكوى للعميل عن طريق استخدم زر التكرار"
         ComRefLbl.Text = ""
-        For Each ctrl In TabPage1.Controls
-            If TypeOf ctrl Is TextBox Or TypeOf ctrl Is MaskedTextBox Then
-                ctrl.Enabled = True
-            ElseIf TypeOf ctrl Is ComboBox Then
-                ctrl.Enabled = True
-            ElseIf TypeOf ctrl Is GroupBox Then
-                ctrl.Enabled = True
-                Invoke(Sub() ctrl.backcolor = Color.FromArgb(BKClr(0), BKClr(1), BKClr(2)))
-            ElseIf TypeOf ctrl Is FlowLayoutPanel Then
-                For Each C In ctrl.Controls
-                    If TypeOf C Is FlowLayoutPanel Then
-                        For Each H In C.Controls
-                            If TypeOf H Is TextBox Or TypeOf H Is MaskedTextBox Then
-                                H.Enabled = True
-                            ElseIf TypeOf H Is ComboBox Then
-                                H.Enabled = True
-                            ElseIf TypeOf H Is GroupBox Then
-                                H.Enabled = True
-                                Invoke(Sub() H.backcolor = Color.FromArgb(BKClr(0), BKClr(1), BKClr(2)))
-                            End If
-                        Next
-                    End If
-                Next
-            End If
-        Next
+        Invoke(Sub()
+                   Dim CTRLLst As New List(Of Control)
+                   GetAll(Me).ToList.ForEach(Sub(c)
+                                                 CTRLLst.Add(c)
+                                             End Sub)
+
+                   For Each Ctrol As Control In CTRLLst
+                       If TypeOf Ctrol Is TextBox Then
+                           Dim TxtBox As TextBox = Ctrol
+                           Ctrol.Enabled = True
+                           If TxtBox.ReadOnly = False Then
+                               Ctrol.BackColor = Color.White
+                               Ctrol.ForeColor = Color.Black
+                           End If
+                       ElseIf TypeOf Ctrol Is MaskedTextBox Then
+                           Dim TxtBox As MaskedTextBox = Ctrol
+                           Ctrol.Enabled = True
+                           If TxtBox.ReadOnly = False Then
+                               Ctrol.BackColor = Color.White
+                               Ctrol.ForeColor = Color.Black
+                           End If
+                       ElseIf TypeOf Ctrol Is ComboBox Then
+                           Ctrol.Enabled = True
+                           Dim TxtBox As ComboBox = Ctrol
+                       ElseIf TypeOf Ctrol Is RadioButton Then
+                           Ctrol.Enabled = True
+                       ElseIf TypeOf Ctrol Is DateTimePicker Then
+                           Ctrol.Enabled = True
+                       End If
+                   Next
+               End Sub)
         TreeView1.Enabled = True
         Invoke(Sub() SubmitBtn.Visible = True)
         Invoke(Sub() WelcomeScreen.StatBrPnlAr.Text = "")
@@ -2031,5 +2090,4 @@ Popul_:
         TimrPhons.Stop()
         TmrActv.Stop()
     End Sub
-
 End Class

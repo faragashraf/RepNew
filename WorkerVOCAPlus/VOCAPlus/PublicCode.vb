@@ -1002,141 +1002,6 @@ End_:
             End If
             CmstripAsgn(CTRLLst(UU))
         Next
-#Region ""
-        'For Each CTTTRL In Frm.Controls
-
-
-        '    If TypeOf CTTTRL Is TabControl Then
-        '        For Each TabPg In CTTTRL.Controls
-        '            For Each Crl In TabPg.Controls
-        '                If TypeOf Crl Is FlowLayoutPanel Then
-        '                    For Each C In Crl.Controls
-        '                        If TypeOf C Is Button Then
-        '                            BttonCtrl = C
-        '                            CalIfBtn(BttonCtrl)
-        '                        ElseIf TypeOf C Is TextBox Then
-        '                            TxtBoxCtrl = C
-        '                            CalIfTxt(TxtBoxCtrl)
-        '                        ElseIf TypeOf C Is GroupBox Then
-        '                            For Each CRLS In C.Controls
-        '                                If TypeOf CRLS Is Button Then
-        '                                    BttonCtrl = CRLS
-        '                                    CalIfBtn(BttonCtrl)
-        '                                ElseIf TypeOf CRLS Is TextBox Then
-        '                                    TxtBoxCtrl = CRLS
-        '                                    CalIfTxt(TxtBoxCtrl)
-        '                                End If
-        '                            Next
-        '                        ElseIf TypeOf C Is FlowLayoutPanel Then
-        '                            For Each CRLSA In C.Controls
-        '                                If TypeOf CRLSA Is FlowLayoutPanel Then
-        '                                    For Each H In CRLSA.Controls
-        '                                        If TypeOf H Is Panel Then
-        '                                            For Each V In H.Controls
-        '                                                If TypeOf V Is Button Then
-        '                                                    BttonCtrl = V
-        '                                                    CalIfBtn(BttonCtrl)
-        '                                                End If
-        '                                            Next
-        '                                        ElseIf TypeOf H Is FlowLayoutPanel Then
-        '                                            For Each V In H.Controls
-        '                                                If TypeOf V Is Panel Then
-        '                                                    For Each VF In V.Controls
-        '                                                        If TypeOf VF Is Button Then
-        '                                                            BttonCtrl = VF
-        '                                                            CalIfBtn(BttonCtrl)
-        '                                                        End If
-        '                                                    Next
-        '                                                End If
-        '                                            Next
-        '                                        End If
-        '                                    Next
-        '                                ElseIf TypeOf CRLSA Is Panel Then
-        '                                    For Each V In CRLSA.Controls
-        '                                        If TypeOf V Is Button Then
-        '                                            BttonCtrl = V
-        '                                            CalIfBtn(BttonCtrl)
-        '                                        End If
-        '                                    Next
-        '                                End If
-        '                            Next CRLSA
-        '                        End If
-        '                        CmstripAsgn(C)
-        '                    Next
-        '                ElseIf TypeOf Crl Is Button Then
-        '                    BttonCtrl = Crl
-        '                    CalIfBtn(BttonCtrl)
-        '                ElseIf TypeOf Crl Is TextBox Then
-        '                    TxtBoxCtrl = Crl
-        '                    CalIfTxt(TxtBoxCtrl)
-        '                End If
-        '                CmstripAsgn(Crl)
-        '            Next
-        '        Next
-        '    ElseIf TypeOf CTTTRL Is FlowLayoutPanel Then
-        '        For Each Crl In CTTTRL.Controls
-        '            If TypeOf Crl Is Button Then
-        '                BttonCtrl = Crl
-        '                CalIfBtn(BttonCtrl)
-        '            ElseIf TypeOf Crl Is TextBox Then
-        '                TxtBoxCtrl = Crl
-        '                CalIfTxt(TxtBoxCtrl)
-        '            ElseIf TypeOf Crl Is GroupBox Then
-        '                For Each C In Crl.Controls
-        '                    If TypeOf C Is Button Then
-        '                        BttonCtrl = C
-        '                        CalIfBtn(BttonCtrl)
-        '                    ElseIf TypeOf C Is TextBox Then
-        '                        TxtBoxCtrl = C
-        '                        CalIfTxt(TxtBoxCtrl)
-        '                    End If
-        '                Next
-        '            ElseIf TypeOf Crl Is FlowLayoutPanel Then
-        '                For Each C In Crl.Controls
-        '                    If TypeOf C Is Panel Then
-        '                        If TypeOf C Is Button Then
-        '                            BttonCtrl = C
-        '                            CalIfBtn(BttonCtrl)
-        '                        ElseIf TypeOf C Is Panel Then
-        '                            For Each D In C.Controls
-        '                                If TypeOf D Is Button Then
-        '                                    BttonCtrl = D
-        '                                    CalIfBtn(BttonCtrl)
-        '                                End If
-        '                            Next
-        '                        End If
-        '                    End If
-        '                Next
-        '            ElseIf TypeOf Crl Is Panel Then
-        '                For Each C In Crl.Controls
-        '                    If TypeOf C Is Button Then
-        '                        BttonCtrl = C
-        '                        CalIfBtn(BttonCtrl)
-        '                    End If
-        '                Next
-        '            End If
-        '            CmstripAsgn(Crl)
-        '        Next
-        '    ElseIf TypeOf CTTTRL Is Button Then
-        '        BttonCtrl = CTTTRL
-        '        CalIfBtn(BttonCtrl)
-        '    ElseIf TypeOf CTTTRL Is TextBox Then
-        '        TxtBoxCtrl = CTTTRL
-        '        CalIfTxt(TxtBoxCtrl)
-        '    ElseIf TypeOf CTTTRL Is Panel Then
-        '        For Each C In CTTTRL.Controls
-        '            If TypeOf C Is Button Then
-        '                BttonCtrl = C
-        '                CalIfBtn(BttonCtrl)
-        '            ElseIf TypeOf C Is TextBox Then
-        '                TxtBoxCtrl = C
-        '                CalIfTxt(TxtBoxCtrl)
-        '            End If
-        '        Next
-        '    End If
-        '    CmstripAsgn(CTTTRL)
-        'Next
-#End Region
         WelcomeScreen.StatBrPnlAr.Text = ""
     End Sub
     Public Function CmstripAsgn(Cnrol As Control) As Control
@@ -1198,8 +1063,6 @@ End_:
         Dim Botn As Control = sender
         BtnDecrease(Botn)
     End Sub
-
-
     Private Sub SndCntls(Ctrl As Control)
         If Ctrl.Dock = DockStyle.None Then
             Ctrl.ContextMenuStrip = DefCmStrip
@@ -1233,7 +1096,10 @@ End_:
     End Sub
     Private Sub Paste_Click(sender As Object, e As EventArgs)
         Dim sms = (sender.GetCurrentParent()).SourceControl
-        sms.Text = Clipboard.GetText()
+        If sms.Readonly = False Then
+            sms.Text = Clipboard.GetText()
+        End If
+
     End Sub
     Private Sub PreviewTik_Click(sender As Object, e As EventArgs)
         Dim sms = sender.GetCurrentParent().SourceControl

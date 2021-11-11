@@ -7,6 +7,8 @@
         ACBStrt.Value = My.Settings.ACBStart
         ACBEnd.Value = My.Settings.ACBEnd
         Min_.Value = My.Settings.Min
+        _To.Text = My.Settings.TO_
+        _Cc.Text = My.Settings.Cc_
     End Sub
 
     Private Sub BtnSbmt_Click(sender As Object, e As EventArgs) Handles BtnSbmt.Click
@@ -17,6 +19,8 @@
         My.Settings.ACBStart = ACBStrt.Value
         My.Settings.ACBEnd = ACBEnd.Value
         My.Settings.Min = Min_.Value
+        My.Settings.TO_ = _To.Text
+        My.Settings.Cc_ = _Cc.Text
         My.Settings.Save()
     End Sub
 End Class

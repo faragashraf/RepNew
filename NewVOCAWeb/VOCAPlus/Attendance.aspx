@@ -69,6 +69,7 @@
                   </contenttemplate>
 
          </asp:UpdatePanel>
+
 <%--          <asp:UpdatePanel ID="up1" runat="server">
                 <ContentTemplate ></ContentTemplate>
                 <Triggers>

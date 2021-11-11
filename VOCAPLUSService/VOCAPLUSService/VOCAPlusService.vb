@@ -227,12 +227,13 @@ SendMail_:
                     exchange.Url() = New Uri("https://mail.egyptpost.org/ews/exchange.asmx")
                     Dim message As New EmailMessage(exchange)
 
-                    '
-                    message.ToRecipients.Add("RTM_TEAM@EgyptPost.Org")
-                    message.ToRecipients.Add("WFM_RTM@EgyptPost.Org")
-                    message.CcRecipients.Add("sameh_gharabawy@EgyptPost.Org")
-                    message.CcRecipients.Add("VOCA-SUPPORT@EgyptPost.Org")
-                    message.CcRecipients.Add("a.farag@egyptpost.org")
+                    For UU = 0 To Split(My.Settings.TO_, ";").Count - 1
+                        message.ToRecipients.Add(Trim(Split(My.Settings.TO_, ";")(UU)))
+                    Next
+
+                    For PP = 0 To Split(My.Settings.Cc_, ";").Count - 1
+                        message.CcRecipients.Add(Trim(Split(My.Settings.Cc_, ";")(PP)))
+                    Next
 
                     message.Subject = "تم عمل تحديث بواسطة " & Tbl.Rows(YY).Item("UsrRealNm") & " للشكوى رقم " & Tbl.Rows(YY).Item("TkupTkSql") & " عن طريق الجهاز " & Tbl.Rows(YY).Item("TkupUserIP") & " من مبني " & Lction & " الساعة : " & Tbl.Rows(YY).Item("TkupSTime")
                     message.Body = Tbl.Rows(YY).Item("TkupTxt").ToString
@@ -320,7 +321,6 @@ SendMail_:
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:" & Chr(34) & "Calibri" & Chr(34) & ",sans-serif;'><span style=" & Chr(34) & "font-size:15px;color:black;" & Chr(34) & ">&nbsp;</span></p>
 <p dir=" & Chr(34) & "RTL" & Chr(34) & " style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:" & Chr(34) & "Calibri" & Chr(34) & ",sans-serif;text-align:right;'><span dir=" & Chr(34) & "LTR" & Chr(34) & ">&nbsp;</span></p>"
 #End Region
-
         If _Now < _EndTime And _Now > _StrtTime Then 'Every Hour Send Hourly Report During The Working Hours
             If Format(_Now, "mm") = HourMin_ Then
                 If Fn.GetTbl("select * from AutoMail where AutoMail.MailRule = 'H'", MailTbl) = Nothing Then

@@ -32,28 +32,35 @@ Partial Class Settings_
         Me.ACBEnd = New System.Windows.Forms.DateTimePicker()
         Me.ACBStrt = New System.Windows.Forms.DateTimePicker()
         Me.Min_ = New System.Windows.Forms.DateTimePicker()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me._Cc = New System.Windows.Forms.TextBox()
+        Me._To = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(193, 63)
+        Me.TextBox1.Location = New System.Drawing.Point(150, 66)
         Me.TextBox1.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(591, 29)
+        Me.TextBox1.Size = New System.Drawing.Size(338, 29)
         Me.TextBox1.TabIndex = 0
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(193, 124)
+        Me.TextBox2.Location = New System.Drawing.Point(150, 103)
         Me.TextBox2.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.TextBox2.Size = New System.Drawing.Size(591, 29)
+        Me.TextBox2.Size = New System.Drawing.Size(338, 29)
         Me.TextBox2.TabIndex = 1
         '
         'BtnSbmt
         '
-        Me.BtnSbmt.Location = New System.Drawing.Point(452, 319)
+        Me.BtnSbmt.Location = New System.Drawing.Point(447, 415)
         Me.BtnSbmt.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
         Me.BtnSbmt.Name = "BtnSbmt"
         Me.BtnSbmt.Size = New System.Drawing.Size(125, 38)
@@ -65,7 +72,7 @@ Partial Class Settings_
         '
         Me.TimeStrt.CustomFormat = "hh:mm tt"
         Me.TimeStrt.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.TimeStrt.Location = New System.Drawing.Point(193, 230)
+        Me.TimeStrt.Location = New System.Drawing.Point(188, 326)
         Me.TimeStrt.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
         Me.TimeStrt.Name = "TimeStrt"
         Me.TimeStrt.ShowUpDown = True
@@ -76,7 +83,7 @@ Partial Class Settings_
         '
         Me.TimeEnd.CustomFormat = "hh:mm tt"
         Me.TimeEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.TimeEnd.Location = New System.Drawing.Point(303, 230)
+        Me.TimeEnd.Location = New System.Drawing.Point(298, 326)
         Me.TimeEnd.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
         Me.TimeEnd.Name = "TimeEnd"
         Me.TimeEnd.ShowUpDown = True
@@ -86,7 +93,7 @@ Partial Class Settings_
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(43, 234)
+        Me.Label1.Location = New System.Drawing.Point(38, 330)
         Me.Label1.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(112, 21)
@@ -96,7 +103,7 @@ Partial Class Settings_
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(43, 276)
+        Me.Label2.Location = New System.Drawing.Point(38, 372)
         Me.Label2.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(52, 21)
@@ -107,7 +114,7 @@ Partial Class Settings_
         '
         Me.ACBEnd.CustomFormat = "hh:mm tt"
         Me.ACBEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.ACBEnd.Location = New System.Drawing.Point(303, 272)
+        Me.ACBEnd.Location = New System.Drawing.Point(298, 368)
         Me.ACBEnd.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
         Me.ACBEnd.Name = "ACBEnd"
         Me.ACBEnd.ShowUpDown = True
@@ -118,7 +125,7 @@ Partial Class Settings_
         '
         Me.ACBStrt.CustomFormat = "hh:mm tt"
         Me.ACBStrt.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.ACBStrt.Location = New System.Drawing.Point(193, 272)
+        Me.ACBStrt.Location = New System.Drawing.Point(188, 368)
         Me.ACBStrt.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
         Me.ACBStrt.Name = "ACBStrt"
         Me.ACBStrt.ShowUpDown = True
@@ -129,18 +136,93 @@ Partial Class Settings_
         '
         Me.Min_.CustomFormat = "mm"
         Me.Min_.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.Min_.Location = New System.Drawing.Point(303, 319)
+        Me.Min_.Location = New System.Drawing.Point(298, 415)
         Me.Min_.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
         Me.Min_.Name = "Min_"
         Me.Min_.ShowUpDown = True
         Me.Min_.Size = New System.Drawing.Size(60, 29)
         Me.Min_.TabIndex = 9
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(61, 108)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(88, 21)
+        Me.Label3.TabIndex = 11
+        Me.Label3.Text = "Password:"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(61, 66)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(46, 21)
+        Me.Label4.TabIndex = 10
+        Me.Label4.Text = "Mail:"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(109, 246)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(36, 21)
+        Me.Label5.TabIndex = 15
+        Me.Label5.Text = "Cc:"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(110, 162)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(35, 21)
+        Me.Label6.TabIndex = 14
+        Me.Label6.Text = "To:"
+        '
+        '_Cc
+        '
+        Me._Cc.Location = New System.Drawing.Point(150, 224)
+        Me._Cc.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
+        Me._Cc.Multiline = True
+        Me._Cc.Name = "_Cc"
+        Me._Cc.Size = New System.Drawing.Size(767, 71)
+        Me._Cc.TabIndex = 13
+        '
+        '_To
+        '
+        Me._To.Location = New System.Drawing.Point(150, 140)
+        Me._To.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
+        Me._To.Multiline = True
+        Me._To.Name = "_To"
+        Me._To.Size = New System.Drawing.Size(767, 76)
+        Me._To.TabIndex = 12
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(0, 140)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(120, 21)
+        Me.Label7.TabIndex = 16
+        Me.Label7.Text = "Event contacts"
+        '
         'Settings_
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 21.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(976, 466)
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me._Cc)
+        Me.Controls.Add(Me._To)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Min_)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.ACBEnd)
@@ -170,4 +252,11 @@ Partial Class Settings_
     Friend WithEvents ACBEnd As DateTimePicker
     Friend WithEvents ACBStrt As DateTimePicker
     Friend WithEvents Min_ As DateTimePicker
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents _Cc As TextBox
+    Friend WithEvents _To As TextBox
+    Friend WithEvents Label7 As Label
 End Class
