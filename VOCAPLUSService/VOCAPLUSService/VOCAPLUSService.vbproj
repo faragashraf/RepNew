@@ -138,6 +138,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMail.Designer.vb">
+      <DependentUpon>AutoMail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AutoMail.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GlobalCode.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -175,6 +181,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AutoMail.resx">
+      <DependentUpon>AutoMail.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

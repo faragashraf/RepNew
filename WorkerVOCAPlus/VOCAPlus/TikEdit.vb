@@ -142,55 +142,50 @@ Popul_:
         lblMsg.ForeColor = Color.DarkGreen
         If PublicCode.GetTbl("SELECT TkSQL, TkKind, TkDtStart, TkID, SrcNm, TkClNm, TkClPh, TkClPh1, TkMail, TkClAdr, TkCardNo, TkShpNo, TkGBNo, TkClNtID, TkAmount, TkTransDate, PrdKind, PrdNm, CompNm, CounNmSender, CounNmConsign, OffNm1, OffArea, TkDetails, TkClsStatus, TkFolw, TkEmpNm, UsrRealNm, 0 AS LstSqlEv, '' AS LstUpdtTime, '' AS TkupTxt, 1 AS TkupUnread, 0 AS TkupEvtId, '' AS LstUpUsr, TkReOp, TkRecieveDt, TkEscTyp, ProdKNm, CompHelp FROM dbo.TicketsAll  where TkID = " & TxtTikID.Text & " ORDER BY TkSQL DESC;", EditTable, "1050&H") = Nothing Then
             If EditTable.Rows.Count > 0 Then
-                If EditTable.Rows(0).Item("TkKind") = True Then
-                    If EditTable.Rows(0).Item("PrdKind") = 1 Then
-                        GroupBox3.Visible = True
-                        GroupBox4.Visible = False
-                    ElseIf EditTable.Rows(0).Item("PrdKind") = 2 Then
-                        GroupBox3.Visible = False
-                        GroupBox4.Visible = True
-                    Else
-                        GroupBox3.Visible = False
-                        GroupBox4.Visible = False
-                    End If
-                    TxtComp.BackColor = Color.White
-                    TxtProd.BackColor = Color.White
-                    TreeView1.CollapseAll()
-
-                    If EditTable.Rows(0).Item("TkClsStatus") = True Then
-                        TreeView1.Visible = False
-                        lblMsg.Text = ("الشكوى مغلقة ولا يمكن تعديلها")
-                        lblMsg.ForeColor = Color.Red
-                        Exit Sub
-                    End If
-                    TxtPh1.Text = EditTable.Rows(0).Item("TkClPh").ToString
-                    TxtPh2.Text = EditTable.Rows(0).Item("TkClPh1").ToString
-                    TxtDt.Text = EditTable.Rows(0).Item("TkDtStart").ToString
-                    TxtNm.Text = EditTable.Rows(0).Item("TkClNm").ToString
-                    TxtAdd.Text = EditTable.Rows(0).Item("TkClAdr").ToString
-                    TxtEmail.Text = EditTable.Rows(0).Item("TkMail").ToString
-                    TxtDetails.Text = EditTable.Rows(0).Item("TkDetails").ToString
-                    TxtArea.Text = EditTable.Rows(0).Item("OffArea").ToString
-                    TxtOff.Text = EditTable.Rows(0).Item("OffNm1").ToString
-                    TxtProd.Text = EditTable.Rows(0).Item("PrdNm").ToString
-                    TxtComp.Text = EditTable.Rows(0).Item("CompNm").ToString
-                    TxtSrc.Text = EditTable.Rows(0).Item("SrcNm").ToString
-                    TxtTrck.Text = EditTable.Rows(0).Item("TkShpNo").ToString
-                    TxtOrgin.Text = EditTable.Rows(0).Item("CounNmSender").ToString
-                    TxtDist.Text = EditTable.Rows(0).Item("CounNmConsign").ToString
-                    TxtCard.Text = EditTable.Rows(0).Item("TkCardNo").ToString
-                    TxtGP.Text = EditTable.Rows(0).Item("TkGBNo").ToString
-                    TxtNId.Text = EditTable.Rows(0).Item("TkClNtID").ToString
-                    TxtAmount.Text = EditTable.Rows(0).Item("TkAmount").ToString
-                    TxtTransDt.Text = EditTable.Rows(0).Item("TkTransDate").ToString
-                    TxtFolw.Text = EditTable.Rows(0).Item("UsrRealNm").ToString
-                    SubmitBtn.Enabled = True
-                    lblMsg.Text = ""
-                    TreeView1.Visible = True
+                If EditTable.Rows(0).Item("PrdKind") = 1 Then
+                    GroupBox3.Visible = True
+                    GroupBox4.Visible = False
+                ElseIf EditTable.Rows(0).Item("PrdKind") = 2 Then
+                    GroupBox3.Visible = False
+                    GroupBox4.Visible = True
                 Else
-                    lblMsg.Text = ("الرقم الذي تم ادخاله يخص استفسار" & " - " & "لا يمكن تعديل بيانات الاستفسار")
-                    lblMsg.ForeColor = Color.Red
+                    GroupBox3.Visible = False
+                    GroupBox4.Visible = False
                 End If
+                TxtComp.BackColor = Color.White
+                TxtProd.BackColor = Color.White
+                TreeView1.CollapseAll()
+
+                If EditTable.Rows(0).Item("TkClsStatus") = True Then
+                    TreeView1.Visible = False
+                    lblMsg.Text = ("الشكوى مغلقة ولا يمكن تعديلها")
+                    lblMsg.ForeColor = Color.Red
+                    Exit Sub
+                End If
+                TxtPh1.Text = EditTable.Rows(0).Item("TkClPh").ToString
+                TxtPh2.Text = EditTable.Rows(0).Item("TkClPh1").ToString
+                TxtDt.Text = EditTable.Rows(0).Item("TkDtStart").ToString
+                TxtNm.Text = EditTable.Rows(0).Item("TkClNm").ToString
+                TxtAdd.Text = EditTable.Rows(0).Item("TkClAdr").ToString
+                TxtEmail.Text = EditTable.Rows(0).Item("TkMail").ToString
+                TxtDetails.Text = EditTable.Rows(0).Item("TkDetails").ToString
+                TxtArea.Text = EditTable.Rows(0).Item("OffArea").ToString
+                TxtOff.Text = EditTable.Rows(0).Item("OffNm1").ToString
+                TxtProd.Text = EditTable.Rows(0).Item("PrdNm").ToString
+                TxtComp.Text = EditTable.Rows(0).Item("CompNm").ToString
+                TxtSrc.Text = EditTable.Rows(0).Item("SrcNm").ToString
+                TxtTrck.Text = EditTable.Rows(0).Item("TkShpNo").ToString
+                TxtOrgin.Text = EditTable.Rows(0).Item("CounNmSender").ToString
+                TxtDist.Text = EditTable.Rows(0).Item("CounNmConsign").ToString
+                TxtCard.Text = EditTable.Rows(0).Item("TkCardNo").ToString
+                TxtGP.Text = EditTable.Rows(0).Item("TkGBNo").ToString
+                TxtNId.Text = EditTable.Rows(0).Item("TkClNtID").ToString
+                TxtAmount.Text = EditTable.Rows(0).Item("TkAmount").ToString
+                TxtTransDt.Text = EditTable.Rows(0).Item("TkTransDate").ToString
+                TxtFolw.Text = EditTable.Rows(0).Item("UsrRealNm").ToString
+                SubmitBtn.Enabled = True
+                lblMsg.Text = ""
+                TreeView1.Visible = True
             Else
                 TreeView1.Visible = False
                 lblMsg.Text = ("لا توجد شكوى مسجلة بهذا الرقم" & vbCrLf & "يرجى التأكد من الرقم وإعادة المحاولة")

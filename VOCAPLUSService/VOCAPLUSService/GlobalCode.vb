@@ -14,8 +14,6 @@ Module GlobalCode
     Public tempTable As DataTable = New DataTable
     Public WdysTable As New DataTable
     Public HeldTbl As DataTable = New DataTable()
-
-    'Public Def.sqlCcon As New SqlConnection("Data Source=MYTHINKBOOK\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046")
     Public Span_ As New TimeSpan
     Public StrFileName As String = "X"
     Public nxt As String
@@ -23,7 +21,8 @@ Module GlobalCode
     Public FileExported As String
     Public Class APblicClss
         Public Class Defntion
-            Public sqlCcon As New SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046") ' I Have assigned conn STR here and delete this row from all project
+            Public sqlCcon As New SqlConnection("Data Source=MYTHINKBOOK\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046")
+            'Public sqlCcon As New SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046")
             Public sqlComm As New SqlCommand                    'SQL Command
             Public sqlComnd As New SqlCommand                    'SQL Command
             Public sqlCommUpddate_ As New SqlCommand            'SQL Command
@@ -35,7 +34,6 @@ Module GlobalCode
             Public SQLTblAdptr As New SqlDataAdapter            'SQL Table Adapter
             Public Reader_ As SqlDataReader                     'SQL Reader
             Public AssignTable As DataTable = New DataTable
-
             Public EscTable As DataTable = New DataTable
         End Class
         Public Class Func
@@ -141,14 +139,11 @@ Module GlobalCode
             End Function
         End Class
     End Class
-
     Function OsIP() As String              'Returns the Ip address 
 #Disable Warning BC40000 ' Type or member is obsolete
         OsIP = System.Net.Dns.GetHostByName("").AddressList(0).ToString()
 #Enable Warning BC40000 ' Type or member is obsolete
     End Function
-
-
     Public Sub MsgInf(MsgBdy As String)
         MessageBox.Show(MsgBdy, "رسالة معلومات", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading Or MessageBoxOptions.RightAlign)
     End Sub

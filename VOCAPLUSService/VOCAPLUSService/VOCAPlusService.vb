@@ -269,6 +269,7 @@ SendMail_:
         Dim _EndTime As Date = Format(My.Settings.TimeEnd, "hh:mm tt")
         Dim HourMin As DateTime = (My.Settings.Min)
         Dim HourMin_ As Integer = Minute(HourMin)
+        Dim HourHour_ As Integer = Hour(HourMin)
 #Region "Body"
         BdyStrt = "<p dir=" & Chr(34) & "RTL" & Chr(34) & " style='margin-top:0cm;margin-right:36.0pt;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:" & Chr(34) & "Calibri" & Chr(34) & ",sans-serif;text-align:right;text-indent:-18.0pt;'><strong><span style='font-size:19px;line-height:107%;font-family:" & Chr(34) & "Times New Roman" & Chr(34) & ",serif;'>نظام البريد التلقائي لتطبيق&nbsp;</span></strong><strong><span dir=" & Chr(34) & "LTR" & Chr(34) & " style='font-size:24px;line-height:107%;font-family:" & Chr(34) & "Bahnschrift Condensed" & Chr(34) & ",sans-serif;color:#0070C0;'>VOCA Plus</span></strong></p>
 <p dir= " & Chr(34) & "RTL" & Chr(34) & " style='margin-top:0cm;margin-right:36.0pt;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:" & Chr(34) & "Calibri" & Chr(34) & ",sans-serif;text-align:right;text-indent:-18.0pt;'><strong><span dir=" & Chr(34) & "RTL" & Chr(34) & " style='font-size:19px;line-height:107%;font-family:" & Chr(34) & "Times New Roman" & Chr(34) & ",serif;'>&nbsp;</span></strong></p>
