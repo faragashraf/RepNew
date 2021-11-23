@@ -152,6 +152,7 @@ Public Class TikNew
                 End If
             End If
         Next
+
         Dim gg As Double = Complete_ / (4 + (FlwMend.Controls.Count) / 2)
         'If Complete_ / (5 + (FlwMend.Controls.Count) / 2) < 0.7 Then
         '    SubmitBtn.BackgroundImage = My.Resources.SaveRed1

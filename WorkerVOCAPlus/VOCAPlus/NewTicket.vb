@@ -45,7 +45,7 @@ Public Class NewTicket
             SerchTxt.Text = "برجاء ادخال كلمات البحث"
             NewTickSub()
             'Me.Width = screenWidth - 200
-            Me.Size = New Point(WelcomeScreen.Width, WelcomeScreen.Height - 110)
+            Me.Size = New Point(WelcomeScreen.Width - 12, WelcomeScreen.Height - 110)
             FlowLayoutPanel4.Size = New Point((Me.Size.Width * 0.55), Me.Height - 100)
             FlowLayoutPanel2.Size = New Point((Me.Size.Width * 0.2), Me.Height - 100)
             FlowLayoutPanel3.Size = New Point((Me.Size.Width * 0.16), Me.Height - 100)
@@ -490,13 +490,19 @@ Ckeck_:
         End If
 
         If SrcCmbBx.Items.Count = 0 Then
-            SrcCmbBx.DataSource = CompSurceTable
+            SrcCmbBx.DataSource = CompSurceTable.DefaultView
             SrcCmbBx.SelectedIndex = -1
         End If
 
         If DistCmbBx.Items.Count = 0 Then
             DistCmbBx.DataSource = CountryTable
             DistCmbBx.SelectedIndex = -1
+        End If
+
+        If Usr.PUsrUCatLvl = 7 Then
+            CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] = '1'"     '     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm"
+        Else
+            CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] > '1'"   '   SrcStr = "Select SrcCd, SrcNm from CDSrc where SrcSusp=0 And srcCd > 1 ORDER BY SrcNm"
         End If
 
 Popul_:

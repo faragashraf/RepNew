@@ -108,7 +108,7 @@ Partial Class TikFolow
         Me.CloseBtn.FlatAppearance.BorderSize = 0
         Me.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CloseBtn.Font = New System.Drawing.Font("Times New Roman", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CloseBtn.Location = New System.Drawing.Point(28, 595)
+        Me.CloseBtn.Location = New System.Drawing.Point(28, 589)
         Me.CloseBtn.Name = "CloseBtn"
         Me.CloseBtn.Size = New System.Drawing.Size(64, 64)
         Me.CloseBtn.TabIndex = 129
@@ -192,14 +192,14 @@ Partial Class TikFolow
         Me.StatBrPnlEn.Alignment = System.Windows.Forms.HorizontalAlignment.Center
         Me.StatBrPnlEn.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring
         Me.StatBrPnlEn.Name = "StatBrPnlEn"
-        Me.StatBrPnlEn.Width = 675
+        Me.StatBrPnlEn.Width = 750
         '
         'StatBrPnlAr
         '
         Me.StatBrPnlAr.Alignment = System.Windows.Forms.HorizontalAlignment.Right
         Me.StatBrPnlAr.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring
         Me.StatBrPnlAr.Name = "StatBrPnlAr"
-        Me.StatBrPnlAr.Width = 675
+        Me.StatBrPnlAr.Width = 750
         '
         'BtnRefrsh
         '
@@ -236,9 +236,10 @@ Partial Class TikFolow
         Me.GroupBox1.Controls.Add(Me.ChckTrnsDy)
         Me.GroupBox1.Controls.Add(Me.ChckUpdColeg)
         Me.GroupBox1.Controls.Add(Me.ChckUpdOther)
-        Me.GroupBox1.Location = New System.Drawing.Point(154, 586)
+        Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 16.0!)
+        Me.GroupBox1.Location = New System.Drawing.Point(291, 578)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1140, 75)
+        Me.GroupBox1.Size = New System.Drawing.Size(1003, 83)
         Me.GroupBox1.TabIndex = 2093
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "تصفيه"
@@ -247,7 +248,7 @@ Partial Class TikFolow
         '
         Me.Lbl6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl6.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl6.Location = New System.Drawing.Point(600, 44)
+        Me.Lbl6.Location = New System.Drawing.Point(607, 53)
         Me.Lbl6.Name = "Lbl6"
         Me.Lbl6.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Lbl6.Size = New System.Drawing.Size(90, 20)
@@ -259,7 +260,7 @@ Partial Class TikFolow
         '
         Me.ChckEsc1.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckEsc1.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckEsc1.Location = New System.Drawing.Point(600, 16)
+        Me.ChckEsc1.Location = New System.Drawing.Point(607, 25)
         Me.ChckEsc1.Name = "ChckEsc1"
         Me.ChckEsc1.Size = New System.Drawing.Size(90, 25)
         Me.ChckEsc1.TabIndex = 2047
@@ -272,7 +273,7 @@ Partial Class TikFolow
         '
         Me.Lbl7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl7.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl7.Location = New System.Drawing.Point(504, 44)
+        Me.Lbl7.Location = New System.Drawing.Point(511, 53)
         Me.Lbl7.Name = "Lbl7"
         Me.Lbl7.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Lbl7.Size = New System.Drawing.Size(90, 20)
@@ -284,7 +285,7 @@ Partial Class TikFolow
         '
         Me.ChckEsc2.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckEsc2.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckEsc2.Location = New System.Drawing.Point(504, 16)
+        Me.ChckEsc2.Location = New System.Drawing.Point(511, 25)
         Me.ChckEsc2.Name = "ChckEsc2"
         Me.ChckEsc2.Size = New System.Drawing.Size(90, 25)
         Me.ChckEsc2.TabIndex = 2045
@@ -297,7 +298,7 @@ Partial Class TikFolow
         '
         Me.Lbl8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl8.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl8.Location = New System.Drawing.Point(408, 44)
+        Me.Lbl8.Location = New System.Drawing.Point(415, 53)
         Me.Lbl8.Name = "Lbl8"
         Me.Lbl8.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Lbl8.Size = New System.Drawing.Size(90, 20)
@@ -309,7 +310,7 @@ Partial Class TikFolow
         '
         Me.ChckEsc3.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckEsc3.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckEsc3.Location = New System.Drawing.Point(408, 16)
+        Me.ChckEsc3.Location = New System.Drawing.Point(415, 25)
         Me.ChckEsc3.Name = "ChckEsc3"
         Me.ChckEsc3.Size = New System.Drawing.Size(90, 25)
         Me.ChckEsc3.TabIndex = 2043
@@ -322,7 +323,7 @@ Partial Class TikFolow
         '
         Me.Lbl5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl5.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl5.Location = New System.Drawing.Point(885, 44)
+        Me.Lbl5.Location = New System.Drawing.Point(892, 53)
         Me.Lbl5.Name = "Lbl5"
         Me.Lbl5.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Lbl5.Size = New System.Drawing.Size(90, 20)
@@ -334,7 +335,7 @@ Partial Class TikFolow
         '
         Me.ChckRead.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckRead.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckRead.Location = New System.Drawing.Point(885, 16)
+        Me.ChckRead.Location = New System.Drawing.Point(892, 25)
         Me.ChckRead.Name = "ChckRead"
         Me.ChckRead.Size = New System.Drawing.Size(90, 25)
         Me.ChckRead.TabIndex = 2041
@@ -347,7 +348,7 @@ Partial Class TikFolow
         '
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label4.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Label4.Location = New System.Drawing.Point(6, 44)
+        Me.Label4.Location = New System.Drawing.Point(13, 53)
         Me.Label4.Name = "Label4"
         Me.Label4.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Label4.Size = New System.Drawing.Size(97, 20)
@@ -359,7 +360,7 @@ Partial Class TikFolow
         '
         Me.Lbl3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl3.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl3.Location = New System.Drawing.Point(789, 44)
+        Me.Lbl3.Location = New System.Drawing.Point(796, 53)
         Me.Lbl3.Name = "Lbl3"
         Me.Lbl3.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Lbl3.Size = New System.Drawing.Size(90, 20)
@@ -371,7 +372,7 @@ Partial Class TikFolow
         '
         Me.Lbl4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl4.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl4.Location = New System.Drawing.Point(696, 44)
+        Me.Lbl4.Location = New System.Drawing.Point(703, 53)
         Me.Lbl4.Name = "Lbl4"
         Me.Lbl4.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Lbl4.Size = New System.Drawing.Size(90, 20)
@@ -383,7 +384,7 @@ Partial Class TikFolow
         '
         Me.Lbl2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl2.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl2.Location = New System.Drawing.Point(106, 44)
+        Me.Lbl2.Location = New System.Drawing.Point(113, 53)
         Me.Lbl2.Name = "Lbl2"
         Me.Lbl2.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Lbl2.Size = New System.Drawing.Size(90, 20)
@@ -395,7 +396,7 @@ Partial Class TikFolow
         '
         Me.Lbl0.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl0.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl0.Location = New System.Drawing.Point(304, 44)
+        Me.Lbl0.Location = New System.Drawing.Point(311, 53)
         Me.Lbl0.Name = "Lbl0"
         Me.Lbl0.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Lbl0.Size = New System.Drawing.Size(100, 20)
@@ -407,7 +408,7 @@ Partial Class TikFolow
         '
         Me.Lbl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl1.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.Lbl1.Location = New System.Drawing.Point(200, 44)
+        Me.Lbl1.Location = New System.Drawing.Point(207, 53)
         Me.Lbl1.Name = "Lbl1"
         Me.Lbl1.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Lbl1.Size = New System.Drawing.Size(102, 20)
@@ -419,7 +420,7 @@ Partial Class TikFolow
         '
         Me.ChckUpdAll.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckUpdAll.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckUpdAll.Location = New System.Drawing.Point(6, 16)
+        Me.ChckUpdAll.Location = New System.Drawing.Point(13, 25)
         Me.ChckUpdAll.Name = "ChckUpdAll"
         Me.ChckUpdAll.Size = New System.Drawing.Size(97, 25)
         Me.ChckUpdAll.TabIndex = 2037
@@ -432,7 +433,7 @@ Partial Class TikFolow
         '
         Me.ChckUpdMe.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckUpdMe.Font = New System.Drawing.Font("Times New Roman", 8.0!)
-        Me.ChckUpdMe.Location = New System.Drawing.Point(302, 16)
+        Me.ChckUpdMe.Location = New System.Drawing.Point(309, 25)
         Me.ChckUpdMe.Name = "ChckUpdMe"
         Me.ChckUpdMe.Size = New System.Drawing.Size(102, 25)
         Me.ChckUpdMe.TabIndex = 2036
@@ -445,7 +446,7 @@ Partial Class TikFolow
         '
         Me.ChckFlN.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckFlN.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckFlN.Location = New System.Drawing.Point(789, 16)
+        Me.ChckFlN.Location = New System.Drawing.Point(796, 25)
         Me.ChckFlN.Name = "ChckFlN"
         Me.ChckFlN.Size = New System.Drawing.Size(90, 25)
         Me.ChckFlN.TabIndex = 2035
@@ -458,7 +459,7 @@ Partial Class TikFolow
         '
         Me.ChckTrnsDy.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckTrnsDy.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckTrnsDy.Location = New System.Drawing.Point(696, 16)
+        Me.ChckTrnsDy.Location = New System.Drawing.Point(703, 25)
         Me.ChckTrnsDy.Name = "ChckTrnsDy"
         Me.ChckTrnsDy.Size = New System.Drawing.Size(90, 25)
         Me.ChckTrnsDy.TabIndex = 2034
@@ -471,7 +472,7 @@ Partial Class TikFolow
         '
         Me.ChckUpdColeg.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckUpdColeg.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckUpdColeg.Location = New System.Drawing.Point(199, 16)
+        Me.ChckUpdColeg.Location = New System.Drawing.Point(206, 25)
         Me.ChckUpdColeg.Name = "ChckUpdColeg"
         Me.ChckUpdColeg.Size = New System.Drawing.Size(102, 25)
         Me.ChckUpdColeg.TabIndex = 2033
@@ -484,7 +485,7 @@ Partial Class TikFolow
         '
         Me.ChckUpdOther.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChckUpdOther.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.ChckUpdOther.Location = New System.Drawing.Point(106, 16)
+        Me.ChckUpdOther.Location = New System.Drawing.Point(113, 25)
         Me.ChckUpdOther.Name = "ChckUpdOther"
         Me.ChckUpdOther.Size = New System.Drawing.Size(90, 25)
         Me.ChckUpdOther.TabIndex = 2032

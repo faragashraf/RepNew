@@ -30,27 +30,24 @@ Partial Class TicketEditNew
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.CloseBtn = New System.Windows.Forms.Button()
         Me.SubmitBtn = New System.Windows.Forms.Button()
-        Me.NewBtn = New System.Windows.Forms.Button()
-        Me.TxtOrgin = New System.Windows.Forms.TextBox()
-        Me.TxtDist = New System.Windows.Forms.ComboBox()
-        Me.TxtTrck = New System.Windows.Forms.MaskedTextBox()
-        Me.TxtTransDt = New System.Windows.Forms.DateTimePicker()
-        Me.TxtAmount = New System.Windows.Forms.TextBox()
-        Me.TxtCard = New System.Windows.Forms.MaskedTextBox()
-        Me.TxtGP = New System.Windows.Forms.MaskedTextBox()
-        Me.TxtDetails = New System.Windows.Forms.TextBox()
-        Me.TxtComp = New System.Windows.Forms.TextBox()
-        Me.TxtAdd = New System.Windows.Forms.TextBox()
-        Me.TxtSrc = New System.Windows.Forms.ComboBox()
-        Me.TxtProd = New System.Windows.Forms.TextBox()
-        Me.TxtNm = New System.Windows.Forms.TextBox()
-        Me.TxtOff = New System.Windows.Forms.ComboBox()
-        Me.TxtDt = New System.Windows.Forms.TextBox()
-        Me.TxtArea = New System.Windows.Forms.ComboBox()
-        Me.TxtEmail = New System.Windows.Forms.TextBox()
-        Me.LblDublicate = New System.Windows.Forms.Label()
-        Me.LblClsOp = New System.Windows.Forms.Label()
-        Me.LblComp = New System.Windows.Forms.Label()
+        Me.CounNmSender = New System.Windows.Forms.TextBox()
+        Me.CounNmConsign2TkConsigCoun = New System.Windows.Forms.ComboBox()
+        Me.TkShpNo = New System.Windows.Forms.MaskedTextBox()
+        Me.TkTransDate = New System.Windows.Forms.DateTimePicker()
+        Me.TkAmount = New System.Windows.Forms.TextBox()
+        Me.TkCardNo = New System.Windows.Forms.MaskedTextBox()
+        Me.TkGBNo = New System.Windows.Forms.MaskedTextBox()
+        Me.TkDetails = New System.Windows.Forms.TextBox()
+        Me.CompNm = New System.Windows.Forms.TextBox()
+        Me.TkClAdr = New System.Windows.Forms.TextBox()
+        Me.SrcNm2TkCompSrc = New System.Windows.Forms.ComboBox()
+        Me.PrdNm = New System.Windows.Forms.TextBox()
+        Me.TkClNm = New System.Windows.Forms.TextBox()
+        Me.OffNm12TkOffNm = New System.Windows.Forms.ComboBox()
+        Me.TkDtStart = New System.Windows.Forms.TextBox()
+        Me.OffArea = New System.Windows.Forms.ComboBox()
+        Me.TkMail = New System.Windows.Forms.TextBox()
+        Me.UsrRealNm = New System.Windows.Forms.TextBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.RadioButton6 = New System.Windows.Forms.RadioButton()
         Me.RadioButton7 = New System.Windows.Forms.RadioButton()
@@ -58,25 +55,23 @@ Partial Class TicketEditNew
         Me.TimrPhons = New System.Windows.Forms.Timer(Me.components)
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.FlowLayoutPanel5 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.ChckReAssign = New System.Windows.Forms.CheckBox()
+        Me.TikID = New System.Windows.Forms.TextBox()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.LblText = New System.Windows.Forms.Label()
         Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.TxtTikID = New System.Windows.Forms.GroupBox()
         Me.RadioButton4 = New System.Windows.Forms.RadioButton()
         Me.RadioButton5 = New System.Windows.Forms.RadioButton()
         Me.TreeView1 = New System.Windows.Forms.TreeView()
         Me.FlowLayoutPanel3 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.Label58 = New System.Windows.Forms.Label()
-        Me.Label57 = New System.Windows.Forms.Label()
-        Me.LblInq = New System.Windows.Forms.Label()
-        Me.Label49 = New System.Windows.Forms.Label()
-        Me.Label59 = New System.Windows.Forms.Label()
-        Me.LblClsCls = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.FlowLayoutPanel4 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TikID = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label29 = New System.Windows.Forms.Label()
-        Me.TxtNId = New System.Windows.Forms.MaskedTextBox()
+        Me.TkClNtID = New System.Windows.Forms.MaskedTextBox()
         Me.RadNID = New System.Windows.Forms.RadioButton()
         Me.RadPss = New System.Windows.Forms.RadioButton()
         Me.MyGroupBox2 = New System.Windows.Forms.Panel()
@@ -85,7 +80,7 @@ Partial Class TicketEditNew
         Me.RadioButton8 = New System.Windows.Forms.RadioButton()
         Me.RadioButton9 = New System.Windows.Forms.RadioButton()
         Me.Label20 = New System.Windows.Forms.Label()
-        Me.TxtPh1 = New System.Windows.Forms.MaskedTextBox()
+        Me.TkClPh = New System.Windows.Forms.MaskedTextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.MyGroupBox1 = New System.Windows.Forms.Panel()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
@@ -93,7 +88,7 @@ Partial Class TicketEditNew
         Me.RadioButton11 = New System.Windows.Forms.RadioButton()
         Me.RadioButton12 = New System.Windows.Forms.RadioButton()
         Me.Label22 = New System.Windows.Forms.Label()
-        Me.TxtPh2 = New System.Windows.Forms.MaskedTextBox()
+        Me.TkClPh1 = New System.Windows.Forms.MaskedTextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -101,10 +96,11 @@ Partial Class TicketEditNew
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label32 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.FinancialGroup = New System.Windows.Forms.GroupBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -122,18 +118,15 @@ Partial Class TicketEditNew
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.CombProdRef = New System.Windows.Forms.ComboBox()
-        Me.FlowLayoutPanel5 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.BtnDublicate = New System.Windows.Forms.Button()
         Me.LblHelp = New System.Windows.Forms.Label()
-        Me.lblMsg = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ECnt_Label = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
+        Me.FlowLayoutPanel5.SuspendLayout()
+        Me.Panel5.SuspendLayout()
         Me.FlowLayoutPanel2.SuspendLayout()
         Me.TxtTikID.SuspendLayout()
         Me.FlowLayoutPanel3.SuspendLayout()
@@ -146,11 +139,8 @@ Partial Class TicketEditNew
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FinancialGroup.SuspendLayout()
         Me.PostalGroup.SuspendLayout()
-        Me.FlowLayoutPanel5.SuspendLayout()
-        Me.Panel4.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        Me.Panel3.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -177,7 +167,9 @@ Partial Class TicketEditNew
         '
         'CloseBtn
         '
-        Me.CloseBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.CloseBtn.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CloseBtn.BackgroundImage = Global.VOCAPlus.My.Resources.Resources._Exit1
         Me.CloseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.CloseBtn.FlatAppearance.BorderColor = System.Drawing.Color.White
@@ -186,9 +178,9 @@ Partial Class TicketEditNew
         Me.CloseBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CloseBtn.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.CloseBtn.Location = New System.Drawing.Point(8, 6)
+        Me.CloseBtn.Location = New System.Drawing.Point(2, 6)
         Me.CloseBtn.Name = "CloseBtn"
-        Me.CloseBtn.Size = New System.Drawing.Size(65, 54)
+        Me.CloseBtn.Size = New System.Drawing.Size(81, 69)
         Me.CloseBtn.TabIndex = 86
         Me.ToolTip1.SetToolTip(Me.CloseBtn, "خروج")
         Me.CloseBtn.UseVisualStyleBackColor = True
@@ -207,317 +199,275 @@ Partial Class TicketEditNew
         Me.SubmitBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.SubmitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.SubmitBtn.Font = New System.Drawing.Font("Times New Roman", 14.25!)
-        Me.SubmitBtn.Location = New System.Drawing.Point(8, 6)
+        Me.SubmitBtn.Location = New System.Drawing.Point(8, 7)
         Me.SubmitBtn.Name = "SubmitBtn"
-        Me.SubmitBtn.Size = New System.Drawing.Size(65, 54)
+        Me.SubmitBtn.Size = New System.Drawing.Size(85, 64)
         Me.SubmitBtn.TabIndex = 92
         Me.ToolTip1.SetToolTip(Me.SubmitBtn, "تسجيل")
         Me.SubmitBtn.UseVisualStyleBackColor = True
         '
-        'NewBtn
+        'CounNmSender
         '
-        Me.NewBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.NewBtn.BackgroundImage = Global.VOCAPlus.My.Resources.Resources.CpAdd
-        Me.NewBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.NewBtn.FlatAppearance.BorderColor = System.Drawing.Color.White
-        Me.NewBtn.FlatAppearance.BorderSize = 0
-        Me.NewBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent
-        Me.NewBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
-        Me.NewBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
-        Me.NewBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.NewBtn.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.NewBtn.Location = New System.Drawing.Point(8, 6)
-        Me.NewBtn.Name = "NewBtn"
-        Me.NewBtn.Size = New System.Drawing.Size(65, 54)
-        Me.NewBtn.TabIndex = 2021
-        Me.NewBtn.Tag = "New Ticket"
-        Me.ToolTip1.SetToolTip(Me.NewBtn, "تسجيل جديد")
-        Me.NewBtn.UseVisualStyleBackColor = True
+        Me.CounNmSender.Location = New System.Drawing.Point(15, 41)
+        Me.CounNmSender.Name = "CounNmSender"
+        Me.CounNmSender.ReadOnly = True
+        Me.CounNmSender.Size = New System.Drawing.Size(250, 26)
+        Me.CounNmSender.TabIndex = 35
+        Me.CounNmSender.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.CounNmSender, "بلد الراسل")
         '
-        'TxtOrgin
+        'CounNmConsign2TkConsigCoun
         '
-        Me.TxtOrgin.Location = New System.Drawing.Point(15, 41)
-        Me.TxtOrgin.Name = "TxtOrgin"
-        Me.TxtOrgin.ReadOnly = True
-        Me.TxtOrgin.Size = New System.Drawing.Size(250, 26)
-        Me.TxtOrgin.TabIndex = 35
-        Me.TxtOrgin.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.TxtOrgin, "بلد الراسل")
+        Me.CounNmConsign2TkConsigCoun.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CounNmConsign2TkConsigCoun.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.CounNmConsign2TkConsigCoun.DisplayMember = "CounNm"
+        Me.CounNmConsign2TkConsigCoun.FormattingEnabled = True
+        Me.CounNmConsign2TkConsigCoun.ItemHeight = 19
+        Me.CounNmConsign2TkConsigCoun.Location = New System.Drawing.Point(15, 68)
+        Me.CounNmConsign2TkConsigCoun.MaxLength = 2
+        Me.CounNmConsign2TkConsigCoun.Name = "CounNmConsign2TkConsigCoun"
+        Me.CounNmConsign2TkConsigCoun.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.CounNmConsign2TkConsigCoun.Size = New System.Drawing.Size(250, 27)
+        Me.CounNmConsign2TkConsigCoun.TabIndex = 6
+        Me.CounNmConsign2TkConsigCoun.Tag = "بلد المرسل إلية"
+        Me.ToolTip1.SetToolTip(Me.CounNmConsign2TkConsigCoun, "بلد المرسل إلية")
+        Me.CounNmConsign2TkConsigCoun.ValueMember = "CounCd"
         '
-        'TxtDist
+        'TkShpNo
         '
-        Me.TxtDist.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.TxtDist.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.TxtDist.DisplayMember = "CounNm"
-        Me.TxtDist.FormattingEnabled = True
-        Me.TxtDist.ItemHeight = 19
-        Me.TxtDist.Location = New System.Drawing.Point(15, 68)
-        Me.TxtDist.MaxLength = 2
-        Me.TxtDist.Name = "TxtDist"
-        Me.TxtDist.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtDist.Size = New System.Drawing.Size(250, 27)
-        Me.TxtDist.TabIndex = 6
-        Me.TxtDist.Tag = "بلد المرسل إلية"
-        Me.ToolTip1.SetToolTip(Me.TxtDist, "بلد المرسل إلية")
-        Me.TxtDist.ValueMember = "CounCd"
+        Me.TkShpNo.Location = New System.Drawing.Point(15, 14)
+        Me.TkShpNo.Mask = "LL 900000000 LL"
+        Me.TkShpNo.Name = "TkShpNo"
+        Me.TkShpNo.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.TkShpNo.Size = New System.Drawing.Size(250, 26)
+        Me.TkShpNo.TabIndex = 5
+        Me.TkShpNo.Tag = "رقم الشحنة"
+        Me.ToolTip1.SetToolTip(Me.TkShpNo, "رقم الشحنة مكون من 13 رقم." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Example : EE 123456789 SA")
         '
-        'TxtTrck
+        'TkTransDate
         '
-        Me.TxtTrck.Location = New System.Drawing.Point(15, 14)
-        Me.TxtTrck.Mask = "LL 900000000 LL"
-        Me.TxtTrck.Name = "TxtTrck"
-        Me.TxtTrck.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TxtTrck.Size = New System.Drawing.Size(250, 26)
-        Me.TxtTrck.TabIndex = 5
-        Me.TxtTrck.Tag = "رقم الشحنة"
-        Me.ToolTip1.SetToolTip(Me.TxtTrck, "رقم الشحنة مكون من 13 رقم." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Example : EE 123456789 SA")
+        Me.TkTransDate.CalendarMonthBackground = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.TkTransDate.CalendarTitleBackColor = System.Drawing.Color.Blue
+        Me.TkTransDate.Location = New System.Drawing.Point(16, 92)
+        Me.TkTransDate.Name = "TkTransDate"
+        Me.TkTransDate.Size = New System.Drawing.Size(250, 26)
+        Me.TkTransDate.TabIndex = 11
+        Me.TkTransDate.Tag = "تاريخ العملية"
+        Me.ToolTip1.SetToolTip(Me.TkTransDate, "تاريخ العملية")
+        Me.TkTransDate.Value = New Date(2020, 4, 1, 0, 0, 0, 0)
         '
-        'TxtTransDt
+        'TkAmount
         '
-        Me.TxtTransDt.CalendarMonthBackground = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.TxtTransDt.CalendarTitleBackColor = System.Drawing.Color.Blue
-        Me.TxtTransDt.Location = New System.Drawing.Point(16, 92)
-        Me.TxtTransDt.Name = "TxtTransDt"
-        Me.TxtTransDt.Size = New System.Drawing.Size(250, 26)
-        Me.TxtTransDt.TabIndex = 11
-        Me.TxtTransDt.Tag = "تاريخ العملية"
-        Me.ToolTip1.SetToolTip(Me.TxtTransDt, "تاريخ العملية")
-        Me.TxtTransDt.Value = New Date(2020, 4, 1, 0, 0, 0, 0)
+        Me.TkAmount.Location = New System.Drawing.Point(16, 67)
+        Me.TkAmount.MaxLength = 16
+        Me.TkAmount.Name = "TkAmount"
+        Me.TkAmount.Size = New System.Drawing.Size(250, 26)
+        Me.TkAmount.TabIndex = 10
+        Me.TkAmount.Tag = "مبلغ العملية"
+        Me.ToolTip1.SetToolTip(Me.TkAmount, "مبلغ العملية")
         '
-        'TxtAmount
+        'TkCardNo
         '
-        Me.TxtAmount.Location = New System.Drawing.Point(16, 67)
-        Me.TxtAmount.MaxLength = 16
-        Me.TxtAmount.Name = "TxtAmount"
-        Me.TxtAmount.Size = New System.Drawing.Size(250, 26)
-        Me.TxtAmount.TabIndex = 10
-        Me.TxtAmount.Tag = "مبلغ العملية"
-        Me.ToolTip1.SetToolTip(Me.TxtAmount, "مبلغ العملية")
+        Me.TkCardNo.Location = New System.Drawing.Point(16, 14)
+        Me.TkCardNo.Mask = "0000 0000 0000 0000"
+        Me.TkCardNo.Name = "TkCardNo"
+        Me.TkCardNo.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.TkCardNo.Size = New System.Drawing.Size(250, 26)
+        Me.TkCardNo.TabIndex = 7
+        Me.TkCardNo.Tag = "رقم الكارت"
+        Me.ToolTip1.SetToolTip(Me.TkCardNo, "رقم الكارت مكون من 16 رقم." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Example : XXXX XXXX XXXX XXXX")
         '
-        'TxtCard
+        'TkGBNo
         '
-        Me.TxtCard.Location = New System.Drawing.Point(16, 14)
-        Me.TxtCard.Mask = "0000 0000 0000 0000"
-        Me.TxtCard.Name = "TxtCard"
-        Me.TxtCard.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TxtCard.Size = New System.Drawing.Size(250, 26)
-        Me.TxtCard.TabIndex = 7
-        Me.TxtCard.Tag = "رقم الكارت"
-        Me.ToolTip1.SetToolTip(Me.TxtCard, "رقم الكارت مكون من 16 رقم." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Example : XXXX XXXX XXXX XXXX")
+        Me.TkGBNo.Location = New System.Drawing.Point(16, 38)
+        Me.TkGBNo.Mask = "LL00000000000000"
+        Me.TkGBNo.Name = "TkGBNo"
+        Me.TkGBNo.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.TkGBNo.Size = New System.Drawing.Size(250, 26)
+        Me.TkGBNo.TabIndex = 8
+        Me.TkGBNo.Tag = "رقم أمر الدفع"
+        Me.ToolTip1.SetToolTip(Me.TkGBNo, "رقم أمر الدفع مكون من 16 رقم." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Example : GPXXXXXXXXXXXXXX")
         '
-        'TxtGP
+        'TkDetails
         '
-        Me.TxtGP.Location = New System.Drawing.Point(16, 38)
-        Me.TxtGP.Mask = "LL00000000000000"
-        Me.TxtGP.Name = "TxtGP"
-        Me.TxtGP.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TxtGP.Size = New System.Drawing.Size(250, 26)
-        Me.TxtGP.TabIndex = 8
-        Me.TxtGP.Tag = "رقم أمر الدفع"
-        Me.ToolTip1.SetToolTip(Me.TxtGP, "رقم أمر الدفع مكون من 16 رقم." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Example : GPXXXXXXXXXXXXXX")
+        Me.TkDetails.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TkDetails.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.FlowLayoutPanel4.SetFlowBreak(Me.TkDetails, True)
+        Me.TkDetails.Location = New System.Drawing.Point(60, 347)
+        Me.TkDetails.Margin = New System.Windows.Forms.Padding(3, 3, 31, 3)
+        Me.TkDetails.Multiline = True
+        Me.TkDetails.Name = "TkDetails"
+        Me.TkDetails.ReadOnly = True
+        Me.TkDetails.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.TkDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.TkDetails.Size = New System.Drawing.Size(646, 110)
+        Me.TkDetails.TabIndex = 90
+        Me.TkDetails.TabStop = False
+        Me.TkDetails.Tag = "تفاصيل الشكوى"
+        Me.ToolTip1.SetToolTip(Me.TkDetails, "تفاصيل الشكوى")
         '
-        'TxtDetails
+        'CompNm
         '
-        Me.TxtDetails.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtDetails.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.FlowLayoutPanel4.SetFlowBreak(Me.TxtDetails, True)
-        Me.TxtDetails.Location = New System.Drawing.Point(7, 343)
-        Me.TxtDetails.Margin = New System.Windows.Forms.Padding(3, 3, 31, 3)
-        Me.TxtDetails.Multiline = True
-        Me.TxtDetails.Name = "TxtDetails"
-        Me.TxtDetails.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TxtDetails.Size = New System.Drawing.Size(646, 110)
-        Me.TxtDetails.TabIndex = 90
-        Me.TxtDetails.TabStop = False
-        Me.TxtDetails.Tag = "Details"
-        Me.ToolTip1.SetToolTip(Me.TxtDetails, "تفاصيل الشكوى")
+        Me.CompNm.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FlowLayoutPanel4.SetFlowBreak(Me.CompNm, True)
+        Me.CompNm.Location = New System.Drawing.Point(60, 206)
+        Me.CompNm.Margin = New System.Windows.Forms.Padding(3, 7, 30, 3)
+        Me.CompNm.Name = "CompNm"
+        Me.CompNm.ReadOnly = True
+        Me.CompNm.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.CompNm.Size = New System.Drawing.Size(278, 29)
+        Me.CompNm.TabIndex = 96
+        Me.CompNm.Tag = "نوع الشكوى"
+        Me.ToolTip1.SetToolTip(Me.CompNm, "نوع الشكوى")
         '
-        'TxtComp
+        'TkClAdr
         '
-        Me.TxtComp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlowLayoutPanel4.SetFlowBreak(Me.TxtComp, True)
-        Me.TxtComp.Location = New System.Drawing.Point(7, 276)
-        Me.TxtComp.Margin = New System.Windows.Forms.Padding(3, 7, 30, 3)
-        Me.TxtComp.Name = "TxtComp"
-        Me.TxtComp.ReadOnly = True
-        Me.TxtComp.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtComp.Size = New System.Drawing.Size(278, 29)
-        Me.TxtComp.TabIndex = 96
-        Me.TxtComp.Tag = "نوع الشكوى"
-        Me.ToolTip1.SetToolTip(Me.TxtComp, "نوع الشكوى")
+        Me.TkClAdr.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TkClAdr.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TkClAdr.Location = New System.Drawing.Point(477, 276)
+        Me.TkClAdr.Margin = New System.Windows.Forms.Padding(3, 3, 31, 3)
+        Me.TkClAdr.Multiline = True
+        Me.TkClAdr.Name = "TkClAdr"
+        Me.TkClAdr.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.TkClAdr.Size = New System.Drawing.Size(229, 65)
+        Me.TkClAdr.TabIndex = 68
+        Me.TkClAdr.Tag = "عنوان العميل"
+        Me.ToolTip1.SetToolTip(Me.TkClAdr, "عنوان العميل")
         '
-        'TxtAdd
+        'SrcNm2TkCompSrc
         '
-        Me.TxtAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtAdd.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.TxtAdd.Location = New System.Drawing.Point(424, 272)
-        Me.TxtAdd.Margin = New System.Windows.Forms.Padding(3, 3, 31, 3)
-        Me.TxtAdd.Multiline = True
-        Me.TxtAdd.Name = "TxtAdd"
-        Me.TxtAdd.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtAdd.Size = New System.Drawing.Size(229, 65)
-        Me.TxtAdd.TabIndex = 68
-        Me.TxtAdd.Tag = "Address"
-        Me.ToolTip1.SetToolTip(Me.TxtAdd, "عنوان العميل")
+        Me.SrcNm2TkCompSrc.AllowDrop = True
+        Me.SrcNm2TkCompSrc.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.SrcNm2TkCompSrc.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.SrcNm2TkCompSrc.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.SrcNm2TkCompSrc.BackColor = System.Drawing.Color.White
+        Me.SrcNm2TkCompSrc.DisplayMember = "SrcNm"
+        Me.SrcNm2TkCompSrc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.FlowLayoutPanel4.SetFlowBreak(Me.SrcNm2TkCompSrc, True)
+        Me.SrcNm2TkCompSrc.FormattingEnabled = True
+        Me.SrcNm2TkCompSrc.ItemHeight = 21
+        Me.SrcNm2TkCompSrc.Location = New System.Drawing.Point(59, 241)
+        Me.SrcNm2TkCompSrc.Name = "SrcNm2TkCompSrc"
+        Me.SrcNm2TkCompSrc.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.SrcNm2TkCompSrc.Size = New System.Drawing.Size(278, 29)
+        Me.SrcNm2TkCompSrc.TabIndex = 4
+        Me.SrcNm2TkCompSrc.Tag = "مصدر الشكوى"
+        Me.ToolTip1.SetToolTip(Me.SrcNm2TkCompSrc, "مصدر الشكوى")
+        Me.SrcNm2TkCompSrc.ValueMember = "SrcCd"
         '
-        'TxtSrc
+        'PrdNm
         '
-        Me.TxtSrc.AllowDrop = True
-        Me.TxtSrc.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtSrc.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.TxtSrc.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.TxtSrc.BackColor = System.Drawing.Color.White
-        Me.TxtSrc.DisplayMember = "SrcNm"
-        Me.TxtSrc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.FlowLayoutPanel4.SetFlowBreak(Me.TxtSrc, True)
-        Me.TxtSrc.FormattingEnabled = True
-        Me.TxtSrc.ItemHeight = 21
-        Me.TxtSrc.Location = New System.Drawing.Point(6, 237)
-        Me.TxtSrc.Name = "TxtSrc"
-        Me.TxtSrc.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtSrc.Size = New System.Drawing.Size(278, 29)
-        Me.TxtSrc.TabIndex = 4
-        Me.TxtSrc.Tag = "مصدر الشكوى"
-        Me.ToolTip1.SetToolTip(Me.TxtSrc, "مصدر الشكوى")
-        Me.TxtSrc.ValueMember = "SrcCd"
+        Me.PrdNm.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FlowLayoutPanel4.SetFlowBreak(Me.PrdNm, True)
+        Me.PrdNm.Location = New System.Drawing.Point(59, 167)
+        Me.PrdNm.Margin = New System.Windows.Forms.Padding(3, 3, 31, 3)
+        Me.PrdNm.Name = "PrdNm"
+        Me.PrdNm.ReadOnly = True
+        Me.PrdNm.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.PrdNm.Size = New System.Drawing.Size(278, 29)
+        Me.PrdNm.TabIndex = 95
+        Me.PrdNm.Tag = "نوع الخدمة"
+        Me.ToolTip1.SetToolTip(Me.PrdNm, "نوع الخدمة")
         '
-        'TxtProd
+        'TkClNm
         '
-        Me.TxtProd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlowLayoutPanel4.SetFlowBreak(Me.TxtProd, True)
-        Me.TxtProd.Location = New System.Drawing.Point(6, 202)
-        Me.TxtProd.Margin = New System.Windows.Forms.Padding(3, 3, 31, 3)
-        Me.TxtProd.Name = "TxtProd"
-        Me.TxtProd.ReadOnly = True
-        Me.TxtProd.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtProd.Size = New System.Drawing.Size(278, 29)
-        Me.TxtProd.TabIndex = 95
-        Me.TxtProd.Tag = "نوع الخدمة"
-        Me.ToolTip1.SetToolTip(Me.TxtProd, "نوع الخدمة")
+        Me.TkClNm.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TkClNm.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TkClNm.Location = New System.Drawing.Point(477, 167)
+        Me.TkClNm.Name = "TkClNm"
+        Me.TkClNm.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.TkClNm.Size = New System.Drawing.Size(229, 29)
+        Me.TkClNm.TabIndex = 1
+        Me.TkClNm.TabStop = False
+        Me.TkClNm.Tag = "اسم العميل"
+        Me.ToolTip1.SetToolTip(Me.TkClNm, "اسم العميل")
         '
-        'TxtNm
+        'OffNm12TkOffNm
         '
-        Me.TxtNm.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtNm.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.TxtNm.Location = New System.Drawing.Point(424, 202)
-        Me.TxtNm.Name = "TxtNm"
-        Me.TxtNm.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtNm.Size = New System.Drawing.Size(229, 29)
-        Me.TxtNm.TabIndex = 1
-        Me.TxtNm.TabStop = False
-        Me.TxtNm.Tag = "اسم العميل"
-        Me.ToolTip1.SetToolTip(Me.TxtNm, "اسم العميل")
+        Me.OffNm12TkOffNm.AllowDrop = True
+        Me.OffNm12TkOffNm.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.OffNm12TkOffNm.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.OffNm12TkOffNm.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.OffNm12TkOffNm.DisplayMember = "OffNm1"
+        Me.FlowLayoutPanel4.SetFlowBreak(Me.OffNm12TkOffNm, True)
+        Me.OffNm12TkOffNm.FormattingEnabled = True
+        Me.OffNm12TkOffNm.ItemHeight = 21
+        Me.OffNm12TkOffNm.Location = New System.Drawing.Point(59, 132)
+        Me.OffNm12TkOffNm.Name = "OffNm12TkOffNm"
+        Me.OffNm12TkOffNm.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.OffNm12TkOffNm.Size = New System.Drawing.Size(278, 29)
+        Me.OffNm12TkOffNm.TabIndex = 3
+        Me.OffNm12TkOffNm.Tag = "اسم المكتب"
+        Me.ToolTip1.SetToolTip(Me.OffNm12TkOffNm, "اسم مكتب البريد")
+        Me.OffNm12TkOffNm.ValueMember = "OffFinCd"
         '
-        'TxtOff
+        'TkDtStart
         '
-        Me.TxtOff.AllowDrop = True
-        Me.TxtOff.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtOff.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.TxtOff.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.TxtOff.DisplayMember = "OffNm1"
-        Me.FlowLayoutPanel4.SetFlowBreak(Me.TxtOff, True)
-        Me.TxtOff.FormattingEnabled = True
-        Me.TxtOff.ItemHeight = 21
-        Me.TxtOff.Location = New System.Drawing.Point(6, 167)
-        Me.TxtOff.Name = "TxtOff"
-        Me.TxtOff.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtOff.Size = New System.Drawing.Size(278, 29)
-        Me.TxtOff.TabIndex = 3
-        Me.TxtOff.Tag = "اسم المكتب"
-        Me.ToolTip1.SetToolTip(Me.TxtOff, "اسم مكتب البريد")
-        Me.TxtOff.ValueMember = "OffFinCd"
+        Me.TkDtStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TkDtStart.Enabled = False
+        Me.TkDtStart.Location = New System.Drawing.Point(477, 132)
+        Me.TkDtStart.Margin = New System.Windows.Forms.Padding(3, 3, 31, 3)
+        Me.TkDtStart.Name = "TkDtStart"
+        Me.TkDtStart.ReadOnly = True
+        Me.TkDtStart.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.TkDtStart.Size = New System.Drawing.Size(229, 29)
+        Me.TkDtStart.TabIndex = 74
+        Me.TkDtStart.TabStop = False
+        Me.TkDtStart.Tag = "Date"
+        Me.ToolTip1.SetToolTip(Me.TkDtStart, "تاريخ الشكوى")
         '
-        'TxtDt
+        'OffArea
         '
-        Me.TxtDt.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtDt.Enabled = False
-        Me.TxtDt.Location = New System.Drawing.Point(424, 167)
-        Me.TxtDt.Margin = New System.Windows.Forms.Padding(3, 3, 31, 3)
-        Me.TxtDt.Name = "TxtDt"
-        Me.TxtDt.ReadOnly = True
-        Me.TxtDt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtDt.Size = New System.Drawing.Size(229, 29)
-        Me.TxtDt.TabIndex = 74
-        Me.TxtDt.TabStop = False
-        Me.TxtDt.Tag = "Date"
-        Me.ToolTip1.SetToolTip(Me.TxtDt, "تاريخ الشكوى")
+        Me.OffArea.AllowDrop = True
+        Me.OffArea.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.OffArea.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.OffArea.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.OffArea.DisplayMember = "OffArea"
+        Me.FlowLayoutPanel4.SetFlowBreak(Me.OffArea, True)
+        Me.OffArea.FormattingEnabled = True
+        Me.OffArea.ItemHeight = 21
+        Me.OffArea.Location = New System.Drawing.Point(59, 97)
+        Me.OffArea.Margin = New System.Windows.Forms.Padding(3, 15, 31, 3)
+        Me.OffArea.Name = "OffArea"
+        Me.OffArea.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.OffArea.Size = New System.Drawing.Size(278, 29)
+        Me.OffArea.TabIndex = 103
+        Me.OffArea.TabStop = False
+        Me.OffArea.Tag = "Office's Area Name"
+        Me.ToolTip1.SetToolTip(Me.OffArea, "اسم المنطقة البريدية")
+        Me.OffArea.ValueMember = "OffArea"
         '
-        'TxtArea
+        'TkMail
         '
-        Me.TxtArea.AllowDrop = True
-        Me.TxtArea.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtArea.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.TxtArea.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.TxtArea.DisplayMember = "OffArea"
-        Me.FlowLayoutPanel4.SetFlowBreak(Me.TxtArea, True)
-        Me.TxtArea.FormattingEnabled = True
-        Me.TxtArea.ItemHeight = 21
-        Me.TxtArea.Location = New System.Drawing.Point(6, 132)
-        Me.TxtArea.Margin = New System.Windows.Forms.Padding(3, 15, 31, 3)
-        Me.TxtArea.Name = "TxtArea"
-        Me.TxtArea.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtArea.Size = New System.Drawing.Size(278, 29)
-        Me.TxtArea.TabIndex = 103
-        Me.TxtArea.TabStop = False
-        Me.TxtArea.Tag = "Office's Area Name"
-        Me.ToolTip1.SetToolTip(Me.TxtArea, "اسم المنطقة البريدية")
-        Me.TxtArea.ValueMember = "OffArea"
+        Me.TkMail.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FlowLayoutPanel4.SetFlowBreak(Me.TkMail, True)
+        Me.TkMail.Location = New System.Drawing.Point(59, 50)
+        Me.TkMail.Margin = New System.Windows.Forms.Padding(3, 17, 31, 3)
+        Me.TkMail.Name = "TkMail"
+        Me.TkMail.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.TkMail.Size = New System.Drawing.Size(278, 29)
+        Me.TkMail.TabIndex = 73
+        Me.TkMail.TabStop = False
+        Me.TkMail.Tag = "البريد الإلكتروني"
+        Me.ToolTip1.SetToolTip(Me.TkMail, "البريد الإلكتروني للعميل")
         '
-        'TxtEmail
+        'UsrRealNm
         '
-        Me.TxtEmail.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlowLayoutPanel4.SetFlowBreak(Me.TxtEmail, True)
-        Me.TxtEmail.Location = New System.Drawing.Point(6, 85)
-        Me.TxtEmail.Margin = New System.Windows.Forms.Padding(3, 17, 31, 3)
-        Me.TxtEmail.Name = "TxtEmail"
-        Me.TxtEmail.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TxtEmail.Size = New System.Drawing.Size(278, 29)
-        Me.TxtEmail.TabIndex = 73
-        Me.TxtEmail.TabStop = False
-        Me.TxtEmail.Tag = "Email Address"
-        Me.ToolTip1.SetToolTip(Me.TxtEmail, "البريد الإلكتروني للعميل")
-        '
-        'LblDublicate
-        '
-        Me.LblDublicate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LblDublicate.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.LblDublicate.Location = New System.Drawing.Point(8, 69)
-        Me.LblDublicate.Name = "LblDublicate"
-        Me.LblDublicate.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.LblDublicate.Size = New System.Drawing.Size(181, 208)
-        Me.LblDublicate.TabIndex = 2025
-        Me.LblDublicate.Text = "Ticket(s) Before :"
-        Me.ToolTip1.SetToolTip(Me.LblDublicate, "بيانات الشكاوى والاستفسارات التي تم تسجيلها لنفس المنتج من قبل")
-        '
-        'LblClsOp
-        '
-        Me.LblClsOp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LblClsOp.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.LblClsOp.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.LblClsOp.Location = New System.Drawing.Point(105, 46)
-        Me.LblClsOp.Margin = New System.Windows.Forms.Padding(0)
-        Me.LblClsOp.Name = "LblClsOp"
-        Me.LblClsOp.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.LblClsOp.Size = New System.Drawing.Size(39, 23)
-        Me.LblClsOp.TabIndex = 2026
-        Me.LblClsOp.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.ToolTip1.SetToolTip(Me.LblClsOp, "عدد الشكاوى والاستفسارات المفتوحة للعميل")
-        '
-        'LblComp
-        '
-        Me.LblComp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LblComp.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.LblComp.Location = New System.Drawing.Point(24, 0)
-        Me.LblComp.Name = "LblComp"
-        Me.LblComp.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.LblComp.Size = New System.Drawing.Size(59, 23)
-        Me.LblComp.TabIndex = 2024
-        Me.LblComp.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.ToolTip1.SetToolTip(Me.LblComp, "عدد الشكاوى التي تم تسجيلها للعميل")
+        Me.UsrRealNm.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FlowLayoutPanel4.SetFlowBreak(Me.UsrRealNm, True)
+        Me.UsrRealNm.Location = New System.Drawing.Point(60, 280)
+        Me.UsrRealNm.Margin = New System.Windows.Forms.Padding(3, 7, 30, 3)
+        Me.UsrRealNm.Name = "UsrRealNm"
+        Me.UsrRealNm.ReadOnly = True
+        Me.UsrRealNm.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.UsrRealNm.Size = New System.Drawing.Size(278, 29)
+        Me.UsrRealNm.TabIndex = 2040
+        Me.UsrRealNm.Tag = "متابع الشكوى"
+        Me.ToolTip1.SetToolTip(Me.UsrRealNm, "نوع الشكوى")
         '
         'Timer1
         '
+        Me.Timer1.Enabled = True
         '
         'RadioButton6
         '
@@ -568,7 +518,7 @@ Partial Class TicketEditNew
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TabPage1.Size = New System.Drawing.Size(1372, 726)
+        Me.TabPage1.Size = New System.Drawing.Size(1532, 726)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "بيانات الشكوى"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -576,17 +526,93 @@ Partial Class TicketEditNew
         'FlowLayoutPanel1
         '
         Me.FlowLayoutPanel1.AutoScroll = True
+        Me.FlowLayoutPanel1.Controls.Add(Me.FlowLayoutPanel5)
         Me.FlowLayoutPanel1.Controls.Add(Me.FlowLayoutPanel2)
         Me.FlowLayoutPanel1.Controls.Add(Me.FlowLayoutPanel3)
         Me.FlowLayoutPanel1.Controls.Add(Me.FlowLayoutPanel4)
-        Me.FlowLayoutPanel1.Controls.Add(Me.lblMsg)
+        Me.FlowLayoutPanel1.Controls.Add(Me.Panel2)
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(3, 3)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1366, 720)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1526, 720)
         Me.FlowLayoutPanel1.TabIndex = 2035
+        '
+        'FlowLayoutPanel5
+        '
+        Me.FlowLayoutPanel5.AutoScroll = True
+        Me.FlowLayoutPanel5.Controls.Add(Me.ChckReAssign)
+        Me.FlowLayoutPanel5.Controls.Add(Me.TikID)
+        Me.FlowLayoutPanel5.Controls.Add(Me.Panel5)
+        Me.FlowLayoutPanel5.Controls.Add(Me.LblText)
+        Me.FlowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Top
+        Me.FlowLayoutPanel1.SetFlowBreak(Me.FlowLayoutPanel5, True)
+        Me.FlowLayoutPanel5.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
+        Me.FlowLayoutPanel5.Location = New System.Drawing.Point(5, 3)
+        Me.FlowLayoutPanel5.Name = "FlowLayoutPanel5"
+        Me.FlowLayoutPanel5.Size = New System.Drawing.Size(1518, 70)
+        Me.FlowLayoutPanel5.TabIndex = 2147
+        '
+        'ChckReAssign
+        '
+        Me.ChckReAssign.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ChckReAssign.Appearance = System.Windows.Forms.Appearance.Button
+        Me.ChckReAssign.AutoSize = True
+        Me.ChckReAssign.Font = New System.Drawing.Font("Times New Roman", 12.0!)
+        Me.ChckReAssign.Location = New System.Drawing.Point(1384, 22)
+        Me.ChckReAssign.Margin = New System.Windows.Forms.Padding(3, 22, 3, 0)
+        Me.ChckReAssign.Name = "ChckReAssign"
+        Me.ChckReAssign.Size = New System.Drawing.Size(131, 29)
+        Me.ChckReAssign.TabIndex = 2145
+        Me.ChckReAssign.Text = "تحويل للفريق المختص"
+        Me.ChckReAssign.UseVisualStyleBackColor = True
+        '
+        'TikID
+        '
+        Me.TikID.Font = New System.Drawing.Font("Times New Roman", 14.0!)
+        Me.TikID.Location = New System.Drawing.Point(1238, 22)
+        Me.TikID.Margin = New System.Windows.Forms.Padding(3, 22, 3, 3)
+        Me.TikID.Name = "TikID"
+        Me.TikID.Size = New System.Drawing.Size(140, 29)
+        Me.TikID.TabIndex = 2037
+        Me.TikID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Panel5
+        '
+        Me.Panel5.BackColor = System.Drawing.Color.Transparent
+        Me.Panel5.Controls.Add(Me.Button1)
+        Me.Panel5.Location = New System.Drawing.Point(1145, 3)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(87, 61)
+        Me.Panel5.TabIndex = 2041
+        '
+        'Button1
+        '
+        Me.Button1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button1.BackgroundImage = Global.VOCAPlus.My.Resources.Resources.DbGet
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button1.Location = New System.Drawing.Point(6, 5)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 50)
+        Me.Button1.TabIndex = 2038
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'LblText
+        '
+        Me.LblText.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LblText.AutoSize = True
+        Me.LblText.Font = New System.Drawing.Font("Times New Roman", 14.0!)
+        Me.LblText.ForeColor = System.Drawing.Color.Green
+        Me.LblText.Location = New System.Drawing.Point(1139, 22)
+        Me.LblText.Margin = New System.Windows.Forms.Padding(3, 22, 3, 0)
+        Me.LblText.Name = "LblText"
+        Me.LblText.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.LblText.Size = New System.Drawing.Size(0, 21)
+        Me.LblText.TabIndex = 2146
+        Me.LblText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'FlowLayoutPanel2
         '
@@ -594,22 +620,22 @@ Partial Class TicketEditNew
         Me.FlowLayoutPanel2.Controls.Add(Me.TxtTikID)
         Me.FlowLayoutPanel2.Controls.Add(Me.TreeView1)
         Me.FlowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(1068, 0)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(1288, 76)
         Me.FlowLayoutPanel2.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(298, 622)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(238, 498)
         Me.FlowLayoutPanel2.TabIndex = 2029
         '
         'TxtTikID
         '
+        Me.TxtTikID.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtTikID.Controls.Add(Me.RadioButton4)
         Me.TxtTikID.Controls.Add(Me.RadioButton5)
-        Me.TxtTikID.Dock = System.Windows.Forms.DockStyle.Top
         Me.FlowLayoutPanel2.SetFlowBreak(Me.TxtTikID, True)
-        Me.TxtTikID.Location = New System.Drawing.Point(112, 3)
+        Me.TxtTikID.Location = New System.Drawing.Point(48, 3)
         Me.TxtTikID.Margin = New System.Windows.Forms.Padding(3, 3, 10, 3)
         Me.TxtTikID.Name = "TxtTikID"
-        Me.TxtTikID.Size = New System.Drawing.Size(176, 42)
+        Me.TxtTikID.Size = New System.Drawing.Size(188, 39)
         Me.TxtTikID.TabIndex = 2020
         Me.TxtTikID.TabStop = False
         '
@@ -621,7 +647,7 @@ Partial Class TicketEditNew
         Me.RadioButton4.Enabled = False
         Me.RadioButton4.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.RadioButton4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.RadioButton4.Location = New System.Drawing.Point(89, 12)
+        Me.RadioButton4.Location = New System.Drawing.Point(102, 12)
         Me.RadioButton4.Name = "RadioButton4"
         Me.RadioButton4.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.RadioButton4.Size = New System.Drawing.Size(75, 22)
@@ -637,7 +663,7 @@ Partial Class TicketEditNew
         Me.RadioButton5.Cursor = System.Windows.Forms.Cursors.Default
         Me.RadioButton5.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.RadioButton5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.RadioButton5.Location = New System.Drawing.Point(15, 12)
+        Me.RadioButton5.Location = New System.Drawing.Point(28, 12)
         Me.RadioButton5.Name = "RadioButton5"
         Me.RadioButton5.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.RadioButton5.Size = New System.Drawing.Size(65, 22)
@@ -653,7 +679,7 @@ Partial Class TicketEditNew
         Me.TreeView1.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold)
         Me.TreeView1.ImageKey = "Add.ico"
         Me.TreeView1.ImageList = Me.ImgLst
-        Me.TreeView1.Location = New System.Drawing.Point(55, 51)
+        Me.TreeView1.Location = New System.Drawing.Point(3, 48)
         Me.TreeView1.Name = "TreeView1"
         TreeNode1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         TreeNode1.ForeColor = System.Drawing.Color.Red
@@ -672,91 +698,13 @@ Partial Class TicketEditNew
         'FlowLayoutPanel3
         '
         Me.FlowLayoutPanel3.AutoScroll = True
-        Me.FlowLayoutPanel3.Controls.Add(Me.Label58)
-        Me.FlowLayoutPanel3.Controls.Add(Me.LblComp)
-        Me.FlowLayoutPanel3.Controls.Add(Me.Label57)
-        Me.FlowLayoutPanel3.Controls.Add(Me.LblInq)
-        Me.FlowLayoutPanel3.Controls.Add(Me.Label49)
-        Me.FlowLayoutPanel3.Controls.Add(Me.LblClsOp)
-        Me.FlowLayoutPanel3.Controls.Add(Me.Label59)
-        Me.FlowLayoutPanel3.Controls.Add(Me.LblClsCls)
-        Me.FlowLayoutPanel3.Controls.Add(Me.LblDublicate)
         Me.FlowLayoutPanel3.Controls.Add(Me.Label18)
         Me.FlowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.FlowLayoutPanel3.Location = New System.Drawing.Point(876, 0)
+        Me.FlowLayoutPanel3.Location = New System.Drawing.Point(1113, 76)
         Me.FlowLayoutPanel3.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel3.Name = "FlowLayoutPanel3"
-        Me.FlowLayoutPanel3.Size = New System.Drawing.Size(192, 622)
+        Me.FlowLayoutPanel3.Size = New System.Drawing.Size(175, 342)
         Me.FlowLayoutPanel3.TabIndex = 2030
-        '
-        'Label58
-        '
-        Me.Label58.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label58.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.Label58.ForeColor = System.Drawing.Color.Blue
-        Me.Label58.Location = New System.Drawing.Point(89, 0)
-        Me.Label58.Name = "Label58"
-        Me.Label58.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label58.Size = New System.Drawing.Size(100, 23)
-        Me.Label58.TabIndex = 2027
-        Me.Label58.Text = "عدد الطلبات :"
-        Me.Label58.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label57
-        '
-        Me.Label57.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label57.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.Label57.ForeColor = System.Drawing.Color.Blue
-        Me.Label57.Location = New System.Drawing.Point(89, 23)
-        Me.Label57.Name = "Label57"
-        Me.Label57.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label57.Size = New System.Drawing.Size(100, 23)
-        Me.Label57.TabIndex = 2028
-        Me.Label57.Text = "عدد الشكاوى :"
-        Me.Label57.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'LblInq
-        '
-        Me.LblInq.Location = New System.Drawing.Point(24, 23)
-        Me.LblInq.Name = "LblInq"
-        Me.LblInq.Size = New System.Drawing.Size(59, 23)
-        Me.LblInq.TabIndex = 2029
-        Me.LblInq.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label49
-        '
-        Me.Label49.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label49.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.Label49.ForeColor = System.Drawing.Color.Blue
-        Me.Label49.Location = New System.Drawing.Point(144, 46)
-        Me.Label49.Margin = New System.Windows.Forms.Padding(0, 0, 3, 0)
-        Me.Label49.Name = "Label49"
-        Me.Label49.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label49.Size = New System.Drawing.Size(45, 23)
-        Me.Label49.TabIndex = 2030
-        Me.Label49.Text = "مفتوح :"
-        Me.Label49.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label59
-        '
-        Me.Label59.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label59.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.Label59.ForeColor = System.Drawing.Color.Blue
-        Me.Label59.Location = New System.Drawing.Point(65, 46)
-        Me.Label59.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label59.Name = "Label59"
-        Me.Label59.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label59.Size = New System.Drawing.Size(40, 23)
-        Me.Label59.TabIndex = 2032
-        Me.Label59.Text = "مغلق :"
-        Me.Label59.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'LblClsCls
-        '
-        Me.LblClsCls.Location = New System.Drawing.Point(23, 46)
-        Me.LblClsCls.Name = "LblClsCls"
-        Me.LblClsCls.Size = New System.Drawing.Size(39, 23)
-        Me.LblClsCls.TabIndex = 2033
         '
         'Label18
         '
@@ -764,85 +712,68 @@ Partial Class TicketEditNew
         Me.Label18.Font = New System.Drawing.Font("Times New Roman", 12.0!)
         Me.Label18.ForeColor = System.Drawing.Color.Blue
         Me.Label18.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Label18.Location = New System.Drawing.Point(3, 277)
+        Me.Label18.Location = New System.Drawing.Point(23, 0)
         Me.Label18.Name = "Label18"
         Me.Label18.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label18.Size = New System.Drawing.Size(186, 314)
+        Me.Label18.Size = New System.Drawing.Size(149, 251)
         Me.Label18.TabIndex = 67
         '
         'FlowLayoutPanel4
         '
         Me.FlowLayoutPanel4.AutoScroll = True
-        Me.FlowLayoutPanel4.Controls.Add(Me.TikID)
-        Me.FlowLayoutPanel4.Controls.Add(Me.Button1)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label11)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label29)
-        Me.FlowLayoutPanel4.Controls.Add(Me.TxtNId)
+        Me.FlowLayoutPanel4.Controls.Add(Me.TkClNtID)
         Me.FlowLayoutPanel4.Controls.Add(Me.RadNID)
         Me.FlowLayoutPanel4.Controls.Add(Me.RadPss)
         Me.FlowLayoutPanel4.Controls.Add(Me.MyGroupBox2)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label20)
-        Me.FlowLayoutPanel4.Controls.Add(Me.TxtPh1)
+        Me.FlowLayoutPanel4.Controls.Add(Me.TkClPh)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label15)
-        Me.FlowLayoutPanel4.Controls.Add(Me.TxtEmail)
+        Me.FlowLayoutPanel4.Controls.Add(Me.TkMail)
         Me.FlowLayoutPanel4.Controls.Add(Me.MyGroupBox1)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label22)
-        Me.FlowLayoutPanel4.Controls.Add(Me.TxtPh2)
+        Me.FlowLayoutPanel4.Controls.Add(Me.TkClPh1)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label7)
-        Me.FlowLayoutPanel4.Controls.Add(Me.TxtArea)
+        Me.FlowLayoutPanel4.Controls.Add(Me.OffArea)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label1)
-        Me.FlowLayoutPanel4.Controls.Add(Me.TxtDt)
+        Me.FlowLayoutPanel4.Controls.Add(Me.TkDtStart)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label6)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label23)
-        Me.FlowLayoutPanel4.Controls.Add(Me.TxtOff)
+        Me.FlowLayoutPanel4.Controls.Add(Me.OffNm12TkOffNm)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label2)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label21)
-        Me.FlowLayoutPanel4.Controls.Add(Me.TxtNm)
+        Me.FlowLayoutPanel4.Controls.Add(Me.TkClNm)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label4)
-        Me.FlowLayoutPanel4.Controls.Add(Me.TxtProd)
+        Me.FlowLayoutPanel4.Controls.Add(Me.PrdNm)
+        Me.FlowLayoutPanel4.Controls.Add(Me.Label5)
+        Me.FlowLayoutPanel4.Controls.Add(Me.CompNm)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label16)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label24)
-        Me.FlowLayoutPanel4.Controls.Add(Me.TxtSrc)
+        Me.FlowLayoutPanel4.Controls.Add(Me.SrcNm2TkCompSrc)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label3)
-        Me.FlowLayoutPanel4.Controls.Add(Me.TxtAdd)
-        Me.FlowLayoutPanel4.Controls.Add(Me.Label5)
-        Me.FlowLayoutPanel4.Controls.Add(Me.TxtComp)
+        Me.FlowLayoutPanel4.Controls.Add(Me.TkClAdr)
+        Me.FlowLayoutPanel4.Controls.Add(Me.Label32)
+        Me.FlowLayoutPanel4.Controls.Add(Me.UsrRealNm)
         Me.FlowLayoutPanel4.Controls.Add(Me.Label17)
-        Me.FlowLayoutPanel4.Controls.Add(Me.TxtDetails)
+        Me.FlowLayoutPanel4.Controls.Add(Me.TkDetails)
         Me.FlowLayoutPanel4.Controls.Add(Me.FinancialGroup)
         Me.FlowLayoutPanel4.Controls.Add(Me.PostalGroup)
         Me.FlowLayoutPanel4.Controls.Add(Me.CombProdRef)
-        Me.FlowLayoutPanel4.Controls.Add(Me.FlowLayoutPanel5)
+        Me.FlowLayoutPanel4.Controls.Add(Me.Panel1)
         Me.FlowLayoutPanel4.Controls.Add(Me.LblHelp)
         Me.FlowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
         Me.FlowLayoutPanel4.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.FlowLayoutPanel4.Location = New System.Drawing.Point(51, 0)
+        Me.FlowLayoutPanel4.Location = New System.Drawing.Point(235, 76)
         Me.FlowLayoutPanel4.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel4.Name = "FlowLayoutPanel4"
-        Me.FlowLayoutPanel4.Size = New System.Drawing.Size(825, 645)
+        Me.FlowLayoutPanel4.Size = New System.Drawing.Size(878, 516)
         Me.FlowLayoutPanel4.TabIndex = 2031
-        '
-        'TikID
-        '
-        Me.FlowLayoutPanel4.SetFlowBreak(Me.TikID, True)
-        Me.TikID.Location = New System.Drawing.Point(705, 3)
-        Me.TikID.Name = "TikID"
-        Me.TikID.Size = New System.Drawing.Size(100, 29)
-        Me.TikID.TabIndex = 2037
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(730, 38)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 2038
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'Label11
         '
         Me.Label11.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label11.Location = New System.Drawing.Point(606, 38)
+        Me.Label11.Location = New System.Drawing.Point(740, 3)
         Me.Label11.Margin = New System.Windows.Forms.Padding(3)
         Me.Label11.Name = "Label11"
         Me.Label11.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -856,29 +787,29 @@ Partial Class TicketEditNew
         Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
         Me.Label29.ForeColor = System.Drawing.Color.Red
         Me.Label29.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label29.Location = New System.Drawing.Point(578, 35)
+        Me.Label29.Location = New System.Drawing.Point(712, 0)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(22, 24)
         Me.Label29.TabIndex = 2010
         Me.Label29.Text = "*"
         '
-        'TxtNId
+        'TkClNtID
         '
-        Me.TxtNId.Location = New System.Drawing.Point(343, 35)
-        Me.TxtNId.Margin = New System.Windows.Forms.Padding(3, 0, 3, 0)
-        Me.TxtNId.Mask = "AAAAAAAAAAAAA"
-        Me.TxtNId.Name = "TxtNId"
-        Me.TxtNId.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TxtNId.Size = New System.Drawing.Size(229, 29)
-        Me.TxtNId.TabIndex = 9
-        Me.TxtNId.Tag = "الرقم القومي"
+        Me.TkClNtID.Location = New System.Drawing.Point(477, 0)
+        Me.TkClNtID.Margin = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.TkClNtID.Mask = "AAAAAAAAAAAAA"
+        Me.TkClNtID.Name = "TkClNtID"
+        Me.TkClNtID.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.TkClNtID.Size = New System.Drawing.Size(229, 29)
+        Me.TkClNtID.TabIndex = 9
+        Me.TkClNtID.Tag = "الرقم القومي"
         '
         'RadNID
         '
         Me.RadNID.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RadNID.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.RadNID.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RadNID.Location = New System.Drawing.Point(255, 35)
+        Me.RadNID.Location = New System.Drawing.Point(389, 0)
         Me.RadNID.Margin = New System.Windows.Forms.Padding(0)
         Me.RadNID.Name = "RadNID"
         Me.RadNID.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -893,7 +824,7 @@ Partial Class TicketEditNew
         Me.RadPss.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RadPss.Cursor = System.Windows.Forms.Cursors.Default
         Me.FlowLayoutPanel4.SetFlowBreak(Me.RadPss, True)
-        Me.RadPss.Location = New System.Drawing.Point(94, 35)
+        Me.RadPss.Location = New System.Drawing.Point(228, 0)
         Me.RadPss.Margin = New System.Windows.Forms.Padding(0)
         Me.RadPss.Name = "RadPss"
         Me.RadPss.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -909,7 +840,7 @@ Partial Class TicketEditNew
         Me.MyGroupBox2.Controls.Add(Me.PictureBox2)
         Me.MyGroupBox2.Controls.Add(Me.RadioButton8)
         Me.MyGroupBox2.Controls.Add(Me.RadioButton9)
-        Me.MyGroupBox2.Location = New System.Drawing.Point(687, 71)
+        Me.MyGroupBox2.Location = New System.Drawing.Point(740, 36)
         Me.MyGroupBox2.Name = "MyGroupBox2"
         Me.MyGroupBox2.Size = New System.Drawing.Size(118, 40)
         Me.MyGroupBox2.TabIndex = 2034
@@ -967,7 +898,7 @@ Partial Class TicketEditNew
         Me.Label20.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
         Me.Label20.ForeColor = System.Drawing.Color.Red
-        Me.Label20.Location = New System.Drawing.Point(659, 81)
+        Me.Label20.Location = New System.Drawing.Point(712, 46)
         Me.Label20.Margin = New System.Windows.Forms.Padding(3, 13, 3, 0)
         Me.Label20.Name = "Label20"
         Me.Label20.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -976,23 +907,23 @@ Partial Class TicketEditNew
         Me.Label20.Text = " *"
         Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtPh1
+        'TkClPh
         '
-        Me.TxtPh1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtPh1.Location = New System.Drawing.Point(424, 81)
-        Me.TxtPh1.Margin = New System.Windows.Forms.Padding(3, 13, 3, 3)
-        Me.TxtPh1.Mask = "00000000000"
-        Me.TxtPh1.Name = "TxtPh1"
-        Me.TxtPh1.Size = New System.Drawing.Size(229, 29)
-        Me.TxtPh1.TabIndex = 0
-        Me.TxtPh1.Tag = "رقم التليفون 1"
+        Me.TkClPh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TkClPh.Location = New System.Drawing.Point(477, 46)
+        Me.TkClPh.Margin = New System.Windows.Forms.Padding(3, 13, 3, 3)
+        Me.TkClPh.Mask = "00000000000"
+        Me.TkClPh.Name = "TkClPh"
+        Me.TkClPh.Size = New System.Drawing.Size(229, 29)
+        Me.TkClPh.TabIndex = 0
+        Me.TkClPh.Tag = "رقم التليفون 1"
         '
         'Label15
         '
         Me.Label15.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label15.Font = New System.Drawing.Font("Times New Roman", 12.0!)
         Me.Label15.ForeColor = System.Drawing.Color.Black
-        Me.Label15.Location = New System.Drawing.Point(318, 85)
+        Me.Label15.Location = New System.Drawing.Point(371, 50)
         Me.Label15.Margin = New System.Windows.Forms.Padding(3, 17, 3, 3)
         Me.Label15.Name = "Label15"
         Me.Label15.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -1007,7 +938,7 @@ Partial Class TicketEditNew
         Me.MyGroupBox1.Controls.Add(Me.PictureBox3)
         Me.MyGroupBox1.Controls.Add(Me.RadioButton11)
         Me.MyGroupBox1.Controls.Add(Me.RadioButton12)
-        Me.MyGroupBox1.Location = New System.Drawing.Point(687, 120)
+        Me.MyGroupBox1.Location = New System.Drawing.Point(740, 85)
         Me.MyGroupBox1.Name = "MyGroupBox1"
         Me.MyGroupBox1.Size = New System.Drawing.Size(118, 40)
         Me.MyGroupBox1.TabIndex = 2035
@@ -1060,7 +991,7 @@ Partial Class TicketEditNew
         Me.Label22.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
         Me.Label22.ForeColor = System.Drawing.Color.Red
-        Me.Label22.Location = New System.Drawing.Point(659, 130)
+        Me.Label22.Location = New System.Drawing.Point(712, 95)
         Me.Label22.Margin = New System.Windows.Forms.Padding(3, 13, 3, 0)
         Me.Label22.Name = "Label22"
         Me.Label22.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -1068,23 +999,23 @@ Partial Class TicketEditNew
         Me.Label22.TabIndex = 2003
         Me.Label22.Text = " "
         '
-        'TxtPh2
+        'TkClPh1
         '
-        Me.TxtPh2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtPh2.Location = New System.Drawing.Point(424, 130)
-        Me.TxtPh2.Margin = New System.Windows.Forms.Padding(3, 13, 3, 3)
-        Me.TxtPh2.Mask = "00000000000"
-        Me.TxtPh2.Name = "TxtPh2"
-        Me.TxtPh2.Size = New System.Drawing.Size(229, 29)
-        Me.TxtPh2.TabIndex = 2
-        Me.TxtPh2.Tag = "رقم التليفون 2"
+        Me.TkClPh1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TkClPh1.Location = New System.Drawing.Point(477, 95)
+        Me.TkClPh1.Margin = New System.Windows.Forms.Padding(3, 13, 3, 3)
+        Me.TkClPh1.Mask = "00000000000"
+        Me.TkClPh1.Name = "TkClPh1"
+        Me.TkClPh1.Size = New System.Drawing.Size(229, 29)
+        Me.TkClPh1.TabIndex = 2
+        Me.TkClPh1.Tag = "رقم التليفون 2"
         '
         'Label7
         '
         Me.Label7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label7.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label7.ForeColor = System.Drawing.Color.Black
-        Me.Label7.Location = New System.Drawing.Point(318, 134)
+        Me.Label7.Location = New System.Drawing.Point(371, 99)
         Me.Label7.Margin = New System.Windows.Forms.Padding(3, 17, 3, 3)
         Me.Label7.Name = "Label7"
         Me.Label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -1098,7 +1029,7 @@ Partial Class TicketEditNew
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(687, 167)
+        Me.Label1.Location = New System.Drawing.Point(740, 132)
         Me.Label1.Margin = New System.Windows.Forms.Padding(3)
         Me.Label1.MinimumSize = New System.Drawing.Size(70, 15)
         Me.Label1.Name = "Label1"
@@ -1113,7 +1044,7 @@ Partial Class TicketEditNew
         Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label6.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label6.ForeColor = System.Drawing.Color.Black
-        Me.Label6.Location = New System.Drawing.Point(318, 171)
+        Me.Label6.Location = New System.Drawing.Point(371, 136)
         Me.Label6.Margin = New System.Windows.Forms.Padding(3, 7, 3, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -1127,7 +1058,7 @@ Partial Class TicketEditNew
         Me.Label23.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
         Me.Label23.ForeColor = System.Drawing.Color.Red
-        Me.Label23.Location = New System.Drawing.Point(290, 167)
+        Me.Label23.Location = New System.Drawing.Point(343, 132)
         Me.Label23.Margin = New System.Windows.Forms.Padding(3, 3, 3, 0)
         Me.Label23.Name = "Label23"
         Me.Label23.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -1141,7 +1072,7 @@ Partial Class TicketEditNew
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(687, 199)
+        Me.Label2.Location = New System.Drawing.Point(740, 164)
         Me.Label2.MinimumSize = New System.Drawing.Size(70, 15)
         Me.Label2.Name = "Label2"
         Me.Label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -1155,7 +1086,7 @@ Partial Class TicketEditNew
         Me.Label21.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
         Me.Label21.ForeColor = System.Drawing.Color.Red
-        Me.Label21.Location = New System.Drawing.Point(659, 199)
+        Me.Label21.Location = New System.Drawing.Point(712, 164)
         Me.Label21.Name = "Label21"
         Me.Label21.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label21.Size = New System.Drawing.Size(22, 24)
@@ -1168,7 +1099,7 @@ Partial Class TicketEditNew
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label4.ForeColor = System.Drawing.Color.Black
-        Me.Label4.Location = New System.Drawing.Point(318, 204)
+        Me.Label4.Location = New System.Drawing.Point(371, 169)
         Me.Label4.Margin = New System.Windows.Forms.Padding(3, 5, 3, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -1177,12 +1108,26 @@ Partial Class TicketEditNew
         Me.Label4.Text = "نوع الخدمة :"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'Label5
+        '
+        Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label5.Font = New System.Drawing.Font("Times New Roman", 14.0!)
+        Me.Label5.ForeColor = System.Drawing.Color.Black
+        Me.Label5.Location = New System.Drawing.Point(371, 204)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(3, 5, 380, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Label5.Size = New System.Drawing.Size(110, 20)
+        Me.Label5.TabIndex = 81
+        Me.Label5.Text = "نوع الشكوى :"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'Label16
         '
         Me.Label16.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label16.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label16.ForeColor = System.Drawing.Color.Black
-        Me.Label16.Location = New System.Drawing.Point(318, 239)
+        Me.Label16.Location = New System.Drawing.Point(371, 243)
         Me.Label16.Margin = New System.Windows.Forms.Padding(3, 5, 380, 0)
         Me.Label16.Name = "Label16"
         Me.Label16.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -1196,7 +1141,7 @@ Partial Class TicketEditNew
         Me.Label24.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
         Me.Label24.ForeColor = System.Drawing.Color.Red
-        Me.Label24.Location = New System.Drawing.Point(290, 239)
+        Me.Label24.Location = New System.Drawing.Point(343, 243)
         Me.Label24.Margin = New System.Windows.Forms.Padding(3, 5, 3, 0)
         Me.Label24.Name = "Label24"
         Me.Label24.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -1210,7 +1155,7 @@ Partial Class TicketEditNew
         Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label3.ForeColor = System.Drawing.Color.Black
-        Me.Label3.Location = New System.Drawing.Point(687, 269)
+        Me.Label3.Location = New System.Drawing.Point(740, 273)
         Me.Label3.MinimumSize = New System.Drawing.Size(70, 15)
         Me.Label3.Name = "Label3"
         Me.Label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -1219,26 +1164,26 @@ Partial Class TicketEditNew
         Me.Label3.Text = "العنوان :"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Label5
+        'Label32
         '
-        Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label5.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(318, 277)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(3, 8, 3, 0)
-        Me.Label5.Name = "Label5"
-        Me.Label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label5.Size = New System.Drawing.Size(100, 20)
-        Me.Label5.TabIndex = 81
-        Me.Label5.Text = "نوع الشكوى :"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label32.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label32.Font = New System.Drawing.Font("Times New Roman", 14.0!)
+        Me.Label32.ForeColor = System.Drawing.Color.Black
+        Me.Label32.Location = New System.Drawing.Point(371, 278)
+        Me.Label32.Margin = New System.Windows.Forms.Padding(3, 5, 3, 0)
+        Me.Label32.Name = "Label32"
+        Me.Label32.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Label32.Size = New System.Drawing.Size(100, 20)
+        Me.Label32.TabIndex = 2039
+        Me.Label32.Text = "متابع الشكوى:"
+        Me.Label32.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label17
         '
         Me.Label17.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label17.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label17.ForeColor = System.Drawing.Color.Black
-        Me.Label17.Location = New System.Drawing.Point(687, 340)
+        Me.Label17.Location = New System.Drawing.Point(740, 344)
         Me.Label17.Name = "Label17"
         Me.Label17.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label17.Size = New System.Drawing.Size(118, 27)
@@ -1249,8 +1194,8 @@ Partial Class TicketEditNew
         'FinancialGroup
         '
         Me.FinancialGroup.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FinancialGroup.Controls.Add(Me.TxtGP)
-        Me.FinancialGroup.Controls.Add(Me.TxtCard)
+        Me.FinancialGroup.Controls.Add(Me.TkGBNo)
+        Me.FinancialGroup.Controls.Add(Me.TkCardNo)
         Me.FinancialGroup.Controls.Add(Me.Label8)
         Me.FinancialGroup.Controls.Add(Me.Label31)
         Me.FinancialGroup.Controls.Add(Me.Label30)
@@ -1258,11 +1203,11 @@ Partial Class TicketEditNew
         Me.FinancialGroup.Controls.Add(Me.Label28)
         Me.FinancialGroup.Controls.Add(Me.Label13)
         Me.FinancialGroup.Controls.Add(Me.Label27)
-        Me.FinancialGroup.Controls.Add(Me.TxtAmount)
-        Me.FinancialGroup.Controls.Add(Me.TxtTransDt)
+        Me.FinancialGroup.Controls.Add(Me.TkAmount)
+        Me.FinancialGroup.Controls.Add(Me.TkTransDate)
         Me.FinancialGroup.Controls.Add(Me.Label19)
         Me.FinancialGroup.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.FinancialGroup.Location = New System.Drawing.Point(359, 459)
+        Me.FinancialGroup.Location = New System.Drawing.Point(412, 463)
         Me.FinancialGroup.Name = "FinancialGroup"
         Me.FinancialGroup.Size = New System.Drawing.Size(446, 124)
         Me.FinancialGroup.TabIndex = 2018
@@ -1360,16 +1305,16 @@ Partial Class TicketEditNew
         'PostalGroup
         '
         Me.PostalGroup.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PostalGroup.Controls.Add(Me.TxtTrck)
+        Me.PostalGroup.Controls.Add(Me.TkShpNo)
         Me.PostalGroup.Controls.Add(Me.Label26)
-        Me.PostalGroup.Controls.Add(Me.TxtDist)
+        Me.PostalGroup.Controls.Add(Me.CounNmConsign2TkConsigCoun)
         Me.PostalGroup.Controls.Add(Me.Label25)
         Me.PostalGroup.Controls.Add(Me.Label9)
-        Me.PostalGroup.Controls.Add(Me.TxtOrgin)
+        Me.PostalGroup.Controls.Add(Me.CounNmSender)
         Me.PostalGroup.Controls.Add(Me.Label10)
         Me.PostalGroup.Controls.Add(Me.Label14)
         Me.PostalGroup.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.PostalGroup.Location = New System.Drawing.Point(359, 589)
+        Me.PostalGroup.Location = New System.Drawing.Point(412, 593)
         Me.PostalGroup.Name = "PostalGroup"
         Me.PostalGroup.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.PostalGroup.Size = New System.Drawing.Size(446, 124)
@@ -1433,96 +1378,42 @@ Partial Class TicketEditNew
         Me.CombProdRef.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CombProdRef.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CombProdRef.FormattingEnabled = True
-        Me.CombProdRef.Location = New System.Drawing.Point(283, 598)
+        Me.CombProdRef.Location = New System.Drawing.Point(336, 602)
         Me.CombProdRef.Margin = New System.Windows.Forms.Padding(3, 12, 3, 3)
         Me.CombProdRef.Name = "CombProdRef"
         Me.CombProdRef.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.CombProdRef.Size = New System.Drawing.Size(70, 29)
         Me.CombProdRef.TabIndex = 2033
         '
-        'FlowLayoutPanel5
-        '
-        Me.FlowLayoutPanel5.AutoScroll = True
-        Me.FlowLayoutPanel5.Controls.Add(Me.Panel4)
-        Me.FlowLayoutPanel5.Controls.Add(Me.Panel1)
-        Me.FlowLayoutPanel5.Controls.Add(Me.Panel2)
-        Me.FlowLayoutPanel5.Controls.Add(Me.Panel3)
-        Me.FlowLayoutPanel4.SetFlowBreak(Me.FlowLayoutPanel5, True)
-        Me.FlowLayoutPanel5.Location = New System.Drawing.Point(106, 611)
-        Me.FlowLayoutPanel5.Margin = New System.Windows.Forms.Padding(0, 25, 0, 0)
-        Me.FlowLayoutPanel5.Name = "FlowLayoutPanel5"
-        Me.FlowLayoutPanel5.Size = New System.Drawing.Size(174, 144)
-        Me.FlowLayoutPanel5.TabIndex = 2034
-        '
-        'Panel4
-        '
-        Me.Panel4.BackColor = System.Drawing.Color.Transparent
-        Me.Panel4.Controls.Add(Me.NewBtn)
-        Me.Panel4.Location = New System.Drawing.Point(3, 3)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(80, 66)
-        Me.Panel4.TabIndex = 2038
-        '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.Transparent
         Me.Panel1.Controls.Add(Me.SubmitBtn)
-        Me.Panel1.Location = New System.Drawing.Point(89, 3)
+        Me.Panel1.Location = New System.Drawing.Point(230, 593)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(80, 66)
+        Me.Panel1.Size = New System.Drawing.Size(100, 76)
         Me.Panel1.TabIndex = 2035
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.Transparent
-        Me.Panel2.Controls.Add(Me.CloseBtn)
-        Me.Panel2.Location = New System.Drawing.Point(3, 75)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(80, 66)
-        Me.Panel2.TabIndex = 2036
-        '
-        'Panel3
-        '
-        Me.Panel3.BackColor = System.Drawing.Color.Transparent
-        Me.Panel3.Controls.Add(Me.BtnDublicate)
-        Me.Panel3.Location = New System.Drawing.Point(89, 75)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(80, 66)
-        Me.Panel3.TabIndex = 2037
-        '
-        'BtnDublicate
-        '
-        Me.BtnDublicate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnDublicate.BackgroundImage = Global.VOCAPlus.My.Resources.Resources.Dublicte1
-        Me.BtnDublicate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BtnDublicate.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.BtnDublicate.FlatAppearance.BorderSize = 0
-        Me.BtnDublicate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnDublicate.Location = New System.Drawing.Point(8, 6)
-        Me.BtnDublicate.Name = "BtnDublicate"
-        Me.BtnDublicate.Size = New System.Drawing.Size(65, 54)
-        Me.BtnDublicate.TabIndex = 2034
-        Me.BtnDublicate.UseVisualStyleBackColor = True
         '
         'LblHelp
         '
         Me.LblHelp.AutoSize = True
         Me.LblHelp.ForeColor = System.Drawing.Color.Green
-        Me.LblHelp.Location = New System.Drawing.Point(805, 755)
+        Me.LblHelp.Location = New System.Drawing.Point(224, 590)
         Me.LblHelp.Name = "LblHelp"
         Me.LblHelp.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.LblHelp.Size = New System.Drawing.Size(0, 21)
         Me.LblHelp.TabIndex = 2036
         Me.LblHelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'lblMsg
+        'Panel2
         '
-        Me.lblMsg.AutoSize = True
-        Me.lblMsg.Location = New System.Drawing.Point(1304, 645)
-        Me.lblMsg.Name = "lblMsg"
-        Me.lblMsg.Size = New System.Drawing.Size(59, 19)
-        Me.lblMsg.TabIndex = 2032
-        Me.lblMsg.Text = "Label32"
+        Me.Panel2.BackColor = System.Drawing.Color.Transparent
+        Me.Panel2.Controls.Add(Me.CloseBtn)
+        Me.FlowLayoutPanel1.SetFlowBreak(Me.Panel2, True)
+        Me.Panel2.Location = New System.Drawing.Point(147, 79)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(85, 81)
+        Me.Panel2.TabIndex = 2036
         '
         'ECnt_Label
         '
@@ -1550,7 +1441,7 @@ Partial Class TicketEditNew
         Me.TabControl1.RightToLeftLayout = True
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.ShowToolTips = True
-        Me.TabControl1.Size = New System.Drawing.Size(1380, 764)
+        Me.TabControl1.Size = New System.Drawing.Size(1540, 764)
         Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight
         Me.TabControl1.TabIndex = 2020
         Me.TabControl1.TabStop = False
@@ -1560,19 +1451,21 @@ Partial Class TicketEditNew
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1380, 764)
+        Me.ClientSize = New System.Drawing.Size(1540, 764)
         Me.Controls.Add(Me.TabControl1)
-        Me.Location = New System.Drawing.Point(-3, 50)
+        Me.Location = New System.Drawing.Point(0, 50)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "TicketEditNew"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.RightToLeftLayout = True
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
-        Me.Text = "تسجيل جديد"
+        Me.Text = "شاشة التعديل"
         Me.TabPage1.ResumeLayout(False)
         Me.FlowLayoutPanel1.ResumeLayout(False)
-        Me.FlowLayoutPanel1.PerformLayout()
+        Me.FlowLayoutPanel5.ResumeLayout(False)
+        Me.FlowLayoutPanel5.PerformLayout()
+        Me.Panel5.ResumeLayout(False)
         Me.FlowLayoutPanel2.ResumeLayout(False)
         Me.TxtTikID.ResumeLayout(False)
         Me.FlowLayoutPanel3.ResumeLayout(False)
@@ -1588,11 +1481,8 @@ Partial Class TicketEditNew
         Me.FinancialGroup.PerformLayout()
         Me.PostalGroup.ResumeLayout(False)
         Me.PostalGroup.PerformLayout()
-        Me.FlowLayoutPanel5.ResumeLayout(False)
-        Me.Panel4.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -1613,22 +1503,13 @@ Partial Class TicketEditNew
     Friend WithEvents RadioButton5 As RadioButton
     Friend WithEvents TreeView1 As TreeView
     Friend WithEvents FlowLayoutPanel3 As FlowLayoutPanel
-    Friend WithEvents Label58 As Label
-    Friend WithEvents LblComp As Label
-    Friend WithEvents Label57 As Label
-    Friend WithEvents LblInq As Label
-    Friend WithEvents Label49 As Label
-    Friend WithEvents LblClsOp As Label
-    Friend WithEvents Label59 As Label
-    Friend WithEvents LblClsCls As Label
-    Friend WithEvents LblDublicate As Label
     Friend WithEvents Label18 As Label
     Friend WithEvents FlowLayoutPanel4 As FlowLayoutPanel
     Friend WithEvents TikID As TextBox
     Friend WithEvents Button1 As Button
     Friend WithEvents Label11 As Label
     Friend WithEvents Label29 As Label
-    Friend WithEvents TxtNId As MaskedTextBox
+    Friend WithEvents TkClNtID As MaskedTextBox
     Friend WithEvents RadNID As RadioButton
     Friend WithEvents RadPss As RadioButton
     Friend WithEvents MyGroupBox2 As Panel
@@ -1637,40 +1518,40 @@ Partial Class TicketEditNew
     Friend WithEvents RadioButton8 As RadioButton
     Friend WithEvents RadioButton9 As RadioButton
     Friend WithEvents Label20 As Label
-    Friend WithEvents TxtPh1 As MaskedTextBox
+    Friend WithEvents TkClPh As MaskedTextBox
     Friend WithEvents Label15 As Label
-    Friend WithEvents TxtEmail As TextBox
+    Friend WithEvents TkMail As TextBox
     Friend WithEvents MyGroupBox1 As Panel
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents RadioButton11 As RadioButton
     Friend WithEvents RadioButton12 As RadioButton
     Friend WithEvents Label22 As Label
-    Friend WithEvents TxtPh2 As MaskedTextBox
+    Friend WithEvents TkClPh1 As MaskedTextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents TxtArea As ComboBox
+    Friend WithEvents OffArea As ComboBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents TxtDt As TextBox
+    Friend WithEvents TkDtStart As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label23 As Label
-    Friend WithEvents TxtOff As ComboBox
+    Friend WithEvents OffNm12TkOffNm As ComboBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label21 As Label
-    Friend WithEvents TxtNm As TextBox
+    Friend WithEvents TkClNm As TextBox
     Friend WithEvents Label4 As Label
-    Friend WithEvents TxtProd As TextBox
+    Friend WithEvents PrdNm As TextBox
     Friend WithEvents Label16 As Label
     Friend WithEvents Label24 As Label
-    Friend WithEvents TxtSrc As ComboBox
+    Friend WithEvents SrcNm2TkCompSrc As ComboBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents TxtAdd As TextBox
+    Friend WithEvents TkClAdr As TextBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents TxtComp As TextBox
+    Friend WithEvents CompNm As TextBox
     Friend WithEvents Label17 As Label
-    Friend WithEvents TxtDetails As TextBox
+    Friend WithEvents TkDetails As TextBox
     Friend WithEvents FinancialGroup As GroupBox
-    Friend WithEvents TxtGP As MaskedTextBox
-    Friend WithEvents TxtCard As MaskedTextBox
+    Friend WithEvents TkGBNo As MaskedTextBox
+    Friend WithEvents TkCardNo As MaskedTextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Label31 As Label
     Friend WithEvents Label30 As Label
@@ -1678,30 +1559,30 @@ Partial Class TicketEditNew
     Friend WithEvents Label28 As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents Label27 As Label
-    Friend WithEvents TxtAmount As TextBox
-    Friend WithEvents TxtTransDt As DateTimePicker
+    Friend WithEvents TkAmount As TextBox
+    Friend WithEvents TkTransDate As DateTimePicker
     Friend WithEvents Label19 As Label
     Friend WithEvents PostalGroup As GroupBox
-    Friend WithEvents TxtTrck As MaskedTextBox
+    Friend WithEvents TkShpNo As MaskedTextBox
     Friend WithEvents Label26 As Label
-    Friend WithEvents TxtDist As ComboBox
+    Friend WithEvents CounNmConsign2TkConsigCoun As ComboBox
     Friend WithEvents Label25 As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents TxtOrgin As TextBox
+    Friend WithEvents CounNmSender As TextBox
     Friend WithEvents Label10 As Label
     Friend WithEvents Label14 As Label
     Friend WithEvents CombProdRef As ComboBox
-    Friend WithEvents FlowLayoutPanel5 As FlowLayoutPanel
-    Friend WithEvents Panel4 As Panel
-    Friend WithEvents NewBtn As Button
     Friend WithEvents Panel1 As Panel
     Friend WithEvents SubmitBtn As Button
     Friend WithEvents Panel2 As Panel
     Friend WithEvents CloseBtn As Button
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents BtnDublicate As Button
     Friend WithEvents LblHelp As Label
     Friend WithEvents ECnt_Label As Label
     Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents lblMsg As Label
+    Friend WithEvents ChckReAssign As CheckBox
+    Friend WithEvents LblText As Label
+    Friend WithEvents Label32 As Label
+    Friend WithEvents UsrRealNm As TextBox
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents FlowLayoutPanel5 As FlowLayoutPanel
 End Class

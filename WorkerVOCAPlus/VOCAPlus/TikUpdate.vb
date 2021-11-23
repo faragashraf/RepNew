@@ -110,7 +110,7 @@ Public Class TikUpdate
                     GetUpdtEvnt_()
                     UpSQlMax_ = UpGetSql.Rows(0).Item("TkupSQL")
 
-                    UpdtCurrTbl.Rows.Add(StruGrdTk.LstUpDt, StruGrdTk.LstUpTxt, Usr.PUsrRlNm, Now, Usr.PUsrID, UpSQlMax_, StruGrdTk.Sql, CmbEvent.SelectedValue, 0, Usr.PUsrUCatLvl, 0)
+                    UpdtCurrTbl.Rows.Add(StruGrdTk.LstUpDt, CmbEvent.SelectedItem, StruGrdTk.LstUpTxt, Usr.PUsrRlNm, Now, Usr.PUsrID, UpSQlMax_, StruGrdTk.Sql, CmbEvent.SelectedValue, 0, Usr.PUsrUCatLvl, 0)
                     UpdtCurrTbl.DefaultView.Sort = "TkupSTime Desc"
                     GridUpdt.Rows(0).Cells("TkupReDt").Value = ""
 
@@ -158,7 +158,7 @@ Public Class TikUpdate
     Private Sub GetUpdtEvnt_()
         UpGetSql = New DataTable
         '                                 0        1         2         3         4        5        6         7         8         9
-        If PublicCode.GetTbl("SELECT TkupSTime, TkupTxt, UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread FROM TkEvent INNER JOIN Int_user ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON Int_user.UsrCat = IntUserCat.UCatId Where ( TkupTkSql = " & StruGrdTk.Sql & ") ORDER BY TkupTkSql,TkupSQL DESC", UpGetSql, "1019&H") = Nothing Then
+        If PublicCode.GetTbl("SELECT TkupSTime,EvNm, TkupTxt, UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread FROM TkEvent INNER JOIN Int_user ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON Int_user.UsrCat = IntUserCat.UCatId Where ( TkupTkSql = " & StruGrdTk.Sql & ") ORDER BY TkupTkSql,TkupSQL DESC", UpGetSql, "1019&H") = Nothing Then
             UpGetSql.Columns.Add("File")        ' Add files Columns 
         Else
             MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)

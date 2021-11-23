@@ -12,9 +12,10 @@ Module Public_
     Public FltrStr As String = ""
     Public screenWidth As Integer = Screen.PrimaryScreen.Bounds.Width
     Public screenHeight As Integer = Screen.PrimaryScreen.Bounds.Height
-    Public ServerCD As String = "Eg Server"
-    Public ServerNm As String = "VOCA Server"
-    Public strConn As String = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaplus21;Password=@VocaPlus$21-4"
+    Public ServerCD As String = "My Labtop"
+    Public ServerNm As String = "My Labtop"
+    Public strConn As String = "Data Source=MYTHINKBOOK\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
+    '"Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaplus21;Password=@VocaPlus$21-4"
     Public sqlCon As New SqlConnection(strConn) ' I Have assigned conn STR here and delete this row from all project
     Public Bol As Boolean
 
@@ -138,7 +139,6 @@ Public Class APblicClss
         Public BolString As Boolean
         Public Admn As Boolean
         Public CompList As New List(Of String) 'list of tickets to get tickets updates
-
     End Class
     Public Class Func
         Public Function ConStrFn(worker As System.ComponentModel.BackgroundWorker) As String
@@ -333,8 +333,8 @@ Public Class APblicClss
                 state.sqlComminsert_1.CommandText = TranStr1
                 state.sqlComminsert_2.CommandText = TranStr2
                 state.Tran = state.CONSQL.BeginTransaction()
-                state.sqlComminsert_1.Transaction = Tran
-                state.sqlComminsert_2.Transaction = Tran
+                state.sqlComminsert_1.Transaction = state.Tran
+                state.sqlComminsert_2.Transaction = state.Tran
                 state.sqlComminsert_1.ExecuteNonQuery()
                 state.sqlComminsert_2.ExecuteNonQuery()
                 state.Tran.Commit()
@@ -579,17 +579,18 @@ Sec2:
                         worker.ReportProgress(0, Def)
                     End If
 
-                    Dim SrcStr As String = ""
-                    If Usr.PUsrUCatLvl = 7 Then
-                        SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1"
-                    Else
-                        SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd > 1 ORDER BY SrcNm"
-                    End If
+
+
                     Def.Str = "جاري تحميل مصادر الشكوى ..."
                     worker.ReportProgress(0, Def)
 
-                    If (Fn.GetTbl(SrcStr, CompSurceTable, "1012&H", worker)) = Nothing Then
+                    If (Fn.GetTbl("select SrcCd, SrcNm,SrcSusp from CDSrc ORDER BY SrcNm", CompSurceTable, "1012&H", worker)) = Nothing Then
                         PrciTblCnt += 1
+                        If Usr.PUsrUCatLvl = 7 Then
+                            CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] = '1'"     '     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm"
+                        Else
+                            CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] > '1'"   '   SrcStr = "Select SrcCd, SrcNm from CDSrc where SrcSusp=0 And srcCd > 1 ORDER BY SrcNm"
+                        End If
                     Else
                         Def.Str = "لم يتم تحميل  مصادر الشكوى  "
                         worker.ReportProgress(0, Def)
@@ -599,7 +600,7 @@ Sec2:
                     Def.Str = "جاري تحميل أسماء الدول ..."
                     worker.ReportProgress(0, Def)
 
-                    If (Fn.GetTbl("select CounCd,CounNm from CDCountry order by CounNm", CountryTable, "1012&H", worker)) = Nothing Then
+                    If (Fn.GetTbl("Select CounCd,CounNm from CDCountry order by CounNm", CountryTable, "1012&H", worker)) = Nothing Then
                         primaryKey(0) = CountryTable.Columns("CounCd")
                         CountryTable.PrimaryKey = primaryKey
                         PrciTblCnt += 1
@@ -612,7 +613,7 @@ Sec2:
                     Def.Str = "جاري تحميل أنواع الخدمات ..."
                     worker.ReportProgress(0, Def)
 
-                    If (Fn.GetTbl("select ProdKCd, ProdKNm, ProdKClr from CDProdK where ProdKSusp = 0 order by ProdKCd", ProdKTable, "1012&H", worker)) = Nothing Then
+                    If (Fn.GetTbl("Select ProdKCd, ProdKNm, ProdKClr from CDProdK where ProdKSusp = 0 order by ProdKCd", ProdKTable, "1012&H", worker)) = Nothing Then
                         primaryKey(0) = ProdKTable.Columns("ProdKNm")
                         ProdKTable.PrimaryKey = primaryKey
                         PrciTblCnt += 1
@@ -625,7 +626,7 @@ Sec2:
                     Def.Str = "جاري تحميل أنواع المنتجات ..."
                     worker.ReportProgress(0, Def)
 
-                    If (Fn.GetTbl("SELECT FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp,CompReqst FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
+                    If (Fn.GetTbl("Select FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp,CompReqst FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
                         primaryKey(0) = ProdCompTable.Columns("FnSQL")
                         ProdCompTable.PrimaryKey = primaryKey
                         PrciTblCnt += 1
@@ -637,14 +638,14 @@ Sec2:
                     Def.Str = "جاري تحميل أنواع التحديثات ..."
                     worker.ReportProgress(0, Def)
                     If Usr.PUsrUCatLvl >= 3 And Usr.PUsrUCatLvl <= 5 Then
-                        If (Fn.GetTbl("SELECT EvId, EvNm FROM CDEvent where EvSusp = 0 and EvBkOfic = 1 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
+                        If (Fn.GetTbl("Select EvId, EvNm FROM CDEvent where EvSusp = 0 And EvBkOfic = 1 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
                             PrciTblCnt += 1
                         Else
                             Def.Str = "لم يتم تحميل  أنواع التحديثات "
                             worker.ReportProgress(0, Def)
                         End If
                     Else
-                        If (Fn.GetTbl("SELECT EvId, EvNm FROM CDEvent where EvSusp = 0 and EvBkOfic = 0 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
+                        If (Fn.GetTbl("Select EvId, EvNm FROM CDEvent where EvSusp = 0 And EvBkOfic = 0 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
                             PrciTblCnt += 1
                         Else
                             Def.Str = " أنواع التحديثات / "
@@ -668,7 +669,7 @@ Sec2:
             Menu_ = New MenuStrip
             CntxMenu = New ContextMenuStrip
 
-            If (Fn.GetTbl("SELECT SwNm, SwSer, SwID, SwObjNew FROM ASwitchboard WHERE (SwType = N'Tab') AND (SwNm <> N'NA') ORDER BY SwID", SwichTabTable, "1002&H", worker)) = Nothing Then
+            If (Fn.GetTbl("Select SwNm, SwSer, SwID, SwObjNew FROM ASwitchboard WHERE (SwType = N'Tab') AND (SwNm <> N'NA') ORDER BY SwID", SwichTabTable, "1002&H", worker)) = Nothing Then
                 Def.Str = " Building Main Menu ..."
                 worker.ReportProgress(0, Def)
                 For Cnt_ = 0 To SwichTabTable.Rows.Count - 1
@@ -757,7 +758,7 @@ Sec2:
 
                     Dim SrcStr As String = ""
                     If Usr.PUsrUCatLvl = 7 Then
-                        SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1"
+                        SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm"
                     Else
                         SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd > 1 ORDER BY SrcNm"
                     End If
@@ -922,7 +923,7 @@ Sec2:
             UpdtCurrTbl = New DataTable
             '                                 0        1         2         3         4        5        6         7         8         9
             'If Fn.GetTbl("SELECT TkupSTime, TkupTxt, UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread FROM TkEvent INNER JOIN Int_user ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON Int_user.UsrCat = IntUserCat.UCatId Where ( " & CompIds & ") ORDER BY TkupTkSql,TkupSQL DESC", UpdtCurrTbl, "1019&H", worker) = Nothing Then
-            If Fn.GetTblXX("SELECT TkupSTime, TkupTxt, UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread FROM TkEvent inner join Tickets on Tickets.TkSQL = TkEvent.TkupTkSql INNER JOIN Int_user ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON Int_user.UsrCat = IntUserCat.UCatId   " & FltrStr & " ORDER BY TkupTkSql,TkupSQL DESC", UpdtCurrTbl, "1019&H") = Nothing Then
+            If Fn.GetTblXX("SELECT TkupSTime,EvNm , TkupTxt, UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread FROM TkEvent inner join Tickets on Tickets.TkSQL = TkEvent.TkupTkSql INNER JOIN Int_user ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON Int_user.UsrCat = IntUserCat.UCatId   " & FltrStr & " ORDER BY TkupTkSql,TkupSQL DESC", UpdtCurrTbl, "1019&H") = Nothing Then
                 UpdtCurrTbl.Columns.Add("File")        ' Add files Columns 
             Else
                 MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & Errmsg)
@@ -971,6 +972,7 @@ Sec2:
                 'Next
                 'CompIds = String.Join(" OR ", Def.CompList)
                 Tbl.Columns.Add("تاريخ آخر تحديث")
+                Tbl.Columns.Add("نوع التحديث")
                 Tbl.Columns.Add("نص آخر تحديث")
                 Tbl.Columns.Add("محرر آخر تحديث")
                 Tbl.Columns.Add("TkupReDt")

@@ -580,8 +580,9 @@ End_:
             GridUpd.Columns("EvSusp").Visible = False
             GridUpd.Columns("UCatLvl").Visible = False
             GridUpd.Columns("TkupUnread").Visible = False
+            GridUpd.Columns("EvNm").HeaderText = "نوع التحديث"
             GridUpd.AutoResizeColumns()
-            GridUpd.Columns("TkupTxt").Width = GridUpd.Width - (GridUpd.Columns("TkupSTime").Width + GridUpd.Columns("UsrRealNm").Width + GridUpd.Columns("TkupReDt").Width + GridUpd.Columns("File").Width + 50)
+            GridUpd.Columns("TkupTxt").Width = GridUpd.Width - (GridUpd.Columns("TkupSTime").Width + GridUpd.Columns("EvNm").Width + GridUpd.Columns("UsrRealNm").Width + GridUpd.Columns("TkupReDt").Width + GridUpd.Columns("File").Width + 50)
             GridUpd.Columns("TkupTxt").DefaultCellStyle.WrapMode = DataGridViewTriState.True
             GridUpd.AutoResizeRows()
             GridUpd.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter

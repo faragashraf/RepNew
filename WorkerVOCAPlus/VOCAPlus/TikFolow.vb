@@ -21,7 +21,7 @@ Public Class TikFolow
     Private Sub FolwTicket_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Point(screenWidth, screenHeight - 120)
         Me.GridTicket.Width = Me.Size.Width - 30
-        Me.GridTicket.Height = Me.Size.Height - 200
+        Me.GridTicket.Height = Me.Size.Height - 215
         GroupBox1.Location = New Point((Me.Size.Width - GroupBox1.Size.Width) / 2, GroupBox1.Location.Y)
         If PreciFlag = False Then
             Beep()
@@ -156,6 +156,8 @@ Public Class TikFolow
                         TickTblMain.Rows(Rws).Item("EvSusp") = UpdtCurrTbl.DefaultView(0).Item("EvSusp")
                         TickTblMain.Rows(Rws).Item("UCatLvl") = UpdtCurrTbl.DefaultView(0).Item("UCatLvl")
                         TickTblMain.Rows(Rws).Item("TkupUnread") = UpdtCurrTbl.DefaultView(0).Item("TkupUnread")
+                        TickTblMain.Rows(Rws).Item("نوع التحديث") = UpdtCurrTbl.DefaultView(0).Item("EvNm")
+                        '
 
                         StruGrdTk.LstUpDt = UpdtCurrTbl.DefaultView(0).Item("TkupSTime")
                         StruGrdTk.LstUpTxt = UpdtCurrTbl.DefaultView(0).Item("TkupTxt")

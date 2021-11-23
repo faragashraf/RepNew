@@ -42,7 +42,7 @@ Public Class Login
         Cmbo.Items.Add("My Labtop")
         Cmbo.Items.Add("Test Database")
         Cmbo.Items.Add("OnLine")
-        Cmbo.SelectedItem = "Eg Server"
+        Cmbo.SelectedItem = "My Labtop"
         ServerCD = Cmbo.SelectedItem
 
         MacStr = GetMACAddressNew()

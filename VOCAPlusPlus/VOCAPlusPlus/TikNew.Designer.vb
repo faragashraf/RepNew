@@ -23,7 +23,7 @@ Partial Class TikNew
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(TikNew))
         Me.FlwMain = New System.Windows.Forms.FlowLayoutPanel()
         Me.FlwTree = New System.Windows.Forms.FlowLayoutPanel()
@@ -191,11 +191,11 @@ Partial Class TikNew
         Me.TreeView1.ImageKey = "Add.ico"
         Me.TreeView1.Location = New System.Drawing.Point(11, 51)
         Me.TreeView1.Name = "TreeView1"
-        TreeNode3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        TreeNode3.ForeColor = System.Drawing.Color.Red
-        TreeNode3.Name = "Rooting"
-        TreeNode3.Text = "Rooting"
-        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode3})
+        TreeNode1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        TreeNode1.ForeColor = System.Drawing.Color.Red
+        TreeNode1.Name = "Rooting"
+        TreeNode1.Text = "Rooting"
+        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
         Me.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TreeView1.RightToLeftLayout = True
         Me.TreeView1.ShowNodeToolTips = True
