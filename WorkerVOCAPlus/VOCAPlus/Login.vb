@@ -4,7 +4,7 @@ Imports System.Threading
 
 Public Class Login
     Dim VerTbl As DataTable = New DataTable
-    Dim MacTble As New DataTable
+
     Private Sub HrdWrWrkr_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles HrdWrWrkr.DoWork
         ' This event handler is where the actual work is done.
         ' This method runs on the background thread.
@@ -48,7 +48,7 @@ Public Class Login
         MacStr = GetMACAddressNew()
         Dim Fn As New APblicClss.Func
         MacTble = New DataTable
-        Fn.GetTblXX("select mac from AMac", MacTble, "0000&H")
+        Fn.GetTblXX("select mac,Admin from AMac", MacTble, "0000&H")
         RemoveHandler Cmbo.SelectedIndexChanged, AddressOf Cmbo_SelectedIndexChanged
         AddHandler Cmbo.SelectedIndexChanged, AddressOf Cmbo_SelectedIndexChanged
         StatusBarPanel1.Icon = My.Resources.WSOff032
@@ -197,13 +197,23 @@ GoodVer:  '       *****      End Check Ver.
         End If
         '"52216F84D3C9"
         'Admin Login For Every user Related to Mac address
-        If MacStr = "6479F03979BB" Or MacStr = "00155DC80B2B" Or MacStr = "7C8AE174167C" Or MacStr = "9651AED8A986" Then
-            TxtUsrPass.Text = Fn.PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy)
-        End If
+        '
+        For YYT = 0 To MacTble.Rows.Count - 1
+            If MacStr = MacTble.Rows(YYT).Item("Mac").ToString And MacTble.Rows(YYT).Item("Admin") = True Then
+                TxtUsrPass.Text = Fn.PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy)
+                Exit For
+            End If
+        Next
+
+
+        'If MacStr = "6479F03979BB" Or MacStr = "00155DC80B2B" Or MacStr = "7C8AE174167C" Or MacStr = "9651AED8A986" Then
+        '    TxtUsrPass.Text = Fn.PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy)
+        'End If
 
         'If OsIP() = "10.10.26.4" Or OsIP() = "10.11.51.232" Or OsIP() = "10.11.51.233" Or OsIP() = "10.10.220.128" Or OsIP() = "10.10.220.129" Then
         '    TxtUsrPass.Text = (PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy))
         'End If
+
         If TxtUsrNm.Text = Usr.PUsrNm And TxtUsrPass.Text = PassDecoding(Usr.PUsrPWrd, Usr.PUsrSltKy) Then 'check user name and password status
             LblLogin.Text = "          Login has been succeeded"
             LblLogin.Image = My.Resources.Check_Marks1

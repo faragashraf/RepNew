@@ -58,6 +58,7 @@ Public Class TikUpdate
                 End If
             End If
         End If
+        UpGetSql.DefaultView.Sort = "TkupSTime desc"
         Dim FolwID As String = ""
         If DBNull.Value.Equals(StruGrdTk.UserId) Then FolwID = "" Else FolwID = StruGrdTk.UserId
         UpdateFormt(GridUpdt, FolwID)
@@ -157,7 +158,6 @@ Public Class TikUpdate
     End Sub
     Private Sub GetUpdtEvnt_()
         UpGetSql = New DataTable
-        '                                 0        1         2         3         4        5        6         7         8         9
         If PublicCode.GetTbl("SELECT TkupSTime,EvNm, TkupTxt, UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread FROM TkEvent INNER JOIN Int_user ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON Int_user.UsrCat = IntUserCat.UCatId Where ( TkupTkSql = " & StruGrdTk.Sql & ") ORDER BY TkupTkSql,TkupSQL DESC", UpGetSql, "1019&H") = Nothing Then
             UpGetSql.Columns.Add("File")        ' Add files Columns 
         Else
@@ -174,9 +174,9 @@ Public Class TikUpdate
         For Count = 0 To GridUpdate.Rows.Count - 1
             For Each row As DataRow In Results
                 If row.ItemArray(0) = GridUpdate.Rows(Count).Cells("TkupSQL").Value Then
-                    GridUpdate.Rows(Count).Cells(11).Value = "✔"
-                    GridUpdate.Rows(Count).Cells(11).Tag = row.ItemArray(1)
-                    GridUpdate.Rows(Count).Cells(11).ToolTipText = row.ItemArray(3) & "-" & row.ItemArray(4) & "-" & row.ItemArray(2)
+                    GridUpdate.Rows(Count).Cells("File").Value = "✔"
+                    GridUpdate.Rows(Count).Cells("File").Tag = row.ItemArray(1)
+                    GridUpdate.Rows(Count).Cells("File").ToolTipText = row.ItemArray(3) & "-" & row.ItemArray(4) & "-" & row.ItemArray(2)
                     Exit For
                 End If
             Next
@@ -391,7 +391,7 @@ fileStream As Stream = File.Create(Environment.GetFolderPath(Environment.Special
             Else
                 CmbEvent.Enabled = True
                 BtnSubmt.Enabled = True
-                TxtUpdt.Text = ""
+                'TxtUpdt.Text = ""
                 TxtUpdt.Font = New Font("Times New Roman", 14, FontStyle.Regular)
                 TxtUpdt.TextAlign = HorizontalAlignment.Left
                 TxtUpdt.ReadOnly = False

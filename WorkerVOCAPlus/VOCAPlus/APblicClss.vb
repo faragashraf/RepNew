@@ -16,9 +16,11 @@ Module Public_
     Public ServerNm As String = "My Labtop"
     Public strConn As String = "Data Source=MYTHINKBOOK\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
     '"Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaplus21;Password=@VocaPlus$21-4"
+    '"Data Source=MYTHINKBOOK\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
     Public sqlCon As New SqlConnection(strConn) ' I Have assigned conn STR here and delete this row from all project
     Public Bol As Boolean
 
+    Public MacTble As New DataTable
     Public HardTable As DataTable = New DataTable
     Public UserTable As DataTable = New DataTable
     Public tempTable As DataTable = New DataTable
@@ -161,6 +163,9 @@ Public Class APblicClss
             Try
                 'sqlCon = New SqlConnection
                 sqlCon.ConnectionString = strConn
+                Dim Fn As New APblicClss.Func
+                MacTble = New DataTable
+                Fn.GetTblXX("select mac,Admin from AMac", MacTble, "0000&H")
             Catch ex As Exception
                 state.Errmsg = ex.Message
                 AppLog("0000&H", ex.Message, "Conecting String")
@@ -840,82 +845,9 @@ Sec2:
             Dim state As New APblicClss.Defntion
             Dim Fn As New APblicClss.Func
             TicTable = New DataTable
-            If GetTbl("select UsrClsN, UsrFlN, UsrReOpY, UsrUnRead, UsrEvDy, UsrClsYDy, UsrReadYDy, UsrRecevDy, UsrClsUpdtd, UsrLastSeen, UsrTikFlowDy, UsrActive,UsrLogSnd from Int_user where UsrId = " & Usr.PUsrID & ";", TicTable, "0000&H", worker) = Nothing Then
+            If Fn.GetTbl("select UsrClsN, UsrFlN, UsrReOpY, UsrUnRead, UsrEvDy, UsrClsYDy, UsrReadYDy, UsrRecevDy, UsrClsUpdtd, UsrLastSeen, UsrTikFlowDy, UsrActive,UsrLogSnd from Int_user where UsrId = " & Usr.PUsrID & ";", TicTable, "0000&H", worker) = Nothing Then
             End If
         End Sub
-#Region "Tik"
-        Public Sub GetUpdtEvnt_(worker As System.ComponentModel.BackgroundWorker)
-            Dim Fn As New APblicClss.Func
-            Dim Def As New APblicClss.Defntion
-            UpdtCurrTbl = New DataTable
-            '                                 0        1         2         3         4        5        6         7         8         9
-            'If Fn.GetTbl("SELECT TkupSTime, TkupTxt, UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread FROM TkEvent INNER JOIN Int_user ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON Int_user.UsrCat = IntUserCat.UCatId Where ( " & CompIds & ") ORDER BY TkupTkSql,TkupSQL DESC", UpdtCurrTbl, "1019&H", worker) = Nothing Then
-            If Fn.GetTbl("SELECT TkupSTime, TkupTxt, UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread FROM TkEvent inner join Tickets on Tickets.TkSQL = TkEvent.TkupTkSql INNER JOIN Int_user ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON Int_user.UsrCat = IntUserCat.UCatId   " & FltrStr & " ORDER BY TkupTkSql,TkupSQL DESC", UpdtCurrTbl, "1019&H", worker) = Nothing Then
-                    UpdtCurrTbl.Columns.Add("File")        ' Add files Columns 
-                Else
-                    MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & Errmsg)
-            End If
-        End Sub
-        Public Function CompGrdTikFill(GrdTick As DataGridView, Tbl As DataTable, ProgBar As ProgressBar, worker As System.ComponentModel.BackgroundWorker) As String
-            Dim Def As New APblicClss.Defntion
-            Dim Fn As New APblicClss.Func
-            Def.Errmsg = Nothing
-            worker.ReportProgress(0, Def)
-            Try
-                GrdTick.DataSource = Tbl.DefaultView
-                Def.CompList = New List(Of String)
-                ProgBar.Visible = True
-                ProgBar.Maximum = Tbl.Columns.Count
-                For HH = 0 To Tbl.Columns.Count - 1
-                    ProgBar.Value = HH + 1
-                    ProgBar.Refresh()
-                    If Tbl.Columns(HH).ColumnName = "TkDtStart" Then
-                        GrdTick.Columns(HH).HeaderText = "تاريخ الشكوى"
-                    ElseIf Tbl.Columns(HH).ColumnName = "TkID" Then
-                        GrdTick.Columns(HH).HeaderText = "رقم الشكوى"
-                    ElseIf Tbl.Columns(HH).ColumnName = "SrcNm" Then
-                        GrdTick.Columns(HH).HeaderText = "مصدر الشكوى"
-                    ElseIf Tbl.Columns(HH).ColumnName = "TkClNm" Then
-                        GrdTick.Columns(HH).HeaderText = "اسم العميل"
-                    ElseIf Tbl.Columns(HH).ColumnName = "TkClPh" Then
-                        GrdTick.Columns(HH).HeaderText = "تليفون العميل1"
-                    ElseIf Tbl.Columns(HH).ColumnName = "TkClPh1" Then
-                        GrdTick.Columns(HH).HeaderText = "تليفون العميل2"
-                    ElseIf Tbl.Columns(HH).ColumnName = "PrdNm" Then
-                        GrdTick.Columns(HH).HeaderText = "اسم المنتج"
-                    ElseIf Tbl.Columns(HH).ColumnName = "CompNm" Then
-                        GrdTick.Columns(HH).HeaderText = "نوع الشكوى"
-                    ElseIf Tbl.Columns(HH).ColumnName = "UsrRealNm" Then
-                        GrdTick.Columns(HH).HeaderText = "متابع الشكوى"
-                    Else
-                        GrdTick.Columns(HH).HeaderText = "unknown"
-                        GrdTick.Columns(HH).Visible = False
-                    End If
-                Next
-                ProgBar.Maximum = GrdTick.Rows.Count
-                'For GG = 0 To GrdTick.Rows.Count - 1
-                '    ProgBar.Value = GG + 1
-                '    ProgBar.Refresh()
-                '    Def.CompList.Add("TkupTkSql = " & GrdTick.Rows(GG).Cells("TkSQL").Value)
-                'Next
-                'CompIds = String.Join(" OR ", Def.CompList)
-                Tbl.Columns.Add("تاريخ آخر تحديث")
-                Tbl.Columns.Add("نص آخر تحديث")
-                Tbl.Columns.Add("محرر آخر تحديث")
-                Tbl.Columns.Add("TkupReDt")
-                Tbl.Columns.Add("TkupUser")
-                Tbl.Columns.Add("LastUpdateID")
-                Tbl.Columns.Add("EvSusp")
-                Tbl.Columns.Add("UCatLvl")
-                Tbl.Columns.Add("TkupUnread")
-            Catch ex As Exception
-                Def.Errmsg = ex.Message
-                worker.ReportProgress(0, Def)
-            End Try
-            ProgBar.Visible = False
-            Return Errmsg
-        End Function
-#End Region
 #Region "Tik1"
         Public Sub GetUpdtEvnt_1()
             Dim Fn As New APblicClss.Func

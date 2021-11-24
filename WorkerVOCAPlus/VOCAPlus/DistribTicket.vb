@@ -28,8 +28,9 @@ Public Class DistribTicket
         UserTree.ImageList = ImgLst
         UsrEmStr = "TkEmpNm = " & Usr.PUsrID & " OR "
         UserTree.Nodes.Add(Usr.PUsrCat.ToString, Usr.PUsrID & " - " & Usr.PUsrCatNm & " - " & Usr.PUsrRlNm, 1, 3)
+        Dim Fn As New APblicClss.Func
         '                   0  ,    1  ,     2    ,    3   ,     4     as mix name                 ***   
-        If GetTbl("Select UsrId, UCatId, UCatIdSub, UCatLvl, UCatNm + N' - ' + UsrRealNm AS UsrMix From Int_user RIGHT OUTER Join IntUserCat On UsrCat = UCatId Where (UsrSusp = 0) AND (UCatLvl between 3 and 5) Order By UCatIdSub, UsrRealNm", UserTable, "1025&H") = Nothing Then
+        If Fn.GetTblXX("Select UsrId, UCatId, UCatIdSub, UCatLvl, UCatNm + N' - ' + UsrRealNm AS UsrMix From Int_user RIGHT OUTER Join IntUserCat On UsrCat = UCatId Where (UsrSusp = 0) AND (UCatLvl between 3 and 5) Order By UCatIdSub, UsrRealNm", UserTable, "1025&H") = Nothing Then
             For Cnt_ = 0 To UserTable.Rows.Count - 1
                 TempNode = UserTree.Nodes.Find(UserTable(Cnt_).Item(2).ToString, True)
                 If TempNode.Length > 0 Then
@@ -45,10 +46,18 @@ Public Class DistribTicket
             If UsrStr.Length > 0 Then UsrStr = Mid(UsrStr, 1, UsrStr.Length - 4) Else UsrStr = ""
             If UsrEmStr.Length > 0 Then UsrEmStr = Mid(UsrEmStr, 1, UsrEmStr.Length - 4) Else UsrEmStr = ""
             UserTree.ExpandAll()
+
             FilTbls()
         Else
             MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
         End If
+        Me.Size = New Point(WelcomeScreen.Width - 12, WelcomeScreen.Height - 110)
+        FlowLayoutPanel1.Size = New Point(WelcomeScreen.Width - 12, WelcomeScreen.Height - 400)
+        GridUsrTickCount.Size = New Point((WelcomeScreen.Width - 12) * 0.15, WelcomeScreen.Height - 450)
+        UserTree.Size = New Point((WelcomeScreen.Width - 12) * 0.15, WelcomeScreen.Height - 450)
+        GridTicket.Size = New Point((WelcomeScreen.Width - 12) * 0.67, WelcomeScreen.Height - 450)
+        'BtnSubmit.Margin = New System.Windows.Forms.Padding(3, 0, WelcomeScreen.Width - 100 - BtnSubmit.Width, 3)
+        '
     End Sub
     Private Sub BtnBck_Click(sender As Object, e As EventArgs) Handles BtnBck.Click
         TabControl1.TabPages.Remove(TabPage2)
@@ -97,11 +106,10 @@ Public Class DistribTicket
         DisributeTable.Rows.Clear()
         CompCountTable.Rows.Clear()
         GridUsrTickCount.DataSource = ""
-        '  Table            0                      1                     2                      3                         4                        5                        6              7       8                  9                     10                   11       12       13           14         15              16                        17               18           19            20      21        22          23         24       25      26          
-        'SELECT TkSQL, TkDtStart, TkID, SrcNm, TkClNm, TkClPh, TkClPh1, TkMail, TkClAdr, TkClNtID, TkShpNo, TkGBNo, TkCardNo, TkAmount, TransDate, ProdKNm, PrdNm, CompNm, CounNmSender, CounNmConsign, OffNm1, OffArea, TkDetails, CompStat, FlwStat, TkEmpNm, UsrRealNm FROM dbo.ExportRep1 WHERE (TkEmpNm = " & Usr.PUsrID & ") AND (CompStat = 'مفتوحه') ORDER BY TkID;
-        '
-        'If GetTbl("SELECT TkSQL, TkDtStart As [تاريخ الشكوى], TkID As [رقم الشكوى], SrcNm As [مصدر الشكوى], TkClNm As [اسم العميل], TkClPh As [رقم التليفون], TkClPh1 As [تليفون2], TkMail, TkClAdr, TkCardNo  As [رقم الكارت], TkShpNo As [رقم الشحنة], TkGBNo, TkClNtID, TkAmount, TkTransDate, PrdKind, PrdNm As [اسم الخدمة], CompNm As [نوع الشكوى], CounNmSender, CounNmConsign, OffNm1, OffArea, TkDetails, TkClsStatus, TkFolw, TkEmpNm, UsrRealNm AS [متابع الشكوى] FROM TicketsAll WHERE (TkEmpNm = " & Usr.PUsrID & ") AND (TkClsStatus = 0) ORDER BY TkSQL;", DisributeTable, "1026&H") = Nothing Then
-        If GetTbl("SELECT TkSQL, TkDtStart As [تاريخ الشكوى], TkID As [رقم الشكوى], SrcNm As [مصدر الشكوى], TkClNm As [اسم العميل], TkClPh As [رقم التليفون], TkClPh1 As [تليفون2], TkMail, TkClAdr, TkCardNo  As [رقم الكارت], TkShpNo As [رقم الشحنة], TkGBNo, TkClNtID, TkAmount, TkTransDate, PrdKind, PrdNm As [اسم الخدمة], CompNm As [نوع الشكوى], CounNmSender, CounNmConsign, OffNm1, OffArea, TkDetails, TkClsStatus, TkFolw, TkEmpNm, UsrRealNm AS [متابع الشكوى] FROM TicketsAll WHERE ((TkRecieveDt is Null) AND (" & UsrEmStr & ") And (TkClsStatus = 0)) or (TkEmpNm = " & Usr.PUsrID & " And (TkClsStatus = 0)) ORDER BY TkSQL;", DisributeTable, "1026&H") = Nothing Then
+        Dim Fn As New APblicClss.Func
+
+
+        If Fn.GetTblXX("SELECT TkSQL, TkDtStart As [تاريخ الشكوى], TkID As [رقم الشكوى], SrcNm As [مصدر الشكوى], TkClNm As [اسم العميل], TkClPh As [رقم التليفون], TkClPh1 As [تليفون2], TkMail, TkClAdr, TkCardNo  As [رقم الكارت], TkShpNo As [رقم الشحنة], TkGBNo, TkClNtID, TkAmount, TkTransDate, PrdKind, PrdNm As [اسم الخدمة], CompNm As [نوع الشكوى], CounNmSender, CounNmConsign, OffNm1, OffArea, TkDetails, TkClsStatus, TkFolw, TkEmpNm, UsrRealNm AS [متابع الشكوى] FROM TicketsAll WHERE ((TkRecieveDt is Null) AND (" & UsrEmStr & ") And (TkClsStatus = 0)) or (TkEmpNm = " & Usr.PUsrID & " And (TkClsStatus = 0)) ORDER BY TkSQL;", DisributeTable, "1026&H") = Nothing Then
             If DisributeTable.Rows.Count > 0 Then
                 AddHandler GridTicket.SelectionChanged, AddressOf GridTicket_SelectionChanged
                 GridTicket.DataSource = DisributeTable
@@ -122,13 +130,6 @@ Public Class DistribTicket
                 GridTicket.Columns(23).Visible = False
                 GridTicket.Columns(24).Visible = False
                 GridTicket.Columns(25).Visible = False
-                If LoadBol = True Then
-                    For Rws = 0 To DisributeTable.Rows.Count - 1
-                        GridTicket.Rows(Rws).Cells(27).Value = "توزيع"
-                        GridTicket.Rows(Rws).Cells(26).Value = ""
-                    Next
-                End If
-
 
                 If LoadBol = False Then
                     WelcomeScreen.StatBrPnlAr.Text = "جاري تجهيز بيانات العملاء المتعلقة ..............."
@@ -140,12 +141,7 @@ Public Class DistribTicket
                         CompIdStr &= "TkSQL <> " & DisributeTable(Rws).Item("TkSQL").ToString & " AND "
                         TemIDStr = MyTeam(Usr.PUsrCat, Usr.PUsrID, "TkEmpNm")
                     Next
-                End If
 
-
-
-
-                If LoadBol = False Then
 
                     If PhonStr.Length > 0 Then PhonStr = "(" & Mid(PhonStr, 1, PhonStr.Length - 4) & ")" Else PhonStr = ""
                     If CompIdStr.Length > 0 Then CompIdStr = "(" & Mid(CompIdStr, 1, CompIdStr.Length - 4) & ")" Else CompIdStr = ""
@@ -166,8 +162,18 @@ Public Class DistribTicket
                         End If
                     Next Cnt_
 
+
+
                     LoadBol = True
                 End If
+
+                If LoadBol = True Then
+                    For Rws = 0 To DisributeTable.Rows.Count - 1
+                        GridTicket.Rows(Rws).Cells(27).Value = "توزيع"
+                        GridTicket.Rows(Rws).Cells("متابع الشكوى").Value = ""
+                    Next
+                End If
+
                 GridTicket.Rows(0).Cells(1).Selected = True
             Else
                 MsgInf("لا توجد شكاوى للتوزيع حالياً")
@@ -179,7 +185,7 @@ Public Class DistribTicket
 
             WelcomeScreen.StatBrPnlAr.Text = "جاري تحميل أعداد الشكاوى لكل موظف ........................."
 
-        If GetTbl("select UsrRealNm As [اسم الموظف], UsrRecevDy As العدد from Int_user WHERE (" & UsrStr & ") ORDER BY [اسم الموظف]", CompCountTable, "1026&H") = Nothing Then
+        If Fn.GetTblXX("select UsrRealNm AS [اسم الموظف], case when (select count(TkSQL) from Tickets  where CONVERT(VARCHAR, TkRecieveDt, 111)= CONVERT(VARCHAR, GETDATE(), 111) and Tickets.TkEmpNm = UsrId group by format( TkRecieveDt,'yyyy/MM/dd') ) IS NULL then 0 else (select count(TkSQL) from Tickets  where CONVERT(VARCHAR, TkRecieveDt, 111)= CONVERT(VARCHAR, GETDATE(), 111) and Tickets.TkEmpNm = UsrId group by format( TkRecieveDt,'yyyy/MM/dd') ) end AS [العدد] from int_User WHERE (" & UsrStr & ") ORDER BY [اسم الموظف]", CompCountTable, "1026&H") = Nothing Then
             GridUsrTickCount.DataSource = CompCountTable
             'GridUsrTickCount.Columns(2).Visible = False
             GridUsrTickCount.AutoResizeColumns()
@@ -206,6 +212,13 @@ Public Class DistribTicket
         Dim TrnsErr As Boolean = False
         Dim TrnsECnt_Count As Integer = 0
         Dim TrnsCnt As Integer = 0
+
+
+        'GridTicket.Rows(DisributeTable.Rows.Count - 1).Selected = True
+        'GridTicket.Refresh()
+        'MsgBox(Convert.ToInt32(DisributeTable.Compute("count(TkSQL) ", "[متابع الشكوى] =''")))
+
+
         For Cnt_ = 0 To GridTicket.Rows.Count - 1
             'PublicCode.FncGrdCurrRow(GridTicket, Cnt_)
             If GridTicket.Rows(Cnt_).Cells(26).Value.ToString.Length > 0 Then
@@ -306,9 +319,9 @@ Err_:
     Private Sub GridTicketDis_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles GridTicket.CellClick
         If (GridTicket.CurrentRow.Index) <> -1 Then
             Filtr = ""
-            Filtr = "([تليفون العميل] like '%" & GridTicket.CurrentRow.Cells(5).Value.ToString & "%')"
+            If ClintPhTable.Rows.Count > 0 Then Filtr = "([تليفون العميل] like '%" & GridTicket.CurrentRow.Cells(5).Value.ToString & "%')"
             ClintPhTable.DefaultView.RowFilter = Filtr
-            If ClintPhView.Count > 0 Then
+            If IsNothing(ClintPhView) = False And ClintPhView.Count > 0 Then
                 GridTicket.CurrentRow.DefaultCellStyle.Font = New Font("Times New Roman", 12, FontStyle.Bold)
                 GridTicket.CurrentRow.DefaultCellStyle.ForeColor = Color.Blue
                 If TabControl1.TabPages.Contains(TabPage3) = False Then TabControl1.TabPages.Insert(1, TabPage3)
@@ -348,8 +361,8 @@ Err_:
                                 'PublicCode.FncGrdCurrRow(GridTicket, GridTicket.CurrentRow.Index)
                                 For Cnt_ = 0 To GridUsrTickCount.Rows.Count - 1
                                     If GridTicket.CurrentRow.Cells(26).Value = GridUsrTickCount.Rows(Cnt_).Cells(0).Value Then
-                                        GridUsrTickCount.Rows(Cnt_).Cells(1).Value += 1
-                                        TickCount += 1
+                                'CompCountTable.Rows(Cnt_).Item(1) += 1
+                                TickCount += 1
                                         chgd = True
                                         Exit For
                                     End If
@@ -366,8 +379,8 @@ Err_:
                         GridTicket.CurrentRow.Cells(27).Style.BackColor = Color.AliceBlue
                         For Cnt_ = 0 To GridUsrTickCount.Rows.Count - 1
                             If GridTicket.CurrentRow.Cells(26).Value = GridUsrTickCount.Rows(Cnt_).Cells(0).Value Then
-                                GridUsrTickCount.Rows(Cnt_).Cells(1).Value -= 1
-                                TickCount -= 1
+                            'GridUsrTickCount.Rows(Cnt_).Cells(1).Value -= 1
+                            TickCount -= 1
                                 Exit For
                             End If
                         Next Cnt_
@@ -390,7 +403,6 @@ Err_:
                 End If
             Next
         End If
-
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         TabControl1.TabPages.Remove(TabPage2)

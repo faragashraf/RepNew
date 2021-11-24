@@ -1673,6 +1673,7 @@ Popul_:
                     Else
                         ChckReAssign.Checked = False
                         MsgInf("الشكوى بالفعل لدى الفريق المختص " & Chr(34) & ReAssgnTbl.Rows(0).Item(0) & Chr(34))
+                        ReAssgnTbl.Rows.Clear()
                     End If
                 End If
 

@@ -93,6 +93,7 @@ Partial Class DistribTicket
         Me.Label3 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.StatBrPnlEn, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -106,6 +107,7 @@ Partial Class DistribTicket
         Me.GroupBox4.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.FlowLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ImgLst
@@ -123,37 +125,29 @@ Partial Class DistribTicket
         '
         'TabControl1
         '
-        Me.TabControl1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.TabControl1.Location = New System.Drawing.Point(4, 4)
+        Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.RightToLeftLayout = True
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1343, 619)
+        Me.TabControl1.Size = New System.Drawing.Size(1537, 698)
         Me.TabControl1.TabIndex = 124
         Me.ToolTip1.SetToolTip(Me.TabControl1, "شكاوى قيد التوزيع")
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.StatusBar1)
-        Me.TabPage1.Controls.Add(Me.Label4)
-        Me.TabPage1.Controls.Add(Me.Label2)
-        Me.TabPage1.Controls.Add(Me.Label1)
-        Me.TabPage1.Controls.Add(Me.CloseBtn)
-        Me.TabPage1.Controls.Add(Me.LblTickCount)
-        Me.TabPage1.Controls.Add(Me.LblAgentCount)
+        Me.TabPage1.Controls.Add(Me.FlowLayoutPanel1)
         Me.TabPage1.Controls.Add(Me.BtnSubmit)
+        Me.TabPage1.Controls.Add(Me.CloseBtn)
         Me.TabPage1.Controls.Add(Me.LblMsg)
-        Me.TabPage1.Controls.Add(Me.GridUsrTickCount)
-        Me.TabPage1.Controls.Add(Me.GridTicket)
-        Me.TabPage1.Controls.Add(Me.UserTree)
         Me.TabPage1.Location = New System.Drawing.Point(4, 28)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1335, 587)
+        Me.TabPage1.Size = New System.Drawing.Size(1529, 666)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "توزيع الشكاوى"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -162,12 +156,12 @@ Partial Class DistribTicket
         '
         Me.StatusBar1.Enabled = False
         Me.StatusBar1.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.StatusBar1.Location = New System.Drawing.Point(3, 551)
+        Me.StatusBar1.Location = New System.Drawing.Point(0, 665)
         Me.StatusBar1.Name = "StatusBar1"
         Me.StatusBar1.Panels.AddRange(New System.Windows.Forms.StatusBarPanel() {Me.StatBrPnlEn, Me.StatBrPnlAr})
         Me.StatusBar1.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.StatusBar1.ShowPanels = True
-        Me.StatusBar1.Size = New System.Drawing.Size(1329, 33)
+        Me.StatusBar1.Size = New System.Drawing.Size(1537, 33)
         Me.StatusBar1.SizingGrip = False
         Me.StatusBar1.TabIndex = 2061
         '
@@ -176,30 +170,31 @@ Partial Class DistribTicket
         Me.StatBrPnlEn.Alignment = System.Windows.Forms.HorizontalAlignment.Center
         Me.StatBrPnlEn.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring
         Me.StatBrPnlEn.Name = "StatBrPnlEn"
-        Me.StatBrPnlEn.Width = 664
+        Me.StatBrPnlEn.Width = 768
         '
         'StatBrPnlAr
         '
         Me.StatBrPnlAr.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring
         Me.StatBrPnlAr.Name = "StatBrPnlAr"
-        Me.StatBrPnlAr.Width = 664
+        Me.StatBrPnlAr.Width = 768
         '
         'Label4
         '
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FlowLayoutPanel1.SetFlowBreak(Me.Label4, True)
         Me.Label4.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label4.ForeColor = System.Drawing.Color.Blue
-        Me.Label4.Location = New System.Drawing.Point(282, 523)
+        Me.Label4.Location = New System.Drawing.Point(303, 425)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(696, 23)
+        Me.Label4.Size = New System.Drawing.Size(935, 23)
         Me.Label4.TabIndex = 2060
         Me.Label4.Text = "اللون الأزرق يعني أن هناك شكاوى أخرى للعميل داخل الفريق"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label2
         '
         Me.Label2.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.Label2.Location = New System.Drawing.Point(1147, 526)
+        Me.Label2.Location = New System.Drawing.Point(1350, 425)
         Me.Label2.Name = "Label2"
         Me.Label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label2.Size = New System.Drawing.Size(170, 20)
@@ -210,7 +205,7 @@ Partial Class DistribTicket
         'Label1
         '
         Me.Label1.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.Label1.Location = New System.Drawing.Point(1147, 500)
+        Me.Label1.Location = New System.Drawing.Point(1350, 405)
         Me.Label1.Name = "Label1"
         Me.Label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label1.Size = New System.Drawing.Size(170, 20)
@@ -228,7 +223,7 @@ Partial Class DistribTicket
         Me.CloseBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CloseBtn.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.CloseBtn.Location = New System.Drawing.Point(17, 504)
+        Me.CloseBtn.Location = New System.Drawing.Point(14, 583)
         Me.CloseBtn.Name = "CloseBtn"
         Me.CloseBtn.Size = New System.Drawing.Size(96, 43)
         Me.CloseBtn.TabIndex = 129
@@ -238,7 +233,7 @@ Partial Class DistribTicket
         'LblTickCount
         '
         Me.LblTickCount.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.LblTickCount.Location = New System.Drawing.Point(1048, 527)
+        Me.LblTickCount.Location = New System.Drawing.Point(1244, 425)
         Me.LblTickCount.Name = "LblTickCount"
         Me.LblTickCount.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.LblTickCount.Size = New System.Drawing.Size(100, 20)
@@ -248,8 +243,9 @@ Partial Class DistribTicket
         '
         'LblAgentCount
         '
+        Me.FlowLayoutPanel1.SetFlowBreak(Me.LblAgentCount, True)
         Me.LblAgentCount.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.LblAgentCount.Location = New System.Drawing.Point(1048, 502)
+        Me.LblAgentCount.Location = New System.Drawing.Point(1244, 405)
         Me.LblAgentCount.Name = "LblAgentCount"
         Me.LblAgentCount.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.LblAgentCount.Size = New System.Drawing.Size(100, 20)
@@ -259,6 +255,7 @@ Partial Class DistribTicket
         '
         'BtnSubmit
         '
+        Me.BtnSubmit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnSubmit.BackgroundImage = Global.VOCAPlus.My.Resources.Resources.recgreen
         Me.BtnSubmit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnSubmit.FlatAppearance.BorderSize = 0
@@ -266,7 +263,7 @@ Partial Class DistribTicket
         Me.BtnSubmit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.BtnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BtnSubmit.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSubmit.Location = New System.Drawing.Point(141, 506)
+        Me.BtnSubmit.Location = New System.Drawing.Point(116, 583)
         Me.BtnSubmit.Name = "BtnSubmit"
         Me.BtnSubmit.Size = New System.Drawing.Size(96, 43)
         Me.BtnSubmit.TabIndex = 126
@@ -278,9 +275,9 @@ Partial Class DistribTicket
         Me.LblMsg.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.LblMsg.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.LblMsg.ForeColor = System.Drawing.Color.Red
-        Me.LblMsg.Location = New System.Drawing.Point(261, 491)
+        Me.LblMsg.Location = New System.Drawing.Point(312, 597)
         Me.LblMsg.Name = "LblMsg"
-        Me.LblMsg.Size = New System.Drawing.Size(450, 23)
+        Me.LblMsg.Size = New System.Drawing.Size(450, 26)
         Me.LblMsg.TabIndex = 125
         Me.LblMsg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -290,12 +287,12 @@ Partial Class DistribTicket
         Me.GridUsrTickCount.AllowUserToDeleteRows = False
         Me.GridUsrTickCount.BackgroundColor = System.Drawing.Color.White
         Me.GridUsrTickCount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.GridUsrTickCount.Location = New System.Drawing.Point(1100, 6)
+        Me.GridUsrTickCount.Location = New System.Drawing.Point(1291, 3)
         Me.GridUsrTickCount.MultiSelect = False
         Me.GridUsrTickCount.Name = "GridUsrTickCount"
         Me.GridUsrTickCount.ReadOnly = True
         Me.GridUsrTickCount.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.GridUsrTickCount.Size = New System.Drawing.Size(229, 481)
+        Me.GridUsrTickCount.Size = New System.Drawing.Size(229, 399)
         Me.GridUsrTickCount.TabIndex = 124
         Me.ToolTip1.SetToolTip(Me.GridUsrTickCount, "عدد شكاوى اليوم لكل موظف")
         '
@@ -307,12 +304,13 @@ Partial Class DistribTicket
         Me.GridTicket.BackgroundColor = System.Drawing.Color.White
         Me.GridTicket.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridTicket.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.GridTicket.Location = New System.Drawing.Point(6, 6)
+        Me.FlowLayoutPanel1.SetFlowBreak(Me.GridTicket, True)
+        Me.GridTicket.Location = New System.Drawing.Point(197, 3)
         Me.GridTicket.MultiSelect = False
         Me.GridTicket.Name = "GridTicket"
         Me.GridTicket.ReadOnly = True
         Me.GridTicket.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.GridTicket.Size = New System.Drawing.Size(758, 481)
+        Me.GridTicket.Size = New System.Drawing.Size(758, 399)
         Me.GridTicket.TabIndex = 123
         Me.ToolTip1.SetToolTip(Me.GridTicket, "شكاوى قيد  التوزيع")
         '
@@ -322,27 +320,27 @@ Partial Class DistribTicket
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.ContextMenuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 48)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(150, 26)
         '
         'CopySelectedToolStripMenuItem
         '
         Me.CopySelectedToolStripMenuItem.Image = Global.VOCAPlus.My.Resources.Resources.Copy
         Me.CopySelectedToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.CopySelectedToolStripMenuItem.Name = "CopySelectedToolStripMenuItem"
-        Me.CopySelectedToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CopySelectedToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.CopySelectedToolStripMenuItem.Text = "Copy Selected"
         '
         'UserTree
         '
         Me.UserTree.BackColor = System.Drawing.SystemColors.Window
         Me.UserTree.Font = New System.Drawing.Font("Times New Roman", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.UserTree.Location = New System.Drawing.Point(770, 6)
+        Me.UserTree.Location = New System.Drawing.Point(961, 3)
         Me.UserTree.Name = "UserTree"
         Me.UserTree.RightToLeftLayout = True
         Me.UserTree.ShowLines = False
         Me.UserTree.ShowNodeToolTips = True
         Me.UserTree.ShowPlusMinus = False
-        Me.UserTree.Size = New System.Drawing.Size(324, 481)
+        Me.UserTree.Size = New System.Drawing.Size(324, 399)
         Me.UserTree.TabIndex = 122
         Me.UserTree.TabStop = False
         '
@@ -965,16 +963,32 @@ Partial Class DistribTicket
         Me.ToolTip1.SetToolTip(Me.Button1, "العودة للتوزيع")
         Me.Button1.UseVisualStyleBackColor = False
         '
+        'FlowLayoutPanel1
+        '
+        Me.FlowLayoutPanel1.AutoScroll = True
+        Me.FlowLayoutPanel1.Controls.Add(Me.GridUsrTickCount)
+        Me.FlowLayoutPanel1.Controls.Add(Me.UserTree)
+        Me.FlowLayoutPanel1.Controls.Add(Me.GridTicket)
+        Me.FlowLayoutPanel1.Controls.Add(Me.Label1)
+        Me.FlowLayoutPanel1.Controls.Add(Me.LblAgentCount)
+        Me.FlowLayoutPanel1.Controls.Add(Me.Label2)
+        Me.FlowLayoutPanel1.Controls.Add(Me.LblTickCount)
+        Me.FlowLayoutPanel1.Controls.Add(Me.Label4)
+        Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(3, 3)
+        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1523, 557)
+        Me.FlowLayoutPanel1.TabIndex = 2062
+        '
         'DistribTicket
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 621)
+        Me.ClientSize = New System.Drawing.Size(1537, 698)
+        Me.Controls.Add(Me.StatusBar1)
         Me.Controls.Add(Me.TabControl1)
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(1366, 660)
         Me.MinimizeBox = False
-        Me.MinimumSize = New System.Drawing.Size(1364, 660)
         Me.Name = "DistribTicket"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.RightToLeftLayout = True
@@ -996,6 +1010,7 @@ Partial Class DistribTicket
         Me.GroupBox4.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1068,4 +1083,5 @@ Partial Class DistribTicket
     Friend WithEvents UserTree As TreeView
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents CopySelectedToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
 End Class

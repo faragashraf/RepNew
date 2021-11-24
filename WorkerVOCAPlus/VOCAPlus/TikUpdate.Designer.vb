@@ -104,7 +104,7 @@ Partial Class TikUpdate
         '
         Me.Label60.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label60.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.Label60.Location = New System.Drawing.Point(1152, 505)
+        Me.Label60.Location = New System.Drawing.Point(1152, 482)
         Me.Label60.Name = "Label60"
         Me.Label60.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label60.Size = New System.Drawing.Size(97, 23)
@@ -117,7 +117,7 @@ Partial Class TikUpdate
         Me.CmbEvent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbEvent.Font = New System.Drawing.Font("Times New Roman", 12.0!)
         Me.CmbEvent.FormattingEnabled = True
-        Me.CmbEvent.Location = New System.Drawing.Point(990, 503)
+        Me.CmbEvent.Location = New System.Drawing.Point(990, 480)
         Me.CmbEvent.Name = "CmbEvent"
         Me.CmbEvent.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.CmbEvent.Size = New System.Drawing.Size(164, 27)
@@ -127,7 +127,7 @@ Partial Class TikUpdate
         '
         Me.TxtUpdt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtUpdt.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.TxtUpdt.Location = New System.Drawing.Point(356, 503)
+        Me.TxtUpdt.Location = New System.Drawing.Point(356, 480)
         Me.TxtUpdt.Multiline = True
         Me.TxtUpdt.Name = "TxtUpdt"
         Me.TxtUpdt.ReadOnly = True
@@ -145,7 +145,7 @@ Partial Class TikUpdate
         Me.BtnSubmt.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
         Me.BtnSubmt.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BtnSubmt.Font = New System.Drawing.Font("Times New Roman", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSubmt.Location = New System.Drawing.Point(258, 543)
+        Me.BtnSubmt.Location = New System.Drawing.Point(258, 520)
         Me.BtnSubmt.Margin = New System.Windows.Forms.Padding(3, 65, 3, 3)
         Me.BtnSubmt.Name = "BtnSubmt"
         Me.BtnSubmt.Size = New System.Drawing.Size(92, 40)
@@ -160,7 +160,7 @@ Partial Class TikUpdate
         Me.BtnBrws.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnBrws.FlatAppearance.BorderColor = System.Drawing.Color.White
         Me.BtnBrws.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnBrws.Location = New System.Drawing.Point(283, 504)
+        Me.BtnBrws.Location = New System.Drawing.Point(283, 481)
         Me.BtnBrws.Name = "BtnBrws"
         Me.BtnBrws.Size = New System.Drawing.Size(60, 27)
         Me.BtnBrws.TabIndex = 2158
@@ -170,7 +170,7 @@ Partial Class TikUpdate
         '
         Me.TxtBrws.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtBrws.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.TxtBrws.Location = New System.Drawing.Point(-1, 504)
+        Me.TxtBrws.Location = New System.Drawing.Point(-1, 481)
         Me.TxtBrws.Name = "TxtBrws"
         Me.TxtBrws.ReadOnly = True
         Me.TxtBrws.Size = New System.Drawing.Size(275, 26)
@@ -178,11 +178,11 @@ Partial Class TikUpdate
         '
         'LblMsg
         '
-        Me.LblMsg.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.LblMsg.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.LblMsg.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.LblMsg.Location = New System.Drawing.Point(0, 586)
         Me.LblMsg.Name = "LblMsg"
-        Me.LblMsg.Size = New System.Drawing.Size(350, 33)
+        Me.LblMsg.Size = New System.Drawing.Size(1252, 33)
         Me.LblMsg.TabIndex = 2160
         Me.LblMsg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
