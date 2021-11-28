@@ -40,9 +40,9 @@ Public Class TicketEditNew
             FlowLayoutPanel2.Size = New Point((Me.Size.Width * 0.25), Me.Height - 160)
             FlowLayoutPanel3.Size = New Point((Me.Size.Width * 0.1), Me.Height - 160)
             TreeView1.Size = New Point((FlowLayoutPanel2.Width), FlowLayoutPanel2.Height - 50)
-            ChckReAssign.Margin = New System.Windows.Forms.Padding(ChckReAssign.Margin.Left, ChckReAssign.Margin.Top, (WelcomeScreen.Width / 2) - 450, ChckReAssign.Margin.Bottom)
+            ChckReAssign.Margin = New System.Windows.Forms.Padding(ChckReAssign.Margin.Left, ChckReAssign.Margin.Top, (WelcomeScreen.Width / 2) - 500, ChckReAssign.Margin.Bottom)
             Panel2.Margin = New System.Windows.Forms.Padding(3, WelcomeScreen.Height - 350 - Panel2.Height, WelcomeScreen.Width - 100 - Panel2.Width, 3)
-            TikID.Focus()
+            TikID.Select()
         End If
     End Sub
     Private Sub NewTickSub()
@@ -1076,7 +1076,7 @@ Popul_:
                         Else
                             UpTxt &= vbCrLf & "تم تعديل " & CombBox.Tag & " من " & Chr(34) & EditTable.Rows(0).Item(Split(CombBox.Name, "2")(0)).ToString & Chr(34) & " إلى " & Chr(34) & CombBox.Text & Chr(34)
                         End If
-                        UpdtTicket &= " ," & Split(CombBox.Name, "2")(1) & " = '" & CombBox.SelectedValue & "' "
+                        UpdtTicket &= " ," & Split(CombBox.Name, "2")(1) & " = '" & CombBox.SelectedValue & "'"
                     End If
                 End If
             End If
@@ -1086,6 +1086,15 @@ Popul_:
             UpTxt &= vbCrLf & "تم تحويل الشكوى للفريق المختص " & ReAssgnTbl.Rows(0).Item(0).ToString
         End If
         If TreeView1.SelectedNode.Name <> EditTable.Rows(0).Item("TkFnPrdCd").ToString Then
+            If TickKind <> EditTable.Rows(0).Item("TkKind") Then
+                UpdtTicket &= " ,TkKind = '" & TickKind & "'"
+                If TickKind = 1 Then
+                    UpTxt &= vbCrLf & "تم تعديل النوع من  " & "طلب" & " إلى " & "شكوى"
+                Else
+                    UpTxt &= vbCrLf & "تم تعديل النوع من  " & "شكوى" & " إلى " & "طلب"
+                End If
+
+            End If
             UpdtTicket &= " ," & "TkFnPrdCd = " & TreeView1.SelectedNode.Name
         End If
 
@@ -1214,7 +1223,7 @@ Popul_:
     Private Sub MailTxtBx_Enter(sender As Object, e As EventArgs) Handles TkMail.Enter
         InputLanguage.CurrentInputLanguage = EnglishInput
     End Sub
-    Private Sub DetailsTxtBx_Enter(sender As Object, e As EventArgs) Handles TkDetails.Enter
+    Private Sub DetailsTxtBx_Enter(sender As Object, e As EventArgs) 
         InputLanguage.CurrentInputLanguage = ArabicInput
     End Sub
     Private Sub AddTxtBx_Enter(sender As Object, e As EventArgs) Handles TkClAdr.Enter
@@ -1646,7 +1655,7 @@ Popul_:
         Else
             LblText.Text = "Error"
         End If
-
+        SelctSerchTxt(TkDetails, "تعديل : بواسطة")
         'If Usr.PUsrUCatLvl = 7 Then
         '    CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] = '1'"     '     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm"
         'Else

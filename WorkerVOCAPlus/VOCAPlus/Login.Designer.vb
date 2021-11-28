@@ -50,6 +50,7 @@ Partial Class Login
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.WChckConn = New System.ComponentModel.BackgroundWorker()
         Me.WrkrLogin = New System.ComponentModel.BackgroundWorker()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.StatusBarPanel1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -62,7 +63,7 @@ Partial Class Login
         Me.TxtUsrPass.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TxtUsrPass.Enabled = False
         Me.TxtUsrPass.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtUsrPass.Location = New System.Drawing.Point(156, 146)
+        Me.TxtUsrPass.Location = New System.Drawing.Point(156, 150)
         Me.TxtUsrPass.Name = "TxtUsrPass"
         Me.TxtUsrPass.Size = New System.Drawing.Size(232, 19)
         Me.TxtUsrPass.TabIndex = 1
@@ -102,19 +103,18 @@ Partial Class Login
         'BtnShow
         '
         Me.BtnShow.BackColor = System.Drawing.Color.Transparent
-        Me.BtnShow.BackgroundImage = Global.VOCAPlus.My.Resources.Resources.recorange
-        Me.BtnShow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.BtnShow.BackgroundImage = Global.VOCAPlus.My.Resources.Resources.ShowY
+        Me.BtnShow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.BtnShow.FlatAppearance.BorderColor = System.Drawing.Color.White
         Me.BtnShow.FlatAppearance.BorderSize = 0
         Me.BtnShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BtnShow.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.BtnShow.Location = New System.Drawing.Point(407, 144)
+        Me.BtnShow.Location = New System.Drawing.Point(394, 148)
         Me.BtnShow.Name = "BtnShow"
-        Me.BtnShow.Size = New System.Drawing.Size(161, 28)
+        Me.BtnShow.Size = New System.Drawing.Size(25, 25)
         Me.BtnShow.TabIndex = 2
         Me.BtnShow.TabStop = False
-        Me.BtnShow.Text = "Show/Hide PassWord"
-        Me.ToolTip1.SetToolTip(Me.BtnShow, "اظهار / اخفاء كلمة المرور")
+        Me.ToolTip1.SetToolTip(Me.BtnShow, "إظهار كلمة المرور")
         Me.BtnShow.UseCompatibleTextRendering = True
         Me.BtnShow.UseVisualStyleBackColor = False
         '
@@ -165,7 +165,7 @@ Partial Class Login
         Me.LblUsrIP.BackColor = System.Drawing.Color.Transparent
         Me.LblUsrIP.Font = New System.Drawing.Font("Times New Roman", 9.0!)
         Me.LblUsrIP.ForeColor = System.Drawing.Color.Red
-        Me.LblUsrIP.Location = New System.Drawing.Point(345, 262)
+        Me.LblUsrIP.Location = New System.Drawing.Point(345, 239)
         Me.LblUsrIP.Name = "LblUsrIP"
         Me.LblUsrIP.Size = New System.Drawing.Size(235, 20)
         Me.LblUsrIP.TabIndex = 68
@@ -190,7 +190,7 @@ Partial Class Login
         Me.PubVerLbl.BackColor = System.Drawing.Color.Transparent
         Me.PubVerLbl.Font = New System.Drawing.Font("Times New Roman", 9.0!)
         Me.PubVerLbl.ForeColor = System.Drawing.Color.Red
-        Me.PubVerLbl.Location = New System.Drawing.Point(348, 279)
+        Me.PubVerLbl.Location = New System.Drawing.Point(348, 256)
         Me.PubVerLbl.Name = "PubVerLbl"
         Me.PubVerLbl.Size = New System.Drawing.Size(232, 24)
         Me.PubVerLbl.TabIndex = 74
@@ -225,7 +225,7 @@ Partial Class Login
         Me.LblHdr.ForeColor = System.Drawing.Color.Red
         Me.LblHdr.Location = New System.Drawing.Point(107, 27)
         Me.LblHdr.Name = "LblHdr"
-        Me.LblHdr.Size = New System.Drawing.Size(473, 84)
+        Me.LblHdr.Size = New System.Drawing.Size(473, 29)
         Me.LblHdr.TabIndex = 71
         '
         'LblLogin
@@ -243,7 +243,7 @@ Partial Class Login
         '
         Me.Cmbo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Cmbo.FormattingEnabled = True
-        Me.Cmbo.Location = New System.Drawing.Point(207, 1)
+        Me.Cmbo.Location = New System.Drawing.Point(220, 6)
         Me.Cmbo.Name = "Cmbo"
         Me.Cmbo.Size = New System.Drawing.Size(121, 21)
         Me.Cmbo.TabIndex = 77
@@ -291,6 +291,10 @@ Partial Class Login
         Me.ImageList1.Images.SetKeyName(7, "Usrresm.png")
         Me.ImageList1.Images.SetKeyName(8, "Export.png")
         Me.ImageList1.Images.SetKeyName(9, "usersLogin.png")
+        Me.ImageList1.Images.SetKeyName(10, "CpClose.png")
+        Me.ImageList1.Images.SetKeyName(11, "UserCreate.png")
+        Me.ImageList1.Images.SetKeyName(12, "delete1.png")
+        Me.ImageList1.Images.SetKeyName(13, "Search1.png")
         '
         'TimerClose
         '
@@ -321,15 +325,28 @@ Partial Class Login
         Me.WrkrLogin.WorkerReportsProgress = True
         Me.WrkrLogin.WorkerSupportsCancellation = True
         '
+        'Label1
+        '
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Font = New System.Drawing.Font("Californian FB", 16.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.DarkRed
+        Me.Label1.Location = New System.Drawing.Point(130, 56)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(348, 57)
+        Me.Label1.TabIndex = 81
+        Me.Label1.Text = "Welcome TO VOCA Enterprise"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Login
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.BackgroundImage = Global.VOCAPlus.My.Resources.Resources.VocaWtr
-        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ClientSize = New System.Drawing.Size(580, 343)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
@@ -387,4 +404,5 @@ Partial Class Login
     Friend WithEvents Timer1 As Timer
     Friend WithEvents WChckConn As System.ComponentModel.BackgroundWorker
     Friend WithEvents WrkrLogin As System.ComponentModel.BackgroundWorker
+    Friend WithEvents Label1 As Label
 End Class

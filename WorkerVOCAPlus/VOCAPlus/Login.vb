@@ -18,6 +18,8 @@ Public Class Login
     End Sub
     <Obsolete>
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Label1.Text = "Welcome TO VOCA Enterprise
+Our Mini CRM"
         'CheckForIllegalCrossThreadCalls = False
         'Dim Forms As New List(Of Form)()
         'For Each t As Type In Me.GetType().Assembly.GetTypes()
@@ -39,10 +41,10 @@ Public Class Login
         'PrTblTswk.Start()
         'Exit Sub
         Cmbo.Items.Add("Eg Server")
-        Cmbo.Items.Add("My Labtop")
-        Cmbo.Items.Add("Test Database")
-        Cmbo.Items.Add("OnLine")
-        Cmbo.SelectedItem = "My Labtop"
+        'Cmbo.Items.Add("My Labtop")
+        Cmbo.Items.Add("Training")
+        'Cmbo.Items.Add("OnLine")
+        Cmbo.SelectedItem = "Eg Server"
         ServerCD = Cmbo.SelectedItem
 
         MacStr = GetMACAddressNew()
@@ -65,7 +67,6 @@ Public Class Login
 GoodVer:  '       *****      End Check Ver.
         TxtUsrNm.Select()
         If Trim(TxtUsrNm.Text).Length = 0 Then TxtUsrNm.Text = LCase(Environment.UserName)
-        Me.BtnShow.Text = "Show Password"
         For Cnt_ = 0 To (InputLanguage.InstalledInputLanguages.Count - 1)
             If InputLanguage.InstalledInputLanguages(Cnt_).Culture.TwoLetterISOLanguageName = ("ar") Then
                 ArabicInput = InputLanguage.InstalledInputLanguages(Cnt_)
@@ -314,10 +315,16 @@ sec_UsrErr_:
     Private Sub BtnShow_Click(sender As Object, e As EventArgs) Handles BtnShow.Click
         If TxtUsrPass.UseSystemPasswordChar = True Then
             TxtUsrPass.UseSystemPasswordChar = False
-            Me.BtnShow.Text = "Hide PassWord"
+            'Me.BtnShow.Text = "Hide PassWord"
+            Invoke(Sub() BtnShow.BackgroundImage = My.Resources.ShowN)
+            Invoke(Sub() BtnShow.BackgroundImageLayout = ImageLayout.Zoom)
+            ToolTip1.SetToolTip(BtnShow, "إخفاء كلمة المرور")
         Else
             TxtUsrPass.UseSystemPasswordChar = True
-            Me.BtnShow.Text = "Show PassWord"
+            'Me.BtnShow.Text = "Show PassWord"
+            Invoke(Sub() BtnShow.BackgroundImage = My.Resources.ShowY)
+            Invoke(Sub() BtnShow.BackgroundImageLayout = ImageLayout.Zoom)
+            ToolTip1.SetToolTip(BtnShow, "إظهار كلمة المرور")
         End If
     End Sub
     Private Sub TextBox1_Enter(sender As Object, e As EventArgs) Handles TxtUsrNm.Enter
@@ -396,7 +403,12 @@ sec_UsrErr_:
                            Invoke(Sub() WChckConn.RunWorkerAsync(Cn))
                        End If
                    End Sub)
-        End If
+            If Label1.ForeColor = Color.DarkRed Then
+                Label1.ForeColor = Color.LimeGreen
+            ElseIf Label1.ForeColor = Color.LimeGreen Then
+                Label1.ForeColor = Color.DarkRed
+            End If
+            End If
 
     End Sub
     Private Sub ConStrWrkr_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles ConStrWrkr.DoWork
@@ -404,8 +416,18 @@ sec_UsrErr_:
         worker1 = CType(sender, System.ComponentModel.BackgroundWorker)
         Dim WC1 As APblicClss.Func = CType(e.Argument, APblicClss.Func)
         WC1.ConStrFn(worker1)
-        'WC1.Conoff(worker1)
-        'WC1.MacTblSub(worker1)
+        If ServerNm = "VOCA Server" Then
+            Invoke(Sub() Me.BackgroundImage = My.Resources.VocaWtr)
+            Invoke(Sub() Me.BackgroundImageLayout = ImageLayout.Stretch)
+            Invoke(Sub() Me.BackColor = Color.FromArgb(192, 255, 192))
+        ElseIf ServerNm = "My Labtop" Then
+            Invoke(Sub() Me.BackgroundImage = My.Resources.Empty)
+            Invoke(Sub() Me.BackColor = Color.White)
+        ElseIf ServerNm = "Training" Then
+            Invoke(Sub() Me.BackgroundImage = My.Resources.Demo)
+            Invoke(Sub() Me.BackgroundImageLayout = ImageLayout.Center)
+            Invoke(Sub() Me.BackColor = Color.White)
+        End If
     End Sub
     Private Sub ConStrWrkr_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles ConStrWrkr.ProgressChanged
         Dim state As APblicClss.Defntion = CType(e.UserState, APblicClss.Defntion)
@@ -481,9 +503,9 @@ sec_UsrErr_:
             ElseIf ServerNm = "My Labtop" Then
                 Invoke(Sub() WelcomeScreen.BackgroundImage = My.Resources.Empty)
                 Invoke(Sub() WelcomeScreen.BackColor = Color.White)
-            ElseIf ServerNm = "Test Database" Then
+            ElseIf ServerNm = "Training" Then
                 Invoke(Sub() WelcomeScreen.BackgroundImage = My.Resources.Demo)
-                Invoke(Sub() WelcomeScreen.BackgroundImageLayout = ImageLayout.Tile)
+                Invoke(Sub() WelcomeScreen.BackgroundImageLayout = ImageLayout.Center)
                 Invoke(Sub() WelcomeScreen.BackColor = Color.White)
             End If
             Invoke(Sub() WelcomeScreen.LblLanguage.Visible = False)
@@ -519,21 +541,23 @@ sec_UsrErr_:
                     subItem12.AccessibleName = K.AccessibleName
                     Invoke(Sub() subItem.DropDownItems.Add(subItem1))
                     Invoke(Sub() subItem2.DropDownItems.Add(subItem12))
+                    Invoke(Sub() subItem1.Image = K.Image)
+                    Invoke(Sub() subItem2.Image = K.Image)
                     Invoke(Sub() AddHandler subItem1.Click, AddressOf ClkEvntClick)
                     Invoke(Sub() AddHandler subItem12.Click, AddressOf ClkEvntClick)
                 Next
             Next
             Invoke(Sub() WelcomeScreen.FlowLayoutPanel1.Visible = True)
-            Menu_.Dispose()
+            Invoke(Sub() Menu_.Dispose())
             CntxMenu.Dispose()
             Invoke(Sub() WelcomeScreen.DbStat.BackgroundImage = My.Resources.DBOn)
             Invoke(Sub() WelcomeScreen.DbStat.Tag = "تم تحميل قواعد البيانات الأساسية بنجـــاح")
             If Usr.PUsrGndr = "Male" Then
                 Invoke(Sub() WelcomeScreen.LblUsrRNm.Text = "Welcome Back Mr. " & Usr.PUsrRlNm)
-                Invoke(Sub() WelcomeScreen.Text = "VOCA Plus - " & "Welcome Back Mr. " & Usr.PUsrRlNm)
+                Invoke(Sub() WelcomeScreen.Text = "VOCA Enterprise - " & "Welcome Back Mr. " & Usr.PUsrRlNm)
             Else
                 Invoke(Sub() WelcomeScreen.LblUsrRNm.Text = "Welcome Back Miss/Mrs. " & Usr.PUsrRlNm)
-                Invoke(Sub() WelcomeScreen.Text = "VOCA Plus - " & "Welcome Back Miss/Mrs. " & Usr.PUsrRlNm)
+                Invoke(Sub() WelcomeScreen.Text = "VOCA Enterprise - " & "Welcome Back Miss/Mrs. " & Usr.PUsrRlNm)
             End If
 
             Invoke(Sub() NonEditableLbl(WelcomeScreen.LblUsrRNm))

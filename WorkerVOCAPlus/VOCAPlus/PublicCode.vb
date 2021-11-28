@@ -184,7 +184,7 @@ Module PublicCode
                 XLWrkBk.Comments = ("VOCA+")
 
                 'Set Signature
-                XLWrkSht.Cells(1, 1) = "Powered By VOCA Plus"
+                XLWrkSht.Cells(1, 1) = "Powered By VOCA Enterprise"
                 XLWrkSht.Cells(2, 1) = "Ashraf Farag"
                 XLWrkSht.Cells(3, 1) = "'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
                 XLWrkSht.Rows("1:3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight
@@ -1006,15 +1006,18 @@ End_:
         WelcomeScreen.StatBrPnlAr.Text = ""
     End Sub
     Public Function CmstripAsgn(Cnrol As Control) As Control
-        If Cnrol.Name = "GridUpdt" Then
-            If Cnrol.ContextMenuStrip IsNot Nothing Then
-                Cnrol.ContextMenuStrip.Font = New Font("Times New Roman", 12, FontStyle.Regular)
+        If TypeOf Cnrol IsNot PictureBox Then
+            If Cnrol.Name = "GridUpdt" Then
+                If Cnrol.ContextMenuStrip IsNot Nothing Then
+                    Cnrol.ContextMenuStrip.Font = New Font("Times New Roman", 12, FontStyle.Regular)
+                End If
+            Else
+                Cnrol.ContextMenuStrip = TikCmStrip
             End If
-        Else
-            Cnrol.ContextMenuStrip = TikCmStrip
+            RemoveHandler Cnrol.MouseEnter, AddressOf Ctrl_MouseEnter
+            AddHandler Cnrol.MouseEnter, AddressOf Ctrl_MouseEnter
         End If
-        RemoveHandler Cnrol.MouseEnter, AddressOf Ctrl_MouseEnter
-        AddHandler Cnrol.MouseEnter, AddressOf Ctrl_MouseEnter
+
         Return Cnrol
     End Function
     Public Sub CalIfBtn(Btn As Button)
@@ -1041,11 +1044,16 @@ End_:
                 ElseIf CTTTRL.Name = "GridHeld" Then
                     CmStripPrvw.Enabled = False
                     CmStripUpVew.Enabled = False
-                ElseIf CTTTRL.Name = "GridHeldUpdt" Then
+                ElseIf CTTTRL.Name = "GridHeldUpdt" Then 'GridUpdt
                     CmStripPrvw.Enabled = False
                     CmStripUpVew.Enabled = False
                 End If
             ElseIf TypeOf CTTTRL Is TextBox Or TypeOf CTTTRL Is MaskedTextBox Then
+                If CTTTRL.Text.Length = 0 Then
+                    CmStripCopy.Enabled = False
+                Else
+                    CmStripCopy.Enabled = True
+                End If
                 CmStripPrvw.Enabled = False
                 CmStripUpVew.Enabled = False
                 CmStripPast.Enabled = True

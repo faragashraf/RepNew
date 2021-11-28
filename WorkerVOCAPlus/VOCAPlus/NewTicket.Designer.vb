@@ -23,7 +23,7 @@ Partial Class NewTicket
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(NewTicket))
         Me.TreeView1 = New System.Windows.Forms.TreeView()
         Me.ImgLst = New System.Windows.Forms.ImageList(Me.components)
@@ -70,7 +70,7 @@ Partial Class NewTicket
         Me.BtnBck4 = New System.Windows.Forms.Button()
         Me.BtnBckComp = New System.Windows.Forms.Button()
         Me.GBTxtBx = New System.Windows.Forms.MaskedTextBox()
-        Me.LblInq = New System.Windows.Forms.Label()
+        Me.LblReq = New System.Windows.Forms.Label()
         Me.LblClsCls = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Label32 = New System.Windows.Forms.Label()
@@ -252,11 +252,11 @@ Partial Class NewTicket
         Me.TreeView1.ImageList = Me.ImgLst
         Me.TreeView1.Location = New System.Drawing.Point(55, 51)
         Me.TreeView1.Name = "TreeView1"
-        TreeNode2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        TreeNode2.ForeColor = System.Drawing.Color.Red
-        TreeNode2.Name = "Rooting"
-        TreeNode2.Text = "Rooting"
-        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode2})
+        TreeNode1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        TreeNode1.ForeColor = System.Drawing.Color.Red
+        TreeNode1.Name = "Rooting"
+        TreeNode1.Text = "Rooting"
+        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
         Me.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TreeView1.RightToLeftLayout = True
         Me.TreeView1.SelectedImageIndex = 0
@@ -289,7 +289,7 @@ Partial Class NewTicket
         Me.Label18.Font = New System.Drawing.Font("Times New Roman", 12.0!)
         Me.Label18.ForeColor = System.Drawing.Color.Blue
         Me.Label18.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Label18.Location = New System.Drawing.Point(3, 277)
+        Me.Label18.Location = New System.Drawing.Point(3, 307)
         Me.Label18.Name = "Label18"
         Me.Label18.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label18.Size = New System.Drawing.Size(186, 314)
@@ -739,12 +739,12 @@ Partial Class NewTicket
         '
         Me.LblClsOp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblClsOp.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.LblClsOp.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.LblClsOp.Location = New System.Drawing.Point(105, 46)
+        Me.LblClsOp.ForeColor = System.Drawing.Color.Red
+        Me.LblClsOp.Location = New System.Drawing.Point(89, 46)
         Me.LblClsOp.Margin = New System.Windows.Forms.Padding(0)
         Me.LblClsOp.Name = "LblClsOp"
         Me.LblClsOp.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.LblClsOp.Size = New System.Drawing.Size(39, 23)
+        Me.LblClsOp.Size = New System.Drawing.Size(46, 23)
         Me.LblClsOp.TabIndex = 2026
         Me.LblClsOp.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.ToolTip1.SetToolTip(Me.LblClsOp, "عدد الشكاوى والاستفسارات المفتوحة للعميل")
@@ -753,7 +753,8 @@ Partial Class NewTicket
         '
         Me.LblDublicate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblDublicate.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.LblDublicate.Location = New System.Drawing.Point(8, 69)
+        Me.LblDublicate.Location = New System.Drawing.Point(8, 99)
+        Me.LblDublicate.Margin = New System.Windows.Forms.Padding(3, 30, 3, 0)
         Me.LblDublicate.Name = "LblDublicate"
         Me.LblDublicate.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.LblDublicate.Size = New System.Drawing.Size(181, 208)
@@ -764,6 +765,7 @@ Partial Class NewTicket
         'LblComp
         '
         Me.LblComp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FlowLayoutPanel3.SetFlowBreak(Me.LblComp, True)
         Me.LblComp.Font = New System.Drawing.Font("Times New Roman", 12.0!)
         Me.LblComp.Location = New System.Drawing.Point(24, 0)
         Me.LblComp.Name = "LblComp"
@@ -876,20 +878,23 @@ Partial Class NewTicket
         Me.GBTxtBx.Tag = "رقم أمر الدفع"
         Me.ToolTip1.SetToolTip(Me.GBTxtBx, "رقم أمر الدفع مكون من 16 رقم." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Example : GPXXXXXXXXXXXXXX")
         '
-        'LblInq
+        'LblReq
         '
-        Me.LblInq.Location = New System.Drawing.Point(24, 23)
-        Me.LblInq.Name = "LblInq"
-        Me.LblInq.Size = New System.Drawing.Size(59, 23)
-        Me.LblInq.TabIndex = 2029
-        Me.LblInq.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.FlowLayoutPanel3.SetFlowBreak(Me.LblReq, True)
+        Me.LblReq.Location = New System.Drawing.Point(24, 23)
+        Me.LblReq.Name = "LblReq"
+        Me.LblReq.Size = New System.Drawing.Size(59, 23)
+        Me.LblReq.TabIndex = 2029
+        Me.LblReq.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'LblClsCls
         '
-        Me.LblClsCls.Location = New System.Drawing.Point(23, 46)
+        Me.LblClsCls.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.LblClsCls.Location = New System.Drawing.Point(7, 46)
         Me.LblClsCls.Name = "LblClsCls"
         Me.LblClsCls.Size = New System.Drawing.Size(39, 23)
         Me.LblClsCls.TabIndex = 2033
+        Me.LblClsCls.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TabPage2
         '
@@ -2284,10 +2289,10 @@ Partial Class NewTicket
         'FlowLayoutPanel3
         '
         Me.FlowLayoutPanel3.AutoScroll = True
-        Me.FlowLayoutPanel3.Controls.Add(Me.Label58)
-        Me.FlowLayoutPanel3.Controls.Add(Me.LblComp)
         Me.FlowLayoutPanel3.Controls.Add(Me.Label57)
-        Me.FlowLayoutPanel3.Controls.Add(Me.LblInq)
+        Me.FlowLayoutPanel3.Controls.Add(Me.LblComp)
+        Me.FlowLayoutPanel3.Controls.Add(Me.Label58)
+        Me.FlowLayoutPanel3.Controls.Add(Me.LblReq)
         Me.FlowLayoutPanel3.Controls.Add(Me.Label49)
         Me.FlowLayoutPanel3.Controls.Add(Me.LblClsOp)
         Me.FlowLayoutPanel3.Controls.Add(Me.Label59)
@@ -2306,7 +2311,7 @@ Partial Class NewTicket
         Me.Label58.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label58.Font = New System.Drawing.Font("Times New Roman", 12.0!)
         Me.Label58.ForeColor = System.Drawing.Color.Blue
-        Me.Label58.Location = New System.Drawing.Point(89, 0)
+        Me.Label58.Location = New System.Drawing.Point(89, 23)
         Me.Label58.Name = "Label58"
         Me.Label58.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label58.Size = New System.Drawing.Size(100, 23)
@@ -2319,7 +2324,7 @@ Partial Class NewTicket
         Me.Label57.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label57.Font = New System.Drawing.Font("Times New Roman", 12.0!)
         Me.Label57.ForeColor = System.Drawing.Color.Blue
-        Me.Label57.Location = New System.Drawing.Point(89, 23)
+        Me.Label57.Location = New System.Drawing.Point(89, 0)
         Me.Label57.Name = "Label57"
         Me.Label57.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label57.Size = New System.Drawing.Size(100, 23)
@@ -2332,11 +2337,11 @@ Partial Class NewTicket
         Me.Label49.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label49.Font = New System.Drawing.Font("Times New Roman", 12.0!)
         Me.Label49.ForeColor = System.Drawing.Color.Blue
-        Me.Label49.Location = New System.Drawing.Point(144, 46)
+        Me.Label49.Location = New System.Drawing.Point(135, 46)
         Me.Label49.Margin = New System.Windows.Forms.Padding(0, 0, 3, 0)
         Me.Label49.Name = "Label49"
         Me.Label49.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label49.Size = New System.Drawing.Size(45, 23)
+        Me.Label49.Size = New System.Drawing.Size(54, 23)
         Me.Label49.TabIndex = 2030
         Me.Label49.Text = "مفتوح :"
         Me.Label49.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -2346,7 +2351,7 @@ Partial Class NewTicket
         Me.Label59.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label59.Font = New System.Drawing.Font("Times New Roman", 12.0!)
         Me.Label59.ForeColor = System.Drawing.Color.Blue
-        Me.Label59.Location = New System.Drawing.Point(65, 46)
+        Me.Label59.Location = New System.Drawing.Point(49, 46)
         Me.Label59.Margin = New System.Windows.Forms.Padding(0)
         Me.Label59.Name = "Label59"
         Me.Label59.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -2857,7 +2862,7 @@ Partial Class NewTicket
     Friend WithEvents BtnSubmt2 As Button
     Friend WithEvents LblMsg2 As Label
     Friend WithEvents LblComp As Label
-    Friend WithEvents LblInq As Label
+    Friend WithEvents LblReq As Label
     Friend WithEvents LblClsOp As Label
     Friend WithEvents Label59 As Label
     Friend WithEvents LblClsCls As Label

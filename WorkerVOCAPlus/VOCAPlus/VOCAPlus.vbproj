@@ -18,19 +18,19 @@
     <PublishUrl>D:\Publish\VOCAPlus\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
+    <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>http://10.10.26.4:80/</UpdateUrl>
-    <ProductName>VOCA Plus New</ProductName>
+    <ProductName>VOCA Enterprise</ProductName>
     <PublisherName>Ashaf Farag</PublisherName>
-    <SuiteName>VOCA Plus New</SuiteName>
+    <SuiteName>VOCA Plus</SuiteName>
     <MinimumRequiredVersion>4.0.0.1</MinimumRequiredVersion>
-    <ApplicationRevision>27</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -319,12 +319,6 @@
     <Compile Include="FolwTeam.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FolwTicket.Designer.vb">
-      <DependentUpon>FolwTicket.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FolwTicket.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FolwTicketClsd.Designer.vb">
       <DependentUpon>FolwTicketClsd.vb</DependentUpon>
     </Compile>
@@ -396,12 +390,6 @@
       <DependentUpon>Start.vb</DependentUpon>
     </Compile>
     <Compile Include="Start.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Test.Designer.vb">
-      <DependentUpon>Test.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Test.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TikFrmRep.vb">
@@ -507,18 +495,6 @@
       <DependentUpon>SupLog.vb</DependentUpon>
     </Compile>
     <Compile Include="SupLog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TikEdit.Designer.vb">
-      <DependentUpon>TikEdit.vb</DependentUpon>
-    </Compile>
-    <Compile Include="TikEdit.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TikSearch.Designer.vb">
-      <DependentUpon>TikSearch.vb</DependentUpon>
-    </Compile>
-    <Compile Include="TikSearch.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TotView.Designer.vb">
@@ -654,9 +630,6 @@
     <EmbeddedResource Include="FolwTeam.resx">
       <DependentUpon>FolwTeam.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FolwTicket.resx">
-      <DependentUpon>FolwTicket.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FolwTicketClsd.resx">
       <DependentUpon>FolwTicketClsd.vb</DependentUpon>
     </EmbeddedResource>
@@ -728,13 +701,6 @@
       <DependentUpon>SupLog.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Test.resx">
-      <DependentUpon>Test.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TikEdit.resx">
-      <DependentUpon>TikEdit.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="TikRep.rdlc" />
     <EmbeddedResource Include="TikFrmRep.resx">
       <DependentUpon>TikFrmRep.vb</DependentUpon>
@@ -752,9 +718,6 @@
     <EmbeddedResource Include="ReLogin.resx">
       <DependentUpon>ReLogin.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TikSearch.resx">
-      <DependentUpon>TikSearch.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TotView.resx">
       <DependentUpon>TotView.vb</DependentUpon>
@@ -885,14 +848,9 @@
     <None Include="Resources\Expand.png" />
     <None Include="Resources\20200814_211149.jpg" />
     <None Include="Resources\VOCAIntro3.gif" />
-    <Content Include="OfflineDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="OfflineDB_log.ldf">
-      <DependentUpon>OfflineDB.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\Update.png" />
+    <None Include="Resources\ShowY.png" />
+    <None Include="Resources\ShowN.png" />
     <Content Include="SqlServerTypes\Loader.cs" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">

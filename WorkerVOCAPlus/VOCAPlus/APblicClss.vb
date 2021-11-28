@@ -12,9 +12,9 @@ Module Public_
     Public FltrStr As String = ""
     Public screenWidth As Integer = Screen.PrimaryScreen.Bounds.Width
     Public screenHeight As Integer = Screen.PrimaryScreen.Bounds.Height
-    Public ServerCD As String = "My Labtop"
-    Public ServerNm As String = "My Labtop"
-    Public strConn As String = "Data Source=MYTHINKBOOK\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
+    Public ServerCD As String = "Eg Server"
+    Public ServerNm As String = "VOCA Server"
+    Public strConn As String = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaplusPlus;Password=@VocaPlus$21-5"
     '"Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaplus21;Password=@VocaPlus$21-4"
     '"Data Source=MYTHINKBOOK\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
     Public sqlCon As New SqlConnection(strConn) ' I Have assigned conn STR here and delete this row from all project
@@ -148,14 +148,14 @@ Public Class APblicClss
             state.Errmsg = Nothing
             strConn = Nothing
             If ServerCD = "Eg Server" Then
-                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaplus21;Password=@VocaPlus$21-4"
+                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaplusPlus;Password=@VocaPlus$21-5"
                 ServerNm = "VOCA Server"
             ElseIf ServerCD = "My Labtop" Then
                 strConn = "Data Source=MyThinkbook\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
                 ServerNm = "My Labtop"
-            ElseIf ServerCD = "Test Database" Then
-                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaplus21;Password=@VocaPlus$21-4"
-                ServerNm = "Test Database"
+            ElseIf ServerCD = "Training" Then
+                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaplusPlus;Password=@VocaPlus$21-5"
+                ServerNm = "Training"
             ElseIf ServerCD = "OnLine" Then
                 strConn = "Data Source=34.123.217.183;Initial Catalog=vocaplus;Persist Security Info=True;User ID=sqlserver;Password=Hemonad105046"
                 ServerNm = "OnLine"
@@ -533,9 +533,11 @@ Sec2:
                                 End If
                                 If DBNull.Value.Equals(SwichButTable.DefaultView(Cnt_1).Item("SwObjImg")) = False Then
                                     Dim imglst As New ImageList
+                                    imglst = Login.ImageList1
                                     Dim Cnt_ = imglst.Images(SwichButTable.DefaultView(Cnt_1).Item("SwObjImg"))
-                                    Dim dd = My.Resources.ResourceManager.GetObject(SwichButTable.DefaultView(Cnt_1).Item("SwObjImg"))
-                                    NewTab.Image = Cnt_
+                                    'Dim dd = My.Resources.ResourceManager.GetObject(SwichButTable.DefaultView(Cnt_1).Item("SwObjImg"))
+                                    subItem.Image = Cnt_
+                                    subItemCx.Image = Cnt_
                                 End If
                                 subItemCx.Tag = SwichButTable.DefaultView(Cnt_1).Item("SwObjNm").ToString  'YYYYYYYYYYY
                                 NewTab.DropDownItems.Add(subItem)
@@ -971,6 +973,7 @@ Sec2:
                 GrivVw_.CurrentRow.Cells("محرر آخر تحديث").Value = StruGrdTk.LstUpUsrNm
                 GrivVw_.CurrentRow.Cells("LastUpdateID").Value = StruGrdTk.LstUpEvId
                 GrivVw_.CurrentRow.Cells("TkClsStatus").Value = StruGrdTk.ClsStat
+                GrivVw_.CurrentRow.Cells("نوع التحديث").Value = StruGrdTk.LstUpKind
 
                 If Frm.Name = "TikFolow" Then
                     If StruGrdTk.ClsStat = True Then

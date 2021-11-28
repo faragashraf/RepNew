@@ -82,6 +82,8 @@ Partial Class WelcomeScreen
         Me.TimerColctLog = New System.Windows.Forms.Timer(Me.components)
         Me.WChckConn = New System.ComponentModel.BackgroundWorker()
         Me.WkrTikCount = New System.ComponentModel.BackgroundWorker()
+        Me.CNTXMNUPic = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.UploadYourPictureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.StatBrPnlEn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.StatBrPnlAr, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DbStat, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -92,6 +94,7 @@ Partial Class WelcomeScreen
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        Me.CNTXMNUPic.SuspendLayout()
         Me.SuspendLayout()
         '
         'TimerOp
@@ -622,6 +625,7 @@ Partial Class WelcomeScreen
         '
         Me.PictureBox1.BackgroundImage = Global.VOCAPlus.My.Resources.Resources.UsrResm
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.PictureBox1.ContextMenuStrip = Me.CNTXMNUPic
         Me.FlowLayoutPanel1.SetFlowBreak(Me.PictureBox1, True)
         Me.PictureBox1.Location = New System.Drawing.Point(72, 41)
         Me.PictureBox1.Margin = New System.Windows.Forms.Padding(40, 0, 0, 0)
@@ -774,6 +778,19 @@ Partial Class WelcomeScreen
         Me.WkrTikCount.WorkerReportsProgress = True
         Me.WkrTikCount.WorkerSupportsCancellation = True
         '
+        'CNTXMNUPic
+        '
+        Me.CNTXMNUPic.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UploadYourPictureToolStripMenuItem})
+        Me.CNTXMNUPic.Name = "CNTXMNUPic"
+        Me.CNTXMNUPic.Size = New System.Drawing.Size(181, 48)
+        '
+        'UploadYourPictureToolStripMenuItem
+        '
+        Me.UploadYourPictureToolStripMenuItem.Image = Global.VOCAPlus.My.Resources.Resources.Upload_Transparent
+        Me.UploadYourPictureToolStripMenuItem.Name = "UploadYourPictureToolStripMenuItem"
+        Me.UploadYourPictureToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UploadYourPictureToolStripMenuItem.Text = "Upload Your Picture"
+        '
         'WelcomeScreen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -803,6 +820,7 @@ Partial Class WelcomeScreen
         Me.Panel2.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
+        Me.CNTXMNUPic.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -865,4 +883,6 @@ Partial Class WelcomeScreen
     Friend WithEvents Button2 As Button
     Friend WithEvents WChckConn As System.ComponentModel.BackgroundWorker
     Friend WithEvents WkrTikCount As System.ComponentModel.BackgroundWorker
+    Friend WithEvents CNTXMNUPic As ContextMenuStrip
+    Friend WithEvents UploadYourPictureToolStripMenuItem As ToolStripMenuItem
 End Class

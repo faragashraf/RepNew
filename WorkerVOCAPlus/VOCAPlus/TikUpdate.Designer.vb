@@ -32,12 +32,17 @@ Partial Class TikUpdate
         Me.CmbEvent = New System.Windows.Forms.ComboBox()
         Me.TxtUpdt = New System.Windows.Forms.TextBox()
         Me.BtnSubmt = New System.Windows.Forms.Button()
-        Me.BtnBrws = New System.Windows.Forms.Button()
         Me.TxtBrws = New System.Windows.Forms.TextBox()
         Me.LblMsg = New System.Windows.Forms.Label()
         Me.TimerEscOpen = New System.Windows.Forms.Timer(Me.components)
+        Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         CType(Me.GridUpdt, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip2.SuspendLayout()
+        Me.FlowLayoutPanel2.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.FlowLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GridUpdt
@@ -47,14 +52,15 @@ Partial Class TikUpdate
         Me.GridUpdt.BackgroundColor = System.Drawing.Color.White
         Me.GridUpdt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridUpdt.ContextMenuStrip = Me.ContextMenuStrip2
-        Me.GridUpdt.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GridUpdt.Location = New System.Drawing.Point(0, 0)
+        Me.FlowLayoutPanel1.SetFlowBreak(Me.GridUpdt, True)
+        Me.GridUpdt.Location = New System.Drawing.Point(540, 0)
+        Me.GridUpdt.Margin = New System.Windows.Forms.Padding(0)
         Me.GridUpdt.MultiSelect = False
         Me.GridUpdt.Name = "GridUpdt"
         Me.GridUpdt.ReadOnly = True
         Me.GridUpdt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.GridUpdt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.GridUpdt.Size = New System.Drawing.Size(1252, 455)
+        Me.GridUpdt.Size = New System.Drawing.Size(719, 356)
         Me.GridUpdt.TabIndex = 2057
         '
         'ContextMenuStrip2
@@ -104,7 +110,8 @@ Partial Class TikUpdate
         '
         Me.Label60.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label60.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.Label60.Location = New System.Drawing.Point(1152, 482)
+        Me.Label60.Location = New System.Drawing.Point(908, 14)
+        Me.Label60.Margin = New System.Windows.Forms.Padding(0, 10, 0, 0)
         Me.Label60.Name = "Label60"
         Me.Label60.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label60.Size = New System.Drawing.Size(97, 23)
@@ -115,9 +122,11 @@ Partial Class TikUpdate
         '
         Me.CmbEvent.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CmbEvent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.FlowLayoutPanel2.SetFlowBreak(Me.CmbEvent, True)
         Me.CmbEvent.Font = New System.Drawing.Font("Times New Roman", 12.0!)
         Me.CmbEvent.FormattingEnabled = True
-        Me.CmbEvent.Location = New System.Drawing.Point(990, 480)
+        Me.CmbEvent.Location = New System.Drawing.Point(744, 10)
+        Me.CmbEvent.Margin = New System.Windows.Forms.Padding(0, 10, 0, 0)
         Me.CmbEvent.Name = "CmbEvent"
         Me.CmbEvent.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.CmbEvent.Size = New System.Drawing.Size(164, 27)
@@ -127,12 +136,12 @@ Partial Class TikUpdate
         '
         Me.TxtUpdt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtUpdt.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.TxtUpdt.Location = New System.Drawing.Point(356, 480)
+        Me.TxtUpdt.Location = New System.Drawing.Point(171, 40)
         Me.TxtUpdt.Multiline = True
         Me.TxtUpdt.Name = "TxtUpdt"
         Me.TxtUpdt.ReadOnly = True
         Me.TxtUpdt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtUpdt.Size = New System.Drawing.Size(632, 104)
+        Me.TxtUpdt.Size = New System.Drawing.Size(831, 146)
         Me.TxtUpdt.TabIndex = 2054
         '
         'BtnSubmt
@@ -145,7 +154,7 @@ Partial Class TikUpdate
         Me.BtnSubmt.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
         Me.BtnSubmt.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BtnSubmt.Font = New System.Drawing.Font("Times New Roman", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSubmt.Location = New System.Drawing.Point(258, 520)
+        Me.BtnSubmt.Location = New System.Drawing.Point(14, 5)
         Me.BtnSubmt.Margin = New System.Windows.Forms.Padding(3, 65, 3, 3)
         Me.BtnSubmt.Name = "BtnSubmt"
         Me.BtnSubmt.Size = New System.Drawing.Size(92, 40)
@@ -153,36 +162,24 @@ Partial Class TikUpdate
         Me.BtnSubmt.Text = "تسجيل"
         Me.BtnSubmt.UseVisualStyleBackColor = True
         '
-        'BtnBrws
-        '
-        Me.BtnBrws.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnBrws.BackgroundImage = Global.VOCAPlus.My.Resources.Resources.browse_button_png_th
-        Me.BtnBrws.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BtnBrws.FlatAppearance.BorderColor = System.Drawing.Color.White
-        Me.BtnBrws.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnBrws.Location = New System.Drawing.Point(283, 481)
-        Me.BtnBrws.Name = "BtnBrws"
-        Me.BtnBrws.Size = New System.Drawing.Size(60, 27)
-        Me.BtnBrws.TabIndex = 2158
-        Me.BtnBrws.UseVisualStyleBackColor = True
-        '
         'TxtBrws
         '
         Me.TxtBrws.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtBrws.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.TxtBrws.Location = New System.Drawing.Point(-1, 481)
+        Me.TxtBrws.Location = New System.Drawing.Point(875, 192)
         Me.TxtBrws.Name = "TxtBrws"
         Me.TxtBrws.ReadOnly = True
-        Me.TxtBrws.Size = New System.Drawing.Size(275, 26)
+        Me.TxtBrws.Size = New System.Drawing.Size(127, 26)
         Me.TxtBrws.TabIndex = 2159
+        Me.TxtBrws.Visible = False
         '
         'LblMsg
         '
         Me.LblMsg.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.LblMsg.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.LblMsg.Location = New System.Drawing.Point(0, 586)
+        Me.LblMsg.Location = New System.Drawing.Point(0, 665)
         Me.LblMsg.Name = "LblMsg"
-        Me.LblMsg.Size = New System.Drawing.Size(1252, 33)
+        Me.LblMsg.Size = New System.Drawing.Size(1259, 33)
         Me.LblMsg.TabIndex = 2160
         Me.LblMsg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -190,28 +187,60 @@ Partial Class TikUpdate
         '
         Me.TimerEscOpen.Interval = 1000
         '
+        'FlowLayoutPanel2
+        '
+        Me.FlowLayoutPanel2.Controls.Add(Me.Label60)
+        Me.FlowLayoutPanel2.Controls.Add(Me.CmbEvent)
+        Me.FlowLayoutPanel2.Controls.Add(Me.TxtUpdt)
+        Me.FlowLayoutPanel2.Controls.Add(Me.Panel1)
+        Me.FlowLayoutPanel2.Controls.Add(Me.TxtBrws)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(251, 359)
+        Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
+        Me.FlowLayoutPanel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(1005, 188)
+        Me.FlowLayoutPanel2.TabIndex = 2161
+        '
+        'Panel1
+        '
+        Me.Panel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.BtnSubmt)
+        Me.Panel1.Location = New System.Drawing.Point(40, 135)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 98, 3, 3)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(125, 51)
+        Me.Panel1.TabIndex = 2160
+        '
+        'FlowLayoutPanel1
+        '
+        Me.FlowLayoutPanel1.Controls.Add(Me.GridUpdt)
+        Me.FlowLayoutPanel1.Controls.Add(Me.FlowLayoutPanel2)
+        Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(0)
+        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1259, 665)
+        Me.FlowLayoutPanel1.TabIndex = 2162
+        '
         'TikUpdate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1252, 619)
-        Me.Controls.Add(Me.TxtUpdt)
-        Me.Controls.Add(Me.CmbEvent)
+        Me.ClientSize = New System.Drawing.Size(1259, 698)
+        Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.LblMsg)
-        Me.Controls.Add(Me.BtnBrws)
-        Me.Controls.Add(Me.TxtBrws)
-        Me.Controls.Add(Me.Label60)
-        Me.Controls.Add(Me.GridUpdt)
-        Me.Controls.Add(Me.BtnSubmt)
         Me.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.Location = New System.Drawing.Point(0, 52)
         Me.Name = "TikUpdate"
         Me.Text = "TikUpdate"
         CType(Me.GridUpdt, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip2.ResumeLayout(False)
+        Me.FlowLayoutPanel2.ResumeLayout(False)
+        Me.FlowLayoutPanel2.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents GridUpdt As DataGridView
@@ -219,7 +248,6 @@ Partial Class TikUpdate
     Friend WithEvents CmbEvent As ComboBox
     Friend WithEvents TxtUpdt As TextBox
     Friend WithEvents BtnSubmt As Button
-    Friend WithEvents BtnBrws As Button
     Friend WithEvents TxtBrws As TextBox
     Friend WithEvents LblMsg As Label
     Friend WithEvents ContextMenuStrip2 As ContextMenuStrip
@@ -227,4 +255,7 @@ Partial Class TikUpdate
     Friend WithEvents UplodAtchToolStripitem As ToolStripMenuItem
     Friend WithEvents DonlodAttchToolStripitem As ToolStripMenuItem
     Friend WithEvents TimerEscOpen As Timer
+    Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
+    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+    Friend WithEvents Panel1 As Panel
 End Class

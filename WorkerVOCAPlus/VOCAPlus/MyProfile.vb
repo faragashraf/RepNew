@@ -169,7 +169,7 @@ Public Class MyProfile
     Private Sub SndMail()
 #Region "Email Body"
         Dim Bdy As String = "<p><span style= " & Chr(34) & "text-align: left;" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & ">Dear " & Usr.PUsrRlNm & ",</span></p>
-<p><span style =  " & Chr(34) & "text-align: left;" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & " > You recieved this message because you have confirmed your email address on <strong><span style=" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & "><span style=" & Chr(34) & " color: #339966;" & Chr(34) & ">VOCA Plus</span>&nbsp;</span></strong></span><span style=" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & ">Application, and you will not recieve this mail again.</span></p>
+<p><span style =  " & Chr(34) & "text-align: left;" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & " > You recieved this message because you have confirmed your email address on <strong><span style=" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & "><span style=" & Chr(34) & " color: #339966;" & Chr(34) & ">VOCA Enterprise</span>&nbsp;</span></strong></span><span style=" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & ">Application, and you will not recieve this mail again.</span></p>
 <ul>
 <li><span style = " & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & " > If your email address is correct and you are the right User, please don't reply.</span></li>
 <li><span style = " & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & " > please feel free to contact us any time On <a href=" & Chr(34) & "mailto:voca-support@egyptpost.org" & Chr(34) & ">VOCA Support Team</a>.</span></li>
@@ -177,7 +177,7 @@ Public Class MyProfile
 "<br>
 
 <p style= " & Chr(34) & "text-align: right;" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & " dir=" & Chr(34) & "rtl" & Chr(34) & "><span  >عزيزي " & Usr.PUsrRlNm & "</span></p>
-<p style =  " & Chr(34) & "text-align: right;" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & "  dir=" & Chr(34) & "rtl" & Chr(34) & "><span " & " >لقد استلمت هذا البريد الإلكتروني فقط لتأكيد بريديك الألكتروني المسجل على تطبيق  <strong><span style=" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & "><span style=" & Chr(34) & " color: #339966;" & Chr(34) & ">VOCA Plus</span>&nbsp;</span></strong></span><span style=" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & ">، ونخبرك أيضا أنك لن تستلم هذه الرسالة مره أخرى.</span></p>
+<p style =  " & Chr(34) & "text-align: right;" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & "  dir=" & Chr(34) & "rtl" & Chr(34) & "><span " & " >لقد استلمت هذا البريد الإلكتروني فقط لتأكيد بريديك الألكتروني المسجل على تطبيق  <strong><span style=" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & "><span style=" & Chr(34) & " color: #339966;" & Chr(34) & ">VOCA Enterprise</span>&nbsp;</span></strong></span><span style=" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & ">، ونخبرك أيضا أنك لن تستلم هذه الرسالة مره أخرى.</span></p>
 
 
 <ul style=" & Chr(34) & "padding-left: 150px; text-align: right;" & Chr(34) & " dir=" & Chr(34) & "rtl" & Chr(34) & ">
@@ -186,10 +186,10 @@ Public Class MyProfile
 <li><span style = " & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & " > لا تردد في التواصل معنا في أي وقت على  <a href=" & Chr(34) & "mailto:voca-support@egyptpost.org" & Chr(34) & ">VOCA Support Team</a>.</span></li>
 </ul>" &
 "<p><span style=" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & " data-mce-mark=" & Chr(34) & "1" & Chr(34) & ">Best Regard,</span></p>
-<p><strong><span style=" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & " data-mce-mark=" & Chr(34) & "1" & Chr(34) & ">VOCA Plus Team</span></strong></p>" & "<img src=" & Chr(34) & "ftp://10.10.26.4/CallCenter/Attch/VocaIcon1.jpg" & Chr(34) & "width=" & Chr(34) & "64" & Chr(34) & " height=" & Chr(34) & "64" & Chr(34) & " />"
+<p><strong><span style=" & Chr(34) & "font-family: 'times new roman', times; font-size: small;" & Chr(34) & " data-mce-mark=" & Chr(34) & "1" & Chr(34) & ">VOCA Enterprise Team</span></strong></p>" & "<img src=" & Chr(34) & "ftp://10.10.26.4/CallCenter/Attch/VocaIcon1.jpg" & Chr(34) & "width=" & Chr(34) & "64" & Chr(34) & " height=" & Chr(34) & "64" & Chr(34) & " />"
 #End Region
         If RadioRght.Checked = True Then
-            If SndExchngMil("voca-support@egyptpost.org", Usr.PUsrMail,, "Verification Mail From VOCA Plus Application", Bdy, 2) = Nothing Then
+            If SndExchngMil("voca-support@egyptpost.org", Usr.PUsrMail,, "Verification Mail From VOCA Enterprise Application", Bdy, 2) = Nothing Then
                 MsgInf("لقد تم ارسال ايميل لك للتأكيد صحة بريدك الإلكتروني" & vbNewLine & "يرجى عدم الرد على الأيميل")
             End If
         ElseIf RadioWrng.Checked = True Then

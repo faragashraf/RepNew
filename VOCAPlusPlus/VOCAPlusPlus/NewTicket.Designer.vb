@@ -770,7 +770,7 @@ Partial Class NewTicket
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TabPage1.Size = New System.Drawing.Size(1866, 839)
+        Me.TabPage1.Size = New System.Drawing.Size(1916, 1023)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "بيانات الشكوى"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -785,7 +785,7 @@ Partial Class NewTicket
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(3, 3)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1860, 833)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1910, 1017)
         Me.FlowLayoutPanel1.TabIndex = 2035
         '
         'FlowLayoutPanel2
@@ -794,7 +794,7 @@ Partial Class NewTicket
         Me.FlowLayoutPanel2.Controls.Add(Me.MyGroupBox3)
         Me.FlowLayoutPanel2.Controls.Add(Me.TreeView1)
         Me.FlowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(1505, 0)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(1555, 0)
         Me.FlowLayoutPanel2.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
         Me.FlowLayoutPanel2.Size = New System.Drawing.Size(355, 806)
@@ -878,7 +878,7 @@ Partial Class NewTicket
         Me.FlowLayoutPanel9.Controls.Add(Me.Label18)
         Me.FlowLayoutPanel9.Controls.Add(Me.FlowLayoutPanel4)
         Me.FlowLayoutPanel9.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.FlowLayoutPanel9.Location = New System.Drawing.Point(59, 3)
+        Me.FlowLayoutPanel9.Location = New System.Drawing.Point(109, 3)
         Me.FlowLayoutPanel9.Name = "FlowLayoutPanel9"
         Me.FlowLayoutPanel9.Size = New System.Drawing.Size(1443, 825)
         Me.FlowLayoutPanel9.TabIndex = 2033
@@ -1699,7 +1699,7 @@ Partial Class NewTicket
         Me.ECnt_Label.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ECnt_Label.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.ECnt_Label.ForeColor = System.Drawing.Color.Red
-        Me.ECnt_Label.Location = New System.Drawing.Point(204, 664)
+        Me.ECnt_Label.Location = New System.Drawing.Point(204, 848)
         Me.ECnt_Label.MaximumSize = New System.Drawing.Size(600, 50)
         Me.ECnt_Label.MinimumSize = New System.Drawing.Size(100, 15)
         Me.ECnt_Label.Name = "ECnt_Label"
@@ -1721,7 +1721,7 @@ Partial Class NewTicket
         Me.TabControl1.RightToLeftLayout = True
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.ShowToolTips = True
-        Me.TabControl1.Size = New System.Drawing.Size(1874, 877)
+        Me.TabControl1.Size = New System.Drawing.Size(1924, 1061)
         Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight
         Me.TabControl1.TabIndex = 2020
         Me.TabControl1.TabStop = False
@@ -1731,7 +1731,7 @@ Partial Class NewTicket
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(2342, 1096)
+        Me.ClientSize = New System.Drawing.Size(2886, 1591)
         Me.Controls.Add(Me.TabControl1)
         Me.Location = New System.Drawing.Point(-3, 50)
         Me.MaximizeBox = False

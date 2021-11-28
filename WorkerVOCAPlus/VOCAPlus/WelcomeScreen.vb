@@ -20,6 +20,7 @@ Public Class WelcomeScreen
     Dim Btn1 As New Button
     Dim Btn2 As New Button
     Dim Btn3 As New Button
+    Dim Txtbx As New Label
     Dim Grid1 As New DataGridView
     Dim Grid2 As New DataGridView
     'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -255,6 +256,7 @@ Public Class WelcomeScreen
         Frm.Controls.Add(Btn2)
         Frm.Controls.Add(Btn3)
         Frm.Controls.Add(Grid1)
+        Frm.Controls.Add(Txtbx)
         'Frm.Controls.Add(Grid2)
         Frm.WindowState = FormWindowState.Maximized
         AddHandler Btn1.Click, AddressOf Button_Click
@@ -266,6 +268,7 @@ Public Class WelcomeScreen
         Btn1.Location = New Point(0, 10)
         Btn2.Location = New Point(80, 10)
         Btn3.Location = New Point(160, 10)
+        Txtbx.Location = New Point(250, 10)
         Grid1.Location = New Point(35, 40)
         Grid1.Dock = DockStyle.Bottom
         Grid1.Size = New Point(350, 650)
@@ -275,27 +278,40 @@ Public Class WelcomeScreen
         RemoveHandler Btn3.Click, AddressOf ButtonRefill_Click
     End Sub
     Private Sub Button_Click(sender As Object, e As EventArgs)
-
+        Dim Def As New APblicClss.Defntion
+        Def.Thread_ = New Thread(AddressOf FILLLLXXX)
+        Def.Thread_.IsBackground = True
+        Def.Thread_.Start()
+    End Sub
+    Private Sub FILLLLXXX()
+        Invoke(Sub() Btn1.Enabled = False)
+        Dim StW As New Stopwatch
+        StW.Start()
+        Dim Def As New APblicClss.Defntion
+        Dim Fn As New APblicClss.Func
         Try
-            cmdSelectCommand = New SqlCommand("select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd > 1 ORDER BY SrcNm", sqlCon)
+            cmdSelectCommand = New SqlCommand("select * from Tickets where TkEmpNm = 128", Def.CONSQL)
             cmdSelectCommand.CommandTimeout = 30
-
+            'dadPurchaseInfo = New SqlDataAdapter
             dadPurchaseInfo.SelectCommand = cmdSelectCommand
             'UpdtCmd.UpdateCommand = cmdSelectCommand
             'InsrtCmd.InsertCommand = cmdSelectCommand
             builder = New SqlCommandBuilder(dadPurchaseInfo)
 
-            CompSurceTable.Rows.Clear()
-            CompSurceTable.Columns.Clear()
+            CompSurceTable = New DataTable
             dadPurchaseInfo.Fill(CompSurceTable)
-            Grid1.DataSource = CompSurceTable
-
+            Invoke(Sub() Grid1.DataSource = CompSurceTable)
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
         End Try
+        StW.Stop()
+        Dim TimSpn As TimeSpan = (StW.Elapsed)
+        Invoke(Sub() Txtbx.Text = (String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimSpn.Hours, TimSpn.Minutes, TimSpn.Seconds, TimSpn.Milliseconds)))
+        Invoke(Sub() Btn1.Enabled = True)
     End Sub
     Private Sub ButtonXX_Click(sender As Object, e As EventArgs)
-
+        Dim StW As New Stopwatch
+        StW.Start()
         Try
             'Dim cmdSelectCommand As SqlCommand = New SqlCommand("se lect SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd > 1 ORDER BY SrcNm", sqlCon)
             'cmdSelectCommand.CommandTimeout = 30
@@ -316,16 +332,23 @@ Public Class WelcomeScreen
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
         End Try
-
+        StW.Stop()
+        Dim TimSpn As TimeSpan = (StW.Elapsed)
+        Txtbx.Text = (String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimSpn.Hours, TimSpn.Minutes, TimSpn.Seconds, TimSpn.Milliseconds))
 
     End Sub
     Private Sub ButtonRefill_Click(sender As Object, e As EventArgs)
+        Dim StW As New Stopwatch
+        StW.Start()
         Try
             CompSurceTable.Rows.Clear()
             dadPurchaseInfo.Fill(CompSurceTable)
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
         End Try
+        StW.Stop()
+        Dim TimSpn As TimeSpan = (StW.Elapsed)
+        Txtbx.Text = (String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimSpn.Hours, TimSpn.Minutes, TimSpn.Seconds, TimSpn.Milliseconds))
     End Sub
     Private Sub WelcomeScreen_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Invoke(Sub()
@@ -407,11 +430,6 @@ Public Class WelcomeScreen
         Dim WC1 As APblicClss.Func = CType(e.Argument, APblicClss.Func)
         WC1.TikCntrSub(worker1)
     End Sub
-
-    Private Sub WkrTikCount_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles WkrTikCount.ProgressChanged
-
-    End Sub
-
     Private Sub WkrTikCount_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles WkrTikCount.RunWorkerCompleted
         Dim Fn As New APblicClss.Func
         If e.Error IsNot Nothing Then
@@ -544,5 +562,46 @@ Public Class WelcomeScreen
 
         End If
 
+    End Sub
+
+    Private Sub UploadYourPictureToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UploadYourPictureToolStripMenuItem.Click
+        Dim D As New OpenFileDialog
+        With D
+            .Title = "Picture Upload"
+            .InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            .Filter = "JPG|*.jpg"
+            .FilterIndex = 1
+            .RestoreDirectory = True
+        End With
+        If D.ShowDialog() = DialogResult.OK Then
+
+            Dim mReq As FtpWebRequest = DirectCast(WebRequest.Create("ftp://10.10.26.4/UserPic/" & Usr.PUsrID & " " & Usr.PUsrNm & ".jpg"), FtpWebRequest)
+            'Upddate property
+            mReq.Credentials = New NetworkCredential("administrator", "Hemonad105046")
+            mReq.Method = WebRequestMethods.Ftp.UploadFile
+            mReq.Timeout = 20000
+            'Read file
+            Dim MFile() As Byte = File.ReadAllBytes(D.FileName)
+            Dim fi As New FileInfo(D.FileName)
+            Dim size As Long = fi.Length
+            If size > 1048576 Then
+                MsgInf("حجم الصوره لابد ان يكون أقل أو يساوى 1024 KB" & vbCrLf & "حجم الملف = " & (size / 1024).ToString("N2") & " KB")
+                Exit Sub
+            End If
+            Try
+                'Upload
+                Dim mStream As Stream = mReq.GetRequestStream()
+                mStream.ReadTimeout = 20000
+                mStream.Write(MFile, 0, MFile.Length)
+                'CleanUp
+                mStream.Close()
+                mStream.Dispose()
+                PictureBox1.Image = Image.FromFile(D.FileName)
+                PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
+                PictureBox1.BorderStyle = BorderStyle.None
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End If
     End Sub
 End Class

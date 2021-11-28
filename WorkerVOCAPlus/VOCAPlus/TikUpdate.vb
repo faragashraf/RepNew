@@ -10,16 +10,9 @@ Public Class TikUpdate
     Dim Fn As New APblicClss.Func
     Private Sub TikUpdate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Point(screenWidth, screenHeight - 120)
-        GridUpdt.Size = New Point(Me.Size.Width, Me.Size.Height - 185)
-        'If StruGrdTk.Tick = 0 Then
-        '    CmbEvent.Enabled = False
-        '    BtnSubmt.Enabled = False
-        '    TxtUpdt.Text = ""
-        '    TxtUpdt.ReadOnly = True
-        '    MsgInf("لا يمكن عمل تحديث على الاستفسار")
-        '    Me.Close()
-        '    Exit Sub
-        'Else
+        GridUpdt.Size = New Point(Me.Size.Width, Me.Size.Height - 350)
+        FlowLayoutPanel2.Margin = New Padding(BtnSubmt.Margin.Left, BtnSubmt.Margin.Top, (WelcomeScreen.Width / 2) - 450, BtnSubmt.Margin.Bottom)
+
         CmbEvent.Enabled = True
         BtnSubmt.Enabled = True
         If TxtUpdt.TextLength = 0 Then
@@ -62,7 +55,14 @@ Public Class TikUpdate
         Dim FolwID As String = ""
         If DBNull.Value.Equals(StruGrdTk.UserId) Then FolwID = "" Else FolwID = StruGrdTk.UserId
         UpdateFormt(GridUpdt, FolwID)
-        Me.Text = "تحديثات شكوى رقم " & StruGrdTk.Sql
+
+        If StruGrdTk.Tick = 1 Then
+            Me.Text = "تحديثات شكوى رقم " & StruGrdTk.Sql
+        Else
+            Me.Text = "تحديثات طلب رقم " & StruGrdTk.Sql
+        End If
+
+
         GettAttchUpdtesFils()
         CompareDataTables(FTPTable, UpdtCurrTbl, GridUpdt)  ' Compare Attached Table With Updtes Table On SQL Column and File Name
         If Usr.PUsrUCatLvl < 3 Or Usr.PUsrUCatLvl > 5 Then
@@ -86,13 +86,13 @@ Public Class TikUpdate
                     If CmbEvent.SelectedValue = 902 Then
                         If PublicCode.InsUpd("update Tickets set TkEscTyp = 1" & " where (TkSQL = " & StruGrdTk.Sql & ");", "1034&H") = Nothing Then
                             If StruGrdTk.FlwStat = False Then
-                                EsStr = "متابعه 1 جديد" & vbCrLf & TxtUpdt.Text
+                                EsStr = "متابعه 1 جديد" & vbCrLf & Replace(TxtUpdt.Text, "'", "$")
                             Else
-                                EsStr = "متابعه 1" & vbCrLf & TxtUpdt.Text
+                                EsStr = "متابعه 1" & vbCrLf & Replace(TxtUpdt.Text, "'", "$")
                             End If
                         End If
                     Else
-                        EsStr = TxtUpdt.Text
+                        EsStr = Replace(TxtUpdt.Text, "'", "$")
                     End If
                     If PublicCode.InsUpd("insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" & StruGrdTk.Sql & "','" & Trim(EsStr) & "','" & "0" & "','" & CmbEvent.SelectedValue & "','" & OsIP() & "','" & Usr.PUsrID & "')", "1034&H") = Nothing Then
                         Done_ = "Done"
@@ -105,13 +105,14 @@ Public Class TikUpdate
                     StruGrdTk.LstUpTxt = TxtUpdt.Text
                     StruGrdTk.LstUpUsrNm = Usr.PUsrRlNm
                     StruGrdTk.LstUpEvId = CmbEvent.SelectedValue
+                    StruGrdTk.LstUpKind = CmbEvent.Text
                     If StruGrdTk.LstUpSys = True Then StruGrdTk.LstUpSys = False
                     '                       TkupSTime,              TkupTxt,     UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread
 
                     GetUpdtEvnt_()
                     UpSQlMax_ = UpGetSql.Rows(0).Item("TkupSQL")
 
-                    UpdtCurrTbl.Rows.Add(StruGrdTk.LstUpDt, CmbEvent.SelectedItem, StruGrdTk.LstUpTxt, Usr.PUsrRlNm, Now, Usr.PUsrID, UpSQlMax_, StruGrdTk.Sql, CmbEvent.SelectedValue, 0, Usr.PUsrUCatLvl, 0)
+                    UpdtCurrTbl.Rows.Add(StruGrdTk.LstUpDt, CmbEvent.Text, StruGrdTk.LstUpTxt, Usr.PUsrRlNm, Now, Usr.PUsrID, UpSQlMax_, StruGrdTk.Sql, CmbEvent.SelectedValue, 0, Usr.PUsrUCatLvl, 0)
                     UpdtCurrTbl.DefaultView.Sort = "TkupSTime Desc"
                     GridUpdt.Rows(0).Cells("TkupReDt").Value = ""
 
@@ -298,40 +299,7 @@ fileStream As Stream = File.Create(Environment.GetFolderPath(Environment.Special
         Dowload()
     End Sub
     Private Sub UplodAtchToolStripitem_Click(sender As Object, e As EventArgs) Handles UplodAtchToolStripitem.Click
-        Uploadsub()
-        CompareDataTables(FTPTable, UpdtCurrTbl, GridUpdt)  ' Compare Attached Table With Updtes Table On SQL Column and File Name
-    End Sub
-    Private Sub GridUpdt_SelectionChanged(sender As Object, e As EventArgs)
-        If GridUpdt.Rows.Count > 0 Then
-            If GridUpdt.Columns.Count = 11 Then
-                Dim subItem As New ToolStripMenuItem("Download Attached")
-                ContextMenuStrip2.Enabled = True
-                If DBNull.Value.Equals(GridUpdt.CurrentRow.Cells(10).Value) = False Then
-                    If GridUpdt.CurrentRow.Cells(10).Value = "✔" Then
-                        ContextMenuStrip2.Items(2).Enabled = True
-                        ContextMenuStrip2.Items(1).Enabled = False
-                        BtnBrws.Enabled = False
-                    End If
-                Else
-                    If GridUpdt.CurrentRow.Cells(4).Value = Usr.PUsrID Then
-                        BtnBrws.Enabled = True
-                        If TxtBrws.TextLength > 0 Then
-                            ContextMenuStrip2.Items(1).Enabled = True
-                        ElseIf TxtBrws.TextLength = 0 Then
-                            ContextMenuStrip2.Items(1).Enabled = False
-                        End If
-                    Else
-                        ContextMenuStrip2.Items(1).Enabled = False
-                        BtnBrws.Enabled = False
-                    End If
-                    ContextMenuStrip2.Items(2).Enabled = False
-                End If
-            End If
-        End If
 
-
-    End Sub
-    Private Sub BtnBrws_Click(sender As Object, e As EventArgs) Handles BtnBrws.Click
         LblMsg.Text = ""
         fd.Title = "File Upload"
         fd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
@@ -350,8 +318,47 @@ fileStream As Stream = File.Create(Environment.GetFolderPath(Environment.Special
             TxtBrws.Text = StrFileName
             FileName = Path.GetFileName(StrFileName)
             Ext = Split(Path.GetFileName(StrFileName), ".")(1)
-            ContextMenuStrip2.Items(1).Enabled = True
+
+            Dim Rslt As DialogResult
+            Rslt = MessageBox.Show("سيتم تحميل ملف " & Chr(34) & FileName & Chr(34) & vbCrLf & "هل تريد الإستمرار؟", "رسالة معلومات", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading Or MessageBoxOptions.RightAlign)
+            If Rslt = DialogResult.Yes Then
+                Uploadsub()
+                CompareDataTables(FTPTable, UpdtCurrTbl, GridUpdt)  ' Compare Attached Table With Updtes Table On SQL Column and File Name
+            End If
+
+
         End If
+
+    End Sub
+    Private Sub GridUpdt_SelectionChanged(sender As Object, e As EventArgs)
+        If GridUpdt.Rows.Count > 0 Then
+            If GridUpdt.Columns.Count = 11 Then
+                Dim subItem As New ToolStripMenuItem("Download Attached")
+                ContextMenuStrip2.Enabled = True
+                If DBNull.Value.Equals(GridUpdt.CurrentRow.Cells(10).Value) = False Then
+                    If GridUpdt.CurrentRow.Cells(10).Value = "✔" Then
+                        ContextMenuStrip2.Items(2).Enabled = True
+                        ContextMenuStrip2.Items(1).Enabled = False
+                    End If
+                Else
+                    If GridUpdt.CurrentRow.Cells(4).Value = Usr.PUsrID Then
+                        If TxtBrws.TextLength > 0 Then
+                            ContextMenuStrip2.Items(1).Enabled = True
+                        ElseIf TxtBrws.TextLength = 0 Then
+                            ContextMenuStrip2.Items(1).Enabled = False
+                        End If
+                    Else
+                        ContextMenuStrip2.Items(1).Enabled = False
+                    End If
+                    ContextMenuStrip2.Items(2).Enabled = False
+                End If
+            End If
+        End If
+
+
+    End Sub
+    Private Sub BtnBrws_Click(sender As Object, e As EventArgs)
+
     End Sub
     Private Sub TxtUpdt_Leave(sender As Object, e As EventArgs) Handles TxtUpdt.Leave
         If TxtUpdt.TextLength = 0 Then
@@ -361,12 +368,11 @@ fileStream As Stream = File.Create(Environment.GetFolderPath(Environment.Special
         End If
     End Sub
     Private Sub TxtUpdt_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtUpdt.KeyPress
-        IntUtly.ValdtIntLetter(e)
+        'IntUtly.ValdtIntLetter(e)
     End Sub
     Private Sub CmbEvent_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbEvent.SelectedIndexChanged
         TxtUpdt.ReadOnly = False
         TxtUpdt.Focus()
-        BtnBrws.Enabled = True
     End Sub
     Private Sub TimerEscOpen_Tick(sender As Object, e As EventArgs) Handles TimerEscOpen.Tick
         If EscTable.Rows.Count = 0 Then
@@ -410,31 +416,29 @@ fileStream As Stream = File.Create(Environment.GetFolderPath(Environment.Special
     End Sub
     Private Sub GridUpdt_SelectionChanged_1(sender As Object, e As EventArgs) Handles GridUpdt.SelectionChanged
         If GridUpdt.Rows.Count > 0 Then
-            If GridUpdt.Columns.Count = 12 Then
+            If GridUpdt.Columns.Count = 13 Then
                 Dim subItem As New ToolStripMenuItem("Download Attached")
                 ContextMenuStrip2.Enabled = True
                 If DBNull.Value.Equals(GridUpdt.CurrentRow.Cells("File").Value) = False Then
                     If GridUpdt.CurrentRow.Cells("File").Value = "✔" Then
                         ContextMenuStrip2.Items(2).Enabled = True
                         ContextMenuStrip2.Items(1).Enabled = False
-                        BtnBrws.Enabled = False
                     End If
                 Else
                     If GridUpdt.CurrentRow.Cells("TkupUser").Value = Usr.PUsrID Then
-                        BtnBrws.Enabled = True
-                        If TxtBrws.TextLength > 0 Then
-                            ContextMenuStrip2.Items(1).Enabled = True
-                        ElseIf TxtBrws.TextLength = 0 Then
-                            ContextMenuStrip2.Items(1).Enabled = False
-                        End If
+                        ContextMenuStrip2.Items(1).Enabled = True
+                        'BtnBrws.Enabled = True
+                        'If TxtBrws.TextLength > 0 Then
+                        '    ContextMenuStrip2.Items(1).Enabled = True
+                        'ElseIf TxtBrws.TextLength = 0 Then
+                        '    ContextMenuStrip2.Items(1).Enabled = False
+                        'End If
                     Else
                         ContextMenuStrip2.Items(1).Enabled = False
-                        BtnBrws.Enabled = False
                     End If
                     ContextMenuStrip2.Items(2).Enabled = False
                 End If
             End If
         End If
     End Sub
-
 End Class

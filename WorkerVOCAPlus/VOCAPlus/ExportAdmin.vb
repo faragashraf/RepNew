@@ -538,13 +538,13 @@ Public Class ExportAdmin
                 XLWrkBk = XLApp.Workbooks.Add(misValue)
                 XLWrkSht = XLWrkBk.Sheets("Sheet1")
 
-                XLWrkBk.Title = ("VOCA Plus Auto Exported Data")
+                XLWrkBk.Title = ("VOCA Enterprise Auto Exported Data")
                 XLWrkBk.Subject = ("Export Screen")
                 XLWrkBk.Author = ("Ashraf Farag")
                 XLWrkBk.Comments = ("VOCA+")
 
                 'Set Signature
-                XLWrkSht.Cells(1, 1) = "Powered By VOCA Plus"
+                XLWrkSht.Cells(1, 1) = "Powered By VOCA Enterprise"
                 XLWrkSht.Cells(2, 1) = "Ashraf Farag"
                 XLWrkSht.Cells(3, 1) = "'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
                 XLWrkSht.Rows("1:3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight

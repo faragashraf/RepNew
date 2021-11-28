@@ -92,6 +92,7 @@
         Public LstUpTxt As String    'Columns(31) "نص آخر تحديث"
         Public LstUpUnRd As Boolean  'Columns(32) "TkupUnread"
         Public LstUpEvId As Integer  'Columns(33) "TkupEvtId"
+        Public LstUpKind As String   'Columns(36) "EvNm"
         Public LstUpEnNm As String   'Columns(34) "EvNm"
         Public LstUpSys As Boolean   'Columns(35) "EvSusp"
         Public LstUpUsrNm As String 'Columns(36) "TkupUser"

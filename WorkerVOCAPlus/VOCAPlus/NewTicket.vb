@@ -150,7 +150,7 @@ Public Class NewTicket
 
         MyGroupBox2.Enabled = False
         LblComp.Text = 0
-        LblInq.Text = 0
+        LblReq.Text = 0
         LblClsOp.Text = 0
         LblClsCls.Text = 0
         LblDublicate.Text = "Ticket(s) Before :"
@@ -166,10 +166,10 @@ Public Class NewTicket
                     For Cnt_ = 0 To Split(MendRw.ItemArray(7), "-").Count - 1
                         CombProdRef.Items.Add(Split(MendRw.ItemArray(7), "-")(Cnt_))
                     Next
-                    CombProdRef.Width = 35 + Split(MendRw.ItemArray(7), "-")(0).Length * 10
                     If CombProdRef.Items.Count > 0 Then CombProdRef.SelectedIndex = 0
                 End If
-
+                CombProdRef.Width = 20 + Split(MendRw.ItemArray(7), "-")(0).Length * 10
+                'CombProdRef.Refresh()
                 TrackMskBx.MaxLength = 15 - CombProdRef.Text.Length
                 AccMskdBx.MaxLength = 19 - CombProdRef.Text.Length
             End If
@@ -179,233 +179,241 @@ Public Class NewTicket
         LblHelp.Text = MendRw.ItemArray(11).ToString
         'If TickKind = 1 Then         '-----------If Complaint True ---------------
         For Cnt_ = 0 To 11
-                For Each c As Control In FlowLayoutPanel4.Controls
-                    If c.TabIndex <= 4 And c.TabIndex > 0 Then
-                        If Trim(c.Text).Length = 0 Then
-                            If Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "Y" And c.TabIndex = Cnt_ Then
-                                c.AccessibleName = "Mendatory"
-                            ElseIf Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "X" And c.TabIndex = Cnt_ Then
-                                c.AccessibleName = "None"
-                            End If
-                        Else
+            For Each c As Control In FlowLayoutPanel4.Controls
+                If c.TabIndex <= 4 And c.TabIndex > 0 Then
+                    If Trim(c.Text).Length = 0 Then
+                        If Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "Y" And c.TabIndex = Cnt_ Then
+                            c.AccessibleName = "Mendatory"
+                        ElseIf Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "X" And c.TabIndex = Cnt_ Then
                             c.AccessibleName = "None"
                         End If
+                    Else
+                        c.AccessibleName = "None"
                     End If
-                Next c
-                For Each c As Control In FlowLayoutPanel4.Controls
-                    If Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "Y" And c.TabIndex = Cnt_ + 2001 Then
-                        c.Text = "*"
-                    ElseIf Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "X" And c.TabIndex = Cnt_ + 2001 Then
-                        c.Text = ""
-                    End If
-                Next c
-                For Each c As Control In FinancialGroup.Controls
-                    If Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "Y" And c.TabIndex = Cnt_ + 2001 Then
-                        c.Text = "*"
-                    ElseIf Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "X" And c.TabIndex = Cnt_ + 2001 Then
-                        c.Text = ""
-                    End If
-                Next c
-
-                For Each c As Control In PostalGroup.Controls
-                    If Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "Y" And c.TabIndex = Cnt_ + 2001 Then
-                        c.Text = "*"
-                    ElseIf Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "X" And c.TabIndex = Cnt_ + 2001 Then
-                        c.Text = ""
-                    End If
-                Next c
-            Next Cnt_
-            If Mid(MendRw.ItemArray(6), 1, 1) = "Y" Then
-                Cnt_ = 0
-                For Cnt_1 = 1 To 11
-                    If Mid(Phon1TxtBx.Text, Cnt_1, 1).CompareTo("[0-9]*") = 1 Then
-                        Cnt_ += 1
-                    End If
-                Next
-                If Cnt_ < Phon1TxtBx.TextLength Then
-                    Phon1TxtBx.AccessibleName = "Mendatory"
-                Else
-                    Phon1TxtBx.AccessibleName = "None"
                 End If
+            Next c
+            For Each c As Control In FlowLayoutPanel4.Controls
+                If Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "Y" And c.TabIndex = Cnt_ + 2001 Then
+                    c.Text = "*"
+                ElseIf Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "X" And c.TabIndex = Cnt_ + 2001 Then
+                    c.Text = ""
+                End If
+            Next c
+            For Each c As Control In FinancialGroup.Controls
+                If Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "Y" And c.TabIndex = Cnt_ + 2001 Then
+                    c.Text = "*"
+                ElseIf Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "X" And c.TabIndex = Cnt_ + 2001 Then
+                    c.Text = ""
+                End If
+            Next c
+
+            For Each c As Control In PostalGroup.Controls
+                If Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "Y" And c.TabIndex = Cnt_ + 2001 Then
+                    c.Text = "*"
+                ElseIf Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "X" And c.TabIndex = Cnt_ + 2001 Then
+                    c.Text = ""
+                End If
+            Next c
+        Next Cnt_
+        If Mid(MendRw.ItemArray(6), 1, 1) = "Y" Then
+            Cnt_ = 0
+            For Cnt_1 = 1 To 11
+                If Mid(Phon1TxtBx.Text, Cnt_1, 1).CompareTo("[0-9]*") = 1 Then
+                    Cnt_ += 1
+                End If
+            Next
+            If Cnt_ < Phon1TxtBx.TextLength Then
+                Phon1TxtBx.AccessibleName = "Mendatory"
             Else
                 Phon1TxtBx.AccessibleName = "None"
             End If
-            If Mid(MendRw.ItemArray(6), 6, 1) = "Y" Then
-                TrackMskBx.Enabled = True
-                If DBNull.Value.Equals(MendRw.ItemArray(7)) = False Then
-                    'Put ProdRef Value in Track No Start
-                    TrackMskBx.Text = CombProdRef.Text + Mid(TrackMskBx.Text, CombProdRef.Text.Length + 1, 19 - CombProdRef.Text.Length + 1)
-                End If
-
-                If MendRw.ItemArray(9) = True Then
-                    TrackMskBx.Mask = "LLL 00000000 LL"
-                    PrdBol = True
-                    If Mid(TrackMskBx.Text, 2, 1).CompareTo("[A-Z][a-z]*") = -1 And Mid(TrackMskBx.Text, 3, 1).CompareTo("[A-Z][a-z]*") = -1 Or Mid(TrackMskBx.Text, 5, 8).CompareTo("[0-9]*") = -1 Or Mid(TrackMskBx.Text, 14, 1).CompareTo("[A-Z][a-z]*") = -1 Or Mid(TrackMskBx.Text, 15, 1).CompareTo("[A-Z][a-z]*") = -1 Then
-                        TrackMskBx.AccessibleName = "Mendatory"
-                    Else
-                        TrackMskBx.AccessibleName = "None"
-                    End If
-                Else
-                    PrdBol = False
-                    TrackMskBx.Mask = "LL 000000000 LL"
-                    If Mid(TrackMskBx.Text, 2, 1).CompareTo("[A-Z][a-z]*") = -1 Or Mid(TrackMskBx.Text, 4, 9).CompareTo("[0-9]*") = -1 Or Mid(TrackMskBx.Text, 14, 1).CompareTo("[A-Z][a-z]*") = -1 Or Mid(TrackMskBx.Text, 15, 1).CompareTo("[A-Z][a-z]*") = -1 Then
-                        TrackMskBx.AccessibleName = "Mendatory"
-                    Else
-                        TrackMskBx.AccessibleName = "None"
-                    End If
-                End If
-
-                'If Split(TreeView1.SelectedNode.FullPath.ToString, "\")(1) = "ايجى ميل" Then
-
-                'Else
-
-                'End If
-
-            Else
-                TrackMskBx.AccessibleName = "None"
-                TrackMskBx.Text = ""
-                TrackMskBx.Enabled = False
-                TrackMskBx.Text = ""
+        Else
+            Phon1TxtBx.AccessibleName = "None"
+        End If
+        If Mid(MendRw.ItemArray(6), 6, 1) = "Y" Then
+            TrackMskBx.Enabled = True
+            If DBNull.Value.Equals(MendRw.ItemArray(7)) = False Then
+                'Put ProdRef Value in Track No Start
+                TrackMskBx.Text = CombProdRef.Text + Mid(TrackMskBx.Text, CombProdRef.Text.Length + 1, 19 - CombProdRef.Text.Length + 1)
             End If
-            If DistCmbBx.Text.Length = 0 Then
-                If Mid(MendRw.ItemArray(6), 7, 1) = "Y" Then
-                    DistCmbBx.AccessibleName = "Mendatory"
+
+            If MendRw.ItemArray(9) = True Then
+                TrackMskBx.Mask = "LLL 00000000 LL"
+                PrdBol = True
+                If Mid(TrackMskBx.Text, 2, 1).CompareTo("[A-Z][a-z]*") = -1 And Mid(TrackMskBx.Text, 3, 1).CompareTo("[A-Z][a-z]*") = -1 Or Mid(TrackMskBx.Text, 5, 8).CompareTo("[0-9]*") = -1 Or Mid(TrackMskBx.Text, 14, 1).CompareTo("[A-Z][a-z]*") = -1 Or Mid(TrackMskBx.Text, 15, 1).CompareTo("[A-Z][a-z]*") = -1 Then
+                    TrackMskBx.AccessibleName = "Mendatory"
                 Else
-                    DistCmbBx.AccessibleName = "None"
+                    TrackMskBx.AccessibleName = "None"
                 End If
+            Else
+                PrdBol = False
+                TrackMskBx.Mask = "LL 000000000 LL"
+                If Mid(TrackMskBx.Text, 2, 1).CompareTo("[A-Z][a-z]*") = -1 Or Mid(TrackMskBx.Text, 4, 9).CompareTo("[0-9]*") = -1 Or Mid(TrackMskBx.Text, 14, 1).CompareTo("[A-Z][a-z]*") = -1 Or Mid(TrackMskBx.Text, 15, 1).CompareTo("[A-Z][a-z]*") = -1 Then
+                    TrackMskBx.AccessibleName = "Mendatory"
+                Else
+                    TrackMskBx.AccessibleName = "None"
+                End If
+            End If
+
+            'If Split(TreeView1.SelectedNode.FullPath.ToString, "\")(1) = "ايجى ميل" Then
+
+            'Else
+
+            'End If
+
+        Else
+            TrackMskBx.AccessibleName = "None"
+            TrackMskBx.Text = ""
+            TrackMskBx.Enabled = False
+            TrackMskBx.Text = ""
+        End If
+        If DistCmbBx.Text.Length = 0 Then
+            If Mid(MendRw.ItemArray(6), 7, 1) = "Y" Then
+                DistCmbBx.AccessibleName = "Mendatory"
             Else
                 DistCmbBx.AccessibleName = "None"
             End If
-            Cnt_ = 0
+        Else
+            DistCmbBx.AccessibleName = "None"
+        End If
+        Cnt_ = 0
 
-            If Mid(MendRw.ItemArray(6), 8, 1) = "Y" Then
-                AccMskdBx.Enabled = True
+        If Mid(MendRw.ItemArray(6), 8, 1) = "Y" Then
+            AccMskdBx.Enabled = True
 
-                'If CombProdRef.Text <> Mid(Replace(AccMskdBx.Text, " ", ""), 1, CombProdRef.Text.Length) Then
-                '    MsgBox(Replace(Trim(Mid(AccMskdBx.Text, 1, CombProdRef.Text.Length)), " ", ""))
-                'End If
+            'If CombProdRef.Text <> Mid(Replace(AccMskdBx.Text, " ", ""), 1, CombProdRef.Text.Length) Then
+            '    MsgBox(Replace(Trim(Mid(AccMskdBx.Text, 1, CombProdRef.Text.Length)), " ", ""))
+            'End If
 
 
-                If DBNull.Value.Equals(MendRw.ItemArray(7)) = False Then
-                    'Put ProdRef Value in Acc No No Start
-                    AccMskdBx.Text = CombProdRef.Text + Mid(AccMskdBx.Text, CombProdRef.Text.Length + 2, 19 - CombProdRef.Text.Length + 1)
-                End If
-
-                For Cnt_1 = 1 To 19
-                    If Mid(AccMskdBx.Text, Cnt_1, 1).CompareTo("[0-9]*") = 1 Then
-                        Cnt_ += 1
-                    End If
-                Next
-                If Cnt_ < 16 Then
-                    AccMskdBx.AccessibleName = "Mendatory"
-                Else
-                    AccMskdBx.AccessibleName = "None"
-                End If
-            Else
-                AccMskdBx.AccessibleName = "None"
-                AccMskdBx.Text = ""
-                AccMskdBx.Enabled = False
-                AccMskdBx.Text = ""
+            If DBNull.Value.Equals(MendRw.ItemArray(7)) = False Then
+                'Put ProdRef Value in Acc No No Start
+                AccMskdBx.Text = CombProdRef.Text + Mid(AccMskdBx.Text, CombProdRef.Text.Length + 2, 19 - CombProdRef.Text.Length + 1)
             End If
 
-
-
-
-
-
-            If Mid(MendRw.ItemArray(6), 9, 1) = "Y" Then
-                Cnt_ = 0
-                For Cnt_1 = 1 To 2
-                    If Mid(GBTxtBx.Text, Cnt_1, 1).CompareTo("[A-Z][a-z]*") = 1 Then
-                        Cnt_ += 1
-                    End If
-                Next
-                For Cnt_1 = 3 To 16
-                    If Mid(GBTxtBx.Text, Cnt_1, 1).CompareTo("[0-9]*") = 1 Then
-                        Cnt_ += 1
-                    End If
-                Next
-                If Cnt_ < 16 Then
-                    GBTxtBx.AccessibleName = "Mendatory"
-                Else
-                    GBTxtBx.AccessibleName = "None"
+            For Cnt_1 = 1 To 19
+                If Mid(AccMskdBx.Text, Cnt_1, 1).CompareTo("[0-9]*") = 1 Then
+                    Cnt_ += 1
                 End If
+            Next
+            If Cnt_ < 16 Then
+                AccMskdBx.AccessibleName = "Mendatory"
+            Else
+                AccMskdBx.AccessibleName = "None"
+            End If
+        Else
+            AccMskdBx.AccessibleName = "None"
+            AccMskdBx.Text = ""
+            AccMskdBx.Enabled = False
+            AccMskdBx.Text = ""
+        End If
+
+
+
+
+
+
+        If Mid(MendRw.ItemArray(6), 9, 1) = "Y" Then
+            Cnt_ = 0
+            For Cnt_1 = 1 To 2
+                If Mid(GBTxtBx.Text, Cnt_1, 1).CompareTo("[A-Z][a-z]*") = 1 Then
+                    Cnt_ += 1
+                End If
+            Next
+            For Cnt_1 = 3 To 16
+                If Mid(GBTxtBx.Text, Cnt_1, 1).CompareTo("[0-9]*") = 1 Then
+                    Cnt_ += 1
+                End If
+            Next
+            If Cnt_ < 16 Then
+                GBTxtBx.AccessibleName = "Mendatory"
             Else
                 GBTxtBx.AccessibleName = "None"
             End If
-            If Mid(MendRw.ItemArray(6), 10, 1) = "Y" Then
-
-            If IsNothing(Replace(IDTxtBx.Text, " ", "")) = True Then
-                IDTxtBx.AccessibleName = "Mendatory"
+        Else
+            GBTxtBx.AccessibleName = "None"
+        End If
+        If Mid(MendRw.ItemArray(6), 10, 1) = "Y" Then
+            If RadNID.Checked = True Then
+                If IsNothing(Replace(IDTxtBx.Text, " ", "")) = True Then
+                    IDTxtBx.AccessibleName = "Mendatory"
+                Else
+                    If Replace(IDTxtBx.Text, " ", "").Length <> 14 Then
+                        IDTxtBx.AccessibleName = "Mendatory"
+                    Else
+                        IDTxtBx.AccessibleName = "None"
+                    End If
+                End If
             Else
-                If Replace(IDTxtBx.Text, " ", "").Length <> 14 Then
+                If IsNothing(Replace(IDTxtBx.Text, " ", "")) = True Then
                     IDTxtBx.AccessibleName = "Mendatory"
                 Else
                     IDTxtBx.AccessibleName = "None"
                 End If
             End If
-        Else
-                IDTxtBx.AccessibleName = "None"
-            End If
 
-            If AmountTxtBx.Text = "0" Then
-                If Mid(MendRw.ItemArray(6), 11, 1) = "Y" Then
-                    AmountTxtBx.AccessibleName = "Mendatory"
-                Else
-                    AmountTxtBx.AccessibleName = "None"
-                End If
+        Else
+            IDTxtBx.AccessibleName = "None"
+        End If
+
+        If AmountTxtBx.Text = "0" Then
+            If Mid(MendRw.ItemArray(6), 11, 1) = "Y" Then
+                AmountTxtBx.AccessibleName = "Mendatory"
             Else
                 AmountTxtBx.AccessibleName = "None"
             End If
-            If TransDtPicker.Value > Today Then
-                If Mid(MendRw.ItemArray(6), 12, 1) = "Y" Then
-                    TransDtPicker.AccessibleName = "Mendatory"
-                Else
-                    TransDtPicker.AccessibleName = "None"
-                End If
+        Else
+            AmountTxtBx.AccessibleName = "None"
+        End If
+        If TransDtPicker.Value > Today Then
+            If Mid(MendRw.ItemArray(6), 12, 1) = "Y" Then
+                TransDtPicker.AccessibleName = "Mendatory"
             Else
                 TransDtPicker.AccessibleName = "None"
             End If
-            'Else
-            '    For Cnt_ = 0 To 11
-            '        For Each c As Control In TabPage1.Controls
-            '            If c.TabIndex > 0 And c.TabIndex <= 2 Or c.TabIndex = 4 Then
-            '                If c.Text.Length = 0 Then
-            '                    If Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "Y" And c.TabIndex = Cnt_ Then
-            '                        c.AccessibleName = "Mendatory"
-            '                    ElseIf Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "X" And c.TabIndex = Cnt_ Then
-            '                        c.AccessibleName = "None"
-            '                    End If
-            '                Else
-            '                    c.AccessibleName = "None"
-            '                End If
-            '            ElseIf c.TabIndex = 3 Then
-            '                c.AccessibleName = "None"
-            '            End If
-            '        Next c
-            '    Next Cnt_
-            '    If Mid(MendRw.ItemArray(6), 1, 1) = "Y" Then
-            '        Cnt_ = 0
-            '        For Cnt_1 = 1 To 11
-            '            If Mid(Phon1TxtBx.Text, Cnt_1, 1).CompareTo("[0-9]*") = 1 Then
-            '                Cnt_ += 1
-            '            End If
-            '        Next
-            '        If Cnt_ < Phon1TxtBx.TextLength Then
-            '            Phon1TxtBx.AccessibleName = "Mendatory"
-            '        Else
-            '            Phon1TxtBx.AccessibleName = "None"
-            '        End If
-            '    Else
-            '        Phon1TxtBx.AccessibleName = "None"
-            '    End If
-            '    For Each c As Control In FinancialGroup.Controls
-            '        c.AccessibleName = "None"
-            '    Next
-            '    For Each c As Control In PostalGroup.Controls
-            '        c.AccessibleName = "None"
-            '    Next
-            'End If
+        Else
+            TransDtPicker.AccessibleName = "None"
+        End If
+        'Else
+        '    For Cnt_ = 0 To 11
+        '        For Each c As Control In TabPage1.Controls
+        '            If c.TabIndex > 0 And c.TabIndex <= 2 Or c.TabIndex = 4 Then
+        '                If c.Text.Length = 0 Then
+        '                    If Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "Y" And c.TabIndex = Cnt_ Then
+        '                        c.AccessibleName = "Mendatory"
+        '                    ElseIf Mid(MendRw.ItemArray(6), Cnt_ + 1, 1) = "X" And c.TabIndex = Cnt_ Then
+        '                        c.AccessibleName = "None"
+        '                    End If
+        '                Else
+        '                    c.AccessibleName = "None"
+        '                End If
+        '            ElseIf c.TabIndex = 3 Then
+        '                c.AccessibleName = "None"
+        '            End If
+        '        Next c
+        '    Next Cnt_
+        '    If Mid(MendRw.ItemArray(6), 1, 1) = "Y" Then
+        '        Cnt_ = 0
+        '        For Cnt_1 = 1 To 11
+        '            If Mid(Phon1TxtBx.Text, Cnt_1, 1).CompareTo("[0-9]*") = 1 Then
+        '                Cnt_ += 1
+        '            End If
+        '        Next
+        '        If Cnt_ < Phon1TxtBx.TextLength Then
+        '            Phon1TxtBx.AccessibleName = "Mendatory"
+        '        Else
+        '            Phon1TxtBx.AccessibleName = "None"
+        '        End If
+        '    Else
+        '        Phon1TxtBx.AccessibleName = "None"
+        '    End If
+        '    For Each c As Control In FinancialGroup.Controls
+        '        c.AccessibleName = "None"
+        '    Next
+        '    For Each c As Control In PostalGroup.Controls
+        '        c.AccessibleName = "None"
+        '    Next
+        'End If
 Ckeck_:
         Dim TTT As String = ""
         Dim TTTCount As Integer = 0
@@ -733,7 +741,7 @@ Popul_:
 
 
                 Invoke(Sub() LblComp.Text = Comp)
-                Invoke(Sub() LblInq.Text = InQ)
+                Invoke(Sub() LblReq.Text = InQ)
                 Invoke(Sub() LblClsCls.Text = Stat)
                 Invoke(Sub() LblClsOp.Text = RelatedTable.Rows.Count - Stat)
                 Invoke(Sub() WelcomeScreen.StatBrPnlAr.Text = "")
@@ -743,7 +751,7 @@ Popul_:
                 Invoke(Sub() Phon2TxtBx.Text = "")
                 Invoke(Sub() MailTxtBx.Text = "")
                 Invoke(Sub() LblComp.Text = 0)
-                Invoke(Sub() LblInq.Text = 0)
+                Invoke(Sub() LblReq.Text = 0)
                 Invoke(Sub() LblClsOp.Text = 0)
                 Invoke(Sub() LblClsCls.Text = 0)
                 Invoke(Sub() LblDublicate.Text = "Ticket(s) Before :")
@@ -796,7 +804,7 @@ Popul_:
             Phon2TxtBx.Text = ""
             MailTxtBx.Text = ""
             LblComp.Text = 0
-            LblInq.Text = 0
+            LblReq.Text = 0
             LblClsOp.Text = 0
             LblClsCls.Text = 0
             LblDublicate.Text = "Ticket(s) Before :"
@@ -1171,10 +1179,10 @@ Popul_:
             'Else
             If Usr.PUsrCalCntr = True Then
                 Invoke(Sub() sqlComminsert_1.CommandText = "INSERT INTO Tickets(TkID, TkKind, TkFnPrdCd, TkCompSrc, TkClNm, TkClPh, TkClPh1, TkClAdr, TkClNtID, TkShpNo, TkGBNo, TkCardNo, TkAmount, TkTransDate, TkDetails, TkSndrCoun, TkConsigCoun, TkOffNm, TkEmpNm0, TkMail) VALUES (0, '" & TickKind & "','" &
-                                          TreeView1.SelectedNode.Name & "','" & SrcCmbBx.SelectedValue & "','" & Trim(NameTxtBx.Text) & "','" & Phon1TxtBx.Text & "','" & Phon2TxtBx.Text & "','" & AddTxtBx.Text & "','" & IDTxtBx.Text & "','" & Trck & "','" & GBTxtBx.Text & "','" & Trim(Mid(AccMskdBx.Text, 1, 4)) & Trim(Mid(AccMskdBx.Text, 6, 4)) & Trim(Mid(AccMskdBx.Text, 11, 4)) & Trim(Mid(AccMskdBx.Text, 16, 4)) & "','" & AmountTxtBx.Text & "','" & TranDt & "','" & DetailsTxtBx.Text & DubStr & "','" & Trim(Mid(TrackMskBx.Text, 14, 2)) & "','" & DistCmbBx.SelectedValue & "','" & OffCmbBx.SelectedValue & "','" & Usr.PUsrID & "','" & MailTxtBx.Text & "');")
+                                          TreeView1.SelectedNode.Name & "','" & SrcCmbBx.SelectedValue & "','" & Trim(NameTxtBx.Text) & "','" & Phon1TxtBx.Text & "','" & Phon2TxtBx.Text & "','" & AddTxtBx.Text & "','" & Trim(IDTxtBx.Text) & "','" & Trck & "','" & GBTxtBx.Text & "','" & Trim(Mid(AccMskdBx.Text, 1, 4)) & Trim(Mid(AccMskdBx.Text, 6, 4)) & Trim(Mid(AccMskdBx.Text, 11, 4)) & Trim(Mid(AccMskdBx.Text, 16, 4)) & "','" & AmountTxtBx.Text & "','" & TranDt & "','" & Replace(DetailsTxtBx.Text, "'", "$") & DubStr & "','" & Trim(Mid(TrackMskBx.Text, 14, 2)) & "','" & DistCmbBx.SelectedValue & "','" & OffCmbBx.SelectedValue & "','" & Usr.PUsrID & "','" & MailTxtBx.Text & "');")
             Else
                 Invoke(Sub() sqlComminsert_1.CommandText = "INSERT INTO Tickets(TkID, TkKind, TkFnPrdCd, TkCompSrc, TkClNm, TkClPh, TkClPh1, TkClAdr, TkClNtID, TkShpNo, TkGBNo, TkCardNo, TkAmount, TkTransDate, TkDetails, TkSndrCoun, TkConsigCoun, TkOffNm, TkEmpNm0, TkMail, TkEmpNm) VALUES (0, '" & TickKind & "','" &
-                                      TreeView1.SelectedNode.Name & "','" & SrcCmbBx.SelectedValue & "','" & Trim(NameTxtBx.Text) & "','" & Phon1TxtBx.Text & "','" & Phon2TxtBx.Text & "','" & AddTxtBx.Text & "','" & IDTxtBx.Text & "','" & Trck & "','" & GBTxtBx.Text & "','" & Trim(Mid(AccMskdBx.Text, 1, 4)) & Trim(Mid(AccMskdBx.Text, 6, 4)) & Trim(Mid(AccMskdBx.Text, 11, 4)) & Trim(Mid(AccMskdBx.Text, 16, 4)) & "','" & AmountTxtBx.Text & "','" & TranDt & "','" & DetailsTxtBx.Text & DubStr & "','" & Trim(Mid(TrackMskBx.Text, 14, 2)) & "','" & DistCmbBx.SelectedValue & "','" & OffCmbBx.SelectedValue & "','" & Usr.PUsrID & "','" & MailTxtBx.Text & "','" & Usr.PUsrID & "');")
+                                      TreeView1.SelectedNode.Name & "','" & SrcCmbBx.SelectedValue & "','" & Trim(NameTxtBx.Text) & "','" & Phon1TxtBx.Text & "','" & Phon2TxtBx.Text & "','" & AddTxtBx.Text & "','" & Trim(IDTxtBx.Text) & "','" & Trck & "','" & GBTxtBx.Text & "','" & Trim(Mid(AccMskdBx.Text, 1, 4)) & Trim(Mid(AccMskdBx.Text, 6, 4)) & Trim(Mid(AccMskdBx.Text, 11, 4)) & Trim(Mid(AccMskdBx.Text, 16, 4)) & "','" & AmountTxtBx.Text & "','" & TranDt & "','" & Replace(DetailsTxtBx.Text, "'", "$") & DubStr & "','" & Trim(Mid(TrackMskBx.Text, 14, 2)) & "','" & DistCmbBx.SelectedValue & "','" & OffCmbBx.SelectedValue & "','" & Usr.PUsrID & "','" & MailTxtBx.Text & "','" & Usr.PUsrID & "');")
             End If
             sqlComminsert_2.CommandText = "INSERT into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES 
                                                                    ((Select Max(TkSQL) As RelationTkID FROM Tickets where TkEmpNm0 = " & Usr.PUsrID & "),'" & "The Complaint has been Recieved" & "','" & "1" & "','" & "0" & "','" & OsIP() & "','" & Usr.PUsrID & "');"
@@ -1191,7 +1199,6 @@ Popul_:
             sqlComminsert_2.ExecuteNonQuery()
             sqlComminsert_3.ExecuteNonQuery()
             Reader_ = sqlComminsert_4.ExecuteReader
-
             Reader_.Read()
             SqlCuCnt_ = Reader_!MaxID
             If TickKind = 0 Then
@@ -1745,7 +1752,7 @@ Popul_:
         TabControl1.SelectedTab = TabPage3
         TabControl1.TabPages.Remove(TabPage2)
         If StruGrdTk.Tick = 0 Then
-            TabPage3.Text = "Inquiry No.: " & StruGrdTk.TkId
+            TabPage3.Text = "Request No.: " & StruGrdTk.TkId
         Else
             TabPage3.Text = "Complaint No.: " & StruGrdTk.TkId
         End If
@@ -1847,7 +1854,7 @@ Popul_:
         Dim PrdNo As String
         Dim Stat_ As String
         LblDublicate.Text = "Ticket(s) Before :"
-        PrdNo = Trim(Mid(AccMskdBx.Text, 1, 4)) & Trim(Mid(AccMskdBx.Text, 6, 4)) & Trim(Mid(AccMskdBx.Text, 11, 4)) & Trim(Mid(AccMskdBx.Text, 16, 4))
+        PrdNo = Replace(AccMskdBx.Text, " ", "")
         If PrdNo.Length = 16 Then
             If RelatedTable.Rows.Count > 0 Then
                 For PrdRefCount = 0 To RelatedTable.Rows.Count - 1
@@ -1942,10 +1949,8 @@ Popul_:
         IDTxtBx.Text = Mid(IDTxtBx.Text, 1, IDTxtBx.MaxLength)
     End Sub
     Private Sub AccMskdBx_KeyDown(sender As Object, e As KeyEventArgs) Handles AccMskdBx.KeyDown
-        If e.Modifiers = Keys.Control Mod e.KeyCode = Keys.V Then
-            AccMskdBx.Text = Clipboard.GetText()
-        End If
-        AccMskdBx.Text = Mid(AccMskdBx.Text, 1, AccMskdBx.MaxLength)
+
+        'AccMskdBx.Text = Mid(AccMskdBx.Text, 1, AccMskdBx.MaxLength)
     End Sub
     Private Sub GBTxtBx_KeyDown(sender As Object, e As KeyEventArgs) Handles GBTxtBx.KeyDown
         If e.Modifiers = Keys.Control Mod e.KeyCode = Keys.V Then
@@ -2095,5 +2100,20 @@ Popul_:
         Timer1.Stop()
         TimrPhons.Stop()
         TmrActv.Stop()
+    End Sub
+
+    Private Sub AccMskdBx_Enter(sender As Object, e As EventArgs) Handles AccMskdBx.Enter
+
+        If Mid(Clipboard.GetText(), 1, CombProdRef.Text.Length) <> CombProdRef.Text Then
+            MsgInf("رقم الكارت المراد لصقه غير صالح" & vbCrLf & "من فضلك تأكد من رقم الكارت أو قم بتغيير نوع الخدمة")
+            Clipboard.Clear()
+        Else
+            AccMskdBx.Text = Clipboard.GetText()
+        End If
+    End Sub
+
+    Private Sub AccMskdBx_Click(sender As Object, e As EventArgs) Handles AccMskdBx.Click
+        'AccMskdBx.SelectionStart = CombProdRef.Text.Length + 1
+        'AccMskdBx.SelectionLength = AccMskdBx.Text.Length
     End Sub
 End Class

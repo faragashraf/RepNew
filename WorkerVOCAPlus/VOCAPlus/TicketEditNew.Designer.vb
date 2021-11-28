@@ -24,7 +24,7 @@ Partial Class TicketEditNew
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(TicketEditNew))
-        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
+        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Rooting")
         Me.ImgLst = New System.Windows.Forms.ImageList(Me.components)
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
@@ -37,7 +37,6 @@ Partial Class TicketEditNew
         Me.TkAmount = New System.Windows.Forms.TextBox()
         Me.TkCardNo = New System.Windows.Forms.MaskedTextBox()
         Me.TkGBNo = New System.Windows.Forms.MaskedTextBox()
-        Me.TkDetails = New System.Windows.Forms.TextBox()
         Me.CompNm = New System.Windows.Forms.TextBox()
         Me.TkClAdr = New System.Windows.Forms.TextBox()
         Me.SrcNm2TkCompSrc = New System.Windows.Forms.ComboBox()
@@ -123,6 +122,7 @@ Partial Class TicketEditNew
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ECnt_Label = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TkDetails = New System.Windows.Forms.RichTextBox()
         Me.TabPage1.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
         Me.FlowLayoutPanel5.SuspendLayout()
@@ -287,24 +287,6 @@ Partial Class TicketEditNew
         Me.TkGBNo.TabIndex = 8
         Me.TkGBNo.Tag = "رقم أمر الدفع"
         Me.ToolTip1.SetToolTip(Me.TkGBNo, "رقم أمر الدفع مكون من 16 رقم." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Example : GPXXXXXXXXXXXXXX")
-        '
-        'TkDetails
-        '
-        Me.TkDetails.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TkDetails.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.FlowLayoutPanel4.SetFlowBreak(Me.TkDetails, True)
-        Me.TkDetails.Location = New System.Drawing.Point(60, 347)
-        Me.TkDetails.Margin = New System.Windows.Forms.Padding(3, 3, 31, 3)
-        Me.TkDetails.Multiline = True
-        Me.TkDetails.Name = "TkDetails"
-        Me.TkDetails.ReadOnly = True
-        Me.TkDetails.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TkDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TkDetails.Size = New System.Drawing.Size(646, 110)
-        Me.TkDetails.TabIndex = 90
-        Me.TkDetails.TabStop = False
-        Me.TkDetails.Tag = "تفاصيل الشكوى"
-        Me.ToolTip1.SetToolTip(Me.TkDetails, "تفاصيل الشكوى")
         '
         'CompNm
         '
@@ -681,11 +663,11 @@ Partial Class TicketEditNew
         Me.TreeView1.ImageList = Me.ImgLst
         Me.TreeView1.Location = New System.Drawing.Point(3, 48)
         Me.TreeView1.Name = "TreeView1"
-        TreeNode1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        TreeNode1.ForeColor = System.Drawing.Color.Red
-        TreeNode1.Name = "Rooting"
-        TreeNode1.Text = "Rooting"
-        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
+        TreeNode2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        TreeNode2.ForeColor = System.Drawing.Color.Red
+        TreeNode2.Name = "Rooting"
+        TreeNode2.Text = "Rooting"
+        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode2})
         Me.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TreeView1.RightToLeftLayout = True
         Me.TreeView1.SelectedImageIndex = 0
@@ -1446,6 +1428,18 @@ Partial Class TicketEditNew
         Me.TabControl1.TabIndex = 2020
         Me.TabControl1.TabStop = False
         '
+        'TkDetails
+        '
+        Me.FlowLayoutPanel4.SetFlowBreak(Me.TkDetails, True)
+        Me.TkDetails.Location = New System.Drawing.Point(60, 347)
+        Me.TkDetails.Margin = New System.Windows.Forms.Padding(3, 3, 31, 3)
+        Me.TkDetails.Name = "TkDetails"
+        Me.TkDetails.ReadOnly = True
+        Me.TkDetails.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.TkDetails.Size = New System.Drawing.Size(646, 110)
+        Me.TkDetails.TabIndex = 2041
+        Me.TkDetails.Text = ""
+        '
         'TicketEditNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1548,7 +1542,6 @@ Partial Class TicketEditNew
     Friend WithEvents Label5 As Label
     Friend WithEvents CompNm As TextBox
     Friend WithEvents Label17 As Label
-    Friend WithEvents TkDetails As TextBox
     Friend WithEvents FinancialGroup As GroupBox
     Friend WithEvents TkGBNo As MaskedTextBox
     Friend WithEvents TkCardNo As MaskedTextBox
@@ -1585,4 +1578,5 @@ Partial Class TicketEditNew
     Friend WithEvents UsrRealNm As TextBox
     Friend WithEvents Panel5 As Panel
     Friend WithEvents FlowLayoutPanel5 As FlowLayoutPanel
+    Friend WithEvents TkDetails As RichTextBox
 End Class
