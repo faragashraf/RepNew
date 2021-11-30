@@ -4,6 +4,93 @@ Public Class TikDetails
     Dim Fn As New APblicClss.Func
     Private Sub TikDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Point(screenWidth, screenHeight - 120)
+
+    End Sub
+    Private Sub BtnAddEdt_Click(sender As Object, e As EventArgs) Handles BtnAddEdt.Click
+        If Trim(TxtDetailsAdd.Text).Length > 0 Then
+            If InsUpd("update Tickets set TkDetails = '" & TxtDetails.Text & vbCrLf & "تعديل : بواسطة  " & Usr.PUsrRlNm & " في " & ServrTime() & " من خلال IP : " & OsIP() & vbCrLf & TxtDetailsAdd.Text & "' where TkSQL = " & StruGrdTk.Sql, "000&H") = Nothing Then
+                TxtDetails.Text &= vbCrLf & "تعديل : بواسطة  " & Usr.PUsrRlNm & " في " & ServrTime() & " من خلال IP : " & OsIP() & vbCrLf & TxtDetailsAdd.Text
+                SelctSerchTxt(TxtDetails, "تعديل : بواسطة")
+                StruGrdTk.Detls = TxtDetails.Text
+                Fn.GetParntFrm(frm__, gridview_)
+                TxtDetailsAdd.Text = ""
+            Else
+                MsgInf(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
+            End If
+        Else
+            MsgInf("يرجى إدخال نص التعديل")
+        End If
+    End Sub
+    Private Sub TikDetails_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        TimerVisInvs.Stop()
+        Me.Dispose()
+    End Sub
+    Private Sub TimerVisInvs_Tick(sender As Object, e As EventArgs) Handles TimerVisInvs.Tick
+        If LblWDays.Text.Length > 0 Then
+            If LblWDays.Visible = True Then
+                LblWDays.Visible = False
+            Else
+                LblWDays.Visible = True
+            End If
+        End If
+    End Sub
+    Private Sub BtnUpd_Click(sender As Object, e As EventArgs) Handles BtnUpd.Click
+        TikUpdate.Show()
+        TikUpdate.Activate()
+    End Sub
+    Private Sub BtnClos_Click(sender As Object, e As EventArgs) Handles BtnClos.Click
+        Dim Rslt As DialogResult
+        Rslt = MessageBox.Show("سيتم إغلاق الشكوى نهائيا" & vbCrLf & "هل تريد الإستمرار؟", "رسالة معلومات", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading Or MessageBoxOptions.RightAlign)
+        If Rslt = DialogResult.Yes Then
+            BtnClos.Enabled = False
+            Dim WDays As Integer = CalDate(StruGrdTk.DtStrt, Nw, "1036&H")
+            If Fn.InsTrans("update Tickets set TkDtClose = (Select GetDate())" & ", TkDuration = " & WDays & ", TkClsStatus = 1" & ", TkFolw = 1" & " where (TkSQL = " & StruGrdTk.Sql & ");",
+                    "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" &
+                    StruGrdTk.Sql & "','" & "The Complaint has been closed In " & WDays & " Working Days" & "','" & "1" & "','" & "900" & "','" & OsIP() & "','" & Usr.PUsrID & "')", "1037&H") = Nothing Then
+                TcktImg.BackgroundImage = My.Resources.Tckoff
+                StruGrdTk.ClsStat = True
+                BtnClos.BackgroundImage = My.Resources.Tckoff
+                'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                UpdtCurrTbl.DefaultView.RowFilter = "[TkupTkSql]" & " = " & StruGrdTk.Sql
+                Dim UpSql As New List(Of String)
+                For uu = 0 To UpdtCurrTbl.DefaultView.Count - 1
+                    If UpdtCurrTbl.DefaultView(uu).Item("TkupUnread") = False Then
+                        UpSql.Add("TkupSQL = " & UpdtCurrTbl.DefaultView(uu).Item("TkupSQL"))
+                    Else
+                        Exit For
+                    End If
+                Next
+                If UpSql.Count > 0 Then
+                    If Fn.InsUpdate("update TkEvent set TkupUnread = 1, TkupReDt = (Select GetDate())" & " where  " & String.Join(" OR ", UpSql) & ";", "1035&H") = Nothing Then
+                    Else
+                        MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & Errmsg)
+                    End If
+                End If
+                'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                BtnUpd.Visible = False
+                Usr.PUsrClsN -= 1   'to don't recieve notification with Ticket count trnasfered to 
+                Fn.GetParntFrm(frm__, gridview_)
+                Dim GrivVw_ As DataGridView = frm__.Controls(gridview_.Name)
+                If frm__.Name = "TikFolow" Then
+                    If StruGrdTk.ClsStat = True Then
+                        GrivVw_.Rows.RemoveAt(GrivVw_.CurrentRow.Index)
+                    End If
+                End If
+                TikFormat(TickTblMain, UpdtCurrTbl, ProgBar)
+                BtnAddEdt.Enabled = False
+                TxtDetailsAdd.Enabled = False
+                TxtDetailsAdd.Text = "لا يمكن عمل تعديل أو إضافة على تفاصيل شكوى مغلقة"
+                TxtDetailsAdd.TextAlign = HorizontalAlignment.Center
+                TxtDetailsAdd.Font = New Font("Times New Roman", 16, FontStyle.Regular)
+                MsgInf("تم إغلاق الشكوى رقم " & StruGrdTk.TkId & " في عدد " & WDays & " يوم عمل")
+            Else
+                BtnClos.Enabled = True
+                MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
+            End If
+        End If
+    End Sub
+
+    Private Sub TikDetails_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         If StruGrdTk.FlwStat = True Then
             TcktImg.BackgroundImage = My.Resources.Tckoff
             TcktImg.BackgroundImageLayout = ImageLayout.Stretch
@@ -77,82 +164,5 @@ Public Class TikDetails
         TxtTikID.Font = New Font("Times New Roman", 14, FontStyle.Bold)
         TxtTikID.TextAlign = ContentAlignment.BottomCenter
         SelctSerchTxt(TxtDetails, "تعديل : بواسطة")
-    End Sub
-    Private Sub BtnAddEdt_Click(sender As Object, e As EventArgs) Handles BtnAddEdt.Click
-        If Trim(TxtDetailsAdd.Text).Length > 0 Then
-            If InsUpd("update Tickets set TkDetails = '" & TxtDetails.Text & vbCrLf & "تعديل : بواسطة  " & Usr.PUsrRlNm & " في " & ServrTime() & " من خلال IP : " & OsIP() & vbCrLf & TxtDetailsAdd.Text & "' where TkSQL = " & StruGrdTk.Sql, "000&H") = Nothing Then
-                TxtDetails.Text &= vbCrLf & "تعديل : بواسطة  " & Usr.PUsrRlNm & " في " & ServrTime() & " من خلال IP : " & OsIP() & vbCrLf & TxtDetailsAdd.Text
-                SelctSerchTxt(TxtDetails, "تعديل : بواسطة")
-                StruGrdTk.Detls = TxtDetails.Text
-                Fn.GetPrntrFrm(frm__, gridview_)
-                TxtDetailsAdd.Text = ""
-            Else
-                MsgInf(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
-            End If
-        Else
-            MsgInf("يرجى إدخال نص التعديل")
-        End If
-    End Sub
-    Private Sub TikDetails_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        TimerVisInvs.Stop()
-        Me.Dispose()
-    End Sub
-    Private Sub TimerVisInvs_Tick(sender As Object, e As EventArgs) Handles TimerVisInvs.Tick
-        If LblWDays.Text.Length > 0 Then
-            If LblWDays.Visible = True Then
-                LblWDays.Visible = False
-            Else
-                LblWDays.Visible = True
-            End If
-        End If
-    End Sub
-    Private Sub BtnUpd_Click(sender As Object, e As EventArgs) Handles BtnUpd.Click
-        TikUpdate.ShowDialog()
-    End Sub
-    Private Sub BtnClos_Click(sender As Object, e As EventArgs) Handles BtnClos.Click
-        Dim Rslt As DialogResult
-        Rslt = MessageBox.Show("سيتم إغلاق الشكوى نهائيا" & vbCrLf & "هل تريد الإستمرار؟", "رسالة معلومات", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading Or MessageBoxOptions.RightAlign)
-        If Rslt = DialogResult.Yes Then
-            BtnClos.Enabled = False
-            Dim WDays As Integer = CalDate(StruGrdTk.DtStrt, Nw, "1036&H")
-            If Fn.InsTrans("update Tickets set TkDtClose = (Select GetDate())" & ", TkDuration = " & WDays & ", TkClsStatus = 1" & ", TkFolw = 1" & " where (TkSQL = " & StruGrdTk.Sql & ");",
-                    "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" &
-                    StruGrdTk.Sql & "','" & "The Complaint has been closed In " & WDays & " Working Days" & "','" & "1" & "','" & "900" & "','" & OsIP() & "','" & Usr.PUsrID & "')", "1037&H") = Nothing Then
-                TcktImg.BackgroundImage = My.Resources.Tckoff
-                StruGrdTk.ClsStat = True
-                BtnClos.BackgroundImage = My.Resources.Tckoff
-                'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                UpdtCurrTbl.DefaultView.RowFilter = "[TkupTkSql]" & " = " & StruGrdTk.Sql
-                Dim UpSql As New List(Of String)
-                For uu = 0 To UpdtCurrTbl.DefaultView.Count - 1
-                    If UpdtCurrTbl.DefaultView(uu).Item("TkupUnread") = False Then
-                        UpSql.Add("TkupSQL = " & UpdtCurrTbl.DefaultView(uu).Item("TkupSQL"))
-                    Else
-                        Exit For
-                    End If
-                Next
-                If UpSql.Count > 0 Then
-                    If Fn.InsUpdate("update TkEvent set TkupUnread = 1, TkupReDt = (Select GetDate())" & " where  " & String.Join(" OR ", UpSql) & ";", "1035&H") = Nothing Then
-                    Else
-                        MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & Errmsg)
-                    End If
-                End If
-                'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                BtnUpd.Visible = False
-
-                Usr.PUsrClsN -= 1   'to don't recieve notification with Ticket count trnasfered to 
-                Fn.GetPrntrFrm(frm__, gridview_)
-                TikFormat(TickTblMain, UpdtCurrTbl, ProgBar)
-                BtnAddEdt.Enabled = False
-                TxtDetailsAdd.Enabled = False
-                TxtDetailsAdd.Text = "لا يمكن عمل تعديل أو إضافة على تفاصيل شكوى مغلقة"
-                TxtDetailsAdd.TextAlign = HorizontalAlignment.Center
-                TxtDetailsAdd.Font = New Font("Times New Roman", 16, FontStyle.Regular)
-                MsgInf("تم إغلاق الشكوى رقم " & StruGrdTk.TkId & " في عدد " & WDays & " يوم عمل")
-            Else
-                BtnClos.Enabled = True
-                MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
-            End If
-        End If
     End Sub
 End Class

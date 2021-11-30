@@ -1,13 +1,13 @@
 ﻿
 Public Class ReLogin
-    Private Const CP_NOCLOSE_BUTTON As Integer = &H200      ' Disable close button
-    Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim myCp As CreateParams = MyBase.CreateParams
-            myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
-            Return myCp
-        End Get
-    End Property
+    'Private Const CP_NOCLOSE_BUTTON As Integer = &H200      ' Disable close button
+    'Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
+    '    Get
+    '        Dim myCp As CreateParams = MyBase.CreateParams
+    '        myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
+    '        Return myCp
+    '    End Get
+    'End Property
     Private Sub ReLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Cnt_ = 32107 Then
             ExitBtn.Visible = False

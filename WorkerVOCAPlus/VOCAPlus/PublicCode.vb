@@ -532,7 +532,6 @@ End_:
         ProgBar.Visible = False
         Return Errmsg
     End Function
-
     Public Function UpdateFormt(GridUpd As DataGridView, Optional StrTick As String = "") As String
         Errmsg = Nothing
 
@@ -927,9 +926,17 @@ End_:
     Public Sub FrmAllSub(Frm As Form)
         Form_ = Frm
         If Frm.Name <> "Login" Then
-            Frm.Location = New Point(0, 52)
+            If WelcomeScreen.RadioButton1.Checked = True Then
+                Frm.AutoSize = False
+                Frm.Location = New Point(0, 52)
+                Frm.FormBorderStyle = FormBorderStyle.FixedSingle
+            ElseIf WelcomeScreen.RadioButton2.Checked = True Then
+                Frm.AutoSize = True
+                Frm.FormBorderStyle = FormBorderStyle.Sizable
+            End If
+
+            'Frm.StartPosition = FormStartPosition.Manual
         End If
-        'MsgBox(Frm.Name)
         Slctd = False
 #Region "Default ContextMenuStrip"
         DefCmStrip = New ContextMenuStrip
@@ -1003,6 +1010,8 @@ End_:
             End If
             CmstripAsgn(CTRLLst(UU))
         Next
+        'Frm.MaximumSize = Frm.Size
+        'Frm.MinimumSize = Frm.Size
         WelcomeScreen.StatBrPnlAr.Text = ""
     End Sub
     Public Function CmstripAsgn(Cnrol As Control) As Control
@@ -1128,7 +1137,8 @@ End_:
 
             If Fn.TikGVDblClck(sms) = Nothing Then
                 TikUpdate.Text = "تحديثات شكوى رقم " & StruGrdTk.Sql
-                TikUpdate.ShowDialog()
+                TikUpdate.Show()
+                TikUpdate.Activate()
             Else
                 MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & Errmsg)
             End If
@@ -1143,12 +1153,12 @@ End_:
     End Sub
     Private Sub TxtSlctOn_Click(sender As Object, e As EventArgs)
         Dim TxtBox As TextBox = sender
-        If bolyy = False Then
-            bolyy = True
-            TxtBox.SelectAll()
-        Else
-            bolyy = False
-        End If
+        'If bolyy = False Then
+        '    bolyy = True
+        '    TxtBox.SelectAll()
+        'Else
+        '    bolyy = False
+        'End If
     End Sub
     Public Sub GettAttchUpdtesFils()
         LodngFrm.LblMsg.Text += vbCrLf & "جاري تحميل الصورة المرفقات .................."

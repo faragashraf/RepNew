@@ -17,6 +17,7 @@
     '    End Get
     'End Property
     Private Sub SecFrm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim Fn As New APblicClss.Func
         Me.Size = New Point(WelcomeScreen.Width, WelcomeScreen.Height - 110)
         SecTree.Size = New Point((WelcomeScreen.Width - FlowLayoutPanel1.Width) * 0.35, Me.Height - 80)
         'UserTree.Size = New Point(SecTree.Width, Me.Height - 80)
@@ -31,12 +32,12 @@
         UserTable.Rows.Clear()
         tempTable.Rows.Clear()
         tempTable.Columns.Clear()
-        GetTbl("SELECT IntUserCat.UCatId, IntUserCat.UCatNm + N' - ' + Int_user.UsrRealNm + N' - ' +  CAST(Int_user.UsrId as varchar(10))  , Int_user.UsrId, Int_user.UsrCat FROM IntUserCat INNER JOIN Int_user ON IntUserCat.UCatId = Int_user.UsrCat WHERE (Int_user.UsrCat = 0)", tempTable, "0000&H")
+        Fn.GetTblXX("SELECT IntUserCat.UCatId, IntUserCat.UCatNm + N' - ' + Int_user.UsrRealNm + N' - ' +  CAST(Int_user.UsrId as varchar(10))  , Int_user.UsrId, Int_user.UsrCat FROM IntUserCat INNER JOIN Int_user ON IntUserCat.UCatId = Int_user.UsrCat WHERE (Int_user.UsrCat = 0)", tempTable, "0000&H")
         UserTree.Nodes.Add(tempTable(0).Item(0).ToString, tempTable(0).Item(1).ToString, 1, 3)
         UserTree.Nodes(0).ForeColor = Color.Green
         UserTree.Nodes(0).NodeFont = New Font("Times New Roman", 18, FontStyle.Bold)
         '                0  ,    1  ,     2    ,    3   ,     4     as mix name                 ***   
-        GetTbl("Select UsrId, UCatId, UCatIdSub, UCatLvl, UCatNm + N' - ' + UsrRealNm + N' - ' +  CAST(Int_user.UsrId as varchar(10)) AS UsrMix From Int_user RIGHT OUTER Join IntUserCat On UsrCat = UCatId Where (UsrSusp = 0) AND (dbo.IntUserCat.UCatLvl <> 0) Order By UCatIdSub, UsrId", UserTable, "1022&H")
+        Fn.GetTblXX("Select UsrId, UCatId, UCatIdSub, UCatLvl, UCatNm + N' - ' + UsrRealNm + N' - ' +  CAST(Int_user.UsrId as varchar(10)) AS UsrMix From Int_user RIGHT OUTER Join IntUserCat On UsrCat = UCatId Where (UsrSusp = 0) AND (dbo.IntUserCat.UCatLvl <> 0) Order By UCatIdSub, UsrId", UserTable, "1022&H")
         On Error Resume Next
         For Cnt_ = 0 To UserTable.Rows.Count - 1
             TempNode = UserTree.Nodes.Find(UserTable(Cnt_).Item(2).ToString, True)
@@ -50,7 +51,7 @@
         StatusBarPanel1.Text = "تم تحميل عدد " + UserTree.GetNodeCount(True).ToString & " مستخدم"
 
         SwTable.Clear()
-        GetTbl("SELECT SwNm, SwID, SwSer FROM ASwitchboard WHERE (SwType = N'Tab') AND (SwNm <> N'NA') ORDER BY SwID", SwTable, "1022&H")
+        Fn.GetTblXX("SELECT SwNm, SwID, SwSer FROM ASwitchboard WHERE (SwType = N'Tab') AND (SwNm <> N'NA') ORDER BY SwID", SwTable, "1022&H")
 
         For Cnt_ = 0 To SwTable.Rows.Count - 1                      ' fill Tab
             SecTree.Nodes(0).Nodes.Add(SwTable.Rows(Cnt_).Item(1).ToString, SwTable.Rows(Cnt_).Item(1).ToString & "-" & SwTable.Rows(Cnt_).Item(0).ToString)
@@ -69,7 +70,7 @@
         '    SecTree.Nodes(1).Nodes.Add(SwTable.Rows(Cnt_).Item(1).ToString, SwTable.Rows(Cnt_).Item(1).ToString & "-" & SwTable.Rows(Cnt_).Item(0).ToString)
         'Next
         SwTable.Rows.Clear()
-        GetTbl("SELECT SwNm, SwID, SwSer FROM ASwitchboard WHERE  (SwType = N'System') ORDER BY SwID", SwTable, "1022&H")
+        Fn.GetTblXX("SELECT SwNm, SwID, SwSer FROM ASwitchboard WHERE  (SwType = N'System') ORDER BY SwID", SwTable, "1022&H")
         For Cnt_ = 0 To SwTable.Rows.Count - 1                      ' fill System
             SecTree.Nodes(1).Nodes.Add(SwTable.Rows(Cnt_).Item(1).ToString, SwTable.Rows(Cnt_).Item(1).ToString & "-" & SwTable.Rows(Cnt_).Item(0).ToString)
         Next

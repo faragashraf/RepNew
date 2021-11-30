@@ -13,65 +13,7 @@ Public Class TikUpdate
         GridUpdt.Size = New Point(Me.Size.Width, Me.Size.Height - 350)
         FlowLayoutPanel2.Margin = New Padding(BtnSubmt.Margin.Left, BtnSubmt.Margin.Top, (WelcomeScreen.Width / 2) - 450, BtnSubmt.Margin.Bottom)
 
-        CmbEvent.Enabled = True
-        BtnSubmt.Enabled = True
-        If TxtUpdt.TextLength = 0 Then
-            TxtUpdt.ReadOnly = True
-        End If
-        LblMsg.Text = ""
-        'End If
-        CmbEvent.DataSource = UpdateKTable
-        CmbEvent.DisplayMember = "EvNm"
-        CmbEvent.ValueMember = "EvId"
-        CmbEvent.SelectedIndex = -1
-        TxtUpdt.ReadOnly = True
-        UpdtCurrTbl.DefaultView.RowFilter = "[TkupTkSql]" & " = " & StruGrdTk.Sql
-        UpGetSql = New DataTable
-        UpGetSql = UpdtCurrTbl.DefaultView.ToTable()
-        GridUpdt.DataSource = UpGetSql
 
-        'StruGrdTk.LstUpEvId
-        'قراءة جميع التحديثات عند الدخول للمتابع
-        UpGetSql.DefaultView.Sort = "TkupUnread"
-        UpGetSql.DefaultView.RowFilter = String.Empty
-        If StruGrdTk.UserId = Usr.PUsrID Then
-            Dim UpSql As New List(Of String)
-            For uu = 0 To UpGetSql.DefaultView.Count - 1
-                If UpGetSql.DefaultView(uu).Item("TkupUnread") = False Then
-                    UpSql.Add("TkupSQL = " & UpGetSql.DefaultView(uu).Item("TkupSQL"))
-                Else
-                    Exit For
-                End If
-            Next
-            If UpSql.Count > 0 Then
-                If Fn.InsUpdate("update TkEvent set TkupUnread = 1, TkupReDt = (Select GetDate())" & " where  " & String.Join(" OR ", UpSql) & ";", "1035&H") = Nothing Then
-
-                Else
-                    MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & Errmsg)
-                End If
-            End If
-        End If
-        UpGetSql.DefaultView.Sort = "TkupSTime desc"
-        Dim FolwID As String = ""
-        If DBNull.Value.Equals(StruGrdTk.UserId) Then FolwID = "" Else FolwID = StruGrdTk.UserId
-        UpdateFormt(GridUpdt, FolwID)
-
-        If StruGrdTk.Tick = 1 Then
-            Me.Text = "تحديثات شكوى رقم " & StruGrdTk.Sql
-        Else
-            Me.Text = "تحديثات طلب رقم " & StruGrdTk.Sql
-        End If
-
-
-        GettAttchUpdtesFils()
-        CompareDataTables(FTPTable, UpdtCurrTbl, GridUpdt)  ' Compare Attached Table With Updtes Table On SQL Column and File Name
-        If Usr.PUsrUCatLvl < 3 Or Usr.PUsrUCatLvl > 5 Then
-            If StruGrdTk.LstUpEvId = 902 Or StruGrdTk.LstUpEvId = 903 Or StruGrdTk.LstUpEvId = 904 Then
-                TimerEscOpen.Start()
-            Else
-                TimerEscOpen.Stop()
-            End If
-        End If
     End Sub
     Private Sub BtnSubmt_Click(sender As Object, e As EventArgs) Handles BtnSubmt.Click
         Dim EsStr As String = ""
@@ -79,7 +21,7 @@ Public Class TikUpdate
         If CmbEvent.SelectedIndex > -1 Then
             If TxtUpdt.TextLength > 0 Then
                 If Usr.PUsrID = StruGrdTk.UserId Then
-                    If PublicCode.InsTrans("update Tickets set TkFolw = 1, TkEscTyp = 0" & " where (TkSQL = " & StruGrdTk.Sql & ");", "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" & StruGrdTk.Sql & "','" & TxtUpdt.Text & "','" & "1" & "','" & CmbEvent.SelectedValue & "','" & OsIP() & "','" & Usr.PUsrID & "')", "1034&H") = Nothing Then
+                    If PublicCode.InsTrans("update Tickets set TkFolw = 1, TkEscTyp = 0" & " where (TkSQL = " & StruGrdTk.Sql & ");", "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" & StruGrdTk.Sql & "','" & Replace(TxtUpdt.Text, "'", "$") & "','" & "1" & "','" & CmbEvent.SelectedValue & "','" & OsIP() & "','" & Usr.PUsrID & "')", "1034&H") = Nothing Then
                         Done_ = "Done"
                     End If
                 Else
@@ -141,7 +83,7 @@ Public Class TikUpdate
                         CmbEvent.Enabled = True
                         TimerEscOpen.Stop()
                     End If
-                    Fn.GetPrntrFrm(frm__, gridview_)
+                    Fn.GetParntFrm(frm__, gridview_)
                 Else
                     MsgErr("Error : " & Errmsg)
                 End If
@@ -438,6 +380,68 @@ fileStream As Stream = File.Create(Environment.GetFolderPath(Environment.Special
                     End If
                     ContextMenuStrip2.Items(2).Enabled = False
                 End If
+            End If
+        End If
+    End Sub
+
+    Private Sub TikUpdate_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        CmbEvent.Enabled = True
+        BtnSubmt.Enabled = True
+        If TxtUpdt.TextLength = 0 Then
+            TxtUpdt.ReadOnly = True
+        End If
+        LblMsg.Text = ""
+        'End If
+        CmbEvent.DataSource = UpdateKTable
+        CmbEvent.DisplayMember = "EvNm"
+        CmbEvent.ValueMember = "EvId"
+        CmbEvent.SelectedIndex = -1
+        TxtUpdt.ReadOnly = True
+        UpdtCurrTbl.DefaultView.RowFilter = "[TkupTkSql]" & " = " & StruGrdTk.Sql
+        UpGetSql = New DataTable
+        UpGetSql = UpdtCurrTbl.DefaultView.ToTable()
+        GridUpdt.DataSource = UpGetSql
+
+        'StruGrdTk.LstUpEvId
+        'قراءة جميع التحديثات عند الدخول للمتابع
+        UpGetSql.DefaultView.Sort = "TkupUnread"
+        UpGetSql.DefaultView.RowFilter = String.Empty
+        If StruGrdTk.UserId = Usr.PUsrID Then
+            Dim UpSql As New List(Of String)
+            For uu = 0 To UpGetSql.DefaultView.Count - 1
+                If UpGetSql.DefaultView(uu).Item("TkupUnread") = False Then
+                    UpSql.Add("TkupSQL = " & UpGetSql.DefaultView(uu).Item("TkupSQL"))
+                Else
+                    Exit For
+                End If
+            Next
+            If UpSql.Count > 0 Then
+                If Fn.InsUpdate("update TkEvent set TkupUnread = 1, TkupReDt = (Select GetDate())" & " where  " & String.Join(" OR ", UpSql) & ";", "1035&H") = Nothing Then
+
+                Else
+                    MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & Errmsg)
+                End If
+            End If
+        End If
+        UpGetSql.DefaultView.Sort = "TkupSTime desc"
+        Dim FolwID As String = ""
+        If DBNull.Value.Equals(StruGrdTk.UserId) Then FolwID = "" Else FolwID = StruGrdTk.UserId
+        UpdateFormt(GridUpdt, FolwID)
+
+        If StruGrdTk.Tick = 1 Then
+            Me.Text = "تحديثات شكوى رقم " & StruGrdTk.Sql
+        Else
+            Me.Text = "تحديثات طلب رقم " & StruGrdTk.Sql
+        End If
+
+
+        GettAttchUpdtesFils()
+        CompareDataTables(FTPTable, UpdtCurrTbl, GridUpdt)  ' Compare Attached Table With Updtes Table On SQL Column and File Name
+        If Usr.PUsrUCatLvl < 3 Or Usr.PUsrUCatLvl > 5 Then
+            If StruGrdTk.LstUpEvId = 902 Or StruGrdTk.LstUpEvId = 903 Or StruGrdTk.LstUpEvId = 904 Then
+                TimerEscOpen.Start()
+            Else
+                TimerEscOpen.Stop()
             End If
         End If
     End Sub

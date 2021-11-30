@@ -105,7 +105,7 @@ Partial Class TikDetails
         Me.FlowDetls.Location = New System.Drawing.Point(0, 0)
         Me.FlowDetls.Name = "FlowDetls"
         Me.FlowDetls.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.FlowDetls.Size = New System.Drawing.Size(1560, 621)
+        Me.FlowDetls.Size = New System.Drawing.Size(1560, 722)
         Me.FlowDetls.TabIndex = 2121
         '
         'TxtTikID
@@ -113,7 +113,7 @@ Partial Class TikDetails
         Me.FlowDetls.SetFlowBreak(Me.TxtTikID, True)
         Me.TxtTikID.Font = New System.Drawing.Font("Times New Roman", 12.0!)
         Me.TxtTikID.ForeColor = System.Drawing.Color.Red
-        Me.TxtTikID.Location = New System.Drawing.Point(215, 0)
+        Me.TxtTikID.Location = New System.Drawing.Point(232, 0)
         Me.TxtTikID.Name = "TxtTikID"
         Me.TxtTikID.Size = New System.Drawing.Size(1325, 23)
         Me.TxtTikID.TabIndex = 2122
@@ -151,10 +151,10 @@ Partial Class TikDetails
         Me.FlowLayoutPanel1.Controls.Add(Me.GroupBox4)
         Me.FlowLayoutPanel1.Controls.Add(Me.GroupBox3)
         Me.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(838, 26)
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(855, 26)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(702, 598)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(702, 621)
         Me.FlowLayoutPanel1.TabIndex = 2115
         '
         'Label37
@@ -730,23 +730,23 @@ Partial Class TikDetails
         'FlowLayoutPanel2
         '
         Me.FlowLayoutPanel2.AutoScroll = True
-        Me.FlowLayoutPanel2.Controls.Add(Me.Panel3)
         Me.FlowLayoutPanel2.Controls.Add(Me.TcktImg)
         Me.FlowLayoutPanel2.Controls.Add(Me.Panel1)
         Me.FlowLayoutPanel2.Controls.Add(Me.TxtDetailsAdd)
+        Me.FlowLayoutPanel2.Controls.Add(Me.Panel3)
         Me.FlowLayoutPanel2.Controls.Add(Me.Panel2)
         Me.FlowLayoutPanel2.Controls.Add(Me.LblWDays)
         Me.FlowLayoutPanel2.Controls.Add(Me.LblHelp)
         Me.FlowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(205, 26)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(87, 26)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(627, 598)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(762, 621)
         Me.FlowLayoutPanel2.TabIndex = 2116
         '
         'Panel3
         '
         Me.Panel3.Controls.Add(Me.BtnClos)
-        Me.Panel3.Location = New System.Drawing.Point(533, 7)
+        Me.Panel3.Location = New System.Drawing.Point(48, 216)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(3, 7, 3, 3)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(91, 85)
@@ -771,7 +771,7 @@ Partial Class TikDetails
         '
         'TcktImg
         '
-        Me.TcktImg.Location = New System.Drawing.Point(255, 3)
+        Me.TcktImg.Location = New System.Drawing.Point(487, 3)
         Me.TcktImg.Name = "TcktImg"
         Me.TcktImg.Size = New System.Drawing.Size(272, 203)
         Me.TcktImg.TabIndex = 2054
@@ -780,7 +780,7 @@ Partial Class TikDetails
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.BtnUpd)
-        Me.Panel1.Location = New System.Drawing.Point(137, 7)
+        Me.Panel1.Location = New System.Drawing.Point(369, 7)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 7, 3, 3)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(112, 53)
@@ -807,7 +807,7 @@ Partial Class TikDetails
         '
         Me.TxtDetailsAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtDetailsAdd.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.TxtDetailsAdd.Location = New System.Drawing.Point(10, 212)
+        Me.TxtDetailsAdd.Location = New System.Drawing.Point(145, 212)
         Me.TxtDetailsAdd.Multiline = True
         Me.TxtDetailsAdd.Name = "TxtDetailsAdd"
         Me.TxtDetailsAdd.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -820,7 +820,7 @@ Partial Class TikDetails
         'Panel2
         '
         Me.Panel2.Controls.Add(Me.BtnAddEdt)
-        Me.Panel2.Location = New System.Drawing.Point(472, 304)
+        Me.Panel2.Location = New System.Drawing.Point(607, 307)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(152, 51)
         Me.Panel2.TabIndex = 2168
@@ -847,7 +847,7 @@ Partial Class TikDetails
         Me.FlowLayoutPanel2.SetFlowBreak(Me.LblWDays, True)
         Me.LblWDays.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold)
         Me.LblWDays.ForeColor = System.Drawing.Color.Green
-        Me.LblWDays.Location = New System.Drawing.Point(85, 306)
+        Me.LblWDays.Location = New System.Drawing.Point(220, 309)
         Me.LblWDays.Margin = New System.Windows.Forms.Padding(3, 5, 3, 0)
         Me.LblWDays.Name = "LblWDays"
         Me.LblWDays.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -859,7 +859,7 @@ Partial Class TikDetails
         'LblHelp
         '
         Me.LblHelp.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.LblHelp.Location = New System.Drawing.Point(10, 363)
+        Me.LblHelp.Location = New System.Drawing.Point(145, 366)
         Me.LblHelp.Margin = New System.Windows.Forms.Padding(3, 5, 3, 0)
         Me.LblHelp.Name = "LblHelp"
         Me.LblHelp.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -877,7 +877,7 @@ Partial Class TikDetails
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1560, 621)
+        Me.ClientSize = New System.Drawing.Size(1560, 722)
         Me.Controls.Add(Me.FlowDetls)
         Me.Location = New System.Drawing.Point(0, 52)
         Me.Name = "TikDetails"

@@ -7,18 +7,19 @@ Public Class TikSearchNew
     Dim SerchItmTable As DataTable = New DataTable()
     Dim PrdItmTable As DataTable = New DataTable()
     Dim CurrRw As Integer
-    Private Const CP_NOCLOSE_BUTTON As Integer = &H200      ' Disable close button
-    Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim myCp As CreateParams = MyBase.CreateParams
-            myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
-            Return myCp
-        End Get
-    End Property
+    'Private Const CP_NOCLOSE_BUTTON As Integer = &H200      ' Disable close button
+    'Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
+    '    Get
+    '        Dim myCp As CreateParams = MyBase.CreateParams
+    '        myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
+    '        Return myCp
+    '    End Get
+    'End Property
     Private Sub TikSearch_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Point(screenWidth, screenHeight - 120)
         Me.GridTicket.Width = screenWidth - 30
         Me.GridTicket.Height = Me.Height - 180
+        FrmAllSub(Me)
         If PreciFlag = False Then
             Me.Close()
             WelcomeScreen.StatBrPnlAr.Text = "لم يكتمل تحميل جميع البيانات"

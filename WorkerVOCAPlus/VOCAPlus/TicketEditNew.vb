@@ -18,14 +18,14 @@ Public Class TicketEditNew
     Dim UpTxt As String = ""
     Dim ReAssgnSTR As String = ""
     Dim EditTable As DataTable
-    Private Const CP_NOCLOSE_BUTTON As Integer = &H200      ' Disable close button
-    Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim myCp As CreateParams = MyBase.CreateParams
-            myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
-            Return myCp
-        End Get
-    End Property
+    'Private Const CP_NOCLOSE_BUTTON As Integer = &H200      ' Disable close button
+    'Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
+    '    Get
+    '        Dim myCp As CreateParams = MyBase.CreateParams
+    '        myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
+    '        Return myCp
+    '    End Get
+    'End Property
     Private Sub NewTeckit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If PreciFlag = False Then
             Me.Close()
@@ -1079,6 +1079,12 @@ Popul_:
                         UpdtTicket &= " ," & Split(CombBox.Name, "2")(1) & " = '" & CombBox.SelectedValue & "'"
                     End If
                 End If
+            ElseIf TypeOf Ctrol Is DateTimePicker Then
+                Dim Piker As DateTimePicker = Ctrol
+                If Piker.Value <> EditTable.Rows(0).Item("TkTransDate").ToString Then
+                    UpTxt &= vbCrLf & "تم تعديل " & Piker.Tag & " من " & Chr(34) & EditTable.Rows(0).Item(Piker.Name).ToString & Chr(34) & " إلى " & Chr(34) & Piker.Text & Chr(34)
+                End If
+                UpdtTicket &= " ," & Piker.Name & " = '" & Piker.Value & "'"
             End If
         Next
         If ChckReAssign.Checked = True Then

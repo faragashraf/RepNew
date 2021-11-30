@@ -18,13 +18,13 @@ Public Class NewTicket
     Dim TickSubmt As Thread
     Dim TickOffSubmt As Thread
     Private Const CP_NOCLOSE_BUTTON As Integer = &H200      ' Disable close button
-    Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim myCp As CreateParams = MyBase.CreateParams
-            myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
-            Return myCp
-        End Get
-    End Property
+    'Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
+    '    Get
+    '        Dim myCp As CreateParams = MyBase.CreateParams
+    '        myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
+    '        Return myCp
+    '    End Get
+    'End Property
     Private Sub NewTeckit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If PreciFlag = False Then
             Me.Close()

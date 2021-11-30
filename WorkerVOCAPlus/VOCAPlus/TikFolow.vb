@@ -11,18 +11,19 @@ Public Class TikFolow
     Private Const CP_NOCLOSE_BUTTON As Integer = &H200      ' Disable close button
     Dim CurrRw As Integer
     Dim FrmErr As String = Nothing
-    Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim myCp As CreateParams = MyBase.CreateParams
-            myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
-            Return myCp
-        End Get
-    End Property
+    'Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
+    '    Get
+    '        Dim myCp As CreateParams = MyBase.CreateParams
+    '        myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
+    '        Return myCp
+    '    End Get
+    'End Property
     Private Sub FolwTicket_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Point(screenWidth, screenHeight - 120)
         Me.GridTicket.Width = Me.Size.Width - 30
         Me.GridTicket.Height = Me.Size.Height - 215
         GroupBox1.Location = New Point((Me.Size.Width - GroupBox1.Size.Width) / 2, GroupBox1.Location.Y)
+        FrmAllSub(Me)
         If PreciFlag = False Then
             Beep()
             Me.Close()
@@ -202,8 +203,8 @@ Public Class TikFolow
             Invoke(Sub() StatBrPnlAr.Text = "لم ينجح البحث - يرجى المحاولة مرة أخرى")
             Invoke(Sub() Beep())
         End If
-            FltrStr = Nothing
-            Invoke(Sub() BtnRefrsh.Enabled = True)
+        FltrStr = Nothing
+        Invoke(Sub() BtnRefrsh.Enabled = True)
         Invoke(Sub() BtnCncl.Enabled = False)
         Invoke(Sub() GroupBox1.Enabled = True)
         Invoke(Sub() FilterComb.Enabled = True)
@@ -341,7 +342,8 @@ Public Class TikFolow
                 CurrRw = GridTicket.CurrentRow.Index
                 If Fn.TikGVDblClck(GridTicket) = Nothing Then
                     TikDetails.Text = "شكوى رقم " & StruGrdTk.Sql
-                    TikDetails.ShowDialog()
+                    TikDetails.Show()
+                    TikDetails.Activate()
                 Else
                     MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & Errmsg)
                 End If

@@ -7,14 +7,14 @@
     Dim UsrStr As String = ""
     Dim TempData As DataView
     Private ds As DateTime = Now
-    Private Const CP_NOCLOSE_BUTTON As Integer = &H200      ' Disable close button
-    Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim myCp As CreateParams = MyBase.CreateParams
-            myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
-            Return myCp
-        End Get
-    End Property
+    'Private Const CP_NOCLOSE_BUTTON As Integer = &H200      ' Disable close button
+    'Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
+    '    Get
+    '        Dim myCp As CreateParams = MyBase.CreateParams
+    '        myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
+    '        Return myCp
+    '    End Get
+    'End Property
     Private Sub FolwTicket_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If PreciFlag = False Then
             WelcomeScreen.StatBrPnlAr.Text = "لم يكتمل تحميل جميع البيانات"

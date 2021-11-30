@@ -59,17 +59,28 @@ Partial Class TikFolow
         Me.ChckUpdColeg = New System.Windows.Forms.RadioButton()
         Me.ChckUpdOther = New System.Windows.Forms.RadioButton()
         Me.BtnCncl = New System.Windows.Forms.Button()
+        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
         CType(Me.GridTicket, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip2.SuspendLayout()
         CType(Me.StatBrPnlEn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.StatBrPnlAr, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
+        Me.FlowLayoutPanel1.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.FlowLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'ProgressBar1
         '
         Me.ProgressBar1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ProgressBar1.Location = New System.Drawing.Point(807, 12)
+        Me.ProgressBar1.Location = New System.Drawing.Point(75, 15)
+        Me.ProgressBar1.Margin = New System.Windows.Forms.Padding(3, 15, 3, 3)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(309, 23)
         Me.ProgressBar1.TabIndex = 2033
@@ -80,7 +91,8 @@ Partial Class TikFolow
         Me.SerchTxt.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SerchTxt.Font = New System.Drawing.Font("Times New Roman", 12.0!)
         Me.SerchTxt.ForeColor = System.Drawing.Color.Silver
-        Me.SerchTxt.Location = New System.Drawing.Point(466, 10)
+        Me.SerchTxt.Location = New System.Drawing.Point(583, 20)
+        Me.SerchTxt.Margin = New System.Windows.Forms.Padding(3, 20, 3, 3)
         Me.SerchTxt.Name = "SerchTxt"
         Me.SerchTxt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.SerchTxt.Size = New System.Drawing.Size(218, 26)
@@ -93,7 +105,8 @@ Partial Class TikFolow
         Me.FilterComb.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FilterComb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.FilterComb.FormattingEnabled = True
-        Me.FilterComb.Location = New System.Drawing.Point(264, 12)
+        Me.FilterComb.Location = New System.Drawing.Point(807, 20)
+        Me.FilterComb.Margin = New System.Windows.Forms.Padding(3, 20, 3, 3)
         Me.FilterComb.MinimumSize = New System.Drawing.Size(70, 0)
         Me.FilterComb.Name = "FilterComb"
         Me.FilterComb.Size = New System.Drawing.Size(196, 21)
@@ -108,7 +121,7 @@ Partial Class TikFolow
         Me.CloseBtn.FlatAppearance.BorderSize = 0
         Me.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CloseBtn.Font = New System.Drawing.Font("Times New Roman", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CloseBtn.Location = New System.Drawing.Point(28, 589)
+        Me.CloseBtn.Location = New System.Drawing.Point(7, 0)
         Me.CloseBtn.Name = "CloseBtn"
         Me.CloseBtn.Size = New System.Drawing.Size(64, 64)
         Me.CloseBtn.TabIndex = 129
@@ -123,12 +136,12 @@ Partial Class TikFolow
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GridTicket.BackgroundColor = System.Drawing.Color.White
         Me.GridTicket.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.GridTicket.Location = New System.Drawing.Point(12, 56)
+        Me.GridTicket.Location = New System.Drawing.Point(329, 63)
         Me.GridTicket.MultiSelect = False
         Me.GridTicket.Name = "GridTicket"
         Me.GridTicket.ReadOnly = True
         Me.GridTicket.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.GridTicket.Size = New System.Drawing.Size(1326, 463)
+        Me.GridTicket.Size = New System.Drawing.Size(1169, 318)
         Me.GridTicket.TabIndex = 123
         '
         'ContextMenuStrip2
@@ -205,7 +218,7 @@ Partial Class TikFolow
         '
         Me.BtnRefrsh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnRefrsh.BackgroundImage = Global.VOCAPlus.My.Resources.Resources.recgreen
-        Me.BtnRefrsh.Location = New System.Drawing.Point(700, 9)
+        Me.BtnRefrsh.Location = New System.Drawing.Point(5, 4)
         Me.BtnRefrsh.Name = "BtnRefrsh"
         Me.BtnRefrsh.Size = New System.Drawing.Size(90, 29)
         Me.BtnRefrsh.TabIndex = 2034
@@ -237,7 +250,7 @@ Partial Class TikFolow
         Me.GroupBox1.Controls.Add(Me.ChckUpdColeg)
         Me.GroupBox1.Controls.Add(Me.ChckUpdOther)
         Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 16.0!)
-        Me.GroupBox1.Location = New System.Drawing.Point(291, 578)
+        Me.GroupBox1.Location = New System.Drawing.Point(495, 387)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(1003, 83)
         Me.GroupBox1.TabIndex = 2093
@@ -501,7 +514,7 @@ Partial Class TikFolow
         Me.BtnCncl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnCncl.FlatAppearance.BorderSize = 0
         Me.BtnCncl.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.BtnCncl.Location = New System.Drawing.Point(1135, 7)
+        Me.BtnCncl.Location = New System.Drawing.Point(4, 1)
         Me.BtnCncl.Name = "BtnCncl"
         Me.BtnCncl.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.BtnCncl.Size = New System.Drawing.Size(69, 34)
@@ -509,24 +522,66 @@ Partial Class TikFolow
         Me.BtnCncl.Text = "Cancel"
         Me.BtnCncl.UseVisualStyleBackColor = True
         '
+        'FlowLayoutPanel1
+        '
+        Me.FlowLayoutPanel1.AutoScroll = True
+        Me.FlowLayoutPanel1.Controls.Add(Me.FlowLayoutPanel2)
+        Me.FlowLayoutPanel1.Controls.Add(Me.GridTicket)
+        Me.FlowLayoutPanel1.Controls.Add(Me.GroupBox1)
+        Me.FlowLayoutPanel1.Controls.Add(Me.Panel3)
+        Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1501, 663)
+        Me.FlowLayoutPanel1.TabIndex = 2170
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.BtnRefrsh)
+        Me.Panel1.Location = New System.Drawing.Point(474, 15)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 15, 3, 3)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(103, 37)
+        Me.Panel1.TabIndex = 2170
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.BtnCncl)
+        Me.Panel2.Location = New System.Drawing.Point(390, 15)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 15, 3, 3)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(78, 37)
+        Me.Panel2.TabIndex = 2171
+        '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.CloseBtn)
+        Me.Panel3.Location = New System.Drawing.Point(408, 387)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(81, 65)
+        Me.Panel3.TabIndex = 2172
+        '
+        'FlowLayoutPanel2
+        '
+        Me.FlowLayoutPanel2.Controls.Add(Me.FilterComb)
+        Me.FlowLayoutPanel2.Controls.Add(Me.SerchTxt)
+        Me.FlowLayoutPanel2.Controls.Add(Me.Panel1)
+        Me.FlowLayoutPanel2.Controls.Add(Me.Panel2)
+        Me.FlowLayoutPanel2.Controls.Add(Me.ProgressBar1)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(245, 3)
+        Me.FlowLayoutPanel2.Margin = New System.Windows.Forms.Padding(250, 3, 3, 3)
+        Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(1006, 54)
+        Me.FlowLayoutPanel2.TabIndex = 2173
+        '
         'TikFolow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1501, 696)
-        Me.Controls.Add(Me.BtnCncl)
-        Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.BtnRefrsh)
-        Me.Controls.Add(Me.CloseBtn)
-        Me.Controls.Add(Me.ProgressBar1)
-        Me.Controls.Add(Me.GridTicket)
-        Me.Controls.Add(Me.SerchTxt)
+        Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.StatusBar1)
-        Me.Controls.Add(Me.FilterComb)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.MinimumSize = New System.Drawing.Size(1364, 660)
         Me.Name = "TikFolow"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.RightToLeftLayout = True
@@ -537,8 +592,13 @@ Partial Class TikFolow
         CType(Me.StatBrPnlEn, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.StatBrPnlAr, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
+        Me.FlowLayoutPanel1.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
+        Me.FlowLayoutPanel2.ResumeLayout(False)
+        Me.FlowLayoutPanel2.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents CloseBtn As Button
@@ -577,4 +637,9 @@ Partial Class TikFolow
     Friend WithEvents ChckUpdColeg As RadioButton
     Friend WithEvents ChckUpdOther As RadioButton
     Friend WithEvents BtnCncl As Button
+    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
 End Class

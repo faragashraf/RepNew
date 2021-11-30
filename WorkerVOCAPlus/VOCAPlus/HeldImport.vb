@@ -105,6 +105,8 @@ Public Class HeldImport
                 For Phcnt = 0 To Len(DataGridView1.Rows(Cnt_).Cells(10).Value) - 1
                     If IsNumeric(Mid(DataGridView1.Rows(Cnt_).Cells(10).Value, Phcnt + 1, 1)) Then
                         PhCount += 1
+                    Else
+                        'MsgBox("XXXXXXXXXXXXXXXXXXXXX")
                     End If
                 Next Phcnt
                 If PhCount <> Len(DataGridView1.Rows(Cnt_).Cells(10).Value) Then

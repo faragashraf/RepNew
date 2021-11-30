@@ -8,14 +8,14 @@ Public Class TotView
     Dim UsrStr As String = ""
     Dim TempData As DataView
     Dim RwCnt As Integer
-    Private Const CP_NOCLOSE_BUTTON As Integer = &H200      ' Disable close button
-    Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim myCp As CreateParams = MyBase.CreateParams
-            myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
-            Return myCp
-        End Get
-    End Property
+    'Private Const CP_NOCLOSE_BUTTON As Integer = &H200      ' Disable close button
+    'Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
+    '    Get
+    '        Dim myCp As CreateParams = MyBase.CreateParams
+    '        myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
+    '        Return myCp
+    '    End Get
+    'End Property
     Private Sub TotView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UsrStr = ""
         UserTable.Rows.Clear()
@@ -26,7 +26,9 @@ Public Class TotView
         End If
         UserTree.ImageList = ImgLst
         If Mid(Usr.PUsrLvl, 17, 1) = "A" Then
-            UserTree.Nodes.Add("2", 32006 & " - " & "قطاع خدمة العملاء" & " - " & "عبد العزيز حسين", 1, 3)
+            Dim Fn As New APblicClss.Func
+            Fn.GetTblXX("SELECT IntUserCat.UCatId, IntUserCat.UCatNm + N' - ' + Int_user.UsrRealNm + N' - ' +  CAST(Int_user.UsrId as varchar(10))  , Int_user.UsrId, Int_user.UsrCat FROM IntUserCat INNER JOIN Int_user ON IntUserCat.UCatId = Int_user.UsrCat WHERE (Int_user.UsrCat = 0)", tempTable, "0000&H")
+            UserTree.Nodes.Add(tempTable(0).Item(0).ToString, tempTable(0).Item(1).ToString, 1, 3)
         Else
             UserTree.Nodes.Add(Usr.PUsrCat.ToString, Usr.PUsrID & " - " & Usr.PUsrCatNm & " - " & Usr.PUsrRlNm, 1, 3)
         End If

@@ -1,13 +1,13 @@
 ﻿Public Class ReopnComp
     Private ReopnTable As DataTable = New DataTable
-    Private Const CP_NOCLOSE_BUTTON As Integer = &H200      ' Disable close button
-    Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim myCp As CreateParams = MyBase.CreateParams
-            myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
-            Return myCp
-        End Get
-    End Property
+    'Private Const CP_NOCLOSE_BUTTON As Integer = &H200      ' Disable close button
+    'Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
+    '    Get
+    '        Dim myCp As CreateParams = MyBase.CreateParams
+    '        myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
+    '        Return myCp
+    '    End Get
+    'End Property
     Private Sub ReopnComp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         MyTeam(Usr.PUsrCat, Usr.PUsrID, "TkEmpNm", True)
         BtnGet.Tag = "تحميل"
@@ -52,27 +52,20 @@
                         TxtProd.Text = ReopnTable(0).Item(6).ToString
                         TxtComp.Text = ReopnTable(0).Item(7).ToString
                         TxtFollNm.Text = ReopnTable(0).Item(8).ToString
-                        If ReopnTable(0).Item(3) = 0 Then
-                            LblMsg.Text = "لا يمكن إعادة فتح الاستفسار"
-                            LblMsg.ForeColor = Color.Red
-                            Beep()
+                        If ReopnTable(0).Item(1) = True Then
+                            TcktImg.BackgroundImage = My.Resources.Tckoff
+                            BtnGet.Tag = "فتح"
+                            BtnGet.BackgroundImage = My.Resources.CpOpen
+                            LblMsg.Text = ""
                         Else
-                            If ReopnTable(0).Item(1) = True Then
-                                TcktImg.BackgroundImage = My.Resources.Tckoff
-                                BtnGet.Tag = "فتح"
-                                BtnGet.BackgroundImage = My.Resources.CpOpen
-                                LblMsg.Text = ""
-                            Else
-                                TcktImg.BackgroundImage = My.Resources.Tckon
+                            TcktImg.BackgroundImage = My.Resources.Tckon
                                 BtnGet.Tag = "تحميل"
                                 LblMsg.Text = "الشكوى رقم " & TxtCompId.Text & " مفتوحة بالفعل"
                                 LblMsg.ForeColor = Color.Red
                                 Beep()
                             End If
-
-                        End If
-                    Else
-                        ReopnTable.Rows.Clear()
+                            Else
+                            ReopnTable.Rows.Clear()
                         If GetTbl("SELECT TkSQL, TkClsStatus, TkDtStart, TkKind, TkID, TkClNm, PrdNm, CompNm, UsrRealNm, TkClPh, TkDetails FROM TicketsAll WHERE (TkID = " & TxtCompId.Text & ") AND (TkClsStatus = 1)", ReopnTable, "1030&H") = Nothing Then
                             If ReopnTable.Rows.Count > 0 Then
                                 LblMsg.Text = "الشكوى لا تخص فريقك - من فضلك تأكد من الرقم الذي قمت بإدخاله"

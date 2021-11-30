@@ -25,6 +25,7 @@ Public Class WelcomeScreen
     Dim Grid2 As New DataGridView
     'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Private Sub WelcomeScreen_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        FrmAllSub(Me)
         If PreciFlag = True Then
             PubVerLbl.Text = "IP: " & OsIP()
             'AssVerLbl.Text = "Assembly Ver. : " & My.Application.Info.Version.ToString
@@ -83,8 +84,10 @@ Public Class WelcomeScreen
         'Invoke(Sub() LodngFrm.Dispose())
         On Error Resume Next
         For Each f As Form In My.Application.OpenForms
-            f.Close()
-            f.Dispose()
+            If f.Name <> "WelcomeScreen" Then
+                f.Close()
+                f.Dispose()
+            End If
         Next
         Me.Close()
         Application.Exit()
@@ -364,10 +367,10 @@ Public Class WelcomeScreen
                End Sub)
     End Sub
     Private Sub WelcomeScreen_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
-        FrmAllSub(Me)
+        'FrmAllSub(Me)
         TimerOp.Start()
 
-        Me.Size = New Point(screenWidth, screenHeight)
+        'Me.Size = New Point(screenWidth, screenHeight)
         If System.Text.Encoding.Default.HeaderName <> "windows-1256" Then
             GroupBox1.Visible = False
             GrpCounters.Visible = False
@@ -415,7 +418,7 @@ Public Class WelcomeScreen
                 ConterWidt = 0
             End If
             DbStat.Margin = New Padding(DbStat.Margin.Left, DbStat.Margin.Top, FlowLayoutPanel1.ClientRectangle.Width - (DbStat.Width + DbStat.Margin.Left), DbStat.Margin.Bottom)
-            PictureBox1.Margin = New Padding(PictureBox1.Margin.Left, PictureBox1.Margin.Top, FlowLayoutPanel1.ClientRectangle.Width - (GroupBox1.Width + GroupBox1.Margin.Right + GroupBox1.Margin.Left + ConterWidt + PictureBox1.Width + PictureBox1.Margin.Left), PictureBox1.Margin.Bottom)
+            PictureBox1.Margin = New Padding(PictureBox1.Margin.Left, PictureBox1.Margin.Top, FlowLayoutPanel1.ClientRectangle.Width - (GroupBox1.Width + GroupBox1.Margin.Right + GroupBox1.Margin.Left + ConterWidt + PictureBox1.Width + PictureBox1.Margin.Left + FlowLayoutPanel2.Width + FlowLayoutPanel2.Margin.Left + 20), PictureBox1.Margin.Bottom)
             LblUsrRNm.Margin = New Padding(LblUsrRNm.Margin.Left, LblUsrRNm.Margin.Top, FlowLayoutPanel1.ClientRectangle.Width - (LblUsrRNm.Width + LblUsrRNm.Margin.Left), LblUsrRNm.Margin.Bottom)
             LblSrvrNm.Margin = New Padding(LblSrvrNm.Margin.Left, LblSrvrNm.Margin.Top, FlowLayoutPanel1.ClientRectangle.Width - (LblSrvrNm.Width + LblUsrRNm.Margin.Left), LblSrvrNm.Margin.Bottom)
             LblLstSeen.Margin = New Padding(LblLstSeen.Margin.Left, LblLstSeen.Margin.Top, FlowLayoutPanel1.ClientRectangle.Width - (LblLstSeen.Width + LblUsrRNm.Margin.Left), LblLstSeen.Margin.Bottom)

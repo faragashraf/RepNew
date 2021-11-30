@@ -24,9 +24,9 @@ Partial Class SecFrm
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SecFrm))
-        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Tab")
-        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("System Varible")
-        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Free Button")
+        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Tab")
+        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("System Varible")
+        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Free Button")
         Me.ImgLst = New System.Windows.Forms.ImageList(Me.components)
         Me.StatusBar1 = New System.Windows.Forms.StatusBar()
         Me.StatusBarPanel2 = New System.Windows.Forms.StatusBarPanel()
@@ -49,6 +49,8 @@ Partial Class SecFrm
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         CType(Me.StatusBarPanel2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.StatusBarPanel1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FlowLayoutPanel1.SuspendLayout()
@@ -57,6 +59,8 @@ Partial Class SecFrm
         Me.Panel4.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.FlowLayoutPanel2.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ImgLst
@@ -77,7 +81,7 @@ Partial Class SecFrm
         Me.StatusBar1.Panels.AddRange(New System.Windows.Forms.StatusBarPanel() {Me.StatusBarPanel2, Me.StatusBarPanel1})
         Me.StatusBar1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.StatusBar1.ShowPanels = True
-        Me.StatusBar1.Size = New System.Drawing.Size(1232, 29)
+        Me.StatusBar1.Size = New System.Drawing.Size(1259, 29)
         Me.StatusBar1.SizingGrip = False
         Me.StatusBar1.TabIndex = 127
         '
@@ -85,28 +89,28 @@ Partial Class SecFrm
         '
         Me.StatusBarPanel2.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring
         Me.StatusBarPanel2.Name = "StatusBarPanel2"
-        Me.StatusBarPanel2.Width = 616
+        Me.StatusBarPanel2.Width = 629
         '
         'StatusBarPanel1
         '
         Me.StatusBarPanel1.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring
         Me.StatusBarPanel1.Name = "StatusBarPanel1"
-        Me.StatusBarPanel1.Width = 616
+        Me.StatusBarPanel1.Width = 629
         '
         'SecTree
         '
         Me.SecTree.CheckBoxes = True
         Me.SecTree.Font = New System.Drawing.Font("Times New Roman", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SecTree.Location = New System.Drawing.Point(260, 0)
+        Me.SecTree.Location = New System.Drawing.Point(287, 0)
         Me.SecTree.Margin = New System.Windows.Forms.Padding(0)
         Me.SecTree.Name = "SecTree"
-        TreeNode1.Name = "Tab"
-        TreeNode1.Text = "Tab"
-        TreeNode2.Name = "SystemVarible"
-        TreeNode2.Text = "System Varible"
-        TreeNode3.Name = "FreeButton"
-        TreeNode3.Text = "Free Button"
-        Me.SecTree.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3})
+        TreeNode10.Name = "Tab"
+        TreeNode10.Text = "Tab"
+        TreeNode11.Name = "SystemVarible"
+        TreeNode11.Text = "System Varible"
+        TreeNode12.Name = "FreeButton"
+        TreeNode12.Text = "Free Button"
+        Me.SecTree.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode10, TreeNode11, TreeNode12})
         Me.SecTree.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.SecTree.RightToLeftLayout = True
         Me.SecTree.Size = New System.Drawing.Size(421, 586)
@@ -133,7 +137,7 @@ Partial Class SecFrm
         Me.UserTree.BackColor = System.Drawing.SystemColors.Window
         Me.UserTree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.UserTree.Font = New System.Drawing.Font("Times New Roman", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.UserTree.Location = New System.Drawing.Point(988, 0)
+        Me.UserTree.Location = New System.Drawing.Point(1015, 0)
         Me.UserTree.Margin = New System.Windows.Forms.Padding(0)
         Me.UserTree.Name = "UserTree"
         Me.UserTree.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -195,7 +199,7 @@ Partial Class SecFrm
         Me.BtnNxt.FlatAppearance.BorderSize = 0
         Me.BtnNxt.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BtnNxt.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.BtnNxt.Location = New System.Drawing.Point(230, 141)
+        Me.BtnNxt.Location = New System.Drawing.Point(9, 6)
         Me.BtnNxt.Margin = New System.Windows.Forms.Padding(3, 3, 45, 3)
         Me.BtnNxt.Name = "BtnNxt"
         Me.BtnNxt.Size = New System.Drawing.Size(32, 32)
@@ -208,9 +212,8 @@ Partial Class SecFrm
         Me.BtnPrvs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnPrvs.FlatAppearance.BorderSize = 0
         Me.BtnPrvs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.FlowLayoutPanel1.SetFlowBreak(Me.BtnPrvs, True)
         Me.BtnPrvs.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.BtnPrvs.Location = New System.Drawing.Point(86, 141)
+        Me.BtnPrvs.Location = New System.Drawing.Point(9, 6)
         Me.BtnPrvs.Name = "BtnPrvs"
         Me.BtnPrvs.Size = New System.Drawing.Size(32, 32)
         Me.BtnPrvs.TabIndex = 138
@@ -219,10 +222,10 @@ Partial Class SecFrm
         'LblCnt
         '
         Me.LblCnt.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.LblCnt.Location = New System.Drawing.Point(124, 145)
+        Me.LblCnt.Location = New System.Drawing.Point(75, 145)
         Me.LblCnt.Margin = New System.Windows.Forms.Padding(3, 7, 3, 0)
         Me.LblCnt.Name = "LblCnt"
-        Me.LblCnt.Size = New System.Drawing.Size(100, 23)
+        Me.LblCnt.Size = New System.Drawing.Size(181, 31)
         Me.LblCnt.TabIndex = 139
         Me.LblCnt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -231,7 +234,7 @@ Partial Class SecFrm
         Me.FlowLayoutPanel1.SetFlowBreak(Me.Label4, True)
         Me.Label4.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.Label4.ForeColor = System.Drawing.Color.Blue
-        Me.Label4.Location = New System.Drawing.Point(30, 179)
+        Me.Label4.Location = New System.Drawing.Point(30, 185)
         Me.Label4.Margin = New System.Windows.Forms.Padding(3, 3, 20, 3)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(257, 23)
@@ -258,7 +261,7 @@ Partial Class SecFrm
         Me.FlowLayoutPanel1.SetFlowBreak(Me.LblSecLvl, True)
         Me.LblSecLvl.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.LblSecLvl.ForeColor = System.Drawing.Color.Blue
-        Me.LblSecLvl.Location = New System.Drawing.Point(30, 208)
+        Me.LblSecLvl.Location = New System.Drawing.Point(30, 214)
         Me.LblSecLvl.Margin = New System.Windows.Forms.Padding(3, 3, 20, 3)
         Me.LblSecLvl.Name = "LblSecLvl"
         Me.LblSecLvl.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -272,15 +275,15 @@ Partial Class SecFrm
         Me.FlowLayoutPanel1.Controls.Add(Me.Panel6)
         Me.FlowLayoutPanel1.Controls.Add(Me.TreeSrchBx)
         Me.FlowLayoutPanel1.Controls.Add(Me.Panel3)
-        Me.FlowLayoutPanel1.Controls.Add(Me.BtnNxt)
+        Me.FlowLayoutPanel1.Controls.Add(Me.Panel2)
         Me.FlowLayoutPanel1.Controls.Add(Me.LblCnt)
-        Me.FlowLayoutPanel1.Controls.Add(Me.BtnPrvs)
+        Me.FlowLayoutPanel1.Controls.Add(Me.Panel1)
         Me.FlowLayoutPanel1.Controls.Add(Me.Label4)
         Me.FlowLayoutPanel1.Controls.Add(Me.LblSecLvl)
         Me.FlowLayoutPanel1.Controls.Add(Me.Panel4)
         Me.FlowLayoutPanel1.Controls.Add(Me.Panel5)
         Me.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(681, 0)
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(708, 0)
         Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.Size = New System.Drawing.Size(307, 586)
@@ -311,7 +314,7 @@ Partial Class SecFrm
         '
         Me.Panel4.BackColor = System.Drawing.Color.Transparent
         Me.Panel4.Controls.Add(Me.BtnCls)
-        Me.Panel4.Location = New System.Drawing.Point(162, 237)
+        Me.Panel4.Location = New System.Drawing.Point(162, 243)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(3, 3, 30, 3)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(115, 47)
@@ -321,7 +324,7 @@ Partial Class SecFrm
         '
         Me.Panel5.BackColor = System.Drawing.Color.Transparent
         Me.Panel5.Controls.Add(Me.BtnAply)
-        Me.Panel5.Location = New System.Drawing.Point(29, 237)
+        Me.Panel5.Location = New System.Drawing.Point(29, 243)
         Me.Panel5.Margin = New System.Windows.Forms.Padding(3, 3, 20, 3)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(110, 47)
@@ -337,15 +340,35 @@ Partial Class SecFrm
         Me.FlowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
         Me.FlowLayoutPanel2.Location = New System.Drawing.Point(0, 0)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(1232, 595)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(1259, 595)
         Me.FlowLayoutPanel2.TabIndex = 2065
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.Transparent
+        Me.Panel2.Controls.Add(Me.BtnNxt)
+        Me.Panel2.Location = New System.Drawing.Point(259, 138)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(48, 44)
+        Me.Panel2.TabIndex = 2078
+        '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.Transparent
+        Me.Panel1.Controls.Add(Me.BtnPrvs)
+        Me.Panel1.Location = New System.Drawing.Point(24, 138)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(48, 44)
+        Me.Panel1.TabIndex = 2079
         '
         'SecFrm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1232, 624)
+        Me.ClientSize = New System.Drawing.Size(1259, 624)
         Me.Controls.Add(Me.FlowLayoutPanel2)
         Me.Controls.Add(Me.StatusBar1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -353,7 +376,7 @@ Partial Class SecFrm
         Me.Name = "SecFrm"
         Me.RightToLeftLayout = True
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
-        Me.Text = "Security Setup"
+        Me.Text = "تعديل صلاحيات المستخدمين"
         CType(Me.StatusBarPanel2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.StatusBarPanel1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FlowLayoutPanel1.ResumeLayout(False)
@@ -363,6 +386,8 @@ Partial Class SecFrm
         Me.Panel4.ResumeLayout(False)
         Me.Panel5.ResumeLayout(False)
         Me.FlowLayoutPanel2.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -388,4 +413,6 @@ Partial Class SecFrm
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Panel6 As Panel
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Panel1 As Panel
 End Class

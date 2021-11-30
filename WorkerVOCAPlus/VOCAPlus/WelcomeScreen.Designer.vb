@@ -69,12 +69,17 @@ Partial Class WelcomeScreen
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label0 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.CNTXMNUPic = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.UploadYourPictureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.LblSrvrNm = New System.Windows.Forms.Label()
         Me.TimrFlsh = New System.Windows.Forms.Timer(Me.components)
         Me.Label9 = New System.Windows.Forms.Label()
         Me.LblLanguage = New System.Windows.Forms.Label()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.LblLstSeen = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -82,19 +87,18 @@ Partial Class WelcomeScreen
         Me.TimerColctLog = New System.Windows.Forms.Timer(Me.components)
         Me.WChckConn = New System.ComponentModel.BackgroundWorker()
         Me.WkrTikCount = New System.ComponentModel.BackgroundWorker()
-        Me.CNTXMNUPic = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.UploadYourPictureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.StatBrPnlEn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.StatBrPnlAr, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DbStat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GrpCounters.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.CNTXMNUPic.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
+        Me.FlowLayoutPanel2.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        Me.CNTXMNUPic.SuspendLayout()
         Me.SuspendLayout()
         '
         'TimerOp
@@ -191,7 +195,7 @@ Partial Class WelcomeScreen
         Me.FlowLayoutPanel1.SetFlowBreak(Me.LblUsrIP, True)
         Me.LblUsrIP.Font = New System.Drawing.Font("Times New Roman", 9.0!)
         Me.LblUsrIP.ForeColor = System.Drawing.Color.Red
-        Me.LblUsrIP.Location = New System.Drawing.Point(1010, 513)
+        Me.LblUsrIP.Location = New System.Drawing.Point(993, 762)
         Me.LblUsrIP.Margin = New System.Windows.Forms.Padding(3, 0, 10, 0)
         Me.LblUsrIP.Name = "LblUsrIP"
         Me.LblUsrIP.Size = New System.Drawing.Size(297, 20)
@@ -206,7 +210,7 @@ Partial Class WelcomeScreen
         Me.FlowLayoutPanel1.SetFlowBreak(Me.PubVerLbl, True)
         Me.PubVerLbl.Font = New System.Drawing.Font("Times New Roman", 9.0!)
         Me.PubVerLbl.ForeColor = System.Drawing.Color.Red
-        Me.PubVerLbl.Location = New System.Drawing.Point(1010, 533)
+        Me.PubVerLbl.Location = New System.Drawing.Point(993, 782)
         Me.PubVerLbl.Margin = New System.Windows.Forms.Padding(3, 0, 10, 0)
         Me.PubVerLbl.Name = "PubVerLbl"
         Me.PubVerLbl.Size = New System.Drawing.Size(297, 20)
@@ -222,7 +226,7 @@ Partial Class WelcomeScreen
         Me.LblUsrRNm.Font = New System.Drawing.Font("Times New Roman", 14.0!, System.Drawing.FontStyle.Bold)
         Me.LblUsrRNm.ForeColor = System.Drawing.Color.Blue
         Me.LblUsrRNm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.LblUsrRNm.Location = New System.Drawing.Point(28, 296)
+        Me.LblUsrRNm.Location = New System.Drawing.Point(11, 545)
         Me.LblUsrRNm.Margin = New System.Windows.Forms.Padding(3, 3, 1000, 3)
         Me.LblUsrRNm.Name = "LblUsrRNm"
         Me.LblUsrRNm.Size = New System.Drawing.Size(289, 20)
@@ -236,7 +240,7 @@ Partial Class WelcomeScreen
         Me.DbStat.BackgroundImage = Global.VOCAPlus.My.Resources.Resources.DBOff
         Me.DbStat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.FlowLayoutPanel1.SetFlowBreak(Me.DbStat, True)
-        Me.DbStat.Location = New System.Drawing.Point(1281, 3)
+        Me.DbStat.Location = New System.Drawing.Point(1264, 3)
         Me.DbStat.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
         Me.DbStat.Name = "DbStat"
         Me.DbStat.Size = New System.Drawing.Size(36, 35)
@@ -304,7 +308,7 @@ Partial Class WelcomeScreen
         Me.GroupBox1.Controls.Add(Me.LblClrNotUsr)
         Me.GroupBox1.Controls.Add(Me.LblClrSys)
         Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(561, 44)
+        Me.GroupBox1.Location = New System.Drawing.Point(322, 44)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 3, 10, 3)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -362,7 +366,7 @@ Partial Class WelcomeScreen
         Me.GrpCounters.Controls.Add(Me.Label0)
         Me.GrpCounters.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold)
         Me.GrpCounters.ForeColor = System.Drawing.Color.ForestGreen
-        Me.GrpCounters.Location = New System.Drawing.Point(220, 44)
+        Me.GrpCounters.Location = New System.Drawing.Point(962, 296)
         Me.GrpCounters.Margin = New System.Windows.Forms.Padding(0, 3, 0, 0)
         Me.GrpCounters.Name = "GrpCounters"
         Me.GrpCounters.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -627,13 +631,26 @@ Partial Class WelcomeScreen
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox1.ContextMenuStrip = Me.CNTXMNUPic
         Me.FlowLayoutPanel1.SetFlowBreak(Me.PictureBox1, True)
-        Me.PictureBox1.Location = New System.Drawing.Point(72, 41)
+        Me.PictureBox1.Location = New System.Drawing.Point(814, 293)
         Me.PictureBox1.Margin = New System.Windows.Forms.Padding(40, 0, 0, 0)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(148, 184)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 90
         Me.PictureBox1.TabStop = False
+        '
+        'CNTXMNUPic
+        '
+        Me.CNTXMNUPic.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UploadYourPictureToolStripMenuItem})
+        Me.CNTXMNUPic.Name = "CNTXMNUPic"
+        Me.CNTXMNUPic.Size = New System.Drawing.Size(180, 26)
+        '
+        'UploadYourPictureToolStripMenuItem
+        '
+        Me.UploadYourPictureToolStripMenuItem.Image = Global.VOCAPlus.My.Resources.Resources.Upload_Transparent
+        Me.UploadYourPictureToolStripMenuItem.Name = "UploadYourPictureToolStripMenuItem"
+        Me.UploadYourPictureToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.UploadYourPictureToolStripMenuItem.Text = "Upload Your Picture"
         '
         'ImageList1
         '
@@ -657,7 +674,7 @@ Partial Class WelcomeScreen
         Me.LblSrvrNm.Font = New System.Drawing.Font("Times New Roman", 9.0!)
         Me.LblSrvrNm.ForeColor = System.Drawing.Color.Red
         Me.LblSrvrNm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.LblSrvrNm.Location = New System.Drawing.Point(28, 322)
+        Me.LblSrvrNm.Location = New System.Drawing.Point(11, 571)
         Me.LblSrvrNm.Margin = New System.Windows.Forms.Padding(3, 3, 1000, 3)
         Me.LblSrvrNm.Name = "LblSrvrNm"
         Me.LblSrvrNm.Size = New System.Drawing.Size(289, 20)
@@ -675,7 +692,7 @@ Partial Class WelcomeScreen
         Me.Label9.BackColor = System.Drawing.Color.Transparent
         Me.FlowLayoutPanel1.SetFlowBreak(Me.Label9, True)
         Me.Label9.Font = New System.Drawing.Font("Times New Roman", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.Label9.Location = New System.Drawing.Point(1013, 374)
+        Me.Label9.Location = New System.Drawing.Point(996, 623)
         Me.Label9.Margin = New System.Windows.Forms.Padding(3, 3, 3, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -687,7 +704,7 @@ Partial Class WelcomeScreen
         Me.LblLanguage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblLanguage.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.LblLanguage.ForeColor = System.Drawing.Color.Red
-        Me.LblLanguage.Location = New System.Drawing.Point(817, 46)
+        Me.LblLanguage.Location = New System.Drawing.Point(800, 46)
         Me.LblLanguage.Margin = New System.Windows.Forms.Padding(0, 5, 3, 0)
         Me.LblLanguage.Name = "LblLanguage"
         Me.LblLanguage.Size = New System.Drawing.Size(497, 25)
@@ -701,6 +718,7 @@ Partial Class WelcomeScreen
         Me.FlowLayoutPanel1.BackColor = System.Drawing.Color.Transparent
         Me.FlowLayoutPanel1.Controls.Add(Me.DbStat)
         Me.FlowLayoutPanel1.Controls.Add(Me.LblLanguage)
+        Me.FlowLayoutPanel1.Controls.Add(Me.FlowLayoutPanel2)
         Me.FlowLayoutPanel1.Controls.Add(Me.GroupBox1)
         Me.FlowLayoutPanel1.Controls.Add(Me.GrpCounters)
         Me.FlowLayoutPanel1.Controls.Add(Me.PictureBox1)
@@ -721,6 +739,38 @@ Partial Class WelcomeScreen
         Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1317, 635)
         Me.FlowLayoutPanel1.TabIndex = 96
         '
+        'FlowLayoutPanel2
+        '
+        Me.FlowLayoutPanel2.Controls.Add(Me.RadioButton1)
+        Me.FlowLayoutPanel2.Controls.Add(Me.RadioButton2)
+        Me.FlowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(581, 44)
+        Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(216, 27)
+        Me.FlowLayoutPanel2.TabIndex = 99
+        '
+        'RadioButton1
+        '
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Checked = True
+        Me.RadioButton1.Location = New System.Drawing.Point(116, 3)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(97, 17)
+        Me.RadioButton1.TabIndex = 0
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.Text = "تثبيت الشاشات"
+        Me.RadioButton1.UseVisualStyleBackColor = True
+        '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Location = New System.Drawing.Point(11, 3)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(99, 17)
+        Me.RadioButton2.TabIndex = 1
+        Me.RadioButton2.Text = "تحريك الشاشات"
+        Me.RadioButton2.UseVisualStyleBackColor = True
+        '
         'LblLstSeen
         '
         Me.LblLstSeen.BackColor = System.Drawing.Color.Transparent
@@ -728,7 +778,7 @@ Partial Class WelcomeScreen
         Me.LblLstSeen.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.LblLstSeen.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.LblLstSeen.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.LblLstSeen.Location = New System.Drawing.Point(28, 348)
+        Me.LblLstSeen.Location = New System.Drawing.Point(11, 597)
         Me.LblLstSeen.Margin = New System.Windows.Forms.Padding(3, 3, 1000, 3)
         Me.LblLstSeen.Name = "LblLstSeen"
         Me.LblLstSeen.Size = New System.Drawing.Size(289, 20)
@@ -740,7 +790,7 @@ Partial Class WelcomeScreen
         '
         Me.Panel2.BackColor = System.Drawing.Color.Transparent
         Me.Panel2.Controls.Add(Me.ExtBt)
-        Me.Panel2.Location = New System.Drawing.Point(1196, 582)
+        Me.Panel2.Location = New System.Drawing.Point(1179, 831)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(118, 40)
         Me.Panel2.TabIndex = 97
@@ -749,7 +799,7 @@ Partial Class WelcomeScreen
         '
         Me.Panel1.BackColor = System.Drawing.Color.Transparent
         Me.Panel1.Controls.Add(Me.SnOutBt)
-        Me.Panel1.Location = New System.Drawing.Point(1066, 582)
+        Me.Panel1.Location = New System.Drawing.Point(1049, 831)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(124, 39)
         Me.Panel1.TabIndex = 96
@@ -758,7 +808,7 @@ Partial Class WelcomeScreen
         '
         Me.Panel3.BackColor = System.Drawing.Color.Transparent
         Me.Panel3.Controls.Add(Me.Button2)
-        Me.Panel3.Location = New System.Drawing.Point(936, 582)
+        Me.Panel3.Location = New System.Drawing.Point(919, 831)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(124, 39)
         Me.Panel3.TabIndex = 97
@@ -777,19 +827,6 @@ Partial Class WelcomeScreen
         '
         Me.WkrTikCount.WorkerReportsProgress = True
         Me.WkrTikCount.WorkerSupportsCancellation = True
-        '
-        'CNTXMNUPic
-        '
-        Me.CNTXMNUPic.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UploadYourPictureToolStripMenuItem})
-        Me.CNTXMNUPic.Name = "CNTXMNUPic"
-        Me.CNTXMNUPic.Size = New System.Drawing.Size(181, 48)
-        '
-        'UploadYourPictureToolStripMenuItem
-        '
-        Me.UploadYourPictureToolStripMenuItem.Image = Global.VOCAPlus.My.Resources.Resources.Upload_Transparent
-        Me.UploadYourPictureToolStripMenuItem.Name = "UploadYourPictureToolStripMenuItem"
-        Me.UploadYourPictureToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.UploadYourPictureToolStripMenuItem.Text = "Upload Your Picture"
         '
         'WelcomeScreen
         '
@@ -816,11 +853,13 @@ Partial Class WelcomeScreen
         Me.GroupBox1.ResumeLayout(False)
         Me.GrpCounters.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.CNTXMNUPic.ResumeLayout(False)
         Me.FlowLayoutPanel1.ResumeLayout(False)
+        Me.FlowLayoutPanel2.ResumeLayout(False)
+        Me.FlowLayoutPanel2.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
-        Me.CNTXMNUPic.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -885,4 +924,7 @@ Partial Class WelcomeScreen
     Friend WithEvents WkrTikCount As System.ComponentModel.BackgroundWorker
     Friend WithEvents CNTXMNUPic As ContextMenuStrip
     Friend WithEvents UploadYourPictureToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
+    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents RadioButton2 As RadioButton
 End Class

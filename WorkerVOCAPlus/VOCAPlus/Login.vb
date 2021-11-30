@@ -630,7 +630,13 @@ sec_UsrErr_:
         Next
         RemoveHandler form_.Activated, AddressOf Frm_Activated
         AddHandler form_.Activated, AddressOf Frm_Activated
-        form_.ShowDialog()
+        If WelcomeScreen.RadioButton1.Checked = True Then
+            form_.ShowDialog()
+        ElseIf WelcomeScreen.RadioButton2.Checked = True Then
+            form_.Show()
+            form_.Activate()
+        End If
+
     End Sub
 #End Region
 
