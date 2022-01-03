@@ -165,7 +165,7 @@ Partial Class Login
         Me.LblUsrIP.BackColor = System.Drawing.Color.Transparent
         Me.LblUsrIP.Font = New System.Drawing.Font("Times New Roman", 9.0!)
         Me.LblUsrIP.ForeColor = System.Drawing.Color.Red
-        Me.LblUsrIP.Location = New System.Drawing.Point(345, 264)
+        Me.LblUsrIP.Location = New System.Drawing.Point(345, 216)
         Me.LblUsrIP.Name = "LblUsrIP"
         Me.LblUsrIP.Size = New System.Drawing.Size(235, 20)
         Me.LblUsrIP.TabIndex = 68
@@ -190,7 +190,7 @@ Partial Class Login
         Me.PubVerLbl.BackColor = System.Drawing.Color.Transparent
         Me.PubVerLbl.Font = New System.Drawing.Font("Times New Roman", 9.0!)
         Me.PubVerLbl.ForeColor = System.Drawing.Color.Red
-        Me.PubVerLbl.Location = New System.Drawing.Point(348, 281)
+        Me.PubVerLbl.Location = New System.Drawing.Point(348, 233)
         Me.PubVerLbl.Name = "PubVerLbl"
         Me.PubVerLbl.Size = New System.Drawing.Size(232, 24)
         Me.PubVerLbl.TabIndex = 74
@@ -275,7 +275,6 @@ Partial Class Login
         Me.Button1.TabIndex = 80
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
-        Me.Button1.Visible = False
         '
         'ImageList1
         '

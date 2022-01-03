@@ -27,7 +27,6 @@
                     Else
                         TempNode(0).ForeColor = Color.Black
                     End If
-
                 End If
             Next Cnt_
         Else

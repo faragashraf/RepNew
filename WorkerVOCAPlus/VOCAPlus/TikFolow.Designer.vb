@@ -60,20 +60,20 @@ Partial Class TikFolow
         Me.ChckUpdOther = New System.Windows.Forms.RadioButton()
         Me.BtnCncl = New System.Windows.Forms.Button()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
         CType(Me.GridTicket, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip2.SuspendLayout()
         CType(Me.StatBrPnlEn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.StatBrPnlAr, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
+        Me.FlowLayoutPanel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        Me.FlowLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'ProgressBar1
@@ -535,6 +535,19 @@ Partial Class TikFolow
         Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1501, 663)
         Me.FlowLayoutPanel1.TabIndex = 2170
         '
+        'FlowLayoutPanel2
+        '
+        Me.FlowLayoutPanel2.Controls.Add(Me.FilterComb)
+        Me.FlowLayoutPanel2.Controls.Add(Me.SerchTxt)
+        Me.FlowLayoutPanel2.Controls.Add(Me.Panel1)
+        Me.FlowLayoutPanel2.Controls.Add(Me.Panel2)
+        Me.FlowLayoutPanel2.Controls.Add(Me.ProgressBar1)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(245, 3)
+        Me.FlowLayoutPanel2.Margin = New System.Windows.Forms.Padding(250, 3, 3, 3)
+        Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(1006, 54)
+        Me.FlowLayoutPanel2.TabIndex = 2173
+        '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.BtnRefrsh)
@@ -561,19 +574,6 @@ Partial Class TikFolow
         Me.Panel3.Size = New System.Drawing.Size(81, 65)
         Me.Panel3.TabIndex = 2172
         '
-        'FlowLayoutPanel2
-        '
-        Me.FlowLayoutPanel2.Controls.Add(Me.FilterComb)
-        Me.FlowLayoutPanel2.Controls.Add(Me.SerchTxt)
-        Me.FlowLayoutPanel2.Controls.Add(Me.Panel1)
-        Me.FlowLayoutPanel2.Controls.Add(Me.Panel2)
-        Me.FlowLayoutPanel2.Controls.Add(Me.ProgressBar1)
-        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(245, 3)
-        Me.FlowLayoutPanel2.Margin = New System.Windows.Forms.Padding(250, 3, 3, 3)
-        Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(1006, 54)
-        Me.FlowLayoutPanel2.TabIndex = 2173
-        '
         'TikFolow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -593,11 +593,11 @@ Partial Class TikFolow
         CType(Me.StatBrPnlAr, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.FlowLayoutPanel1.ResumeLayout(False)
+        Me.FlowLayoutPanel2.ResumeLayout(False)
+        Me.FlowLayoutPanel2.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
-        Me.FlowLayoutPanel2.ResumeLayout(False)
-        Me.FlowLayoutPanel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

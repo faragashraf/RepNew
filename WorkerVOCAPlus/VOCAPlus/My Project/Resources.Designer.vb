@@ -83,9 +83,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         '''</summary>
-        Friend ReadOnly Property Add() As System.Drawing.Icon
+        Friend ReadOnly Property Add2() As System.Drawing.Icon
             Get
-                Dim obj As Object = ResourceManager.GetObject("Add", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("Add2", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
             End Get
         End Property
@@ -532,9 +532,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         '''</summary>
-        Friend ReadOnly Property Minus() As System.Drawing.Icon
+        Friend ReadOnly Property Minus3() As System.Drawing.Icon
             Get
-                Dim obj As Object = ResourceManager.GetObject("Minus", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("Minus3", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
             End Get
         End Property
@@ -961,9 +961,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         '''</summary>
-        Friend ReadOnly Property VCOff48() As System.Drawing.Icon
+        Friend ReadOnly Property VCOff482() As System.Drawing.Icon
             Get
-                Dim obj As Object = ResourceManager.GetObject("VCOff48", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("VCOff482", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
             End Get
         End Property
@@ -971,9 +971,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         '''</summary>
-        Friend ReadOnly Property VCOn48() As System.Drawing.Icon
+        Friend ReadOnly Property VCOn482() As System.Drawing.Icon
             Get
-                Dim obj As Object = ResourceManager.GetObject("VCOn48", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("VCOn482", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
             End Get
         End Property

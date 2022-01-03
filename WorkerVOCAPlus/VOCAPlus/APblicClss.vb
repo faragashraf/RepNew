@@ -265,7 +265,6 @@ Public Class APblicClss
                 If state.CONSQL.State = ConnectionState.Closed Or state.CONSQL.State = ConnectionState.Broken Then
                     state.CONSQL.Open()
                 End If
-
                 state.reader = sqlCommW.ExecuteReader
                 SqlTbl.Load(state.reader)
                 StW.Stop()

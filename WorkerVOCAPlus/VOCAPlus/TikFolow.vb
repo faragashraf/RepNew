@@ -116,7 +116,7 @@ Public Class TikFolow
 
         primaryKey(0) = TickTblMain.Columns("TkSQL")
         TickTblMain.PrimaryKey = primaryKey
-        FltrStr = " Where " & " (TkClsStatus = 0)  and TkEmpNm = " & Usr.PUsrID
+        FltrStr = " Where  (TkClsStatus = 0)  and TkEmpNm = " & Usr.PUsrID
         Invoke(Sub() GridTicket.Visible = False)
         If Fn.GetTblXX("SELECT TkSQL, TkKind, TkDtStart, TkID, SrcNm, TkClNm, TkClPh, TkClPh1, TkMail, TkClAdr, TkCardNo, TkShpNo, TkGBNo, TkClNtID, TkAmount, TkTransDate, PrdKind, PrdNm, CompNm, CounNmSender, CounNmConsign, OffNm1, OffArea, TkDetails, TkClsStatus, TkFolw, TkEmpNm, UsrRealNm,  TkReOp, format(TkRecieveDt,'yyyy/MM/dd') As TkRecieveDt, TkEscTyp, ProdKNm, CompHelp FROM dbo.TicketsAll " & FltrStr & "  ORDER BY TkSQL;", TickTblMain, "1028&H") = Nothing Then
             Invoke(Sub() Me.Text = "متابعة الشكاوى" & "_" & ElapsedTimeSpan)

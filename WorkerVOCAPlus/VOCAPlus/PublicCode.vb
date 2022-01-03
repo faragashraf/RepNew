@@ -920,7 +920,7 @@ End_:
         LodngFrm.LblMsg.Refresh()
     End Sub
     Public Function GetAll(ByVal sender As Control) As IEnumerable(Of Control)
-        Dim controls = sender.Controls.Cast(Of Control)()
+        Dim controls As IEnumerable(Of Control) = sender.Controls.Cast(Of Control)()
         Return controls.SelectMany(Function(ctrl) GetAll(ctrl)).Concat(controls)
     End Function
     Public Sub FrmAllSub(Frm As Form)
@@ -940,14 +940,11 @@ End_:
         Slctd = False
 #Region "Default ContextMenuStrip"
         DefCmStrip = New ContextMenuStrip
-        DefCmStrip.Font = New Font("Times New Roman", 12, FontStyle.Regular)
         CmStripPast = New ToolStripMenuItem
-
+        DefCmStrip.Font = New Font("Times New Roman", 12, FontStyle.Regular)
 
         DefCmStrip.Items.Add(CmStripPast)
-
         CmStripPast.Image = My.Resources.Paste1
-
         CmStripPast.Text = "Paste"
 
 

@@ -222,7 +222,7 @@ GoodVer:  '       *****      End Check Ver.
             LblLogin.Refresh()
             If Usr.PUsrActv = True Or Usr.PUsrActv = False Then              'XXXXXXXXXXX to cancel this delete   *** Or Usr.PUsrActv = 1  ***     'if user Not Active
                 If Deployment.Application.ApplicationDeployment.IsNetworkDeployed Then
-                    If PublicCode.InsUpd("UPDATE Int_user SET UsrActive = 1, UsrIP ='" & OsIP() & "', UsrVer = '" & Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4) & "', UsrLastSeen = '" & Format(ServrTime(), "yyyy-MM-dd HH:mm:ss") & "' WHERE (UsrNm = '" & TxtUsrNm.Text & "');", "1007&H") <> Nothing Then  'Update User Active =  True    
+                    If PublicCode.InsUpd("UPDATE Int_user SET UsrActive = 1, UsrIP ='" & OsIP() & "', UsrVer = '" & Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4) & "', UsrLastSeen = '" & Format(ServrTime(), "yyyy-MM-dd HH:mm:ss") & "' WHERE (UsrId = " & Usr.PUsrID & "');", "1007&H") <> Nothing Then  'Update User Active =  True    
                         StatusBarPanel1.Icon = My.Resources.WSOff032
                         Exit Sub
                     End If
@@ -355,18 +355,30 @@ sec_UsrErr_:
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        Dim tes As New DataTable
-        If LogCollect() > 0 Then
-            Dim FF As New Form
-            Dim hh As New DataGridView
-            FF.Controls.Add(hh)
-            hh.DataSource = LogOfflinTbl
-            FF.WindowState = FormWindowState.Maximized
-            hh.Dock = DockStyle.Fill
-            FF.ShowDialog()
-        Else
-            MsgBox("there is No Records to Display")
-        End If
+        Dim Fn As New APblicClss.Func
+        MsgBox("Will Fill Password for All Users")
+        'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        UserTable = New DataTable
+        Fn.GetTblXX("select UsrId,UsrPass,UsrKey,RIGHT(dbo.IntGuid.PRGUID, CAST(LEFT(dbo.IntGuid.Id, 2) AS int) / 2) + SUBSTRING(dbo.IntGuid.GUID, 3, 5) + LEFT(dbo.IntGuid.PRGUID, CAST(RIGHT(dbo.IntGuid.Id, 2) AS int) / 2) AS SaltKey from INT_USER INNER JOIN dbo.IntGuid ON int_user.UsrKey = SUBSTRING(dbo.IntGuid.GUID, 26, 11) ", UserTable, "0000&H")
+        For OO = 0 To UserTable.Rows.Count - 1
+            Dim GG As String = Fn.PassDecoding(UserTable.Rows(OO).Item("UsrPass").ToString(), UserTable.Rows(OO).Item("SaltKey").ToString())
+            Fn.InsUpdate("update Int_user set UsrPassTmp ='" & GG & "' WHERE USRID = " & UserTable.Rows(OO).Item("UsrId").ToString(), "FFF")
+        Next OO
+        MsgBox("Done")
+        'update Int_user set UsrPassTmp =''
+        'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        'Dim tes As New DataTable
+        'If LogCollect() > 0 Then
+        '    Dim FF As New Form
+        '    Dim hh As New DataGridView
+        '    FF.Controls.Add(hh)
+        '    hh.DataSource = LogOfflinTbl
+        '    FF.WindowState = FormWindowState.Maximized
+        '    hh.Dock = DockStyle.Fill
+        '    FF.ShowDialog()
+        'Else
+        '    MsgBox("there is No Records to Display")
+        'End If
     End Sub
     Private Sub TimerClose_Tick(sender As Object, e As EventArgs) Handles TimerClose.Tick
         If Opacity > 0.1 Then
@@ -523,6 +535,7 @@ sec_UsrErr_:
 
             Invoke(Sub() WelcomeScreen.MenuSw.Items.Clear())
             Invoke(Sub() WelcomeScreen.CntxtMnuStrp.Items.Clear())
+
             For Each H As ToolStripMenuItem In Menu_.Items
                 Dim subItem As New ToolStripMenuItem(H.Text)
                 Dim subItem2 As New ToolStripMenuItem(H.Text)

@@ -1,4 +1,5 @@
 ﻿
+Imports System.Text
 Public Class DistribTicket
     Private ReadOnly UserTable As DataTable = New DataTable
     Private CompCountTable As DataTable = New DataTable
@@ -8,6 +9,7 @@ Public Class DistribTicket
     Dim LoadBol As Boolean = False
     Dim Filtr As String
     Dim UsrStr As String = ""
+    Dim UsrStr1 As StringBuilder
     Dim UsrEmStr As String = ""
     Dim PhonStr As String = ""
     Dim CompIdStr As String = ""
@@ -31,10 +33,13 @@ Public Class DistribTicket
         Dim Fn As New APblicClss.Func
         '                   0  ,    1  ,     2    ,    3   ,     4     as mix name                 ***   
         If Fn.GetTblXX("Select UsrId, UCatId, UCatIdSub, UCatLvl, UCatNm + N' - ' + UsrRealNm AS UsrMix From Int_user RIGHT OUTER Join IntUserCat On UsrCat = UCatId Where (UsrSusp = 0) AND (UCatLvl between 3 and 5) Order By UCatIdSub, UsrRealNm", UserTable, "1025&H") = Nothing Then
+            UsrStr1 = New StringBuilder
+            UsrStr1.Append(" UsrId In (")
             For Cnt_ = 0 To UserTable.Rows.Count - 1
                 TempNode = UserTree.Nodes.Find(UserTable(Cnt_).Item(2).ToString, True)
                 If TempNode.Length > 0 Then
                     TempNode(0).Nodes.Add(UserTable(Cnt_).Item(1).ToString, UserTable(Cnt_).Item(0).ToString & " - " & UserTable(Cnt_).Item(4).ToString, 0, 2)
+                    UsrStr1.Append(UserTable(Cnt_).Item(0).ToString & " , ")
                     UsrStr &= "UsrId = " & UserTable(Cnt_).Item(0).ToString & " OR "
                     UsrEmStr &= "TkEmpNm = " & UserTable(Cnt_).Item(0).ToString & " OR "
                     If TempNode(0).Nodes.Count > 0 Then
@@ -43,7 +48,8 @@ Public Class DistribTicket
                     End If
                 End If
             Next Cnt_
-            If UsrStr.Length > 0 Then UsrStr = Mid(UsrStr, 1, UsrStr.Length - 4) Else UsrStr = ""
+            UsrStr = Mid(String.Join(",", UsrStr1.ToString), 1, UsrStr1.ToString.Length - 2) & ")"
+            'If UsrStr.Length > 0 Then UsrStr = Mid(UsrStr, 1, UsrStr.Length - 4) Else UsrStr = ""
             If UsrEmStr.Length > 0 Then UsrEmStr = Mid(UsrEmStr, 1, UsrEmStr.Length - 4) Else UsrEmStr = ""
             UserTree.ExpandAll()
 
@@ -109,7 +115,7 @@ Public Class DistribTicket
         Dim Fn As New APblicClss.Func
 
 
-        If Fn.GetTblXX("SELECT TkSQL, TkDtStart As [تاريخ الشكوى], TkID As [رقم الشكوى], SrcNm As [مصدر الشكوى], TkClNm As [اسم العميل], TkClPh As [رقم التليفون], TkClPh1 As [تليفون2], TkMail, TkClAdr, TkCardNo  As [رقم الكارت], TkShpNo As [رقم الشحنة], TkGBNo, TkClNtID, TkAmount, TkTransDate, PrdKind, PrdNm As [اسم الخدمة], CompNm As [نوع الشكوى], CounNmSender, CounNmConsign, OffNm1, OffArea, TkDetails, TkClsStatus, TkFolw, TkEmpNm, UsrRealNm AS [متابع الشكوى] FROM TicketsAll WHERE ((TkRecieveDt is Null) AND (" & UsrEmStr & ") And (TkClsStatus = 0)) or (TkEmpNm = " & Usr.PUsrID & " And (TkClsStatus = 0)) ORDER BY TkSQL;", DisributeTable, "1026&H") = Nothing Then
+        If Fn.GetTblXX("SELECT TkSQL, TkDtStart As [تاريخ الشكوى], TkID As [رقم الشكوى], SrcNm As [مصدر الشكوى], TkClNm As [اسم العميل], TkClPh As [رقم التليفون], TkClPh1 As [تليفون2], TkMail, TkClAdr, TkCardNo  As [رقم الكارت], TkShpNo As [رقم الشحنة], TkGBNo, TkClNtID, TkAmount, TkTransDate, PrdKind, PrdNm As [اسم الخدمة], CompNm As [نوع الشكوى], CounNmSender, CounNmConsign, OffNm1, OffArea, TkDetails, TkClsStatus, TkFolw, TkEmpNm, UsrRealNm AS [متابع الشكوى] FROM TicketsAll WHERE ((TkRecieveDt is Null) And (" & UsrEmStr & ") And (TkClsStatus = 0)) Or (TkEmpNm = " & Usr.PUsrID & " And (TkClsStatus = 0)) ORDER BY TkSQL;", DisributeTable, "1026&H") = Nothing Then
             If DisributeTable.Rows.Count > 0 Then
                 AddHandler GridTicket.SelectionChanged, AddressOf GridTicket_SelectionChanged
                 GridTicket.DataSource = DisributeTable
@@ -181,9 +187,9 @@ Public Class DistribTicket
         Else
             MsgErr("كود خطأ : " & "1026&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
 
-            End If
+        End If
 
-            WelcomeScreen.StatBrPnlAr.Text = "جاري تحميل أعداد الشكاوى لكل موظف ........................."
+        WelcomeScreen.StatBrPnlAr.Text = "جاري تحميل أعداد الشكاوى لكل موظف ........................."
 
         If Fn.GetTblXX("select UsrRealNm AS [اسم الموظف], case when (select count(TkSQL) from Tickets  where CONVERT(VARCHAR, TkRecieveDt, 111)= CONVERT(VARCHAR, GETDATE(), 111) and Tickets.TkEmpNm = UsrId group by format( TkRecieveDt,'yyyy/MM/dd') ) IS NULL then 0 else (select count(TkSQL) from Tickets  where CONVERT(VARCHAR, TkRecieveDt, 111)= CONVERT(VARCHAR, GETDATE(), 111) and Tickets.TkEmpNm = UsrId group by format( TkRecieveDt,'yyyy/MM/dd') ) end AS [العدد] from int_User WHERE (" & UsrStr & ") ORDER BY [اسم الموظف]", CompCountTable, "1026&H") = Nothing Then
             GridUsrTickCount.DataSource = CompCountTable
@@ -337,56 +343,56 @@ Err_:
 
 
             If GridTicket.Columns(e.ColumnIndex).Name = "توزيع/إستعادة" Then
-                    If GridTicket.CurrentRow.Cells(27).Value = "توزيع" Then
-                        If UserTree.SelectedNode IsNot Nothing Then
-                            LblMsg.Text = ""
+                If GridTicket.CurrentRow.Cells(27).Value = "توزيع" Then
+                    If UserTree.SelectedNode IsNot Nothing Then
+                        LblMsg.Text = ""
                         'If UserTree.SelectedNode.Level = 0 Then
                         '    LblMsg.Text = "الشكوى موجودة بـ" & Split(UserTree.SelectedNode.Text, " - ")(2) & " بالفعل"
                         'Else
                         LblMsg.Text = ""
-                                If DBNull.Value.Equals(GridTicket.CurrentRow.Cells(27).Value.ToString) Then
-                                    For Cnt_ = 0 To GridUsrTickCount.Rows.Count - 1
-                                        If GridTicket.CurrentRow.Cells(26).Value = GridUsrTickCount.Rows(Cnt_).Cells(0).Value Then
-                                            GridUsrTickCount.Rows(Cnt_).Cells(1).Value -= 1
-                                            TickCount -= 1
-                                            Exit For
-                                        End If
-                                    Next Cnt_
+                        If DBNull.Value.Equals(GridTicket.CurrentRow.Cells(27).Value.ToString) Then
+                            For Cnt_ = 0 To GridUsrTickCount.Rows.Count - 1
+                                If GridTicket.CurrentRow.Cells(26).Value = GridUsrTickCount.Rows(Cnt_).Cells(0).Value Then
+                                    GridUsrTickCount.Rows(Cnt_).Cells(1).Value -= 1
+                                    TickCount -= 1
+                                    Exit For
                                 End If
-                                GridTicket.CurrentRow.Cells(26).Value = Split(UserTree.SelectedNode.Text, " - ")(2)
-                                GridTicket.CurrentRow.Cells(25).Value = Split(UserTree.SelectedNode.Text, " - ")(0)
-                                GridTicket.CurrentRow.DefaultCellStyle.BackColor = Color.LightGreen
-                                GridTicket.CurrentRow.Cells(27).Value = "استعادة"
-                                GridTicket.CurrentRow.Cells(27).Style.BackColor = Color.Aqua
-                                'PublicCode.FncGrdCurrRow(GridTicket, GridTicket.CurrentRow.Index)
-                                For Cnt_ = 0 To GridUsrTickCount.Rows.Count - 1
-                                    If GridTicket.CurrentRow.Cells(26).Value = GridUsrTickCount.Rows(Cnt_).Cells(0).Value Then
-                                'CompCountTable.Rows(Cnt_).Item(1) += 1
-                                TickCount += 1
-                                        chgd = True
-                                        Exit For
-                                    End If
-                                Next Cnt_
-                            'End If
-                            Else
-                            LblMsg.Text = "برجاء اختيار اسم الموظف أولاً"
-                            Beep()
+                            Next Cnt_
                         End If
-                    Else
-                        GridTicket.CurrentRow.Cells(25).Value = Usr.PUsrID
-                        GridTicket.CurrentRow.DefaultCellStyle.BackColor = Color.White
-                        GridTicket.CurrentRow.Cells(27).Value = "توزيع"
-                        GridTicket.CurrentRow.Cells(27).Style.BackColor = Color.AliceBlue
+                        GridTicket.CurrentRow.Cells(26).Value = Split(UserTree.SelectedNode.Text, " - ")(2)
+                        GridTicket.CurrentRow.Cells(25).Value = Split(UserTree.SelectedNode.Text, " - ")(0)
+                        GridTicket.CurrentRow.DefaultCellStyle.BackColor = Color.LightGreen
+                        GridTicket.CurrentRow.Cells(27).Value = "استعادة"
+                        GridTicket.CurrentRow.Cells(27).Style.BackColor = Color.Aqua
+                        'PublicCode.FncGrdCurrRow(GridTicket, GridTicket.CurrentRow.Index)
                         For Cnt_ = 0 To GridUsrTickCount.Rows.Count - 1
                             If GridTicket.CurrentRow.Cells(26).Value = GridUsrTickCount.Rows(Cnt_).Cells(0).Value Then
-                            'GridUsrTickCount.Rows(Cnt_).Cells(1).Value -= 1
-                            TickCount -= 1
+                                'CompCountTable.Rows(Cnt_).Item(1) += 1
+                                TickCount += 1
+                                chgd = True
                                 Exit For
                             End If
                         Next Cnt_
-                        GridTicket.CurrentRow.Cells(26).Value = ""
+                        'End If
+                    Else
+                        LblMsg.Text = "برجاء اختيار اسم الموظف أولاً"
+                        Beep()
                     End If
+                Else
+                    GridTicket.CurrentRow.Cells(25).Value = Usr.PUsrID
+                    GridTicket.CurrentRow.DefaultCellStyle.BackColor = Color.White
+                    GridTicket.CurrentRow.Cells(27).Value = "توزيع"
+                    GridTicket.CurrentRow.Cells(27).Style.BackColor = Color.AliceBlue
+                    For Cnt_ = 0 To GridUsrTickCount.Rows.Count - 1
+                        If GridTicket.CurrentRow.Cells(26).Value = GridUsrTickCount.Rows(Cnt_).Cells(0).Value Then
+                            'GridUsrTickCount.Rows(Cnt_).Cells(1).Value -= 1
+                            TickCount -= 1
+                            Exit For
+                        End If
+                    Next Cnt_
+                    GridTicket.CurrentRow.Cells(26).Value = ""
                 End If
+            End If
 
             LblTickCount.Text = TickCount
             GridTicket.Columns(27).AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells

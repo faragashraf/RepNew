@@ -26,21 +26,19 @@ Public Class CompSetup
     'End Property
     Private Sub CompSetup_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim UsrIdsTable As New DataTable
-
-        GetTbl("SELECT UsrId, UsrRealNm FROM Int_user WHERE (((UsrRealNm) Like '%' + 'فريق' + '%'));", UsrIdsTable, "000&H")
+        Dim Fn As New APblicClss.Func
+        Fn.GetTblXX("SELECT UsrId, UsrRealNm FROM Int_user WHERE (((UsrRealNm) Like '%' + 'فريق' + '%'));", UsrIdsTable, "000&H")
         UsrIdsTable.Rows.Add("32000", "32000")
         ComboBox1.DataSource = UsrIdsTable
         ComboBox1.DisplayMember = "UsrRealNm"
         ComboBox1.ValueMember = "UsrId"
         'ComboBox1.ResetText()
-
         For Each c In MendGrp.Controls
             c.Appearance = Appearance.Button
             c.AutoSize = False
             c.Size = New Size(150, 30)
         Next
         ChckColor()
-
         RadActvs.Checked = True
         RadAcv.Checked = True
 Popul_:
@@ -55,7 +53,6 @@ Popul_:
                     c.BackColor = Color.Red
                 End If
             End If
-
         Next
     End Sub
     Private Sub Checkbox_Click(sender As Object, e As EventArgs) Handles ChckBxPh1.Click, ChckBxTrck.Click, ChckBxSrc.Click, ChckBxPh2.Click, ChckBxOff.Click, ChckBxNm.Click, ChckBxID.Click, ChckBxGB.Click, ChckBxDt.Click, ChckBxDist.Click, ChckBxCrd.Click, ChckBxAmnt.Click
@@ -212,6 +209,7 @@ Popul_:
         GC.Collect()
     End Sub
     Private Sub SSubmit()
+        Dim Fn As New APblicClss.Func
         Dim Err As Boolean = False
         Label7.Text = ""
         If RadSusp.Checked = True Then
@@ -231,17 +229,20 @@ Popul_:
                 MendArry = String.Join("", CntrlAry)
                 MNGR_ = TempPrd.ItemArray(8)
                 Stat = TempPrd.ItemArray(10)
+
+                '"update CDFnProd set [FnMend] = '" & MendArry & "' , [FnSusp] = '" & Stat & "',[FnMngr]= '" & MNGR_ & "' where [FnSQL] = " &  TreeView1.SelectedNode.Name
+                Fn.InsUpdate("update CDFnProd set [FnMend] = '" & MendArry & "' , [FnSusp] = '" & Stat & "',[FnMngr]= '" & MNGR_ & "' where [FnSQL] = " & TreeView1.SelectedNode.Name, "0000&H")
                 Dim thisBuilder As SqlCommandBuilder = New SqlCommandBuilder(SQLLclAdptr)
-                SQLLclAdptr.SelectCommand = sqlComnd
-                SQLLclAdptr.Update(ProdCompTable)
+                'SQLLclAdptr.SelectCommand = sqlComnd
+                'SQLLclAdptr.Update(ProdCompTable)
                 ChngSub()
             End If
         ElseIf TreeView1.SelectedNode.Level = 1 Then
             If PrdRef_ <> TxtBxRef.Text Then
                 If (TxtBxRef.TextLength) = 0 Then
-                    InsUpd("update CDProd set PrdRef = NULL  where PrdCd='" & TreeView1.SelectedNode.Name & "';", "0000&H")
+                    Fn.InsUpdate("update CDProd set PrdRef = NULL  where PrdCd='" & TreeView1.SelectedNode.Name & "';", "0000&H")
                 Else
-                    InsUpd("update CDProd set PrdRef='" & TxtBxRef.Text & "' where PrdCd='" & TreeView1.SelectedNode.Name & "';", "0000&H")
+                    Fn.InsUpdate("update CDProd set PrdRef='" & TxtBxRef.Text & "' where PrdCd='" & TreeView1.SelectedNode.Name & "';", "0000&H")
                     PrdRef_ = TempPrd.ItemArray(7)
                 End If
 
@@ -367,8 +368,6 @@ Popul_:
         GroupBox1.BackColor = Color.FromArgb(BKClr(0), BKClr(1), BKClr(2))
 
 
-
-
         RemoveHandler ComboBox1.SelectedValueChanged, AddressOf ComboBox1_SelectedValueChanged
         TreeView1.Nodes.Clear()
         If TreeView1.Nodes.Count = 0 Or TreeView1.Nodes.Count = Nothing Then
@@ -460,17 +459,27 @@ Popul_:
         ElseIf RadAlls.Checked = True Then
             Suspended_ = ""
         End If
+        Dim Def As New APblicClss.Defntion
         WelcomeScreen.StatBrPnlAr.Text = "جاري تحميل أنواع المنتجات ..."
         ProdCompTable.Rows.Clear()
         'ProdCompTable.Columns.Clear()
-        sqlComnd.Connection = sqlCon
+        sqlComnd.Connection = Def.CONSQL
         sqlComnd.CommandType = CommandType.Text
-        sqlComnd.CommandText = "SELECT FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp FROM VwFnProd " & Suspended_ & " ORDER BY PrdKind, PrdNm, CompNm"
+        sqlComnd.CommandText = "SELECT FnSQL, CDProd.PrdKind, FnProdCd, CDProd.PrdNm, FnCompCd, CompNm, FnMend, CDProd.PrdRef, FnMngr, CDProd.Prd3, FnSusp, CompReqst, CompHelp AS CompHlp FROM CDFnProd INNER JOIN CDComp ON FnCompCd = CompCd INNER JOIN CDProd ON FnProdCd = CDProd.PrdCd " & Suspended_ & " ORDER BY CDProd.PrdKind, CDProd.PrdNm, CompNm"
         SQLLclAdptr.SelectCommand = sqlComnd
         SQLLclAdptr.Fill(ProdCompTable)
         WelcomeScreen.StatBrPnlAr.Text = ""
         sqlCon.Close()
         LblTrCnt.Text = "Tree Nodes Count : " & ProdCompTable.Rows.Count
+
+        'Dim Fn As New APblicClss.Func
+
+        'If (Fn.GetTblXX("SELECT FnSQL, CDProd.PrdKind, FnProdCd, CDProd.PrdNm, FnCompCd, CompNm, FnMend, CDProd.PrdRef, FnMngr, CDProd.Prd3, FnSusp, CompReqst, CompHelp AS CompHlp FROM CDFnProd INNER JOIN CDComp ON FnCompCd = CompCd INNER JOIN CDProd ON FnProdCd = CDProd.PrdCd " & Suspended_ & " ORDER BY CDProd.PrdKind, CDProd.PrdNm, CompNm", ProdCompTable, "1012&H")) = Nothing Then
+
+        'End If
+
+
+
     End Sub
     Private Sub FilComp()
         Dim primaryKey(0) As DataColumn

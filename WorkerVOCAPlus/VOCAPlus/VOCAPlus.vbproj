@@ -23,14 +23,14 @@
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
+    <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>http://10.10.26.4:80/</UpdateUrl>
     <ProductName>VOCA Enterprise</ProductName>
     <PublisherName>Ashaf Farag</PublisherName>
     <SuiteName>VOCA Plus</SuiteName>
     <MinimumRequiredVersion>4.0.0.3</MinimumRequiredVersion>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -90,7 +90,10 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BarcodeLib, Version=1.1.0.0, Culture=neutral, PublicKeyToken=5f09bda868cc39e7, processorArchitecture=MSIL">
@@ -851,6 +854,32 @@
     <None Include="Resources\Update.png" />
     <None Include="Resources\ShowY.png" />
     <None Include="Resources\ShowN.png" />
+    <None Include="Resources\Exit1.ico" />
+    <None Include="Resources\Add1.ico" />
+    <None Include="Resources\DBOff1.ico" />
+    <None Include="Resources\DBOn1.ico" />
+    <None Include="Resources\Frstaid1.ico" />
+    <None Include="Resources\Minus2.ico" />
+    <None Include="Resources\VCOff481.ico" />
+    <None Include="Resources\VCOn481.ico" />
+    <None Include="Resources\VocaIcon21.ico" />
+    <None Include="Resources\WSOff0321.ico" />
+    <None Include="Resources\WSOff0481.ico" />
+    <None Include="Resources\WSOn0321.ico" />
+    <None Include="Resources\WSOn0481.ico" />
+    <None Include="Resources\Exit2.ico" />
+    <None Include="Resources\Add2.ico" />
+    <None Include="Resources\DBOff2.ico" />
+    <None Include="Resources\DBOn2.ico" />
+    <None Include="Resources\Frstaid2.ico" />
+    <None Include="Resources\Minus3.ico" />
+    <None Include="Resources\VCOff482.ico" />
+    <None Include="Resources\VCOn482.ico" />
+    <None Include="Resources\VocaIcon22.ico" />
+    <None Include="Resources\WSOff0322.ico" />
+    <None Include="Resources\WSOff0482.ico" />
+    <None Include="Resources\WSOn0322.ico" />
+    <None Include="Resources\WSOn0482.ico" />
     <Content Include="SqlServerTypes\Loader.cs" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
