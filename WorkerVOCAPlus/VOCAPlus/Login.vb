@@ -41,7 +41,7 @@ Our Mini CRM"
         'PrTblTswk.Start()
         'Exit Sub
         Cmbo.Items.Add("Eg Server")
-        'Cmbo.Items.Add("My Labtop")
+        Cmbo.Items.Add("My Labtop")
         Cmbo.Items.Add("Training")
         'Cmbo.Items.Add("OnLine")
         Cmbo.SelectedItem = "Eg Server"

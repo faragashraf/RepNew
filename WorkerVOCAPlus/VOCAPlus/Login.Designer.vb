@@ -247,7 +247,6 @@ Partial Class Login
         Me.Cmbo.Name = "Cmbo"
         Me.Cmbo.Size = New System.Drawing.Size(121, 21)
         Me.Cmbo.TabIndex = 77
-        Me.Cmbo.Visible = False
         '
         'Panel1
         '

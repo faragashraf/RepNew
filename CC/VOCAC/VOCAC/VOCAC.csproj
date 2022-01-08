@@ -51,12 +51,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APblicClss.cs" />
+    <Compile Include="BL\CLS_LOGIN.cs" />
+    <Compile Include="BL\CLS_TIKFOLLOW.cs" />
+    <Compile Include="DAL\DataAccessLayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TikFolow.cs">
+    <Compile Include="TikDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TikFolow.Designer.cs">
+    <Compile Include="TikDetails.Designer.cs">
+      <DependentUpon>TikDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\TikFolow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TikFolow.Designer.cs">
       <DependentUpon>TikFolow.cs</DependentUpon>
     </Compile>
     <Compile Include="TikSearchNew.cs">
@@ -82,7 +91,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="TikFolow.resx">
+    <EmbeddedResource Include="TikDetails.resx">
+      <DependentUpon>TikDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\TikFolow.resx">
       <DependentUpon>TikFolow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WelcomeScreen.resx">

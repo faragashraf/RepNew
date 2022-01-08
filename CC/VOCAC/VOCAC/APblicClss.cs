@@ -17,62 +17,59 @@ using System.Runtime.InteropServices;
 namespace VOCAC
 {
     //Application Definitions With Current User Class Inheritance
-    public class defintions
+    public class Statcdif
     {
         public static int screenWidth = Screen.PrimaryScreen.Bounds.Width;
         public static int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-        public InputLanguage EnglishInput;
-        public InputLanguage ArabicInput;
-        #region SQL_Definition
-        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocac;Password=Hemonad105046";
+        public static InputLanguage EnglishInput;
+        public static InputLanguage ArabicInput;
+        public static string strConn = @"Data Source=MyThinkbook\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046";
         public SqlConnection CONSQL;
+        public static String _ServerCD;
+        public static String _serverNm;
+        public static string servrTime;
+        public static String _MacStr,_IP;
+        public static bool CncStat;
+        public static MenuStrip Menu_;
+        public static ContextMenuStrip CntxMenu;
+        #region DataTables
+        public static DataTable MacTble, UserTable;
+        public static DataTable AreaTable, OfficeTable, CompSurceTable, CountryTable, ProdKTable, ProdCompTable, UpdateKTable;
+        #endregion
+    }
+    class menustrp
+    {
+        #region FormAdjust
+        ContextMenuStrip DefCmStrip, TikCmStrip, UpdtCmStrip;
+        ToolStripMenuItem CmStripCopy, CmStripPast, CmStripPrvw, CmStripUpVew, CmStripUpload, CmStripDwnload = new ToolStripMenuItem();
+        ToolStripMenuItem CmstripItemTmp1, CmstripItemTmp2, CmstripItemTmp3 = new ToolStripMenuItem();
+        #endregion
+    }
+    public class defintions
+    {
+        #region SQL_Definition
+
         public SqlDataReader reader;
         public SqlDataAdapter sqladptr;
         public SqlCommand SqlComm;
         #endregion
-
-        #region DataTables
-        public static DataTable MacTble;
-        public static DataTable UserTable;
-        public static DataTable AreaTable;
-        public static DataTable OfficeTable;
-        public static DataTable CompSurceTable;
-        public static DataTable CountryTable;
-        public static DataTable ProdKTable;
-        public static DataTable ProdCompTable;
-        public static DataTable UpdateKTable;
-        #endregion
-
-        public string servrTime;
-        public static String _ServerCD;
-        public static String _serverNm;
-        public static String _MacStr;
-        public static bool CncStat;
-        public static MenuStrip Menu_;
-        public static ContextMenuStrip CntxMenu;
         public Thread thread_;
-
-        #region FormAdjust
-
-        ContextMenuStrip DefCmStrip;
-        ContextMenuStrip TikCmStrip;
-        ContextMenuStrip UpdtCmStrip;
-
-        ToolStripMenuItem CmStripCopy = new ToolStripMenuItem();
-        ToolStripMenuItem CmStripPast = new ToolStripMenuItem();
-        ToolStripMenuItem CmStripPrvw = new ToolStripMenuItem();
-        ToolStripMenuItem CmStripUpVew = new ToolStripMenuItem();
-        ToolStripMenuItem CmStripUpload = new ToolStripMenuItem();
-        ToolStripMenuItem CmStripDwnload = new ToolStripMenuItem();
-
-        ToolStripMenuItem CmstripItemTmp1 = new ToolStripMenuItem();
-        ToolStripMenuItem CmstripItemTmp2 = new ToolStripMenuItem();
-        ToolStripMenuItem CmstripItemTmp3 = new ToolStripMenuItem();
-        #endregion
     }
     //Application Functions With Definitions Class Inheritance
-    public class function : defintions
+    public sealed class function : Statcdif
     {
+        private static readonly Lazy<function> fn = new Lazy<function>(() => new function());
+        public static function getfn
+        {
+            get
+            {
+                return fn.Value;
+            }
+        }
+        private function()
+        {
+
+        }
         public string ElapsedTimeSpan;
         public string ConStrFn()
         {
@@ -116,47 +113,50 @@ namespace VOCAC
         }
         public bool CheckConnection()                                                                        //Check Connection
         {
-            defintions def = new defintions();
-            def.CONSQL = new SqlConnection(defintions.strConn);
-            if (def.CONSQL != null)
+            Statcdif defstac = new Statcdif();
+            defstac.CONSQL = new SqlConnection(strConn);
+            //if (defstac.CONSQL != null)
+            //{
+            if (defstac.CONSQL.State == ConnectionState.Closed)
             {
-                if (def.CONSQL.State == ConnectionState.Closed)
+                try
                 {
-                    try
+                    if (defstac.CONSQL.State == ConnectionState.Closed)
                     {
-                        def.CONSQL.Open();
+                        defstac.CONSQL.Open();
                         CncStat = true;
                     }
-                    catch (SqlException Ex)
-                    {
-                        CncStat = false;
-                        AppLog("1002&H", Ex.Message, "Trying To Open Connection");
-                    }
                 }
-                else
+                catch (SqlException Ex)
                 {
                     CncStat = false;
+                    AppLog("1002&H", Ex.Message, "Trying To Open Connection");
                 }
             }
-            def.CONSQL.Close();
-            SqlConnection.ClearPool(def.CONSQL);
+            else
+            {
+                CncStat = true;
+            }
+            defstac.CONSQL.Close();
+            SqlConnection.ClearPool(defstac.CONSQL);
             return CncStat;
         }
         public string Gettable(String SSqlStr, DataTable SqlTbl, String ErrHndl)                             //Get Data and Fill DataTable
         {
             defintions def = new defintions();
+            Statcdif defstac = new Statcdif();
             string Msg = null;
             Stopwatch Stp = new Stopwatch();
-            def.CONSQL = new SqlConnection(defintions.strConn);
-            this.sqladptr = new SqlDataAdapter(SSqlStr, def.CONSQL);
+            defstac.CONSQL = new SqlConnection(strConn);
+            def.sqladptr = new SqlDataAdapter(SSqlStr, defstac.CONSQL);
             Stp.Start();
             try
             {
-                if (def.CONSQL.State == ConnectionState.Closed)
+                if (defstac.CONSQL.State == ConnectionState.Closed)
                 {
-                    def.CONSQL.Open();
+                    defstac.CONSQL.Open();
                 }
-                this.sqladptr.Fill(SqlTbl);
+                def.sqladptr.Fill(SqlTbl);
                 TimeSpan TimSpn = (Stp.Elapsed);
                 Stp.Stop();
                 this.ElapsedTimeSpan = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimSpn.Hours, TimSpn.Minutes, TimSpn.Seconds, TimSpn.Milliseconds);
@@ -166,28 +166,30 @@ namespace VOCAC
                 Msg = Ex.Message;
                 AppLog(" ", Ex.Message, SSqlStr);
             }
-            def.CONSQL.Close();
-            SqlConnection.ClearPool(def.CONSQL);
+            def.sqladptr.Dispose();
+            defstac.CONSQL.Close();
+            SqlConnection.ClearPool(defstac.CONSQL);
             return Msg;
         }
         public List<DataTable> Gettable(String SSqlStr, List<DataTable> LstDTbl, String ErrHndl)                             //Get Data and Fill List of DataTable
         {
             defintions def = new defintions();
+            Statcdif defstac = new Statcdif();
             Stopwatch Stp = new Stopwatch();
-            def.CONSQL = new SqlConnection(defintions.strConn);
+            defstac.CONSQL = new SqlConnection(strConn);
             Stp.Start();
             try
             {
                 string[] Str = SSqlStr.Split('$');
                 for (int i = 0; i < Str.Length - 1; i++)
                 {
-                    if (def.CONSQL.State == ConnectionState.Closed)
+                    if (defstac.CONSQL.State == ConnectionState.Closed)
                     {
-                        def.CONSQL.Open();
+                        defstac.CONSQL.Open();
                     }
-                    this.sqladptr = new SqlDataAdapter(Str[i], def.CONSQL);
+                    def.sqladptr = new SqlDataAdapter(Str[i], defstac.CONSQL);
                     DataTable dd = LstDTbl[i];
-                    this.sqladptr.Fill(LstDTbl[i]);
+                    def.sqladptr.Fill(LstDTbl[i]);
                 }
                 TimeSpan TimSpn = (Stp.Elapsed);
                 Stp.Stop();
@@ -197,24 +199,25 @@ namespace VOCAC
             {
                 AppLog(" ", Ex.Message, SSqlStr);
             }
-            def.CONSQL.Close();
-            SqlConnection.ClearPool(def.CONSQL);
+            defstac.CONSQL.Close();
+            SqlConnection.ClearPool(defstac.CONSQL);
             return LstDTbl;
         }
         public string InsUpdate(String SSqlStr, String ErrHndl)
         {
             defintions def = new defintions();
+            Statcdif defstac = new Statcdif();
             string Errmsg = null;
             Stopwatch Stp = new Stopwatch();
-            def.CONSQL = new SqlConnection(defintions.strConn);
-            def.SqlComm = new SqlCommand(SSqlStr, def.CONSQL);
+            defstac.CONSQL = new SqlConnection(strConn);
+            def.SqlComm = new SqlCommand(SSqlStr, defstac.CONSQL);
             def.SqlComm.CommandType = CommandType.Text;
             Stp.Start();
             try
             {
-                if (def.CONSQL.State == ConnectionState.Closed)
+                if (defstac.CONSQL.State == ConnectionState.Closed)
                 {
-                    def.CONSQL.Open();
+                    defstac.CONSQL.Open();
                 }
                 def.SqlComm.ExecuteNonQuery();
             }
@@ -223,8 +226,9 @@ namespace VOCAC
                 Errmsg = Ex.Message;
                 AppLog(" ", Ex.Message, SSqlStr);
             }
-            def.CONSQL.Close();
-            SqlConnection.ClearPool(def.CONSQL);
+            def.SqlComm.Dispose();
+            defstac.CONSQL.Close();
+            SqlConnection.ClearPool(defstac.CONSQL);
             return Errmsg;
         }
         public string OsIP()                                                                                 //Get User IP Address
@@ -243,13 +247,13 @@ namespace VOCAC
                 {
                     IPInterfaceProperties properties = adapter.GetIPProperties();
                     sMacAddress = adapter.GetPhysicalAddress().ToString();
+                    break;
                 }
             }
             return sMacAddress;
         }
         public string ServrTime()
         {
-
             DataTable TimeTbl = new DataTable();
             if (Gettable("Select GetDate() as Now_", TimeTbl, "1003&H") == null)
             {
@@ -263,76 +267,71 @@ namespace VOCAC
             string _content = DateTime.Now + " ," + ErrHndls + LogMsg + " &H" + SSqlStrs + Environment.NewLine;
             File.AppendAllText(_path, _content);
         }
-        public void SwitchBoard()
+        public void SwitchBoard(DataTable dt)
         {
             WelcomeScreen Logfrm = new WelcomeScreen();
 
             Menu_ = new MenuStrip();
             CntxMenu = new ContextMenuStrip();
-            DataTable SwichTabTable = new DataTable();
             DataTable SwichButTable = new DataTable();
             defintions Def = new defintions();
 
-            if (Gettable("SELECT SwNm, SwSer, SwID, SwObjNew,SwObjNm, SwObjImg, SwType,NewNew FROM ASwitchboard ORDER BY SwID", SwichTabTable, "1004&H") == null)
+            SwichButTable = dt.Copy();
+            dt.DefaultView.RowFilter = "(SwType = 'Tab') AND (SwNm <> 'NA')";
+            DataTable tabTable = dt.DefaultView.ToTable();
+            for (int i = 0; i < dt.DefaultView.Count - 1; i++)
             {
-                SwichButTable = SwichTabTable.Copy();
-                SwichTabTable.DefaultView.RowFilter = "(SwType = 'Tab') AND (SwNm <> 'NA')";
-                DataTable tabTable = SwichTabTable.DefaultView.ToTable();
-                for (int i = 0; i < SwichTabTable.DefaultView.Count - 1; i++)
+
+                ToolStripMenuItem NewTab = new ToolStripMenuItem(tabTable.Rows[i].Field<string>("SwNm"));
+                ToolStripMenuItem NewTabCx = new ToolStripMenuItem(tabTable.Rows[i].Field<string>("SwNm"));  //YYYYYYYYYYY
+
+                if (CurrentUser.PUsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID") - 1, 1) == "A" ||
+                    CurrentUser.PUsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID") - 1, 1) == "H")
                 {
+                    Menu_.Items.Add(NewTab);
+                    CntxMenu.Items.Add(NewTabCx);                    //YYYYYYYYYYY
 
-                    ToolStripMenuItem NewTab = new ToolStripMenuItem(tabTable.Rows[i].Field<string>("SwNm"));
-                    ToolStripMenuItem NewTabCx = new ToolStripMenuItem(tabTable.Rows[i].Field<string>("SwNm"));  //YYYYYYYYYYY
-
-                    if (CurrentUser.PUsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID")-1, 1) == "A" ||
-                        CurrentUser.PUsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID")-1, 1) == "H")
+                    String Filtr_ = tabTable.Rows[i].Field<string>("SwSer");
+                    SwichButTable.DefaultView.RowFilter = "(([SwType] <> '" + "Tab" + "') AND ([SwNm] <> '" + "NA" + "') AND ([SwSer] ='" + Filtr_ + "'))";
+                    DataTable butTable = SwichButTable.DefaultView.ToTable();
+                    for (int u = 0; u < SwichButTable.DefaultView.Count - 1; u++)
                     {
-                        Menu_.Items.Add(NewTab);
-                        CntxMenu.Items.Add(NewTabCx);                    //YYYYYYYYYYY
-
-                        String Filtr_ = tabTable.Rows[i].Field<string>("SwSer");
-                        SwichButTable.DefaultView.RowFilter = "(([SwType] <> '" + "Tab" + "') AND ([SwNm] <> '" + "NA" + "') AND ([SwSer] ='" + Filtr_ + "'))";
-                        DataTable butTable = SwichButTable.DefaultView.ToTable();
-                        for (int u = 0; u < SwichButTable.DefaultView.Count - 1; u++)
+                        ToolStripMenuItem subItem = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
+                        ToolStripMenuItem subItemCx = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
+                        if (CurrentUser.PUsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID"), 1) == "A" ||
+                            CurrentUser.PUsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID"), 1) == "H")
                         {
-                            ToolStripMenuItem subItem = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
-                            ToolStripMenuItem subItemCx = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
-                            if (CurrentUser.PUsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID"), 1) == "A" ||
-                                CurrentUser.PUsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID"), 1) == "H")
+                            if (butTable.Rows[u].Field<bool>("NewNew") == true)  // Populate Switchboard Button If form Added
                             {
-                                if (butTable.Rows[u].Field<bool>("NewNew") == true)  // Populate Switchboard Button If form Added
+                                subItem.Tag = butTable.Rows[u].Field<string>("SwObjNm");
+                                if (CurrentUser.PUsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID"), 1) == "H")
                                 {
-                                    subItem.Tag = butTable.Rows[u].Field<string>("SwObjNm");
-                                    if (CurrentUser.PUsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID"), 1) == "H")
-                                    {
-                                        subItem.AccessibleName = "True";
-                                        subItemCx.AccessibleName = "True";
-                                    }
-                                    // Assign Icon To every Button
-                                    if (DBNull.Value.Equals(butTable.Rows[u].Field<string>("SwObjImg")) == false)
-                                    {
-                                        ImageList imglst = new ImageList();
-                                        //imglst = Login.ControlCollection["ImageList1"];
-                                        Image Cnt_ = Logfrm.ImageList1.Images[butTable.Rows[u].Field<string>("SwObjImg")];
-                                        //Image Cnt_ = (Image)Resources.ResourceManager.GetObject(butTable.Rows[u].Field<string>("SwObjImg"));
-                                        subItem.Image = Cnt_;
-                                        subItemCx.Image = Cnt_;
-                                        subItemCx.Tag = butTable.Rows[u].Field<string>("SwObjNm");
-                                        NewTab.DropDownItems.Add(subItem);
-                                        NewTabCx.DropDownItems.Add(subItemCx);
-                                        frms GG = new frms();
-                                        subItem.Click += new System.EventHandler(GG.ClkEvntClick);
-                                        subItemCx.Click += new System.EventHandler(GG.ClkEvntClick);
-                                    }
+                                    subItem.AccessibleName = "True";
+                                    subItemCx.AccessibleName = "True";
+                                }
+                                // Assign Icon To every Button
+                                if (DBNull.Value.Equals(butTable.Rows[u].Field<string>("SwObjImg")) == false)
+                                {
+                                    ImageList imglst = new ImageList();
+                                    //imglst = Login.ControlCollection["ImageList1"];
+                                    Image Cnt_ = Logfrm.ImageList1.Images[butTable.Rows[u].Field<string>("SwObjImg")];
+                                    //Image Cnt_ = (Image)Resources.ResourceManager.GetObject(butTable.Rows[u].Field<string>("SwObjImg"));
+                                    subItem.Image = Cnt_;
+                                    subItemCx.Image = Cnt_;
+                                    subItemCx.Tag = butTable.Rows[u].Field<string>("SwObjNm");
+                                    NewTab.DropDownItems.Add(subItem);
+                                    NewTabCx.DropDownItems.Add(subItemCx);
+                                    frms GG = new frms();
+                                    subItem.Click += new System.EventHandler(GG.ClkEvntClick);
+                                    subItemCx.Click += new System.EventHandler(GG.ClkEvntClick);
                                 }
                             }
                         }
                     }
                 }
-                SwichTabTable.Dispose();
-                SwichButTable.Dispose();
             }
-
+            dt.Dispose();
+            SwichButTable.Dispose();
 
 
             //        Def.Str = " Menu has been builded  "
@@ -506,6 +505,7 @@ namespace VOCAC
         }
         public void FrmAllSub(Form frm)
         {
+
             List<Control> ctrl = GetAll(frm).ToList();
 
             foreach (Control c in ctrl)
@@ -558,17 +558,17 @@ namespace VOCAC
             {
                 if (f.Name == frm.Name)
                 {
-                    frm.BringToFront();
-                    if (frm.WindowState == FormWindowState.Minimized || frm.WindowState == FormWindowState.Normal)
+                    f.BringToFront();
+                    if (f.WindowState == FormWindowState.Minimized || f.WindowState == FormWindowState.Normal)
                     {
-                        f.WindowState = FormWindowState.Maximized;
+                        f.WindowState = FormWindowState.Normal;
                         f.BringToFront();
                     }
                     return;
                 }
             }
             frm.MdiParent = WelcomeScreen.ActiveForm;
-            frm.WindowState = FormWindowState.Maximized;
+            frm.WindowState = FormWindowState.Normal;
             frm.Show();
         }
         #endregion

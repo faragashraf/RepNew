@@ -763,7 +763,6 @@
             this.LogInBtn.BackColor = System.Drawing.Color.Transparent;
             this.LogInBtn.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
             this.LogInBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.LogInBtn.Enabled = false;
             this.LogInBtn.FlatAppearance.BorderSize = 0;
             this.LogInBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LogInBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
@@ -826,6 +825,7 @@
             this.TxtUsrPass.TabIndex = 102;
             this.ToolTip1.SetToolTip(this.TxtUsrPass, "كلمة المرور");
             this.TxtUsrPass.UseSystemPasswordChar = true;
+            this.TxtUsrPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtUsrPass_KeyDown);
             // 
             // TxtUsrNm
             // 
