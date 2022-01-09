@@ -33,6 +33,7 @@ namespace VOCAC.DAL
                 try
                 {
                     sqlconnection.Open();
+                    GC.Collect();
                 }
                 catch (Exception Ex)
                 {
@@ -49,6 +50,7 @@ namespace VOCAC.DAL
                 try
                 {
                     sqlconnection.Close();
+                    GC.Collect();
                 }
                 catch (Exception Ex)
                 {

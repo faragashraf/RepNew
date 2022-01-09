@@ -136,6 +136,7 @@
             // BtnUpd
             // 
             this.BtnUpd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnUpd.BackgroundImage = global::VOCAC.Properties.Resources.recorange;
             this.BtnUpd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnUpd.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.BtnUpd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
@@ -174,6 +175,7 @@
             // 
             // BtnClos
             // 
+            this.BtnClos.BackgroundImage = global::VOCAC.Properties.Resources.CpClose;
             this.BtnClos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnClos.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.BtnClos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
@@ -199,6 +201,7 @@
             // BtnAddEdt
             // 
             this.BtnAddEdt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnAddEdt.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
             this.BtnAddEdt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnAddEdt.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.BtnAddEdt.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -879,6 +882,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1560, 722);
             this.Controls.Add(this.FlowDetls);
             this.Name = "TikDetails";

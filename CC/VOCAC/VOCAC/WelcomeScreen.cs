@@ -16,13 +16,14 @@ namespace VOCAC
     public delegate void delagatethread();
     public partial class WelcomeScreen : Form
     {
-        private static WelcomeScreen frm;
         List<DataTable> DtblClction = new List<DataTable>();
         BL.CLS_LOGIN log = new BL.CLS_LOGIN();
         private string Ver = null;
+        private static WelcomeScreen frm;
         static void frm_Closed(object sender, FormClosedEventArgs e)
         {
             frm = null;
+            frm.Dispose();
         }
         public static WelcomeScreen getwecmscrnfrm
         {
@@ -48,25 +49,29 @@ namespace VOCAC
             this.LblClrSamCat.BackColor = Settings.Default.ClrSamCat;
             this.LblClrNotUsr.BackColor = Settings.Default.ClrNotUsr;
             this.LblClrOperation.BackColor = Settings.Default.ClrOperation;
-            PubVerLbl.Text = "IP: " + Statcdif._IP;
+
+            Label1.Text = "Welcome TO VOCA Enterprise" + Environment.NewLine + "Our Mini CRM";
+            function fn = function.getfn;
+            Statcdif._IP = fn.OsIP();
+            LblUsrIP.Text = "IP: " + Statcdif._IP;
             if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
             {
                 Ver = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4);
                 PubVerLbl.Text = "Ver. : " + Ver;
+                PubVerLbl1.Text = "Ver. : " + Ver;
             }
             else
             {
                 Ver = "Publish version";
                 PubVerLbl.Text = "Publish Ver. : This isn't a Publish version";
+                PubVerLbl1.Text = "Publish Ver. : This isn't a Publish version";
             }
-            LblUsrIP.Text = "IP: " + Statcdif._IP;
-            Label1.Text = "Welcome TO VOCA Enterprise" + Environment.NewLine + "Our Mini CRM";
 
             Cmbo.Items.Add("Eg Server");
             Cmbo.Items.Add("My Labtop");
             Cmbo.Items.Add("Training");
             //Cmbo.Items.Add("OnLine");
-            function fn =  function.getfn;
+
             Statcdif.servrTime = fn.ServrTime();
         }
         private void WelcomeScreen_Load(object sender, EventArgs e)
@@ -120,7 +125,6 @@ namespace VOCAC
         {
             Log();
         }
-        public string Msgs;
         public string SQLSTR;
         private void Log()
         {
@@ -153,11 +157,10 @@ namespace VOCAC
                 else
                 {
                     log.int_Access(Convert.ToInt32(0), TxtUsrNm.Text, "Fa", Statcdif._IP);
-                    Msgs = "          Invalid User Name Or Password";
+                    LblLogin.Text = "          Invalid User Name Or Password";
                     LblLogin.Image = Resources.Check_Marks2;
                     LblLogin.ForeColor = Color.Red;
                     StatBrPnlEn.Text = "Offline";
-                    fn.msg("Wrong", "تسجيل الدخول");
                 }
             }
             else
@@ -170,7 +173,6 @@ namespace VOCAC
             LogInBtn.Enabled = true;
             GC.Collect();
         }
-
         private void IntializeSwitchBoard(function fn)
         {
             DAL.DataAccessLayer.myStruct Swtchbordreslt = log.SwtchBoard();
@@ -182,15 +184,15 @@ namespace VOCAC
             Statcdif.Menu_.BackColor = Color.FromArgb(0, 192, 0);
             Statcdif.Menu_.Font = new Font("Times New Roman", 14, FontStyle.Regular);
             Statcdif.Menu_.RightToLeft = RightToLeft.Yes;
-            Statcdif.Menu_.Dock = DockStyle.Right;
+            Statcdif.Menu_.Dock = DockStyle.Left;
             Statcdif.Menu_.TextDirection = ToolStripTextDirection.Vertical270;
             this.Controls.Add(Statcdif.Menu_);
             panellgin.Visible = false;
-            FlowLayoutPanel1.Size = new Size(Statcdif.screenWidth - Statcdif.Menu_.Width, Statcdif.screenHeight - 130);
-            FlowLayoutPanel1.Location = new Point(0, 0);
+            FlowLayoutPanel1.Size = new Size(Statcdif.screenWidth - Statcdif.Menu_.Width, Statcdif.screenHeight - 120);
+            //FlowLayoutPanel1.Location = new Point(100, 30);
             FlowLayoutPanel1.Visible = true;
+            FlowLayoutPanel1.Dock = DockStyle.Fill;
         }
-
         private void SelctMainTables()
         {
             Statcdif.AreaTable = new DataTable();
@@ -200,6 +202,7 @@ namespace VOCAC
             Statcdif.ProdKTable = new DataTable();
             Statcdif.ProdCompTable = new DataTable();
             Statcdif.UpdateKTable = new DataTable();
+            Statcdif.CDHolDay = new DataTable();
             DAL.DataAccessLayer.myStruct SlctMainreslt = log.slctmaintbls();
             if (SlctMainreslt.ds.Tables.Count > 0)
             {
@@ -210,9 +213,9 @@ namespace VOCAC
                 Statcdif.ProdKTable = SlctMainreslt.ds.Tables[4];
                 Statcdif.ProdCompTable = SlctMainreslt.ds.Tables[5];
                 Statcdif.UpdateKTable = SlctMainreslt.ds.Tables[6];
+                Statcdif.CDHolDay = SlctMainreslt.ds.Tables[7];
             }
         }
-
         private void IntializeUser()
         {
             StatBrPnlEn.Text = "Online";
@@ -249,7 +252,6 @@ namespace VOCAC
             LblLogin.ForeColor = Color.Green;
             LblLogin.Refresh();
         }
-
         private void Chckcont()
         {
             defintions def = new defintions();
@@ -393,21 +395,19 @@ namespace VOCAC
         }
         private void tmrbringfront1(object sender, EventArgs e)
         {
-            Form[] dd = this.MdiChildren;
+            int Tst = 0;
+            Form[] dd = getwecmscrnfrm.MdiChildren;
             if (dd.Count() > 0)
             {
                 foreach (Form mdic in dd)
                 {
                     if (mdic.WindowState == FormWindowState.Normal || mdic.WindowState == FormWindowState.Maximized)
                     {
-                        FlowLayoutPanel1.SendToBack();
+                        Tst++;
                         break;
                     }
-                    else
-                    {
-                        FlowLayoutPanel1.BringToFront();
-                    }
                 }
+                if (Tst > 0) { FlowLayoutPanel1.SendToBack(); } else { FlowLayoutPanel1.BringToFront(); };
             }
             else
             {

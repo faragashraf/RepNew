@@ -13,6 +13,7 @@ using System.Threading;
 using VOCAC.Properties;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using static VOCAC.BL.currentTicket;
 
 namespace VOCAC
 {
@@ -34,7 +35,7 @@ namespace VOCAC
         public static ContextMenuStrip CntxMenu;
         #region DataTables
         public static DataTable MacTble, UserTable;
-        public static DataTable AreaTable, OfficeTable, CompSurceTable, CountryTable, ProdKTable, ProdCompTable, UpdateKTable;
+        public static DataTable AreaTable, OfficeTable, CompSurceTable, CountryTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay;
         #endregion
     }
     class menustrp
@@ -450,6 +451,12 @@ namespace VOCAC
         public void msg(string Messd, string titl, MessageBoxButtons messageBoxButtons = MessageBoxButtons.OK, MessageBoxOptions messageBoxOptions = MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign)
         {
             MessageBox.Show(Messd, titl, messageBoxButtons, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, messageBoxOptions);
+        }
+        public int CalDate(string StDt , string EnDt )
+        {
+            Statcdif.CDHolDay.DefaultView.RowFilter = "HDate >= '" + StDt + "' and HDate <= '" + EnDt + "'";
+            int Wdays = Statcdif.CDHolDay.DefaultView.Count;
+            return Wdays;
         }
     }
     // Current User Class

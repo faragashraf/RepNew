@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VOCAC.BL;
+using VOCAC.Properties;
+using static VOCAC.BL.currentTicket;
 
 namespace VOCAC
 {
@@ -36,11 +39,12 @@ namespace VOCAC
             {
                 frm = this;
             }
+          
         }
-
         private void TikDetails_Load(object sender, EventArgs e)
         {
-
+           
+            //هأكمل بقيت الكود هنا
         }
     }
 }

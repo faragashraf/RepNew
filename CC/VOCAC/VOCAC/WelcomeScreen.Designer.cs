@@ -104,6 +104,7 @@
             this.panellgin = new System.Windows.Forms.Panel();
             this.ImageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tmrbringfront = new System.Windows.Forms.Timer(this.components);
+            this.PubVerLbl1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.CNTXMNUPic.SuspendLayout();
             this.FlowLayoutPanel1.SuspendLayout();
@@ -290,6 +291,7 @@
             this.FlowLayoutPanel1.Location = new System.Drawing.Point(0, 12);
             this.FlowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.FlowLayoutPanel1.Name = "FlowLayoutPanel1";
+            this.FlowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.FlowLayoutPanel1.Size = new System.Drawing.Size(398, 541);
             this.FlowLayoutPanel1.TabIndex = 99;
             this.FlowLayoutPanel1.Visible = false;
@@ -821,6 +823,7 @@
             this.TxtUsrPass.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtUsrPass.Location = new System.Drawing.Point(158, 182);
             this.TxtUsrPass.Name = "TxtUsrPass";
+            this.TxtUsrPass.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.TxtUsrPass.Size = new System.Drawing.Size(232, 19);
             this.TxtUsrPass.TabIndex = 102;
             this.ToolTip1.SetToolTip(this.TxtUsrPass, "كلمة المرور");
@@ -834,6 +837,7 @@
             this.TxtUsrNm.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtUsrNm.Location = new System.Drawing.Point(158, 148);
             this.TxtUsrNm.Name = "TxtUsrNm";
+            this.TxtUsrNm.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.TxtUsrNm.Size = new System.Drawing.Size(232, 19);
             this.TxtUsrNm.TabIndex = 101;
             this.ToolTip1.SetToolTip(this.TxtUsrNm, "اسم المستخدم");
@@ -854,16 +858,16 @@
             // 
             // StatBrPnlAr
             // 
-            this.StatBrPnlAr.Alignment = System.Windows.Forms.HorizontalAlignment.Right;
             this.StatBrPnlAr.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring;
             this.StatBrPnlAr.Name = "StatBrPnlAr";
-            this.StatBrPnlAr.Width = 808;
+            this.StatBrPnlAr.Width = 1607;
             // 
             // StatBrPnlEn
             // 
-            this.StatBrPnlEn.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring;
+            this.StatBrPnlEn.Alignment = System.Windows.Forms.HorizontalAlignment.Right;
+            this.StatBrPnlEn.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Contents;
             this.StatBrPnlEn.Name = "StatBrPnlEn";
-            this.StatBrPnlEn.Width = 808;
+            this.StatBrPnlEn.Width = 10;
             // 
             // StatusBar1
             // 
@@ -874,7 +878,7 @@
             this.StatusBar1.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.StatBrPnlEn,
             this.StatBrPnlAr});
-            this.StatusBar1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.StatusBar1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.StatusBar1.ShowPanels = true;
             this.StatusBar1.Size = new System.Drawing.Size(1617, 33);
             this.StatusBar1.SizingGrip = false;
@@ -928,6 +932,7 @@
             this.LblLogin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.LblLogin.Location = new System.Drawing.Point(92, 207);
             this.LblLogin.Name = "LblLogin";
+            this.LblLogin.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.LblLogin.Size = new System.Drawing.Size(478, 34);
             this.LblLogin.TabIndex = 109;
             this.LblLogin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -949,6 +954,7 @@
             this.LblUsrPw.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblUsrPw.Location = new System.Drawing.Point(22, 182);
             this.LblUsrPw.Name = "LblUsrPw";
+            this.LblUsrPw.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.LblUsrPw.Size = new System.Drawing.Size(130, 19);
             this.LblUsrPw.TabIndex = 105;
             this.LblUsrPw.Text = "Password: ";
@@ -960,6 +966,7 @@
             this.LblUsrNm.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblUsrNm.Location = new System.Drawing.Point(26, 151);
             this.LblUsrNm.Name = "LblUsrNm";
+            this.LblUsrNm.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.LblUsrNm.Size = new System.Drawing.Size(126, 19);
             this.LblUsrNm.TabIndex = 104;
             this.LblUsrNm.Text = "User Name:";
@@ -978,6 +985,7 @@
             // panellgin
             // 
             this.panellgin.BackColor = System.Drawing.Color.White;
+            this.panellgin.Controls.Add(this.PubVerLbl1);
             this.panellgin.Controls.Add(this.PictureBox2);
             this.panellgin.Controls.Add(this.TxtUsrNm);
             this.panellgin.Controls.Add(this.label11);
@@ -1018,6 +1026,21 @@
             this.tmrbringfront.Enabled = true;
             this.tmrbringfront.Tick += new System.EventHandler(this.tmrbringfront1);
             // 
+            // PubVerLbl1
+            // 
+            this.PubVerLbl1.BackColor = System.Drawing.Color.Transparent;
+            this.PubVerLbl1.Font = new System.Drawing.Font("Times New Roman", 9F);
+            this.PubVerLbl1.ForeColor = System.Drawing.Color.Red;
+            this.PubVerLbl1.Location = new System.Drawing.Point(349, 315);
+            this.PubVerLbl1.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
+            this.PubVerLbl1.Name = "PubVerLbl1";
+            this.PubVerLbl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.PubVerLbl1.Size = new System.Drawing.Size(297, 20);
+            this.PubVerLbl1.TabIndex = 114;
+            this.PubVerLbl1.Text = "Publish Ver.";
+            this.PubVerLbl1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ToolTip1.SetToolTip(this.PubVerLbl1, "Publish Version Number");
+            // 
             // WelcomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1029,6 +1052,8 @@
             this.Controls.Add(this.StatusBar1);
             this.IsMdiContainer = true;
             this.Name = "WelcomeScreen";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.RightToLeftLayout = true;
             this.Text = "Login Screen";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.WelcomeScreen_Load);
@@ -1129,5 +1154,6 @@
         private System.Windows.Forms.Panel panellgin;
         internal System.Windows.Forms.ImageList ImageList1;
         private System.Windows.Forms.Timer tmrbringfront;
+        internal System.Windows.Forms.Label PubVerLbl1;
     }
 }
