@@ -24,7 +24,7 @@ namespace VOCAC
         public static int screenHeight = Screen.PrimaryScreen.Bounds.Height;
         public static InputLanguage EnglishInput;
         public static InputLanguage ArabicInput;
-        public static string strConn = @"Data Source=MyThinkbook\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046";
+        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-323";
         public SqlConnection CONSQL;
         public static String _ServerCD;
         public static String _serverNm;
@@ -87,7 +87,7 @@ namespace VOCAC
             }
             else if (_ServerCD == "Training")
             {
-                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-7";
+                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-323";
                 _serverNm = "Training";
             }
             else if (_ServerCD == "OnLine")

@@ -87,16 +87,15 @@ namespace VOCAC.BL
         public DAL.DataAccessLayer.myStruct slctmaintbls()
         {
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-            DataSet ds = new DataSet();
-            DAL.Struc = DAL.SelectMainDs("SP_MAINTBL_SLCT");
+            DAL.Struc = DAL.SelectDataset("SP_MAINTBL_SLCT");
             DAL.Close();
             return DAL.Struc;
         }
         public DAL.DataAccessLayer.myStruct SwtchBoard()
         {
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-            DataTable dt = new DataTable();
-            DAL.Struc = DAL.SwitchBoard("SP_SwitchBoard_SLCT");
+            SqlParameter[] param = null;
+            DAL.Struc = DAL.SelectData("SP_SwitchBoard_SLCT", param);
             DAL.Close();
             DataColumn primaryKey, primaryKey1 = new DataColumn();
             primaryKey = Statcdif.CountryTable.Columns["CounCd"];

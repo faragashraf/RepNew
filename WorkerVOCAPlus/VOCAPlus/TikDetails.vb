@@ -91,7 +91,7 @@ Public Class TikDetails
     End Sub
 
     Private Sub TikDetails_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
-        If StruGrdTk.FlwStat = True Then
+        If StruGrdTk.ClsStat = True Then
             TcktImg.BackgroundImage = My.Resources.Tckoff
             TcktImg.BackgroundImageLayout = ImageLayout.Stretch
             BtnAddEdt.Enabled = False

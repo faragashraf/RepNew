@@ -23,7 +23,7 @@ namespace VOCAC.DAL
         {
             //"Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocac;Password=Hemonad105046";
             //@"Data Source = MyThinkbook\ASHRAFSQL; Initial Catalog = VOCAPlus; Persist Security Info = True; User ID = sa; Password = Hemonad105046")
-            sqlconnection = new SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocac;Password=Hemonad105046");
+            sqlconnection = new SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-323");
         }
         //Method to Open connection
         public void Open()
@@ -115,7 +115,8 @@ namespace VOCAC.DAL
             }
             return Struc;
         }
-        public myStruct SelectMainDs(string Stored_Procedure)
+        //Method to Read Data From Database And Return A Dataset
+        public myStruct SelectDataset(string Stored_Procedure)
         {
             Struc.msg = null;
             Struc.ds = null;
@@ -130,30 +131,6 @@ namespace VOCAC.DAL
             try
             {
                 da.Fill(Struc.ds);
-            }
-            catch (Exception Ex)
-            {
-                function fn = function.getfn;
-                Struc.msg = Ex.Message;
-                fn.AppLog(this.ToString(), Ex.Message, Stored_Procedure);
-            }
-            return Struc;
-        }
-        public myStruct SwitchBoard(string Stored_Procedure)
-        {
-            Struc.msg = null;
-            Struc.ds = null;
-            Struc.dt = null;
-            SqlCommand sqlcmd = new SqlCommand();
-            sqlcmd.CommandType = CommandType.StoredProcedure;
-            sqlcmd.CommandText = Stored_Procedure;
-            sqlcmd.Connection = sqlconnection;
-
-            SqlDataAdapter da = new SqlDataAdapter(sqlcmd);
-            Struc.dt = new DataTable();
-            try
-            {
-                da.Fill(Struc.dt);
             }
             catch (Exception Ex)
             {
