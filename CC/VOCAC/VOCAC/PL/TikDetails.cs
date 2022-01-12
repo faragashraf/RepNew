@@ -11,7 +11,7 @@ using VOCAC.BL;
 using VOCAC.Properties;
 using static VOCAC.BL.currentTicket;
 
-namespace VOCAC
+namespace VOCAC.PL
 {
     public partial class TikDetails : Form
     {

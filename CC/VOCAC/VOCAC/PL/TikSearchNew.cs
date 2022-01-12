@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace VOCAC
+namespace VOCAC.PL
 {
     public partial class TikSearchNew : Form
     {
@@ -46,13 +46,13 @@ namespace VOCAC
             //FltrStr.Append(" [TkSQL]" + LK + strt + SerchTxt.Text + end_);
             FltrStr.Append(" where  [TkSQL]" + LK + strt + SerchTxt.Text + end_);
 
-            DAL.DataAccessLayer.myStruct Struc = new DAL.DataAccessLayer.myStruct();
+            DAL.DataAccessLayer.rturnStruct Struc = new DAL.DataAccessLayer.rturnStruct();
             Struc = Search_(FltrStr.ToString());
             GridTicket.DataSource = Struc.dt;
             this.Text += Struc.dt.Rows.Count.ToString();
         }
 
-        private DAL.DataAccessLayer.myStruct Search_(string Where_)
+        private DAL.DataAccessLayer.rturnStruct Search_(string Where_)
         {
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             SqlParameter[] param = new SqlParameter[1];

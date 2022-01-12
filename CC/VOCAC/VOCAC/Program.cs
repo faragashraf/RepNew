@@ -16,7 +16,7 @@ namespace VOCAC
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run( new WelcomeScreen());
+            Application.Run( new PL.WelcomeScreen());
         }
 
 

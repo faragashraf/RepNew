@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VOCAC.Properties;
 
-namespace VOCAC
+namespace VOCAC.PL
 {
     public delegate void delagatethread();
     public partial class WelcomeScreen : Form
@@ -137,15 +137,15 @@ namespace VOCAC
             LblLogin.ForeColor = Color.Blue;
             this.Refresh();
 
-            DAL.DataAccessLayer.myStruct logreslt = log.LOGIN(TxtUsrNm.Text, TxtUsrPass.Text);
+            DAL.DataAccessLayer.rturnStruct logreslt = log.LOGIN(TxtUsrNm.Text, TxtUsrPass.Text);
             if (logreslt.msg == null)
             {
                 if (logreslt.dt.Rows.Count > 0)
                 {
                     Statcdif.UserTable = logreslt.dt;
                     IntializeUser();
-                    DAL.DataAccessLayer.myStruct Accesslogreslt = log.UsrUpdate(Statcdif._IP, Ver, CurrentUser.PUsrID);
-                    DAL.DataAccessLayer.myStruct Updtereslt = log.int_Access(CurrentUser.PUsrID, CurrentUser.PUsrNm, "OK", Statcdif._IP);
+                    DAL.DataAccessLayer.rturnStruct Accesslogreslt = log.UsrUpdate(Statcdif._IP, Ver, CurrentUser.UsrID);
+                    DAL.DataAccessLayer.rturnStruct Updtereslt = log.int_Access(CurrentUser.UsrID, CurrentUser.UsrNm, "OK", Statcdif._IP);
                     if (Accesslogreslt.msg == null && Updtereslt.msg == null)
                     {
                         SelctMainTables();
@@ -175,12 +175,12 @@ namespace VOCAC
         }
         private void IntializeSwitchBoard(function fn)
         {
-            DAL.DataAccessLayer.myStruct Swtchbordreslt = log.SwtchBoard();
+            DAL.DataAccessLayer.rturnStruct Swtchbordreslt = log.SwtchBoard();
             if (Swtchbordreslt.dt.Rows.Count > 0)
             {
                 fn.SwitchBoard(Swtchbordreslt.dt);
             }
-            this.Text = "Welcome " + CurrentUser.PUsrRlNm;
+            this.Text = "Welcome " + CurrentUser.UsrRlNm;
             Statcdif.Menu_.BackColor = Color.FromArgb(0, 192, 0);
             Statcdif.Menu_.Font = new Font("Times New Roman", 14, FontStyle.Regular);
             Statcdif.Menu_.RightToLeft = RightToLeft.Yes;
@@ -203,7 +203,9 @@ namespace VOCAC
             Statcdif.ProdCompTable = new DataTable();
             Statcdif.UpdateKTable = new DataTable();
             Statcdif.CDHolDay = new DataTable();
-            DAL.DataAccessLayer.myStruct SlctMainreslt = log.slctmaintbls();
+            Statcdif.MendFildsTable = new DataTable();
+            Statcdif.MendPvtTable = new DataTable();
+            DAL.DataAccessLayer.rturnStruct SlctMainreslt = log.slctmaintbls();
             if (SlctMainreslt.ds.Tables.Count > 0)
             {
                 Statcdif.AreaTable = SlctMainreslt.ds.Tables[0];
@@ -214,46 +216,62 @@ namespace VOCAC
                 Statcdif.ProdCompTable = SlctMainreslt.ds.Tables[5];
                 Statcdif.UpdateKTable = SlctMainreslt.ds.Tables[6];
                 Statcdif.CDHolDay = SlctMainreslt.ds.Tables[7];
+                Statcdif.MendFildsTable = SlctMainreslt.ds.Tables[8];
+                Statcdif.MendPvtTable = SlctMainreslt.ds.Tables[9];
+                if (CurrentUser.UsrUCatLvl == 7)
+                {
+                    Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" + 0 + " AND [srcCd] = '1'";     //     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm";
+                }
+                    else
+                {
+                    Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" + 0 + " AND [srcCd] > '1'";   //  SrcStr = "Select SrcCd, SrcNm from CDSrc where SrcSusp=0 And srcCd > 1 ORDER BY SrcNm"
+                }
+                Statcdif.FildList.Clear();
+                for (int i = 0; i < Statcdif.MendPvtTable.Rows.Count; i++)
+                {
+                    Statcdif.FildList.Add("[" + Statcdif.MendPvtTable.Rows[i].Field<string>("FildKind") + "]");
+                }
             }
         }
         private void IntializeUser()
         {
             StatBrPnlEn.Text = "Online";
-            CurrentUser.PUsrID = Statcdif.UserTable.Rows[0].Field<int>("UsrId");                  //store user ID
-            CurrentUser.PUsrCat = Statcdif.UserTable.Rows[0].Field<int>("UsrCat");                //Current User Catagory
-            CurrentUser.PUsrNm = Statcdif.UserTable.Rows[0].Field<String>("UsrNm");               //Current User Name
-            CurrentUser.PUsrPWrd = Statcdif.UserTable.Rows[0].Field<String>("UsrPassTmp");        //Current User Password
-            CurrentUser.PUsrLvl = Statcdif.UserTable.Rows[0].Field<String>("UsrLevel");           //Current User Class
-            CurrentUser.PUsrRlNm = Statcdif.UserTable.Rows[0].Field<String>("UsrRealNm");         //Current user Real Name
-            CurrentUser.PUsrMail = Statcdif.UserTable.Rows[0].Field<String>("UsrEmail");          //Current user UsrEmail
-            CurrentUser.PUsrSisco = Statcdif.UserTable.Rows[0].Field<String>("UsrSisco");         //Current user UsrSisco
-            CurrentUser.PUsrGsm = Statcdif.UserTable.Rows[0].Field<String>("UsrGsm");             //Current user UsrGsm
-            CurrentUser.PUsrGndr = Statcdif.UserTable.Rows[0].Field<String>("UsrGender");         //Current user Gender
-            CurrentUser.PUsrActv = Statcdif.UserTable.Rows[0].Field<bool>("UsrActive");           //Current User Active Or not
-            CurrentUser.PUsrLstS = Statcdif.UserTable.Rows[0].Field<DateTime>("UsrLastSeen");     //Current User LastSeen
-            CurrentUser.PUsrSusp = Statcdif.UserTable.Rows[0].Field<bool>("UsrSusp");             //Current User Suspended Or not
-            CurrentUser.PUsrTcCnt = Statcdif.UserTable.Rows[0].Field<int>("UsrTkCount");          //Ticket Count
-            CurrentUser.PUsrSltKy = Statcdif.UserTable.Rows[0].Field<String>("SaltKey");          //SaltKey
-            CurrentUser.PUsrCatNm = Statcdif.UserTable.Rows[0].Field<String>("UCatNm");           //Catagory name
-            CurrentUser.PUsrCalCntr = Statcdif.UserTable.Rows[0].Field<bool>("UsrCalCntr");       //Call Center Boolean
-            CurrentUser.PUsrUCatLvl = Statcdif.UserTable.Rows[0].Field<Int16>("UCatLvl");         //User Cat. Level
-            CurrentUser.PUsrClsN = Statcdif.UserTable.Rows[0].Field<int>("UsrClsN");              //Open Complaint Count
-            CurrentUser.PUsrFlN = Statcdif.UserTable.Rows[0].Field<int>("UsrFlN");                //No Follow Count
-            CurrentUser.PUsrReOpY = Statcdif.UserTable.Rows[0].Field<int>("UsrReOpY");            //ReOPen Couunt
-            CurrentUser.PUsrUnRead = Statcdif.UserTable.Rows[0].Field<int>("UsrUnRead");          //Unread Events Count
-            CurrentUser.PUsrEvDy = Statcdif.UserTable.Rows[0].Field<int>("UsrEvDy");              //Event Count Per Day
-            CurrentUser.PUsrClsYDy = Statcdif.UserTable.Rows[0].Field<int>("UsrClsYDy");          //Closed Complaint Per day
-            CurrentUser.PUsrReadYDy = Statcdif.UserTable.Rows[0].Field<int>("UsrReadYDy");        //Read Events Count Per Day
-            CurrentUser.PUsrRecvDy = Statcdif.UserTable.Rows[0].Field<int>("UsrRecevDy");         //RecievedTickets Count Per Day
-            CurrentUser.PUsrClsUpdtd = Statcdif.UserTable.Rows[0].Field<int>("UsrClsUpdtd");      //Closed Tickets with New Updates
-            CurrentUser.PUsrFolwDay = Statcdif.UserTable.Rows[0].Field<int>("UsrTikFlowDy");      //Closed Tickets with New Updates
+            CurrentUser.UsrID = Statcdif.UserTable.Rows[0].Field<int>("UsrId");                  //store user ID
+            CurrentUser.UsrCat = Statcdif.UserTable.Rows[0].Field<int>("UsrCat");                //Current User Catagory
+            CurrentUser.UsrNm = Statcdif.UserTable.Rows[0].Field<String>("UsrNm");               //Current User Name
+            CurrentUser.UsrPWrd = Statcdif.UserTable.Rows[0].Field<String>("UsrPassTmp");        //Current User Password
+            CurrentUser.UsrLvl = Statcdif.UserTable.Rows[0].Field<String>("UsrLevel");           //Current User Class
+            CurrentUser.UsrRlNm = Statcdif.UserTable.Rows[0].Field<String>("UsrRealNm");         //Current user Real Name
+            CurrentUser.UsrMail = Statcdif.UserTable.Rows[0].Field<String>("UsrEmail");          //Current user UsrEmail
+            CurrentUser.UsrSisco = Statcdif.UserTable.Rows[0].Field<String>("UsrSisco");         //Current user UsrSisco
+            CurrentUser.UsrGsm = Statcdif.UserTable.Rows[0].Field<String>("UsrGsm");             //Current user UsrGsm
+            CurrentUser.UsrGndr = Statcdif.UserTable.Rows[0].Field<String>("UsrGender");         //Current user Gender
+            CurrentUser.UsrActv = Statcdif.UserTable.Rows[0].Field<bool>("UsrActive");           //Current User Active Or not
+            CurrentUser.UsrLstS = Statcdif.UserTable.Rows[0].Field<DateTime>("UsrLastSeen");     //Current User LastSeen
+            CurrentUser.UsrSusp = Statcdif.UserTable.Rows[0].Field<bool>("UsrSusp");             //Current User Suspended Or not
+            CurrentUser.UsrTcCnt = Statcdif.UserTable.Rows[0].Field<int>("UsrTkCount");          //Ticket Count
+            CurrentUser.UsrSltKy = Statcdif.UserTable.Rows[0].Field<String>("SaltKey");          //SaltKey
+            CurrentUser.UsrCatNm = Statcdif.UserTable.Rows[0].Field<String>("UCatNm");           //Catagory name
+            CurrentUser.UsrCalCntr = Statcdif.UserTable.Rows[0].Field<bool>("UsrCalCntr");       //Call Center Boolean
+            CurrentUser.UsrUCatLvl = Statcdif.UserTable.Rows[0].Field<Int16>("UCatLvl");         //User Cat. Level
+            CurrentUser.UsrClsN = Statcdif.UserTable.Rows[0].Field<int>("UsrClsN");              //Open Complaint Count
+            CurrentUser.UsrFlN = Statcdif.UserTable.Rows[0].Field<int>("UsrFlN");                //No Follow Count
+            CurrentUser.UsrReOpY = Statcdif.UserTable.Rows[0].Field<int>("UsrReOpY");            //ReOPen Couunt
+            CurrentUser.UsrUnRead = Statcdif.UserTable.Rows[0].Field<int>("UsrUnRead");          //Unread Events Count
+            CurrentUser.UsrEvDy = Statcdif.UserTable.Rows[0].Field<int>("UsrEvDy");              //Event Count Per Day
+            CurrentUser.UsrClsYDy = Statcdif.UserTable.Rows[0].Field<int>("UsrClsYDy");          //Closed Complaint Per day
+            CurrentUser.UsrReadYDy = Statcdif.UserTable.Rows[0].Field<int>("UsrReadYDy");        //Read Events Count Per Day
+            CurrentUser.UsrRecvDy = Statcdif.UserTable.Rows[0].Field<int>("UsrRecevDy");         //RecievedTickets Count Per Day
+            CurrentUser.UsrClsUpdtd = Statcdif.UserTable.Rows[0].Field<int>("UsrClsUpdtd");      //Closed Tickets with New Updates
+            CurrentUser.UsrFolwDay = Statcdif.UserTable.Rows[0].Field<int>("UsrTikFlowDy");      //Closed Tickets with New Updates
+            CurrentUser.UsrTeam = log.MyTeam(CurrentUser.UsrCat, CurrentUser.UsrID, "").msg;
             LblLogin.Text = "          Login has been succeeded";
             LblLogin.Image = Resources.Check_Marks1;
             LblLogin.ForeColor = Color.Green;
             LblLogin.Refresh();
 
 
-            LblUsrRNm.Text = "Welcome " + CurrentUser.PUsrRlNm;
+            LblUsrRNm.Text = "Welcome " + CurrentUser.UsrRlNm;
 
         }
         private void Chckcont()

@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Net.NetworkInformation;
-using System.IO;
-using System.Net;
-using System.Windows.Forms;
-using System.Threading;
-using VOCAC.Properties;
 using System.Drawing;
-using System.Runtime.InteropServices;
-using static VOCAC.BL.currentTicket;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Threading;
+using System.Windows.Forms;
+using VOCAC.PL;
 
 namespace VOCAC
 {
@@ -30,12 +27,14 @@ namespace VOCAC
         public static String _serverNm;
         public static string servrTime;
         public static String _MacStr,_IP;
+        public static List<string> FildList= new List<string>();
         public static bool CncStat;
         public static MenuStrip Menu_;
         public static ContextMenuStrip CntxMenu;
         #region DataTables
         public static DataTable MacTble, UserTable;
-        public static DataTable AreaTable, OfficeTable, CompSurceTable, CountryTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay;
+        public static DataTable AreaTable, OfficeTable, CompSurceTable, CountryTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, MendPvtTable;
+
         #endregion
     }
     class menustrp
@@ -172,7 +171,7 @@ namespace VOCAC
             SqlConnection.ClearPool(defstac.CONSQL);
             return Msg;
         }
-        public List<DataTable> Gettable(String SSqlStr, List<DataTable> LstDTbl, String ErrHndl)                             //Get Data and Fill List of DataTable
+        public List<DataTable> Gettable(String SSqlStr, List<DataTable> LstDTbl, String ErrHndl)             //Get Data and Fill List of DataTable
         {
             defintions def = new defintions();
             Statcdif defstac = new Statcdif();
@@ -280,14 +279,14 @@ namespace VOCAC
             SwichButTable = dt.Copy();
             dt.DefaultView.RowFilter = "(SwType = 'Tab') AND (SwNm <> 'NA')";
             DataTable tabTable = dt.DefaultView.ToTable();
-            for (int i = 0; i < dt.DefaultView.Count - 1; i++)
+            for (int i = 0; i < dt.DefaultView.Count ; i++)
             {
 
                 ToolStripMenuItem NewTab = new ToolStripMenuItem(tabTable.Rows[i].Field<string>("SwNm"));
                 ToolStripMenuItem NewTabCx = new ToolStripMenuItem(tabTable.Rows[i].Field<string>("SwNm"));  //YYYYYYYYYYY
 
-                if (CurrentUser.PUsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID") - 1, 1) == "A" ||
-                    CurrentUser.PUsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID") - 1, 1) == "H")
+                if (CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID") - 1, 1) == "A" ||
+                    CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID") - 1, 1) == "H")
                 {
                     Menu_.Items.Add(NewTab);
                     CntxMenu.Items.Add(NewTabCx);                    //YYYYYYYYYYY
@@ -295,17 +294,16 @@ namespace VOCAC
                     String Filtr_ = tabTable.Rows[i].Field<string>("SwSer");
                     SwichButTable.DefaultView.RowFilter = "(([SwType] <> '" + "Tab" + "') AND ([SwNm] <> '" + "NA" + "') AND ([SwSer] ='" + Filtr_ + "'))";
                     DataTable butTable = SwichButTable.DefaultView.ToTable();
-                    for (int u = 0; u < SwichButTable.DefaultView.Count - 1; u++)
+                    for (int u = 0; u < SwichButTable.DefaultView.Count; u++)
                     {
                         ToolStripMenuItem subItem = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
                         ToolStripMenuItem subItemCx = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
-                        if (CurrentUser.PUsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID"), 1) == "A" ||
-                            CurrentUser.PUsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID"), 1) == "H")
+                        if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID")-1, 1) == "A" )
                         {
                             if (butTable.Rows[u].Field<bool>("NewNew") == true)  // Populate Switchboard Button If form Added
                             {
-                                subItem.Tag = butTable.Rows[u].Field<string>("SwObjNm");
-                                if (CurrentUser.PUsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID"), 1) == "H")
+                                subItem.Tag = butTable.Rows[u].Field<string>("SwObjNm1");
+                                if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID")-1, 1) == "A")
                                 {
                                     subItem.AccessibleName = "True";
                                     subItemCx.AccessibleName = "True";
@@ -319,7 +317,7 @@ namespace VOCAC
                                     //Image Cnt_ = (Image)Resources.ResourceManager.GetObject(butTable.Rows[u].Field<string>("SwObjImg"));
                                     subItem.Image = Cnt_;
                                     subItemCx.Image = Cnt_;
-                                    subItemCx.Tag = butTable.Rows[u].Field<string>("SwObjNm");
+                                    subItemCx.Tag = butTable.Rows[u].Field<string>("SwObjNm1");
                                     NewTab.DropDownItems.Add(subItem);
                                     NewTabCx.DropDownItems.Add(subItemCx);
                                     frms GG = new frms();
@@ -462,34 +460,35 @@ namespace VOCAC
     // Current User Class
     public static class CurrentUser
     {
-        public static int PUsrID;          //UsrId
-        public static int PUsrCat;         //UsrCat
-        public static String PUsrNm;        //UsrNm
-        public static String PUsrPWrd;       //UsrPass
-        public static String PUsrLvl;      //UsrLevel
-        public static String PUsrRlNm;    //UsrRealNm
-        public static String PUsrMail;   //UsrEmail
-        public static String PUsrSisco;  //UsrSisco
-        public static String PUsrGsm;  //UsrMobile
-        public static String PUsrGndr;    //UsrGender
-        public static Boolean PUsrActv;   //UsrActive(Yes/No)
-        public static DateTime PUsrLstS;    //UsrLastSeen
-        public static bool PUsrSusp;   //UsrSusp(Yes/No)
-        public static int PUsrTcCnt;       //UsrTkCount
-        public static String PUsrSltKy;  //SaltKey
-        public static String PUsrCatNm;    //Catagory name
-        public static Boolean PUsrCalCntr;     //Call Center
-        public static Int16 PUsrUCatLvl;     //Close Count
-        public static int PUsrFlN;         //Follow Count
-        public static int PUsrClsN;    //Open Count
-        public static int PUsrReOpY;   //ReOpen Count
-        public static int PUsrUnRead;  //Read Count
-        public static int PUsrEvDy;    //Enent Count
-        public static int PUsrReadYDy;  //Read Count
-        public static int PUsrClsYDy;      //Close Count
-        public static int PUsrRecvDy;      //Recieved Count
-        public static int PUsrClsUpdtd;    //Closed updated Count
-        public static int PUsrFolwDay;     //Followed Tickets Count
+        public static int UsrID;          //UsrId
+        public static int UsrCat;         //UsrCat
+        public static String UsrNm;        //UsrNm
+        public static String UsrPWrd;       //UsrPass
+        public static String UsrLvl;      //UsrLevel
+        public static String UsrRlNm;    //UsrRealNm
+        public static String UsrMail;   //UsrEmail
+        public static String UsrSisco;  //UsrSisco
+        public static String UsrGsm;  //UsrMobile
+        public static String UsrGndr;    //UsrGender
+        public static Boolean UsrActv;   //UsrActive(Yes/No)
+        public static DateTime UsrLstS;    //UsrLastSeen
+        public static bool UsrSusp;   //UsrSusp(Yes/No)
+        public static int UsrTcCnt;       //UsrTkCount
+        public static String UsrSltKy;  //SaltKey
+        public static String UsrCatNm;    //Catagory name
+        public static Boolean UsrCalCntr;     //Call Center
+        public static Int16 UsrUCatLvl;     //Close Count
+        public static int UsrFlN;         //Follow Count
+        public static int UsrClsN;    //Open Count
+        public static int UsrReOpY;   //ReOpen Count
+        public static int UsrUnRead;  //Read Count
+        public static int UsrEvDy;    //Enent Count
+        public static int UsrReadYDy;  //Read Count
+        public static int UsrClsYDy;      //Close Count
+        public static int UsrRecvDy;      //Recieved Count
+        public static int UsrClsUpdtd;    //Closed updated Count
+        public static int UsrFolwDay;     //Followed Tickets Count
+        public static string UsrTeam;     //User Team Agents IDs 
     }
     public class frms
     {
@@ -559,7 +558,7 @@ namespace VOCAC
         public void ClkEvntClick(object sender, EventArgs e)
         {
             ToolStripMenuItem _item = (ToolStripMenuItem)sender;
-            String formName = "VOCAC." + _item.Tag;
+            String formName = "VOCAC.PL." + _item.Tag;
             Form frm = (Form)Activator.CreateInstance(Type.GetType(formName));
             foreach (Form f in Application.OpenForms)
             {

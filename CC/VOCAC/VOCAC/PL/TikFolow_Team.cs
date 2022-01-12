@@ -16,21 +16,21 @@ using static VOCAC.BL.currentTicket;
 
 namespace VOCAC.PL
 {
-    public partial class TikFolow : Form
+    public partial class TikFolow_Team : Form
     {
         BL.currentTicket Crnt = new currentTicket();
-        private static TikFolow frm;
+        private static TikFolow_Team frm;
         static void frm_Closed(object sender, FormClosedEventArgs e)
         {
             frm = null;
         }
-        public static TikFolow getTikFollowfrm
+        public static TikFolow_Team getTikFollowfrm
         {
             get
             {
                 if (frm == null)
                 {
-                    frm = new TikFolow();
+                    frm = new TikFolow_Team();
                     frm.FormClosed += new FormClosedEventHandler(frm_Closed);
                 }
                 return frm;
@@ -41,7 +41,8 @@ namespace VOCAC.PL
         BindingManagerBase bmb;
         SqlCommandBuilder sqlcmb;
         DataTable TickTblMain = new DataTable();
-        public TikFolow()
+        DataView TempData = new DataView();
+        public TikFolow_Team()
         {
             WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "  جاري تحميل البيانات .......";
             InitializeComponent();
@@ -49,7 +50,7 @@ namespace VOCAC.PL
                             "TkDetails, TkClsStatus, TkFolw, TkEmpNm, tk.UsrRealNm as 'folowusr', TkReOp, format(TkRecieveDt, 'yyyy/MM/dd') As TkRecieveDt, TkEscTyp, ProdKNm, CompHelp, TkupSTime, EvNm, TkupTxt, upusr.UsrRealNm as 'updtusr', TkupReDt, TkupUser, TkupSQL, TkupTkSql," +
                             "TkupEvtId, EvSusp, UCatLvl, TkupUnread" +
                             " from TicketsAll tk inner join TkEvent Ev on Ev.TkupSQL = TkEvSql INNER JOIN Int_user upusr ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON upusr.UsrCat = IntUserCat.UCatId where tk.TkClsStatus = 0 and " +
-                            "tk.TkEmpNm = " + CurrentUser.UsrID + " order by TkSQL", sqlcon);
+                            "tk.TkEmpNm  " + CurrentUser.UsrTeam + " order by TkSQL", sqlcon);
             try
             {
                 da.Fill(TickTblMain);
@@ -112,7 +113,7 @@ namespace VOCAC.PL
         {
             if (this.GridTicket.Columns.Count > 0)
             {
-                for (int i = 0; i < GridTicket.Columns.Count ; i++)
+                for (int i = 0; i < GridTicket.Columns.Count; i++)
                 {
                     GridTicket.Columns[i].Visible = false;
                 }
@@ -201,6 +202,7 @@ namespace VOCAC.PL
             string LK = " like ";
             string strt = "'%";
             string end_ = "%'";
+            TempData = TickTblMain.DefaultView;
 
             if (SerchTxt.TextLength > 0)
             {
@@ -373,7 +375,7 @@ namespace VOCAC.PL
         {
             Filtr();
         }
-        private void GridTicket_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void GridTicket_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             Stopwatch Stp = new Stopwatch();
             Stp.Start();

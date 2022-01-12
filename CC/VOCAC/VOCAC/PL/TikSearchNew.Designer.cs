@@ -1,4 +1,4 @@
-﻿namespace VOCAC
+﻿namespace VOCAC.PL
 {
     partial class TikSearchNew
     {

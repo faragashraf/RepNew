@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VOCAC.PL;
 using VOCAC.Properties;
 
 namespace VOCAC.BL
@@ -30,7 +31,7 @@ namespace VOCAC.BL
             public static string _TkClNtID;
             public static string _TkAmount;
             public static DateTime _TkTransDate;
-            public static string _PrdKind;
+            public static string _ProdKNm;
             public static string _PrdNm;
             public static string _CompNm;
             public static string _CounNmSender;
@@ -45,7 +46,6 @@ namespace VOCAC.BL
             public static bool _TkReOp;
             public static DateTime _TkRecieveDt;
             public static int _TkEscTyp;
-            public static string _ProdKNm;
             public static string _CompHelp;
             public static DateTime _TkupSTime;
             public static string _EvNm;
@@ -99,7 +99,10 @@ namespace VOCAC.BL
             currntTicket._folowusr = Convert.ToString(gv.CurrentRow.Cells["folowusr"].Value);
             currntTicket._TkReOp = Convert.ToBoolean(gv.CurrentRow.Cells["TkReOp"].Value);
             currntTicket._TkClsStatus = Convert.ToBoolean(gv.CurrentRow.Cells["TkClsStatus"].Value);
-            currntTicket._TkTransDate = (DateTime)gv.CurrentRow.Cells["TkTransDate"].Value;
+            if (gv.CurrentRow.Cells["TkTransDate"].Value.ToString().Length > 0)
+            {
+                currntTicket._TkTransDate = (DateTime)gv.CurrentRow.Cells["TkTransDate"].Value;
+            }
 
             currntTicket._EvNm = Convert.ToString(gv.CurrentRow.Cells["EvNm"].Value);
             currntTicket._EvSusp = Convert.ToBoolean(gv.CurrentRow.Cells["EvSusp"].Value);
@@ -136,7 +139,7 @@ namespace VOCAC.BL
                 TikDetails.gettikdetlsfrm.TxtDetailsAdd.Text = "";
                 TikDetails.gettikdetlsfrm.TxtDetailsAdd.Font = new Font("Times new Roman", 12, FontStyle.Regular);
                 TikDetails.gettikdetlsfrm.TxtDetailsAdd.TextAlign = HorizontalAlignment.Left;
-                if (CurrentUser.PUsrRlNm == currntTicket._folowusr)
+                if (CurrentUser.UsrRlNm == currntTicket._folowusr)
                 {
                     TikDetails.gettikdetlsfrm.BtnClos.Visible = true;
                 }
@@ -172,16 +175,10 @@ namespace VOCAC.BL
             else { TikDetails.gettikdetlsfrm.TxtTransDt.Text = currntTicket._TkTransDate.ToString("yyyy/MM/dd"); }
 
             TikDetails.gettikdetlsfrm.TxtFolw.Text = currntTicket._folowusr;
-            try
-            {
+
                 function fn = function.getfn;
                 TikDetails.gettikdetlsfrm.LblWDays.Text = "تم تسجيل الشكوى منذ : " + fn.CalDate(currntTicket._TkDtStart.ToString(), Statcdif.servrTime).ToString() + " يوم عمل";
-            }
-            catch (Exception ex)
-            {
-                function fn = function.getfn;
-                fn.msg("لم يتم احتساب أيام العمل", "عدد أيام العمل");
-            }
+
             if (currntTicket._ProdKNm == "مالية")
             {
                 TikDetails.gettikdetlsfrm.GroupBox3.Visible = true;

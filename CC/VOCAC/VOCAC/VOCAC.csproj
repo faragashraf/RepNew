@@ -90,6 +90,18 @@
     <Compile Include="BL\CLS_LOGIN.cs" />
     <Compile Include="BL\currentTicket.cs" />
     <Compile Include="DAL\DataAccessLayer.cs" />
+    <Compile Include="PL\TikFolow_Team.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TikFolow_Team.Designer.cs">
+      <DependentUpon>TikFolow_Team.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\TikNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TikNew.Designer.cs">
+      <DependentUpon>TikNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PL\TikDetails.cs">
@@ -117,6 +129,12 @@
     <Compile Include="PL\WelcomeScreen.Designer.cs">
       <DependentUpon>WelcomeScreen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="PL\TikFolow_Team.resx">
+      <DependentUpon>TikFolow_Team.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\TikNew.resx">
+      <DependentUpon>TikNew.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -462,6 +480,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Frstaid.ico" />
+    <None Include="Resources\SaveRed1.png" />
+    <None Include="Resources\SaveRed.png" />
+    <None Include="Resources\SaveGreen1.png" />
+    <None Include="Resources\SaveGreen.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

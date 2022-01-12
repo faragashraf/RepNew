@@ -571,10 +571,10 @@ Partial Class CompSetup
         '
         Me.TreeComp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TreeComp.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.TreeComp.Location = New System.Drawing.Point(563, 42)
+        Me.TreeComp.Location = New System.Drawing.Point(951, 42)
         Me.TreeComp.Name = "TreeComp"
         Me.TreeComp.RightToLeftLayout = True
-        Me.TreeComp.Size = New System.Drawing.Size(571, 451)
+        Me.TreeComp.Size = New System.Drawing.Size(183, 213)
         Me.TreeComp.TabIndex = 105
         '
         'RadAl

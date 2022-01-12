@@ -145,8 +145,6 @@ Public Class TikNew
                     Complete_ += 1
                 End If
             ElseIf TypeOf (Ctrl) Is DateTimePicker Then
-                Dim dd As Date = Format(Ctrl.MaxDate, "dd/MM/yyyy")
-                Dim dd1 As Date = Format(Today.AddDays(1), "dd/MM/yyyy")
                 If Format(Ctrl.value, "dd/MM/yyyy") <> Format(Today.AddDays(1), "dd/MM/yyyy") Then
                     Complete_ += 1
                 End If
@@ -267,7 +265,6 @@ Popul_:
         TreeView1.Visible = True
         TreeView1.Nodes.Clear()
         If TreeView1.Nodes.Count = 1 Or TreeView1.Nodes.Count = Nothing Then
-            Dim Root As String = ""
             Dim Child1 As String = ""
             TreeView1.ImageList = ImgLst
             ' Populate Main Root

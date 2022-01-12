@@ -1,6 +1,6 @@
 ﻿namespace VOCAC.PL
 {
-    partial class TikFolow
+    partial class TikFolow_Team
     {
         /// <summary>
         /// Required designer variable.
@@ -328,7 +328,7 @@
             this.GridTicket.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.GridTicket.Size = new System.Drawing.Size(1466, 318);
             this.GridTicket.TabIndex = 123;
-            this.GridTicket.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridTicket_CellMouseClick);
+            this.GridTicket.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridTicket_CellContentClick);
             // 
             // flowLayoutPanel3
             // 
@@ -746,7 +746,7 @@
             this.ContextMenuStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.ContextMenuStrip2.Size = new System.Drawing.Size(185, 70);
             // 
-            // TikFolow
+            // TikFolow_Team
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -754,7 +754,7 @@
             this.ClientSize = new System.Drawing.Size(1501, 696);
             this.Controls.Add(this.FlowLayoutPanel1);
             this.Controls.Add(this.StatusBar1);
-            this.Name = "TikFolow";
+            this.Name = "TikFolow_Team";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

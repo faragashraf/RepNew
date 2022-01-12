@@ -5,17 +5,24 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace VOCAC.DAL
 {
     class DataAccessLayer
     {
-        public myStruct Struc;
-        public struct myStruct
+        public rturnStruct Struc;
+        public treeStruct treeStruc;
+        public struct rturnStruct
         {
             public string msg;
             public DataTable dt;
             public DataSet ds;
+        }
+        public struct treeStruct
+        {
+            public string msg;
+            public TreeView tree;
         }
         SqlConnection sqlconnection;
         //This Constructor Insialize the connection Object
@@ -60,7 +67,7 @@ namespace VOCAC.DAL
             }
         }
         //Method to Read Data  From Database
-        public myStruct SelectData(string Stored_Procedure, SqlParameter[] param)
+        public rturnStruct SelectData(string Stored_Procedure, SqlParameter[] param)
         {
             Struc.msg = null;
             Struc.ds = null;
@@ -90,7 +97,7 @@ namespace VOCAC.DAL
             return Struc;
         }
         //Method to Insert,Update and Delete Data From Database
-        public myStruct ExcuteCommand(string Stored_Procedure, SqlParameter[] param)
+        public rturnStruct ExcuteCommand(string Stored_Procedure, SqlParameter[] param)
         {
             Struc.msg = null;
             Struc.ds = null;
@@ -116,7 +123,7 @@ namespace VOCAC.DAL
             return Struc;
         }
         //Method to Read Data From Database And Return A Dataset
-        public myStruct SelectDataset(string Stored_Procedure)
+        public rturnStruct SelectDataset(string Stored_Procedure)
         {
             Struc.msg = null;
             Struc.ds = null;

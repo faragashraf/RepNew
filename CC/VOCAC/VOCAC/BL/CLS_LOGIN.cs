@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using VOCAC.Properties;
+using System.Windows.Forms;
 
 namespace VOCAC.BL
 {
     class CLS_LOGIN
     {
-        public DAL.DataAccessLayer.myStruct LOGIN(String ID, String PWD)
+        public DAL.DataAccessLayer.rturnStruct LOGIN(String ID, String PWD)
         {
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             DAL.Struc.msg = null;
@@ -34,7 +35,7 @@ namespace VOCAC.BL
             DAL.Close();
             return DAL.Struc;
         }
-        public DAL.DataAccessLayer.myStruct int_Access(int usrid, string usrNm, string Stat, string ip)
+        public DAL.DataAccessLayer.rturnStruct int_Access(int usrid, string usrNm, string Stat, string ip)
         {
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             DAL.Struc.msg = null;
@@ -51,7 +52,7 @@ namespace VOCAC.BL
             param[3].Value = ip;
             DAL.Open();
             DAL.Struc = DAL.ExcuteCommand("SP_USR_ACCESS_LOG_INSERT", param);
-            if (DAL.Struc.msg == null){}
+            if (DAL.Struc.msg == null) { }
             else
             {
                 function fn = function.getfn;
@@ -60,7 +61,7 @@ namespace VOCAC.BL
             DAL.Close();
             return DAL.Struc;
         }
-        public DAL.DataAccessLayer.myStruct UsrUpdate(string ip, string Ver, int usrid)
+        public DAL.DataAccessLayer.rturnStruct UsrUpdate(string ip, string Ver, int usrid)
         {
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             DAL.Struc.msg = null;
@@ -81,17 +82,17 @@ namespace VOCAC.BL
                 function fn = function.getfn;
                 fn.msg(Resources.ConnErr + Environment.NewLine + Resources.TryAgain, "Update User");
             }
-                DAL.Close();
+            DAL.Close();
             return DAL.Struc;
         }
-        public DAL.DataAccessLayer.myStruct slctmaintbls()
+        public DAL.DataAccessLayer.rturnStruct slctmaintbls()
         {
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             DAL.Struc = DAL.SelectDataset("SP_MAINTBL_SLCT");
             DAL.Close();
             return DAL.Struc;
         }
-        public DAL.DataAccessLayer.myStruct SwtchBoard()
+        public DAL.DataAccessLayer.rturnStruct SwtchBoard()
         {
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             SqlParameter[] param = null;
@@ -101,6 +102,45 @@ namespace VOCAC.BL
             primaryKey = Statcdif.CountryTable.Columns["CounCd"];
             primaryKey1 = Statcdif.ProdKTable.Columns["ProdKNm"];
             return DAL.Struc;
+        }
+        public DAL.DataAccessLayer.rturnStruct TeamTree()
+        {
+            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
+            SqlParameter[] param = null;
+
+            DAL.Struc = DAL.SelectData("SP_MyTeam_SLCT", param);
+            DAL.Close();
+            return DAL.Struc;
+        }
+        public DAL.DataAccessLayer.treeStruct MyTeam(int LedrCat, int LedrId, String UsrCase)
+        {
+            DAL.DataAccessLayer.treeStruct treestruc = new DAL.DataAccessLayer.treeStruct();
+            List<string> UsrStr = new List<string>();
+            TreeNode[] TempNode = new TreeNode[0];
+            TreeView TreeTemp = new TreeView();
+
+            TreeTemp.Nodes.Add(LedrCat.ToString(), LedrId.ToString());
+
+
+            DAL.DataAccessLayer.rturnStruct SlctTeamReslt = TeamTree();
+
+            UsrStr.Add(CurrentUser.UsrID.ToString());
+            if (this.TeamTree().msg == null)
+            {
+                SlctTeamReslt.dt.DefaultView.RowFilter =  "UCatIdSub >= " + CurrentUser.UsrUCatLvl;
+                for (int i = 0; i < SlctTeamReslt.dt.DefaultView.Count; i++)
+                {
+                    TempNode = TreeTemp.Nodes.Find(SlctTeamReslt.dt.DefaultView[i][2].ToString(), true);
+                    if (TempNode.Length > 0)
+                    {
+                        TempNode[0].Nodes.Add(SlctTeamReslt.dt.DefaultView[i][1].ToString(), SlctTeamReslt.dt.DefaultView[i][0].ToString());
+                        UsrStr.Add(SlctTeamReslt.dt.DefaultView[i][0].ToString());
+                    }
+                }
+            }
+            treestruc.msg =  UsrCase + " in (" + string.Join(", ", UsrStr) + ")";
+            treestruc.tree = TreeTemp;
+            return treestruc;
         }
     }
 }
