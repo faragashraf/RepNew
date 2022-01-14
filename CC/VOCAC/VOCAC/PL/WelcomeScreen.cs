@@ -44,6 +44,18 @@ namespace VOCAC.PL
             {
                 frm = this;
             }
+            //intialize Languges
+            foreach (InputLanguage langu in InputLanguage.InstalledInputLanguages)
+            {
+                if (langu.Culture.TwoLetterISOLanguageName == "ar")
+                {
+                    Statcdif.ArabicInput = langu;
+                }
+                else if (langu.Culture.TwoLetterISOLanguageName == "en")
+                {
+                    Statcdif.ArabicInput = langu;
+                }
+            }
             this.LblClrSys.BackColor = Settings.Default.ClrSys;
             this.LblClrUsr.BackColor = Settings.Default.ClrUsr;
             this.LblClrSamCat.BackColor = Settings.Default.ClrSamCat;
@@ -92,18 +104,6 @@ namespace VOCAC.PL
             frms forms = new frms();
             forms.FrmAllSub(this);
             function fn = function.getfn;
-            //intialize Languges
-            foreach (InputLanguage langu in InputLanguage.InstalledInputLanguages)
-            {
-                if (langu.Culture.TwoLetterISOLanguageName == "ar")
-                {
-                    Statcdif.ArabicInput = langu;
-                }
-                else if (langu.Culture.TwoLetterISOLanguageName == "en")
-                {
-                    Statcdif.ArabicInput = langu;
-                }
-            }
             //initialize Lables
 
             Statcdif._MacStr = fn.GetMACAddressNew();

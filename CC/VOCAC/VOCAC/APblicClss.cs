@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Forms;
+using VOCAC.BL;
 using VOCAC.PL;
 
 namespace VOCAC
@@ -21,13 +22,14 @@ namespace VOCAC
         public static int screenHeight = Screen.PrimaryScreen.Bounds.Height;
         public static InputLanguage EnglishInput;
         public static InputLanguage ArabicInput;
-        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-323";
+        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-323";
         public SqlConnection CONSQL;
         public static String _ServerCD;
         public static String _serverNm;
         public static string servrTime;
         public static String _MacStr, _IP;
         public static List<string> FildList = new List<string>();
+        public static bool bolyy = false;
         public static bool CncStat;
         public static MenuStrip Menu_;
         public static ContextMenuStrip CntxMenu;
@@ -456,6 +458,31 @@ namespace VOCAC
             int Wdays = Statcdif.CDHolDay.DefaultView.Count;
             return Wdays;
         }
+        public void ClorTxt(RichTextBox richtxtbx, String Strng, Color backClr, Color FontClr)
+        {
+            try
+            {
+                int starttxt = 0;
+                int endtxt;
+                endtxt = richtxtbx.Text.LastIndexOf(Strng);
+                while (starttxt < endtxt)
+                {
+                    if (richtxtbx.Find(Strng, starttxt, richtxtbx.TextLength, RichTextBoxFinds.None) > 0)
+                    {
+                        richtxtbx.SelectionBackColor = backClr;
+                        richtxtbx.SelectionColor = FontClr;
+                        richtxtbx.SelectionFont = new Font("Times new Roman", 16, FontStyle.Regular);
+                    }
+                    starttxt += 1;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
     // Current User Class
     public static class CurrentUser
@@ -520,12 +547,16 @@ namespace VOCAC
                 {
                     this.CalIfBtn((Button)c);
                 }
-                //else if (c.GetType() == typeof(TextBox))
-                //{
-                //    this.CalIfTxt((TextBox)c);
-                //}
+                else if (c.GetType() == typeof(TextBox))
+                {
+                    this.CalIfTxt((TextBox)c);
+                }
+                else if (c.GetType() == typeof(MaskedTextBox))
+                {
+                    this.CalIfTxt((MaskedTextBox)c);
+                }
             }
-            List<Control> ctrl1 = GetAll(frm, typeof(Button)).ToList();
+            //List<Control> ctrl1 = GetAll(frm, typeof(Button)).ToList();
         }
         #region Events         
         //format button void and assign Events
@@ -538,9 +569,154 @@ namespace VOCAC
             Btn.MouseEnter += new EventHandler(Btn_MouseEnter);
             Btn.MouseLeave += new EventHandler(Btn_MouseLeave);
         }
-        public void CalIfTxt(TextBox Txtbx)
+        public void CalIfTxt(Control Txtbx)
         {
+            if(Txtbx is MaskedTextBox)
+            {
+                MaskedTextBox TxtBox = (MaskedTextBox)Txtbx;
+            }
+            else
+            {
+                TextBox TxtBox = (TextBox)Txtbx;
+            }
 
+            Txtbx.Click -= new EventHandler(TxtSlctOn_Click);
+            Txtbx.Click += new EventHandler(TxtSlctOn_Click);
+            Txtbx.Enter -= new EventHandler(Text_Enter);
+            Txtbx.Enter += new EventHandler(Text_Enter);
+            Txtbx.KeyDown -= new KeyEventHandler(TxtBox_KeyDown);
+            Txtbx.KeyDown += new KeyEventHandler(TxtBox_KeyDown);
+        }
+        private void TxtSlctOn_Click(object sender, EventArgs e)
+        {
+            if (sender is TextBox)
+            {
+                TextBox TxtBox = (TextBox)sender;
+                if (Statcdif.bolyy == false)
+                {
+                    Statcdif.bolyy = true;
+                    TxtBox.SelectAll();
+                }
+                else
+                    Statcdif.bolyy = false;
+            }
+            else if (sender is MaskedTextBox)
+            {
+                MaskedTextBox TxtBox = (MaskedTextBox)sender;
+                if (Statcdif.bolyy == false)
+                {
+                    Statcdif.bolyy = true;
+                    TxtBox.SelectAll();
+                }
+                else
+                    Statcdif.bolyy = false;
+            }
+        }
+
+        private void Text_Enter(object sender, EventArgs e)
+        {
+            if (sender is TextBox)
+            {
+                TextBox TxtBox = (TextBox)sender;
+                if (TxtBox.ReadOnly == false)
+                {
+                    if (TxtBox.Tag.ToString().Split('-')[0].Trim() == "English")
+                    { InputLanguage.CurrentInputLanguage = Statcdif.EnglishInput; }            // Tansfer writing to English
+                    else if (TxtBox.Tag.ToString().Split('-')[0].Trim() == "Arabic")
+                    { InputLanguage.CurrentInputLanguage = Statcdif.ArabicInput; }
+                }
+            }
+            else if (sender is MaskedTextBox)
+            {
+                MaskedTextBox TxtBox = (MaskedTextBox)sender;
+                if (TxtBox.ReadOnly == false)
+                {
+                    if (TxtBox.Tag.ToString().Split('-')[0].Trim() == "English")
+                    { InputLanguage.CurrentInputLanguage = Statcdif.EnglishInput; }            // Tansfer writing to English
+                    else if (TxtBox.Tag.ToString().Split('-')[0].Trim() == "Arabic")
+                    { InputLanguage.CurrentInputLanguage = Statcdif.ArabicInput; }
+                }
+            }
+        }
+        private void TxtBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (sender is TextBox)
+            {
+                TextBox TxtBox = (TextBox)sender;
+                if (e.Modifiers == Keys.Control && e.KeyCode == Keys.V)
+                {
+                    if (TxtBox.ReadOnly == false)
+                        TxtBox.Text += Clipboard.GetText();
+                }
+                else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.C)
+                {
+                    if (TxtBox.Text.Trim().Length > 0)
+                        Clipboard.SetText(TxtBox.Text);
+                }
+                else
+                {
+                    TxtBox.KeyPress -= new KeyPressEventHandler(Txt_KeyPress);
+                    TxtBox.KeyPress += new KeyPressEventHandler(Txt_KeyPress);
+                }
+            }
+            else if (sender is MaskedTextBox)
+            {
+                MaskedTextBox TxtBox = (MaskedTextBox)sender;
+                if (e.Modifiers == Keys.Control && e.KeyCode == Keys.V)
+                {
+                    if (TxtBox.ReadOnly == false)
+                        TxtBox.Text += Clipboard.GetText();
+                }
+                else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.C)
+                {
+                    if (TxtBox.Text.Trim().Length > 0)
+                        Clipboard.SetText(TxtBox.Text);
+                }
+                else
+                {
+                    TxtBox.KeyPress -= new KeyPressEventHandler(Txt_KeyPress);
+                    TxtBox.KeyPress += new KeyPressEventHandler(Txt_KeyPress);
+                }
+            }
+        }
+        private void Txt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (sender is TextBox)
+            {
+                TextBox TxtBox = (TextBox)sender;
+                if (TxtBox.ReadOnly == false)
+                {
+                    if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "Number")
+                        IntUtly.ValdtInt(e);
+                    else if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "Amount")
+                        IntUtly.ValdtNumber(TxtBox, e);
+                    else if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "TextNumber")
+                        IntUtly.ValdtIntLetter(e);
+                    else if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "Text")
+                        IntUtly.ValdtLetter(TxtBox, e);
+                    else if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "All")
+                    {
+                    }
+                }
+            }
+            else if (sender is MaskedTextBox)
+            {
+                MaskedTextBox TxtBox = (MaskedTextBox)sender;
+                if (TxtBox.ReadOnly == false)
+                {
+                    if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "Number")
+                        IntUtly.ValdtInt(e);
+                    else if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "Amount")
+                        IntUtly.ValdtNumber(TxtBox, e);
+                    else if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "TextNumber")
+                        IntUtly.ValdtIntLetter(e);
+                    else if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "Text")
+                        IntUtly.ValdtLetter(TxtBox, e);
+                    else if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "All")
+                    {
+                    }
+                }
+            }
         }
         //Increase Button Size on Mouse Enter Event
         public void Btn_MouseEnter(object sender, EventArgs e)
@@ -579,11 +755,13 @@ namespace VOCAC
             frm.Show();
         }
         #endregion
+
         public static bool FormIsOpen(FormCollection application, Type formType)
         {
             //usage sample: FormIsOpen(Application.OpenForms,typeof(Form2)
             return Application.OpenForms.Cast<Form>().Any(openForm => openForm.GetType() == formType);
         }
+
     }
 }
 

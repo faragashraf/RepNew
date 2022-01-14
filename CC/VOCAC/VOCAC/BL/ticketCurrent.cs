@@ -35,6 +35,9 @@ namespace VOCAC.BL
             public static bool _TkFolw;
             public static int _TkEmpNm;
             public static string _folowusr;
+            public static string _TikfolowusrTeam;
+            public static string _TikCreat;
+            public static string _TikCreatTeam;
             public static bool _TkReOp;
             public static DateTime _TkRecieveDt;
             public static int _TkEscTyp;
@@ -82,6 +85,9 @@ namespace VOCAC.BL
             };
 
             currntTicket._folowusr = Convert.ToString(gv.CurrentRow.Cells["folowusr"].Value);
+            currntTicket._TikfolowusrTeam = Convert.ToString(gv.CurrentRow.Cells["TikfolowusrTeam"].Value);
+            currntTicket._TikCreat = Convert.ToString(gv.CurrentRow.Cells["TikCreat"].Value);
+            currntTicket._TikCreatTeam = Convert.ToString(gv.CurrentRow.Cells["TikCreatTeam"].Value);
             currntTicket._TkReOp = Convert.ToBoolean(gv.CurrentRow.Cells["TkReOp"].Value);
             currntTicket._TkClsStatus = Convert.ToBoolean(gv.CurrentRow.Cells["TkClsStatus"].Value);
 
@@ -97,7 +103,7 @@ namespace VOCAC.BL
             currntTicket._updtusr = Convert.ToString(gv.CurrentRow.Cells["updtusr"].Value);
 
             currntTicket.SlctdFldLst.Clear();
-            for (int i = 33; i < gv.Columns.Count; i++)
+            for (int i = 36; i < gv.Columns.Count; i++)
             {
                 if (gv.CurrentRow.Cells[i].Value.ToString().Length > 0)
                 {
@@ -148,13 +154,16 @@ namespace VOCAC.BL
             TikDetails.gettikdetlsfrm.TxtNm.Text = currntTicket._TkClNm;
             TikDetails.gettikdetlsfrm.TxtAdd.Text = currntTicket._TkClAdr;
             TikDetails.gettikdetlsfrm.TxtEmail.Text = currntTicket._TkMail;
-            TikDetails.gettikdetlsfrm.TxtDetails.Text = currntTicket._TkDetails;
-            TikDetails.gettikdetlsfrm.TxtProd.Text = currntTicket._PrdNm;
-            TikDetails.gettikdetlsfrm.TxtComp.Text = currntTicket._CompNm;
-            TikDetails.gettikdetlsfrm.TxtSrc.Text = currntTicket._SrcNm;
+
+            TikDetails.gettikdetlsfrm.TxtComp.Text = currntTicket._PrdNm;
+            TikDetails.gettikdetlsfrm.TxtSrc.Text = currntTicket._CompNm;
+            TikDetails.gettikdetlsfrm.TxtFolw.Text = currntTicket._SrcNm;
             TikDetails.gettikdetlsfrm.TxtNId.Text = currntTicket._TkClNtID;
 
             TikDetails.gettikdetlsfrm.TxtFolw.Text = currntTicket._folowusr;
+            TikDetails.gettikdetlsfrm.TxtfolowusrTeam.Text = currntTicket._TikfolowusrTeam;
+            TikDetails.gettikdetlsfrm.TxtTikCreat.Text = currntTicket._TikCreat;
+            TikDetails.gettikdetlsfrm.TxtTikCreatTeam.Text = currntTicket._TikCreatTeam;
 
             function fn = function.getfn;
             TikDetails.gettikdetlsfrm.LblWDays.Text = "تم تسجيل الشكوى منذ : " + fn.CalDate(currntTicket._TkDtStart.ToString(), Statcdif.servrTime).ToString() + " يوم عمل";
@@ -189,8 +198,22 @@ namespace VOCAC.BL
             TikDetails.gettikdetlsfrm.TxtTikID.RightToLeft = RightToLeft.Yes;
             TikDetails.gettikdetlsfrm.TxtTikID.Font = new Font("Times new Roman", 14, FontStyle.Bold);
             TikDetails.gettikdetlsfrm.TxtTikID.TextAlign = ContentAlignment.BottomCenter;
+            TikDetails.gettikdetlsfrm.TxtDetails.Text = currntTicket._TkDetails;
 
-            //SelctSerchTxt(TxtDetails, "تعديل : بواسطة")
+            //Delete Empty lines from Details & Reassign Details Text Value
+            string jj = "";
+            for (int i = 0; i < TikDetails.gettikdetlsfrm.TxtDetails.Lines.Length; i++)
+            {
+                if (TikDetails.gettikdetlsfrm.TxtDetails.Lines[i].ToString().Length > 0)
+                {
+                    jj += TikDetails.gettikdetlsfrm.TxtDetails.Lines[i].ToString() + Environment.NewLine;
+
+                }
+            }
+            TikDetails.gettikdetlsfrm.TxtDetails.Text = jj;
+
+            fn.ClorTxt(TikDetails.gettikdetlsfrm.TxtDetails, "تعديل : بواسطة", Color.Transparent, Color.Red);
+            fn.ClorTxt(TikDetails.gettikdetlsfrm.TxtDetails, "إضافة تلقائية من النظام:", Color.Transparent, Color.Green);
         }
     }
 }

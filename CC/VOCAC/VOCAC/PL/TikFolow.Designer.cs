@@ -98,7 +98,7 @@
             // Panel3
             // 
             this.Panel3.Controls.Add(this.CloseBtn);
-            this.Panel3.Location = new System.Drawing.Point(230, 422);
+            this.Panel3.Location = new System.Drawing.Point(230, 426);
             this.Panel3.Name = "Panel3";
             this.Panel3.Size = new System.Drawing.Size(76, 72);
             this.Panel3.TabIndex = 2172;
@@ -153,7 +153,7 @@
             this.FlowLayoutPanel2.Location = new System.Drawing.Point(112, 3);
             this.FlowLayoutPanel2.Margin = new System.Windows.Forms.Padding(195, 3, 3, 3);
             this.FlowLayoutPanel2.Name = "FlowLayoutPanel2";
-            this.FlowLayoutPanel2.Size = new System.Drawing.Size(1165, 65);
+            this.FlowLayoutPanel2.Size = new System.Drawing.Size(1165, 69);
             this.FlowLayoutPanel2.TabIndex = 2173;
             // 
             // panel4
@@ -327,14 +327,13 @@
             this.GridTicket.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GridTicket.BackgroundColor = System.Drawing.Color.White;
             this.GridTicket.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridTicket.Location = new System.Drawing.Point(3, 74);
+            this.GridTicket.Location = new System.Drawing.Point(3, 78);
             this.GridTicket.MultiSelect = false;
             this.GridTicket.Name = "GridTicket";
             this.GridTicket.ReadOnly = true;
             this.GridTicket.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.GridTicket.Size = new System.Drawing.Size(1466, 342);
             this.GridTicket.TabIndex = 123;
-            this.GridTicket.SelectionChanged += new System.EventHandler(this.GridTicket_SelectionChanged);
             this.GridTicket.DoubleClick += new System.EventHandler(this.GridTicket_DoubleClick);
             // 
             // flowLayoutPanel3
@@ -363,7 +362,7 @@
             this.flowLayoutPanel3.Controls.Add(this.LblFl3);
             this.flowLayoutPanel3.Controls.Add(this.LabelCompCount);
             this.flowLayoutPanel3.Controls.Add(this.LblRequest);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(312, 422);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(312, 426);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(1157, 72);
             this.flowLayoutPanel3.TabIndex = 2174;

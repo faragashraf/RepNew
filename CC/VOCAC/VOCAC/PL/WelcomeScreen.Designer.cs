@@ -828,6 +828,7 @@
             this.TxtUsrPass.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.TxtUsrPass.Size = new System.Drawing.Size(232, 19);
             this.TxtUsrPass.TabIndex = 102;
+            this.TxtUsrPass.Tag = "English-All";
             this.ToolTip1.SetToolTip(this.TxtUsrPass, "كلمة المرور");
             this.TxtUsrPass.UseSystemPasswordChar = true;
             this.TxtUsrPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtUsrPass_KeyDown);
@@ -842,6 +843,7 @@
             this.TxtUsrNm.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.TxtUsrNm.Size = new System.Drawing.Size(232, 19);
             this.TxtUsrNm.TabIndex = 101;
+            this.TxtUsrNm.Tag = "English-All";
             this.ToolTip1.SetToolTip(this.TxtUsrNm, "اسم المستخدم");
             // 
             // PubVerLbl1

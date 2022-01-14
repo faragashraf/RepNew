@@ -72,6 +72,7 @@
     <ApplicationIcon>Frstaid.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
@@ -88,6 +89,7 @@
   <ItemGroup>
     <Compile Include="APblicClss.cs" />
     <Compile Include="BL\CLS_LOGIN.cs" />
+    <Compile Include="BL\IntUtly.cs" />
     <Compile Include="BL\ticketCurrent.cs" />
     <Compile Include="BL\TicketsSelectBulk.cs" />
     <Compile Include="DAL\DataAccessLayer.cs" />

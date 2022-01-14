@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VOCAC.BL;
 using VOCAC.Properties;
 
 namespace VOCAC.PL
@@ -14,7 +16,14 @@ namespace VOCAC.PL
     public partial class TikNew : Form
     {
         frms forms = new frms();
+        function fn = function.getfn;
         DataTable RelatedTable = new DataTable();
+        Form Frm;
+        DataGridView GV;
+        DataTable tbl;
+        FlowLayoutPanel Flow;
+        TextBox TxBox;
+        TextBox sndr;
         int TickKind;
         string PrdKind;
         public TikNew()
@@ -23,7 +32,6 @@ namespace VOCAC.PL
             forms.FrmAllSub(this);
             NewTickSub();
         }
-
         private void TikNew_Load(object sender, EventArgs e)
         {
 
@@ -90,7 +98,8 @@ namespace VOCAC.PL
         }
         private void Mendatory()
         {
-            int Complete_ = 0;
+            Timer1.Stop();
+            double Complete_ = 0;
             if (PrdKind == "مالية")
             {
                 //Check Customer ID
@@ -123,7 +132,7 @@ namespace VOCAC.PL
                 }
             }
             //Check Customer Name 
-            if (NameTxtBx.Text.Replace(" ", "").Trim().Length > 0)
+            if (NameTxtBx.Text.Trim().ToCharArray().Count(c => c == Convert.ToChar(" ")) > 1)
             {
                 Complete_ += 1;
             }
@@ -140,26 +149,27 @@ namespace VOCAC.PL
                     {
                         Complete_ += 1;
                     }
-                    else if (Ctrl.GetType() == typeof(MaskedTextBox))
+                }
+                else if (Ctrl.GetType() == typeof(MaskedTextBox))
+                {
+                    MaskedTextBox mskd = new MaskedTextBox();
+                    mskd = (MaskedTextBox)Ctrl;
+                    if (mskd.Mask.Replace(" ", "").Trim().Length == mskd.Text.Replace(" ", "").Trim().Length)
                     {
-                        MaskedTextBox mskd = new MaskedTextBox();
-                        mskd = (MaskedTextBox)Ctrl;
-                        if (mskd.Mask.Replace(" ", "").Trim().Length > 0)
-                        { Complete_ += 1; }
+                        Complete_ += 1;
                     }
-                    else if (Ctrl.GetType() == typeof(DateTimePicker))
+                }
+                else if (Ctrl.GetType() == typeof(DateTimePicker))
+                {
+                    DateTimePicker Dpkr = new DateTimePicker();
+                    Dpkr = (DateTimePicker)Ctrl;
+                    if (Dpkr.Value.ToString("dd/MM/yyyy") != DateTime.Now.AddDays(1).ToString("dd/MM/yyyy"))
                     {
-                        DateTimePicker Dpkr = new DateTimePicker();
-                        Dpkr = (DateTimePicker)Ctrl;
-                        if (Dpkr.Value.ToString("dd/MM/yyyy") != DateTime.Now.AddDays(1).ToString("dd/MM/yyyy"))
-                        {
-                            Complete_ += 1;
-                        }
+                        Complete_ += 1;
                     }
                 }
             }
 
-            double gg = Complete_ / (4 + (FlwMend.Controls.Count) / 2);
 
             //if (Complete_ / (5 + (FlwMend.Controls.Count) / 2) < 0.7 
             //    SubmitBtn.BackgroundImage = My.Resources.SaveRed1
@@ -168,17 +178,17 @@ namespace VOCAC.PL
             //End if
             if (PrdKind == "مالية")
             {
-                if (Complete_ == 5 + (FlwMend.Controls.Count) / 2)
+                if (Complete_ == 5 + (FlwMend.Controls.Count / 2))
                 {
                     SubmitBtn.Enabled = true;
                     SubmitBtn.BackgroundImage = Resources.SaveGreen1;
                 }
-                else if (Complete_ / (5 + (FlwMend.Controls.Count) / 2) <= 0.5)
+                else if (Complete_ / (5 + (FlwMend.Controls.Count / 2)) <= 0.5)
                 {
                     SubmitBtn.BackgroundImage = Resources.SaveRed;
                     SubmitBtn.Enabled = false;
                 }
-                else if (Complete_ / (5 + (FlwMend.Controls.Count) / 2) > 0.5)
+                else if (Complete_ / (5 + (FlwMend.Controls.Count / 2)) > 0.5)
                 {
                     SubmitBtn.BackgroundImage = Resources.SaveGreen;
                     SubmitBtn.Enabled = false;
@@ -214,6 +224,7 @@ namespace VOCAC.PL
                 SubmitBtn.Enabled = false;
             }
             GC.Collect();
+            Timer1.Start();
         }
         private void CompReqst_CheckedChanged(object sender, EventArgs e)
         {
@@ -306,7 +317,7 @@ namespace VOCAC.PL
                 Timer1.Start();
                 BtnAdd.Visible = true;
                 BtnClr.Visible = false;
-                Statcdif.MendFildsTable.DefaultView.RowFilter = "[MendCdFn]" + " = " + TreeView1.SelectedNode.Name;
+                Statcdif.MendFildsTable.DefaultView.RowFilter = "[MendCdFn]  = " + TreeView1.SelectedNode.Name;
                 FlwMend.Controls.Clear();
 
                 for (int i = 0; i < Statcdif.MendFildsTable.DefaultView.Count; i++)
@@ -339,9 +350,12 @@ namespace VOCAC.PL
                         Ctrl.Size = new Size(150, 25);
                         Ctrl.Name = Statcdif.MendFildsTable.DefaultView[i]["CDMendNm"].ToString();
                         Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendAccessNm"].ToString();
+                        Ctrl.AccessibleName = Statcdif.MendFildsTable.DefaultView[i]["CDMendTbl"].ToString();
                         FlwMend.Controls.Add(Ctrl);
                         Ctrl.ReadOnly = true;
-                        //AddHandler Ctrl.KeyDown, AddressOf TextBox_KeyDown
+                        Ctrl.KeyDown += new KeyEventHandler(TextBox_KeyDown);
+                        Ctrl.Enter += new EventHandler(TextBox_ENTER);
+                        Ctrl.Leave += new EventHandler(TextBox_LEAVE);
                     }
 
                     else if (Statcdif.MendFildsTable.DefaultView[i]["CDMendType"].ToString() == "MaskedTextBox")
@@ -369,7 +383,7 @@ namespace VOCAC.PL
                         FlwMend.Controls.Add(Ctrl);
                     }
                 }
-                //    FrmAllSub(Me)
+                forms.FrmAllSub(this);
                 //'TempClr = Statcdif.MendFildsTable.Rows.Find(TreeView1.SelectedNode.Name)
                 //'Dim BKClr = Split(TempClr.ItemArray(2), ",")
                 //'Timer1.Start()
@@ -384,18 +398,26 @@ namespace VOCAC.PL
                 Comp.Text = "";
                 BtnAdd.Visible = false;
                 BtnClr.Visible = false;
-                Timer1.Stop();
+                FlwMend.Controls.Clear();
+                //Timer1.Stop();
             }
             if (TreeView1.SelectedNode.FullPath.ToString().Split('\\')[0] != PrdKind)
             {
                 PrdKind = "";
             }
         }
+        private void TextBox_LEAVE(object sender, EventArgs e)
+        {
+            WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
+        }
+        private void TextBox_ENTER(object sender, EventArgs e)
+        {
+            WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "     إضغط F1  لإختيار  " + GetNextControl((TextBox)sender, false).Text.Substring(0, GetNextControl((TextBox)sender, false).Text.Length - 2);
+        }
         private void Timer1_Tick(object sender, EventArgs e)
         {
             Mendatory();
         }
-
         private void RadioButton8_Click(object sender, EventArgs e)
         {
             TimrPhons.Start();
@@ -415,6 +437,160 @@ namespace VOCAC.PL
             Phon2TxtBx.Text = "";
             MailTxtBx.Text = "";
             RelatedTable.Rows.Clear();
+        }
+        private void TimrPhons_Tick(object sender, EventArgs e)
+        {
+            if (RadioButton8.Checked == true)
+            {
+                if (PictureBox1.Size.Width > 24)
+                {
+                    PictureBox1.Size = new Size(PictureBox1.Size.Width - 1, 44);
+                    PictureBox1.Location = new Point(PictureBox1.Location.X + 1, PictureBox1.Location.Y + 1);
+                }
+                else
+                {
+                    PictureBox1.Size = new Size(PictureBox1.Size.Width + 1, 44);
+                    PictureBox1.Location = new Point(PictureBox1.Location.X - 1, PictureBox1.Location.Y - 1);
+                }
+            }
+            if (RadioButton9.Checked == true)
+            {
+                if (PictureBox2.Size.Width > 43)
+                {
+                    PictureBox2.Size = new Size(PictureBox2.Size.Width - 1, 42);
+                    PictureBox2.Location = new Point(PictureBox2.Location.X + 1, PictureBox2.Location.Y + 1);
+                }
+                else
+                {
+                    PictureBox2.Size = new Size(PictureBox2.Size.Width + 1, 42);
+                    PictureBox2.Location = new Point(PictureBox2.Location.X - 1, PictureBox2.Location.Y - 1);
+                }
+            }
+            if (RadioButton11.Checked == true)
+            {
+                if (PictureBox3.Size.Width > 24)
+                {
+                    PictureBox3.Size = new Size(PictureBox3.Size.Width - 1, 44);
+                    PictureBox3.Location = new Point(PictureBox3.Location.X + 1, PictureBox3.Location.Y + 1);
+                }
+                else
+                {
+                    PictureBox3.Size = new Size(PictureBox3.Size.Width + 1, 44);
+                    PictureBox3.Location = new Point(PictureBox3.Location.X - 1, PictureBox3.Location.Y - 1);
+                }
+            }
+            if (RadioButton12.Checked == true)
+            {
+                if (PictureBox4.Size.Width > 43)
+                {
+                    PictureBox4.Size = new Size(PictureBox4.Size.Width - 1, 42);
+                    PictureBox4.Location = new Point(PictureBox4.Location.X + 1, PictureBox4.Location.Y + 1);
+                }
+                else
+                {
+                    PictureBox4.Size = new Size(PictureBox4.Size.Width + 1, 42);
+                    PictureBox4.Location = new Point(PictureBox4.Location.X - 1, PictureBox4.Location.Y - 1);
+                }
+            }
+        }
+        private DataTable populateTextCoise(DataTable Tbl, string selct)
+        {
+            SqlConnection sqlcon = new SqlConnection(Statcdif.strConn);
+            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
+            SqlCommand cmd;
+            SqlDataAdapter da;
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@slctstat", SqlDbType.VarChar);
+            param[0].Value = selct;
+            cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "SP_CHOISE_SLCT";
+            cmd.Connection = sqlcon;
+            cmd.Parameters.Add(param[0]);
+            da = new SqlDataAdapter(cmd);
+            try
+            {
+                da.Fill(Tbl);
+            }
+            catch (Exception ex)
+            {
+                fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "أختيار حقل");
+            }
+            DAL.Close();
+            return Tbl;
+        }
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            // NOTE: set form's KeyPreview property to True
+            if (e.KeyCode == Keys.F1)
+            {
+                sndr = (TextBox)sender;
+                Frm = new Form();
+                tbl = new DataTable();
+                tbl = populateTextCoise(tbl, sndr.AccessibleName);
+                if (tbl.Rows.Count > 0)
+                {
+                    Frm.RightToLeft = RightToLeft.Yes;
+                    Frm.RightToLeftLayout = true;
+                    Frm.WindowState = FormWindowState.Normal;
+                    Frm.StartPosition = FormStartPosition.CenterScreen;
+                    Frm.SizeChanged += new EventHandler(Frm_sizechanged);
+                    tbl.DefaultView.RowFilter = string.Empty;
+                    GV = new DataGridView();
+                    GV.DataSource = tbl.DefaultView;
+                    TxBox = new TextBox();
+                    TxBox.Size = new Size(200, 30);
+                    GV.CellDoubleClick += new DataGridViewCellEventHandler(DataGridView_CellClick);
+                    TxBox.TextChanged += new EventHandler(Txt_TextChanged);
+                    //Frm.Load += Frm_Load;
+                    Flow = new FlowLayoutPanel();
+                    Flow.RightToLeft = RightToLeft.Yes;
+                    Flow.SetFlowBreak(TxBox, true);
+                    //TxBox.Dock = DockStyle.Top;
+                    Flow.Dock = DockStyle.Fill;
+                    Flow.FlowDirection = FlowDirection.RightToLeft;
+                    GV.AllowUserToAddRows = false;
+                    GV.AllowUserToDeleteRows = false;
+                    GV.ReadOnly = true;
+                    GV.AutoResizeColumns();
+                    GV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    GV.Size = new Size(800, 800);
+                    TxBox.Font = new Font("Times New Roman", 14, FontStyle.Regular);
+                    GV.DefaultCellStyle.Font = new Font("Times New Roman", 14, FontStyle.Regular);
+                    Frm.BackColor = Color.White;
+                    Frm.Controls.Add(Flow);
+                    Flow.Controls.Add(TxBox);
+                    Flow.Controls.Add(GV);
+                    Frm.Size = new Size(GV.Width, TxBox.Height + GV.Height + 50);
+                    Frm.Text = "اختيار " + GetNextControl(sndr, false).Text + " عدد البيانات " + tbl.Rows.Count;
+                    WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "للرجوع بالإختيار يرجى الضغط المزدوج على " + GetNextControl((TextBox)sender, false).Text.Substring(0, GetNextControl((TextBox)sender, false).Text.Length - 2);
+                    Frm.ShowDialog();
+                    WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
+                    tbl.Dispose();
+                    Frm.Dispose();
+                    GC.Collect();
+                }
+                else
+                {
+                    fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "تحميل البيانات");
+                }
+            }
+        }
+        private void Txt_TextChanged(object sender, EventArgs e)
+        {
+            tbl.DefaultView.RowFilter = "[" + tbl.Columns[0].ColumnName + "]" + " like '%" + TxBox.Text + "%'";
+            GV.DataSource = tbl.DefaultView;
+        }
+        private void DataGridView_CellClick(object sender, EventArgs e)
+        {
+            sndr.Text = GV.CurrentRow.Cells[0].Value.ToString();
+            Frm.Close();
+        }
+        private void Frm_sizechanged(object sender, EventArgs e)
+        {
+            TxBox.Margin = new Padding(TxBox.Margin.Left, TxBox.Margin.Top, (Frm.Width - TxBox.Width) / 2, TxBox.Margin.Bottom);
+            GV.Margin = new Padding(GV.Margin.Left, GV.Margin.Top, (Frm.Width - GV.Width) / 2, GV.Margin.Bottom);
         }
     }
 }

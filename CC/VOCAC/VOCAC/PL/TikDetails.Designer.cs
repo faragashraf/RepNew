@@ -50,19 +50,19 @@
             this.TxtDt = new System.Windows.Forms.TextBox();
             this.Label54 = new System.Windows.Forms.Label();
             this.TxtNId = new System.Windows.Forms.TextBox();
-            this.TxtOff = new System.Windows.Forms.TextBox();
+            this.TxtProd = new System.Windows.Forms.TextBox();
             this.Label36 = new System.Windows.Forms.Label();
             this.TxtNm = new System.Windows.Forms.TextBox();
             this.Label51 = new System.Windows.Forms.Label();
-            this.TxtProd = new System.Windows.Forms.TextBox();
+            this.TxtComp = new System.Windows.Forms.TextBox();
             this.Label39 = new System.Windows.Forms.Label();
             this.TxtAdd = new System.Windows.Forms.TextBox();
             this.Label52 = new System.Windows.Forms.Label();
-            this.TxtComp = new System.Windows.Forms.TextBox();
-            this.Label53 = new System.Windows.Forms.Label();
             this.TxtSrc = new System.Windows.Forms.TextBox();
-            this.Label1 = new System.Windows.Forms.Label();
+            this.Label53 = new System.Windows.Forms.Label();
             this.TxtFolw = new System.Windows.Forms.TextBox();
+            this.Label1 = new System.Windows.Forms.Label();
+            this.TxtfolowusrTeam = new System.Windows.Forms.TextBox();
             this.Label43 = new System.Windows.Forms.Label();
             this.TxtDetails = new System.Windows.Forms.RichTextBox();
             this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -71,6 +71,10 @@
             this.FlowDetls = new System.Windows.Forms.FlowLayoutPanel();
             this.TxtTikID = new System.Windows.Forms.Label();
             this.TimerVisInvs = new System.Windows.Forms.Timer(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.TxtTikCreat = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.TxtTikCreatTeam = new System.Windows.Forms.TextBox();
             this.FlowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TcktImg)).BeginInit();
             this.Panel1.SuspendLayout();
@@ -91,14 +95,14 @@
             this.FlowLayoutPanel2.Controls.Add(this.LblWDays);
             this.FlowLayoutPanel2.Location = new System.Drawing.Point(33, 26);
             this.FlowLayoutPanel2.Name = "FlowLayoutPanel2";
-            this.FlowLayoutPanel2.Size = new System.Drawing.Size(605, 591);
+            this.FlowLayoutPanel2.Size = new System.Drawing.Size(605, 633);
             this.FlowLayoutPanel2.TabIndex = 2116;
             // 
             // TcktImg
             // 
             this.TcktImg.Location = new System.Drawing.Point(330, 3);
             this.TcktImg.Name = "TcktImg";
-            this.TcktImg.Size = new System.Drawing.Size(272, 203);
+            this.TcktImg.Size = new System.Drawing.Size(272, 215);
             this.TcktImg.TabIndex = 2054;
             this.TcktImg.TabStop = false;
             // 
@@ -133,12 +137,12 @@
             // 
             this.TxtDetailsAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtDetailsAdd.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtDetailsAdd.Location = new System.Drawing.Point(104, 212);
+            this.TxtDetailsAdd.Location = new System.Drawing.Point(104, 224);
             this.TxtDetailsAdd.Multiline = true;
             this.TxtDetailsAdd.Name = "TxtDetailsAdd";
             this.TxtDetailsAdd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TxtDetailsAdd.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtDetailsAdd.Size = new System.Drawing.Size(498, 248);
+            this.TxtDetailsAdd.Size = new System.Drawing.Size(498, 220);
             this.TxtDetailsAdd.TabIndex = 2111;
             this.TxtDetailsAdd.TabStop = false;
             this.TxtDetailsAdd.Tag = "Details";
@@ -147,7 +151,7 @@
             // 
             this.Panel3.Controls.Add(this.BtnClos);
             this.FlowLayoutPanel2.SetFlowBreak(this.Panel3, true);
-            this.Panel3.Location = new System.Drawing.Point(7, 216);
+            this.Panel3.Location = new System.Drawing.Point(7, 228);
             this.Panel3.Margin = new System.Windows.Forms.Padding(3, 7, 3, 3);
             this.Panel3.Name = "Panel3";
             this.Panel3.Size = new System.Drawing.Size(91, 85);
@@ -173,7 +177,7 @@
             // Panel2
             // 
             this.Panel2.Controls.Add(this.BtnAddEdt);
-            this.Panel2.Location = new System.Drawing.Point(450, 466);
+            this.Panel2.Location = new System.Drawing.Point(450, 450);
             this.Panel2.Name = "Panel2";
             this.Panel2.Size = new System.Drawing.Size(152, 51);
             this.Panel2.TabIndex = 2168;
@@ -200,7 +204,7 @@
             this.FlowLayoutPanel2.SetFlowBreak(this.LblWDays, true);
             this.LblWDays.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.LblWDays.ForeColor = System.Drawing.Color.Green;
-            this.LblWDays.Location = new System.Drawing.Point(63, 468);
+            this.LblWDays.Location = new System.Drawing.Point(63, 452);
             this.LblWDays.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.LblWDays.Name = "LblWDays";
             this.LblWDays.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -350,7 +354,7 @@
             this.Label54.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Label54.Size = new System.Drawing.Size(100, 20);
             this.Label54.TabIndex = 2102;
-            this.Label54.Text = "اسم المكتب :";
+            this.Label54.Text = "نوع الخدمة :";
             this.Label54.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // TxtNId
@@ -366,18 +370,18 @@
             this.TxtNId.TabStop = false;
             this.TxtNId.Tag = "Email Address";
             // 
-            // TxtOff
+            // TxtProd
             // 
-            this.TxtOff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtOff.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.TxtOff.Location = new System.Drawing.Point(9, 71);
-            this.TxtOff.Name = "TxtOff";
-            this.TxtOff.ReadOnly = true;
-            this.TxtOff.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.TxtOff.Size = new System.Drawing.Size(229, 26);
-            this.TxtOff.TabIndex = 2107;
-            this.TxtOff.TabStop = false;
-            this.TxtOff.Tag = "Email Address";
+            this.TxtProd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtProd.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.TxtProd.Location = new System.Drawing.Point(9, 71);
+            this.TxtProd.Name = "TxtProd";
+            this.TxtProd.ReadOnly = true;
+            this.TxtProd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.TxtProd.Size = new System.Drawing.Size(229, 26);
+            this.TxtProd.TabIndex = 2107;
+            this.TxtProd.TabStop = false;
+            this.TxtProd.Tag = "Email Address";
             // 
             // Label36
             // 
@@ -421,20 +425,20 @@
             this.Label51.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Label51.Size = new System.Drawing.Size(100, 20);
             this.Label51.TabIndex = 2093;
-            this.Label51.Text = "نوع الخدمة :";
+            this.Label51.Text = "نوع الشكوى :";
             this.Label51.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // TxtProd
+            // TxtComp
             // 
-            this.TxtProd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtProd.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.TxtProd.Location = new System.Drawing.Point(9, 103);
-            this.TxtProd.Name = "TxtProd";
-            this.TxtProd.ReadOnly = true;
-            this.TxtProd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.TxtProd.Size = new System.Drawing.Size(229, 26);
-            this.TxtProd.TabIndex = 2099;
-            this.TxtProd.Tag = "نوع الخدمة";
+            this.TxtComp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtComp.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.TxtComp.Location = new System.Drawing.Point(9, 103);
+            this.TxtComp.Name = "TxtComp";
+            this.TxtComp.ReadOnly = true;
+            this.TxtComp.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.TxtComp.Size = new System.Drawing.Size(229, 26);
+            this.TxtComp.TabIndex = 2099;
+            this.TxtComp.Tag = "نوع الخدمة";
             // 
             // Label39
             // 
@@ -478,20 +482,20 @@
             this.Label52.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Label52.Size = new System.Drawing.Size(100, 20);
             this.Label52.TabIndex = 2094;
-            this.Label52.Text = "نوع الشكوى :";
+            this.Label52.Text = "مصدر الشكوى :";
             this.Label52.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // TxtComp
+            // TxtSrc
             // 
-            this.TxtComp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtComp.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.TxtComp.Location = new System.Drawing.Point(9, 135);
-            this.TxtComp.Name = "TxtComp";
-            this.TxtComp.ReadOnly = true;
-            this.TxtComp.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.TxtComp.Size = new System.Drawing.Size(229, 26);
-            this.TxtComp.TabIndex = 2100;
-            this.TxtComp.Tag = "نوع الشكوى";
+            this.TxtSrc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtSrc.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.TxtSrc.Location = new System.Drawing.Point(9, 135);
+            this.TxtSrc.Name = "TxtSrc";
+            this.TxtSrc.ReadOnly = true;
+            this.TxtSrc.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.TxtSrc.Size = new System.Drawing.Size(229, 26);
+            this.TxtSrc.TabIndex = 2100;
+            this.TxtSrc.Tag = "نوع الشكوى";
             // 
             // Label53
             // 
@@ -503,20 +507,20 @@
             this.Label53.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Label53.Size = new System.Drawing.Size(100, 29);
             this.Label53.TabIndex = 2103;
-            this.Label53.Text = "مصدر الشكوى :";
+            this.Label53.Text = "متابع الشكوى :";
             this.Label53.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // TxtSrc
+            // TxtFolw
             // 
-            this.TxtSrc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtSrc.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.TxtSrc.Location = new System.Drawing.Point(350, 226);
-            this.TxtSrc.Name = "TxtSrc";
-            this.TxtSrc.ReadOnly = true;
-            this.TxtSrc.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.TxtSrc.Size = new System.Drawing.Size(229, 26);
-            this.TxtSrc.TabIndex = 2108;
-            this.TxtSrc.Tag = "نوع الشكوى";
+            this.TxtFolw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtFolw.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.TxtFolw.Location = new System.Drawing.Point(350, 226);
+            this.TxtFolw.Name = "TxtFolw";
+            this.TxtFolw.ReadOnly = true;
+            this.TxtFolw.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.TxtFolw.Size = new System.Drawing.Size(229, 26);
+            this.TxtFolw.TabIndex = 2108;
+            this.TxtFolw.Tag = "نوع الشكوى";
             // 
             // Label1
             // 
@@ -529,27 +533,27 @@
             this.Label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Label1.Size = new System.Drawing.Size(100, 20);
             this.Label1.TabIndex = 2109;
-            this.Label1.Text = "متابع الشكوى :";
+            this.Label1.Text = "اسم الفريق :";
             this.Label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // TxtFolw
+            // TxtfolowusrTeam
             // 
-            this.TxtFolw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtFolw.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.TxtFolw.Location = new System.Drawing.Point(9, 226);
-            this.TxtFolw.Name = "TxtFolw";
-            this.TxtFolw.ReadOnly = true;
-            this.TxtFolw.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.TxtFolw.Size = new System.Drawing.Size(229, 26);
-            this.TxtFolw.TabIndex = 2110;
-            this.TxtFolw.Tag = "نوع الشكوى";
+            this.TxtfolowusrTeam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtfolowusrTeam.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.TxtfolowusrTeam.Location = new System.Drawing.Point(9, 226);
+            this.TxtfolowusrTeam.Name = "TxtfolowusrTeam";
+            this.TxtfolowusrTeam.ReadOnly = true;
+            this.TxtfolowusrTeam.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.TxtfolowusrTeam.Size = new System.Drawing.Size(229, 26);
+            this.TxtfolowusrTeam.TabIndex = 2110;
+            this.TxtfolowusrTeam.Tag = "نوع الشكوى";
             // 
             // Label43
             // 
             this.Label43.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Label43.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label43.ForeColor = System.Drawing.Color.Blue;
-            this.Label43.Location = new System.Drawing.Point(585, 255);
+            this.Label43.Location = new System.Drawing.Point(585, 287);
             this.Label43.Name = "Label43";
             this.Label43.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Label43.Size = new System.Drawing.Size(100, 35);
@@ -560,7 +564,7 @@
             // TxtDetails
             // 
             this.TxtDetails.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.TxtDetails.Location = new System.Drawing.Point(9, 258);
+            this.TxtDetails.Location = new System.Drawing.Point(9, 290);
             this.TxtDetails.Name = "TxtDetails";
             this.TxtDetails.ReadOnly = true;
             this.TxtDetails.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -582,31 +586,35 @@
             this.FlowLayoutPanel1.Controls.Add(this.Label34);
             this.FlowLayoutPanel1.Controls.Add(this.TxtDt);
             this.FlowLayoutPanel1.Controls.Add(this.Label54);
-            this.FlowLayoutPanel1.Controls.Add(this.TxtOff);
+            this.FlowLayoutPanel1.Controls.Add(this.TxtProd);
             this.FlowLayoutPanel1.Controls.Add(this.Label36);
             this.FlowLayoutPanel1.Controls.Add(this.TxtNm);
             this.FlowLayoutPanel1.Controls.Add(this.Label51);
-            this.FlowLayoutPanel1.Controls.Add(this.TxtProd);
+            this.FlowLayoutPanel1.Controls.Add(this.TxtComp);
             this.FlowLayoutPanel1.Controls.Add(this.Label39);
             this.FlowLayoutPanel1.Controls.Add(this.TxtAdd);
             this.FlowLayoutPanel1.Controls.Add(this.Label52);
-            this.FlowLayoutPanel1.Controls.Add(this.TxtComp);
-            this.FlowLayoutPanel1.Controls.Add(this.Label53);
             this.FlowLayoutPanel1.Controls.Add(this.TxtSrc);
-            this.FlowLayoutPanel1.Controls.Add(this.Label1);
+            this.FlowLayoutPanel1.Controls.Add(this.Label53);
             this.FlowLayoutPanel1.Controls.Add(this.TxtFolw);
+            this.FlowLayoutPanel1.Controls.Add(this.Label1);
+            this.FlowLayoutPanel1.Controls.Add(this.TxtfolowusrTeam);
+            this.FlowLayoutPanel1.Controls.Add(this.label2);
+            this.FlowLayoutPanel1.Controls.Add(this.TxtTikCreat);
+            this.FlowLayoutPanel1.Controls.Add(this.label3);
+            this.FlowLayoutPanel1.Controls.Add(this.TxtTikCreatTeam);
             this.FlowLayoutPanel1.Controls.Add(this.Label43);
             this.FlowLayoutPanel1.Controls.Add(this.TxtDetails);
             this.FlowLayoutPanel1.Controls.Add(this.FlwMend);
             this.FlowLayoutPanel1.Location = new System.Drawing.Point(644, 26);
             this.FlowLayoutPanel1.Name = "FlowLayoutPanel1";
             this.FlowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.FlowLayoutPanel1.Size = new System.Drawing.Size(688, 684);
+            this.FlowLayoutPanel1.Size = new System.Drawing.Size(688, 726);
             this.FlowLayoutPanel1.TabIndex = 2115;
             // 
             // FlwMend
             // 
-            this.FlwMend.Location = new System.Drawing.Point(9, 418);
+            this.FlwMend.Location = new System.Drawing.Point(9, 450);
             this.FlwMend.Margin = new System.Windows.Forms.Padding(80, 3, 3, 3);
             this.FlwMend.Name = "FlwMend";
             this.FlwMend.Size = new System.Drawing.Size(599, 252);
@@ -622,7 +630,7 @@
             this.FlowDetls.Location = new System.Drawing.Point(0, 0);
             this.FlowDetls.Name = "FlowDetls";
             this.FlowDetls.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.FlowDetls.Size = new System.Drawing.Size(1335, 722);
+            this.FlowDetls.Size = new System.Drawing.Size(1335, 764);
             this.FlowDetls.TabIndex = 2122;
             // 
             // TxtTikID
@@ -642,12 +650,64 @@
             this.TimerVisInvs.Enabled = true;
             this.TimerVisInvs.Interval = 500;
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Blue;
+            this.label2.Location = new System.Drawing.Point(585, 261);
+            this.label2.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.label2.Name = "label2";
+            this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label2.Size = new System.Drawing.Size(100, 20);
+            this.label2.TabIndex = 2166;
+            this.label2.Text = "محرر الشكوى :";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // TxtTikCreat
+            // 
+            this.TxtTikCreat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtTikCreat.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.TxtTikCreat.Location = new System.Drawing.Point(350, 258);
+            this.TxtTikCreat.Name = "TxtTikCreat";
+            this.TxtTikCreat.ReadOnly = true;
+            this.TxtTikCreat.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.TxtTikCreat.Size = new System.Drawing.Size(229, 26);
+            this.TxtTikCreat.TabIndex = 2167;
+            this.TxtTikCreat.Tag = "نوع الشكوى";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Blue;
+            this.label3.Location = new System.Drawing.Point(244, 261);
+            this.label3.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.label3.Name = "label3";
+            this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label3.Size = new System.Drawing.Size(100, 20);
+            this.label3.TabIndex = 2168;
+            this.label3.Text = "اسم الفريق :";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // TxtTikCreatTeam
+            // 
+            this.TxtTikCreatTeam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtTikCreatTeam.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.TxtTikCreatTeam.Location = new System.Drawing.Point(9, 258);
+            this.TxtTikCreatTeam.Name = "TxtTikCreatTeam";
+            this.TxtTikCreatTeam.ReadOnly = true;
+            this.TxtTikCreatTeam.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.TxtTikCreatTeam.Size = new System.Drawing.Size(229, 26);
+            this.TxtTikCreatTeam.TabIndex = 2169;
+            this.TxtTikCreatTeam.Tag = "نوع الشكوى";
+            // 
             // TikDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1335, 722);
+            this.ClientSize = new System.Drawing.Size(1335, 764);
             this.Controls.Add(this.FlowDetls);
             this.Name = "TikDetails";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -690,19 +750,19 @@
         internal System.Windows.Forms.Label Label34;
         internal System.Windows.Forms.TextBox TxtDt;
         internal System.Windows.Forms.Label Label54;
-        internal System.Windows.Forms.TextBox TxtOff;
+        internal System.Windows.Forms.TextBox TxtProd;
         internal System.Windows.Forms.Label Label36;
         internal System.Windows.Forms.TextBox TxtNm;
         internal System.Windows.Forms.Label Label51;
-        internal System.Windows.Forms.TextBox TxtProd;
+        internal System.Windows.Forms.TextBox TxtComp;
         internal System.Windows.Forms.Label Label39;
         internal System.Windows.Forms.TextBox TxtAdd;
         internal System.Windows.Forms.Label Label52;
-        internal System.Windows.Forms.TextBox TxtComp;
-        internal System.Windows.Forms.Label Label53;
         internal System.Windows.Forms.TextBox TxtSrc;
-        internal System.Windows.Forms.Label Label1;
+        internal System.Windows.Forms.Label Label53;
         internal System.Windows.Forms.TextBox TxtFolw;
+        internal System.Windows.Forms.Label Label1;
+        internal System.Windows.Forms.TextBox TxtfolowusrTeam;
         internal System.Windows.Forms.Label Label43;
         internal System.Windows.Forms.TextBox TxtNId;
         internal System.Windows.Forms.RichTextBox TxtDetails;
@@ -711,5 +771,9 @@
         internal System.Windows.Forms.Label TxtTikID;
         internal System.Windows.Forms.Timer TimerVisInvs;
         public System.Windows.Forms.FlowLayoutPanel FlwMend;
+        internal System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.TextBox TxtTikCreat;
+        internal System.Windows.Forms.Label label3;
+        internal System.Windows.Forms.TextBox TxtTikCreatTeam;
     }
 }

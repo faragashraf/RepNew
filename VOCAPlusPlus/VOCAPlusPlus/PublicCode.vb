@@ -595,7 +595,7 @@ End_:
         End If
         UsrStr = UsrCas & " = " & Usr.PUsrID & " OR "
         'TkEmpNm
-        '                   0  ,    1  ,     2     ***   
+        '                         0  ,    1  ,     2     ***   
         If Fn.GetTblXX("Select UsrId, UCatId, UCatIdSub From Int_user RIGHT OUTER Join IntUserCat On UsrCat = UCatId Where (UsrSusp = 0) " & BckOff & " Order By UCatIdSub, UsrRealNm", UsrTable, "1048&H") = Nothing Then
             For Cnt_ = 0 To UsrTable.Rows.Count - 1
                 TempNode = TreeTemp.Nodes.Find(UsrTable(Cnt_).Item(2).ToString, True)

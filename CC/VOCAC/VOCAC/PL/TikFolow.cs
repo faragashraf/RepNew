@@ -36,7 +36,7 @@ namespace VOCAC.PL
                 return frm;
             }
         }
-        SqlConnection sqlcon = new SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-323");
+        SqlConnection sqlcon = new SqlConnection(Statcdif.strConn);
         SqlCommand cmd;
         SqlDataAdapter da;
         BindingManagerBase bmb;
@@ -88,41 +88,62 @@ namespace VOCAC.PL
             {
                 try
                 {
-                    GridTicket.DataSource = TickTblMain.DefaultView;
-                    WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
+                    if (TickTblMain.DefaultView.Count > 0)
+                    {
+                        gridadjst();
+                        Filtr();
+                        assignfltrTXTintoCtrlTag();
+                        this.GridTicket.SelectionChanged += new System.EventHandler(this.GridTicket_SelectionChanged);
+                    }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "متابعة الشكاوى");
+                    fn.msg("هناك خطأ في الإتصال بقواعد البيانات" + Environment.NewLine + ex.Message, "متابعة الشكاوى");
                 }
-                gridadjst();
-                Filtr();
-                frmAdjust();
-                assignfltrTXTintoCtrlTag();
-                this.GridTicket.SelectionChanged += new System.EventHandler(this.GridTicket_SelectionChanged);
             }
+            else
+            {
+                fn.msg("لا توجد شكاوى للمتابعة", "متابعة الشكاوى");
+                flowLayoutPanel3.Visible = false;
+            }
+            frmAdjust();
+            WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
         }
         private void gridadjst()
         {
             if (this.GridTicket.Columns.Count > 0)
             {
-                for (int i = 0; i < 32; i++)
+                for (int i = 0; i < 36; i++)
                 {
                     GridTicket.Columns[i].Visible = false;
                 }
                 GridTicket.Columns["TkSQL"].Visible = true;
+                GridTicket.Columns["TkSQL"].HeaderText = "رقم الشكوى";
                 GridTicket.Columns["TkKind"].Visible = true;
+                GridTicket.Columns["TkKind"].HeaderText = "شكوى/طلب";
                 GridTicket.Columns["TkDtStart"].Visible = true;
+                GridTicket.Columns["TkDtStart"].HeaderText = "التاريخ";
                 GridTicket.Columns["TkClNm"].Visible = true;
+                GridTicket.Columns["TkClNm"].HeaderText = "اسم العميل";
                 GridTicket.Columns["TkClPh"].Visible = true;
+                GridTicket.Columns["TkClPh"].HeaderText = "تليفون العميل";
                 GridTicket.Columns["TkClNtID"].Visible = true;
+                GridTicket.Columns["TkClNtID"].HeaderText = "الرقم القومي";
                 GridTicket.Columns["PrdNm"].Visible = true;
+                GridTicket.Columns["PrdNm"].HeaderText = "اسم الخدمة";
                 GridTicket.Columns["CompNm"].Visible = true;
+                GridTicket.Columns["CompNm"].HeaderText = "نوع الشكوى";
                 GridTicket.Columns["TkupSTime"].Visible = true;
+                GridTicket.Columns["TkupSTime"].HeaderText = "تاريخ آخر تحديث";
                 GridTicket.Columns["TkupTxt"].Visible = true;
+                GridTicket.Columns["TkupTxt"].HeaderText = "نص آخر تحديث";
                 GridTicket.Columns["updtusr"].Visible = true;
+                GridTicket.Columns["updtusr"].HeaderText = "محرر آخر تحديث";
                 GridTicket.Columns["EvNm"].Visible = true;
-                for (int i = 33; i < GridTicket.Columns.Count; i++)
+                GridTicket.Columns["EvNm"].HeaderText = "نوع آخر تحديث";
+
+
+                for (int i = 37; i < GridTicket.Columns.Count; i++)
                 {
                     GridTicket.Columns[i].Visible = true;
                 }
@@ -190,7 +211,7 @@ namespace VOCAC.PL
             sqlcmb = new SqlCommandBuilder(da);
             TickTblMain.Rows.Clear();
             da.Fill(TickTblMain);
-            Filtr();
+            if (TickTblMain.Rows.Count > 0) { Filtr(); }
             this.StatBrPnlEn.Text = "إجمالي العدد : " + TickTblMain.Rows.Count.ToString();
         }
         private void Filtr()
@@ -221,6 +242,7 @@ namespace VOCAC.PL
                 FltrStr.Append(" or [PrdNm]" + LK + strt + SerchTxt.Text + end_);
                 FltrStr.Append(" or [CompNm]" + LK + strt + SerchTxt.Text + end_);
                 FltrStr.Append(" or [EvNm]" + LK + strt + SerchTxt.Text + end_);
+                FltrStr.Append(" or [TkDetails]" + LK + strt + SerchTxt.Text + end_);
                 FltrStr.Append(")");
             }
 
@@ -265,6 +287,30 @@ namespace VOCAC.PL
             LblFl2.Text = Convert.ToString(TickTblMain.Compute("count(TkupEvtId)", "TkupEvtId = 903"));
             LblFl3.Text = Convert.ToString(TickTblMain.Compute("count(TkupEvtId)", "TkupEvtId = 904"));
             Color_();
+
+
+            //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            if (GridTicket.Rows.Count > 0)
+            {
+                if (TickTblMain.DefaultView.Count < TickTblMain.Rows.Count)
+                {
+                    Fltrreslt = "الفلتر يعمل  : ";
+                    this.StatBrPnlAr.Icon = Resources.FilterOn;
+                }
+                else
+                {
+                    Fltrreslt = "الفلتر لا يعمل : ";
+                    this.StatBrPnlAr.Icon = Resources.FilterOff;
+                }
+                this.StatBrPnlAr.Text = Fltrreslt + (GridTicket.CurrentRow.Index + 1) + " / " + TickTblMain.DefaultView.Count.ToString() + "     ";
+            }
+            else if (GridTicket.Rows.Count == 0 && TickTblMain.Rows.Count > 0)
+            {
+                this.StatBrPnlAr.Text = "الفلتر يعمل     ";
+                this.StatBrPnlAr.Icon = Resources.FilterOn;
+                TikDetails.gettikdetlsfrm.Hide();
+            }
+            //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
         }
         private void Color_()
         {
@@ -286,16 +332,19 @@ namespace VOCAC.PL
                 }
                 else if (c.GetType() == typeof(Label))
                 {
-                    if (Convert.ToInt32(c.Text) > 0)
+                    Label LBL = new Label();
+                    LBL = c as Label;
+                    if (Convert.ToInt32(LBL.Text) > 0)
                     {
-                        c.ForeColor = Color.Green;
-                        c.Font = new Font("Times new Roman", 12, FontStyle.Bold);
+                        LBL.ForeColor = Color.Green;
+                        LBL.Font = new Font("Times new Roman", 12, FontStyle.Bold);
                     }
                     else
                     {
-                        c.BackColor = Color.White;
-                        c.Font = new Font("Times new Roman", 6, FontStyle.Regular);
+                        LBL.BackColor = Color.White;
+                        LBL.Font = new Font("Times new Roman", 6, FontStyle.Regular);
                     }
+                    LBL.TextAlign = ContentAlignment.MiddleCenter;
                 }
             }
         }
@@ -313,7 +362,10 @@ namespace VOCAC.PL
         }
         private void SerchTxt_TextChanged(object sender, EventArgs e)
         {
+            this.GridTicket.SelectionChanged -= new System.EventHandler(this.GridTicket_SelectionChanged);
+            TikDetails.gettikdetlsfrm.Hide();
             Filtr();
+            this.GridTicket.SelectionChanged += new System.EventHandler(this.GridTicket_SelectionChanged);
         }
         private void CloseBtn_Click(object sender, EventArgs e)
         {
@@ -324,29 +376,16 @@ namespace VOCAC.PL
         {
             if (GridTicket.Rows.Count > 0)
             {
-                if (TickTblMain.DefaultView.Count < TickTblMain.Rows.Count)
-                {
-                    Fltrreslt = "الفلتر يعمل  : ";
-                    this.StatBrPnlAr.Icon = Resources.FilterOn;
-                }
-                else
-                {
-                    Fltrreslt = "الفلتر لا يعمل : ";
-                    this.StatBrPnlAr.Icon = Resources.FilterOff;
-                }
                 if (GridTicket.CurrentRow != null)
                 {
                     this.StatBrPnlAr.Text = Fltrreslt + (GridTicket.CurrentRow.Index + 1) + " / " + TickTblMain.DefaultView.Count.ToString() + "     ";
                 }
+                if (frms.FormIsOpen(Application.OpenForms, typeof(TikDetails)) == true)
+                {
+                    ShowResult();
+                    GC.Collect();
+                }
 
-                ShowResult();
-                GC.Collect();
-            }
-            else if (GridTicket.Rows.Count == 0 && TickTblMain.Rows.Count > 0)
-            {
-                this.StatBrPnlAr.Text = "الفلتر يعمل     ";
-                this.StatBrPnlAr.Icon = Resources.FilterOn;
-                TikDetails.gettikdetlsfrm.Hide();
             }
         }
         private void ShowResult()
@@ -406,10 +445,11 @@ namespace VOCAC.PL
             try
             {
                 da.Fill(TickTblMain);
+                GridTicket.DataSource = TickTblMain.DefaultView;
             }
             catch (Exception ex)
             {
-                fn.msg("SSS", "متابعة الشكاوى");
+                fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "متابعة الشكاوى");
             }
             DAL.Close();
             return TickTblMain;
@@ -418,12 +458,12 @@ namespace VOCAC.PL
         {
             if (GridTicket.SelectedRows != null)
             {
-                if (frms.FormIsOpen(Application.OpenForms,typeof(TikDetails)) == false)
+                if (frms.FormIsOpen(Application.OpenForms, typeof(TikDetails)) == false)
                 {
-                ShowResult();
-                TikDetails.gettikdetlsfrm.MdiParent = WelcomeScreen.ActiveForm;
-                TikDetails.gettikdetlsfrm.WindowState = FormWindowState.Normal;
-                TikDetails.gettikdetlsfrm.Show();
+                    ShowResult();
+                    TikDetails.gettikdetlsfrm.MdiParent = WelcomeScreen.ActiveForm;
+                    TikDetails.gettikdetlsfrm.WindowState = FormWindowState.Normal;
+                    TikDetails.gettikdetlsfrm.Show();
                 }
             }
         }

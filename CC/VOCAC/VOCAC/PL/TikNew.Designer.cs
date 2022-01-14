@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TikNew));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Rooting");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Rooting");
             this.BtnAdd = new System.Windows.Forms.Button();
             this.Label11 = new System.Windows.Forms.Label();
             this.Label29 = new System.Windows.Forms.Label();
@@ -591,6 +591,7 @@
             // TimrPhons
             // 
             this.TimrPhons.Interval = 200;
+            this.TimrPhons.Tick += new System.EventHandler(this.TimrPhons_Tick);
             // 
             // Label2
             // 
@@ -718,12 +719,12 @@
             this.TreeView1.ImageKey = "Add.ico";
             this.TreeView1.Location = new System.Drawing.Point(11, 51);
             this.TreeView1.Name = "TreeView1";
-            treeNode1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            treeNode1.ForeColor = System.Drawing.Color.Red;
-            treeNode1.Name = "Rooting";
-            treeNode1.Text = "Rooting";
+            treeNode2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            treeNode2.ForeColor = System.Drawing.Color.Red;
+            treeNode2.Name = "Rooting";
+            treeNode2.Text = "Rooting";
             this.TreeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode2});
             this.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TreeView1.RightToLeftLayout = true;
             this.TreeView1.ShowNodeToolTips = true;
@@ -835,7 +836,7 @@
             this.NameTxtBx.Size = new System.Drawing.Size(286, 32);
             this.NameTxtBx.TabIndex = 1;
             this.NameTxtBx.TabStop = false;
-            this.NameTxtBx.Tag = "English-Text";
+            this.NameTxtBx.Tag = "Arabic-Text";
             // 
             // Label15
             // 

@@ -39,7 +39,6 @@ namespace VOCAC.PL
             {
                 frm = this;
             }
-
         }
         private void TikDetails_Load(object sender, EventArgs e)
         {
