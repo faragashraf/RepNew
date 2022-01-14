@@ -98,21 +98,23 @@ namespace VOCAC.BL
             SqlParameter[] param = null;
             DAL.Struc = DAL.SelectData("SP_SwitchBoard_SLCT", param);
             DAL.Close();
-            DataColumn primaryKey, primaryKey1 = new DataColumn();
+            DataColumn primaryKey = new DataColumn(), primaryKey1 = new DataColumn();
             primaryKey = Statcdif.CountryTable.Columns["CounCd"];
             primaryKey1 = Statcdif.ProdKTable.Columns["ProdKNm"];
             return DAL.Struc;
         }
-        public DAL.DataAccessLayer.rturnStruct TeamTree()
+        public DAL.DataAccessLayer.rturnStruct TeamTree(bool Stat)
         {
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-            SqlParameter[] param = null;
+            SqlParameter[] param = new SqlParameter[1];
+            param[0] = new SqlParameter("@Stat", SqlDbType.Bit);
+            param[0].Value = Stat;
 
             DAL.Struc = DAL.SelectData("SP_MyTeam_SLCT", param);
             DAL.Close();
             return DAL.Struc;
         }
-        public DAL.DataAccessLayer.treeStruct MyTeam(int LedrCat, int LedrId, String UsrCase)
+        public DAL.DataAccessLayer.treeStruct MyTeam(int LedrCat, int LedrId, String UsrCase, bool Stat)
         {
             DAL.DataAccessLayer.treeStruct treestruc = new DAL.DataAccessLayer.treeStruct();
             List<string> UsrStr = new List<string>();
@@ -121,11 +123,10 @@ namespace VOCAC.BL
 
             TreeTemp.Nodes.Add(LedrCat.ToString(), LedrId.ToString());
 
-
-            DAL.DataAccessLayer.rturnStruct SlctTeamReslt = TeamTree();
+            DAL.DataAccessLayer.rturnStruct SlctTeamReslt = TeamTree(Stat);
 
             UsrStr.Add(CurrentUser.UsrID.ToString());
-            if (this.TeamTree().msg == null)
+            if (this.TeamTree(Stat).msg == null)
             {
                 SlctTeamReslt.dt.DefaultView.RowFilter =  "UCatIdSub >= " + CurrentUser.UsrUCatLvl;
                 for (int i = 0; i < SlctTeamReslt.dt.DefaultView.Count; i++)

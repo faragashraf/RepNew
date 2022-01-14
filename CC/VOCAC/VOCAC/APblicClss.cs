@@ -26,8 +26,8 @@ namespace VOCAC
         public static String _ServerCD;
         public static String _serverNm;
         public static string servrTime;
-        public static String _MacStr,_IP;
-        public static List<string> FildList= new List<string>();
+        public static String _MacStr, _IP;
+        public static List<string> FildList = new List<string>();
         public static bool CncStat;
         public static MenuStrip Menu_;
         public static ContextMenuStrip CntxMenu;
@@ -279,7 +279,7 @@ namespace VOCAC
             SwichButTable = dt.Copy();
             dt.DefaultView.RowFilter = "(SwType = 'Tab') AND (SwNm <> 'NA')";
             DataTable tabTable = dt.DefaultView.ToTable();
-            for (int i = 0; i < dt.DefaultView.Count ; i++)
+            for (int i = 0; i < dt.DefaultView.Count; i++)
             {
 
                 ToolStripMenuItem NewTab = new ToolStripMenuItem(tabTable.Rows[i].Field<string>("SwNm"));
@@ -298,12 +298,12 @@ namespace VOCAC
                     {
                         ToolStripMenuItem subItem = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
                         ToolStripMenuItem subItemCx = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
-                        if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID")-1, 1) == "A" )
+                        if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID") - 1, 1) == "A")
                         {
                             if (butTable.Rows[u].Field<bool>("NewNew") == true)  // Populate Switchboard Button If form Added
                             {
                                 subItem.Tag = butTable.Rows[u].Field<string>("SwObjNm1");
-                                if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID")-1, 1) == "A")
+                                if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID") - 1, 1) == "A")
                                 {
                                     subItem.AccessibleName = "True";
                                     subItemCx.AccessibleName = "True";
@@ -450,7 +450,7 @@ namespace VOCAC
         {
             MessageBox.Show(Messd, titl, messageBoxButtons, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, messageBoxOptions);
         }
-        public int CalDate(string StDt , string EnDt )
+        public int CalDate(string StDt, string EnDt)
         {
             Statcdif.CDHolDay.DefaultView.RowFilter = "HDate >= '" + StDt + "' and HDate <= '" + EnDt + "'";
             int Wdays = Statcdif.CDHolDay.DefaultView.Count;
@@ -560,6 +560,7 @@ namespace VOCAC
             ToolStripMenuItem _item = (ToolStripMenuItem)sender;
             String formName = "VOCAC.PL." + _item.Tag;
             Form frm = (Form)Activator.CreateInstance(Type.GetType(formName));
+
             foreach (Form f in Application.OpenForms)
             {
                 if (f.Name == frm.Name)
@@ -578,6 +579,11 @@ namespace VOCAC
             frm.Show();
         }
         #endregion
+        public static bool FormIsOpen(FormCollection application, Type formType)
+        {
+            //usage sample: FormIsOpen(Application.OpenForms,typeof(Form2)
+            return Application.OpenForms.Cast<Form>().Any(openForm => openForm.GetType() == formType);
+        }
     }
 }
 

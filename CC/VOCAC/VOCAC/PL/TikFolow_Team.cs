@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VOCAC.BL;
 using VOCAC.Properties;
-using static VOCAC.BL.currentTicket;
+using static VOCAC.BL.ticketCurrent;
 
 namespace VOCAC.PL
 {
     public partial class TikFolow_Team : Form
     {
-        BL.currentTicket Crnt = new currentTicket();
+        BL.ticketCurrent Crnt = new ticketCurrent();
         private static TikFolow_Team frm;
         static void frm_Closed(object sender, FormClosedEventArgs e)
         {

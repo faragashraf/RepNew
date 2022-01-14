@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VOCAC.BL;
 using VOCAC.Properties;
-using static VOCAC.BL.currentTicket;
+using static VOCAC.BL.ticketCurrent;
 
 namespace VOCAC.PL
 {
@@ -39,7 +39,7 @@ namespace VOCAC.PL
             {
                 frm = this;
             }
-          
+
         }
         private void TikDetails_Load(object sender, EventArgs e)
         {

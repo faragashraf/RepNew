@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VOCAC.BL;
 using VOCAC.Properties;
-using static VOCAC.BL.currentTicket;
+using static VOCAC.BL.ticketCurrent;
 
 namespace VOCAC.PL
 {
     public partial class TikFolow : Form
     {
-        BL.currentTicket Crnt = new currentTicket();
+        BL.ticketCurrent Crnt = new ticketCurrent();
         private static TikFolow frm;
         static void frm_Closed(object sender, FormClosedEventArgs e)
         {
@@ -37,37 +37,14 @@ namespace VOCAC.PL
             }
         }
         SqlConnection sqlcon = new SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-323");
+        SqlCommand cmd;
         SqlDataAdapter da;
         BindingManagerBase bmb;
         SqlCommandBuilder sqlcmb;
         DataTable TickTblMain = new DataTable();
         public TikFolow()
         {
-            WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "  جاري تحميل البيانات .......";
             InitializeComponent();
-            da = new SqlDataAdapter("select TkSQL, TkKind, TkDtStart, TkID, SrcNm, TkClNm, TkClPh, TkClPh1, TkMail, TkClAdr, TkCardNo, TkShpNo, TkGBNo, TkClNtID, TkAmount, TkTransDate, PrdKind, PrdNm, CompNm, CounNmSender, CounNmConsign, OffNm1, OffArea, " +
-                            "TkDetails, TkClsStatus, TkFolw, TkEmpNm, tk.UsrRealNm as 'folowusr', TkReOp, format(TkRecieveDt, 'yyyy/MM/dd') As TkRecieveDt, TkEscTyp, ProdKNm, CompHelp, TkupSTime, EvNm, TkupTxt, upusr.UsrRealNm as 'updtusr', TkupReDt, TkupUser, TkupSQL, TkupTkSql," +
-                            "TkupEvtId, EvSusp, UCatLvl, TkupUnread" +
-                            " from TicketsAll tk inner join TkEvent Ev on Ev.TkupSQL = TkEvSql INNER JOIN Int_user upusr ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON upusr.UsrCat = IntUserCat.UCatId where tk.TkClsStatus = 0 and " +
-                            "tk.TkEmpNm = " + CurrentUser.UsrID + " order by TkSQL", sqlcon);
-            try
-            {
-                da.Fill(TickTblMain);
-                GridTicket.DataSource = TickTblMain.DefaultView;
-                gridadjst();
-                Filtr();
-                frmAdjust();
-                assignfltrTXTintoCtrlTag();
-                WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
-            }
-            catch (Exception)
-            {
-                fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "متابعة الشكاوى");
-            }
-
-            //bmb = this.BindingContext[TickTblMain];
-            //TikDetails.gettikdetlsfrm.TxtPh1.DataBindings.Add("text", TickTblMain, "TkClPh");
-            //TikDetails.gettikdetlsfrm.TxtPh2.DataBindings.Add("text", TickTblMain, "TkClPh1");
         }
         //assign Filtr TEXT into Control Tag and assign Event EventHandler
         private void assignfltrTXTintoCtrlTag()
@@ -106,13 +83,30 @@ namespace VOCAC.PL
         {
             frms forms = new frms();
             forms.FrmAllSub(this);
-            this.GridTicket.SelectionChanged += new System.EventHandler(this.GridTicket_SelectionChanged);
+            WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "  جاري تحميل البيانات .......";
+            if (filtbl().Rows.Count > 0)
+            {
+                try
+                {
+                    GridTicket.DataSource = TickTblMain.DefaultView;
+                    WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
+                }
+                catch (Exception)
+                {
+                    fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "متابعة الشكاوى");
+                }
+                gridadjst();
+                Filtr();
+                frmAdjust();
+                assignfltrTXTintoCtrlTag();
+                this.GridTicket.SelectionChanged += new System.EventHandler(this.GridTicket_SelectionChanged);
+            }
         }
         private void gridadjst()
         {
             if (this.GridTicket.Columns.Count > 0)
             {
-                for (int i = 0; i < GridTicket.Columns.Count ; i++)
+                for (int i = 0; i < 32; i++)
                 {
                     GridTicket.Columns[i].Visible = false;
                 }
@@ -121,13 +115,17 @@ namespace VOCAC.PL
                 GridTicket.Columns["TkDtStart"].Visible = true;
                 GridTicket.Columns["TkClNm"].Visible = true;
                 GridTicket.Columns["TkClPh"].Visible = true;
-                GridTicket.Columns["TkCardNo"].Visible = true;
                 GridTicket.Columns["TkClNtID"].Visible = true;
-                GridTicket.Columns["TkShpNo"].Visible = true;
                 GridTicket.Columns["PrdNm"].Visible = true;
                 GridTicket.Columns["CompNm"].Visible = true;
+                GridTicket.Columns["TkupSTime"].Visible = true;
                 GridTicket.Columns["TkupTxt"].Visible = true;
+                GridTicket.Columns["updtusr"].Visible = true;
                 GridTicket.Columns["EvNm"].Visible = true;
+                for (int i = 33; i < GridTicket.Columns.Count; i++)
+                {
+                    GridTicket.Columns[i].Visible = true;
+                }
             }
         }
         private void Fill_()
@@ -215,9 +213,10 @@ namespace VOCAC.PL
                 FltrStr.Append(" or [TkClNm]" + LK + strt + SerchTxt.Text + end_);
                 FltrStr.Append(" or [TkClPh]" + LK + strt + SerchTxt.Text + end_);
                 FltrStr.Append(" or [TkClPh1]" + LK + strt + SerchTxt.Text + end_);
-                FltrStr.Append(" or [TkCardNo]" + LK + strt + SerchTxt.Text + end_);
-                FltrStr.Append(" or [TkShpNo]" + LK + strt + SerchTxt.Text + end_);
-                FltrStr.Append(" or [TkGBNo]" + LK + strt + SerchTxt.Text + end_);
+                for (int i = 33; i < GridTicket.Columns.Count; i++)
+                {
+                    FltrStr.Append(" or [" + GridTicket.Columns[i].Name.ToString() + "]" + LK + strt + SerchTxt.Text + end_);
+                }
                 FltrStr.Append(" or [TkClNtID]" + LK + strt + SerchTxt.Text + end_);
                 FltrStr.Append(" or [PrdNm]" + LK + strt + SerchTxt.Text + end_);
                 FltrStr.Append(" or [CompNm]" + LK + strt + SerchTxt.Text + end_);
@@ -327,22 +326,35 @@ namespace VOCAC.PL
             {
                 if (TickTblMain.DefaultView.Count < TickTblMain.Rows.Count)
                 {
-                    Fltrreslt = "نتيجة الفلتر  : ";
+                    Fltrreslt = "الفلتر يعمل  : ";
+                    this.StatBrPnlAr.Icon = Resources.FilterOn;
                 }
                 else
                 {
-                    Fltrreslt = "العدد الإجمالي :";
+                    Fltrreslt = "الفلتر لا يعمل : ";
+                    this.StatBrPnlAr.Icon = Resources.FilterOff;
                 }
                 if (GridTicket.CurrentRow != null)
                 {
-                    this.StatBrPnlAr.Text = Fltrreslt + (GridTicket.CurrentRow.Index + 1) + " / " + TickTblMain.DefaultView.Count.ToString();
+                    this.StatBrPnlAr.Text = Fltrreslt + (GridTicket.CurrentRow.Index + 1) + " / " + TickTblMain.DefaultView.Count.ToString() + "     ";
                 }
 
+                ShowResult();
+                GC.Collect();
             }
-            else
+            else if (GridTicket.Rows.Count == 0 && TickTblMain.Rows.Count > 0)
             {
-                this.StatBrPnlAr.Text = "";
+                this.StatBrPnlAr.Text = "الفلتر يعمل     ";
+                this.StatBrPnlAr.Icon = Resources.FilterOn;
+                TikDetails.gettikdetlsfrm.Hide();
             }
+        }
+        private void ShowResult()
+        {
+
+            Crnt.currentRow(GridTicket);
+            Crnt.AssignToForm();
+            if (checkBox1.Checked) { TikDetails.gettikdetlsfrm.BringToFront(); };
         }
         private void RadioLikeEqual_CheckedChanged(object sender, EventArgs e)
         {
@@ -351,15 +363,17 @@ namespace VOCAC.PL
                 Rd_strtwith.Checked = false;
                 Rd_endwith.Checked = false;
                 Rd_contain.Checked = false;
+
                 Rd_strtwith.Enabled = false;
                 Rd_endwith.Enabled = false;
                 Rd_contain.Enabled = false;
             }
             else if (Rd_Like.Checked)
             {
-                Rd_strtwith.Checked = true;
+                Rd_strtwith.Checked = false;
                 Rd_endwith.Checked = false;
-                Rd_contain.Checked = false;
+                Rd_contain.Checked = true;
+
                 Rd_strtwith.Enabled = true;
                 Rd_endwith.Enabled = true;
                 Rd_contain.Enabled = true;
@@ -373,20 +387,45 @@ namespace VOCAC.PL
         {
             Filtr();
         }
-        private void GridTicket_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private DataTable filtbl()
         {
-            Stopwatch Stp = new Stopwatch();
-            Stp.Start();
-            Crnt.currentRow(GridTicket);
-            TikDetails.gettikdetlsfrm.MdiParent = WelcomeScreen.ActiveForm;
-            TikDetails.gettikdetlsfrm.WindowState = FormWindowState.Normal;
-            TikDetails.gettikdetlsfrm.Show();
-            if (checkBox1.Checked) { TikDetails.gettikdetlsfrm.BringToFront(); };
-            Crnt.AssignToForm();
-            TimeSpan TimSpn = (Stp.Elapsed);
-            Stp.Stop();
-            TikDetails.gettikdetlsfrm.Text += " _ " + String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimSpn.Hours, TimSpn.Minutes, TimSpn.Seconds, TimSpn.Milliseconds);
-            GC.Collect();
+            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
+            SqlParameter[] param = new SqlParameter[2];
+
+            param[0] = new SqlParameter("@id", SqlDbType.VarChar);
+            param[0].Value = " in (" + CurrentUser.UsrID.ToString() + ")";
+            param[1] = new SqlParameter("@STATUS_", SqlDbType.Bit);
+            param[1].Value = 0;
+            cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "SP_TICKETS_SLCT";
+            cmd.Connection = sqlcon;
+            cmd.Parameters.Add(param[0]);
+            cmd.Parameters.Add(param[1]);
+            da = new SqlDataAdapter(cmd);
+            try
+            {
+                da.Fill(TickTblMain);
+            }
+            catch (Exception ex)
+            {
+                fn.msg("SSS", "متابعة الشكاوى");
+            }
+            DAL.Close();
+            return TickTblMain;
+        }
+        private void GridTicket_DoubleClick(object sender, EventArgs e)
+        {
+            if (GridTicket.SelectedRows != null)
+            {
+                if (frms.FormIsOpen(Application.OpenForms,typeof(TikDetails)) == false)
+                {
+                ShowResult();
+                TikDetails.gettikdetlsfrm.MdiParent = WelcomeScreen.ActiveForm;
+                TikDetails.gettikdetlsfrm.WindowState = FormWindowState.Normal;
+                TikDetails.gettikdetlsfrm.Show();
+                }
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ using VOCAC.Properties;
 
 namespace VOCAC.BL
 {
-    class currentTicket
+    class ticketCurrent
     {
         public struct currntTicket
         {
@@ -25,19 +25,11 @@ namespace VOCAC.BL
             public static string _TkClNm;
             public static string _TkMail;
             public static string _TkClAdr;
-            public static string _TkCardNo;
-            public static string _TkShpNo;
-            public static string _TkGBNo;
             public static string _TkClNtID;
-            public static string _TkAmount;
-            public static DateTime _TkTransDate;
+            public static int _TkFnPrdCd;
             public static string _ProdKNm;
             public static string _PrdNm;
             public static string _CompNm;
-            public static string _CounNmSender;
-            public static string _CounNmConsign;
-            public static string _OffNm1;
-            public static string _OffArea;
             public static string _TkDetails;
             public static bool _TkClsStatus;
             public static bool _TkFolw;
@@ -46,20 +38,19 @@ namespace VOCAC.BL
             public static bool _TkReOp;
             public static DateTime _TkRecieveDt;
             public static int _TkEscTyp;
-            public static string _CompHelp;
             public static DateTime _TkupSTime;
             public static string _EvNm;
             public static string _TkupTxt;
             public static string _updtusr;
             public static DateTime _TkupReDt;
             public static int _TkupUser;
-            public static int _TkupTkSql;
             public static int _TkupEvtId;
             public static bool _EvSusp;
             public static int _UCatLvl;
             public static bool _TkupUnread;
+            public static List<string> SlctdFldLst = new List<string>();
         }
-        public void currentRow( DataGridView gv)
+        public void currentRow(DataGridView gv)
         {
             currntTicket._TkKind = Convert.ToBoolean(gv.CurrentRow.Cells["TkKind"].Value);
             currntTicket._SrcNm = Convert.ToString(gv.CurrentRow.Cells["SrcNm"].Value);
@@ -70,14 +61,13 @@ namespace VOCAC.BL
             currntTicket._TkClPh1 = Convert.ToString(gv.CurrentRow.Cells["TkClPh1"].Value);
             currntTicket._TkClAdr = Convert.ToString(gv.CurrentRow.Cells["TkClAdr"].Value);
 
+            currntTicket._TkFnPrdCd = Convert.ToInt32(gv.CurrentRow.Cells["TkFnPrdCd"].Value);
             currntTicket._PrdNm = Convert.ToString(gv.CurrentRow.Cells["PrdNm"].Value);
             currntTicket._ProdKNm = Convert.ToString(gv.CurrentRow.Cells["ProdKNm"].Value);
             currntTicket._CompNm = Convert.ToString(gv.CurrentRow.Cells["CompNm"].Value);
             currntTicket._TkMail = Convert.ToString(gv.CurrentRow.Cells["TkMail"].Value);
 
-            currntTicket._TkCardNo = Convert.ToString(gv.CurrentRow.Cells["TkCardNo"].Value);
-            currntTicket._TkGBNo = Convert.ToString(gv.CurrentRow.Cells["TkGBNo"].Value);
-            currntTicket._TkAmount = Convert.ToString(gv.CurrentRow.Cells["TkAmount"].Value);
+
             currntTicket._TkClNtID = Convert.ToString(gv.CurrentRow.Cells["TkClNtID"].Value);
 
             currntTicket._TkDetails = Convert.ToString(gv.CurrentRow.Cells["TkDetails"].Value);
@@ -85,40 +75,43 @@ namespace VOCAC.BL
             currntTicket._TkEscTyp = Convert.ToInt32(gv.CurrentRow.Cells["TkEscTyp"].Value);
             currntTicket._TkFolw = Convert.ToBoolean(gv.CurrentRow.Cells["TkFolw"].Value);
 
-            currntTicket._OffArea = Convert.ToString(gv.CurrentRow.Cells["OffArea"].Value);
-            currntTicket._OffNm1 = Convert.ToString(gv.CurrentRow.Cells["OffNm1"].Value);
 
             if (gv.CurrentRow.Cells["TkRecieveDt"].Value.ToString().Length > 0)
             {
                 currntTicket._TkRecieveDt = Convert.ToDateTime(gv.CurrentRow.Cells["TkRecieveDt"].Value);
             };
-            currntTicket._TkShpNo = Convert.ToString(gv.CurrentRow.Cells["TkShpNo"].Value);
-            currntTicket._CounNmConsign = Convert.ToString(gv.CurrentRow.Cells["CounNmConsign"].Value);
-            currntTicket._CounNmSender = Convert.ToString(gv.CurrentRow.Cells["CounNmSender"].Value);
 
             currntTicket._folowusr = Convert.ToString(gv.CurrentRow.Cells["folowusr"].Value);
             currntTicket._TkReOp = Convert.ToBoolean(gv.CurrentRow.Cells["TkReOp"].Value);
             currntTicket._TkClsStatus = Convert.ToBoolean(gv.CurrentRow.Cells["TkClsStatus"].Value);
-            if (gv.CurrentRow.Cells["TkTransDate"].Value.ToString().Length > 0)
-            {
-                currntTicket._TkTransDate = (DateTime)gv.CurrentRow.Cells["TkTransDate"].Value;
-            }
 
             currntTicket._EvNm = Convert.ToString(gv.CurrentRow.Cells["EvNm"].Value);
             currntTicket._EvSusp = Convert.ToBoolean(gv.CurrentRow.Cells["EvSusp"].Value);
             currntTicket._TkupEvtId = Convert.ToInt32(gv.CurrentRow.Cells["TkupEvtId"].Value);
             currntTicket._TkupReDt = Convert.ToDateTime(gv.CurrentRow.Cells["TkupReDt"].Value);
             currntTicket._TkupSTime = Convert.ToDateTime(gv.CurrentRow.Cells["TkupSTime"].Value);
-            currntTicket._TkupTkSql = Convert.ToInt32(gv.CurrentRow.Cells["TkupTkSql"].Value);
             currntTicket._TkupTxt = Convert.ToString(gv.CurrentRow.Cells["TkupTxt"].Value);
             currntTicket._TkupUnread = Convert.ToBoolean(gv.CurrentRow.Cells["TkupUnread"].Value);
             currntTicket._TkupUser = Convert.ToInt32(gv.CurrentRow.Cells["TkupUser"].Value);
             currntTicket._UCatLvl = Convert.ToInt32(gv.CurrentRow.Cells["UCatLvl"].Value);
             currntTicket._updtusr = Convert.ToString(gv.CurrentRow.Cells["updtusr"].Value);
-            currntTicket._CompHelp = Convert.ToString(gv.CurrentRow.Cells["CompHelp"].Value);
+
+            currntTicket.SlctdFldLst.Clear();
+            for (int i = 33; i < gv.Columns.Count; i++)
+            {
+                if (gv.CurrentRow.Cells[i].Value.ToString().Length > 0)
+                {
+                    currntTicket.SlctdFldLst.Add(gv.Columns[i].Name.ToString() + "_" + gv.CurrentRow.Cells[i].Value.ToString());
+                }
+            }
         }
         public void AssignToForm()
         {
+
+
+            TikDetails.gettikdetlsfrm.FlwMend.Controls.Clear();
+
+
             if (currntTicket._TkClsStatus == true)
             {
                 TikDetails.gettikdetlsfrm.TcktImg.BackgroundImage = Resources.Tckoff;
@@ -156,45 +149,33 @@ namespace VOCAC.BL
             TikDetails.gettikdetlsfrm.TxtAdd.Text = currntTicket._TkClAdr;
             TikDetails.gettikdetlsfrm.TxtEmail.Text = currntTicket._TkMail;
             TikDetails.gettikdetlsfrm.TxtDetails.Text = currntTicket._TkDetails;
-            TikDetails.gettikdetlsfrm.TxtArea.Text = currntTicket._OffArea;
-            TikDetails.gettikdetlsfrm.TxtOff.Text = currntTicket._OffNm1;
             TikDetails.gettikdetlsfrm.TxtProd.Text = currntTicket._PrdNm;
             TikDetails.gettikdetlsfrm.TxtComp.Text = currntTicket._CompNm;
             TikDetails.gettikdetlsfrm.TxtSrc.Text = currntTicket._SrcNm;
-            TikDetails.gettikdetlsfrm.TxtTrck.Text = currntTicket._TkShpNo;
-            TikDetails.gettikdetlsfrm.TxtOrgin.Text = currntTicket._CounNmSender;
-            TikDetails.gettikdetlsfrm.TxtDist.Text = currntTicket._CounNmConsign;
-            TikDetails.gettikdetlsfrm.TxtCard.Text = currntTicket._TkCardNo;
-            TikDetails.gettikdetlsfrm.TxtGP.Text = currntTicket._TkGBNo;
             TikDetails.gettikdetlsfrm.TxtNId.Text = currntTicket._TkClNtID;
-            TikDetails.gettikdetlsfrm.TxtAmount.Text = currntTicket._TkAmount;
-
-
-            if (Convert.ToInt32((currntTicket._TkTransDate).ToString("yyyy")) < 2000)
-                TikDetails.gettikdetlsfrm.TxtTransDt.Text = "";
-            else { TikDetails.gettikdetlsfrm.TxtTransDt.Text = currntTicket._TkTransDate.ToString("yyyy/MM/dd"); }
 
             TikDetails.gettikdetlsfrm.TxtFolw.Text = currntTicket._folowusr;
 
-                function fn = function.getfn;
-                TikDetails.gettikdetlsfrm.LblWDays.Text = "تم تسجيل الشكوى منذ : " + fn.CalDate(currntTicket._TkDtStart.ToString(), Statcdif.servrTime).ToString() + " يوم عمل";
+            function fn = function.getfn;
+            TikDetails.gettikdetlsfrm.LblWDays.Text = "تم تسجيل الشكوى منذ : " + fn.CalDate(currntTicket._TkDtStart.ToString(), Statcdif.servrTime).ToString() + " يوم عمل";
 
-            if (currntTicket._ProdKNm == "مالية")
+            for (int i = 0; i < currntTicket.SlctdFldLst.Count; i++)
             {
-                TikDetails.gettikdetlsfrm.GroupBox3.Visible = true;
-                TikDetails.gettikdetlsfrm.GroupBox4.Visible = false;
+                Label Lbl = new Label();
+                TextBox TxtBx = new TextBox();
+                Lbl.Font = new Font("Times new Roman", 12, FontStyle.Bold);
+                Lbl.Size = new Size(100, 25);
+                Lbl.TextAlign = ContentAlignment.MiddleRight;
+                TxtBx.TextAlign = HorizontalAlignment.Left;
+                TxtBx.Font = new Font("Times new Roman", 12, FontStyle.Bold);
+                TxtBx.Size = new Size(180, 25);
+                string[] ss = currntTicket.SlctdFldLst[i].Split('_');
+                Lbl.Text = ss[0] + " : ";
+                TxtBx.Text = ss[1];
+                TikDetails.gettikdetlsfrm.FlwMend.Controls.Add(Lbl);
+                TikDetails.gettikdetlsfrm.FlwMend.Controls.Add(TxtBx);
+                TxtBx.ReadOnly = true;
             }
-            else if (currntTicket._ProdKNm == "بريدية")
-            {
-                TikDetails.gettikdetlsfrm.GroupBox3.Visible = false;
-                TikDetails.gettikdetlsfrm.GroupBox4.Visible = true;
-            }
-            else
-            {
-                TikDetails.gettikdetlsfrm.GroupBox3.Visible = false;
-                TikDetails.gettikdetlsfrm.GroupBox4.Visible = false;
-            }
-            TikDetails.gettikdetlsfrm.LblHelp.Text = currntTicket._CompHelp;
             if (currntTicket._TkKind == true)
             {
                 TikDetails.gettikdetlsfrm.TxtTikID.Text = "شكوى رقم : " + currntTicket._TkSQL;
@@ -206,7 +187,7 @@ namespace VOCAC.BL
                 TikDetails.gettikdetlsfrm.Text = "طلب رقم : " + currntTicket._TkSQL;
             }
             TikDetails.gettikdetlsfrm.TxtTikID.RightToLeft = RightToLeft.Yes;
-            TikDetails.gettikdetlsfrm.TxtTikID.Font = new Font("Times New Roman", 14, FontStyle.Bold);
+            TikDetails.gettikdetlsfrm.TxtTikID.Font = new Font("Times new Roman", 14, FontStyle.Bold);
             TikDetails.gettikdetlsfrm.TxtTikID.TextAlign = ContentAlignment.BottomCenter;
 
             //SelctSerchTxt(TxtDetails, "تعديل : بواسطة")

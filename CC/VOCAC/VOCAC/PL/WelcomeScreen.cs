@@ -168,7 +168,7 @@ namespace VOCAC.PL
                 LblLogin.Text = "";
                 StatBrPnlEn.Text = "Offline";
                 this.Refresh();
-                fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "Login");
+                fn.msg("لم ينجح الإتصال بقواعد البيانات", "Login");
             }
             LogInBtn.Enabled = true;
             GC.Collect();
@@ -222,7 +222,7 @@ namespace VOCAC.PL
                 {
                     Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" + 0 + " AND [srcCd] = '1'";     //     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm";
                 }
-                    else
+                else
                 {
                     Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" + 0 + " AND [srcCd] > '1'";   //  SrcStr = "Select SrcCd, SrcNm from CDSrc where SrcSusp=0 And srcCd > 1 ORDER BY SrcNm"
                 }
@@ -247,7 +247,8 @@ namespace VOCAC.PL
             CurrentUser.UsrGsm = Statcdif.UserTable.Rows[0].Field<String>("UsrGsm");             //Current user UsrGsm
             CurrentUser.UsrGndr = Statcdif.UserTable.Rows[0].Field<String>("UsrGender");         //Current user Gender
             CurrentUser.UsrActv = Statcdif.UserTable.Rows[0].Field<bool>("UsrActive");           //Current User Active Or not
-            CurrentUser.UsrLstS = Statcdif.UserTable.Rows[0].Field<DateTime>("UsrLastSeen");     //Current User LastSeen
+            if (Statcdif.UserTable.Rows[0]["UsrLastSeen"] != null && Statcdif.UserTable.Rows[0]["UsrLastSeen"].ToString().Length > 0)
+            {CurrentUser.UsrLstS = Statcdif.UserTable.Rows[0].Field<DateTime>("UsrLastSeen");}    //Current User LastSeen
             CurrentUser.UsrSusp = Statcdif.UserTable.Rows[0].Field<bool>("UsrSusp");             //Current User Suspended Or not
             CurrentUser.UsrTcCnt = Statcdif.UserTable.Rows[0].Field<int>("UsrTkCount");          //Ticket Count
             CurrentUser.UsrSltKy = Statcdif.UserTable.Rows[0].Field<String>("SaltKey");          //SaltKey
@@ -264,7 +265,7 @@ namespace VOCAC.PL
             CurrentUser.UsrRecvDy = Statcdif.UserTable.Rows[0].Field<int>("UsrRecevDy");         //RecievedTickets Count Per Day
             CurrentUser.UsrClsUpdtd = Statcdif.UserTable.Rows[0].Field<int>("UsrClsUpdtd");      //Closed Tickets with New Updates
             CurrentUser.UsrFolwDay = Statcdif.UserTable.Rows[0].Field<int>("UsrTikFlowDy");      //Closed Tickets with New Updates
-            CurrentUser.UsrTeam = log.MyTeam(CurrentUser.UsrCat, CurrentUser.UsrID, "").msg;
+            CurrentUser.UsrTeam = log.MyTeam(CurrentUser.UsrCat, CurrentUser.UsrID, "", false).msg;
             LblLogin.Text = "          Login has been succeeded";
             LblLogin.Image = Resources.Check_Marks1;
             LblLogin.ForeColor = Color.Green;

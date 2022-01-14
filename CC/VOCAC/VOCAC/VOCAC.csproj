@@ -88,7 +88,8 @@
   <ItemGroup>
     <Compile Include="APblicClss.cs" />
     <Compile Include="BL\CLS_LOGIN.cs" />
-    <Compile Include="BL\currentTicket.cs" />
+    <Compile Include="BL\ticketCurrent.cs" />
+    <Compile Include="BL\TicketsSelectBulk.cs" />
     <Compile Include="DAL\DataAccessLayer.cs" />
     <Compile Include="PL\TikFolow_Team.cs">
       <SubType>Form</SubType>
@@ -480,6 +481,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Frstaid.ico" />
+    <None Include="Resources\FilterOff.ico" />
+    <None Include="Resources\FilterOn.ico" />
     <None Include="Resources\SaveRed1.png" />
     <None Include="Resources\SaveRed.png" />
     <None Include="Resources\SaveGreen1.png" />
