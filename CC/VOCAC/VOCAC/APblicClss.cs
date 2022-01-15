@@ -35,7 +35,7 @@ namespace VOCAC
         public static ContextMenuStrip CntxMenu;
         #region DataTables
         public static DataTable MacTble, UserTable;
-        public static DataTable AreaTable, OfficeTable, CompSurceTable, CountryTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, MendPvtTable;
+        public static DataTable  CompSurceTable,  ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, MendPvtTable;
 
         #endregion
     }
@@ -333,120 +333,6 @@ namespace VOCAC
             }
             dt.Dispose();
             SwichButTable.Dispose();
-
-
-            //        Def.Str = " Menu has been builded  "
-            //        worker.ReportProgress(0, Def)
-            //        Def.Str = "جاري تحميل البيانات ..."
-            //        worker.ReportProgress(0, Def)
-            //        If Def.Str = "جاري تحميل البيانات ..." Then
-            //            Dim primaryKey(0) As DataColumn
-            //            AreaTable = New DataTable
-            //            OfficeTable = New DataTable
-            //            CompSurceTable = New DataTable
-            //            CountryTable = New DataTable
-            //            ProdKTable = New DataTable
-            //            ProdCompTable = New DataTable
-            //            UpdateKTable = New DataTable
-            //            Def.Str = "جاري تحميل أسماء المناطق ..."
-            //            worker.ReportProgress(0, Def)
-            //            If(Fn.GetTbl("SELECT OffArea FROM PostOff GROUP BY OffArea ORDER BY OffArea;", AreaTable, "1012&H", worker)) = Nothing Then
-            //               PrciTblCnt += 1
-            //            Else
-            //                Def.Str = "لم يتم تحميل  أسماء المناطق "
-            //                worker.ReportProgress(0, Def)
-            //            End If
-
-            //            Def.Str = "جاري تحميل أسماء المكاتب ..."
-            //            worker.ReportProgress(0, Def)
-
-            //            If(Fn.GetTbl("select OffNm1, OffFinCd, OffArea from PostOff ORDER BY OffNm1;", OfficeTable, "1012&H", worker)) = Nothing Then
-            //               PrciTblCnt += 1
-            //            Else
-            //                Def.Str = "لم يتم تحميل  أسماء المكاتب  "
-            //                worker.ReportProgress(0, Def)
-            //            End If
-
-
-
-            //            Def.Str = "جاري تحميل مصادر الشكوى ..."
-            //            worker.ReportProgress(0, Def)
-
-            //            If(Fn.GetTbl("select SrcCd, SrcNm,SrcSusp from CDSrc ORDER BY SrcNm", CompSurceTable, "1012&H", worker)) = Nothing Then
-            //               PrciTblCnt += 1
-            //                If Usr.PUsrUCatLvl = 7 Then
-            //                    CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] = '1'"     '     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm"
-            //                Else
-            //                    CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] > '1'"   '   SrcStr = "Select SrcCd, SrcNm from CDSrc where SrcSusp=0 And srcCd > 1 ORDER BY SrcNm"
-            //                End If
-            //            Else
-            //                Def.Str = "لم يتم تحميل  مصادر الشكوى  "
-            //                worker.ReportProgress(0, Def)
-            //            End If
-
-
-            //            Def.Str = "جاري تحميل أسماء الدول ..."
-            //            worker.ReportProgress(0, Def)
-
-            //            If(Fn.GetTbl("Select CounCd,CounNm from CDCountry order by CounNm", CountryTable, "1012&H", worker)) = Nothing Then
-            //                primaryKey(0) = CountryTable.Columns("CounCd")
-            //                CountryTable.PrimaryKey = primaryKey
-            //                PrciTblCnt += 1
-            //            Else
-            //                Def.Str = "لم يتم تحميل  أسماء الدول  "
-            //                worker.ReportProgress(0, Def)
-            //            End If
-
-
-            //            Def.Str = "جاري تحميل أنواع الخدمات ..."
-            //            worker.ReportProgress(0, Def)
-
-            //            If(Fn.GetTbl("Select ProdKCd, ProdKNm, ProdKClr from CDProdK where ProdKSusp = 0 order by ProdKCd", ProdKTable, "1012&H", worker)) = Nothing Then
-            //                primaryKey(0) = ProdKTable.Columns("ProdKNm")
-            //                ProdKTable.PrimaryKey = primaryKey
-            //                PrciTblCnt += 1
-            //            Else
-            //                Def.Str = "لم يتم تحميل  أنواع الخدمات "
-            //                worker.ReportProgress(0, Def)
-            //            End If
-
-
-            //            Def.Str = "جاري تحميل أنواع المنتجات ..."
-            //            worker.ReportProgress(0, Def)
-
-            //            If(Fn.GetTbl("Select FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp,CompReqst FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
-            //                primaryKey(0) = ProdCompTable.Columns("FnSQL")
-            //                ProdCompTable.PrimaryKey = primaryKey
-            //                PrciTblCnt += 1
-            //            Else
-            //                Def.Str = "لم يتم تحميل أنواع المنتجات  "
-            //                worker.ReportProgress(0, Def)
-            //            End If
-
-            //            Def.Str = "جاري تحميل أنواع التحديثات ..."
-            //            worker.ReportProgress(0, Def)
-            //            If Usr.PUsrUCatLvl >= 3 And Usr.PUsrUCatLvl <= 5 Then
-            //                If(Fn.GetTbl("Select EvId, EvNm FROM CDEvent where EvSusp = 0 And EvBkOfic = 1 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
-            //                   PrciTblCnt += 1
-            //                Else
-            //                    Def.Str = "لم يتم تحميل  أنواع التحديثات "
-            //                    worker.ReportProgress(0, Def)
-            //                End If
-            //            Else
-            //                If(Fn.GetTbl("Select EvId, EvNm FROM CDEvent where EvSusp = 0 And EvBkOfic = 0 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
-            //                   PrciTblCnt += 1
-            //                Else
-            //                    Def.Str = " أنواع التحديثات / "
-            //                    worker.ReportProgress(0, Def)
-            //                End If
-            //            End If
-            //        End If
-
-            //        'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-            //    Else
-            //        worker.ReportProgress(0, Def)
-            //        Fn.MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf)
-            //    End If
         }
         public void msg(string Messd, string titl, MessageBoxButtons messageBoxButtons = MessageBoxButtons.OK, MessageBoxOptions messageBoxOptions = MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign)
         {

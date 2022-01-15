@@ -228,7 +228,8 @@ namespace VOCAC.PL
         }
         private void CompReqst_CheckedChanged(object sender, EventArgs e)
         {
-            this.TreeView1.AfterSelect -= new System.Windows.Forms.TreeViewEventHandler(this.TreeView1_AfterSelect);
+            this.TreeView1.AfterSelect -= new TreeViewEventHandler(this.TreeView1_AfterSelect);
+            this.TreeView1.BeforeSelect -= new TreeViewCancelEventHandler(TreeView1_BeforeSelect);
             if (RadioButton4.Checked)
             {
                 TickKind = 0;
@@ -306,7 +307,22 @@ namespace VOCAC.PL
             TreeView1.SelectedNode = null;
             MyGroupBox2.Enabled = true;
             FlwMainData.Enabled = true;
-            this.TreeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView1_AfterSelect);
+            this.TreeView1.AfterSelect += new TreeViewEventHandler(this.TreeView1_AfterSelect);
+            this.TreeView1.BeforeSelect += new TreeViewCancelEventHandler(this.TreeView1_BeforeSelect);
+        }
+        private void TreeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            if (TreeView1.SelectedNode == null)
+            {
+            }
+            else if (TreeView1.SelectedNode.Level == 2)
+                TreeView1.SelectedNode.Parent.Parent.Collapse(false);  // True to leave the child nodes in their Current state; false to collapse the child nodes.
+            else if (TreeView1.SelectedNode.Level == 1)
+                // CombProdRef.Items.Clear()
+                TreeView1.SelectedNode.Parent.Collapse(false);
+            else if (TreeView1.SelectedNode.Level == 0)
+                // CombProdRef.Items.Clear()
+                TreeView1.SelectedNode.Collapse(false);
         }
         private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -339,6 +355,7 @@ namespace VOCAC.PL
                         Ctrl.Size = new Size(150, 25);
                         Ctrl.Name = Statcdif.MendFildsTable.DefaultView[i]["CDMendNm"].ToString();
                         Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendAccessNm"].ToString();
+                        Ctrl.MaxLength = Convert.ToInt32(Statcdif.MendFildsTable.DefaultView[i]["MendLenght"]);
                         FlwMend.Controls.Add(Ctrl);
                     }
                     else if (Statcdif.MendFildsTable.DefaultView[i]["CDMendType"].ToString() == "TextBox!")
@@ -357,17 +374,15 @@ namespace VOCAC.PL
                         Ctrl.Enter += new EventHandler(TextBox_ENTER);
                         Ctrl.Leave += new EventHandler(TextBox_LEAVE);
                     }
-
                     else if (Statcdif.MendFildsTable.DefaultView[i]["CDMendType"].ToString() == "MaskedTextBox")
                     {
                         MaskedTextBox Ctrl = new MaskedTextBox();
                         Ctrl.TextAlign = HorizontalAlignment.Center;
                         Ctrl.Font = new Font("Times new Roman", 12, FontStyle.Bold);
                         Ctrl.Size = new Size(150, 25);
-                        Ctrl.Mask = Statcdif.MendFildsTable.DefaultView[i]["CDMendMskd"].ToString();
+                        Ctrl.Mask = Statcdif.MendFildsTable.DefaultView[i]["MendMask"].ToString();
                         Ctrl.Name = Statcdif.MendFildsTable.DefaultView[i]["CDMendNm"].ToString();
                         Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendAccessNm"].ToString();
-                        //AddHandler Ctrl.Enter, AddressOf Masked_Enter
                         FlwMend.Controls.Add(Ctrl);
                     }
                     else if (Statcdif.MendFildsTable.DefaultView[i]["CDMendType"].ToString() == "DateTimePicker")
@@ -412,7 +427,7 @@ namespace VOCAC.PL
         }
         private void TextBox_ENTER(object sender, EventArgs e)
         {
-            WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "     إضغط F1  لإختيار  " + GetNextControl((TextBox)sender, false).Text.Substring(0, GetNextControl((TextBox)sender, false).Text.Length - 2);
+            WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "     إضغط F1  لإختيار " + GetNextControl((TextBox)sender, false).Text.Substring(0, GetNextControl((TextBox)sender, false).Text.Length - 2);
         }
         private void Timer1_Tick(object sender, EventArgs e)
         {
@@ -526,45 +541,21 @@ namespace VOCAC.PL
             if (e.KeyCode == Keys.F1)
             {
                 sndr = (TextBox)sender;
-                Frm = new Form();
                 tbl = new DataTable();
                 tbl = populateTextCoise(tbl, sndr.AccessibleName);
                 if (tbl.Rows.Count > 0)
                 {
-                    Frm.RightToLeft = RightToLeft.Yes;
-                    Frm.RightToLeftLayout = true;
-                    Frm.WindowState = FormWindowState.Normal;
-                    Frm.StartPosition = FormStartPosition.CenterScreen;
-                    Frm.SizeChanged += new EventHandler(Frm_sizechanged);
                     tbl.DefaultView.RowFilter = string.Empty;
-                    GV = new DataGridView();
-                    GV.DataSource = tbl.DefaultView;
-                    TxBox = new TextBox();
-                    TxBox.Size = new Size(200, 30);
-                    GV.CellDoubleClick += new DataGridViewCellEventHandler(DataGridView_CellClick);
-                    TxBox.TextChanged += new EventHandler(Txt_TextChanged);
-                    //Frm.Load += Frm_Load;
-                    Flow = new FlowLayoutPanel();
-                    Flow.RightToLeft = RightToLeft.Yes;
-                    Flow.SetFlowBreak(TxBox, true);
-                    //TxBox.Dock = DockStyle.Top;
-                    Flow.Dock = DockStyle.Fill;
-                    Flow.FlowDirection = FlowDirection.RightToLeft;
-                    GV.AllowUserToAddRows = false;
-                    GV.AllowUserToDeleteRows = false;
-                    GV.ReadOnly = true;
-                    GV.AutoResizeColumns();
-                    GV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                    GV.Size = new Size(800, 800);
-                    TxBox.Font = new Font("Times New Roman", 14, FontStyle.Regular);
-                    GV.DefaultCellStyle.Font = new Font("Times New Roman", 14, FontStyle.Regular);
-                    Frm.BackColor = Color.White;
+                    addnewTextBox();
+                    addnewGridview();
+                    addnewFowoutpanel();
+                    addnewform_();
+
                     Frm.Controls.Add(Flow);
                     Flow.Controls.Add(TxBox);
                     Flow.Controls.Add(GV);
-                    Frm.Size = new Size(GV.Width, TxBox.Height + GV.Height + 50);
-                    Frm.Text = "اختيار " + GetNextControl(sndr, false).Text + " عدد البيانات " + tbl.Rows.Count;
-                    WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "للرجوع بالإختيار يرجى الضغط المزدوج على " + GetNextControl((TextBox)sender, false).Text.Substring(0, GetNextControl((TextBox)sender, false).Text.Length - 2);
+
+                    WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "    يرجى الضغط المزدوج على " + GetNextControl((TextBox)sender, false).Text.Substring(0, GetNextControl((TextBox)sender, false).Text.Length - 2) + " للرجوع بالإختيار وإغلاق شاشة البحث.";
                     Frm.ShowDialog();
                     WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
                     tbl.Dispose();
@@ -576,6 +567,50 @@ namespace VOCAC.PL
                     fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "تحميل البيانات");
                 }
             }
+        }
+        private void addnewform_()
+        {
+            Frm = new Form();
+            Frm.RightToLeft = RightToLeft.Yes;
+            Frm.RightToLeftLayout = true;
+            Frm.WindowState = FormWindowState.Normal;
+            Frm.StartPosition = FormStartPosition.CenterScreen;
+            Frm.SizeChanged += new EventHandler(Frm_sizechanged);
+            Frm.Size = new Size(GV.Width, TxBox.Height + GV.Height + 50);
+            Frm.Text = "اختيار " + GetNextControl(sndr, false).Text + " عدد البيانات " + tbl.Rows.Count;
+            Frm.BackColor = Color.White;
+        }
+        private void addnewTextBox()
+        {
+            TxBox = new TextBox();
+            TxBox.Size = new Size(200, 30);
+            TxBox.Font = new Font("Times New Roman", 14, FontStyle.Regular);
+            TxBox.TextChanged += new EventHandler(Txt_TextChanged);
+        }
+        private void addnewGridview()
+        {
+            GV = new DataGridView();
+            GV.DataSource = tbl.DefaultView;
+            GV.AllowUserToAddRows = false;
+            GV.AllowUserToDeleteRows = false;
+            GV.ReadOnly = true;
+            GV.AutoResizeColumns();
+            GV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            GV.Size = new Size(800, 800);
+            GV.BackgroundColor = Color.White;
+            GV.DefaultCellStyle.Font = new Font("Times New Roman", 12, FontStyle.Regular);
+            GV.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            GV.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 16, FontStyle.Bold);
+            GV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            GV.CellDoubleClick += new DataGridViewCellEventHandler(DataGridView_CellClick);
+        }
+        private void addnewFowoutpanel()
+        {
+            Flow = new FlowLayoutPanel();
+            Flow.RightToLeft = RightToLeft.Yes;
+            Flow.SetFlowBreak(TxBox, true);
+            Flow.Dock = DockStyle.Fill;
+            Flow.FlowDirection = FlowDirection.RightToLeft;
         }
         private void Txt_TextChanged(object sender, EventArgs e)
         {

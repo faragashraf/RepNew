@@ -195,10 +195,7 @@ namespace VOCAC.PL
         }
         private void SelctMainTables()
         {
-            Statcdif.AreaTable = new DataTable();
-            Statcdif.OfficeTable = new DataTable();
             Statcdif.CompSurceTable = new DataTable();
-            Statcdif.CountryTable = new DataTable();
             Statcdif.ProdKTable = new DataTable();
             Statcdif.ProdCompTable = new DataTable();
             Statcdif.UpdateKTable = new DataTable();
@@ -208,16 +205,13 @@ namespace VOCAC.PL
             DAL.DataAccessLayer.rturnStruct SlctMainreslt = log.slctmaintbls();
             if (SlctMainreslt.ds.Tables.Count > 0)
             {
-                Statcdif.AreaTable = SlctMainreslt.ds.Tables[0];
-                Statcdif.OfficeTable = SlctMainreslt.ds.Tables[1];
-                Statcdif.CompSurceTable = SlctMainreslt.ds.Tables[2];
-                Statcdif.CountryTable = SlctMainreslt.ds.Tables[3];
-                Statcdif.ProdKTable = SlctMainreslt.ds.Tables[4];
-                Statcdif.ProdCompTable = SlctMainreslt.ds.Tables[5];
-                Statcdif.UpdateKTable = SlctMainreslt.ds.Tables[6];
-                Statcdif.CDHolDay = SlctMainreslt.ds.Tables[7];
-                Statcdif.MendFildsTable = SlctMainreslt.ds.Tables[8];
-                Statcdif.MendPvtTable = SlctMainreslt.ds.Tables[9];
+                Statcdif.CompSurceTable = SlctMainreslt.ds.Tables[0];
+                Statcdif.ProdKTable = SlctMainreslt.ds.Tables[1];
+                Statcdif.ProdCompTable = SlctMainreslt.ds.Tables[2];
+                Statcdif.UpdateKTable = SlctMainreslt.ds.Tables[3];
+                Statcdif.CDHolDay = SlctMainreslt.ds.Tables[4];
+                Statcdif.MendFildsTable = SlctMainreslt.ds.Tables[5];
+                Statcdif.MendPvtTable = SlctMainreslt.ds.Tables[6];
                 if (CurrentUser.UsrUCatLvl == 7)
                 {
                     Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" + 0 + " AND [srcCd] = '1'";     //     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm";
@@ -377,36 +371,6 @@ namespace VOCAC.PL
                 this.BackColor = Color.White;
                 this.panellgin.BackColor = Color.White;
             }
-        }
-        private void intializMainTbls()
-        {
-            Statcdif.AreaTable = new DataTable();
-            Statcdif.OfficeTable = new DataTable();
-            Statcdif.CompSurceTable = new DataTable();
-            Statcdif.CountryTable = new DataTable();
-            Statcdif.ProdKTable = new DataTable();
-            Statcdif.ProdCompTable = new DataTable();
-            Statcdif.UpdateKTable = new DataTable();
-            DtblClction.Add(Statcdif.AreaTable);
-            DtblClction.Add(Statcdif.OfficeTable);
-            DtblClction.Add(Statcdif.CompSurceTable);
-            DtblClction.Add(Statcdif.CountryTable);
-            DtblClction.Add(Statcdif.ProdKTable);
-            DtblClction.Add(Statcdif.ProdCompTable);
-            DtblClction.Add(Statcdif.UpdateKTable);
-            function fn = function.getfn;
-            fn.Gettable("SELECT OffArea FROM PostOff GROUP BY OffArea ORDER BY OffArea;$" +
-                        "select OffNm1, OffFinCd, OffArea from PostOff ORDER BY OffNm1;$" +
-                        "select SrcCd, SrcNm,SrcSusp from CDSrc ORDER BY SrcNm$" +
-                        "Select CounCd,CounNm from CDCountry order by CounNm$" +
-                        "Select ProdKCd, ProdKNm, ProdKClr from CDProdK where ProdKSusp = 0 order by ProdKCd$" +
-                        "Select FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp,CompReqst FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm$" +
-                        "Select EvId, EvNm FROM CDEvent where EvSusp = 0 And EvBkOfic = 1 ORDER BY EvNm", DtblClction, "test");
-            this.Text = "Welcome Screen _ " + fn.ElapsedTimeSpan;
-            DataColumn primaryKey = new DataColumn();
-            DataColumn primaryKey1 = new DataColumn();
-            primaryKey = Statcdif.CountryTable.Columns["CounCd"];
-            primaryKey1 = Statcdif.ProdKTable.Columns["ProdKNm"];
         }
         private void Button2_Click(object sender, EventArgs e)
         {

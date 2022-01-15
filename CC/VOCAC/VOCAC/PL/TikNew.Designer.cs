@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TikNew));
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Rooting");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Rooting");
             this.BtnAdd = new System.Windows.Forms.Button();
             this.Label11 = new System.Windows.Forms.Label();
             this.Label29 = new System.Windows.Forms.Label();
@@ -189,7 +189,7 @@
             // 
             this.Panel5.BackColor = System.Drawing.Color.Transparent;
             this.Panel5.Controls.Add(this.BtnAdd);
-            this.Panel5.Location = new System.Drawing.Point(475, 568);
+            this.Panel5.Location = new System.Drawing.Point(443, 568);
             this.Panel5.Name = "Panel5";
             this.Panel5.Size = new System.Drawing.Size(107, 55);
             this.Panel5.TabIndex = 2036;
@@ -375,7 +375,7 @@
             // 
             this.FlwMend.AutoScroll = true;
             this.FlwMend.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.FlwMend.Location = new System.Drawing.Point(706, 568);
+            this.FlwMend.Location = new System.Drawing.Point(674, 568);
             this.FlwMend.Name = "FlwMend";
             this.FlwMend.Size = new System.Drawing.Size(551, 232);
             this.FlwMend.TabIndex = 1;
@@ -384,7 +384,7 @@
             // 
             this.Panel6.BackColor = System.Drawing.Color.Transparent;
             this.Panel6.Controls.Add(this.BtnClr);
-            this.Panel6.Location = new System.Drawing.Point(588, 568);
+            this.Panel6.Location = new System.Drawing.Point(556, 568);
             this.Panel6.Name = "Panel6";
             this.Panel6.Size = new System.Drawing.Size(112, 55);
             this.Panel6.TabIndex = 2037;
@@ -614,7 +614,7 @@
             this.FlowLayoutPanel5.Controls.Add(this.Panel1);
             this.FlowLayoutPanel5.Controls.Add(this.Panel2);
             this.FlowLayoutPanel5.Controls.Add(this.Panel3);
-            this.FlowLayoutPanel5.Location = new System.Drawing.Point(205, 565);
+            this.FlowLayoutPanel5.Location = new System.Drawing.Point(173, 565);
             this.FlowLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.FlowLayoutPanel5.Name = "FlowLayoutPanel5";
             this.FlowLayoutPanel5.Size = new System.Drawing.Size(267, 202);
@@ -658,10 +658,10 @@
             this.FlwTree.Controls.Add(this.MyGroupBox3);
             this.FlwTree.Controls.Add(this.TreeView1);
             this.FlwTree.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.FlwTree.Location = new System.Drawing.Point(1372, 3);
+            this.FlwTree.Location = new System.Drawing.Point(1306, 3);
             this.FlwTree.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.FlwTree.Name = "FlwTree";
-            this.FlwTree.Size = new System.Drawing.Size(414, 812);
+            this.FlwTree.Size = new System.Drawing.Size(480, 812);
             this.FlwTree.TabIndex = 0;
             // 
             // MyGroupBox3
@@ -669,7 +669,7 @@
             this.MyGroupBox3.Controls.Add(this.RadioButton4);
             this.MyGroupBox3.Controls.Add(this.RadioButton5);
             this.MyGroupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.MyGroupBox3.Location = new System.Drawing.Point(228, 3);
+            this.MyGroupBox3.Location = new System.Drawing.Point(294, 3);
             this.MyGroupBox3.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.MyGroupBox3.Name = "MyGroupBox3";
             this.MyGroupBox3.Size = new System.Drawing.Size(176, 42);
@@ -717,21 +717,22 @@
             this.TreeView1.Dock = System.Windows.Forms.DockStyle.Top;
             this.TreeView1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.TreeView1.ImageKey = "Add.ico";
-            this.TreeView1.Location = new System.Drawing.Point(11, 51);
+            this.TreeView1.Location = new System.Drawing.Point(7, 51);
             this.TreeView1.Name = "TreeView1";
-            treeNode2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            treeNode2.ForeColor = System.Drawing.Color.Red;
-            treeNode2.Name = "Rooting";
-            treeNode2.Text = "Rooting";
+            treeNode1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            treeNode1.ForeColor = System.Drawing.Color.Red;
+            treeNode1.Name = "Rooting";
+            treeNode1.Text = "Rooting";
             this.TreeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode1});
             this.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TreeView1.RightToLeftLayout = true;
             this.TreeView1.ShowNodeToolTips = true;
             this.TreeView1.ShowPlusMinus = false;
-            this.TreeView1.Size = new System.Drawing.Size(400, 679);
+            this.TreeView1.Size = new System.Drawing.Size(470, 749);
             this.TreeView1.TabIndex = 2022;
             this.TreeView1.Tag = "نوع الخدمة & نوع الشكوى";
+            this.TreeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeView1_BeforeSelect);
             // 
             // FlwSubMain
             // 
@@ -743,9 +744,9 @@
             this.FlwSubMain.Controls.Add(this.Panel5);
             this.FlwSubMain.Controls.Add(this.FlowLayoutPanel5);
             this.FlwSubMain.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.FlwSubMain.Location = new System.Drawing.Point(106, 3);
+            this.FlwSubMain.Location = new System.Drawing.Point(72, 3);
             this.FlwSubMain.Name = "FlwSubMain";
-            this.FlwSubMain.Size = new System.Drawing.Size(1260, 812);
+            this.FlwSubMain.Size = new System.Drawing.Size(1228, 812);
             this.FlwSubMain.TabIndex = 2034;
             // 
             // ComRefLbl
@@ -753,7 +754,7 @@
             this.ComRefLbl.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.FlwSubMain.SetFlowBreak(this.ComRefLbl, true);
             this.ComRefLbl.Font = new System.Drawing.Font("Times New Roman", 16F);
-            this.ComRefLbl.Location = new System.Drawing.Point(48, 3);
+            this.ComRefLbl.Location = new System.Drawing.Point(16, 3);
             this.ComRefLbl.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
             this.ComRefLbl.Name = "ComRefLbl";
             this.ComRefLbl.ReadOnly = true;
@@ -765,7 +766,7 @@
             // 
             this.TabControl2.Controls.Add(this.TabPage3);
             this.TabControl2.Font = new System.Drawing.Font("Times New Roman", 16F);
-            this.TabControl2.Location = new System.Drawing.Point(58, 34);
+            this.TabControl2.Location = new System.Drawing.Point(26, 34);
             this.TabControl2.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
             this.TabControl2.Name = "TabControl2";
             this.TabControl2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -1017,6 +1018,7 @@
             this.Name = "TikNew";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NewTicket";
             this.Load += new System.EventHandler(this.TikNew_Load);
             this.Panel5.ResumeLayout(false);

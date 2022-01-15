@@ -89,6 +89,8 @@ namespace VOCAC.BL
         {
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             DAL.Struc = DAL.SelectDataset("SP_MAINTBL_SLCT");
+            DataColumn primaryKey = new DataColumn();
+            primaryKey = Statcdif.ProdKTable.Columns["ProdKNm"];
             DAL.Close();
             return DAL.Struc;
         }
@@ -98,9 +100,6 @@ namespace VOCAC.BL
             SqlParameter[] param = null;
             DAL.Struc = DAL.SelectData("SP_SwitchBoard_SLCT", param);
             DAL.Close();
-            DataColumn primaryKey = new DataColumn(), primaryKey1 = new DataColumn();
-            primaryKey = Statcdif.CountryTable.Columns["CounCd"];
-            primaryKey1 = Statcdif.ProdKTable.Columns["ProdKNm"];
             return DAL.Struc;
         }
         public DAL.DataAccessLayer.rturnStruct TeamTree(bool Stat)
