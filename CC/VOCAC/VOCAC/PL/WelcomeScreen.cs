@@ -137,26 +137,20 @@ namespace VOCAC.PL
             LblLogin.ForeColor = Color.Blue;
             this.Refresh();
 
-            DAL.DataAccessLayer.rturnStruct logreslt = log.LOGIN(TxtUsrNm.Text, TxtUsrPass.Text);
+            DAL.DataAccessLayer.rturnStruct logreslt = log.LOGIN(TxtUsrNm.Text, TxtUsrPass.Text, Ver, Statcdif._IP);
             if (logreslt.msg == null)
             {
                 if (logreslt.dt.Rows.Count > 0)
                 {
                     Statcdif.UserTable = logreslt.dt;
                     IntializeUser();
-                    DAL.DataAccessLayer.rturnStruct Accesslogreslt = log.UsrUpdate(Statcdif._IP, Ver, CurrentUser.UsrID);
-                    DAL.DataAccessLayer.rturnStruct Updtereslt = log.int_Access(CurrentUser.UsrID, CurrentUser.UsrNm, "OK", Statcdif._IP);
-                    if (Accesslogreslt.msg == null && Updtereslt.msg == null)
-                    {
-                        SelctMainTables();
-                        IntializeSwitchBoard(fn);
-                        LblLogin.Text = "";
-                        LblLogin.Image = Resources.Empty;
-                    }
+                    SelctMainTables();
+                    IntializeSwitchBoard(fn);
+                    LblLogin.Text = "";
+                    LblLogin.Image = Resources.Empty;
                 }
                 else
                 {
-                    log.int_Access(Convert.ToInt32(0), TxtUsrNm.Text, "Fa", Statcdif._IP);
                     LblLogin.Text = "          Invalid User Name Or Password";
                     LblLogin.Image = Resources.Check_Marks2;
                     LblLogin.ForeColor = Color.Red;
@@ -242,7 +236,7 @@ namespace VOCAC.PL
             CurrentUser.UsrGndr = Statcdif.UserTable.Rows[0].Field<String>("UsrGender");         //Current user Gender
             CurrentUser.UsrActv = Statcdif.UserTable.Rows[0].Field<bool>("UsrActive");           //Current User Active Or not
             if (Statcdif.UserTable.Rows[0]["UsrLastSeen"] != null && Statcdif.UserTable.Rows[0]["UsrLastSeen"].ToString().Length > 0)
-            {CurrentUser.UsrLstS = Statcdif.UserTable.Rows[0].Field<DateTime>("UsrLastSeen");}    //Current User LastSeen
+            { CurrentUser.UsrLstS = Statcdif.UserTable.Rows[0].Field<DateTime>("UsrLastSeen"); }    //Current User LastSeen
             CurrentUser.UsrSusp = Statcdif.UserTable.Rows[0].Field<bool>("UsrSusp");             //Current User Suspended Or not
             CurrentUser.UsrTcCnt = Statcdif.UserTable.Rows[0].Field<int>("UsrTkCount");          //Ticket Count
             CurrentUser.UsrSltKy = Statcdif.UserTable.Rows[0].Field<String>("SaltKey");          //SaltKey
@@ -414,9 +408,25 @@ namespace VOCAC.PL
             Statcdif.Menu_.Dispose();
             DtblClction.Clear();
             this.Controls.RemoveByKey(Statcdif.Menu_.Name);
+            List<Form> frmlst = new List<Form>();
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.Name != this.Name)
+                {
+                    frmlst.Add(f);
+                }
+            }
+            foreach (Form f in frmlst)
+            {
+                f.Close();
+            }
             FlowLayoutPanel1.Visible = false;
             panellgin.Visible = true;
             this.Text = "Login Screen";
+
+
+
+
         }
         private void getMac()
         {
@@ -437,6 +447,15 @@ namespace VOCAC.PL
             {
                 Log();
             }
+        }
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            //  function fn =  function.getfn
+            //fn.msg( Convert.ToString( jj(sender)),"test");
+        }
+        private void jj<T>(object uu)
+        {
+            //uu.GetType();
         }
     }
 }

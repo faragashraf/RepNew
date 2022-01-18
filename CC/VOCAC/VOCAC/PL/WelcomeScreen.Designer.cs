@@ -105,6 +105,7 @@
             this.panellgin = new System.Windows.Forms.Panel();
             this.ImageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tmrbringfront = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.CNTXMNUPic.SuspendLayout();
             this.FlowLayoutPanel1.SuspendLayout();
@@ -1004,6 +1005,7 @@
             // panellgin
             // 
             this.panellgin.BackColor = System.Drawing.Color.White;
+            this.panellgin.Controls.Add(this.button1);
             this.panellgin.Controls.Add(this.PubVerLbl1);
             this.panellgin.Controls.Add(this.PictureBox2);
             this.panellgin.Controls.Add(this.TxtUsrNm);
@@ -1044,6 +1046,26 @@
             // 
             this.tmrbringfront.Enabled = true;
             this.tmrbringfront.Tick += new System.EventHandler(this.tmrbringfront1);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(71, 274);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(91, 28);
+            this.button1.TabIndex = 115;
+            this.button1.Text = "Login";
+            this.ToolTip1.SetToolTip(this.button1, "تسجيل الدخول");
+            this.button1.UseCompatibleTextRendering = true;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // WelcomeScreen
             // 
@@ -1160,5 +1182,6 @@
         internal System.Windows.Forms.ImageList ImageList1;
         private System.Windows.Forms.Timer tmrbringfront;
         internal System.Windows.Forms.Label PubVerLbl1;
+        internal System.Windows.Forms.Button button1;
     }
 }

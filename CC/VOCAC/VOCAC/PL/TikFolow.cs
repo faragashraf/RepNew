@@ -120,7 +120,7 @@ namespace VOCAC.PL
                 GridTicket.Columns["TkSQL"].Visible = true;
                 GridTicket.Columns["TkSQL"].HeaderText = "رقم الشكوى";
                 GridTicket.Columns["TkKind"].Visible = true;
-                GridTicket.Columns["TkKind"].HeaderText = "شكوى/طلب";
+                GridTicket.Columns["TkKind"].HeaderText = "شكوى/ طلب";
                 GridTicket.Columns["TkDtStart"].Visible = true;
                 GridTicket.Columns["TkDtStart"].HeaderText = "التاريخ";
                 GridTicket.Columns["TkClNm"].Visible = true;
@@ -148,6 +148,8 @@ namespace VOCAC.PL
                     GridTicket.Columns[i].Visible = true;
                 }
             }
+            GridTicket.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 14, FontStyle.Bold);
+            GridTicket.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
         private void Fill_()
         {
@@ -234,7 +236,7 @@ namespace VOCAC.PL
                 FltrStr.Append(" or [TkClNm]" + LK + strt + SerchTxt.Text + end_);
                 FltrStr.Append(" or [TkClPh]" + LK + strt + SerchTxt.Text + end_);
                 FltrStr.Append(" or [TkClPh1]" + LK + strt + SerchTxt.Text + end_);
-                for (int i = 33; i < GridTicket.Columns.Count; i++)
+                for (int i = 37; i < GridTicket.Columns.Count; i++)
                 {
                     FltrStr.Append(" or [" + GridTicket.Columns[i].Name.ToString() + "]" + LK + strt + SerchTxt.Text + end_);
                 }

@@ -155,9 +155,10 @@ namespace VOCAC.BL
             TikDetails.gettikdetlsfrm.TxtAdd.Text = currntTicket._TkClAdr;
             TikDetails.gettikdetlsfrm.TxtEmail.Text = currntTicket._TkMail;
 
-            TikDetails.gettikdetlsfrm.TxtComp.Text = currntTicket._PrdNm;
-            TikDetails.gettikdetlsfrm.TxtSrc.Text = currntTicket._CompNm;
-            TikDetails.gettikdetlsfrm.TxtFolw.Text = currntTicket._SrcNm;
+            TikDetails.gettikdetlsfrm.TxtProd.Text = currntTicket._PrdNm;
+            TikDetails.gettikdetlsfrm.TxtComp.Text = currntTicket._CompNm;
+            TikDetails.gettikdetlsfrm.TxtSrc.Text = currntTicket._SrcNm;
+            TikDetails.gettikdetlsfrm.TxtFolw.Text = currntTicket._folowusr;
             TikDetails.gettikdetlsfrm.TxtNId.Text = currntTicket._TkClNtID;
 
             TikDetails.gettikdetlsfrm.TxtFolw.Text = currntTicket._folowusr;

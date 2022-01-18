@@ -257,6 +257,7 @@
             this.SerchTxt.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.SerchTxt.Size = new System.Drawing.Size(218, 26);
             this.SerchTxt.TabIndex = 2024;
+            this.SerchTxt.Tag = "Arabic-All";
             this.SerchTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.SerchTxt.TextChanged += new System.EventHandler(this.SerchTxt_TextChanged);
             // 

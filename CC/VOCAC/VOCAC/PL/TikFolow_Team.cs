@@ -36,7 +36,7 @@ namespace VOCAC.PL
                 return frm;
             }
         }
-        SqlConnection sqlcon = new SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-323");
+        SqlConnection sqlcon = new SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-323");
         SqlDataAdapter da;
         BindingManagerBase bmb;
         SqlCommandBuilder sqlcmb;

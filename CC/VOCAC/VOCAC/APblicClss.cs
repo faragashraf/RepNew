@@ -22,7 +22,7 @@ namespace VOCAC
         public static int screenHeight = Screen.PrimaryScreen.Bounds.Height;
         public static InputLanguage EnglishInput;
         public static InputLanguage ArabicInput;
-        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-323";
+        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-323";
         public SqlConnection CONSQL;
         public static String _ServerCD;
         public static String _serverNm;
@@ -35,7 +35,7 @@ namespace VOCAC
         public static ContextMenuStrip CntxMenu;
         #region DataTables
         public static DataTable MacTble, UserTable;
-        public static DataTable  CompSurceTable,  ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, MendPvtTable;
+        public static DataTable CompSurceTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, MendPvtTable;
 
         #endregion
     }
@@ -373,7 +373,7 @@ namespace VOCAC
     // Current User Class
     public static class CurrentUser
     {
-        public static int UsrID;          //UsrId
+        public static int UsrID = 0;          //UsrId
         public static int UsrCat;         //UsrCat
         public static String UsrNm;        //UsrNm
         public static String UsrPWrd;       //UsrPass
@@ -457,7 +457,7 @@ namespace VOCAC
         }
         public void CalIfTxt(Control Txtbx)
         {
-            if(Txtbx is MaskedTextBox)
+            if (Txtbx is MaskedTextBox)
             {
                 MaskedTextBox TxtBox = (MaskedTextBox)Txtbx;
             }
@@ -498,7 +498,6 @@ namespace VOCAC
                     Statcdif.bolyy = false;
             }
         }
-
         private void Text_Enter(object sender, EventArgs e)
         {
             if (sender is TextBox)
@@ -532,7 +531,11 @@ namespace VOCAC
                 if (e.Modifiers == Keys.Control && e.KeyCode == Keys.V)
                 {
                     if (TxtBox.ReadOnly == false)
-                        TxtBox.Text += Clipboard.GetText();
+                    {
+                        var ASDS = Clipboard.GetText();
+                        TxtBox.Text = Clipboard.GetText();
+                    }
+
                 }
                 else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.C)
                 {
@@ -551,7 +554,7 @@ namespace VOCAC
                 if (e.Modifiers == Keys.Control && e.KeyCode == Keys.V)
                 {
                     if (TxtBox.ReadOnly == false)
-                        TxtBox.Text += Clipboard.GetText();
+                        TxtBox.Text = Clipboard.GetText();
                 }
                 else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.C)
                 {

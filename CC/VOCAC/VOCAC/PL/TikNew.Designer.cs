@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TikNew));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Rooting");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Rooting");
             this.BtnAdd = new System.Windows.Forms.Button();
             this.Label11 = new System.Windows.Forms.Label();
             this.Label29 = new System.Windows.Forms.Label();
@@ -496,6 +496,7 @@
             this.NewBtn.TabIndex = 2021;
             this.NewBtn.Tag = "New Ticket";
             this.NewBtn.UseVisualStyleBackColor = true;
+            this.NewBtn.Click += new System.EventHandler(this.NewBtn_Click);
             // 
             // Panel1
             // 
@@ -525,6 +526,7 @@
             this.SubmitBtn.Size = new System.Drawing.Size(100, 74);
             this.SubmitBtn.TabIndex = 92;
             this.SubmitBtn.UseVisualStyleBackColor = true;
+            this.SubmitBtn.Click += new System.EventHandler(this.SubmitBtn_Click);
             // 
             // Panel2
             // 
@@ -553,6 +555,7 @@
             this.CloseBtn.Size = new System.Drawing.Size(100, 74);
             this.CloseBtn.TabIndex = 86;
             this.CloseBtn.UseVisualStyleBackColor = true;
+            this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
             // 
             // Panel3
             // 
@@ -578,6 +581,7 @@
             this.BtnDublicate.Size = new System.Drawing.Size(100, 74);
             this.BtnDublicate.TabIndex = 2034;
             this.BtnDublicate.UseVisualStyleBackColor = true;
+            this.BtnDublicate.Click += new System.EventHandler(this.BtnDublicate_Click);
             // 
             // ImgLst
             // 
@@ -709,7 +713,7 @@
             this.RadioButton5.Text = "شكوى";
             this.RadioButton5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.RadioButton5.UseVisualStyleBackColor = true;
-            this.RadioButton5.CheckedChanged += new System.EventHandler(this.CompReqst_CheckedChanged);
+            this.RadioButton5.Click += new System.EventHandler(this.CompReqst_CheckedChanged);
             // 
             // TreeView1
             // 
@@ -719,12 +723,12 @@
             this.TreeView1.ImageKey = "Add.ico";
             this.TreeView1.Location = new System.Drawing.Point(7, 51);
             this.TreeView1.Name = "TreeView1";
-            treeNode1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            treeNode1.ForeColor = System.Drawing.Color.Red;
-            treeNode1.Name = "Rooting";
-            treeNode1.Text = "Rooting";
+            treeNode8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            treeNode8.ForeColor = System.Drawing.Color.Red;
+            treeNode8.Name = "Rooting";
+            treeNode8.Text = "Rooting";
             this.TreeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode8});
             this.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TreeView1.RightToLeftLayout = true;
             this.TreeView1.ShowNodeToolTips = true;
@@ -751,9 +755,11 @@
             // 
             // ComRefLbl
             // 
+            this.ComRefLbl.BackColor = System.Drawing.Color.White;
             this.ComRefLbl.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.FlwSubMain.SetFlowBreak(this.ComRefLbl, true);
             this.ComRefLbl.Font = new System.Drawing.Font("Times New Roman", 16F);
+            this.ComRefLbl.ForeColor = System.Drawing.Color.Red;
             this.ComRefLbl.Location = new System.Drawing.Point(16, 3);
             this.ComRefLbl.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
             this.ComRefLbl.Name = "ComRefLbl";
@@ -1019,7 +1025,6 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "NewTicket";
             this.Load += new System.EventHandler(this.TikNew_Load);
             this.Panel5.ResumeLayout(false);
             this.MyGroupBox2.ResumeLayout(false);

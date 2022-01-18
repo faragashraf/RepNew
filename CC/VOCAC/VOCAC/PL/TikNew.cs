@@ -26,6 +26,7 @@ namespace VOCAC.PL
         TextBox sndr;
         int TickKind;
         string PrdKind;
+        int COMPID_ = 0;
         public TikNew()
         {
             InitializeComponent();
@@ -47,7 +48,6 @@ namespace VOCAC.PL
             TreeView1.CollapseAll();
 
             SubmitBtn.Visible = true;
-            SubmitBtn.Enabled = false;
             BtnDublicate.Visible = false;
             RelatedTable.Rows.Clear();
 
@@ -61,11 +61,11 @@ namespace VOCAC.PL
                     TextBox TB = new TextBox();
                     MaskedTextBox MTB = new MaskedTextBox();
                     try { TB = (TextBox)c; } catch (Exception) { MTB = (MaskedTextBox)c; }
-                    TB.Text = "";
+                    c.Text = "";
                     if (TB.ReadOnly == false)
                     {
-                        c.BackColor = Color.White;
-                        c.ForeColor = Color.Black;
+                        TB.BackColor = Color.White;
+                        TB.ForeColor = Color.Black;
                     }
                 }
                 else if (c.GetType() == typeof(ComboBox))
@@ -95,6 +95,10 @@ namespace VOCAC.PL
             TickKind = 0;
             PrdKind = "";
             MyGroupBox3.Enabled = true;
+            FlwMainData.Enabled = true;
+            FlwTree.Enabled = true;
+            FlwMend.Enabled = true;
+            BtnDublicate.Visible = false;
         }
         private void Mendatory()
         {
@@ -156,7 +160,19 @@ namespace VOCAC.PL
                     mskd = (MaskedTextBox)Ctrl;
                     if (mskd.Mask.Replace(" ", "").Trim().Length == mskd.Text.Replace(" ", "").Trim().Length)
                     {
-                        Complete_ += 1;
+                        if (Ctrl.Tag.ToString().Split('-')[2] == "N")
+                        {
+                            if (Ctrl.Tag.ToString().Split('-')[3] == mskd.Text.Replace(" ", "").Trim().Substring(0, Ctrl.Tag.ToString().Split('-')[3].Length))
+                            {
+                                Complete_ += 1;
+                            }
+                            else
+                            {
+                                fn.msg(GetNextControl(mskd,false).Text.Substring(0, GetNextControl(mskd, false).Text.Length-3) + " لابد أنه يبدأ بـ " + Ctrl.Tag.ToString().Split('-')[3], "رسالة معلومات");
+                                mskd.Text = "";
+                            }
+                        }
+
                     }
                 }
                 else if (Ctrl.GetType() == typeof(DateTimePicker))
@@ -384,6 +400,11 @@ namespace VOCAC.PL
                         Ctrl.Name = Statcdif.MendFildsTable.DefaultView[i]["CDMendNm"].ToString();
                         Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendAccessNm"].ToString();
                         FlwMend.Controls.Add(Ctrl);
+                        if (Ctrl.Tag.ToString().Split('-')[2] == "N")
+                        {
+                            Ctrl.Tag += "-" + Statcdif.MendFildsTable.DefaultView[i]["PrdRef"].ToString();
+                            //Ctrl.Text = Statcdif.MendFildsTable.DefaultView[i]["PrdRef"].ToString();
+                        }
                     }
                     else if (Statcdif.MendFildsTable.DefaultView[i]["CDMendType"].ToString() == "DateTimePicker")
                     {
@@ -397,11 +418,10 @@ namespace VOCAC.PL
                         Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendAccessNm"].ToString();
                         FlwMend.Controls.Add(Ctrl);
                     }
+
                 }
                 forms.FrmAllSub(this);
-                //'TempClr = Statcdif.MendFildsTable.Rows.Find(TreeView1.SelectedNode.Name)
-                //'Dim BKClr = Split(TempClr.ItemArray(2), ",")
-                //'Timer1.Start()
+
                 PrdKind = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[0];
                 Prdct.Text = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[1];
                 Comp.Text = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[2];
@@ -579,6 +599,7 @@ namespace VOCAC.PL
             Frm.Size = new Size(GV.Width, TxBox.Height + GV.Height + 50);
             Frm.Text = "اختيار " + GetNextControl(sndr, false).Text + " عدد البيانات " + tbl.Rows.Count;
             Frm.BackColor = Color.White;
+
         }
         private void addnewTextBox()
         {
@@ -586,6 +607,7 @@ namespace VOCAC.PL
             TxBox.Size = new Size(200, 30);
             TxBox.Font = new Font("Times New Roman", 14, FontStyle.Regular);
             TxBox.TextChanged += new EventHandler(Txt_TextChanged);
+            TxBox.KeyDown += new System.Windows.Forms.KeyEventHandler(Frm_KeyDown);
         }
         private void addnewGridview()
         {
@@ -603,6 +625,7 @@ namespace VOCAC.PL
             GV.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 16, FontStyle.Bold);
             GV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             GV.CellDoubleClick += new DataGridViewCellEventHandler(DataGridView_CellClick);
+            GV.KeyDown += new System.Windows.Forms.KeyEventHandler(Frm_KeyDown);
         }
         private void addnewFowoutpanel()
         {
@@ -611,6 +634,13 @@ namespace VOCAC.PL
             Flow.SetFlowBreak(TxBox, true);
             Flow.Dock = DockStyle.Fill;
             Flow.FlowDirection = FlowDirection.RightToLeft;
+        }
+        private void Frm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Frm.Close();
+            }
         }
         private void Txt_TextChanged(object sender, EventArgs e)
         {
@@ -626,6 +656,188 @@ namespace VOCAC.PL
         {
             TxBox.Margin = new Padding(TxBox.Margin.Left, TxBox.Margin.Top, (Frm.Width - TxBox.Width) / 2, TxBox.Margin.Bottom);
             GV.Margin = new Padding(GV.Margin.Left, GV.Margin.Top, (Frm.Width - GV.Width) / 2, GV.Margin.Bottom);
+        }
+        private void SubmitBtn_Click(object sender, EventArgs e)
+        {
+            if (CurrentUser.UsrUCatLvl >= 3 && CurrentUser.UsrUCatLvl <= 5)
+            {
+                AddNewTicket(CurrentUser.UsrID);
+            }
+            else
+            {
+                AddNewTicket(0);
+            }
+        }
+        private DAL.DataAccessLayer.rturnStruct insertTicket(bool kind, int cdfnid, int src, string clNm, string ClPh, string ClPh1, string ClAdr, string ClNtID
+                                                            , string TkDetails, int EmpNm0, int EmpNm, string ClMail, DataTable FIELDTABL)
+        {
+            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
+            DAL.Struc.msg = null;
+            DAL.Struc.dt = null;
+            DAL.Struc.ds = null;
+            SqlConnection sqlcon = new SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-323");
+            SqlParameter[] param = new SqlParameter[13];
+            SqlCommand sqlcmd = new SqlCommand();
+            sqlcmd.CommandType = CommandType.StoredProcedure;
+            sqlcmd.CommandText = "SP_ONE_TICKETS_INSERT";
+            sqlcmd.Connection = sqlcon;
+            param[0] = new SqlParameter("@TkKind", SqlDbType.Bit);
+            param[0].Value = kind;
+            param[1] = new SqlParameter("@TkFnPrdCd", SqlDbType.Int);
+            param[1].Value = cdfnid;
+            param[2] = new SqlParameter("@TkCompSrc", SqlDbType.Int);
+            param[2].Value = src;
+            param[3] = new SqlParameter("@TkClNm", SqlDbType.NVarChar, 100);
+            param[3].Value = clNm;
+            param[4] = new SqlParameter("@TkClPh", SqlDbType.NVarChar, 14);
+            param[4].Value = ClPh;
+            param[5] = new SqlParameter("@TkClPh1", SqlDbType.NVarChar, 14);
+            if (ClPh1.Length == 0) { param[5].Value = DBNull.Value; }
+            else { param[5].Value = ClPh1; }
+            param[6] = new SqlParameter("@TkClAdr", SqlDbType.NVarChar, 255);
+            if (ClAdr.Length == 0) { param[6].Value = DBNull.Value; }
+            else { param[6].Value = ClAdr; }
+            param[7] = new SqlParameter("@TkClNtID", SqlDbType.NVarChar, 14);
+            if (ClNtID.Length == 0) { param[7].Value = DBNull.Value; }
+            else { param[7].Value = ClNtID; }
+            param[8] = new SqlParameter("@TkDetails", SqlDbType.NVarChar);
+            if (TkDetails.Length == 0) { param[8].Value = DBNull.Value; }
+            else { param[8].Value = TkDetails; }
+            param[9] = new SqlParameter("@TkEmpNm0", SqlDbType.Int);
+            param[9].Value = EmpNm0;
+            param[10] = new SqlParameter("@TkEmpNm", SqlDbType.Int);
+            if (EmpNm == 0) { param[10].Value = DBNull.Value; }
+            else { param[10].Value = EmpNm; }
+            param[11] = new SqlParameter("@TkMail", SqlDbType.NVarChar, 50);
+            if (ClMail.Length == 0) { param[11].Value = DBNull.Value; }
+            else { param[11].Value = ClMail; }
+            param[12] = new SqlParameter();
+            param[12].ParameterName = "@FIELDTABLETYPE";
+            param[12].Value = FIELDTABL;
+            // Add Out Put Parameter
+            sqlcmd.Parameters.AddRange(param);
+            sqlcmd.Parameters.Add("@Comdid", SqlDbType.Int);
+            sqlcmd.Parameters["@Comdid"].Direction = ParameterDirection.Output;
+            try
+            {
+                sqlcon.Open();
+                sqlcmd.ExecuteNonQuery();
+                COMPID_ = Convert.ToInt32(sqlcmd.Parameters["@Comdid"].Value);
+                if (COMPID_ != 0)
+                {
+                    SubmitBtn.Visible = false;
+                    if (TickKind == 0)
+                    {
+                        ComRefLbl.Text = "طلب رقم : " + Convert.ToString(COMPID_);
+                    }
+                    else
+                    {
+                        ComRefLbl.Text = "شكوى رقم : " + Convert.ToString(COMPID_);
+                    }
+                    TimrPhons.Stop();
+                    FlwMainData.Enabled = false;
+                    FlwTree.Enabled = false;
+                    FlwMend.Enabled = false;
+                    BtnDublicate.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                DAL.Struc.msg = ex.Message;
+                function fn = function.getfn;
+                fn.msg(Resources.ConnErr + Environment.NewLine + ex, "Create New Tickect");
+            }
+            return DAL.Struc;
+        }
+        private DAL.DataAccessLayer.rturnStruct insertTicketXXX(DataTable FIELDTABL)
+        {
+            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
+            DAL.Struc.msg = null;
+            DAL.Struc.dt = null;
+            DAL.Struc.ds = null;
+            SqlParameter[] param = new SqlParameter[1];
+            param[0] = new SqlParameter();
+            param[0].ParameterName = "@FIELDTABLETYPE";
+            param[0].Value = FIELDTABL;
+            DAL.Open();
+            DAL.Struc = DAL.ExcuteCommand("SP_TEST1_PARAM_TABLE", param);
+            if (DAL.Struc.msg == null) { }
+            else
+            {
+                function fn = function.getfn;
+                fn.msg(Resources.ConnErr + Environment.NewLine + Resources.TryAgain, "Update User");
+            }
+            DAL.Close();
+            return DAL.Struc;
+        }
+        private void CloseBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void AddNewTicket(int usrid)
+        {
+            DataTable mndtbl = new DataTable();
+            mndtbl.Columns.Add("A", typeof(int));
+            mndtbl.Columns.Add("B", typeof(string));
+            mndtbl.Columns.Add("C", typeof(string));
+
+            foreach (Control Ctrl in FlwMend.Controls)
+            {
+                if (Ctrl.GetType() == typeof(TextBox))
+                {
+
+                    string KK = GetNextControl(Ctrl, false).Text.Substring(0, GetNextControl(Ctrl, false).Text.Length - 3);
+                    mndtbl.Rows.Add(0, KK, Ctrl.Text);
+                }
+                else if (Ctrl.GetType() == typeof(MaskedTextBox))
+                {
+                    string KK = GetNextControl(Ctrl, false).Text.Substring(0, GetNextControl(Ctrl, false).Text.Length - 3);
+                    mndtbl.Rows.Add(0, KK, Ctrl.Text);
+                }
+                else if (Ctrl.GetType() == typeof(DateTimePicker))
+                {
+                    DateTimePicker Dpkr = new DateTimePicker();
+                    Dpkr = (DateTimePicker)Ctrl;
+                    string KK = GetNextControl(Ctrl, false).Text.Substring(0, GetNextControl(Ctrl, false).Text.Length - 3);
+                    mndtbl.Rows.Add(0, KK, Dpkr.Value);
+                }
+            }
+            Statcdif.ProdCompTable.DefaultView.RowFilter = "[FnSQL]  = " + TreeView1.SelectedNode.Name;
+            DAL.DataAccessLayer.rturnStruct Accesslogreslt = insertTicket(
+                Convert.ToBoolean(TickKind)                                         //Ticket Kind
+                , Convert.ToInt32(Statcdif.ProdCompTable.DefaultView[0]["FnSQL"])  //Ticket Pcoduct & Cmplaint Code SQL
+                , Convert.ToInt32(SrcCmbBx.SelectedValue)                     //Ticket Source
+                , NameTxtBx.Text.ToString()                                       //Ticket Client Name
+                , Phon1TxtBx.Text.ToString()                                       //Ticket Client Phone Number 1
+                , Phon2TxtBx.Text.ToString().Replace(" ", "")                                       //Ticket Client Phone Number 2
+                , AddTxtBx.Text.ToString().Trim()                                         //Ticket Client Address
+                , IDTxtBx.Text.ToString().Trim()                                          //Ticket Clients National ID
+                , DetailsTxtBx.Text.ToString().Trim()                                     //Ticket Details
+                , CurrentUser.UsrID                                            //Ticket Creator ID
+                , usrid                                                        //Ticket Follower ID (It must be Zero Amount To Assign Null Value to Database)
+                , MailTxtBx.Text.ToString().Trim()                                        //Ticket Client Mail address
+                , mndtbl);                                                     //Ticket Mend Table send it as type table to Stored Procedure
+            if (COMPID_ != 0)
+            {
+                fn.msg("Done", "Add new Ticket");
+            }
+            else
+            {
+                fn.msg("لم ينجح الإتصال بقواعد البيانات" + Environment.NewLine + Accesslogreslt.msg, "Add new Ticket");
+            }
+        }
+        private void NewBtn_Click(object sender, EventArgs e)
+        {
+            NewTickSub();
+        }
+        private void BtnDublicate_Click(object sender, EventArgs e)
+        {
+            SubmitBtn.Visible = true;
+            FlwMainData.Enabled = true;
+            FlwTree.Enabled = true;
+            FlwMend.Enabled = true;
+            ComRefLbl.Text = "";
+            BtnDublicate.Visible = false;
         }
     }
 }
