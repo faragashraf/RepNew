@@ -35,7 +35,8 @@ namespace VOCAC
         public static ContextMenuStrip CntxMenu;
         #region DataTables
         public static DataTable MacTble, UserTable;
-        public static DataTable CompSurceTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, MendPvtTable;
+        public static TreeView _tree;
+        public static DataTable CompSurceTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, MendPvtTable, TreeUsrTbl;
 
         #endregion
     }
@@ -344,7 +345,7 @@ namespace VOCAC
             int Wdays = Statcdif.CDHolDay.DefaultView.Count;
             return Wdays;
         }
-        public void ClorTxt(RichTextBox richtxtbx, String Strng, Color backClr, Color FontClr)
+        public void ClorTxt(RichTextBox richtxtbx, String Strng, Color backClr, Color FontClr,  int fontsize)
         {
             try
             {
@@ -357,7 +358,7 @@ namespace VOCAC
                     {
                         richtxtbx.SelectionBackColor = backClr;
                         richtxtbx.SelectionColor = FontClr;
-                        richtxtbx.SelectionFont = new Font("Times new Roman", 16, FontStyle.Regular);
+                        richtxtbx.SelectionFont = new Font("Times new Roman", fontsize, FontStyle.Bold);
                     }
                     starttxt += 1;
                 }
@@ -533,7 +534,7 @@ namespace VOCAC
                     if (TxtBox.ReadOnly == false)
                     {
                         var ASDS = Clipboard.GetText();
-                        TxtBox.Text = Clipboard.GetText();
+                        TxtBox.Text += Clipboard.GetText();
                     }
 
                 }
@@ -541,6 +542,12 @@ namespace VOCAC
                 {
                     if (TxtBox.Text.Trim().Length > 0)
                         Clipboard.SetText(TxtBox.Text);
+                }
+                else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.X)
+                {
+                    if (TxtBox.Text.Trim().Length > 0)
+                        Clipboard.SetText(TxtBox.Text);
+                    TxtBox.Text = "";
                 }
                 else
                 {
@@ -553,13 +560,13 @@ namespace VOCAC
                 MaskedTextBox TxtBox = (MaskedTextBox)sender;
                 if (e.Modifiers == Keys.Control && e.KeyCode == Keys.V)
                 {
-                    if (TxtBox.ReadOnly == false)
-                        TxtBox.Text = Clipboard.GetText();
+                    //if (TxtBox.ReadOnly == false)
+                    //TxtBox.Text = Clipboard.GetText();
                 }
                 else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.C)
                 {
-                    if (TxtBox.Text.Trim().Length > 0)
-                        Clipboard.SetText(TxtBox.Text);
+                    //if (TxtBox.Text.Trim().Length > 0)
+                    //Clipboard.SetText(TxtBox.Text);
                 }
                 else
                 {
@@ -593,7 +600,7 @@ namespace VOCAC
                 MaskedTextBox TxtBox = (MaskedTextBox)sender;
                 if (TxtBox.ReadOnly == false)
                 {
-                    if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "Number")
+                   if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "Number")
                         IntUtly.ValdtInt(e);
                     else if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "Amount")
                         IntUtly.ValdtNumber(TxtBox, e);

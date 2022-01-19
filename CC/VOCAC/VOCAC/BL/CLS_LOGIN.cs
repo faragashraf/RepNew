@@ -7,6 +7,8 @@ using System.Data.SqlClient;
 using System.Data;
 using VOCAC.Properties;
 using System.Windows.Forms;
+using System.Windows.Media;
+using Color = System.Drawing.Color;
 
 namespace VOCAC.BL
 {
@@ -56,45 +58,16 @@ namespace VOCAC.BL
             DAL.Close();
             return DAL.Struc;
         }
-        public DAL.DataAccessLayer.rturnStruct TeamTree(bool Stat)
-        {
-            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-            SqlParameter[] param = new SqlParameter[1];
-            param[0] = new SqlParameter("@Stat", SqlDbType.Bit);
-            param[0].Value = Stat;
+        //public DAL.DataAccessLayer.rturnStruct TeamTree(bool Stat)
+        //{
+        //    DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
+        //    SqlParameter[] param = new SqlParameter[1];
+        //    param[0] = new SqlParameter("@Stat", SqlDbType.Bit);
+        //    param[0].Value = Stat;
 
-            DAL.Struc = DAL.SelectData("SP_MyTeam_SLCT", param);
-            DAL.Close();
-            return DAL.Struc;
-        }
-        public DAL.DataAccessLayer.treeStruct MyTeam(int LedrCat, int LedrId, String UsrCase, bool Stat)
-        {
-            DAL.DataAccessLayer.treeStruct treestruc = new DAL.DataAccessLayer.treeStruct();
-            List<string> UsrStr = new List<string>();
-            TreeNode[] TempNode = new TreeNode[0];
-            TreeView TreeTemp = new TreeView();
-
-            TreeTemp.Nodes.Add(LedrCat.ToString(), LedrId.ToString());
-
-            DAL.DataAccessLayer.rturnStruct SlctTeamReslt = TeamTree(Stat);
-
-            UsrStr.Add(CurrentUser.UsrID.ToString());
-            if (this.TeamTree(Stat).msg == null)
-            {
-                SlctTeamReslt.dt.DefaultView.RowFilter = "UCatIdSub >= " + CurrentUser.UsrUCatLvl;
-                for (int i = 0; i < SlctTeamReslt.dt.DefaultView.Count; i++)
-                {
-                    TempNode = TreeTemp.Nodes.Find(SlctTeamReslt.dt.DefaultView[i][2].ToString(), true);
-                    if (TempNode.Length > 0)
-                    {
-                        TempNode[0].Nodes.Add(SlctTeamReslt.dt.DefaultView[i][1].ToString(), SlctTeamReslt.dt.DefaultView[i][0].ToString());
-                        UsrStr.Add(SlctTeamReslt.dt.DefaultView[i][0].ToString());
-                    }
-                }
-            }
-            treestruc.msg = UsrCase + " in (" + string.Join(", ", UsrStr) + ")";
-            treestruc.tree = TreeTemp;
-            return treestruc;
-        }
+        //    DAL.Struc = DAL.SelectData("SP_MyTeam_SLCT", param);
+        //    DAL.Close();
+        //    return DAL.Struc;
+        //}
     }
 }

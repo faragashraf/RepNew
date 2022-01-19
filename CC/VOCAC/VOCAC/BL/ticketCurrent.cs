@@ -17,7 +17,7 @@ namespace VOCAC.BL
         public struct currntTicket
         {
             public static string _TkSQL;
-            public static bool _TkKind;
+            public static string _TkKind;
             public static DateTime _TkDtStart;
             public static string _SrcNm;
             public static string _TkClPh;
@@ -55,7 +55,7 @@ namespace VOCAC.BL
         }
         public void currentRow(DataGridView gv)
         {
-            currntTicket._TkKind = Convert.ToBoolean(gv.CurrentRow.Cells["TkKind"].Value);
+            currntTicket._TkKind = Convert.ToString(gv.CurrentRow.Cells["TkKind"].Value);
             currntTicket._SrcNm = Convert.ToString(gv.CurrentRow.Cells["SrcNm"].Value);
             currntTicket._TkSQL = Convert.ToString(gv.CurrentRow.Cells["TkSQL"].Value);
             currntTicket._TkDtStart = Convert.ToDateTime(gv.CurrentRow.Cells["TkDtStart"].Value);
@@ -186,7 +186,7 @@ namespace VOCAC.BL
                 TikDetails.gettikdetlsfrm.FlwMend.Controls.Add(TxtBx);
                 TxtBx.ReadOnly = true;
             }
-            if (currntTicket._TkKind == true)
+            if (currntTicket._TkKind.Equals("شكوى",StringComparison.OrdinalIgnoreCase))
             {
                 TikDetails.gettikdetlsfrm.TxtTikID.Text = "شكوى رقم : " + currntTicket._TkSQL;
                 TikDetails.gettikdetlsfrm.Text = "شكوى رقم : " + currntTicket._TkSQL;
@@ -213,8 +213,8 @@ namespace VOCAC.BL
             }
             TikDetails.gettikdetlsfrm.TxtDetails.Text = jj;
 
-            fn.ClorTxt(TikDetails.gettikdetlsfrm.TxtDetails, "تعديل : بواسطة", Color.Transparent, Color.Red);
-            fn.ClorTxt(TikDetails.gettikdetlsfrm.TxtDetails, "إضافة تلقائية من النظام:", Color.Transparent, Color.Green);
+            fn.ClorTxt(TikDetails.gettikdetlsfrm.TxtDetails, "تعديل : بواسطة", Color.Transparent, Color.Red, 16);
+            fn.ClorTxt(TikDetails.gettikdetlsfrm.TxtDetails, "إضافة تلقائية من النظام:", Color.Transparent, Color.Green, 16);
         }
     }
 }

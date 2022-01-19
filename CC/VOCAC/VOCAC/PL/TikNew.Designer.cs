@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TikNew));
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Rooting");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Rooting");
             this.BtnAdd = new System.Windows.Forms.Button();
             this.Label11 = new System.Windows.Forms.Label();
             this.Label29 = new System.Windows.Forms.Label();
@@ -53,6 +53,7 @@
             this.RadioButton12 = new System.Windows.Forms.RadioButton();
             this.FlwMend = new System.Windows.Forms.FlowLayoutPanel();
             this.Panel6 = new System.Windows.Forms.Panel();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SrcCmbBx = new System.Windows.Forms.ComboBox();
             this.Label20 = new System.Windows.Forms.Label();
@@ -160,7 +161,7 @@
             // 
             // IDTxtBx
             // 
-            this.IDTxtBx.AccessibleName = "";
+            this.IDTxtBx.AccessibleName = "رقم قومي";
             this.IDTxtBx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.IDTxtBx.Location = new System.Drawing.Point(633, 0);
             this.IDTxtBx.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
@@ -168,7 +169,7 @@
             this.IDTxtBx.Name = "IDTxtBx";
             this.IDTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.IDTxtBx.Size = new System.Drawing.Size(286, 32);
-            this.IDTxtBx.TabIndex = 9;
+            this.IDTxtBx.TabIndex = 1;
             this.IDTxtBx.Tag = "English-Number";
             // 
             // RadNID
@@ -184,12 +185,13 @@
             this.RadNID.TabIndex = 504;
             this.RadNID.Text = "رقم قومي";
             this.RadNID.UseVisualStyleBackColor = true;
+            this.RadNID.Click += new System.EventHandler(this.RadNID_Click);
             // 
             // Panel5
             // 
             this.Panel5.BackColor = System.Drawing.Color.Transparent;
             this.Panel5.Controls.Add(this.BtnAdd);
-            this.Panel5.Location = new System.Drawing.Point(443, 568);
+            this.Panel5.Location = new System.Drawing.Point(298, 568);
             this.Panel5.Name = "Panel5";
             this.Panel5.Size = new System.Drawing.Size(107, 55);
             this.Panel5.TabIndex = 2036;
@@ -202,9 +204,9 @@
             this.BtnClr.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnClr.Enabled = false;
             this.BtnClr.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.BtnClr.Location = new System.Drawing.Point(2, 5);
+            this.BtnClr.Location = new System.Drawing.Point(200, 5);
             this.BtnClr.Name = "BtnClr";
-            this.BtnClr.Size = new System.Drawing.Size(105, 40);
+            this.BtnClr.Size = new System.Drawing.Size(52, 28);
             this.BtnClr.TabIndex = 3;
             this.BtnClr.Text = "Clear";
             this.BtnClr.UseVisualStyleBackColor = true;
@@ -220,9 +222,9 @@
             this.RadPss.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RadPss.Size = new System.Drawing.Size(216, 38);
             this.RadPss.TabIndex = 505;
-            this.RadPss.TabStop = true;
             this.RadPss.Text = "جواز سفر";
             this.RadPss.UseVisualStyleBackColor = true;
+            this.RadPss.Click += new System.EventHandler(this.RadNID_Click);
             // 
             // MyGroupBox2
             // 
@@ -269,7 +271,7 @@
             this.RadioButton8.TabIndex = 505;
             this.RadioButton8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RadioButton8.UseVisualStyleBackColor = true;
-            this.RadioButton8.Click += new System.EventHandler(this.RadioButton8_Click);
+            this.RadioButton8.Click += new System.EventHandler(this.RadioPhone1_Click);
             // 
             // RadioButton9
             // 
@@ -283,7 +285,7 @@
             this.RadioButton9.TabIndex = 504;
             this.RadioButton9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RadioButton9.UseVisualStyleBackColor = true;
-            this.RadioButton9.Click += new System.EventHandler(this.RadioButton8_Click);
+            this.RadioButton9.Click += new System.EventHandler(this.RadioPhone1_Click);
             // 
             // Label1
             // 
@@ -359,6 +361,7 @@
             this.RadioButton11.TabIndex = 508;
             this.RadioButton11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RadioButton11.UseVisualStyleBackColor = true;
+            this.RadioButton11.Click += new System.EventHandler(this.RadioPhone2_Click);
             // 
             // RadioButton12
             // 
@@ -370,6 +373,7 @@
             this.RadioButton12.TabIndex = 507;
             this.RadioButton12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RadioButton12.UseVisualStyleBackColor = true;
+            this.RadioButton12.Click += new System.EventHandler(this.RadioPhone2_Click);
             // 
             // FlwMend
             // 
@@ -378,17 +382,31 @@
             this.FlwMend.Location = new System.Drawing.Point(674, 568);
             this.FlwMend.Name = "FlwMend";
             this.FlwMend.Size = new System.Drawing.Size(551, 232);
-            this.FlwMend.TabIndex = 1;
+            this.FlwMend.TabIndex = 6;
+            this.FlwMend.TabStop = true;
             // 
             // Panel6
             // 
             this.Panel6.BackColor = System.Drawing.Color.Transparent;
+            this.Panel6.Controls.Add(this.richTextBox1);
             this.Panel6.Controls.Add(this.BtnClr);
-            this.Panel6.Location = new System.Drawing.Point(556, 568);
+            this.Panel6.Location = new System.Drawing.Point(411, 568);
             this.Panel6.Name = "Panel6";
-            this.Panel6.Size = new System.Drawing.Size(112, 55);
+            this.Panel6.Size = new System.Drawing.Size(257, 232);
             this.Panel6.TabIndex = 2037;
-            this.Panel6.Visible = false;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Enabled = false;
+            this.richTextBox1.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.ForeColor = System.Drawing.Color.Red;
+            this.richTextBox1.Location = new System.Drawing.Point(17, 6);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.richTextBox1.Size = new System.Drawing.Size(174, 223);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "";
             // 
             // ToolTip1
             // 
@@ -396,6 +414,7 @@
             // 
             // SrcCmbBx
             // 
+            this.SrcCmbBx.AccessibleName = "مصدر الشكوى";
             this.SrcCmbBx.AllowDrop = true;
             this.SrcCmbBx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SrcCmbBx.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
@@ -410,7 +429,7 @@
             this.SrcCmbBx.Name = "SrcCmbBx";
             this.SrcCmbBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.SrcCmbBx.Size = new System.Drawing.Size(286, 31);
-            this.SrcCmbBx.TabIndex = 2040;
+            this.SrcCmbBx.TabIndex = 3;
             this.SrcCmbBx.Tag = "مصدر الشكوى";
             this.ToolTip1.SetToolTip(this.SrcCmbBx, "مصدر الشكوى");
             this.SrcCmbBx.ValueMember = "SrcCd";
@@ -431,7 +450,7 @@
             // 
             // Phon1TxtBx
             // 
-            this.Phon1TxtBx.AccessibleName = "";
+            this.Phon1TxtBx.AccessibleName = "رقم التليفون 1";
             this.Phon1TxtBx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Phon1TxtBx.Location = new System.Drawing.Point(633, 53);
             this.Phon1TxtBx.Margin = new System.Windows.Forms.Padding(3, 13, 3, 3);
@@ -494,6 +513,7 @@
             this.NewBtn.Name = "NewBtn";
             this.NewBtn.Size = new System.Drawing.Size(100, 74);
             this.NewBtn.TabIndex = 2021;
+            this.NewBtn.TabStop = false;
             this.NewBtn.Tag = "New Ticket";
             this.NewBtn.UseVisualStyleBackColor = true;
             this.NewBtn.Click += new System.EventHandler(this.NewBtn_Click);
@@ -525,6 +545,7 @@
             this.SubmitBtn.Name = "SubmitBtn";
             this.SubmitBtn.Size = new System.Drawing.Size(100, 74);
             this.SubmitBtn.TabIndex = 92;
+            this.SubmitBtn.TabStop = false;
             this.SubmitBtn.UseVisualStyleBackColor = true;
             this.SubmitBtn.Click += new System.EventHandler(this.SubmitBtn_Click);
             // 
@@ -554,6 +575,7 @@
             this.CloseBtn.Name = "CloseBtn";
             this.CloseBtn.Size = new System.Drawing.Size(100, 74);
             this.CloseBtn.TabIndex = 86;
+            this.CloseBtn.TabStop = false;
             this.CloseBtn.UseVisualStyleBackColor = true;
             this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
             // 
@@ -580,6 +602,7 @@
             this.BtnDublicate.Name = "BtnDublicate";
             this.BtnDublicate.Size = new System.Drawing.Size(100, 74);
             this.BtnDublicate.TabIndex = 2034;
+            this.BtnDublicate.TabStop = false;
             this.BtnDublicate.UseVisualStyleBackColor = true;
             this.BtnDublicate.Click += new System.EventHandler(this.BtnDublicate_Click);
             // 
@@ -618,7 +641,7 @@
             this.FlowLayoutPanel5.Controls.Add(this.Panel1);
             this.FlowLayoutPanel5.Controls.Add(this.Panel2);
             this.FlowLayoutPanel5.Controls.Add(this.Panel3);
-            this.FlowLayoutPanel5.Location = new System.Drawing.Point(173, 565);
+            this.FlowLayoutPanel5.Location = new System.Drawing.Point(28, 565);
             this.FlowLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.FlowLayoutPanel5.Name = "FlowLayoutPanel5";
             this.FlowLayoutPanel5.Size = new System.Drawing.Size(267, 202);
@@ -723,18 +746,19 @@
             this.TreeView1.ImageKey = "Add.ico";
             this.TreeView1.Location = new System.Drawing.Point(7, 51);
             this.TreeView1.Name = "TreeView1";
-            treeNode8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            treeNode8.ForeColor = System.Drawing.Color.Red;
-            treeNode8.Name = "Rooting";
-            treeNode8.Text = "Rooting";
+            treeNode9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            treeNode9.ForeColor = System.Drawing.Color.Red;
+            treeNode9.Name = "Rooting";
+            treeNode9.Text = "Rooting";
             this.TreeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode8});
+            treeNode9});
             this.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TreeView1.RightToLeftLayout = true;
             this.TreeView1.ShowNodeToolTips = true;
             this.TreeView1.ShowPlusMinus = false;
             this.TreeView1.Size = new System.Drawing.Size(470, 749);
             this.TreeView1.TabIndex = 2022;
+            this.TreeView1.TabStop = false;
             this.TreeView1.Tag = "نوع الخدمة & نوع الشكوى";
             this.TreeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeView1_BeforeSelect);
             // 
@@ -766,6 +790,7 @@
             this.ComRefLbl.ReadOnly = true;
             this.ComRefLbl.Size = new System.Drawing.Size(1192, 25);
             this.ComRefLbl.TabIndex = 2034;
+            this.ComRefLbl.TabStop = false;
             this.ComRefLbl.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TabControl2
@@ -826,6 +851,7 @@
             this.FlwMainData.Controls.Add(this.Label6);
             this.FlwMainData.Controls.Add(this.DetailsTxtBx);
             this.FlwMainData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FlwMainData.Enabled = false;
             this.FlwMainData.Location = new System.Drawing.Point(3, 3);
             this.FlwMainData.Name = "FlwMainData";
             this.FlwMainData.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -834,14 +860,14 @@
             // 
             // NameTxtBx
             // 
-            this.NameTxtBx.AccessibleName = "";
+            this.NameTxtBx.AccessibleName = "اسم العميل";
             this.NameTxtBx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.NameTxtBx.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.NameTxtBx.Location = new System.Drawing.Point(633, 155);
             this.NameTxtBx.Name = "NameTxtBx";
             this.NameTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.NameTxtBx.Size = new System.Drawing.Size(286, 32);
-            this.NameTxtBx.TabIndex = 1;
+            this.NameTxtBx.TabIndex = 2;
             this.NameTxtBx.TabStop = false;
             this.NameTxtBx.Tag = "Arabic-Text";
             // 
@@ -932,6 +958,7 @@
             this.Prdct.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Prdct.Size = new System.Drawing.Size(286, 32);
             this.Prdct.TabIndex = 2038;
+            this.Prdct.TabStop = false;
             this.Prdct.Tag = "نوع الخدمة";
             // 
             // Label5
@@ -958,6 +985,7 @@
             this.Comp.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Comp.Size = new System.Drawing.Size(490, 32);
             this.Comp.TabIndex = 2039;
+            this.Comp.TabStop = false;
             this.Comp.Tag = "نوع الشكوى";
             // 
             // Label3
@@ -986,7 +1014,7 @@
             this.AddTxtBx.Name = "AddTxtBx";
             this.AddTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.AddTxtBx.Size = new System.Drawing.Size(910, 86);
-            this.AddTxtBx.TabIndex = 68;
+            this.AddTxtBx.TabIndex = 4;
             this.AddTxtBx.Tag = "Arabic-All";
             // 
             // Label6
@@ -1012,7 +1040,7 @@
             this.DetailsTxtBx.Name = "DetailsTxtBx";
             this.DetailsTxtBx.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.DetailsTxtBx.Size = new System.Drawing.Size(910, 114);
-            this.DetailsTxtBx.TabIndex = 2045;
+            this.DetailsTxtBx.TabIndex = 5;
             this.DetailsTxtBx.Tag = "Arabic-All";
             // 
             // TikNew
@@ -1121,5 +1149,6 @@
         internal System.Windows.Forms.TextBox ComRefLbl;
         internal System.Windows.Forms.TabControl TabControl2;
         internal System.Windows.Forms.TabPage TabPage3;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

@@ -196,6 +196,7 @@ namespace VOCAC.PL
             Statcdif.CDHolDay = new DataTable();
             Statcdif.MendFildsTable = new DataTable();
             Statcdif.MendPvtTable = new DataTable();
+            Statcdif.TreeUsrTbl = new DataTable();
             DAL.DataAccessLayer.rturnStruct SlctMainreslt = log.slctmaintbls();
             if (SlctMainreslt.ds.Tables.Count > 0)
             {
@@ -206,6 +207,8 @@ namespace VOCAC.PL
                 Statcdif.CDHolDay = SlctMainreslt.ds.Tables[4];
                 Statcdif.MendFildsTable = SlctMainreslt.ds.Tables[5];
                 Statcdif.MendPvtTable = SlctMainreslt.ds.Tables[6];
+                Statcdif.MendPvtTable = SlctMainreslt.ds.Tables[6];
+                Statcdif.TreeUsrTbl = SlctMainreslt.ds.Tables[7];
                 if (CurrentUser.UsrUCatLvl == 7)
                 {
                     Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" + 0 + " AND [srcCd] = '1'";     //     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm";
@@ -253,7 +256,6 @@ namespace VOCAC.PL
             CurrentUser.UsrRecvDy = Statcdif.UserTable.Rows[0].Field<int>("UsrRecevDy");         //RecievedTickets Count Per Day
             CurrentUser.UsrClsUpdtd = Statcdif.UserTable.Rows[0].Field<int>("UsrClsUpdtd");      //Closed Tickets with New Updates
             CurrentUser.UsrFolwDay = Statcdif.UserTable.Rows[0].Field<int>("UsrTikFlowDy");      //Closed Tickets with New Updates
-            CurrentUser.UsrTeam = log.MyTeam(CurrentUser.UsrCat, CurrentUser.UsrID, "", false).msg;
             LblLogin.Text = "          Login has been succeeded";
             LblLogin.Image = Resources.Check_Marks1;
             LblLogin.ForeColor = Color.Green;

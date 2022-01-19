@@ -47,6 +47,7 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.FlowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.GridTicket = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.ChckAll = new System.Windows.Forms.RadioButton();
@@ -98,9 +99,9 @@
             // Panel3
             // 
             this.Panel3.Controls.Add(this.CloseBtn);
-            this.Panel3.Location = new System.Drawing.Point(259, 393);
+            this.Panel3.Location = new System.Drawing.Point(247, 642);
             this.Panel3.Name = "Panel3";
-            this.Panel3.Size = new System.Drawing.Size(76, 67);
+            this.Panel3.Size = new System.Drawing.Size(76, 72);
             this.Panel3.TabIndex = 2172;
             // 
             // CloseBtn
@@ -114,7 +115,7 @@
             this.CloseBtn.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CloseBtn.Location = new System.Drawing.Point(4, 2);
             this.CloseBtn.Name = "CloseBtn";
-            this.CloseBtn.Size = new System.Drawing.Size(64, 64);
+            this.CloseBtn.Size = new System.Drawing.Size(64, 69);
             this.CloseBtn.TabIndex = 129;
             this.CloseBtn.UseVisualStyleBackColor = false;
             this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
@@ -122,19 +123,19 @@
             // Panel1
             // 
             this.Panel1.Controls.Add(this.BtnRefrsh);
-            this.Panel1.Location = new System.Drawing.Point(374, 15);
-            this.Panel1.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
+            this.Panel1.Location = new System.Drawing.Point(410, 10);
+            this.Panel1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.Panel1.Name = "Panel1";
-            this.Panel1.Size = new System.Drawing.Size(103, 42);
+            this.Panel1.Size = new System.Drawing.Size(103, 45);
             this.Panel1.TabIndex = 2170;
             // 
             // BtnRefrsh
             // 
             this.BtnRefrsh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnRefrsh.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
-            this.BtnRefrsh.Location = new System.Drawing.Point(6, 7);
+            this.BtnRefrsh.Location = new System.Drawing.Point(6, 8);
             this.BtnRefrsh.Name = "BtnRefrsh";
-            this.BtnRefrsh.Size = new System.Drawing.Size(90, 29);
+            this.BtnRefrsh.Size = new System.Drawing.Size(90, 31);
             this.BtnRefrsh.TabIndex = 2034;
             this.BtnRefrsh.Text = "تحديث";
             this.BtnRefrsh.UseVisualStyleBackColor = true;
@@ -150,10 +151,10 @@
             this.FlowLayoutPanel2.Controls.Add(this.Panel2);
             this.FlowLayoutPanel2.Controls.Add(this.panel6);
             this.FlowLayoutPanel1.SetFlowBreak(this.FlowLayoutPanel2, true);
-            this.FlowLayoutPanel2.Location = new System.Drawing.Point(217, 3);
+            this.FlowLayoutPanel2.Location = new System.Drawing.Point(129, 3);
             this.FlowLayoutPanel2.Margin = new System.Windows.Forms.Padding(195, 3, 3, 3);
             this.FlowLayoutPanel2.Name = "FlowLayoutPanel2";
-            this.FlowLayoutPanel2.Size = new System.Drawing.Size(1089, 60);
+            this.FlowLayoutPanel2.Size = new System.Drawing.Size(1165, 69);
             this.FlowLayoutPanel2.TabIndex = 2173;
             // 
             // panel4
@@ -162,21 +163,20 @@
             this.panel4.Controls.Add(this.Rd_contain);
             this.panel4.Controls.Add(this.Rd_endwith);
             this.panel4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.panel4.Location = new System.Drawing.Point(856, 3);
+            this.panel4.Location = new System.Drawing.Point(892, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(230, 48);
+            this.panel4.Size = new System.Drawing.Size(270, 52);
             this.panel4.TabIndex = 2175;
             // 
             // Rd_strtwith
             // 
             this.Rd_strtwith.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Rd_strtwith.AutoSize = true;
-            this.Rd_strtwith.Checked = true;
-            this.Rd_strtwith.Location = new System.Drawing.Point(168, 17);
+            this.Rd_strtwith.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
+            this.Rd_strtwith.Location = new System.Drawing.Point(200, 18);
             this.Rd_strtwith.Name = "Rd_strtwith";
-            this.Rd_strtwith.Size = new System.Drawing.Size(55, 23);
+            this.Rd_strtwith.Size = new System.Drawing.Size(63, 26);
             this.Rd_strtwith.TabIndex = 2172;
-            this.Rd_strtwith.TabStop = true;
             this.Rd_strtwith.Text = "يبدأ بـ";
             this.Rd_strtwith.UseVisualStyleBackColor = true;
             this.Rd_strtwith.Click += new System.EventHandler(this.Radio_CheckedChanged);
@@ -185,10 +185,13 @@
             // 
             this.Rd_contain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Rd_contain.AutoSize = true;
-            this.Rd_contain.Location = new System.Drawing.Point(10, 17);
+            this.Rd_contain.Checked = true;
+            this.Rd_contain.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
+            this.Rd_contain.Location = new System.Drawing.Point(11, 18);
             this.Rd_contain.Name = "Rd_contain";
-            this.Rd_contain.Size = new System.Drawing.Size(86, 23);
+            this.Rd_contain.Size = new System.Drawing.Size(99, 26);
             this.Rd_contain.TabIndex = 2174;
+            this.Rd_contain.TabStop = true;
             this.Rd_contain.Text = "يحتوى على";
             this.Rd_contain.UseVisualStyleBackColor = true;
             this.Rd_contain.Click += new System.EventHandler(this.Radio_CheckedChanged);
@@ -197,9 +200,10 @@
             // 
             this.Rd_endwith.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Rd_endwith.AutoSize = true;
-            this.Rd_endwith.Location = new System.Drawing.Point(98, 17);
+            this.Rd_endwith.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
+            this.Rd_endwith.Location = new System.Drawing.Point(116, 18);
             this.Rd_endwith.Name = "Rd_endwith";
-            this.Rd_endwith.Size = new System.Drawing.Size(66, 23);
+            this.Rd_endwith.Size = new System.Drawing.Size(77, 26);
             this.Rd_endwith.TabIndex = 2173;
             this.Rd_endwith.Text = "ينتهي بـ";
             this.Rd_endwith.UseVisualStyleBackColor = true;
@@ -210,18 +214,19 @@
             this.panel5.Controls.Add(this.Rd_Equal);
             this.panel5.Controls.Add(this.Rd_Like);
             this.panel5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.panel5.Location = new System.Drawing.Point(707, 3);
+            this.panel5.Location = new System.Drawing.Point(743, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(143, 48);
+            this.panel5.Size = new System.Drawing.Size(143, 52);
             this.panel5.TabIndex = 2176;
             // 
             // Rd_Equal
             // 
             this.Rd_Equal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Rd_Equal.AutoSize = true;
-            this.Rd_Equal.Location = new System.Drawing.Point(87, 17);
+            this.Rd_Equal.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
+            this.Rd_Equal.Location = new System.Drawing.Point(84, 18);
             this.Rd_Equal.Name = "Rd_Equal";
-            this.Rd_Equal.Size = new System.Drawing.Size(36, 23);
+            this.Rd_Equal.Size = new System.Drawing.Size(39, 26);
             this.Rd_Equal.TabIndex = 2172;
             this.Rd_Equal.Text = "=";
             this.Rd_Equal.UseVisualStyleBackColor = true;
@@ -232,9 +237,10 @@
             this.Rd_Like.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Rd_Like.AutoSize = true;
             this.Rd_Like.Checked = true;
-            this.Rd_Like.Location = new System.Drawing.Point(15, 17);
+            this.Rd_Like.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
+            this.Rd_Like.Location = new System.Drawing.Point(9, 18);
             this.Rd_Like.Name = "Rd_Like";
-            this.Rd_Like.Size = new System.Drawing.Size(52, 23);
+            this.Rd_Like.Size = new System.Drawing.Size(58, 26);
             this.Rd_Like.TabIndex = 2173;
             this.Rd_Like.TabStop = true;
             this.Rd_Like.Text = "like";
@@ -246,22 +252,23 @@
             this.SerchTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SerchTxt.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.SerchTxt.ForeColor = System.Drawing.Color.Black;
-            this.SerchTxt.Location = new System.Drawing.Point(483, 20);
-            this.SerchTxt.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.SerchTxt.Location = new System.Drawing.Point(519, 22);
+            this.SerchTxt.Margin = new System.Windows.Forms.Padding(3, 22, 3, 3);
             this.SerchTxt.Name = "SerchTxt";
             this.SerchTxt.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.SerchTxt.Size = new System.Drawing.Size(218, 26);
             this.SerchTxt.TabIndex = 2024;
+            this.SerchTxt.Tag = "Arabic-TextNumber";
             this.SerchTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.SerchTxt.TextChanged += new System.EventHandler(this.SerchTxt_TextChanged);
             // 
             // Panel2
             // 
             this.Panel2.Controls.Add(this.BtnCncl);
-            this.Panel2.Location = new System.Drawing.Point(290, 15);
-            this.Panel2.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
+            this.Panel2.Location = new System.Drawing.Point(326, 10);
+            this.Panel2.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.Panel2.Name = "Panel2";
-            this.Panel2.Size = new System.Drawing.Size(78, 42);
+            this.Panel2.Size = new System.Drawing.Size(78, 45);
             this.Panel2.TabIndex = 2171;
             // 
             // BtnCncl
@@ -274,7 +281,7 @@
             this.BtnCncl.Location = new System.Drawing.Point(4, 5);
             this.BtnCncl.Name = "BtnCncl";
             this.BtnCncl.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.BtnCncl.Size = new System.Drawing.Size(69, 34);
+            this.BtnCncl.Size = new System.Drawing.Size(69, 37);
             this.BtnCncl.TabIndex = 2169;
             this.BtnCncl.Text = "Cancel";
             this.BtnCncl.UseVisualStyleBackColor = true;
@@ -283,15 +290,15 @@
             // 
             this.panel6.Controls.Add(this.checkBox1);
             this.panel6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.panel6.Location = new System.Drawing.Point(24, 3);
+            this.panel6.Location = new System.Drawing.Point(60, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(260, 48);
+            this.panel6.Size = new System.Drawing.Size(260, 52);
             this.panel6.TabIndex = 2177;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(100, 17);
+            this.checkBox1.Location = new System.Drawing.Point(100, 18);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(128, 23);
             this.checkBox1.TabIndex = 0;
@@ -303,14 +310,24 @@
             this.FlowLayoutPanel1.AutoScroll = true;
             this.FlowLayoutPanel1.AutoSize = true;
             this.FlowLayoutPanel1.Controls.Add(this.FlowLayoutPanel2);
+            this.FlowLayoutPanel1.Controls.Add(this.treeView1);
             this.FlowLayoutPanel1.Controls.Add(this.GridTicket);
             this.FlowLayoutPanel1.Controls.Add(this.flowLayoutPanel3);
             this.FlowLayoutPanel1.Controls.Add(this.Panel3);
             this.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FlowLayoutPanel1.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.FlowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.FlowLayoutPanel1.Name = "FlowLayoutPanel1";
-            this.FlowLayoutPanel1.Size = new System.Drawing.Size(1501, 663);
+            this.FlowLayoutPanel1.Size = new System.Drawing.Size(1489, 753);
             this.FlowLayoutPanel1.TabIndex = 2172;
+            // 
+            // treeView1
+            // 
+            this.treeView1.Location = new System.Drawing.Point(1124, 78);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.RightToLeftLayout = true;
+            this.treeView1.Size = new System.Drawing.Size(362, 558);
+            this.treeView1.TabIndex = 2175;
             // 
             // GridTicket
             // 
@@ -321,14 +338,14 @@
             this.GridTicket.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GridTicket.BackgroundColor = System.Drawing.Color.White;
             this.GridTicket.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridTicket.Location = new System.Drawing.Point(32, 69);
+            this.GridTicket.Location = new System.Drawing.Point(16, 78);
             this.GridTicket.MultiSelect = false;
             this.GridTicket.Name = "GridTicket";
             this.GridTicket.ReadOnly = true;
             this.GridTicket.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.GridTicket.Size = new System.Drawing.Size(1466, 318);
+            this.GridTicket.Size = new System.Drawing.Size(1102, 342);
             this.GridTicket.TabIndex = 123;
-            this.GridTicket.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridTicket_CellContentClick);
+            this.GridTicket.DoubleClick += new System.EventHandler(this.GridTicket_DoubleClick);
             // 
             // flowLayoutPanel3
             // 
@@ -356,9 +373,9 @@
             this.flowLayoutPanel3.Controls.Add(this.LblFl3);
             this.flowLayoutPanel3.Controls.Add(this.LabelCompCount);
             this.flowLayoutPanel3.Controls.Add(this.LblRequest);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(341, 393);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(329, 642);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(1157, 67);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(1157, 72);
             this.flowLayoutPanel3.TabIndex = 2174;
             // 
             // ChckAll
@@ -367,7 +384,7 @@
             this.ChckAll.Font = new System.Drawing.Font("Times New Roman", 10F);
             this.ChckAll.Location = new System.Drawing.Point(1064, 3);
             this.ChckAll.Name = "ChckAll";
-            this.ChckAll.Size = new System.Drawing.Size(90, 30);
+            this.ChckAll.Size = new System.Drawing.Size(90, 32);
             this.ChckAll.TabIndex = 2069;
             this.ChckAll.TabStop = true;
             this.ChckAll.Text = "الكل";
@@ -380,7 +397,7 @@
             this.ChckTrnsDy.Font = new System.Drawing.Font("Times New Roman", 10F);
             this.ChckTrnsDy.Location = new System.Drawing.Point(968, 3);
             this.ChckTrnsDy.Name = "ChckTrnsDy";
-            this.ChckTrnsDy.Size = new System.Drawing.Size(90, 30);
+            this.ChckTrnsDy.Size = new System.Drawing.Size(90, 32);
             this.ChckTrnsDy.TabIndex = 2053;
             this.ChckTrnsDy.TabStop = true;
             this.ChckTrnsDy.Text = "استلام اليوم";
@@ -393,7 +410,7 @@
             this.ChckFlN.Font = new System.Drawing.Font("Times New Roman", 10F);
             this.ChckFlN.Location = new System.Drawing.Point(872, 3);
             this.ChckFlN.Name = "ChckFlN";
-            this.ChckFlN.Size = new System.Drawing.Size(90, 30);
+            this.ChckFlN.Size = new System.Drawing.Size(90, 32);
             this.ChckFlN.TabIndex = 2054;
             this.ChckFlN.TabStop = true;
             this.ChckFlN.Text = "بدون متابعة";
@@ -406,7 +423,7 @@
             this.ChckRead.Font = new System.Drawing.Font("Times New Roman", 10F);
             this.ChckRead.Location = new System.Drawing.Point(776, 3);
             this.ChckRead.Name = "ChckRead";
-            this.ChckRead.Size = new System.Drawing.Size(90, 30);
+            this.ChckRead.Size = new System.Drawing.Size(90, 32);
             this.ChckRead.TabIndex = 2061;
             this.ChckRead.TabStop = true;
             this.ChckRead.Text = "غير مقروء";
@@ -419,7 +436,7 @@
             this.ChckUpdMe.Font = new System.Drawing.Font("Times New Roman", 8F);
             this.ChckUpdMe.Location = new System.Drawing.Point(680, 3);
             this.ChckUpdMe.Name = "ChckUpdMe";
-            this.ChckUpdMe.Size = new System.Drawing.Size(90, 30);
+            this.ChckUpdMe.Size = new System.Drawing.Size(90, 32);
             this.ChckUpdMe.TabIndex = 2055;
             this.ChckUpdMe.TabStop = true;
             this.ChckUpdMe.Text = "تحديثات المتابع";
@@ -432,7 +449,7 @@
             this.ChckUpdColeg.Font = new System.Drawing.Font("Times New Roman", 10F);
             this.ChckUpdColeg.Location = new System.Drawing.Point(584, 3);
             this.ChckUpdColeg.Name = "ChckUpdColeg";
-            this.ChckUpdColeg.Size = new System.Drawing.Size(90, 30);
+            this.ChckUpdColeg.Size = new System.Drawing.Size(90, 32);
             this.ChckUpdColeg.TabIndex = 2052;
             this.ChckUpdColeg.TabStop = true;
             this.ChckUpdColeg.Text = "تحديثات الزملاء";
@@ -445,7 +462,7 @@
             this.ChckUpdOther.Font = new System.Drawing.Font("Times New Roman", 10F);
             this.ChckUpdOther.Location = new System.Drawing.Point(488, 3);
             this.ChckUpdOther.Name = "ChckUpdOther";
-            this.ChckUpdOther.Size = new System.Drawing.Size(90, 30);
+            this.ChckUpdOther.Size = new System.Drawing.Size(90, 32);
             this.ChckUpdOther.TabIndex = 2050;
             this.ChckUpdOther.TabStop = true;
             this.ChckUpdOther.Text = "تحديثات الغير";
@@ -458,7 +475,7 @@
             this.ChckEsc1.Font = new System.Drawing.Font("Times New Roman", 10F);
             this.ChckEsc1.Location = new System.Drawing.Point(392, 3);
             this.ChckEsc1.Name = "ChckEsc1";
-            this.ChckEsc1.Size = new System.Drawing.Size(90, 30);
+            this.ChckEsc1.Size = new System.Drawing.Size(90, 32);
             this.ChckEsc1.TabIndex = 2067;
             this.ChckEsc1.TabStop = true;
             this.ChckEsc1.Text = "متابعة 1";
@@ -471,7 +488,7 @@
             this.ChckEsc2.Font = new System.Drawing.Font("Times New Roman", 10F);
             this.ChckEsc2.Location = new System.Drawing.Point(296, 3);
             this.ChckEsc2.Name = "ChckEsc2";
-            this.ChckEsc2.Size = new System.Drawing.Size(90, 30);
+            this.ChckEsc2.Size = new System.Drawing.Size(90, 32);
             this.ChckEsc2.TabIndex = 2065;
             this.ChckEsc2.TabStop = true;
             this.ChckEsc2.Text = "متابعة 2";
@@ -484,7 +501,7 @@
             this.ChckEsc3.Font = new System.Drawing.Font("Times New Roman", 10F);
             this.ChckEsc3.Location = new System.Drawing.Point(200, 3);
             this.ChckEsc3.Name = "ChckEsc3";
-            this.ChckEsc3.Size = new System.Drawing.Size(90, 30);
+            this.ChckEsc3.Size = new System.Drawing.Size(90, 32);
             this.ChckEsc3.TabIndex = 2063;
             this.ChckEsc3.TabStop = true;
             this.ChckEsc3.Text = "متابعة 3";
@@ -497,7 +514,7 @@
             this.ChckComp.Font = new System.Drawing.Font("Times New Roman", 10F);
             this.ChckComp.Location = new System.Drawing.Point(104, 3);
             this.ChckComp.Name = "ChckComp";
-            this.ChckComp.Size = new System.Drawing.Size(90, 30);
+            this.ChckComp.Size = new System.Drawing.Size(90, 32);
             this.ChckComp.TabIndex = 2056;
             this.ChckComp.TabStop = true;
             this.ChckComp.Text = "شكاوى";
@@ -511,7 +528,7 @@
             this.ChckRequest.Font = new System.Drawing.Font("Times New Roman", 10F);
             this.ChckRequest.Location = new System.Drawing.Point(8, 3);
             this.ChckRequest.Name = "ChckRequest";
-            this.ChckRequest.Size = new System.Drawing.Size(90, 30);
+            this.ChckRequest.Size = new System.Drawing.Size(90, 32);
             this.ChckRequest.TabIndex = 2071;
             this.ChckRequest.TabStop = true;
             this.ChckRequest.Text = "طلبات";
@@ -522,11 +539,11 @@
             // 
             this.LblAll.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblAll.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblAll.Location = new System.Drawing.Point(1064, 39);
+            this.LblAll.Location = new System.Drawing.Point(1064, 41);
             this.LblAll.Margin = new System.Windows.Forms.Padding(3);
             this.LblAll.Name = "LblAll";
             this.LblAll.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.LblAll.Size = new System.Drawing.Size(90, 25);
+            this.LblAll.Size = new System.Drawing.Size(90, 27);
             this.LblAll.TabIndex = 2070;
             this.LblAll.Text = "LblAll";
             this.LblAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -535,11 +552,11 @@
             // 
             this.LblRecved.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblRecved.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblRecved.Location = new System.Drawing.Point(968, 39);
+            this.LblRecved.Location = new System.Drawing.Point(968, 41);
             this.LblRecved.Margin = new System.Windows.Forms.Padding(3);
             this.LblRecved.Name = "LblRecved";
             this.LblRecved.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.LblRecved.Size = new System.Drawing.Size(90, 25);
+            this.LblRecved.Size = new System.Drawing.Size(90, 27);
             this.LblRecved.TabIndex = 2059;
             this.LblRecved.Text = "LblRecved";
             this.LblRecved.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -548,11 +565,11 @@
             // 
             this.LblNoFlwCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblNoFlwCount.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblNoFlwCount.Location = new System.Drawing.Point(872, 39);
+            this.LblNoFlwCount.Location = new System.Drawing.Point(872, 41);
             this.LblNoFlwCount.Margin = new System.Windows.Forms.Padding(3);
             this.LblNoFlwCount.Name = "LblNoFlwCount";
             this.LblNoFlwCount.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.LblNoFlwCount.Size = new System.Drawing.Size(90, 25);
+            this.LblNoFlwCount.Size = new System.Drawing.Size(90, 27);
             this.LblNoFlwCount.TabIndex = 2060;
             this.LblNoFlwCount.Text = "LblNoFlwCount";
             this.LblNoFlwCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -561,11 +578,11 @@
             // 
             this.LblUnReadCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblUnReadCount.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblUnReadCount.Location = new System.Drawing.Point(776, 39);
+            this.LblUnReadCount.Location = new System.Drawing.Point(776, 41);
             this.LblUnReadCount.Margin = new System.Windows.Forms.Padding(3);
             this.LblUnReadCount.Name = "LblUnReadCount";
             this.LblUnReadCount.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.LblUnReadCount.Size = new System.Drawing.Size(90, 25);
+            this.LblUnReadCount.Size = new System.Drawing.Size(90, 27);
             this.LblUnReadCount.TabIndex = 2062;
             this.LblUnReadCount.Text = "LblUnReadCount";
             this.LblUnReadCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -574,11 +591,11 @@
             // 
             this.LblUpdtFollow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblUpdtFollow.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblUpdtFollow.Location = new System.Drawing.Point(680, 39);
+            this.LblUpdtFollow.Location = new System.Drawing.Point(680, 41);
             this.LblUpdtFollow.Margin = new System.Windows.Forms.Padding(3);
             this.LblUpdtFollow.Name = "LblUpdtFollow";
             this.LblUpdtFollow.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.LblUpdtFollow.Size = new System.Drawing.Size(90, 25);
+            this.LblUpdtFollow.Size = new System.Drawing.Size(90, 27);
             this.LblUpdtFollow.TabIndex = 2049;
             this.LblUpdtFollow.Text = "LblUpdtFollow";
             this.LblUpdtFollow.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -587,11 +604,11 @@
             // 
             this.LblUpdtColleg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblUpdtColleg.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblUpdtColleg.Location = new System.Drawing.Point(584, 39);
+            this.LblUpdtColleg.Location = new System.Drawing.Point(584, 41);
             this.LblUpdtColleg.Margin = new System.Windows.Forms.Padding(3);
             this.LblUpdtColleg.Name = "LblUpdtColleg";
             this.LblUpdtColleg.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.LblUpdtColleg.Size = new System.Drawing.Size(90, 25);
+            this.LblUpdtColleg.Size = new System.Drawing.Size(90, 27);
             this.LblUpdtColleg.TabIndex = 2051;
             this.LblUpdtColleg.Text = "LblUpdtColleg";
             this.LblUpdtColleg.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -600,11 +617,11 @@
             // 
             this.LblUpdtOthrs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblUpdtOthrs.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblUpdtOthrs.Location = new System.Drawing.Point(488, 39);
+            this.LblUpdtOthrs.Location = new System.Drawing.Point(488, 41);
             this.LblUpdtOthrs.Margin = new System.Windows.Forms.Padding(3);
             this.LblUpdtOthrs.Name = "LblUpdtOthrs";
             this.LblUpdtOthrs.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.LblUpdtOthrs.Size = new System.Drawing.Size(90, 25);
+            this.LblUpdtOthrs.Size = new System.Drawing.Size(90, 27);
             this.LblUpdtOthrs.TabIndex = 2057;
             this.LblUpdtOthrs.Text = "LblUpdtOthrs";
             this.LblUpdtOthrs.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -613,11 +630,11 @@
             // 
             this.LblFl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblFl1.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblFl1.Location = new System.Drawing.Point(392, 39);
+            this.LblFl1.Location = new System.Drawing.Point(392, 41);
             this.LblFl1.Margin = new System.Windows.Forms.Padding(3);
             this.LblFl1.Name = "LblFl1";
             this.LblFl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.LblFl1.Size = new System.Drawing.Size(90, 25);
+            this.LblFl1.Size = new System.Drawing.Size(90, 27);
             this.LblFl1.TabIndex = 2068;
             this.LblFl1.Text = "Label3";
             this.LblFl1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -626,11 +643,11 @@
             // 
             this.LblFl2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblFl2.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblFl2.Location = new System.Drawing.Point(296, 39);
+            this.LblFl2.Location = new System.Drawing.Point(296, 41);
             this.LblFl2.Margin = new System.Windows.Forms.Padding(3);
             this.LblFl2.Name = "LblFl2";
             this.LblFl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.LblFl2.Size = new System.Drawing.Size(90, 25);
+            this.LblFl2.Size = new System.Drawing.Size(90, 27);
             this.LblFl2.TabIndex = 2066;
             this.LblFl2.Text = "Label3";
             this.LblFl2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -639,11 +656,11 @@
             // 
             this.LblFl3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblFl3.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblFl3.Location = new System.Drawing.Point(200, 39);
+            this.LblFl3.Location = new System.Drawing.Point(200, 41);
             this.LblFl3.Margin = new System.Windows.Forms.Padding(3);
             this.LblFl3.Name = "LblFl3";
             this.LblFl3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.LblFl3.Size = new System.Drawing.Size(90, 25);
+            this.LblFl3.Size = new System.Drawing.Size(90, 27);
             this.LblFl3.TabIndex = 2064;
             this.LblFl3.Text = "Label3";
             this.LblFl3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -652,11 +669,11 @@
             // 
             this.LabelCompCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LabelCompCount.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LabelCompCount.Location = new System.Drawing.Point(104, 39);
+            this.LabelCompCount.Location = new System.Drawing.Point(104, 41);
             this.LabelCompCount.Margin = new System.Windows.Forms.Padding(3);
             this.LabelCompCount.Name = "LabelCompCount";
             this.LabelCompCount.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.LabelCompCount.Size = new System.Drawing.Size(90, 25);
+            this.LabelCompCount.Size = new System.Drawing.Size(90, 27);
             this.LabelCompCount.TabIndex = 2058;
             this.LabelCompCount.Text = "LabelCompCount";
             this.LabelCompCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -665,11 +682,11 @@
             // 
             this.LblRequest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblRequest.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblRequest.Location = new System.Drawing.Point(8, 39);
+            this.LblRequest.Location = new System.Drawing.Point(8, 41);
             this.LblRequest.Margin = new System.Windows.Forms.Padding(3);
             this.LblRequest.Name = "LblRequest";
             this.LblRequest.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.LblRequest.Size = new System.Drawing.Size(90, 25);
+            this.LblRequest.Size = new System.Drawing.Size(90, 27);
             this.LblRequest.TabIndex = 2072;
             this.LblRequest.Text = "LblRequest";
             this.LblRequest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -679,7 +696,7 @@
             this.StatBrPnlAr.Alignment = System.Windows.Forms.HorizontalAlignment.Center;
             this.StatBrPnlAr.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring;
             this.StatBrPnlAr.Name = "StatBrPnlAr";
-            this.StatBrPnlAr.Width = 750;
+            this.StatBrPnlAr.Width = 744;
             // 
             // CopyToolStripitem
             // 
@@ -717,14 +734,14 @@
             // 
             this.StatusBar1.Enabled = false;
             this.StatusBar1.Font = new System.Drawing.Font("Times New Roman", 14F);
-            this.StatusBar1.Location = new System.Drawing.Point(0, 663);
+            this.StatusBar1.Location = new System.Drawing.Point(0, 753);
             this.StatusBar1.Name = "StatusBar1";
             this.StatusBar1.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.StatBrPnlEn,
             this.StatBrPnlAr});
             this.StatusBar1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.StatusBar1.ShowPanels = true;
-            this.StatusBar1.Size = new System.Drawing.Size(1501, 33);
+            this.StatusBar1.Size = new System.Drawing.Size(1489, 36);
             this.StatusBar1.SizingGrip = false;
             this.StatusBar1.TabIndex = 2171;
             // 
@@ -733,7 +750,7 @@
             this.StatBrPnlEn.Alignment = System.Windows.Forms.HorizontalAlignment.Center;
             this.StatBrPnlEn.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring;
             this.StatBrPnlEn.Name = "StatBrPnlEn";
-            this.StatBrPnlEn.Width = 750;
+            this.StatBrPnlEn.Width = 744;
             // 
             // ContextMenuStrip2
             // 
@@ -748,12 +765,13 @@
             // 
             // TikFolow_Team
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1501, 696);
+            this.ClientSize = new System.Drawing.Size(1489, 789);
             this.Controls.Add(this.FlowLayoutPanel1);
             this.Controls.Add(this.StatusBar1);
+            this.Font = new System.Drawing.Font("Times New Roman", 8F);
             this.Name = "TikFolow_Team";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
@@ -836,5 +854,6 @@
         internal System.Windows.Forms.Label LblAll;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }

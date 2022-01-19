@@ -50,8 +50,8 @@ namespace VOCAC.PL
         private void assignfltrTXTintoCtrlTag()
         {
             ChckAll.Tag = string.Empty;
-            ChckRequest.Tag = "TkKind = 0";
-            ChckComp.Tag = "TkKind = 1";
+            ChckRequest.Tag = "TkKind = 'طلب'";
+            ChckComp.Tag = "TkKind = 'شكوى'";
             ChckUpdMe.Tag = "[folowusr] = updtusr";
             ChckUpdColeg.Tag = "[updtusr] <> folowusr AND UCatLvl >= 3 And UCatLvl <= 5";
             ChckUpdOther.Tag = "[updtusr] <> folowusr AND UCatLvl < 3 or UCatLvl > 5";
@@ -277,8 +277,8 @@ namespace VOCAC.PL
             this.StatBrPnlEn.Text = "إجمالي العدد : " + TickTblMain.Rows.Count.ToString();
 
             LblAll.Text = Convert.ToString(TickTblMain.Compute("count(TkKind) ", String.Empty));
-            LblRequest.Text = Convert.ToString(TickTblMain.Compute("count(TkKind) ", "TkKind = 0"));
-            LabelCompCount.Text = Convert.ToString(TickTblMain.Compute("count(TkKind) ", "TkKind = 1"));
+            LblRequest.Text = Convert.ToString(TickTblMain.Compute("count(TkKind) ", "TkKind = 'طلب'"));
+            LabelCompCount.Text = Convert.ToString(TickTblMain.Compute("count(TkKind) ", "TkKind = 'شكوى'"));
             LblUpdtFollow.Text = Convert.ToString(TickTblMain.Compute("count(folowusr)", "[folowusr] = updtusr"));
             LblUpdtColleg.Text = Convert.ToString(TickTblMain.Compute("count(updtusr)", "[updtusr] <> folowusr AND UCatLvl >= 3 And UCatLvl <= 5"));
             LblUpdtOthrs.Text = Convert.ToString(TickTblMain.Compute("count(updtusr)", "[updtusr] <> folowusr AND UCatLvl < 3 or UCatLvl > 5"));

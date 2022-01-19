@@ -12,7 +12,7 @@ namespace VOCAC.DAL
     class DataAccessLayer
     {
         public rturnStruct Struc;
-        public treeStruct treeStruc;
+        public treeStruct treStruc;
         public struct rturnStruct
         {
             public string msg;
