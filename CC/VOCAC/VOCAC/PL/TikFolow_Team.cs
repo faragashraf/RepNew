@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VOCAC.BL;
 using VOCAC.Properties;
-using static VOCAC.BL.ticketCurrent;
 
 namespace VOCAC.PL
 {
@@ -39,7 +33,6 @@ namespace VOCAC.PL
         SqlConnection sqlcon = new SqlConnection(Statcdif.strConn);
         SqlCommand cmd;
         SqlDataAdapter da;
-        BindingManagerBase bmb;
         SqlCommandBuilder sqlcmb;
         DataTable TickTblMain = new DataTable();
         public TikFolow_Team()
@@ -213,6 +206,15 @@ namespace VOCAC.PL
                     }
                 }
             }
+
+            if (treeView1.SelectedNode != null)
+            {
+                if (FltrStr.Length > 0) { FltrStr.Append(" and "); };
+                FltrStr.Append("(");
+                FltrStr.Append(" [TkEmpNm] in ( " + MyTeam(Convert.ToInt32(treeView1.SelectedNode.Text.Split('-')[2])) + ")");
+                FltrStr.Append(")");
+            }
+
             if (FltrStr.ToString().Length > 2)
             {
                 TickTblMain.DefaultView.RowFilter = FltrStr.ToString();
@@ -304,9 +306,11 @@ namespace VOCAC.PL
         }
         private void frmAdjust()
         {
-            GridTicket.Size = new Size(this.Width - treeView1.Width - 60, this.Height -  260);
+            GridTicket.Size = new Size(this.Width - treeView1.Width - 50, this.Height - 260);
+            GridTicket.Margin = new Padding((this.Width - treeView1.Width - GridTicket.Width) / 2, GridTicket.Margin.Top, GridTicket.Margin.Right, GridTicket.Margin.Bottom);
+            treeView1.Height = GridTicket.Height;
+           
             FlowLayoutPanel2.Margin = new Padding((this.Width - FlowLayoutPanel2.Width) / 2, FlowLayoutPanel2.Margin.Top, FlowLayoutPanel2.Margin.Right, FlowLayoutPanel2.Margin.Bottom);
-            GridTicket.Margin = new Padding((this.Width - treeView1.Width - GridTicket.Width ) / 2, GridTicket.Margin.Top, GridTicket.Margin.Right, GridTicket.Margin.Bottom);
             flowLayoutPanel3.Margin = new Padding((this.Width - flowLayoutPanel3.Width) / 2, flowLayoutPanel3.Margin.Top, flowLayoutPanel3.Margin.Right, flowLayoutPanel3.Margin.Bottom);
         }
         private void SerchTxt_TextChanged(object sender, EventArgs e)
@@ -334,13 +338,11 @@ namespace VOCAC.PL
                     ShowResult();
                     GC.Collect();
                 }
-
             }
         }
         private void ShowResult()
         {
-
-            Crnt.currentRow(GridTicket);
+            ticketCurrent.currentRow(GridTicket);
             Crnt.AssignToForm();
             if (checkBox1.Checked) { TikDetails.gettikdetlsfrm.BringToFront(); };
         }
@@ -421,7 +423,7 @@ namespace VOCAC.PL
             List<string> UsrStr = new List<string>();
             TreeNode[] TempNode = new TreeNode[0];
 
-            if(CurrentUser.UsrLvl.Substring(41,1) == "A")
+            if(CurrentUser.UsrLvl.Substring(16,1) == "A")
             {
                 Statcdif.TreeUsrTbl.DefaultView.RowFilter = "UsrSusp = 0 and UCatId = 0";
                 treeView1.Nodes.Add(Statcdif.TreeUsrTbl.DefaultView[0]["UCatId"].ToString(),
@@ -451,28 +453,13 @@ namespace VOCAC.PL
         }
         private void TreeTeam_select(object sender, EventArgs e)
         {
-            List<string> str = new List<string>();
-            str.Add(treeView1.SelectedNode.Text.Split('-')[2]);
-            //int pp = treeView1.SelectedNode.GetNodeCount(true);
-            //for (int i = 0; i < pp; i++)
-            //{
-            //    string pook = treeView1.Nodes[i].Text;
-            //    //str.Add(treeView1.Nodes[i].Text.Split('-')[2]);
-            //}
-
-            //foreach (TreeNode item in treeView1.SelectedNode.Nodes)
-            //{
-            //    string kkk = item.Text;
-            //    str.Add(item.Text.Split('-')[2]);
-            //}
-            TickTblMain.DefaultView.RowFilter = "TkEmpNm in( " + MyTeam(Convert.ToInt32( treeView1.SelectedNode.Text.Split('-')[2])) + ")";
+            Filtr();
         }
         public string MyTeam(int slctdId)
         {
             List<string> UsrStr = new List<string>();
             TreeNode[] TempNode = new TreeNode[0];
             TreeView trvw = new TreeView();
-
                 Statcdif.TreeUsrTbl.DefaultView.RowFilter = "UsrSusp = 0 and UsrId = " + slctdId;
                 trvw.Nodes.Add(Statcdif.TreeUsrTbl.DefaultView[0]["UCatId"].ToString(), Statcdif.TreeUsrTbl.DefaultView[0]["UsrMix"].ToString());
                 UsrStr.Add(slctdId.ToString());
@@ -489,6 +476,7 @@ namespace VOCAC.PL
             }
             trvw.Dispose();
             return string.Join(", ", UsrStr);
+       
         }
     }
 }

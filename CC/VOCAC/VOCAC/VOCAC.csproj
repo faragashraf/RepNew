@@ -27,7 +27,7 @@
     <ProductName>VOCA Ultimate</ProductName>
     <PublisherName>Ashraf Farag</PublisherName>
     <SuiteName>VOCA Ultimate</SuiteName>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -76,6 +76,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -94,6 +95,12 @@
     <Compile Include="BL\ticketCurrent.cs" />
     <Compile Include="BL\TicketsSelectBulk.cs" />
     <Compile Include="DAL\DataAccessLayer.cs" />
+    <Compile Include="PL\TEST.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TEST.Designer.cs">
+      <DependentUpon>TEST.cs</DependentUpon>
+    </Compile>
     <Compile Include="PL\TikFolow_Team.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +112,12 @@
     </Compile>
     <Compile Include="PL\TikNew.Designer.cs">
       <DependentUpon>TikNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\TikUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TikUpdate.Designer.cs">
+      <DependentUpon>TikUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,6 +139,12 @@
     <Compile Include="PL\TikSearchNew.Designer.cs">
       <DependentUpon>TikSearchNew.cs</DependentUpon>
     </Compile>
+    <Compile Include="PL\TikSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TikSetup.Designer.cs">
+      <DependentUpon>TikSetup.cs</DependentUpon>
+    </Compile>
     <Compile Include="VCtheme.cs" />
     <Compile Include="PL\WelcomeScreen.cs">
       <SubType>Form</SubType>
@@ -133,11 +152,20 @@
     <Compile Include="PL\WelcomeScreen.Designer.cs">
       <DependentUpon>WelcomeScreen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="PL\TEST.resx">
+      <DependentUpon>TEST.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PL\TikFolow_Team.resx">
       <DependentUpon>TikFolow_Team.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PL\TikNew.resx">
       <DependentUpon>TikNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\TikSetup.resx">
+      <DependentUpon>TikSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\TikUpdate.resx">
+      <DependentUpon>TikUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

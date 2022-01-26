@@ -79,11 +79,12 @@ namespace VOCAC.PL
                 PubVerLbl1.Text = "Publish Ver. : This isn't a Publish version";
             }
 
-            Cmbo.Items.Add("Eg Server");
-            Cmbo.Items.Add("My Labtop");
-            Cmbo.Items.Add("Training");
-            //Cmbo.Items.Add("OnLine");
 
+            //Cmbo.Items.Add("My Labtop");
+            Cmbo.Items.Add("Eg Server");
+            Cmbo.Items.Add("Training");
+            Cmbo.Items.Add("servrMe");
+            Cmbo.Items.Add("Lab");
             Statcdif.servrTime = fn.ServrTime();
         }
         private void WelcomeScreen_Load(object sender, EventArgs e)
@@ -109,11 +110,13 @@ namespace VOCAC.PL
             Statcdif._MacStr = fn.GetMACAddressNew();
             Statcdif._IP = fn.OsIP();
             TxtUsrNm.Select();
-            TxtUsrNm.Text = "otp";
-            TxtUsrPass.Text = "Ahmed2220";
+            TxtUsrNm.Text = "ashraf";
+            TxtUsrPass.Text = "hemonad";
 
             Cmbo.SelectedItem = "Eg Server";
+            //Cmbo.SelectedItem = "Eg Server";
             Statcdif._ServerCD = Cmbo.SelectedItem.ToString();
+            LblSrvrNm.Text = Statcdif._ServerCD;
             this.Cmbo.SelectedIndexChanged += new System.EventHandler(this.Cmbo_SelectedIndexChanged);
 
             //defintions def = new defintions();
@@ -162,7 +165,7 @@ namespace VOCAC.PL
                 LblLogin.Text = "";
                 StatBrPnlEn.Text = "Offline";
                 this.Refresh();
-                fn.msg("لم ينجح الإتصال بقواعد البيانات", "Login");
+                fn.msg("لم ينجح الإتصال بقواعد البيانات" + Environment.NewLine + logreslt.msg, "Login");
             }
             LogInBtn.Enabled = true;
             GC.Collect();
@@ -195,20 +198,17 @@ namespace VOCAC.PL
             Statcdif.UpdateKTable = new DataTable();
             Statcdif.CDHolDay = new DataTable();
             Statcdif.MendFildsTable = new DataTable();
-            Statcdif.MendPvtTable = new DataTable();
             Statcdif.TreeUsrTbl = new DataTable();
             DAL.DataAccessLayer.rturnStruct SlctMainreslt = log.slctmaintbls();
             if (SlctMainreslt.ds.Tables.Count > 0)
             {
-                Statcdif.CompSurceTable = SlctMainreslt.ds.Tables[0];
-                Statcdif.ProdKTable = SlctMainreslt.ds.Tables[1];
-                Statcdif.ProdCompTable = SlctMainreslt.ds.Tables[2];
-                Statcdif.UpdateKTable = SlctMainreslt.ds.Tables[3];
-                Statcdif.CDHolDay = SlctMainreslt.ds.Tables[4];
-                Statcdif.MendFildsTable = SlctMainreslt.ds.Tables[5];
-                Statcdif.MendPvtTable = SlctMainreslt.ds.Tables[6];
-                Statcdif.MendPvtTable = SlctMainreslt.ds.Tables[6];
-                Statcdif.TreeUsrTbl = SlctMainreslt.ds.Tables[7];
+                Statcdif.CompSurceTable = SlctMainreslt.ds.Tables[0];                   //Tickets Source Table
+                Statcdif.ProdKTable = SlctMainreslt.ds.Tables[1];                       // Product Kind Table
+                Statcdif.ProdCompTable = SlctMainreslt.ds.Tables[2];                    // Finished Product + complaints Table
+                Statcdif.UpdateKTable = SlctMainreslt.ds.Tables[3];                     // Event kinds Table
+                Statcdif.CDHolDay = SlctMainreslt.ds.Tables[4];                         //Calendar Table
+                Statcdif.MendFildsTable = SlctMainreslt.ds.Tables[5];                   //Medatory Fields VS Products & complaints CDFN Table
+                Statcdif.TreeUsrTbl = SlctMainreslt.ds.Tables[6];                       //Users Table
                 if (CurrentUser.UsrUCatLvl == 7)
                 {
                     Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" + 0 + " AND [srcCd] = '1'";     //     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm";
@@ -216,11 +216,6 @@ namespace VOCAC.PL
                 else
                 {
                     Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" + 0 + " AND [srcCd] > '1'";   //  SrcStr = "Select SrcCd, SrcNm from CDSrc where SrcSusp=0 And srcCd > 1 ORDER BY SrcNm"
-                }
-                Statcdif.FildList.Clear();
-                for (int i = 0; i < Statcdif.MendPvtTable.Rows.Count; i++)
-                {
-                    Statcdif.FildList.Add("[" + Statcdif.MendPvtTable.Rows[i].Field<string>("FildKind") + "]");
                 }
             }
         }
@@ -347,34 +342,15 @@ namespace VOCAC.PL
             //defintions.CncStat = false;
             Statcdif._ServerCD = Cmbo.SelectedItem.ToString();
             fn.ConStrFn();
-            if (Statcdif._serverNm == "VOCA Server")
-            {
-                this.BackgroundImage = Resources.VocaWtr;
-                this.BackgroundImageLayout = ImageLayout.Stretch;
-                this.BackColor = Color.FromArgb(192, 255, 192);
-                this.panellgin.BackColor = Color.FromArgb(192, 255, 192);
-            }
-            else if (Statcdif._serverNm == "My Labtop")
-            {
-                this.BackgroundImage = Resources.Empty;
-                this.BackColor = Color.White;
-                this.panellgin.BackColor = Color.White;
-            }
-            else if (Statcdif._serverNm == "Training")
-            {
-                this.BackgroundImage = Resources.Demo;
-                this.BackgroundImageLayout = ImageLayout.Center;
-                this.BackColor = Color.White;
-                this.panellgin.BackColor = Color.White;
-            }
         }
         private void Button2_Click(object sender, EventArgs e)
         {
-            Form[] dd = this.MdiChildren;
-            foreach (Form f in dd)
-            {
-                MessageBox.Show(f.Text);
-            }
+            //Form[] dd = this.MdiChildren;
+            //foreach (Form f in dd)
+            //{
+            //    MessageBox.Show(f.Text);
+            //}
+
         }
         private void tmrbringfront1(object sender, EventArgs e)
         {
@@ -454,10 +430,6 @@ namespace VOCAC.PL
         {
             //  function fn =  function.getfn
             //fn.msg( Convert.ToString( jj(sender)),"test");
-        }
-        private void jj<T>(object uu)
-        {
-            //uu.GetType();
         }
     }
 }

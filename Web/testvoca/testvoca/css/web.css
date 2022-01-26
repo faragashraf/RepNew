@@ -1,0 +1,97 @@
+﻿/*  Start Global */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+}
+
+.container {
+    width: 1400px;
+    margin: auto;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+/*  End Global */
+
+/*  Start navbar */
+.navbar {
+    background-color: #6DF7AF;
+    height: 70px;
+    color: black;
+    font-size: 20px;
+    /*position: fixed;*/
+    z-index: 2;
+}
+
+    .navbar .brand {
+        float: left;
+        width: 30%;
+        text-transform: uppercase;
+        margin-left:10px;
+    }
+
+    .navbar .links {
+        float:left;
+        width: 40%;
+        margin-top: 20px;
+        margin-left:60px;
+    }
+    .navbar .usrlbl {
+        float: right;
+        width: 20%;
+        margin-top: 20px;
+        margin-left: 60px;
+        text-wrap:avoid;
+    }
+        .navbar .links li {
+            display: inline-block;
+            padding: 10px 0;
+            margin: 0 10px;
+            text-transform: capitalize;
+            /*border-bottom: 2px solid;
+            border-color: black;*/
+            font-weight: bold;
+        }
+        .navbar .links li a{
+            color:black;
+            text-decoration:none;
+        }
+            .navbar.links li.active a, navbar.links li a:hover {
+                color: red;
+                background-color:red;
+            }
+            .navbar.links li.active, navbar.links li:hover {
+                border-color: red;
+                background-color: red;
+            }
+/*  End navbar */
+
+/*  Start Hearder*/
+.header {
+    background: url('../images/header.jpg');
+    position: relative;
+}
+/*  End Hearder */
+
+/*  Start login */
+.area {
+    direction: rtl;
+    align-content: flex-start;
+    float:right;
+}
+    .area .area2 {
+        float: right;
+        margin: 10px 5px;
+    }
+/*  Start login */
+/*  Start My Framwork */
+.clearfix {
+    clear: both;
+}
+/*  End My Framwork */

@@ -338,12 +338,12 @@
             this.GridTicket.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GridTicket.BackgroundColor = System.Drawing.Color.White;
             this.GridTicket.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridTicket.Location = new System.Drawing.Point(16, 78);
+            this.GridTicket.Location = new System.Drawing.Point(82, 78);
             this.GridTicket.MultiSelect = false;
             this.GridTicket.Name = "GridTicket";
             this.GridTicket.ReadOnly = true;
             this.GridTicket.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.GridTicket.Size = new System.Drawing.Size(1102, 342);
+            this.GridTicket.Size = new System.Drawing.Size(1036, 343);
             this.GridTicket.TabIndex = 123;
             this.GridTicket.DoubleClick += new System.EventHandler(this.GridTicket_DoubleClick);
             // 

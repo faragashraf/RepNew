@@ -15,6 +15,24 @@ namespace VOCAC.PL
 {
     public partial class TikNew : Form
     {
+
+        private static TikNew frm;
+        static void frm_Closed(object sender, FormClosedEventArgs e)
+        {
+            frm = null;
+        }
+        public static TikNew getTiknewfrm
+        {
+            get
+            {
+                if (frm == null)
+                {
+                    frm = new TikNew();
+                    frm.FormClosed += new FormClosedEventHandler(frm_Closed);
+                }
+                return frm;
+            }
+        }
         frms forms = new frms();
         function fn = function.getfn;
         DataTable RelatedTable = new DataTable();
@@ -27,15 +45,14 @@ namespace VOCAC.PL
         int TickKind;
         string PrdKind;
         int COMPID_ = 0;
+        string itemRef;
+        int TeamIdentfier;
+        string Help_;
         public TikNew()
         {
             InitializeComponent();
             forms.FrmAllSub(this);
             NewTickSub();
-        }
-        private void TikNew_Load(object sender, EventArgs e)
-        {
-
         }
         private void NewTickSub()
         {
@@ -98,6 +115,7 @@ namespace VOCAC.PL
             BtnDublicate.Visible = false;
             FlwMainData.Enabled = false;
             richTextBox1.Text = "";
+            lblhelp.Text = "";
         }
         private void mendlstlbl()
         {
@@ -124,8 +142,11 @@ namespace VOCAC.PL
                 //Check Customer ID
                 if (RadNID.Checked == true && IDTxtBx.Text.Replace(" ", "").Trim().Length == 14)
                 {
-                    Complete_ += 1;
-                    fn.ClorTxt(richTextBox1, IDTxtBx.AccessibleName, Color.White, Color.Green, 14);
+                    if (function.validateNationalID(IDTxtBx.Text.Replace(" ", "").Trim().ToString()) == true)
+                    {
+                        Complete_ += 1;
+                        fn.ClorTxt(richTextBox1, IDTxtBx.AccessibleName, Color.White, Color.Green, 14);
+                    }
                 }
                 else if (RadPss.Checked == true && IDTxtBx.Text.Replace(" ", "").Trim().Length > 0)
                 {
@@ -137,10 +158,6 @@ namespace VOCAC.PL
                     fn.ClorTxt(richTextBox1, IDTxtBx.AccessibleName, Color.White, Color.Red, 14);
                 }
                 Label29.Visible = true;
-                //رقم قومي
-                //string kk = Lblmend[1].tol();
-                //if (Lblmend[0] ("الرقم القومي") + Environment.NewLine)
-                //{ Lblmend.Insert(0, "الرقم القومي" + Environment.NewLine); richTextBox1.Text = Lblmend.ToString(); }
             }
             else
             {
@@ -151,10 +168,12 @@ namespace VOCAC.PL
             if (Phon1TxtBx.Mask.Length == Phon1TxtBx.Text.Replace(" ", "").Trim().Length)
             {
                 Complete_ += 1;
+                toolTip1.Hide(Phon1TxtBx);
                 fn.ClorTxt(richTextBox1, Phon1TxtBx.AccessibleName, Color.White, Color.Green, 14);
             }
             else
             {
+                if (ActiveControl == Phon1TxtBx) { toolTip1.Show("رقم التليفون لابد أنه تكون من " + Phon1TxtBx.Mask.Length + " رقم", ActiveControl, 0, 30, 1000); }
                 fn.ClorTxt(richTextBox1, Phon1TxtBx.AccessibleName, Color.White, Color.Red, 14);
             }
 
@@ -170,10 +189,13 @@ namespace VOCAC.PL
             if (NameTxtBx.Text.Trim().ToCharArray().Count(c => c == Convert.ToChar(" ")) > 1)
             {
                 Complete_ += 1;
+                toolTip1.Hide(NameTxtBx);
                 fn.ClorTxt(richTextBox1, NameTxtBx.AccessibleName, Color.White, Color.Green, 14);
             }
             else
             {
+                if(ActiveControl == NameTxtBx) { toolTip1.Show("اسم العميل لابد أن يكون ثلاثي على الأقل", NameTxtBx, 0, 30, 3000); }
+
                 fn.ClorTxt(richTextBox1, NameTxtBx.AccessibleName, Color.White, Color.Red, 14);
             }
             //Check Complaint Source
@@ -207,14 +229,15 @@ namespace VOCAC.PL
                         {
                             if (Ctrl.Tag.ToString().Split('-')[2].Equals("N", StringComparison.OrdinalIgnoreCase))
                             {
-                                int CNT = Ctrl.Tag.ToString().Split('-')[3].Split(',').Count<string>();
+                                int CNT = itemRef.Split('-').Count<string>();
                                 if (CNT > 1)
                                 {
                                     bool chckidentefecation = false;
+                                    string itemRefContent = null;
                                     for (int i = 0; i < CNT; i++)
                                     {
-                                        string UU = Ctrl.Tag.ToString().Split('-')[3].Split(',')[i];
-                                        if (mskd.Text.Replace(" ", "").Trim().Substring(0, UU.Length).ToString().Equals(UU, StringComparison.OrdinalIgnoreCase))
+                                         itemRefContent = itemRef.Split('-')[i];
+                                        if (mskd.Text.Replace(" ", "").Trim().Substring(0, itemRefContent.Length).ToString().Equals(itemRefContent, StringComparison.OrdinalIgnoreCase))
                                         {
                                             chckidentefecation = true;
                                             break;
@@ -227,21 +250,23 @@ namespace VOCAC.PL
                                     }
                                     else
                                     {
-                                        fn.msg(GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3) + " لابد أنه يبدأ بأحد الإختيارات التالية " + Environment.NewLine + Ctrl.Tag.ToString().Split('-')[3], "رسالة معلومات");
+                                        if (ActiveControl == mskd) { toolTip1.Show(GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3) + " لابد أنه يبدأ بأحد الإختيارات التالية " + Environment.NewLine + itemRef, ActiveControl, 0, 30, 3000); };
+                                        //fn.msg(GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3) + " لابد أنه يبدأ بأحد الإختيارات التالية " + Environment.NewLine + itemRef, "رسالة معلومات");
                                         mskd.Text = "";
                                     }
                                 }
                                 else
                                 {
-                                    if (Ctrl.Tag.ToString().Split('-')[3].Equals(mskd.Text.Replace(" ", "").Trim().Substring(0, Ctrl.Tag.ToString().Split('-')[3].Length), StringComparison.OrdinalIgnoreCase))
+                                    if (itemRef.Equals(mskd.Text.Replace(" ", "").Trim().Substring(0, itemRef.Length), StringComparison.OrdinalIgnoreCase))
                                     {
                                         Complete_ += 1;
                                         fn.ClorTxt(richTextBox1, GetNextControl(Ctrl, false).Text.ToString().Substring(0, GetNextControl(Ctrl, false).Text.Length - 3), Color.White, Color.Green, 14);
                                     }
                                     else
                                     {
-                                        fn.msg(GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3) + " لابد أنه يبدأ بـ " + Ctrl.Tag.ToString().Split('-')[3], "رسالة معلومات");
-                                        mskd.Text = "";
+                                        if (ActiveControl == mskd) { toolTip1.Show(GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3) + " لابد أنه يبدأ بـ " + itemRef, ActiveControl, 0, 30, 3000); } ;
+                                        //fn.msg(GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3) + " لابد أنه يبدأ بـ " + itemRef, "رسالة معلومات");
+                                        mskd.Text = itemRef;
                                     }
                                 }
                             }
@@ -250,6 +275,10 @@ namespace VOCAC.PL
                         {
                             Complete_ += 1;
                         }
+                    }
+                    else if (mskd.Tag.ToString().Split('-').Count() > 2 && itemRef.Length > 0)
+                    {
+                        if (ActiveControl == mskd) { toolTip1.Show(GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3) + " لابد أنه يبدأ بـ " + itemRef, mskd, 0, 30, 1000); };
                     }
                 }
                 else if (Ctrl.GetType() == typeof(DateTimePicker))
@@ -319,6 +348,7 @@ namespace VOCAC.PL
                 SubmitBtn.BackgroundImage = Resources.SaveRed;
                 SubmitBtn.Enabled = false;
             }
+            //if (lblhelp.Visible==true) { Timer1.Interval = 100; lblhelp.Visible = false; } else { Timer1.Interval = 100; lblhelp.Visible = true; }
             GC.Collect();
             Timer1.Start();
         }
@@ -420,29 +450,42 @@ namespace VOCAC.PL
                 // CombProdRef.Items.Clear()
                 TreeView1.SelectedNode.Collapse(false);
         }
+
         private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeView1.SelectedNode.Expand();
             BtnAdd.Enabled = true;
             if (TreeView1.SelectedNode.Level == 2)
             {
+                Statcdif.ProdCompTable.PrimaryKey = new DataColumn[] { Statcdif.ProdCompTable.Columns["FnSQL"] };
+                DataRow DRW = Statcdif.ProdCompTable.Rows.Find(TreeView1.SelectedNode.Name);
+                itemRef = DRW.ItemArray[7].ToString();
+                TeamIdentfier = Convert.ToInt32(DRW.ItemArray[8]);
+                Help_ = DRW.ItemArray[11].ToString();
+                lblhelp.Text = Help_;
                 Timer1.Start();
                 BtnAdd.Visible = true;
                 BtnClr.Visible = false;
                 PrdKind = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[0];
                 Prdct.Text = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[1];
                 Comp.Text = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[2];
-                Statcdif.MendFildsTable.DefaultView.RowFilter = "[MendCdFn]  = " + TreeView1.SelectedNode.Name;
+                Statcdif.MendFildsTable.DefaultView.RowFilter = "[MendCdFn]  = " + TreeView1.SelectedNode.Name + " and MendStat = 0";
                 FlwMend.Controls.Clear();
                 mendlstlbl();
+
+                Font CtrlFont = new Font("Times new Roman", 12, FontStyle.Bold);
+                Size Ctrlsize = new Size(150, 32);
+                Size lblsize = new Size(100, 25);
+
                 for (int i = 0; i < Statcdif.MendFildsTable.DefaultView.Count; i++)
                 {
                     Label Lbl = new Label();
                     Lbl.AutoSize = false;
                     Lbl.RightToLeft = RightToLeft.Yes;
                     Lbl.TextAlign = ContentAlignment.MiddleRight;
-                    Lbl.Font = new Font("Times new Roman", 12, FontStyle.Bold);
-                    Lbl.Size = new Size(100, 25);
+                    Lbl.Margin = new Padding(3, 3, 3, 3);
+                    Lbl.Font = CtrlFont;
+                    Lbl.Size = lblsize;
                     Lbl.Text = Statcdif.MendFildsTable.DefaultView[i]["CDMendTxt"] + " : ";
                     FlwMend.Controls.Add(Lbl);
                     richTextBox1.Text += (Statcdif.MendFildsTable.DefaultView[i]["CDMendTxt"]) + Environment.NewLine;
@@ -451,22 +494,20 @@ namespace VOCAC.PL
                         TextBox Ctrl = new TextBox();
                         Ctrl.TextAlign = HorizontalAlignment.Center;
                         Ctrl.RightToLeft = RightToLeft.Yes;
-                        Ctrl.Font = new Font("Times new Roman", 12, FontStyle.Bold);
-                        Ctrl.Size = new Size(150, 25);
-                        Ctrl.Name = Statcdif.MendFildsTable.DefaultView[i]["CDMendNm"].ToString();
-                        Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendAccessNm"].ToString();
-                        Ctrl.MaxLength = Convert.ToInt32(Statcdif.MendFildsTable.DefaultView[i]["MendLenght"]);
+                        Ctrl.Font = CtrlFont;
+                        Ctrl.Size = Ctrlsize;
+                        Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendDatatype"].ToString();
+                        if (DBNull.Value.Equals(Statcdif.MendFildsTable.DefaultView[i]["CDMendLenght"]) == false) { Ctrl.MaxLength = Convert.ToInt32(Statcdif.MendFildsTable.DefaultView[i]["CDMendLenght"]); };
                         FlwMend.Controls.Add(Ctrl);
                     }
-                    else if (Statcdif.MendFildsTable.DefaultView[i]["CDMendType"].ToString().Equals("TextBox!", StringComparison.OrdinalIgnoreCase))
+                    else if (Statcdif.MendFildsTable.DefaultView[i]["CDMendType"].ToString().Equals("TextBoxC", StringComparison.OrdinalIgnoreCase))
                     {
                         TextBox Ctrl = new TextBox();
                         Ctrl.TextAlign = HorizontalAlignment.Center;
                         Ctrl.RightToLeft = RightToLeft.Yes;
-                        Ctrl.Font = new Font("Times new Roman", 12, FontStyle.Bold);
-                        Ctrl.Size = new Size(150, 25);
-                        Ctrl.Name = Statcdif.MendFildsTable.DefaultView[i]["CDMendNm"].ToString();
-                        Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendAccessNm"].ToString();
+                        Ctrl.Font = CtrlFont;
+                        Ctrl.Size = Ctrlsize;
+                        Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendDatatype"].ToString();
                         Ctrl.AccessibleName = Statcdif.MendFildsTable.DefaultView[i]["CDMendTbl"].ToString();
                         FlwMend.Controls.Add(Ctrl);
                         Ctrl.ReadOnly = true;
@@ -478,32 +519,22 @@ namespace VOCAC.PL
                     {
                         MaskedTextBox Ctrl = new MaskedTextBox();
                         Ctrl.TextAlign = HorizontalAlignment.Center;
-                        Ctrl.Font = new Font("Times new Roman", 12, FontStyle.Bold);
-                        Ctrl.Size = new Size(150, 25);
-                        Ctrl.Mask = Statcdif.MendFildsTable.DefaultView[i]["MendMask"].ToString();
-                        Ctrl.Name = Statcdif.MendFildsTable.DefaultView[i]["CDMendNm"].ToString();
-                        Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendAccessNm"].ToString();
+                        Ctrl.Font = CtrlFont;
+                        Ctrl.Size = Ctrlsize;
+                        Ctrl.Mask = Statcdif.MendFildsTable.DefaultView[i]["CDMendmask"].ToString();
+                        Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendDatatype"].ToString();
+                        Ctrl.PromptChar = Convert.ToChar(" ");
                         FlwMend.Controls.Add(Ctrl);
-                        if (Ctrl.Tag.ToString().Split('-').Count() > 2)
-                        {
-                            if (Ctrl.Tag.ToString().Split('-')[2].Equals("N", StringComparison.OrdinalIgnoreCase))
-                            {
-                                Ctrl.Tag += "-" + Statcdif.MendFildsTable.DefaultView[i]["PrdRef"].ToString();
-                                //Ctrl.Text = Statcdif.MendFildsTable.DefaultView[i]["PrdRef"].ToString();
-                            }
-                        }
-
                     }
                     else if (Statcdif.MendFildsTable.DefaultView[i]["CDMendType"].ToString().Equals("DateTimePicker", StringComparison.OrdinalIgnoreCase))
                     {
                         DateTimePicker Ctrl = new DateTimePicker();
-                        Ctrl.Font = new Font("Times new Roman", 12, FontStyle.Bold);
-                        Ctrl.Size = new Size(150, 25);
+                        Ctrl.Font = CtrlFont;
+                        Ctrl.Size = Ctrlsize;
                         Ctrl.MaxDate = DateTime.Now.AddDays(1);
                         Ctrl.Format = DateTimePickerFormat.Short;
-                        Ctrl.Name = Statcdif.MendFildsTable.DefaultView[i]["CDMendNm"].ToString();
                         Ctrl.Value = DateTime.Now.AddDays(1);
-                        Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendAccessNm"].ToString();
+                        Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendDatatype"].ToString();
                         FlwMend.Controls.Add(Ctrl);
                     }
 
@@ -521,7 +552,11 @@ namespace VOCAC.PL
                 BtnClr.Visible = false;
                 FlwMend.Controls.Clear();
                 richTextBox1.Text = "";
-                //Timer1.Stop();
+                itemRef = "";
+                TeamIdentfier = 0;
+                Help_ = "";
+                lblhelp.Text = "";
+                Timer1.Stop();
             }
             if (TreeView1.SelectedNode.FullPath.ToString().Split('\\')[0] != PrdKind)
             {
@@ -752,7 +787,7 @@ namespace VOCAC.PL
             }
             else
             {
-                AddNewTicket(0);
+                AddNewTicket(TeamIdentfier);
             }
         }
         private DAL.DataAccessLayer.rturnStruct insertTicket(bool kind, int cdfnid, int src, string clNm, string ClPh, string ClPh1, string ClAdr, string ClNtID
@@ -834,27 +869,6 @@ namespace VOCAC.PL
                 function fn = function.getfn;
                 fn.msg(Resources.ConnErr + Environment.NewLine + ex, "Create New Tickect");
             }
-            return DAL.Struc;
-        }
-        private DAL.DataAccessLayer.rturnStruct insertTicketXXX(DataTable FIELDTABL)
-        {
-            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-            DAL.Struc.msg = null;
-            DAL.Struc.dt = null;
-            DAL.Struc.ds = null;
-            SqlParameter[] param = new SqlParameter[1];
-            param[0] = new SqlParameter();
-            param[0].ParameterName = "@FIELDTABLETYPE";
-            param[0].Value = FIELDTABL;
-            DAL.Open();
-            DAL.Struc = DAL.ExcuteCommand("SP_TEST1_PARAM_TABLE", param);
-            if (DAL.Struc.msg == null) { }
-            else
-            {
-                function fn = function.getfn;
-                fn.msg(Resources.ConnErr + Environment.NewLine + Resources.TryAgain, "Update User");
-            }
-            DAL.Close();
             return DAL.Struc;
         }
         private void CloseBtn_Click(object sender, EventArgs e)

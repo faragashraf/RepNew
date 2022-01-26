@@ -86,6 +86,7 @@
             this.TxtUsrPass = new System.Windows.Forms.TextBox();
             this.TxtUsrNm = new System.Windows.Forms.TextBox();
             this.PubVerLbl1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.TimerCon = new System.Windows.Forms.Timer(this.components);
             this.CntxtMnuStrp = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TimerTikCoun = new System.Windows.Forms.Timer(this.components);
@@ -105,7 +106,6 @@
             this.panellgin = new System.Windows.Forms.Panel();
             this.ImageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tmrbringfront = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.CNTXMNUPic.SuspendLayout();
             this.FlowLayoutPanel1.SuspendLayout();
@@ -238,7 +238,6 @@
             this.LblSrvrNm.TabIndex = 91;
             this.LblSrvrNm.Text = "ccc";
             this.LblSrvrNm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LblSrvrNm.Visible = false;
             // 
             // TimrFlsh
             // 
@@ -294,7 +293,7 @@
             this.FlowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.FlowLayoutPanel1.Name = "FlowLayoutPanel1";
             this.FlowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.FlowLayoutPanel1.Size = new System.Drawing.Size(430, 474);
+            this.FlowLayoutPanel1.Size = new System.Drawing.Size(304, 474);
             this.FlowLayoutPanel1.TabIndex = 99;
             this.FlowLayoutPanel1.Visible = false;
             // 
@@ -862,6 +861,26 @@
             this.PubVerLbl1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ToolTip1.SetToolTip(this.PubVerLbl1, "Publish Version Number");
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(71, 274);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(91, 28);
+            this.button1.TabIndex = 115;
+            this.button1.Text = "Login";
+            this.ToolTip1.SetToolTip(this.button1, "تسجيل الدخول");
+            this.button1.UseCompatibleTextRendering = true;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
             // TimerCon
             // 
             this.TimerCon.Interval = 1000;
@@ -1000,7 +1019,6 @@
             this.Cmbo.Name = "Cmbo";
             this.Cmbo.Size = new System.Drawing.Size(121, 21);
             this.Cmbo.TabIndex = 110;
-            this.Cmbo.Visible = false;
             // 
             // panellgin
             // 
@@ -1046,26 +1064,6 @@
             // 
             this.tmrbringfront.Enabled = true;
             this.tmrbringfront.Tick += new System.EventHandler(this.tmrbringfront1);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(71, 274);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 28);
-            this.button1.TabIndex = 115;
-            this.button1.Text = "Login";
-            this.ToolTip1.SetToolTip(this.button1, "تسجيل الدخول");
-            this.button1.UseCompatibleTextRendering = true;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // WelcomeScreen
             // 
@@ -1178,10 +1176,10 @@
         internal System.Windows.Forms.TextBox TxtUsrNm;
         internal System.Windows.Forms.Label LblUsrIP;
         internal System.Windows.Forms.Label PubVerLbl;
-        private System.Windows.Forms.Panel panellgin;
         internal System.Windows.Forms.ImageList ImageList1;
         private System.Windows.Forms.Timer tmrbringfront;
         internal System.Windows.Forms.Label PubVerLbl1;
         internal System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Panel panellgin;
     }
 }

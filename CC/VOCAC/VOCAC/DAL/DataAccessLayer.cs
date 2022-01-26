@@ -30,7 +30,7 @@ namespace VOCAC.DAL
         {
             //"Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocac;Password=Hemonad105046";
             //@"Data Source = MyThinkbook\ASHRAFSQL; Initial Catalog = VOCAPlus; Persist Security Info = True; User ID = sa; Password = Hemonad105046")
-            sqlconnection = new SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-323");
+            sqlconnection = new SqlConnection(Statcdif.strConn);
         }
         //Method to Open connection
         public void Open()

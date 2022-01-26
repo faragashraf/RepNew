@@ -12,6 +12,7 @@ using System.Threading;
 using System.Windows.Forms;
 using VOCAC.BL;
 using VOCAC.PL;
+using VOCAC.Properties;
 
 namespace VOCAC
 {
@@ -22,7 +23,7 @@ namespace VOCAC
         public static int screenHeight = Screen.PrimaryScreen.Bounds.Height;
         public static InputLanguage EnglishInput;
         public static InputLanguage ArabicInput;
-        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-323";
+        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-32223";
         public SqlConnection CONSQL;
         public static String _ServerCD;
         public static String _serverNm;
@@ -36,8 +37,7 @@ namespace VOCAC
         #region DataTables
         public static DataTable MacTble, UserTable;
         public static TreeView _tree;
-        public static DataTable CompSurceTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, MendPvtTable, TreeUsrTbl;
-
+        public static DataTable CompSurceTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, TreeUsrTbl;
         #endregion
     }
     class menustrp
@@ -77,29 +77,42 @@ namespace VOCAC
         public string ConStrFn()
         {
             strConn = null;
+            WelcomeScreen WlcmScren = WelcomeScreen.getwecmscrnfrm;
             if (_ServerCD == "Eg Server")
             {
-                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-7";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-32223";
                 _serverNm = "VOCA Server";
+                WlcmScren.BackgroundImage = Resources.VocaWtr;
+                WlcmScren.BackgroundImageLayout = ImageLayout.Stretch;
+                WlcmScren.BackColor = Color.FromArgb(192, 255, 192);
+                WlcmScren.panellgin.BackColor = Color.FromArgb(192, 255, 192);
             }
-            else if (_ServerCD == "My Labtop")
+            else if (_ServerCD == "Lab")
             {
-                strConn = @"Data Source=MyThinkbook\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046";
-                _serverNm = "My Labtop";
+                Statcdif.strConn = @"Data Source=MyThinkbook\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046";
+                _serverNm = "Lab";
             }
             else if (_ServerCD == "Training")
             {
-                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-323";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-32223";
                 _serverNm = "Training";
+                WlcmScren.BackgroundImage = Resources.Empty;
+                WlcmScren.BackColor = Color.White;
+                WlcmScren.panellgin.BackColor = Color.White;
             }
-            else if (_ServerCD == "OnLine")
+            else if (_ServerCD == "servrMe")
             {
-                strConn = "Data Source=34.123.217.183;Initial Catalog=vocaplus;Persist Security Info=True;User ID=sqlserver;Password=Hemonad105046_Q";
-                _serverNm = "OnLine";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusashraf;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-32223";
+                _serverNm = "servrMe";
+                WlcmScren.BackgroundImage = Resources.Demo;
+                WlcmScren.BackgroundImageLayout = ImageLayout.Center;
+                WlcmScren.BackColor = Color.White;
+                WlcmScren.panellgin.BackColor = Color.White;
             }
+            WlcmScren.LblSrvrNm.Text = Statcdif._ServerCD;
             try
             {
-                CONSQL.ConnectionString = strConn;
+                CONSQL.ConnectionString = Statcdif.strConn;
                 MacTble.Rows.Clear();
                 if (Gettable("SELECT * from AMac WHERE Mac='" + _MacStr + "'", MacTble, "1000&H") == null)
                 {
@@ -345,7 +358,7 @@ namespace VOCAC
             int Wdays = Statcdif.CDHolDay.DefaultView.Count;
             return Wdays;
         }
-        public void ClorTxt(RichTextBox richtxtbx, String Strng, Color backClr, Color FontClr,  int fontsize)
+        public void ClorTxt(RichTextBox richtxtbx, String Strng, Color backClr, Color FontClr, int fontsize)
         {
             try
             {
@@ -370,6 +383,89 @@ namespace VOCAC
                 throw;
             }
         }
+        public static bool validateNationalID(string NationalID)
+        {
+            try
+            {
+                string centery = NationalID.Substring(0, 1);
+                string BirthDateS = "";
+                if (centery == "2")
+                    BirthDateS = "19";
+                else if (centery == "3")
+                    BirthDateS = "20";
+                BirthDateS += NationalID.Substring(1, 2) + "/" + NationalID.Substring(3, 2) + "/" + NationalID.Substring(5, 2);
+
+                try
+                {
+                    DateTime BithDateD = Convert.ToDateTime(BirthDateS);
+                }
+                catch
+                {
+                    return false;
+                }
+
+                SetGov();
+                string NaIdGovCode = NationalID.Substring(7, 2);
+                if (!GovCodeList.Contains(NaIdGovCode))
+                    return false;
+
+                string Factor = "2765432765432";
+                int Total = 0;
+                for (int i = 0; i < 13; i++)
+                {
+                    Total += int.Parse(Factor.Substring(i, 1)) * int.Parse(NationalID.Substring(i, 1));
+                }
+                int PreCode = Total % 11;
+                int code = 11 - PreCode;
+                if (code > 9)
+                {
+                    code = code - 10;
+                }
+                if (code != int.Parse(NationalID.Substring(13, 1)))
+                    return false;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        private static List<string> GovCodeList = new List<string>();
+        private static void SetGov()
+        {
+            GovCodeList.Add("01");
+            GovCodeList.Add("02");
+            GovCodeList.Add("03");
+            GovCodeList.Add("04");
+            GovCodeList.Add("05");
+            GovCodeList.Add("06");
+            GovCodeList.Add("11");
+            GovCodeList.Add("12");
+            GovCodeList.Add("13");
+            GovCodeList.Add("14");
+            GovCodeList.Add("15");
+            GovCodeList.Add("16");
+            GovCodeList.Add("17");
+            GovCodeList.Add("18");
+            GovCodeList.Add("19");
+            GovCodeList.Add("21");
+            GovCodeList.Add("22");
+            GovCodeList.Add("23");
+            GovCodeList.Add("24");
+            GovCodeList.Add("25");
+            GovCodeList.Add("26");
+            GovCodeList.Add("27");
+            GovCodeList.Add("28");
+            GovCodeList.Add("29");
+            GovCodeList.Add("31");
+            GovCodeList.Add("32");
+            GovCodeList.Add("33");
+            GovCodeList.Add("34");
+            GovCodeList.Add("35");
+            GovCodeList.Add("88");
+        }
+
+
     }
     // Current User Class
     public static class CurrentUser
@@ -534,7 +630,7 @@ namespace VOCAC
                     if (TxtBox.ReadOnly == false)
                     {
                         var ASDS = Clipboard.GetText();
-                        TxtBox.Text += Clipboard.GetText();
+                        //TxtBox.Text += Clipboard.GetText();
                     }
 
                 }
@@ -600,7 +696,7 @@ namespace VOCAC
                 MaskedTextBox TxtBox = (MaskedTextBox)sender;
                 if (TxtBox.ReadOnly == false)
                 {
-                   if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "Number")
+                    if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "Number")
                         IntUtly.ValdtInt(e);
                     else if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "Amount")
                         IntUtly.ValdtNumber(TxtBox, e);

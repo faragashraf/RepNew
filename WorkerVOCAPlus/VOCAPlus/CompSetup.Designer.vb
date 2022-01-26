@@ -470,6 +470,7 @@ Partial Class CompSetup
         Me.GroupBox1.Controls.Add(Me.RadActv)
         Me.GroupBox1.Controls.Add(Me.Label9)
         Me.GroupBox1.Controls.Add(Me.TxtFnMngr)
+        Me.GroupBox1.Controls.Add(Me.TreeComp)
         Me.GroupBox1.Controls.Add(Me.ComboBox1)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label10)
@@ -571,7 +572,7 @@ Partial Class CompSetup
         '
         Me.TreeComp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TreeComp.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.TreeComp.Location = New System.Drawing.Point(951, 42)
+        Me.TreeComp.Location = New System.Drawing.Point(94, 49)
         Me.TreeComp.Name = "TreeComp"
         Me.TreeComp.RightToLeftLayout = True
         Me.TreeComp.Size = New System.Drawing.Size(183, 213)
@@ -667,7 +668,6 @@ Partial Class CompSetup
         Me.Controls.Add(Me.LblHelp)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.TreeComp)
         Me.Controls.Add(Me.LblTrCnt)
         Me.Controls.Add(Me.RadAlls)
         Me.Controls.Add(Me.RadSusps)

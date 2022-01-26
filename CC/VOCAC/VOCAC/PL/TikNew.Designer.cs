@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TikNew));
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Rooting");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Rooting");
             this.BtnAdd = new System.Windows.Forms.Button();
             this.Label11 = new System.Windows.Forms.Label();
             this.Label29 = new System.Windows.Forms.Label();
@@ -54,7 +54,7 @@
             this.FlwMend = new System.Windows.Forms.FlowLayoutPanel();
             this.Panel6 = new System.Windows.Forms.Panel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SrcCmbBx = new System.Windows.Forms.ComboBox();
             this.Label20 = new System.Windows.Forms.Label();
             this.Phon1TxtBx = new System.Windows.Forms.MaskedTextBox();
@@ -99,6 +99,7 @@
             this.AddTxtBx = new System.Windows.Forms.TextBox();
             this.Label6 = new System.Windows.Forms.Label();
             this.DetailsTxtBx = new System.Windows.Forms.TextBox();
+            this.lblhelp = new System.Windows.Forms.Label();
             this.Panel5.SuspendLayout();
             this.MyGroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).BeginInit();
@@ -167,6 +168,7 @@
             this.IDTxtBx.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.IDTxtBx.Mask = "AAAAAAAAAAAAA";
             this.IDTxtBx.Name = "IDTxtBx";
+            this.IDTxtBx.PromptChar = ' ';
             this.IDTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.IDTxtBx.Size = new System.Drawing.Size(286, 32);
             this.IDTxtBx.TabIndex = 1;
@@ -191,9 +193,9 @@
             // 
             this.Panel5.BackColor = System.Drawing.Color.Transparent;
             this.Panel5.Controls.Add(this.BtnAdd);
-            this.Panel5.Location = new System.Drawing.Point(298, 568);
+            this.Panel5.Location = new System.Drawing.Point(298, 590);
             this.Panel5.Name = "Panel5";
-            this.Panel5.Size = new System.Drawing.Size(107, 55);
+            this.Panel5.Size = new System.Drawing.Size(107, 52);
             this.Panel5.TabIndex = 2036;
             this.Panel5.Visible = false;
             // 
@@ -317,7 +319,7 @@
             this.DateTxtBx.TabIndex = 2043;
             this.DateTxtBx.TabStop = false;
             this.DateTxtBx.Tag = "Date";
-            this.ToolTip1.SetToolTip(this.DateTxtBx, "تاريخ الشكوى");
+            this.toolTip1.SetToolTip(this.DateTxtBx, "تاريخ الشكوى");
             // 
             // MyGroupBox1
             // 
@@ -379,7 +381,7 @@
             // 
             this.FlwMend.AutoScroll = true;
             this.FlwMend.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.FlwMend.Location = new System.Drawing.Point(674, 568);
+            this.FlwMend.Location = new System.Drawing.Point(674, 590);
             this.FlwMend.Name = "FlwMend";
             this.FlwMend.Size = new System.Drawing.Size(551, 232);
             this.FlwMend.TabIndex = 6;
@@ -390,7 +392,8 @@
             this.Panel6.BackColor = System.Drawing.Color.Transparent;
             this.Panel6.Controls.Add(this.richTextBox1);
             this.Panel6.Controls.Add(this.BtnClr);
-            this.Panel6.Location = new System.Drawing.Point(411, 568);
+            this.Panel6.Enabled = false;
+            this.Panel6.Location = new System.Drawing.Point(411, 590);
             this.Panel6.Name = "Panel6";
             this.Panel6.Size = new System.Drawing.Size(257, 232);
             this.Panel6.TabIndex = 2037;
@@ -406,11 +409,8 @@
             this.richTextBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.richTextBox1.Size = new System.Drawing.Size(174, 223);
             this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.TabStop = false;
             this.richTextBox1.Text = "";
-            // 
-            // ToolTip1
-            // 
-            this.ToolTip1.IsBalloon = true;
             // 
             // SrcCmbBx
             // 
@@ -431,7 +431,7 @@
             this.SrcCmbBx.Size = new System.Drawing.Size(286, 31);
             this.SrcCmbBx.TabIndex = 3;
             this.SrcCmbBx.Tag = "مصدر الشكوى";
-            this.ToolTip1.SetToolTip(this.SrcCmbBx, "مصدر الشكوى");
+            this.toolTip1.SetToolTip(this.SrcCmbBx, "مصدر الشكوى");
             this.SrcCmbBx.ValueMember = "SrcCd";
             // 
             // Label20
@@ -456,6 +456,7 @@
             this.Phon1TxtBx.Margin = new System.Windows.Forms.Padding(3, 13, 3, 3);
             this.Phon1TxtBx.Mask = "00000000000";
             this.Phon1TxtBx.Name = "Phon1TxtBx";
+            this.Phon1TxtBx.PromptChar = ' ';
             this.Phon1TxtBx.Size = new System.Drawing.Size(286, 32);
             this.Phon1TxtBx.TabIndex = 0;
             this.Phon1TxtBx.Tag = "English-Number";
@@ -482,6 +483,7 @@
             this.Phon2TxtBx.Margin = new System.Windows.Forms.Padding(3, 13, 3, 3);
             this.Phon2TxtBx.Mask = "00000000000";
             this.Phon2TxtBx.Name = "Phon2TxtBx";
+            this.Phon2TxtBx.PromptChar = ' ';
             this.Phon2TxtBx.Size = new System.Drawing.Size(286, 32);
             this.Phon2TxtBx.TabIndex = 2;
             this.Phon2TxtBx.Tag = "English-Number";
@@ -641,7 +643,7 @@
             this.FlowLayoutPanel5.Controls.Add(this.Panel1);
             this.FlowLayoutPanel5.Controls.Add(this.Panel2);
             this.FlowLayoutPanel5.Controls.Add(this.Panel3);
-            this.FlowLayoutPanel5.Location = new System.Drawing.Point(28, 565);
+            this.FlowLayoutPanel5.Location = new System.Drawing.Point(28, 587);
             this.FlowLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.FlowLayoutPanel5.Name = "FlowLayoutPanel5";
             this.FlowLayoutPanel5.Size = new System.Drawing.Size(267, 202);
@@ -649,7 +651,6 @@
             // 
             // Timer1
             // 
-            this.Timer1.Enabled = true;
             this.Timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // Label21
@@ -746,12 +747,12 @@
             this.TreeView1.ImageKey = "Add.ico";
             this.TreeView1.Location = new System.Drawing.Point(7, 51);
             this.TreeView1.Name = "TreeView1";
-            treeNode9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            treeNode9.ForeColor = System.Drawing.Color.Red;
-            treeNode9.Name = "Rooting";
-            treeNode9.Text = "Rooting";
+            treeNode3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            treeNode3.ForeColor = System.Drawing.Color.Red;
+            treeNode3.Name = "Rooting";
+            treeNode3.Text = "Rooting";
             this.TreeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode9});
+            treeNode3});
             this.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TreeView1.RightToLeftLayout = true;
             this.TreeView1.ShowNodeToolTips = true;
@@ -774,7 +775,7 @@
             this.FlwSubMain.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.FlwSubMain.Location = new System.Drawing.Point(72, 3);
             this.FlwSubMain.Name = "FlwSubMain";
-            this.FlwSubMain.Size = new System.Drawing.Size(1228, 812);
+            this.FlwSubMain.Size = new System.Drawing.Size(1228, 832);
             this.FlwSubMain.TabIndex = 2034;
             // 
             // ComRefLbl
@@ -803,7 +804,7 @@
             this.TabControl2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TabControl2.RightToLeftLayout = true;
             this.TabControl2.SelectedIndex = 0;
-            this.TabControl2.Size = new System.Drawing.Size(1182, 528);
+            this.TabControl2.Size = new System.Drawing.Size(1182, 550);
             this.TabControl2.TabIndex = 2033;
             // 
             // TabPage3
@@ -812,7 +813,7 @@
             this.TabPage3.Location = new System.Drawing.Point(4, 32);
             this.TabPage3.Name = "TabPage3";
             this.TabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage3.Size = new System.Drawing.Size(1174, 492);
+            this.TabPage3.Size = new System.Drawing.Size(1174, 514);
             this.TabPage3.TabIndex = 0;
             this.TabPage3.Text = "البيانات الأساسية";
             this.TabPage3.UseVisualStyleBackColor = true;
@@ -850,12 +851,13 @@
             this.FlwMainData.Controls.Add(this.AddTxtBx);
             this.FlwMainData.Controls.Add(this.Label6);
             this.FlwMainData.Controls.Add(this.DetailsTxtBx);
+            this.FlwMainData.Controls.Add(this.lblhelp);
             this.FlwMainData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FlwMainData.Enabled = false;
             this.FlwMainData.Location = new System.Drawing.Point(3, 3);
             this.FlwMainData.Name = "FlwMainData";
             this.FlwMainData.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.FlwMainData.Size = new System.Drawing.Size(1168, 486);
+            this.FlwMainData.Size = new System.Drawing.Size(1168, 508);
             this.FlwMainData.TabIndex = 0;
             // 
             // NameTxtBx
@@ -1013,7 +1015,7 @@
             this.AddTxtBx.Multiline = true;
             this.AddTxtBx.Name = "AddTxtBx";
             this.AddTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.AddTxtBx.Size = new System.Drawing.Size(910, 86);
+            this.AddTxtBx.Size = new System.Drawing.Size(910, 61);
             this.AddTxtBx.TabIndex = 4;
             this.AddTxtBx.Tag = "Arabic-All";
             // 
@@ -1022,7 +1024,7 @@
             this.Label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Label6.Font = new System.Drawing.Font("Times New Roman", 16F);
             this.Label6.ForeColor = System.Drawing.Color.Black;
-            this.Label6.Location = new System.Drawing.Point(959, 357);
+            this.Label6.Location = new System.Drawing.Point(959, 332);
             this.Label6.MinimumSize = new System.Drawing.Size(70, 15);
             this.Label6.Name = "Label6";
             this.Label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -1034,14 +1036,23 @@
             // DetailsTxtBx
             // 
             this.FlwMainData.SetFlowBreak(this.DetailsTxtBx, true);
-            this.DetailsTxtBx.Location = new System.Drawing.Point(11, 360);
+            this.DetailsTxtBx.Location = new System.Drawing.Point(11, 335);
             this.DetailsTxtBx.Margin = new System.Windows.Forms.Padding(35, 3, 3, 3);
             this.DetailsTxtBx.Multiline = true;
             this.DetailsTxtBx.Name = "DetailsTxtBx";
             this.DetailsTxtBx.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.DetailsTxtBx.Size = new System.Drawing.Size(910, 114);
+            this.DetailsTxtBx.Size = new System.Drawing.Size(910, 98);
             this.DetailsTxtBx.TabIndex = 5;
             this.DetailsTxtBx.Tag = "Arabic-All";
+            // 
+            // lblhelp
+            // 
+            this.lblhelp.ForeColor = System.Drawing.Color.Green;
+            this.lblhelp.Location = new System.Drawing.Point(11, 436);
+            this.lblhelp.Name = "lblhelp";
+            this.lblhelp.Size = new System.Drawing.Size(1154, 72);
+            this.lblhelp.TabIndex = 2048;
+            this.lblhelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TikNew
             // 
@@ -1053,7 +1064,6 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.TikNew_Load);
             this.Panel5.ResumeLayout(false);
             this.MyGroupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).EndInit();
@@ -1100,7 +1110,7 @@
         internal System.Windows.Forms.MaskedTextBox Phon1TxtBx;
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.TextBox DateTxtBx;
-        internal System.Windows.Forms.ToolTip ToolTip1;
+        internal System.Windows.Forms.ToolTip toolTip1;
         internal System.Windows.Forms.Panel MyGroupBox1;
         internal System.Windows.Forms.PictureBox PictureBox4;
         internal System.Windows.Forms.PictureBox PictureBox3;
@@ -1150,5 +1160,6 @@
         internal System.Windows.Forms.TabControl TabControl2;
         internal System.Windows.Forms.TabPage TabPage3;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label lblhelp;
     }
 }

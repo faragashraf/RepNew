@@ -45,8 +45,6 @@ namespace VOCAC.BL
         {
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             DAL.Struc = DAL.SelectDataset("SP_MAINTBL_SLCT");
-            DataColumn primaryKey = new DataColumn();
-            primaryKey = Statcdif.ProdKTable.Columns["ProdKNm"];
             DAL.Close();
             return DAL.Struc;
         }

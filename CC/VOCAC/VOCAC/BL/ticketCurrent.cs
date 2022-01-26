@@ -53,7 +53,7 @@ namespace VOCAC.BL
             public static bool _TkupUnread;
             public static List<string> SlctdFldLst = new List<string>();
         }
-        public void currentRow(DataGridView gv)
+        public static void currentRow(DataGridView gv)
         {
             currntTicket._TkKind = Convert.ToString(gv.CurrentRow.Cells["TkKind"].Value);
             currntTicket._SrcNm = Convert.ToString(gv.CurrentRow.Cells["SrcNm"].Value);

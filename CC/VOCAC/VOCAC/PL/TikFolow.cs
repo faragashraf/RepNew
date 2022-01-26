@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VOCAC.BL;
 using VOCAC.Properties;
-using static VOCAC.BL.ticketCurrent;
 
 namespace VOCAC.PL
 {
@@ -392,8 +386,7 @@ namespace VOCAC.PL
         }
         private void ShowResult()
         {
-
-            Crnt.currentRow(GridTicket);
+            ticketCurrent.currentRow(GridTicket);
             Crnt.AssignToForm();
             if (checkBox1.Checked) { TikDetails.gettikdetlsfrm.BringToFront(); };
         }
