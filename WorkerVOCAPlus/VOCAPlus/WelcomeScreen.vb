@@ -293,17 +293,21 @@ Public Class WelcomeScreen
         Dim Def As New APblicClss.Defntion
         Dim Fn As New APblicClss.Func
         Try
-            cmdSelectCommand = New SqlCommand("select * from Tickets where TkEmpNm = 128", Def.CONSQL)
-            cmdSelectCommand.CommandTimeout = 30
-            'dadPurchaseInfo = New SqlDataAdapter
+            cmdSelectCommand = New SqlCommand("select * from CDFnProd", Def.CONSQL)
             dadPurchaseInfo.SelectCommand = cmdSelectCommand
-            'UpdtCmd.UpdateCommand = cmdSelectCommand
-            'InsrtCmd.InsertCommand = cmdSelectCommand
-            builder = New SqlCommandBuilder(dadPurchaseInfo)
-
             CompSurceTable = New DataTable
             dadPurchaseInfo.Fill(CompSurceTable)
             Invoke(Sub() Grid1.DataSource = CompSurceTable)
+
+            cmdSelectCommand.CommandTimeout = 30
+            'dadPurchaseInfo = New SqlDataAdapter
+
+            'UpdtCmd.UpdateCommand = cmdSelectCommand
+            'InsrtCmd.InsertCommand = cmdSelectCommand
+
+            'builder = New SqlCommandBuilder(dadPurchaseInfo)
+
+
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
         End Try

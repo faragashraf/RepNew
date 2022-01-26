@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TikNew));
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Rooting");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Rooting");
             this.BtnAdd = new System.Windows.Forms.Button();
             this.Label11 = new System.Windows.Forms.Label();
             this.Label29 = new System.Windows.Forms.Label();
@@ -747,12 +747,12 @@
             this.TreeView1.ImageKey = "Add.ico";
             this.TreeView1.Location = new System.Drawing.Point(7, 51);
             this.TreeView1.Name = "TreeView1";
-            treeNode3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            treeNode3.ForeColor = System.Drawing.Color.Red;
-            treeNode3.Name = "Rooting";
-            treeNode3.Text = "Rooting";
+            treeNode1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            treeNode1.ForeColor = System.Drawing.Color.Red;
+            treeNode1.Name = "Rooting";
+            treeNode1.Text = "Rooting";
             this.TreeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            treeNode1});
             this.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TreeView1.RightToLeftLayout = true;
             this.TreeView1.ShowNodeToolTips = true;

@@ -450,7 +450,6 @@ namespace VOCAC.PL
                 // CombProdRef.Items.Clear()
                 TreeView1.SelectedNode.Collapse(false);
         }
-
         private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeView1.SelectedNode.Expand();

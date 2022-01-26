@@ -81,8 +81,8 @@ namespace VOCAC.PL
 
 
             //Cmbo.Items.Add("My Labtop");
-            Cmbo.Items.Add("Eg Server");
             Cmbo.Items.Add("Training");
+            Cmbo.Items.Add("Eg Server");
             Cmbo.Items.Add("servrMe");
             Cmbo.Items.Add("Lab");
             Statcdif.servrTime = fn.ServrTime();
@@ -113,7 +113,7 @@ namespace VOCAC.PL
             TxtUsrNm.Text = "ashraf";
             TxtUsrPass.Text = "hemonad";
 
-            Cmbo.SelectedItem = "Eg Server";
+            Cmbo.SelectedItem = "Training";
             //Cmbo.SelectedItem = "Eg Server";
             Statcdif._ServerCD = Cmbo.SelectedItem.ToString();
             LblSrvrNm.Text = Statcdif._ServerCD;
@@ -202,13 +202,13 @@ namespace VOCAC.PL
             DAL.DataAccessLayer.rturnStruct SlctMainreslt = log.slctmaintbls();
             if (SlctMainreslt.ds.Tables.Count > 0)
             {
-                Statcdif.CompSurceTable = SlctMainreslt.ds.Tables[0];                   //Tickets Source Table
+                Statcdif.CompSurceTable = SlctMainreslt.ds.Tables[0];                   // Tickets Source Table
                 Statcdif.ProdKTable = SlctMainreslt.ds.Tables[1];                       // Product Kind Table
                 Statcdif.ProdCompTable = SlctMainreslt.ds.Tables[2];                    // Finished Product + complaints Table
                 Statcdif.UpdateKTable = SlctMainreslt.ds.Tables[3];                     // Event kinds Table
-                Statcdif.CDHolDay = SlctMainreslt.ds.Tables[4];                         //Calendar Table
-                Statcdif.MendFildsTable = SlctMainreslt.ds.Tables[5];                   //Medatory Fields VS Products & complaints CDFN Table
-                Statcdif.TreeUsrTbl = SlctMainreslt.ds.Tables[6];                       //Users Table
+                Statcdif.CDHolDay = SlctMainreslt.ds.Tables[4];                         // Calendar Table
+                Statcdif.MendFildsTable = SlctMainreslt.ds.Tables[5];                   // Medatory Fields VS Products & complaints CDFN Table
+                Statcdif.TreeUsrTbl = SlctMainreslt.ds.Tables[6];                       // Users Table
                 if (CurrentUser.UsrUCatLvl == 7)
                 {
                     Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" + 0 + " AND [srcCd] = '1'";     //     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm";

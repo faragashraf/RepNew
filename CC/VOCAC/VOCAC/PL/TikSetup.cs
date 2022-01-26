@@ -26,6 +26,7 @@ namespace VOCAC.PL
                 return frm;
             }
         }
+        DataSet ds = new DataSet();
         DataTable MendfildTable;
         int TickKind;
         string PrdKind;
@@ -35,89 +36,25 @@ namespace VOCAC.PL
         string length = null;
         string mask = null;
         SqlConnection sqlcon = new SqlConnection(Statcdif.strConn);
-        SqlCommand cmd;
-        SqlDataAdapter da;
-        SqlCommandBuilder sqlcmb;
+        static SqlCommand cmd = new SqlCommand();
+        static SqlDataAdapter da = new SqlDataAdapter(cmd);
+        static SqlCommandBuilder sqlcmb;
         public TikSetup()
         {
             InitializeComponent();
         }
         private void TikSetup_Load(object sender, EventArgs e)
         {
-            getmendtbl();
-        }
-        private void PopulateTree()
-        {
-
-            if (RadioButton4.Checked)
+            DataSet setupDataSet1 = SetupDataSet();
+            if (setupDataSet1.Tables.Count > 0)
             {
-                TickKind = 0;
-                this.Text = "إعدادات الطبات";
+                MendfildTable = new DataTable();
+                Statcdif.MendFildsTable.Rows.Clear();
+
+                MendfildTable = setupDataSet1.Tables[0];
+                Statcdif.MendFildsTable = setupDataSet1.Tables[1];
             }
 
-            else if (RadioButton5.Checked)
-            {
-                TickKind = 1;
-                this.Text = "إعدادات الشكاوى";
-            }
-
-            TreeView1.Visible = true;
-            TreeView1.Nodes.Clear();
-
-            if (TreeView1.Nodes.Count == 0)
-            {
-                String Child1 = "";
-                TreeView1.ImageList = ImgLst;
-                for (int i = 0; i < Statcdif.ProdKTable.Rows.Count; i++)
-                {
-                    TreeView1.Nodes.Add(Statcdif.ProdKTable.Rows[i][0].ToString(), Statcdif.ProdKTable.Rows[i][1].ToString(), 1, 3);
-                }
-                if (TickKind == 0)
-                {
-                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + true;
-                }
-                else
-                {
-                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + false;
-                }
-                //Populate Products Nodes
-                for (int i = 0; i < Statcdif.ProdCompTable.DefaultView.Count; i++)
-                {
-                    foreach (TreeNode n in this.TreeView1.Nodes)
-                    {
-                        if (n.Name.Equals(Statcdif.ProdCompTable.DefaultView[i][1].ToString(), StringComparison.OrdinalIgnoreCase))
-                        {
-                            TreeView1.SelectedNode = n;
-                        }
-                    }
-                    if (Child1 != Statcdif.ProdCompTable.DefaultView[i]["PrdNm"].ToString())
-                    {
-                        TreeView1.SelectedNode.Nodes.Add(Statcdif.ProdCompTable.Rows[i]["FnProdCd"].ToString(), Statcdif.ProdCompTable.DefaultView[i]["PrdNm"].ToString(), 1, 3);
-                    }
-                    Child1 = Statcdif.ProdCompTable.DefaultView[i]["PrdNm"].ToString();
-                }
-                for (int i = 0; i < Statcdif.ProdCompTable.DefaultView.Count; i++)
-                {
-                    for (int o = 0; o < TreeView1.Nodes.Count; o++)
-                    {
-                        for (int p = 0; p < TreeView1.Nodes[o].Nodes.Count; p++)
-                        {
-                            if (TreeView1.Nodes[o].Nodes[p].ToString().Split(':')[1].Trim().Equals(Statcdif.ProdCompTable.DefaultView[i]["PrdNm"].ToString(), StringComparison.OrdinalIgnoreCase))
-                            {
-                                TreeView1.Nodes[o].Nodes[p].Nodes.Add(Statcdif.ProdCompTable.DefaultView[i]["FnSQL"].ToString(), Statcdif.ProdCompTable.DefaultView[i]["CompNm"].ToString(), 0, 2);
-                                for (int q = 0; q < TreeView1.Nodes[o].Nodes[p].GetNodeCount(true); q++)
-                                {
-                                    TreeView1.Nodes[o].Nodes[p].Nodes[q].ForeColor = Color.Green;
-                                }
-                                TreeView1.Nodes[o].Nodes[p].ForeColor = Color.FromArgb(165, 42, 42);
-                            }
-                        }
-                    }
-
-                }
-            }
-            TreeView1.Visible = true;
-            TreeView1.SelectedNode = null;
         }
         private void RadClick_CheckedChanged(object sender, EventArgs e)
         {
@@ -152,8 +89,8 @@ namespace VOCAC.PL
                 Statcdif.FildList.Clear();
                 for (int i = 0; i < Statcdif.MendFildsTable.DefaultView.Count; i++)
                 {
-                    addfieldtoflow(Statcdif.MendFildsTable.DefaultView[i]["CDMendTxt"].ToString(), 
-                        Statcdif.MendFildsTable.DefaultView[i]["CDMendDatatype"].ToString(), 
+                    addfieldtoflow(Statcdif.MendFildsTable.DefaultView[i]["CDMendTxt"].ToString(),
+                        Statcdif.MendFildsTable.DefaultView[i]["CDMendDatatype"].ToString(),
                         Convert.ToBoolean(Statcdif.MendFildsTable.DefaultView[i]["MendStat"]));
                 }
                 if (Statcdif.FildList.Count > 0)
@@ -326,9 +263,7 @@ namespace VOCAC.PL
             {
                 //MendfildTable.Rows.Add(fieldtyp, txtfldnm.Text, null, langues, length, mask);
                 DisposeAdditionFlowpanel();
-                sqlcmb = new SqlCommandBuilder(da);
-                MendfildTable.Rows.Clear();
-                da.Fill(MendfildTable);
+                udatedataset();
             }
         }
         private void Btncancel_Click(object sender, EventArgs e)
@@ -454,27 +389,6 @@ namespace VOCAC.PL
                 toolTip1.Show("الحقل يقبل حروف عربية وانجليزية ورقم واحد فقط", ActiveControl, 0, 20, 1000);
             }
         }
-        private DataTable getmendtbl()
-        {
-            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-            cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "SP_Mend_SLCT";
-            cmd.Connection = sqlcon;
-            da = new SqlDataAdapter(cmd);
-            MendfildTable = new DataTable();
-            try
-            {
-                da.Fill(MendfildTable);
-            }
-            catch (Exception ex)
-            {
-                function fn = function.getfn;
-                fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "متابعة الشكاوى");
-            }
-            DAL.Close();
-            return MendfildTable;
-        }
         private string insertnewMendField(string fieldtyp, string txtfldnm, string langues, int length, string mask)
         {
             string msg = null;
@@ -529,7 +443,7 @@ namespace VOCAC.PL
         }
         private void DataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (addMendField(TreeView1.SelectedNode.Name, dataGridView1.CurrentRow.Cells[1].Value.ToString(),true) != null)
+            if (addMendField(TreeView1.SelectedNode.Name, dataGridView1.CurrentRow.Cells[1].Value.ToString(), true) != null)
             {
                 function fn = function.getfn;
                 fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "متابعة الشكاوى");
@@ -537,6 +451,7 @@ namespace VOCAC.PL
             else
             {
                 addfieldtoflow(dataGridView1.CurrentRow.Cells[1].Value.ToString(), dataGridView1.CurrentRow.Cells[3].Value.ToString(), true);
+                udatedataset();
                 if (Statcdif.FildList.Count > 0)
                 {
                     MendfildTable.DefaultView.RowFilter = "CDMendTxt not in (" + string.Join(" ,", Statcdif.FildList) + ")";
@@ -545,7 +460,7 @@ namespace VOCAC.PL
 
                 dataGridView1.DataSource = MendfildTable.DefaultView;
             }
-          
+
         }
         private void addfieldtoflow(string fildname, string datatype, bool status)
         {
@@ -582,12 +497,107 @@ namespace VOCAC.PL
                 }
             }
             else { FlwMend.SetFlowBreak(txtfld, true); }
-            Statcdif.FildList.Add("'" + fildname + "'");        
+            Statcdif.FildList.Add("'" + fildname + "'");
         }
         private void Button1_Click(object sender, EventArgs e)
         {
             TEST hh = new TEST();
             hh.ShowDialog();
+        }
+        private void PopulateTree()
+        {
+
+            if (RadioButton4.Checked)
+            {
+                TickKind = 0;
+                this.Text = "إعدادات الطبات";
+            }
+
+            else if (RadioButton5.Checked)
+            {
+                TickKind = 1;
+                this.Text = "إعدادات الشكاوى";
+            }
+
+            TreeView1.Visible = true;
+            TreeView1.Nodes.Clear();
+
+            if (TreeView1.Nodes.Count == 0)
+            {
+                String Child1 = "";
+                TreeView1.ImageList = ImgLst;
+                for (int i = 0; i < Statcdif.ProdKTable.Rows.Count; i++)
+                {
+                    TreeView1.Nodes.Add(Statcdif.ProdKTable.Rows[i][0].ToString(), Statcdif.ProdKTable.Rows[i][1].ToString(), 1, 3);
+                }
+                if (TickKind == 0)
+                {
+                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + true;
+                }
+                else
+                {
+                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + false;
+                }
+                //Populate Products Nodes
+                for (int i = 0; i < Statcdif.ProdCompTable.DefaultView.Count; i++)
+                {
+                    foreach (TreeNode n in this.TreeView1.Nodes)
+                    {
+                        if (n.Name.Equals(Statcdif.ProdCompTable.DefaultView[i][1].ToString(), StringComparison.OrdinalIgnoreCase))
+                        {
+                            TreeView1.SelectedNode = n;
+                        }
+                    }
+                    if (Child1 != Statcdif.ProdCompTable.DefaultView[i]["PrdNm"].ToString())
+                    {
+                        TreeView1.SelectedNode.Nodes.Add(Statcdif.ProdCompTable.Rows[i]["FnProdCd"].ToString(), Statcdif.ProdCompTable.DefaultView[i]["PrdNm"].ToString(), 1, 3);
+                    }
+                    Child1 = Statcdif.ProdCompTable.DefaultView[i]["PrdNm"].ToString();
+                }
+                for (int i = 0; i < Statcdif.ProdCompTable.DefaultView.Count; i++)
+                {
+                    for (int o = 0; o < TreeView1.Nodes.Count; o++)
+                    {
+                        for (int p = 0; p < TreeView1.Nodes[o].Nodes.Count; p++)
+                        {
+                            if (TreeView1.Nodes[o].Nodes[p].ToString().Split(':')[1].Trim().Equals(Statcdif.ProdCompTable.DefaultView[i]["PrdNm"].ToString(), StringComparison.OrdinalIgnoreCase))
+                            {
+                                TreeView1.Nodes[o].Nodes[p].Nodes.Add(Statcdif.ProdCompTable.DefaultView[i]["FnSQL"].ToString(), Statcdif.ProdCompTable.DefaultView[i]["CompNm"].ToString(), 0, 2);
+                                for (int q = 0; q < TreeView1.Nodes[o].Nodes[p].GetNodeCount(true); q++)
+                                {
+                                    TreeView1.Nodes[o].Nodes[p].Nodes[q].ForeColor = Color.Green;
+                                }
+                                TreeView1.Nodes[o].Nodes[p].ForeColor = Color.FromArgb(165, 42, 42);
+                            }
+                        }
+                    }
+
+                }
+            }
+            TreeView1.Visible = true;
+            TreeView1.SelectedNode = null;
+        }
+        private DataSet SetupDataSet()
+        {
+            sqlcmb = new SqlCommandBuilder(da);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "SP_A_MEND_SLCT";
+            cmd.Connection = sqlcon;
+            try
+            {
+                da.Fill(ds);
+            }
+            catch (Exception Ex)
+            {
+                function fn = function.getfn;
+
+            }
+            return ds;
+        }
+        private void udatedataset()
+        {
+            ds.Clear();
+            da.Fill(ds);
         }
     }
 }

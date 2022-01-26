@@ -23,7 +23,7 @@ namespace VOCAC
         public static int screenHeight = Screen.PrimaryScreen.Bounds.Height;
         public static InputLanguage EnglishInput;
         public static InputLanguage ArabicInput;
-        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-32223";
+        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-32223";
         public SqlConnection CONSQL;
         public static String _ServerCD;
         public static String _serverNm;
@@ -433,36 +433,13 @@ namespace VOCAC
         private static List<string> GovCodeList = new List<string>();
         private static void SetGov()
         {
-            GovCodeList.Add("01");
-            GovCodeList.Add("02");
-            GovCodeList.Add("03");
-            GovCodeList.Add("04");
-            GovCodeList.Add("05");
-            GovCodeList.Add("06");
-            GovCodeList.Add("11");
-            GovCodeList.Add("12");
-            GovCodeList.Add("13");
-            GovCodeList.Add("14");
-            GovCodeList.Add("15");
-            GovCodeList.Add("16");
-            GovCodeList.Add("17");
-            GovCodeList.Add("18");
-            GovCodeList.Add("19");
-            GovCodeList.Add("21");
-            GovCodeList.Add("22");
-            GovCodeList.Add("23");
-            GovCodeList.Add("24");
-            GovCodeList.Add("25");
-            GovCodeList.Add("26");
-            GovCodeList.Add("27");
-            GovCodeList.Add("28");
-            GovCodeList.Add("29");
-            GovCodeList.Add("31");
-            GovCodeList.Add("32");
-            GovCodeList.Add("33");
-            GovCodeList.Add("34");
-            GovCodeList.Add("35");
-            GovCodeList.Add("88");
+            string[] arr = { "01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20"
+            ,"21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","88"};
+
+            foreach (string item in arr)
+            {
+                GovCodeList.Add(item);
+            }    
         }
 
 
