@@ -383,7 +383,7 @@
             this.FlwMend.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.FlwMend.Location = new System.Drawing.Point(674, 590);
             this.FlwMend.Name = "FlwMend";
-            this.FlwMend.Size = new System.Drawing.Size(551, 232);
+            this.FlwMend.Size = new System.Drawing.Size(551, 271);
             this.FlwMend.TabIndex = 6;
             this.FlwMend.TabStop = true;
             // 
@@ -395,7 +395,7 @@
             this.Panel6.Enabled = false;
             this.Panel6.Location = new System.Drawing.Point(411, 590);
             this.Panel6.Name = "Panel6";
-            this.Panel6.Size = new System.Drawing.Size(257, 232);
+            this.Panel6.Size = new System.Drawing.Size(257, 271);
             this.Panel6.TabIndex = 2037;
             // 
             // richTextBox1
@@ -407,7 +407,7 @@
             this.richTextBox1.Location = new System.Drawing.Point(17, 6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.richTextBox1.Size = new System.Drawing.Size(174, 223);
+            this.richTextBox1.Size = new System.Drawing.Size(174, 247);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.TabStop = false;
             this.richTextBox1.Text = "";
@@ -677,7 +677,7 @@
             this.FlwMain.Location = new System.Drawing.Point(0, 0);
             this.FlwMain.Name = "FlwMain";
             this.FlwMain.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.FlwMain.Size = new System.Drawing.Size(1796, 847);
+            this.FlwMain.Size = new System.Drawing.Size(1796, 890);
             this.FlwMain.TabIndex = 1;
             // 
             // FlwTree
@@ -689,7 +689,7 @@
             this.FlwTree.Location = new System.Drawing.Point(1306, 3);
             this.FlwTree.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.FlwTree.Name = "FlwTree";
-            this.FlwTree.Size = new System.Drawing.Size(480, 812);
+            this.FlwTree.Size = new System.Drawing.Size(480, 875);
             this.FlwTree.TabIndex = 0;
             // 
             // MyGroupBox3
@@ -757,7 +757,7 @@
             this.TreeView1.RightToLeftLayout = true;
             this.TreeView1.ShowNodeToolTips = true;
             this.TreeView1.ShowPlusMinus = false;
-            this.TreeView1.Size = new System.Drawing.Size(470, 749);
+            this.TreeView1.Size = new System.Drawing.Size(470, 810);
             this.TreeView1.TabIndex = 2022;
             this.TreeView1.TabStop = false;
             this.TreeView1.Tag = "نوع الخدمة & نوع الشكوى";
@@ -775,7 +775,7 @@
             this.FlwSubMain.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.FlwSubMain.Location = new System.Drawing.Point(72, 3);
             this.FlwSubMain.Name = "FlwSubMain";
-            this.FlwSubMain.Size = new System.Drawing.Size(1228, 832);
+            this.FlwSubMain.Size = new System.Drawing.Size(1228, 875);
             this.FlwSubMain.TabIndex = 2034;
             // 
             // ComRefLbl
@@ -1058,7 +1058,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1796, 847);
+            this.ClientSize = new System.Drawing.Size(1796, 890);
             this.Controls.Add(this.FlwMain);
             this.Name = "TikNew";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;

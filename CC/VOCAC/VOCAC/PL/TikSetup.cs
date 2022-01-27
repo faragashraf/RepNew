@@ -27,7 +27,7 @@ namespace VOCAC.PL
             }
         }
         DataSet ds = new DataSet();
-        DataTable MendfildTable;
+        DataTable MendsrcTable;
         int TickKind;
         string PrdKind;
         string fieldtyp = null;
@@ -48,10 +48,10 @@ namespace VOCAC.PL
             DataSet setupDataSet1 = SetupDataSet();
             if (setupDataSet1.Tables.Count > 0)
             {
-                MendfildTable = new DataTable();
+                MendsrcTable = new DataTable();
                 Statcdif.MendFildsTable.Rows.Clear();
 
-                MendfildTable = setupDataSet1.Tables[0];
+                MendsrcTable = setupDataSet1.Tables[0];
                 Statcdif.MendFildsTable = setupDataSet1.Tables[1];
             }
 
@@ -95,11 +95,11 @@ namespace VOCAC.PL
                 }
                 if (Statcdif.FildList.Count > 0)
                 {
-                    MendfildTable.DefaultView.RowFilter = "CDMendTxt not in (" + string.Join(" ,", Statcdif.FildList) + ")";
+                    MendsrcTable.DefaultView.RowFilter = "CDMendTxt not in (" + string.Join(" ,", Statcdif.FildList) + ")";
                 }
-                else { MendfildTable.DefaultView.RowFilter = string.Empty; }
+                else { MendsrcTable.DefaultView.RowFilter = string.Empty; }
 
-                dataGridView1.DataSource = MendfildTable.DefaultView;
+                dataGridView1.DataSource = MendsrcTable.DefaultView;
             }
             else if (TreeView1.SelectedNode.Level < 2)
             {
@@ -204,15 +204,15 @@ namespace VOCAC.PL
             bool exists = false;
             if (txtfldnm.Text.Trim().Length > 0)
             {
-                for (int i = 0; i < MendfildTable.Rows.Count; i++)
+                for (int i = 0; i < MendsrcTable.Rows.Count; i++)
                 {
-                    if (MendfildTable.Rows[i]["CDMendTxt"].ToString().Trim().Contains(txtfldnm.Text))
+                    if (MendsrcTable.Rows[i]["CDMendTxt"].ToString().Trim().Contains(txtfldnm.Text))
                     {
                         exists = true;
-                        labfldNm.Text = "- هناك حقل بالفعل باسم \"" + MendfildTable.Rows[i]["CDMendTxt"].ToString() + "\"";
+                        labfldNm.Text = "- هناك حقل بالفعل باسم \"" + MendsrcTable.Rows[i]["CDMendTxt"].ToString() + "\"";
                         break;
                     }
-                    else if (txtfldnm.Text.Trim().Equals(MendfildTable.Rows[i]["CDMendTxt"].ToString()))
+                    else if (txtfldnm.Text.Trim().Equals(MendsrcTable.Rows[i]["CDMendTxt"].ToString()))
                     {
                         exists = true;
                         labfldNm.Text = "- اسم الحقل موجود بالفعل" + Environment.NewLine;
@@ -443,22 +443,22 @@ namespace VOCAC.PL
         }
         private void DataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (addMendField(TreeView1.SelectedNode.Name, dataGridView1.CurrentRow.Cells[1].Value.ToString(), true) != null)
+            if (addMendField(TreeView1.SelectedNode.Name, dataGridView1.CurrentRow.Cells[1].Value.ToString(), false) != null)
             {
                 function fn = function.getfn;
                 fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "متابعة الشكاوى");
             }
             else
             {
-                addfieldtoflow(dataGridView1.CurrentRow.Cells[1].Value.ToString(), dataGridView1.CurrentRow.Cells[3].Value.ToString(), true);
+                addfieldtoflow(dataGridView1.CurrentRow.Cells[1].Value.ToString(), dataGridView1.CurrentRow.Cells[3].Value.ToString(), false);
                 udatedataset();
                 if (Statcdif.FildList.Count > 0)
                 {
-                    MendfildTable.DefaultView.RowFilter = "CDMendTxt not in (" + string.Join(" ,", Statcdif.FildList) + ")";
+                    MendsrcTable.DefaultView.RowFilter = "CDMendTxt not in (" + string.Join(" ,", Statcdif.FildList) + ")";
                 }
-                else { MendfildTable.DefaultView.RowFilter = string.Empty; }
+                else { MendsrcTable.DefaultView.RowFilter = string.Empty; }
 
-                dataGridView1.DataSource = MendfildTable.DefaultView;
+                dataGridView1.DataSource = MendsrcTable.DefaultView;
             }
 
         }

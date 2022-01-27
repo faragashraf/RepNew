@@ -194,7 +194,7 @@ namespace VOCAC.PL
             }
             else
             {
-                if(ActiveControl == NameTxtBx) { toolTip1.Show("اسم العميل لابد أن يكون ثلاثي على الأقل", NameTxtBx, 0, 30, 3000); }
+                if (ActiveControl == NameTxtBx) { toolTip1.Show("اسم العميل لابد أن يكون ثلاثي على الأقل", NameTxtBx, 0, 30, 3000); }
 
                 fn.ClorTxt(richTextBox1, NameTxtBx.AccessibleName, Color.White, Color.Red, 14);
             }
@@ -213,10 +213,18 @@ namespace VOCAC.PL
             {
                 if (Ctrl.GetType() == typeof(TextBox))
                 {
+                    TextBox Ctrl1 = (TextBox)Ctrl;
                     if (Ctrl.Text.Replace(" ", "").Trim().Length > 0)
                     {
                         Complete_ += 1;
                         fn.ClorTxt(richTextBox1, GetNextControl(Ctrl, false).Text.ToString().Substring(0, GetNextControl(Ctrl, false).Text.Length - 3), Color.White, Color.Green, 14);
+                    }
+                    else
+                    {
+                        if (Ctrl1.ReadOnly == true)
+                        {
+                            if (ActiveControl == Ctrl) { toolTip1.Show("     إضغط F1  لإختيار " + GetNextControl((TextBox)Ctrl, false).Text.Substring(0, GetNextControl((TextBox)Ctrl, false).Text.Length - 2), ActiveControl, 0, 30, 3000); };
+                        }
                     }
                 }
                 else if (Ctrl.GetType() == typeof(MaskedTextBox))
@@ -236,7 +244,7 @@ namespace VOCAC.PL
                                     string itemRefContent = null;
                                     for (int i = 0; i < CNT; i++)
                                     {
-                                         itemRefContent = itemRef.Split('-')[i];
+                                        itemRefContent = itemRef.Split('-')[i];
                                         if (mskd.Text.Replace(" ", "").Trim().Substring(0, itemRefContent.Length).ToString().Equals(itemRefContent, StringComparison.OrdinalIgnoreCase))
                                         {
                                             chckidentefecation = true;
@@ -264,7 +272,7 @@ namespace VOCAC.PL
                                     }
                                     else
                                     {
-                                        if (ActiveControl == mskd) { toolTip1.Show(GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3) + " لابد أنه يبدأ بـ " + itemRef, ActiveControl, 0, 30, 3000); } ;
+                                        if (ActiveControl == mskd) { toolTip1.Show(GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3) + " لابد أنه يبدأ بـ " + itemRef, ActiveControl, 0, 30, 3000); };
                                         //fn.msg(GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3) + " لابد أنه يبدأ بـ " + itemRef, "رسالة معلومات");
                                         mskd.Text = itemRef;
                                     }
