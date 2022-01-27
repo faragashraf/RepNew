@@ -233,49 +233,46 @@ namespace VOCAC.PL
                     mskd = (MaskedTextBox)Ctrl;
                     if (mskd.Mask.Replace(" ", "").Trim().Length == mskd.Text.Replace(" ", "").Trim().Length)
                     {
-                        if (Ctrl.Tag.ToString().Split('-').Count() > 2)
+                        if (Ctrl.Tag.ToString().Split('-').Count() > 2 && 
+                            Ctrl.Tag.ToString().Split('-')[2].Equals("N", StringComparison.OrdinalIgnoreCase) &&
+                            itemRef.Length > 0)
                         {
-                            if (Ctrl.Tag.ToString().Split('-')[2].Equals("N", StringComparison.OrdinalIgnoreCase))
+                            int CNT = itemRef.Split('-').Count<string>();
+                            if (CNT > 1)
                             {
-                                int CNT = itemRef.Split('-').Count<string>();
-                                if (CNT > 1)
+                                bool chckidentefecation = false;
+                                string itemRefContent = null;
+                                for (int i = 0; i < CNT; i++)
                                 {
-                                    bool chckidentefecation = false;
-                                    string itemRefContent = null;
-                                    for (int i = 0; i < CNT; i++)
+                                    itemRefContent = itemRef.Split('-')[i];
+                                    if (Ctrl.Text.Replace(" ", "").Trim().Substring(0, itemRefContent.Length).ToString().Equals(itemRefContent, StringComparison.OrdinalIgnoreCase))
                                     {
-                                        itemRefContent = itemRef.Split('-')[i];
-                                        if (mskd.Text.Replace(" ", "").Trim().Substring(0, itemRefContent.Length).ToString().Equals(itemRefContent, StringComparison.OrdinalIgnoreCase))
-                                        {
-                                            chckidentefecation = true;
-                                            break;
-                                        }
+                                        chckidentefecation = true;
+                                        break;
                                     }
-                                    if (chckidentefecation == true)
-                                    {
-                                        Complete_ += 1;
-                                        fn.ClorTxt(richTextBox1, GetNextControl(mskd, false).Text.ToString().Substring(0, GetNextControl(mskd, false).Text.Length - 3), Color.White, Color.Green, 14);
-                                    }
-                                    else
-                                    {
-                                        if (ActiveControl == mskd) { toolTip1.Show(GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3) + " لابد أنه يبدأ بأحد الإختيارات التالية " + Environment.NewLine + itemRef, ActiveControl, 0, 30, 3000); };
-                                        //fn.msg(GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3) + " لابد أنه يبدأ بأحد الإختيارات التالية " + Environment.NewLine + itemRef, "رسالة معلومات");
-                                        mskd.Text = "";
-                                    }
+                                }
+                                if (chckidentefecation == true)
+                                {
+                                    Complete_ += 1;
+                                    fn.ClorTxt(richTextBox1, GetNextControl(Ctrl, false).Text.ToString().Substring(0, GetNextControl(Ctrl, false).Text.Length - 3), Color.White, Color.Green, 14);
                                 }
                                 else
                                 {
-                                    if (itemRef.Equals(mskd.Text.Replace(" ", "").Trim().Substring(0, itemRef.Length), StringComparison.OrdinalIgnoreCase))
-                                    {
-                                        Complete_ += 1;
-                                        fn.ClorTxt(richTextBox1, GetNextControl(Ctrl, false).Text.ToString().Substring(0, GetNextControl(Ctrl, false).Text.Length - 3), Color.White, Color.Green, 14);
-                                    }
-                                    else
-                                    {
-                                        if (ActiveControl == mskd) { toolTip1.Show(GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3) + " لابد أنه يبدأ بـ " + itemRef, ActiveControl, 0, 30, 3000); };
-                                        //fn.msg(GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3) + " لابد أنه يبدأ بـ " + itemRef, "رسالة معلومات");
-                                        mskd.Text = itemRef;
-                                    }
+                                    if (ActiveControl == Ctrl) { toolTip1.Show(GetNextControl(Ctrl, false).Text.Substring(0, GetNextControl(Ctrl, false).Text.Length - 3) + " لابد أنه يبدأ بأحد الإختيارات التالية " + Environment.NewLine + itemRef, ActiveControl, 0, 30, 3000); };
+                                    Ctrl.Text = "";
+                                }
+                            }
+                            else
+                            {
+                                if (itemRef.Equals(Ctrl.Text.Replace(" ", "").Trim().Substring(0, itemRef.Length), StringComparison.OrdinalIgnoreCase))
+                                {
+                                    Complete_ += 1;
+                                    fn.ClorTxt(richTextBox1, GetNextControl(Ctrl, false).Text.ToString().Substring(0, GetNextControl(Ctrl, false).Text.Length - 3), Color.White, Color.Green, 14);
+                                }
+                                else
+                                {
+                                    if (ActiveControl == Ctrl) { toolTip1.Show(GetNextControl(Ctrl, false).Text.Substring(0, GetNextControl(Ctrl, false).Text.Length - 3) + " لابد أنه يبدأ بـ " + itemRef, ActiveControl, 0, 30, 3000); };
+                                    Ctrl.Text = itemRef;
                                 }
                             }
                         }
@@ -284,9 +281,9 @@ namespace VOCAC.PL
                             Complete_ += 1;
                         }
                     }
-                    else if (mskd.Tag.ToString().Split('-').Count() > 2 && itemRef.Length > 0)
+                    else if (Ctrl.Tag.ToString().Split('-').Count() > 2 && itemRef.Length > 0)
                     {
-                        if (ActiveControl == mskd) { toolTip1.Show(GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3) + " لابد أنه يبدأ بـ " + itemRef, mskd, 0, 30, 1000); };
+                        if (ActiveControl == Ctrl) { toolTip1.Show(GetNextControl(Ctrl, false).Text.Substring(0, GetNextControl(Ctrl, false).Text.Length - 3) + " لابد أنه يبدأ بـ " + itemRef, Ctrl, 0, 30, 1000); };
                     }
                 }
                 else if (Ctrl.GetType() == typeof(DateTimePicker))
@@ -304,7 +301,6 @@ namespace VOCAC.PL
                     fn.ClorTxt(richTextBox1, Ctrl.Text.ToString().Substring(0, Ctrl.Text.Length - 3), Color.White, Color.Red, 14);
                 }
             }
-
 
             if (PrdKind.Equals("مالية", StringComparison.OrdinalIgnoreCase))
             {
@@ -356,7 +352,6 @@ namespace VOCAC.PL
                 SubmitBtn.BackgroundImage = Resources.SaveRed;
                 SubmitBtn.Enabled = false;
             }
-            //if (lblhelp.Visible==true) { Timer1.Interval = 100; lblhelp.Visible = false; } else { Timer1.Interval = 100; lblhelp.Visible = true; }
             GC.Collect();
             Timer1.Start();
         }
