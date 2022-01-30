@@ -462,5 +462,24 @@ namespace VOCAC.PL
                 }
             }
         }
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            function fn = function.getfn;
+            if (TickTblMain.Rows.Count > 0)
+            {
+                if (fn.exportxlsx(TickTblMain, CurrentUser.UsrRlNm) == null)
+                {
+                    fn.msg("تم استخراج البيانات بنجاح", "استخراج البيانات");
+                }
+                else
+                {
+                    fn.msg("خطأ في استخراج البيانات", "استخراج البيانات");
+                }
+            }
+            else
+            {
+                fn.msg("لاتوجد بيانات للاستخراج", "استخراج البيانات");
+            }
+        }
     }
 }

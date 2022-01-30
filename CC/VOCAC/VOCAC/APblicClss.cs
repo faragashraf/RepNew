@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClosedXML.Excel;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -439,10 +440,38 @@ namespace VOCAC
             foreach (string item in arr)
             {
                 GovCodeList.Add(item);
-            }    
+            }
         }
-
-
+        public string exportxlsx(DataTable tbl, string filename)
+        {
+            string rslt = null;
+            using (SaveFileDialog d = new SaveFileDialog())
+            {
+                d.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                d.Filter = "Excel File|*.xlsx";
+                d.FilterIndex = 1;
+                d.RestoreDirectory = true;
+                d.Title = "Save Excel File";
+                d.FileName = CurrentUser.UsrRlNm;
+                if (d.ShowDialog() == DialogResult.OK)
+                {
+                    using (XLWorkbook Workbook = new XLWorkbook())
+                    {
+                        try
+                        {
+                            IXLWorksheet worksheet = Workbook.AddWorksheet(tbl, filename);
+                            worksheet.Style.Alignment.WrapText = false;
+                            Workbook.SaveAs(d.FileName);
+                        }
+                        catch (Exception ex)
+                        {
+                            rslt = ex.Message;
+                        }
+                    }
+                }
+            }
+            return rslt;
+        }
     }
     // Current User Class
     public static class CurrentUser
@@ -607,7 +636,7 @@ namespace VOCAC
                     if (TxtBox.ReadOnly == false)
                     {
                         var ASDS = Clipboard.GetText();
-                        //TxtBox.Text += Clipboard.GetText();
+                        TxtBox.Text += Clipboard.GetText();
                     }
 
                 }
@@ -665,6 +694,7 @@ namespace VOCAC
                         IntUtly.ValdtLetter(TxtBox, e);
                     else if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "All")
                     {
+                        IntUtly.ValdtAll(e);
                     }
                 }
             }

@@ -20,11 +20,24 @@ namespace VOCAC.BL
                 SystemSounds.Beep.Play();
             }
         }
+        public static void ValdtAll(KeyPressEventArgs e) // numeric only int
+        {
+            if ((e.KeyChar)==8)
+            {
+
+            }
+            else if (char.IsControl(e.KeyChar) == true && (Keys)e.KeyChar != Keys.V)
+
+            {
+                e.Handled = true;
+                SystemSounds.Beep.Play();
+            }
+        }
         public static void ValdtNumber(object sender, KeyPressEventArgs e) //numeric decmal
         {
             TextBox TempNum = (TextBox)sender;
-            if (((Keys)e.KeyChar !=  Keys.Back  && ("0123456789.").IndexOf(e.KeyChar) == -1) ||
-                e.KeyChar == Convert.ToChar(".")  && TempNum.Text.ToCharArray().Count(c => c == Convert.ToChar( ".")) > 0)
+            if (((Keys)e.KeyChar != Keys.Back && ("0123456789.").IndexOf(e.KeyChar) == -1) ||
+                e.KeyChar == Convert.ToChar(".") && TempNum.Text.ToCharArray().Count(c => c == Convert.ToChar(".")) > 0)
             {
                 e.Handled = true;
                 SystemSounds.Beep.Play();
@@ -32,12 +45,12 @@ namespace VOCAC.BL
         }
         public static void ValdtIntLetter(KeyPressEventArgs e) // numeric & Letters & White Space & Backspace
         {
-            if (char.IsControl(e.KeyChar) == false && (char.IsDigit(e.KeyChar)) || 
-                                             (char.IsLetter(e.KeyChar)) || 
-                                             (char.IsWhiteSpace(e.KeyChar)) || 
-                                               (Keys)e.KeyChar == Keys.Back || 
+            if (char.IsControl(e.KeyChar) == false && (char.IsDigit(e.KeyChar)) ||
+                                             (char.IsLetter(e.KeyChar)) ||
+                                             (char.IsWhiteSpace(e.KeyChar)) ||
+                                               (Keys)e.KeyChar == Keys.Back ||
                 ((Keys)e.KeyChar == Keys.ShiftKey) && (char.IsLetter(e.KeyChar)))
-            {}
+            { }
             else
             {
                 e.Handled = true;
@@ -47,11 +60,11 @@ namespace VOCAC.BL
         public static void ValdtLetter(object sender, KeyPressEventArgs e) //  Letters & White Space & Backspace
         {
             TextBox TempNum = (TextBox)sender;
-            if (char.IsControl(e.KeyChar) == false && (char.IsLetter(e.KeyChar)) || 
-                                                      (char.IsWhiteSpace(e.KeyChar)) || 
-                                                        (Keys)e.KeyChar == Keys.Back || 
+            if (char.IsControl(e.KeyChar) == false && (char.IsLetter(e.KeyChar)) ||
+                                                      (char.IsWhiteSpace(e.KeyChar)) ||
+                                                        (Keys)e.KeyChar == Keys.Back ||
                 ((Keys)e.KeyChar == Keys.ShiftKey) && char.IsLetter(e.KeyChar))
-            {}
+            { }
             else
             {
                 e.Handled = true;

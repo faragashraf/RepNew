@@ -71,7 +71,6 @@ namespace VOCAC.PL
             this.ChckUpdOther.CheckedChanged += new System.EventHandler(this.Chckfltr_CheckedChanged);
         }
         function fn = function.getfn;
-        defintions Def = new defintions();
         private void TikFolow_Load(object sender, EventArgs e)
         {
             frms forms = new frms();
@@ -88,7 +87,7 @@ namespace VOCAC.PL
                         Filtr();
                         assignfltrTXTintoCtrlTag();
                         this.GridTicket.SelectionChanged += new System.EventHandler(this.GridTicket_SelectionChanged);
-                       treeView1.AfterSelect += new TreeViewEventHandler(TreeTeam_select);
+                        treeView1.AfterSelect += new TreeViewEventHandler(TreeTeam_select);
                     }
                 }
                 catch (Exception ex)
@@ -309,7 +308,7 @@ namespace VOCAC.PL
             GridTicket.Size = new Size(this.Width - treeView1.Width - 50, this.Height - 260);
             GridTicket.Margin = new Padding((this.Width - treeView1.Width - GridTicket.Width) / 2, GridTicket.Margin.Top, GridTicket.Margin.Right, GridTicket.Margin.Bottom);
             treeView1.Height = GridTicket.Height;
-           
+
             FlowLayoutPanel2.Margin = new Padding((this.Width - FlowLayoutPanel2.Width) / 2, FlowLayoutPanel2.Margin.Top, FlowLayoutPanel2.Margin.Right, FlowLayoutPanel2.Margin.Bottom);
             flowLayoutPanel3.Margin = new Padding((this.Width - flowLayoutPanel3.Width) / 2, flowLayoutPanel3.Margin.Top, flowLayoutPanel3.Margin.Right, flowLayoutPanel3.Margin.Bottom);
         }
@@ -418,12 +417,12 @@ namespace VOCAC.PL
                 }
             }
         }
-        public void MyTeam(int LedrCat, int LedrId,  bool Stat = false)
+        public void MyTeam(int LedrCat, int LedrId, bool Stat = false)
         {
             List<string> UsrStr = new List<string>();
             TreeNode[] TempNode = new TreeNode[0];
 
-            if(CurrentUser.UsrLvl.Substring(16,1) == "A")
+            if (CurrentUser.UsrLvl.Substring(16, 1) == "A")
             {
                 Statcdif.TreeUsrTbl.DefaultView.RowFilter = "UsrSusp = 0 and UCatId = 0";
                 treeView1.Nodes.Add(Statcdif.TreeUsrTbl.DefaultView[0]["UCatId"].ToString(),
@@ -435,19 +434,19 @@ namespace VOCAC.PL
                 treeView1.Nodes.Add(LedrCat.ToString(), CurrentUser.UsrCatNm + "-" + CurrentUser.UsrRlNm + "-" + LedrId.ToString());
                 UsrStr.Add(CurrentUser.UsrID.ToString());
             }
-            if(Stat == false)
+            if (Stat == false)
             {
                 Statcdif.TreeUsrTbl.DefaultView.RowFilter = "UsrSusp = 0 and UCatId <> 0";
             }
             //Statcdif.TreeUsrTbl.DefaultView.RowFilter = string.Empty; // "UCatIdSub >= " + CurrentUser.UsrUCatLvl;
-                for (int i = 0; i < Statcdif.TreeUsrTbl.DefaultView.Count; i++)
+            for (int i = 0; i < Statcdif.TreeUsrTbl.DefaultView.Count; i++)
+            {
+                TempNode = treeView1.Nodes.Find(Statcdif.TreeUsrTbl.DefaultView[i][2].ToString(), true);
+                if (TempNode.Length > 0)
                 {
-                    TempNode = treeView1.Nodes.Find(Statcdif.TreeUsrTbl.DefaultView[i][2].ToString(), true);
-                    if (TempNode.Length > 0)
-                    {
-                        TempNode[0].Nodes.Add(Statcdif.TreeUsrTbl.DefaultView[i]["UCatId"].ToString(), Statcdif.TreeUsrTbl.DefaultView[i]["UsrMix"].ToString());
-                        UsrStr.Add(Statcdif.TreeUsrTbl.DefaultView[i][0].ToString());
-                    }
+                    TempNode[0].Nodes.Add(Statcdif.TreeUsrTbl.DefaultView[i]["UCatId"].ToString(), Statcdif.TreeUsrTbl.DefaultView[i]["UsrMix"].ToString());
+                    UsrStr.Add(Statcdif.TreeUsrTbl.DefaultView[i][0].ToString());
+                }
             }
             CurrentUser.UsrTeam = string.Join(", ", UsrStr);
         }
@@ -460,9 +459,9 @@ namespace VOCAC.PL
             List<string> UsrStr = new List<string>();
             TreeNode[] TempNode = new TreeNode[0];
             TreeView trvw = new TreeView();
-                Statcdif.TreeUsrTbl.DefaultView.RowFilter = "UsrSusp = 0 and UsrId = " + slctdId;
-                trvw.Nodes.Add(Statcdif.TreeUsrTbl.DefaultView[0]["UCatId"].ToString(), Statcdif.TreeUsrTbl.DefaultView[0]["UsrMix"].ToString());
-                UsrStr.Add(slctdId.ToString());
+            Statcdif.TreeUsrTbl.DefaultView.RowFilter = "UsrSusp = 0 and UsrId = " + slctdId;
+            trvw.Nodes.Add(Statcdif.TreeUsrTbl.DefaultView[0]["UCatId"].ToString(), Statcdif.TreeUsrTbl.DefaultView[0]["UsrMix"].ToString());
+            UsrStr.Add(slctdId.ToString());
 
             Statcdif.TreeUsrTbl.DefaultView.RowFilter = "UsrSusp = 0 ";
             for (int i = 0; i < Statcdif.TreeUsrTbl.DefaultView.Count; i++)
@@ -476,7 +475,26 @@ namespace VOCAC.PL
             }
             trvw.Dispose();
             return string.Join(", ", UsrStr);
-       
+
+        }
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            function fn = function.getfn;
+            if (TickTblMain.Rows.Count > 0)
+            {
+                if (fn.exportxlsx(TickTblMain, CurrentUser.UsrRlNm) == null)
+                {
+                    fn.msg("تم استخراج البيانات بنجاح", "استخراج البيانات");
+                }
+                else
+                {
+                    fn.msg("خطأ في استخراج البيانات", "استخراج البيانات");
+                }
+            }
+            else
+            {
+                fn.msg("لاتوجد بيانات للاستخراج", "استخراج البيانات");
+            }
         }
     }
 }

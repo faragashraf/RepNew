@@ -279,6 +279,7 @@ namespace VOCAC.PL
                         else
                         {
                             Complete_ += 1;
+                            fn.ClorTxt(richTextBox1, GetNextControl(Ctrl, false).Text.ToString().Substring(0, GetNextControl(Ctrl, false).Text.Length - 3), Color.White, Color.Green, 14);
                         }
                     }
                     else if (Ctrl.Tag.ToString().Split('-').Count() > 2 && itemRef.Length > 0)

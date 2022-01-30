@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -89,17 +91,19 @@ namespace VOCAC.PL
         }
         private void WelcomeScreen_Load(object sender, EventArgs e)
         {
-            MdiClient Mdiclnt;
+            panellgin.Location = new Point((Statcdif.screenWidth - panellgin.Width) / 2, (Statcdif.screenHeight - 150 - panellgin.Height) / 2);
+
+            MdiClient Mdiclnt1;
             foreach (Control ctrl in this.Controls)
             {
                 try
                 {
-                    Mdiclnt = (MdiClient)ctrl;
-                    Mdiclnt.BackColor = Color.White;
+                Mdiclnt1 = (MdiClient)ctrl;
+                Mdiclnt1.BackColor = Color.White;
                 }
                 catch (Exception)
                 {
-                    //Ignore Cast Error
+
                 }
             }
             frms forms = new frms();
@@ -118,11 +122,6 @@ namespace VOCAC.PL
             Statcdif._ServerCD = Cmbo.SelectedItem.ToString();
             LblSrvrNm.Text = Statcdif._ServerCD;
             this.Cmbo.SelectedIndexChanged += new System.EventHandler(this.Cmbo_SelectedIndexChanged);
-
-            //defintions def = new defintions();
-            //def.thread_ = new Thread(Chckcont);
-            //def.thread_.IsBackground = true;
-            //def.thread_.Start();
         }
         private void LogInBtn_Click(object sender, EventArgs e)
         {
@@ -149,8 +148,10 @@ namespace VOCAC.PL
                     IntializeUser();
                     SelctMainTables();
                     IntializeSwitchBoard(fn);
+                    getusrPic();
                     LblLogin.Text = "";
                     LblLogin.Image = Resources.Empty;
+                    DbStat.BackgroundImage = Resources.DBOn;
                 }
                 else
                 {
@@ -158,6 +159,7 @@ namespace VOCAC.PL
                     LblLogin.Image = Resources.Check_Marks2;
                     LblLogin.ForeColor = Color.Red;
                     StatBrPnlEn.Text = "Offline";
+                    DbStat.BackgroundImage = Resources.DBOff;
                 }
             }
             else
@@ -169,6 +171,36 @@ namespace VOCAC.PL
             }
             LogInBtn.Enabled = true;
             GC.Collect();
+
+            MdiClient Mdiclnt;
+            foreach (Control ctrl in this.Controls)
+            {
+                try
+                {
+                    Mdiclnt = (MdiClient)ctrl;
+                    if (Statcdif._ServerCD == "Eg Server")
+                    {
+                        FlowLayoutPanel1.BackColor = Color.FromArgb(192, 255, 192);
+                        FlowLayoutPanel1.BackgroundImage = Resources.VocaWtr;
+                        FlowLayoutPanel1.BackgroundImageLayout = ImageLayout.Stretch;
+                    }
+                    else if (Statcdif._ServerCD == "Training")
+                    {
+                        FlowLayoutPanel1.BackColor = Color.White;
+                        FlowLayoutPanel1.BackgroundImage = Resources.Demo;
+                        FlowLayoutPanel1.BackgroundImageLayout = ImageLayout.Center;
+                    }
+                }
+                catch (Exception)
+                {
+                    //Ignore Cast Error
+                }
+            }
+
+
+
+
+
         }
         private void IntializeSwitchBoard(function fn)
         {
@@ -259,6 +291,53 @@ namespace VOCAC.PL
 
             LblUsrRNm.Text = "Welcome " + CurrentUser.UsrRlNm;
 
+            int ConterWidt = 0;
+            if (CurrentUser.UsrUCatLvl >= 3 && CurrentUser.UsrUCatLvl <= 5)
+            {
+                GrpCounters.Visible = true;
+                //GrpCounters.Text = "ملخص أرقامي حتى : " & Now
+                //GrpCounters.Visible = True
+                //LblClsN.Text = Usr.PUsrClsN
+                //LblFlN.Text = Usr.PUsrFlN
+                //LblClsYDy.Text = Usr.PUsrClsYDy
+                //LblEvDy.Text = Usr.PUsrEvDy
+                //LblUnRead.Text = Usr.PUsrUnRead
+                //LblReadYDy.Text = Usr.PUsrReadYDy
+                //LblReOpY.Text = Usr.PUsrReOpY
+                //LblRecivDy.Text = Usr.PUsrRecvDy
+                //LblClsUpdted.Text = Usr.PUsrClsUpdtd
+                //LblFolwDy.Text = Usr.PUsrFolwDay
+                ConterWidt = GrpCounters.Width + GrpCounters.Margin.Left + GrpCounters.Margin.Right;
+            }
+            else
+            {
+                GrpCounters.Visible = false;
+                ConterWidt = 0;
+            }
+            DbStat.Margin = new Padding(DbStat.Margin.Left, 30, Statcdif.screenWidth - 100 - (DbStat.Width + DbStat.Margin.Left), DbStat.Margin.Bottom);
+            PictureBox1.Margin = new Padding(PictureBox1.Margin.Left, 50, Statcdif.screenWidth - 100 - (GroupBox1.Width + GroupBox1.Margin.Right + GroupBox1.Margin.Left + ConterWidt + PictureBox1.Width + PictureBox1.Margin.Left + 20), PictureBox1.Margin.Bottom);
+            LblUsrRNm.Margin = new Padding(LblUsrRNm.Margin.Left, LblUsrRNm.Margin.Top, Statcdif.screenWidth - 100 - (LblUsrRNm.Width + LblUsrRNm.Margin.Left), LblUsrRNm.Margin.Bottom);
+            LblSrvrNm.Margin = new Padding(LblSrvrNm.Margin.Left, LblSrvrNm.Margin.Top, Statcdif.screenWidth - 100 - (LblSrvrNm.Width + LblUsrRNm.Margin.Left), LblSrvrNm.Margin.Bottom);
+            LblLstSeen.Margin = new Padding(LblLstSeen.Margin.Left, LblLstSeen.Margin.Top, Statcdif.screenWidth - 100 - (LblLstSeen.Width + LblUsrRNm.Margin.Left), LblLstSeen.Margin.Bottom);
+        }
+        private void getusrPic()
+        {
+            try
+            {
+                byte[] image = (byte[])Statcdif.UserTable.Rows[0]["UsrPic"];
+                Image img;
+                using (MemoryStream ms = new MemoryStream(image))
+                {
+                    img = Image.FromStream(ms);
+                    PictureBox1.Image = img;
+                }
+            }
+            catch (Exception)
+            {
+                PictureBox1.Image = Resources.UsrResm;
+            }
+            PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            PictureBox1.BorderStyle = BorderStyle.None;
         }
         private void Chckcont()
         {
@@ -345,12 +424,7 @@ namespace VOCAC.PL
         }
         private void Button2_Click(object sender, EventArgs e)
         {
-            //Form[] dd = this.MdiChildren;
-            //foreach (Form f in dd)
-            //{
-            //    MessageBox.Show(f.Text);
-            //}
-
+            getusrPic();
         }
         private void tmrbringfront1(object sender, EventArgs e)
         {
@@ -428,8 +502,90 @@ namespace VOCAC.PL
         }
         private void Button1_Click(object sender, EventArgs e)
         {
-            //  function fn =  function.getfn
-            //fn.msg( Convert.ToString( jj(sender)),"test");
+            string startPath = @"C:\Users\ashraf\Desktop\UserPic\XXXXX";
+            DirectoryInfo d = new DirectoryInfo(startPath);
+            string[] files = Directory.GetFiles(startPath, "*.jpg", SearchOption.AllDirectories);
+
+            foreach (string oCurrent in files)
+            {
+                DirectoryInfo d1 = new DirectoryInfo(oCurrent);
+                //
+                byte[] image1 = File.ReadAllBytes(oCurrent);
+
+                SqlCommand sqlcmd = new SqlCommand();
+                sqlcmd.CommandType = CommandType.StoredProcedure;
+                sqlcmd.CommandText = "SP_A_USR_PIC";
+                SqlConnection con = new SqlConnection(Statcdif.strConn);
+                sqlcmd.Connection = con;
+                SqlParameter[] param = new SqlParameter[2];
+                param[0] = new SqlParameter("@id", SqlDbType.Int);
+                param[0].Value = Convert.ToInt32(d1.Name.Split(' ')[0]);
+                param[1] = new SqlParameter("@pic", SqlDbType.Image);
+                param[1].Value = image1;
+                sqlcmd.Parameters.Add(param[0]);
+                sqlcmd.Parameters.Add(param[1]);
+                try
+                {
+                    con.Open();
+                    sqlcmd.ExecuteNonQuery();
+                }
+                catch (Exception Ex)
+                {
+                    function fn = function.getfn;
+                    fn.msg("dd", "frfff");
+                }
+            }
+
+
+            //MemoryStream mr = new MemoryStream();
+            //PictureBox1.Image.Save(mr, PictureBox1.Image.RawFormat);
+            ////byte[] image = File.ReadAllBytes(@"C:\\Users\ashraf\\Desktop\\مطبخ غاده\\1.jpg");
+            //byte[] byteImage = mr.ToArray();
+
+
+        }
+        private void UploadYourPictureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+                openFileDialog.Filter = "JPG files (*.jpg)|*.*";
+                openFileDialog.FilterIndex = 2;
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    byte[] image1 = File.ReadAllBytes(openFileDialog.FileName);
+
+                    SqlCommand sqlcmd = new SqlCommand();
+                    sqlcmd.CommandType = CommandType.StoredProcedure;
+                    sqlcmd.CommandText = "AAAA";
+                    SqlConnection con = new SqlConnection(Statcdif.strConn);
+                    sqlcmd.Connection = con;
+                    SqlParameter[] param = new SqlParameter[2];
+                    param[0] = new SqlParameter("@id", SqlDbType.Int);
+                    param[0].Value = CurrentUser.UsrID;
+                    param[1] = new SqlParameter("@pic", SqlDbType.Image);
+                    param[1].Value = image1;
+                    sqlcmd.Parameters.Add(param[0]);
+                    sqlcmd.Parameters.Add(param[1]);
+                    try
+                    {
+                        con.Open();
+                        sqlcmd.ExecuteNonQuery();
+                        using (MemoryStream ms = new MemoryStream(image1))
+                        {
+                            PictureBox1.Image = Image.FromStream(ms);
+                        }
+                    }
+                    catch (Exception Ex)
+                    {
+                        function fn = function.getfn;
+                        fn.msg("خطأ في تحميل الصوره", "تحميل الصورة الشخصية");
+                    }
+                }
+
+            }
         }
     }
 }

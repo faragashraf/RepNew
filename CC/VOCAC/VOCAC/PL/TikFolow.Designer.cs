@@ -80,6 +80,8 @@
             this.StatusBar1 = new System.Windows.Forms.StatusBar();
             this.StatBrPnlEn = new System.Windows.Forms.StatusBarPanel();
             this.ContextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnExport = new System.Windows.Forms.Button();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.Panel3.SuspendLayout();
             this.Panel1.SuspendLayout();
             this.FlowLayoutPanel2.SuspendLayout();
@@ -93,6 +95,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlAr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlEn)).BeginInit();
             this.ContextMenuStrip2.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // Panel3
@@ -149,6 +152,7 @@
             this.FlowLayoutPanel2.Controls.Add(this.Panel1);
             this.FlowLayoutPanel2.Controls.Add(this.Panel2);
             this.FlowLayoutPanel2.Controls.Add(this.panel6);
+            this.FlowLayoutPanel2.Controls.Add(this.panel7);
             this.FlowLayoutPanel1.SetFlowBreak(this.FlowLayoutPanel2, true);
             this.FlowLayoutPanel2.Location = new System.Drawing.Point(112, 3);
             this.FlowLayoutPanel2.Margin = new System.Windows.Forms.Padding(195, 3, 3, 3);
@@ -289,15 +293,15 @@
             // 
             this.panel6.Controls.Add(this.checkBox1);
             this.panel6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.panel6.Location = new System.Drawing.Point(60, 3);
+            this.panel6.Location = new System.Drawing.Point(165, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(260, 52);
+            this.panel6.Size = new System.Drawing.Size(155, 52);
             this.panel6.TabIndex = 2177;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(100, 18);
+            this.checkBox1.Location = new System.Drawing.Point(19, 18);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(128, 23);
             this.checkBox1.TabIndex = 0;
@@ -753,6 +757,30 @@
             this.ContextMenuStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.ContextMenuStrip2.Size = new System.Drawing.Size(185, 70);
             // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnExport.BackColor = System.Drawing.Color.White;
+            this.btnExport.BackgroundImage = global::VOCAC.Properties.Resources.Export;
+            this.btnExport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnExport.FlatAppearance.BorderSize = 0;
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.Location = new System.Drawing.Point(10, 7);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(41, 45);
+            this.btnExport.TabIndex = 129;
+            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.btnExport);
+            this.panel7.Location = new System.Drawing.Point(98, 3);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(61, 56);
+            this.panel7.TabIndex = 2178;
+            // 
             // TikFolow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -786,6 +814,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlAr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlEn)).EndInit();
             this.ContextMenuStrip2.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -844,5 +873,7 @@
         internal System.Windows.Forms.Label LblAll;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.CheckBox checkBox1;
+        internal System.Windows.Forms.Button btnExport;
+        internal System.Windows.Forms.Panel panel7;
     }
 }

@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Linq;
 using System.Media;
 using System.Windows.Forms;
+using VOCAC.Properties;
+
 namespace VOCAC.PL
 {
     public partial class TikSetup : Form
@@ -28,6 +30,7 @@ namespace VOCAC.PL
         }
         DataSet ds = new DataSet();
         DataTable MendsrcTable;
+        DataTable ManagerTable;
         int TickKind;
         string PrdKind;
         string fieldtyp = null;
@@ -50,9 +53,15 @@ namespace VOCAC.PL
             {
                 MendsrcTable = new DataTable();
                 Statcdif.MendFildsTable.Rows.Clear();
+                ManagerTable = new DataTable();
 
                 MendsrcTable = setupDataSet1.Tables[0];
                 Statcdif.MendFildsTable = setupDataSet1.Tables[1];
+                ManagerTable = setupDataSet1.Tables[2];
+                comboBox1.DataSource = ManagerTable;
+                comboBox1.DisplayMember = "UsrRealNm";
+                comboBox1.ValueMember = "UsrId";
+                comboBox1.ResetText();
             }
 
         }
@@ -79,12 +88,16 @@ namespace VOCAC.PL
             TreeView1.SelectedNode.Expand();
             if (TreeView1.SelectedNode.Level == 2)
             {
+                Statcdif.ProdCompTable.PrimaryKey = new DataColumn[] { Statcdif.ProdCompTable.Columns["FnSQL"] };
+                DataRow DRW = Statcdif.ProdCompTable.Rows.Find(TreeView1.SelectedNode.Name);
                 btnaddnew.Visible = true;
                 PrdKind = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[0];
                 Prdct.Text = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[1];
                 Comp.Text = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[2];
                 CdfnID.Text = TreeView1.SelectedNode.Name;
                 Statcdif.MendFildsTable.DefaultView.RowFilter = "[MendCdFn]  = " + TreeView1.SelectedNode.Name;
+                comboBox1.SelectedValue = DRW.ItemArray[8];
+                comboBox1.Visible = true;
                 FlwMend.Controls.Clear();
                 Statcdif.FildList.Clear();
                 for (int i = 0; i < Statcdif.MendFildsTable.DefaultView.Count; i++)
@@ -109,6 +122,7 @@ namespace VOCAC.PL
                 FlwMend.Controls.Clear();
                 CdfnID.Text = "";
                 btnaddnew.Visible = false;
+                comboBox1.Visible = false;
                 DisposeAdditionFlowpanel();
             }
             if (TreeView1.SelectedNode.FullPath.ToString().Split('\\')[0] != PrdKind)
@@ -469,16 +483,18 @@ namespace VOCAC.PL
             txtfld.Font = new Font("Times new Roman", 12, FontStyle.Bold);
             txtfld.TextAlign = ContentAlignment.MiddleCenter;
             txtfld.Size = new Size(100, 30);
-
             if (status == true)
             {
                 txtfld.BackColor = Color.Red;
+                txtfld.Checked = false;
             }
             else
             {
                 txtfld.BackColor = Color.LimeGreen;
+                txtfld.Checked = true;
             }
-
+            txtfld.Click += new EventHandler(checkbox_Click);
+            //ProdIdentefication.Click += new EventHandler(colr);
             txtfld.Text = fildname;
             txtfld.Appearance = Appearance.Button;
             FlwMend.Controls.Add(txtfld);
@@ -599,6 +615,64 @@ namespace VOCAC.PL
             ds.Clear();
             da.Fill(ds);
         }
+        private void checkbox_Click(object sender, EventArgs e)
+        {
+            bool STAT;
+            CheckBox checkbox = (CheckBox)sender;
+            if (checkbox.Checked)
+            {
+                STAT = false;
+            }
+            else
+            {
+                STAT = true;
+            }
+            if (updateMendField(Convert.ToInt32(TreeView1.SelectedNode.Name), checkbox.Text, STAT) == null)
+            {
+                COLR(checkbox);
+            }
+            else
+            {
+                function fn = function.getfn;
+                fn.msg(Resources.ConnErr, "تحديث حالة الحقل");
+            }
+        }
+        private string updateMendField(int CDFNid, String FLDNAME, bool MendStat)
+        {
+            string msg = null;
+            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
+            cmd = new SqlCommand();
+            SqlParameter[] param = new SqlParameter[3];
+            param[0] = new SqlParameter("@CDFNID", SqlDbType.Int);
+            param[0].Value = CDFNid;
+            param[1] = new SqlParameter("@FLDNAME", SqlDbType.VarChar, 50);
+            param[1].Value = FLDNAME;
+            param[2] = new SqlParameter("@STAT", SqlDbType.Bit);
+            param[2].Value = MendStat;
+            DAL.Open();
+            try
+            {
+                DAL.Struc = DAL.ExcuteCommand("SP_A_MEND_STATE_UPDATE", param);
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+            }
+            DAL.Close();
+            return msg;
+        }
+        private void COLR(CheckBox CKBOX)
+        {
+            if (CKBOX.Checked)
+            {
+                CKBOX.BackColor = Color.LimeGreen;
+            }
+            else
+            {
+                CKBOX.BackColor = Color.Red;
+            }
+        }
     }
 }
+
 

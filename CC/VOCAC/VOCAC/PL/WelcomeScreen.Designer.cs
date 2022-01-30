@@ -45,9 +45,6 @@
             this.Label9 = new System.Windows.Forms.Label();
             this.FlowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.DbStat = new System.Windows.Forms.PictureBox();
-            this.FlowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.RadioButton1 = new System.Windows.Forms.RadioButton();
-            this.RadioButton2 = new System.Windows.Forms.RadioButton();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.LblClrSamCat = new System.Windows.Forms.Label();
             this.LblClrOperation = new System.Windows.Forms.Label();
@@ -110,7 +107,6 @@
             this.CNTXMNUPic.SuspendLayout();
             this.FlowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DbStat)).BeginInit();
-            this.FlowLayoutPanel2.SuspendLayout();
             this.GroupBox1.SuspendLayout();
             this.GrpCounters.SuspendLayout();
             this.Panel2.SuspendLayout();
@@ -203,7 +199,7 @@
             this.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PictureBox1.ContextMenuStrip = this.CNTXMNUPic;
             this.FlowLayoutPanel1.SetFlowBreak(this.PictureBox1, true);
-            this.PictureBox1.Location = new System.Drawing.Point(806, 293);
+            this.PictureBox1.Location = new System.Drawing.Point(47, 41);
             this.PictureBox1.Margin = new System.Windows.Forms.Padding(40, 0, 0, 0);
             this.PictureBox1.Name = "PictureBox1";
             this.PictureBox1.Size = new System.Drawing.Size(148, 184);
@@ -216,22 +212,23 @@
             this.CNTXMNUPic.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.UploadYourPictureToolStripMenuItem});
             this.CNTXMNUPic.Name = "CNTXMNUPic";
-            this.CNTXMNUPic.Size = new System.Drawing.Size(180, 26);
+            this.CNTXMNUPic.Size = new System.Drawing.Size(132, 26);
             // 
             // UploadYourPictureToolStripMenuItem
             // 
             this.UploadYourPictureToolStripMenuItem.Name = "UploadYourPictureToolStripMenuItem";
-            this.UploadYourPictureToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.UploadYourPictureToolStripMenuItem.Text = "Upload Your Picture";
+            this.UploadYourPictureToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.UploadYourPictureToolStripMenuItem.Text = "اختيار صوره";
+            this.UploadYourPictureToolStripMenuItem.Click += new System.EventHandler(this.UploadYourPictureToolStripMenuItem_Click);
             // 
             // LblSrvrNm
             // 
             this.LblSrvrNm.BackColor = System.Drawing.Color.Transparent;
             this.FlowLayoutPanel1.SetFlowBreak(this.LblSrvrNm, true);
-            this.LblSrvrNm.Font = new System.Drawing.Font("Times New Roman", 9F);
+            this.LblSrvrNm.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.LblSrvrNm.ForeColor = System.Drawing.Color.Red;
             this.LblSrvrNm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LblSrvrNm.Location = new System.Drawing.Point(3, 571);
+            this.LblSrvrNm.Location = new System.Drawing.Point(3, 322);
             this.LblSrvrNm.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.LblSrvrNm.Name = "LblSrvrNm";
             this.LblSrvrNm.Size = new System.Drawing.Size(289, 20);
@@ -263,7 +260,7 @@
             this.Label9.BackColor = System.Drawing.Color.Transparent;
             this.FlowLayoutPanel1.SetFlowBreak(this.Label9, true);
             this.Label9.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.Label9.Location = new System.Drawing.Point(988, 623);
+            this.Label9.Location = new System.Drawing.Point(988, 374);
             this.Label9.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.Label9.Name = "Label9";
             this.Label9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -276,7 +273,6 @@
             this.FlowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.FlowLayoutPanel1.Controls.Add(this.DbStat);
             this.FlowLayoutPanel1.Controls.Add(this.LblLanguage);
-            this.FlowLayoutPanel1.Controls.Add(this.FlowLayoutPanel2);
             this.FlowLayoutPanel1.Controls.Add(this.GroupBox1);
             this.FlowLayoutPanel1.Controls.Add(this.GrpCounters);
             this.FlowLayoutPanel1.Controls.Add(this.PictureBox1);
@@ -293,7 +289,7 @@
             this.FlowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.FlowLayoutPanel1.Name = "FlowLayoutPanel1";
             this.FlowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.FlowLayoutPanel1.Size = new System.Drawing.Size(304, 474);
+            this.FlowLayoutPanel1.Size = new System.Drawing.Size(409, 508);
             this.FlowLayoutPanel1.TabIndex = 99;
             this.FlowLayoutPanel1.Visible = false;
             // 
@@ -309,39 +305,6 @@
             this.DbStat.TabIndex = 79;
             this.DbStat.TabStop = false;
             // 
-            // FlowLayoutPanel2
-            // 
-            this.FlowLayoutPanel2.Controls.Add(this.RadioButton1);
-            this.FlowLayoutPanel2.Controls.Add(this.RadioButton2);
-            this.FlowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.FlowLayoutPanel2.Location = new System.Drawing.Point(573, 44);
-            this.FlowLayoutPanel2.Name = "FlowLayoutPanel2";
-            this.FlowLayoutPanel2.Size = new System.Drawing.Size(216, 27);
-            this.FlowLayoutPanel2.TabIndex = 99;
-            this.FlowLayoutPanel2.Visible = false;
-            // 
-            // RadioButton1
-            // 
-            this.RadioButton1.AutoSize = true;
-            this.RadioButton1.Checked = true;
-            this.RadioButton1.Location = new System.Drawing.Point(116, 3);
-            this.RadioButton1.Name = "RadioButton1";
-            this.RadioButton1.Size = new System.Drawing.Size(97, 17);
-            this.RadioButton1.TabIndex = 0;
-            this.RadioButton1.TabStop = true;
-            this.RadioButton1.Text = "تثبيت الشاشات";
-            this.RadioButton1.UseVisualStyleBackColor = true;
-            // 
-            // RadioButton2
-            // 
-            this.RadioButton2.AutoSize = true;
-            this.RadioButton2.Location = new System.Drawing.Point(11, 3);
-            this.RadioButton2.Name = "RadioButton2";
-            this.RadioButton2.Size = new System.Drawing.Size(99, 17);
-            this.RadioButton2.TabIndex = 1;
-            this.RadioButton2.Text = "تحريك الشاشات";
-            this.RadioButton2.UseVisualStyleBackColor = true;
-            // 
             // GroupBox1
             // 
             this.GroupBox1.BackColor = System.Drawing.Color.Transparent;
@@ -351,7 +314,7 @@
             this.GroupBox1.Controls.Add(this.LblClrNotUsr);
             this.GroupBox1.Controls.Add(this.LblClrSys);
             this.GroupBox1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GroupBox1.Location = new System.Drawing.Point(314, 44);
+            this.GroupBox1.Location = new System.Drawing.Point(536, 44);
             this.GroupBox1.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.GroupBox1.Name = "GroupBox1";
             this.GroupBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -445,7 +408,7 @@
             this.GrpCounters.Controls.Add(this.Label0);
             this.GrpCounters.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.GrpCounters.ForeColor = System.Drawing.Color.ForestGreen;
-            this.GrpCounters.Location = new System.Drawing.Point(954, 296);
+            this.GrpCounters.Location = new System.Drawing.Point(195, 44);
             this.GrpCounters.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.GrpCounters.Name = "GrpCounters";
             this.GrpCounters.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -453,7 +416,6 @@
             this.GrpCounters.TabIndex = 88;
             this.GrpCounters.TabStop = false;
             this.GrpCounters.Text = "ملخص أرقامي :";
-            this.GrpCounters.Visible = false;
             // 
             // LblFolwDy
             // 
@@ -637,7 +599,7 @@
             this.LblUsrRNm.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
             this.LblUsrRNm.ForeColor = System.Drawing.Color.Blue;
             this.LblUsrRNm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LblUsrRNm.Location = new System.Drawing.Point(3, 545);
+            this.LblUsrRNm.Location = new System.Drawing.Point(3, 296);
             this.LblUsrRNm.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.LblUsrRNm.Name = "LblUsrRNm";
             this.LblUsrRNm.Size = new System.Drawing.Size(289, 20);
@@ -652,14 +614,12 @@
             this.LblLstSeen.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.LblLstSeen.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.LblLstSeen.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LblLstSeen.Location = new System.Drawing.Point(3, 597);
+            this.LblLstSeen.Location = new System.Drawing.Point(3, 348);
             this.LblLstSeen.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.LblLstSeen.Name = "LblLstSeen";
             this.LblLstSeen.Size = new System.Drawing.Size(289, 20);
             this.LblLstSeen.TabIndex = 98;
-            this.LblLstSeen.Text = "ccc";
             this.LblLstSeen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LblLstSeen.Visible = false;
             // 
             // LblUsrIP
             // 
@@ -667,7 +627,7 @@
             this.FlowLayoutPanel1.SetFlowBreak(this.LblUsrIP, true);
             this.LblUsrIP.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.LblUsrIP.ForeColor = System.Drawing.Color.Red;
-            this.LblUsrIP.Location = new System.Drawing.Point(985, 762);
+            this.LblUsrIP.Location = new System.Drawing.Point(985, 513);
             this.LblUsrIP.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
             this.LblUsrIP.Name = "LblUsrIP";
             this.LblUsrIP.Size = new System.Drawing.Size(297, 20);
@@ -682,7 +642,7 @@
             this.FlowLayoutPanel1.SetFlowBreak(this.PubVerLbl, true);
             this.PubVerLbl.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.PubVerLbl.ForeColor = System.Drawing.Color.Red;
-            this.PubVerLbl.Location = new System.Drawing.Point(985, 782);
+            this.PubVerLbl.Location = new System.Drawing.Point(985, 533);
             this.PubVerLbl.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
             this.PubVerLbl.Name = "PubVerLbl";
             this.PubVerLbl.Size = new System.Drawing.Size(297, 20);
@@ -697,7 +657,7 @@
             this.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.Panel2.Controls.Add(this.SnOutBt);
             this.Panel2.Controls.Add(this.ExtBt);
-            this.Panel2.Location = new System.Drawing.Point(1047, 831);
+            this.Panel2.Location = new System.Drawing.Point(1047, 582);
             this.Panel2.Name = "Panel2";
             this.Panel2.Size = new System.Drawing.Size(242, 40);
             this.Panel2.TabIndex = 97;
@@ -735,7 +695,7 @@
             this.Panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Panel3.BackColor = System.Drawing.Color.Transparent;
             this.Panel3.Controls.Add(this.Button2);
-            this.Panel3.Location = new System.Drawing.Point(917, 832);
+            this.Panel3.Location = new System.Drawing.Point(917, 583);
             this.Panel3.Name = "Panel3";
             this.Panel3.Size = new System.Drawing.Size(124, 39);
             this.Panel3.TabIndex = 97;
@@ -879,6 +839,7 @@
             this.ToolTip1.SetToolTip(this.button1, "تسجيل الدخول");
             this.button1.UseCompatibleTextRendering = true;
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // TimerCon
@@ -1086,8 +1047,6 @@
             this.CNTXMNUPic.ResumeLayout(false);
             this.FlowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DbStat)).EndInit();
-            this.FlowLayoutPanel2.ResumeLayout(false);
-            this.FlowLayoutPanel2.PerformLayout();
             this.GroupBox1.ResumeLayout(false);
             this.GrpCounters.ResumeLayout(false);
             this.Panel2.ResumeLayout(false);
@@ -1111,15 +1070,11 @@
         internal System.Windows.Forms.Label LblRecivDy;
         internal System.Windows.Forms.Label Label8;
         internal System.Windows.Forms.Label LblReOpY;
-        internal System.Windows.Forms.PictureBox PictureBox1;
         internal System.Windows.Forms.ContextMenuStrip CNTXMNUPic;
         internal System.Windows.Forms.ToolStripMenuItem UploadYourPictureToolStripMenuItem;
         internal System.Windows.Forms.FlowLayoutPanel FlowLayoutPanel1;
         internal System.Windows.Forms.PictureBox DbStat;
         internal System.Windows.Forms.Label LblLanguage;
-        internal System.Windows.Forms.FlowLayoutPanel FlowLayoutPanel2;
-        internal System.Windows.Forms.RadioButton RadioButton1;
-        internal System.Windows.Forms.RadioButton RadioButton2;
         internal System.Windows.Forms.GroupBox GroupBox1;
         internal System.Windows.Forms.Label LblClrSamCat;
         internal System.Windows.Forms.Label LblClrOperation;
@@ -1181,5 +1136,6 @@
         internal System.Windows.Forms.Label PubVerLbl1;
         internal System.Windows.Forms.Button button1;
         public System.Windows.Forms.Panel panellgin;
+        public System.Windows.Forms.PictureBox PictureBox1;
     }
 }

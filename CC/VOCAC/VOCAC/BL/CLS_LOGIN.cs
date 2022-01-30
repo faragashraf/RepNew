@@ -32,7 +32,7 @@ namespace VOCAC.BL
             DataTable Dt = new DataTable();
             try
             {
-                DAL.Struc = DAL.SelectData("SP_USR_LOG_SLCT_UPDATE", param);
+                DAL.Struc = DAL.SelectData("SP_A_USR_LOG_SLCT_UPDATE", param);
             }
             catch (Exception ex)
             {
