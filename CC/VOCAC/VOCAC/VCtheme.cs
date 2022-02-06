@@ -16,7 +16,7 @@ namespace VOCAC
             VCBtn.BackgroundImageLayout = ImageLayout.Stretch;
             if (VCBtn.Text.Split(' ').Count() > 1)
             {
-                VCBtn.Font = new Font("Times new Roman", VCBtn.Width / 14, FontStyle.Regular, GraphicsUnit.Point);
+                VCBtn.Font = new Font("Times new Roman", VCBtn.Width / 10, FontStyle.Regular, GraphicsUnit.Point);
             }
             else
             {

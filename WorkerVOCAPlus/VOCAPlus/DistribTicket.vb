@@ -223,56 +223,82 @@ Public Class DistribTicket
         'GridTicket.Rows(DisributeTable.Rows.Count - 1).Selected = True
         'GridTicket.Refresh()
         'MsgBox(Convert.ToInt32(DisributeTable.Compute("count(TkSQL) ", "[متابع الشكوى] =''")))
-
-
+        Dim Tbl As New DataTable
+        Tbl.Columns.Add("SQLID")
+        Tbl.Columns.Add("UserID")
         For Cnt_ = 0 To GridTicket.Rows.Count - 1
-            'PublicCode.FncGrdCurrRow(GridTicket, Cnt_)
             If GridTicket.Rows(Cnt_).Cells(26).Value.ToString.Length > 0 Then
-                TrnsCnt += 1
-                LblMsg.Text = "جاري تحويل " & TrnsCnt & " من " & (From row As DataGridViewRow In GridTicket.Rows
-                                                                  Where Len(row.Cells(26).Value.ToString) > 0 And row.Cells(26).Value IsNot DBNull.Value.ToString
-                                                                  Select row.Cells(26).Value).Count().ToString("N0") & " شكوى"
-                LblMsg.Refresh()
-                LblMsg.ForeColor = Color.Green
-                Try
-                    If sqlCon.State = ConnectionState.Closed Then
-                        sqlCon.Open()
-                    End If
-                    sqlComminsert_1.Connection = sqlCon
-                    sqlComminsert_2.Connection = sqlCon
-                    sqlComminsert_1.CommandType = CommandType.Text
-                    sqlComminsert_2.CommandType = CommandType.Text
-
-                    sqlComminsert_1.CommandText = "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" & GridTicket.Rows(Cnt_).Cells(0).Value.ToString & "','" & "The Complaint has been sent to " & GridTicket.Rows(Cnt_).Cells(26).Value.ToString & "','" & "1" & "','" & "2" & "','" & OsIP() & "','" & Usr.PUsrID & "')"
-                    sqlComminsert_2.CommandText = "update Tickets set TkEmpNm = " & GridTicket.Rows(Cnt_).Cells(25).Value.ToString & ", TkRecieveDt = (Select GetDate()) Where (TkSQL = " & GridTicket.Rows(Cnt_).Cells(0).Value & ")"
-                    '                                                                                                                                 
-                    Tran = sqlCon.BeginTransaction()
-                    sqlComminsert_1.Transaction = Tran
-                    sqlComminsert_2.Transaction = Tran
-                    sqlComminsert_1.ExecuteNonQuery()
-                    sqlComminsert_2.ExecuteNonQuery()
-                    Tran.Commit()
-                    sqlCon.Close()
-                    SqlConnection.ClearPool(sqlCon)
-                Catch ex As Exception
-                    Tran.Rollback()
-                    AppLog("1027&H", Errmsg, sqlComminsert_1.CommandText & "_" & sqlComminsert_2.CommandText)
-                    TrnsErr = True
-                    TrnsECnt_Count += 1
-                End Try
+                Tbl.Rows.Add(GridTicket.Rows(Cnt_).Cells(0).Value, GridTicket.Rows(Cnt_).Cells(25).Value)
             End If
+#Region "Old Code"
+
+            '    TrnsCnt += 1
+            '    LblMsg.Text = "جاري تحويل " & TrnsCnt & " من " & (From row As DataGridViewRow In GridTicket.Rows
+            '                                                      Where Len(row.Cells(26).Value.ToString) > 0 And row.Cells(26).Value IsNot DBNull.Value.ToString
+            '                                                      Select row.Cells(26).Value).Count().ToString("N0") & " شكوى"
+            '    LblMsg.Refresh()
+            '    LblMsg.ForeColor = Color.Green
+            '    Try
+            '        If sqlCon.State = ConnectionState.Closed Then
+            '            sqlCon.Open()
+            '        End If
+            '        sqlComminsert_1.Connection = sqlCon
+            '        sqlComminsert_2.Connection = sqlCon
+            '        sqlComminsert_1.CommandType = CommandType.Text
+            '        sqlComminsert_2.CommandType = CommandType.Text
+
+            '        sqlComminsert_1.CommandText = "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" & GridTicket.Rows(Cnt_).Cells(0).Value.ToString & "','" & "The Complaint has been sent to " & GridTicket.Rows(Cnt_).Cells(26).Value.ToString & "','" & "1" & "','" & "2" & "','" & OsIP() & "','" & Usr.PUsrID & "')"
+            '        sqlComminsert_2.CommandText = "update Tickets set TkEmpNm = " & GridTicket.Rows(Cnt_).Cells(25).Value.ToString & ", TkRecieveDt = (Select GetDate()) Where (TkSQL = " & GridTicket.Rows(Cnt_).Cells(0).Value & ")"
+            '        '                                                                                                                                 
+            '        Tran = sqlCon.BeginTransaction()
+            '        sqlComminsert_1.Transaction = Tran
+            '        sqlComminsert_2.Transaction = Tran
+            '        sqlComminsert_1.ExecuteNonQuery()
+            '        sqlComminsert_2.ExecuteNonQuery()
+            '        Tran.Commit()
+            '        sqlCon.Close()
+            '        SqlConnection.ClearPool(sqlCon)
+            '    Catch ex As Exception
+            '        Tran.Rollback()
+            '        AppLog("1027&H", Errmsg, sqlComminsert_1.CommandText & "_" & sqlComminsert_2.CommandText)
+            '        TrnsErr = True
+            '        TrnsECnt_Count += 1
+            '    End Try
+
+#End Region
+
         Next Cnt_
-        LblMsg.Text = "تم تحويل عدد " & (From row As DataGridViewRow In GridTicket.Rows
-                                         Where Len(row.Cells(26).Value.ToString) > 0 And row.Cells(26).Value IsNot DBNull.Value.ToString
-                                         Select row.Cells(26).Value).Count().ToString("N0") & " شكوى"
-        LblMsg.ForeColor = Color.Green
-        If TrnsErr = True Then GoTo Err_
-        Exit Sub
-Err_:
-        LblMsg.Text = ""
-        WelcomeScreen.TimerCon.Start()
-        WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
-        MsgErr("كود خطأ : " & "1027&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & "لم يتم تحويل عدد " & TrnsECnt_Count)
+
+        Dim msg As String = Nothing
+        Dim state As New APblicClss.Defntion
+        Dim sqlComminsert_1 As New SqlCommand            'SQL Command
+        Dim param(2) As SqlParameter
+        sqlComminsert_1.CommandType = CommandType.StoredProcedure
+        sqlComminsert_1.CommandText = "SP_TICKET_Distribute"
+        sqlComminsert_1.Connection = state.CONSQL
+        param(0) = New SqlParameter("@TkupUserIP", SqlDbType.NVarChar, 15)
+        param(0).Value = OsIP()
+        param(1) = New SqlParameter("@UserDisID", SqlDbType.Int)
+        param(1).Value = Usr.PUsrID
+        param(2) = New SqlParameter()
+        param(2).ParameterName = "@TicketsCollection"
+        param(2).Value = Tbl
+
+        For i = 0 To param.Length - 1
+            sqlComminsert_1.Parameters.Add(param(i))
+        Next
+
+        Try
+            If state.CONSQL.State = ConnectionState.Closed Then
+                state.CONSQL.Open()
+            End If
+            sqlComminsert_1.ExecuteNonQuery()
+            LblMsg.ForeColor = Color.Green
+        Catch ex As Exception
+            msg = ex.Message
+            AppLog("1011&H", ex.Message, sqlComminsert_1.CommandText)
+            MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
+        End Try
     End Sub
     Private Sub CloseBtn_Click(sender As Object, e As EventArgs) Handles CloseBtn.Click
         Dim Rslt As DialogResult

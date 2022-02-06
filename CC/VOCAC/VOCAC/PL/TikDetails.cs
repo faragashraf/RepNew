@@ -46,5 +46,12 @@ namespace VOCAC.PL
             forms.FrmAllSub(this);
             //هأكمل بقيت الكود هنا
         }
+        private void BtnUpd_Click(object sender, EventArgs e)
+        {
+            getupdate();
+            TikUpdate.getTikupdatefrm.MdiParent = WelcomeScreen.ActiveForm;
+            TikUpdate.getTikupdatefrm.WindowState = FormWindowState.Normal;
+            TikUpdate.getTikupdatefrm.Show();
+        }
     }
 }

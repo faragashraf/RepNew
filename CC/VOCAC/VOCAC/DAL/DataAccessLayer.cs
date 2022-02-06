@@ -112,12 +112,13 @@ namespace VOCAC.DAL
             }
             try
             {
+                Open();
                 sqlcmd.ExecuteNonQuery();
             }
             catch (Exception Ex)
             {
-                function fn = function.getfn;
                 Struc.msg = Ex.Message;
+                function fn = function.getfn;
                 fn.AppLog(this.ToString(), Ex.Message, Stored_Procedure);
             }
             return Struc;

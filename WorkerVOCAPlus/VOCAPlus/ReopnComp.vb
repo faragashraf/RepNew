@@ -43,7 +43,7 @@
                 LblMsg.Text = "جاري تحميل البيانات ...."
                 LblMsg.ForeColor = Color.Green
                 '                   0          1          2         3      4      5      6       7        8         9        10             
-                If GetTbl("SELECT TkSQL, TkClsStatus, TkDtStart, TkKind, TkID, TkClNm, PrdNm, CompNm, UsrRealNm, TkClPh, TkDetails FROM TicketsAll WHERE (TkID = " & TxtCompId.Text & ") AND (TkClsStatus = 1) AND (" & MyTeam(Usr.PUsrCat, Usr.PUsrID, "TkEmpNm", True) & ");", ReopnTable, "1030&H") = Nothing Then
+                If GetTbl("SELECT TkSQL, TkClsStatus, TkDtStart, TkKind, TkID, TkClNm, PrdNm, CompNm, UsrRealNm, TkClPh, TkDetails FROM TicketsAll WHERE (TkID = " & TxtCompId.Text & ") AND (TkClsStatus = 1) ", ReopnTable, "1030&H") = Nothing Then
                     If ReopnTable.Rows.Count > 0 Then
                         TxtPh1.Text = ReopnTable(0).Item(9).ToString
                         TxtDt.Text = ReopnTable(0).Item(2).ToString
@@ -59,24 +59,16 @@
                             LblMsg.Text = ""
                         Else
                             TcktImg.BackgroundImage = My.Resources.Tckon
-                                BtnGet.Tag = "تحميل"
-                                LblMsg.Text = "الشكوى رقم " & TxtCompId.Text & " مفتوحة بالفعل"
-                                LblMsg.ForeColor = Color.Red
-                                Beep()
-                            End If
-                            Else
-                            ReopnTable.Rows.Clear()
-                        If GetTbl("SELECT TkSQL, TkClsStatus, TkDtStart, TkKind, TkID, TkClNm, PrdNm, CompNm, UsrRealNm, TkClPh, TkDetails FROM TicketsAll WHERE (TkID = " & TxtCompId.Text & ") AND (TkClsStatus = 1)", ReopnTable, "1030&H") = Nothing Then
-                            If ReopnTable.Rows.Count > 0 Then
-                                LblMsg.Text = "الشكوى لا تخص فريقك - من فضلك تأكد من الرقم الذي قمت بإدخاله"
-                                LblMsg.ForeColor = Color.Red
-                                Beep()
-                            Else
-                                LblMsg.Text = "لا توجد شكوى مسجلة بهذا الرقم - الشكوى قد تكون مفتوحة - من فضلك تأكد من الرقم الذي قمت بإدخاله"
-                                LblMsg.ForeColor = Color.Red
-                                Beep()
-                            End If
+                            BtnGet.Tag = "تحميل"
+                            LblMsg.Text = "الشكوى رقم " & TxtCompId.Text & " مفتوحة بالفعل"
+                            LblMsg.ForeColor = Color.Red
+                            Beep()
                         End If
+                    Else
+
+                        LblMsg.Text = "لا توجد شكوى مسجلة بهذا الرقم - الشكوى قد تكون مفتوحة - من فضلك تأكد من الرقم الذي قمت بإدخاله"
+                        LblMsg.ForeColor = Color.Red
+                        Beep()
                     End If
                 Else
                     MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
@@ -88,18 +80,26 @@
                     BtnGet.Enabled = False
                     LblMsg.Text = "جاري إعادة فتح الشكوى ...."
                     LblMsg.ForeColor = Color.Green
-                    If InsTrans("update Tickets set TkClsStatus = 0, TkDtClose = '', TkReOp = 1 where (TkSQL = " & ReopnTable(0).Item(0) & ");",
-                "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" & ReopnTable(0).Item(0) & "','" & "The Complaint has been Reopened" & "','" & "1" & "','" & "999" & "','" & OsIP() & "','" & Usr.PUsrID & "')",
-                "1031&H") = Nothing Then
+                    If insupdate(ReopnTable(0).Item(0), "The Complaint has been Reopened", 1, 999, OsIP(), Usr.PUsrID) = Nothing Then
+
                         BtnGet.Tag = "تحميل"
                         BtnGet.Enabled = True
                         BtnGet.BackgroundImage = My.Resources.DbGet
                         LblMsg.Text = "تم إعادة فتح الشكوى رقم " & ReopnTable(0).Item(4) & " بنجاح"
                         LblMsg.ForeColor = Color.Green
                         TcktImg.BackgroundImage = My.Resources.Tckon
-                    Else
-                        MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
                     End If
+
+                    '    If InsTrans("update Tickets set TkClsStatus = 0, TkDtClose = '', TkReOp = 1 where (TkSQL = " & ReopnTable(0).Item(0) & ");",
+                    '"insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" &
+                    'ReopnTable(0).Item(0) & "','" & "The Complaint has been Reopened" & "','" & "1" & "','" & "999" & "','" & OsIP() & "','" & Usr.PUsrID & "')",
+                    '"1031&H") = Nothing Then
+
+
+
+                    '    Else
+                    '        MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
+                    '    End If
                 Else
                     BtnGet.Tag = "تحميل"
                     BtnGet.Enabled = True
@@ -120,7 +120,44 @@
         End If
         BtnGet.Enabled = True
     End Sub
+    Private Function insupdate(id As Integer, txt As String, read As Boolean, EvId As Integer, IP As String, Updateuser As Integer) As String
+        Dim msg As String = Nothing
+        Dim state As New APblicClss.Defntion
+        Dim sqlComminsert_1 As New SqlCommand            'SQL Command
+        Dim param(5) As SqlParameter
+        sqlComminsert_1.CommandType = CommandType.StoredProcedure
+        sqlComminsert_1.CommandText = "SP_TICKET_EVENT_INSERT"
+        sqlComminsert_1.Connection = state.CONSQL
+        param(0) = New SqlParameter("@TkupTkSql", SqlDbType.Int)
+        param(0).Value = id
+        param(1) = New SqlParameter("@TkupTxt", SqlDbType.NVarChar)
+        param(1).Value = txt
+        param(2) = New SqlParameter("@TkupUnread", SqlDbType.Bit)
+        param(2).Value = read
+        param(3) = New SqlParameter("@TkupEvtId", SqlDbType.Int)
+        param(3).Value = EvId
+        param(4) = New SqlParameter("@TkupUserIP", SqlDbType.NVarChar, 15)
+        param(4).Value = IP
+        param(5) = New SqlParameter("@TkupUser", SqlDbType.Int)
+        param(5).Value = Updateuser
 
+        For i = 0 To param.Length - 1
+            sqlComminsert_1.Parameters.Add(param(i))
+        Next
+
+        Try
+            If state.CONSQL.State = ConnectionState.Closed Then
+                state.CONSQL.Open()
+            End If
+            sqlComminsert_1.ExecuteNonQuery()
+        Catch ex As Exception
+            msg = ex.Message
+            AppLog("1011&H", ex.Message, sqlComminsert_1.CommandText)
+            MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
+        End Try
+
+        Return msg
+    End Function
     Private Sub BtnGet_MouseEnter(sender As Object, e As EventArgs) Handles BtnGet.MouseEnter
         ToolTip1.Show(BtnGet.Tag, BtnGet, 0, 20, 500)
     End Sub

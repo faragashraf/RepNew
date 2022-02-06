@@ -602,7 +602,6 @@ Partial Class TikFolow
 
     End Sub
     Friend WithEvents CloseBtn As Button
-    Friend WithEvents GridTicket As DataGridView
     Friend WithEvents SerchTxt As TextBox
     Friend WithEvents FilterComb As ComboBox
     Friend WithEvents ToolTip1 As ToolTip
@@ -642,4 +641,5 @@ Partial Class TikFolow
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
+    Public WithEvents GridTicket As DataGridView
 End Class

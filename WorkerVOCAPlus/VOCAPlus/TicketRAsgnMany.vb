@@ -366,7 +366,7 @@
                     Tran.Rollback()
                     AppLog("1039&H", ex.Message, sqlComminsert_1.CommandText & "_" & sqlComminsert_2.CommandText)
                     WelcomeScreen.TimerCon.Start()
-                    WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+                    'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
                     MsgErr("كود خطأ : " & "1039&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
                     Exit Sub
                 End Try
@@ -556,7 +556,7 @@
 Err_:
         LblStus.Text = ""
         WelcomeScreen.TimerCon.Start()
-        WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+        'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
         MsgErr("كود خطأ : " & "1027&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & "لم يتم تحويل عدد " & TrnsECnt_Count)
     End Sub
     Private Sub BtnSubmit_Click(sender As Object, e As EventArgs) Handles BtnSubmit.Click

@@ -460,8 +460,7 @@ namespace VOCAC.PL
             BtnAdd.Enabled = true;
             if (TreeView1.SelectedNode.Level == 2)
             {
-                Statcdif.ProdCompTable.PrimaryKey = new DataColumn[] { Statcdif.ProdCompTable.Columns["FnSQL"] };
-                DataRow DRW = Statcdif.ProdCompTable.Rows.Find(TreeView1.SelectedNode.Name);
+                DataRow DRW = function.DRW(Statcdif.ProdCompTable, TreeView1.SelectedNode.Name, Statcdif.ProdCompTable.Columns["FnSQL"]);
                 itemRef = DRW.ItemArray[7].ToString();
                 TeamIdentfier = Convert.ToInt32(DRW.ItemArray[8]);
                 Help_ = DRW.ItemArray[11].ToString();
@@ -804,7 +803,7 @@ namespace VOCAC.PL
             SqlParameter[] param = new SqlParameter[13];
             SqlCommand sqlcmd = new SqlCommand();
             sqlcmd.CommandType = CommandType.StoredProcedure;
-            sqlcmd.CommandText = "SP_ONE_TICKETS_INSERT";
+            sqlcmd.CommandText = "SP_TICKETS_INSERT";
             sqlcmd.Connection = sqlcon;
             param[0] = new SqlParameter("@TkKind", SqlDbType.Bit);
             param[0].Value = kind;
@@ -906,10 +905,10 @@ namespace VOCAC.PL
                     mndtbl.Rows.Add(0, KK, Dpkr.Value);
                 }
             }
-            Statcdif.ProdCompTable.DefaultView.RowFilter = "[FnSQL]  = " + TreeView1.SelectedNode.Name;
+            //Statcdif.ProdCompTable.DefaultView.RowFilter = "[FnSQL]  = " + TreeView1.SelectedNode.Name;
             DAL.DataAccessLayer.rturnStruct Accesslogreslt = insertTicket(
                 Convert.ToBoolean(TickKind)                                         //Ticket Kind
-                , Convert.ToInt32(Statcdif.ProdCompTable.DefaultView[0]["FnSQL"])  //Ticket Pcoduct & Cmplaint Code SQL
+                , Convert.ToInt32(TreeView1.SelectedNode.Name)  //Ticket Pcoduct & Cmplaint Code SQL
                 , Convert.ToInt32(SrcCmbBx.SelectedValue)                     //Ticket Source
                 , NameTxtBx.Text.ToString()                                       //Ticket Client Name
                 , Phon1TxtBx.Text.ToString()                                       //Ticket Client Phone Number 1

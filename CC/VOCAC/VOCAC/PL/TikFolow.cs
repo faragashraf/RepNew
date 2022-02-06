@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -379,10 +380,13 @@ namespace VOCAC.PL
                 if (frms.FormIsOpen(Application.OpenForms, typeof(TikDetails)) == true)
                 {
                     ShowResult();
-                    GC.Collect();
                 }
-
+                if (frms.FormIsOpen(Application.OpenForms, typeof(TikUpdate)) == true)
+                {
+                    ticketCurrent.getupdate();
+                }
             }
+            GC.Collect();
         }
         private void ShowResult()
         {
@@ -465,11 +469,37 @@ namespace VOCAC.PL
         private void btnExport_Click(object sender, EventArgs e)
         {
             function fn = function.getfn;
-            if (TickTblMain.Rows.Count > 0)
+            if (TickTblMain.DefaultView.Count > 0)
             {
-                if (fn.exportxlsx(TickTblMain, CurrentUser.UsrRlNm) == null)
+                DataTable exporTbl = new DataTable();
+                exporTbl = TickTblMain.DefaultView.ToTable();
+                List<int> lst = new List<int>();
+                for (int i = 0; i < GridTicket.Columns.Count; i++)
+                {
+                    if (GridTicket.Columns[i].Visible == false)
+                    {
+                        lst.Add(i);
+                    }
+                    else
+                    {
+                        exporTbl.Columns[i].ColumnName = GridTicket.Columns[i].HeaderText;
+
+                    }
+                }
+                lst.Reverse();
+                for (int i = 0; i < lst.Count; i++)
+                {
+                    int Index = lst[i];
+                    exporTbl.Columns.RemoveAt(Index);
+                }
+                string Rslt = fn.exportxlsx(exporTbl, CurrentUser.UsrRlNm);
+                if (Rslt == null)
                 {
                     fn.msg("تم استخراج البيانات بنجاح", "استخراج البيانات");
+                }
+                else if (Rslt == "X")
+                {
+                    fn.msg("لقد قمت بإلغاء استخراج البيانات", "استخراج البيانات");
                 }
                 else
                 {

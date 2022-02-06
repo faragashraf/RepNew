@@ -133,7 +133,6 @@ Partial Class WelcomeScreen
         '
         'TimerTikCoun
         '
-        Me.TimerTikCoun.Enabled = True
         Me.TimerTikCoun.Interval = 1000
         '
         'MenuSw
@@ -812,6 +811,7 @@ Partial Class WelcomeScreen
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(124, 39)
         Me.Panel3.TabIndex = 97
+        Me.Panel3.Visible = False
         '
         'TimerColctLog
         '

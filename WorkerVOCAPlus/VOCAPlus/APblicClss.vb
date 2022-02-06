@@ -14,7 +14,8 @@ Module Public_
     Public screenHeight As Integer = Screen.PrimaryScreen.Bounds.Height
     Public ServerCD As String = "Eg Server"
     Public ServerNm As String = "VOCA Server"
-    Public strConn As String = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-7"
+    '@VocaPlus$21-7
+    Public strConn As String = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-127"
     '"Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaplus21;Password=@VocaPlus$21-4"
     '"Data Source=MYTHINKBOOK\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
     Public sqlCon As New SqlConnection(strConn) ' I Have assigned conn STR here and delete this row from all project
@@ -148,13 +149,13 @@ Public Class APblicClss
             state.Errmsg = Nothing
             strConn = Nothing
             If ServerCD = "Eg Server" Then
-                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-7"
+                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-127"
                 ServerNm = "VOCA Server"
             ElseIf ServerCD = "My Labtop" Then
                 strConn = "Data Source=MyThinkbook\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
                 ServerNm = "My Labtop"
             ElseIf ServerCD = "Training" Then
-                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-7"
+                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-127"
                 ServerNm = "Training"
             ElseIf ServerCD = "OnLine" Then
                 strConn = "Data Source=34.123.217.183;Initial Catalog=vocaplus;Persist Security Info=True;User ID=sqlserver;Password=Hemonad105046"
@@ -234,14 +235,18 @@ Public Class APblicClss
                 If state.CONSQL.State = ConnectionState.Closed Or state.CONSQL.State = ConnectionState.Broken Then
                     state.CONSQL.Open()
                 End If
-
+                state.Tran = state.CONSQL.BeginTransaction(IsolationLevel.Snapshot)
+                sqlCommW.Transaction = state.Tran
+                state.Tran.Commit()
                 state.reader = sqlCommW.ExecuteReader
                 SqlTbl.Load(state.reader)
+
                 worker.ReportProgress(0, state)
                 StW.Stop()
                 Dim TimSpn As TimeSpan = (StW.Elapsed)
                 ElapsedTimeSpan = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimSpn.Hours, TimSpn.Minutes, TimSpn.Seconds, TimSpn.Milliseconds / 10)
             Catch ex As Exception
+                state.Tran.Rollback()
                 If ex.Message.Contains("The connection is broken and recovery is not possible") Then
                     state.CONSQL.Close()
                     SqlConnection.ClearPool(state.CONSQL)
@@ -265,12 +270,16 @@ Public Class APblicClss
                 If state.CONSQL.State = ConnectionState.Closed Or state.CONSQL.State = ConnectionState.Broken Then
                     state.CONSQL.Open()
                 End If
+                state.Tran = state.CONSQL.BeginTransaction(IsolationLevel.Snapshot)
+                sqlCommW.Transaction = state.Tran
+                state.Tran.Commit()
                 state.reader = sqlCommW.ExecuteReader
                 SqlTbl.Load(state.reader)
                 StW.Stop()
                 Dim TimSpn As TimeSpan = (StW.Elapsed)
                 ElapsedTimeSpan = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimSpn.Hours, TimSpn.Minutes, TimSpn.Seconds, TimSpn.Milliseconds / 10)
             Catch ex As Exception
+                state.Tran.Rollback()
                 If ex.Message.Contains("The connection is broken and recovery is not possible") Then
                     state.CONSQL.Close()
                     SqlConnection.ClearPool(state.CONSQL)
@@ -429,7 +438,7 @@ Public Class APblicClss
                 Dim frmCollection = Application.OpenForms
                 If frmCollection.OfType(Of WelcomeScreen).Any Then
                     WelcomeScreen.TimerCon.Start()
-                    WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+                    'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
                 End If
             End Try
             Return Def.Nw
@@ -985,7 +994,8 @@ Sec2:
             Dim Def As New APblicClss.Defntion
             Try
                 StruGrdTk.Tick = GrdTick.CurrentRow.Cells("TkKind").Value
-                StruGrdTk.FlwStat = GrdTick.CurrentRow.Cells("TkClsStatus").Value
+                StruGrdTk.FlwStat = GrdTick.CurrentRow.Cells("TkFolw").Value
+                StruGrdTk.ClsStat = GrdTick.CurrentRow.Cells("TkClsStatus").Value
                 StruGrdTk.Sql = GrdTick.CurrentRow.Cells("TkSQL").Value
                 StruGrdTk.Ph1 = GrdTick.CurrentRow.Cells("TkClPh").Value
                 StruGrdTk.Ph2 = GrdTick.CurrentRow.Cells("TkClPh1").Value.ToString
@@ -1005,7 +1015,7 @@ Sec2:
                 StruGrdTk.Card = GrdTick.CurrentRow.Cells("TkCardNo").Value.ToString
                 StruGrdTk.Gp = GrdTick.CurrentRow.Cells("TkGBNo").Value.ToString
                 StruGrdTk.NID = GrdTick.CurrentRow.Cells("TkClNtID").Value.ToString
-                StruGrdTk.Amnt = GrdTick.CurrentRow.Cells("TkAmount").Value
+                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkAmount").Value) = False Then StruGrdTk.Amnt = GrdTick.CurrentRow.Cells("TkAmount").Value
                 If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkTransDate").Value) = False Then StruGrdTk.TransDt = GrdTick.CurrentRow.Cells("TkTransDate").Value
                 If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("UsrRealNm").Value) = False Then StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("UsrRealNm").Value
                 'StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("UsrRealNm").Value

@@ -67,14 +67,14 @@
             this.TxtDetails = new System.Windows.Forms.RichTextBox();
             this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.FlowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.FlwMend = new System.Windows.Forms.FlowLayoutPanel();
-            this.FlowDetls = new System.Windows.Forms.FlowLayoutPanel();
-            this.TxtTikID = new System.Windows.Forms.Label();
-            this.TimerVisInvs = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.TxtTikCreat = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TxtTikCreatTeam = new System.Windows.Forms.TextBox();
+            this.FlwMend = new System.Windows.Forms.FlowLayoutPanel();
+            this.FlowDetls = new System.Windows.Forms.FlowLayoutPanel();
+            this.TxtTikID = new System.Windows.Forms.Label();
+            this.TimerVisInvs = new System.Windows.Forms.Timer(this.components);
             this.FlowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TcktImg)).BeginInit();
             this.Panel1.SuspendLayout();
@@ -93,7 +93,7 @@
             this.FlowLayoutPanel2.Controls.Add(this.Panel3);
             this.FlowLayoutPanel2.Controls.Add(this.Panel2);
             this.FlowLayoutPanel2.Controls.Add(this.LblWDays);
-            this.FlowLayoutPanel2.Location = new System.Drawing.Point(33, 26);
+            this.FlowLayoutPanel2.Location = new System.Drawing.Point(52, 26);
             this.FlowLayoutPanel2.Name = "FlowLayoutPanel2";
             this.FlowLayoutPanel2.Size = new System.Drawing.Size(605, 633);
             this.FlowLayoutPanel2.TabIndex = 2116;
@@ -132,6 +132,7 @@
             this.BtnUpd.TabIndex = 2082;
             this.BtnUpd.Text = "التحديثات";
             this.BtnUpd.UseVisualStyleBackColor = true;
+            this.BtnUpd.Click += new System.EventHandler(this.BtnUpd_Click);
             // 
             // TxtDetailsAdd
             // 
@@ -606,49 +607,11 @@
             this.FlowLayoutPanel1.Controls.Add(this.Label43);
             this.FlowLayoutPanel1.Controls.Add(this.TxtDetails);
             this.FlowLayoutPanel1.Controls.Add(this.FlwMend);
-            this.FlowLayoutPanel1.Location = new System.Drawing.Point(644, 26);
+            this.FlowLayoutPanel1.Location = new System.Drawing.Point(663, 26);
             this.FlowLayoutPanel1.Name = "FlowLayoutPanel1";
             this.FlowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.FlowLayoutPanel1.Size = new System.Drawing.Size(688, 726);
             this.FlowLayoutPanel1.TabIndex = 2115;
-            // 
-            // FlwMend
-            // 
-            this.FlwMend.Location = new System.Drawing.Point(9, 450);
-            this.FlwMend.Margin = new System.Windows.Forms.Padding(80, 3, 3, 3);
-            this.FlwMend.Name = "FlwMend";
-            this.FlwMend.Size = new System.Drawing.Size(599, 252);
-            this.FlwMend.TabIndex = 2165;
-            // 
-            // FlowDetls
-            // 
-            this.FlowDetls.AutoScroll = true;
-            this.FlowDetls.Controls.Add(this.TxtTikID);
-            this.FlowDetls.Controls.Add(this.FlowLayoutPanel1);
-            this.FlowDetls.Controls.Add(this.FlowLayoutPanel2);
-            this.FlowDetls.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FlowDetls.Location = new System.Drawing.Point(0, 0);
-            this.FlowDetls.Name = "FlowDetls";
-            this.FlowDetls.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.FlowDetls.Size = new System.Drawing.Size(1335, 764);
-            this.FlowDetls.TabIndex = 2122;
-            // 
-            // TxtTikID
-            // 
-            this.FlowDetls.SetFlowBreak(this.TxtTikID, true);
-            this.TxtTikID.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.TxtTikID.ForeColor = System.Drawing.Color.Red;
-            this.TxtTikID.Location = new System.Drawing.Point(7, 0);
-            this.TxtTikID.Name = "TxtTikID";
-            this.TxtTikID.Size = new System.Drawing.Size(1325, 23);
-            this.TxtTikID.TabIndex = 2122;
-            this.TxtTikID.Text = "Label2";
-            this.TxtTikID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // TimerVisInvs
-            // 
-            this.TimerVisInvs.Enabled = true;
-            this.TimerVisInvs.Interval = 500;
             // 
             // label2
             // 
@@ -702,12 +665,50 @@
             this.TxtTikCreatTeam.TabIndex = 2169;
             this.TxtTikCreatTeam.Tag = "نوع الشكوى";
             // 
+            // FlwMend
+            // 
+            this.FlwMend.Location = new System.Drawing.Point(9, 450);
+            this.FlwMend.Margin = new System.Windows.Forms.Padding(80, 3, 3, 3);
+            this.FlwMend.Name = "FlwMend";
+            this.FlwMend.Size = new System.Drawing.Size(599, 252);
+            this.FlwMend.TabIndex = 2165;
+            // 
+            // FlowDetls
+            // 
+            this.FlowDetls.AutoScroll = true;
+            this.FlowDetls.Controls.Add(this.TxtTikID);
+            this.FlowDetls.Controls.Add(this.FlowLayoutPanel1);
+            this.FlowDetls.Controls.Add(this.FlowLayoutPanel2);
+            this.FlowDetls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FlowDetls.Location = new System.Drawing.Point(0, 0);
+            this.FlowDetls.Name = "FlowDetls";
+            this.FlowDetls.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.FlowDetls.Size = new System.Drawing.Size(1354, 758);
+            this.FlowDetls.TabIndex = 2122;
+            // 
+            // TxtTikID
+            // 
+            this.FlowDetls.SetFlowBreak(this.TxtTikID, true);
+            this.TxtTikID.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.TxtTikID.ForeColor = System.Drawing.Color.Red;
+            this.TxtTikID.Location = new System.Drawing.Point(26, 0);
+            this.TxtTikID.Name = "TxtTikID";
+            this.TxtTikID.Size = new System.Drawing.Size(1325, 23);
+            this.TxtTikID.TabIndex = 2122;
+            this.TxtTikID.Text = "Label2";
+            this.TxtTikID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // TimerVisInvs
+            // 
+            this.TimerVisInvs.Enabled = true;
+            this.TimerVisInvs.Interval = 500;
+            // 
             // TikDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1335, 764);
+            this.ClientSize = new System.Drawing.Size(1354, 758);
             this.Controls.Add(this.FlowDetls);
             this.Name = "TikDetails";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;

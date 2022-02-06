@@ -21,26 +21,29 @@ Public Class TikUpdate
         If CmbEvent.SelectedIndex > -1 Then
             If TxtUpdt.TextLength > 0 Then
                 If Usr.PUsrID = StruGrdTk.UserId Then
-                    If PublicCode.InsTrans("update Tickets set TkFolw = 1, TkEscTyp = 0" & " where (TkSQL = " & StruGrdTk.Sql & ");", "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" & StruGrdTk.Sql & "','" & Replace(TxtUpdt.Text, "'", "$") & "','" & "1" & "','" & CmbEvent.SelectedValue & "','" & OsIP() & "','" & Usr.PUsrID & "')", "1034&H") = Nothing Then
-                        Done_ = "Done"
-                    End If
+                    'If PublicCode.InsTrans("update Tickets set TkFolw = 1, TkEscTyp = 0" & " where (TkSQL = " & StruGrdTk.Sql & ");", "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" & StruGrdTk.Sql & "','" & Replace(TxtUpdt.Text, "'", "$") & "','" & "1" & "','" & CmbEvent.SelectedValue & "','" & OsIP() & "','" & Usr.PUsrID & "')", "1034&H") = Nothing Then
+                    '    Done_ = "Done"
+                    'End If
+                    EsStr = TxtUpdt.Text
                 Else
                     If CmbEvent.SelectedValue = 902 Then
-                        If PublicCode.InsUpd("update Tickets set TkEscTyp = 1" & " where (TkSQL = " & StruGrdTk.Sql & ");", "1034&H") = Nothing Then
-                            If StruGrdTk.FlwStat = False Then
-                                EsStr = "متابعه 1 جديد" & vbCrLf & Replace(TxtUpdt.Text, "'", "$")
-                            Else
-                                EsStr = "متابعه 1" & vbCrLf & Replace(TxtUpdt.Text, "'", "$")
-                            End If
+                        'If PublicCode.InsUpd("update Tickets set TkEscTyp = 1" & " where (TkSQL = " & StruGrdTk.Sql & ");", "1034&H") = Nothing Then
+
+                        'End If
+                        If StruGrdTk.FlwStat = False Then
+                            EsStr = "متابعه 1 جديد" & vbCrLf & TxtUpdt.Text
+                        Else
+                            EsStr = "متابعه 1" & vbCrLf & TxtUpdt.Text
                         End If
                     Else
-                        EsStr = Replace(TxtUpdt.Text, "'", "$")
+                        EsStr = TxtUpdt.Text
                     End If
-                    If PublicCode.InsUpd("insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" & StruGrdTk.Sql & "','" & Trim(EsStr) & "','" & "0" & "','" & CmbEvent.SelectedValue & "','" & OsIP() & "','" & Usr.PUsrID & "')", "1034&H") = Nothing Then
-                        Done_ = "Done"
-                    End If
+                    '                    If PublicCode.InsUpd("insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES 
+                    '('" & StruGrdTk.Sql & "','" & Trim(EsStr) & "','" & "0" & "','" & CmbEvent.SelectedValue & "','" & OsIP() & "','" & Usr.PUsrID & "')", "1034&H") = Nothing Then
+                    '                        Done_ = "Done"
+                    '                    End If
                 End If
-                If Done_ <> Nothing Then
+                If insupdate(StruGrdTk.Sql, Trim(EsStr), 1, CmbEvent.SelectedValue, OsIP(), Usr.PUsrID) = Nothing Then
                     LblMsg.Text = ("تم إضافة التحديث بنجاح")
                     LblMsg.ForeColor = Color.Green
                     StruGrdTk.LstUpDt = Now
@@ -66,11 +69,11 @@ Public Class TikUpdate
                     'GridUpdt.Rows(0).Selected = True             'Select Row(0) Before upload to get SQL As file Name
                     If TxtBrws.TextLength > 0 Then               ' Upload File If TxtBrws is have file
                         If UpSQlMax_ > 0 Then
-                            CompareDataTables(FTPTable, UpdtCurrTbl, GridUpdt)  ' Compare Attached Table With Updtes Table On SQL Column and File Name
-                            Uploadsub()
+                            'CompareDataTables(FTPTable, UpdtCurrTbl, GridUpdt)  ' Compare Attached Table With Updtes Table On SQL Column and File Name
+                            'Uploadsub()
                         End If
                     Else
-                        CompareDataTables(FTPTable, UpdtCurrTbl, GridUpdt)  ' Compare Attached Table With Updtes Table On SQL Column and File Name
+                        'CompareDataTables(FTPTable, UpdtCurrTbl, GridUpdt)  ' Compare Attached Table With Updtes Table On SQL Column and File Name
                     End If
                     CmbEvent.SelectedIndex = -1
                     TxtUpdt.Text = ""
@@ -99,6 +102,46 @@ Public Class TikUpdate
             LblMsg.ForeColor = Color.Red
         End If
     End Sub
+    Private Function insupdate(id As Integer, txt As String, read As Boolean, EvId As Integer, IP As String, user As Integer,
+                                                                                            Optional attach As Byte() = Nothing) As String
+        Dim msg As String = Nothing
+        Dim state As New APblicClss.Defntion
+        Dim sqlComminsert_1 As New SqlCommand            'SQL Command
+        Dim param(6) As SqlParameter
+        sqlComminsert_1.CommandType = CommandType.StoredProcedure
+        sqlComminsert_1.CommandText = "SP_TICKET_EVENT_INSERT"
+        sqlComminsert_1.Connection = state.CONSQL
+        param(0) = New SqlParameter("@TkupTkSql", SqlDbType.Int)
+        param(0).Value = id
+        param(1) = New SqlParameter("@TkupTxt", SqlDbType.NVarChar)
+        param(1).Value = txt
+        param(2) = New SqlParameter("@TkupUnread", SqlDbType.Bit)
+        param(2).Value = read
+        param(3) = New SqlParameter("@TkupEvtId", SqlDbType.Int)
+        param(3).Value = EvId
+        param(4) = New SqlParameter("@TkupUserIP", SqlDbType.NVarChar, 15)
+        param(4).Value = IP
+        param(5) = New SqlParameter("@TkupUser", SqlDbType.Int)
+        param(5).Value = user
+        param(6) = New SqlParameter("@TkupAttch", SqlDbType.Image)
+        param(6).Value = attach
+        For i = 0 To param.Length - 1
+            sqlComminsert_1.Parameters.Add(param(i))
+        Next
+
+        Try
+            If state.CONSQL.State = ConnectionState.Closed Then
+                state.CONSQL.Open()
+            End If
+            sqlComminsert_1.ExecuteNonQuery()
+        Catch ex As Exception
+            msg = ex.Message
+            AppLog("1011&H", ex.Message, sqlComminsert_1.CommandText)
+            MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
+        End Try
+
+        Return msg
+    End Function
     Private Sub GetUpdtEvnt_()
         UpGetSql = New DataTable
         If PublicCode.GetTbl("SELECT TkupSTime,EvNm, TkupTxt, UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread FROM TkEvent INNER JOIN Int_user ON TkupUser = UsrId INNER JOIN CDEvent ON TkupEvtId = EvId INNER JOIN IntUserCat ON Int_user.UsrCat = IntUserCat.UCatId Where ( TkupTkSql = " & StruGrdTk.Sql & ") ORDER BY TkupTkSql,TkupSQL DESC", UpGetSql, "1019&H") = Nothing Then
@@ -160,7 +203,7 @@ Public Class TikUpdate
                 NewRow("Type") = Ext
                 NewRow("Size") = (fi.Length / 1024).ToString("N0") & " KB"
                 FTPTable.Rows.Add(NewRow)
-                CompareDataTables(FTPTable, UpdtCurrTbl, GridUpdt)  ' Compare Attached Table With Updtes Table On SQL Column and File Name
+                'CompareDataTables(FTPTable, UpdtCurrTbl, GridUpdt)  ' Compare Attached Table With Updtes Table On SQL Column and File Name
                 Me.Enabled = True
             Catch exs As Exception
                 Me.Enabled = True
@@ -264,8 +307,8 @@ fileStream As Stream = File.Create(Environment.GetFolderPath(Environment.Special
             Dim Rslt As DialogResult
             Rslt = MessageBox.Show("سيتم تحميل ملف " & Chr(34) & FileName & Chr(34) & vbCrLf & "هل تريد الإستمرار؟", "رسالة معلومات", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading Or MessageBoxOptions.RightAlign)
             If Rslt = DialogResult.Yes Then
-                Uploadsub()
-                CompareDataTables(FTPTable, UpdtCurrTbl, GridUpdt)  ' Compare Attached Table With Updtes Table On SQL Column and File Name
+                'Uploadsub()
+                'CompareDataTables(FTPTable, UpdtCurrTbl, GridUpdt)  ' Compare Attached Table With Updtes Table On SQL Column and File Name
             End If
 
 
@@ -404,26 +447,26 @@ fileStream As Stream = File.Create(Environment.GetFolderPath(Environment.Special
 
         'StruGrdTk.LstUpEvId
         'قراءة جميع التحديثات عند الدخول للمتابع
-        UpGetSql.DefaultView.Sort = "TkupUnread"
-        UpGetSql.DefaultView.RowFilter = String.Empty
-        If StruGrdTk.UserId = Usr.PUsrID Then
-            Dim UpSql As New List(Of String)
-            For uu = 0 To UpGetSql.DefaultView.Count - 1
-                If UpGetSql.DefaultView(uu).Item("TkupUnread") = False Then
-                    UpSql.Add("TkupSQL = " & UpGetSql.DefaultView(uu).Item("TkupSQL"))
-                Else
-                    Exit For
-                End If
-            Next
-            If UpSql.Count > 0 Then
-                If Fn.InsUpdate("update TkEvent set TkupUnread = 1, TkupReDt = (Select GetDate())" & " where  " & String.Join(" OR ", UpSql) & ";", "1035&H") = Nothing Then
+        'UpGetSql.DefaultView.Sort = "TkupUnread"
+        'UpGetSql.DefaultView.RowFilter = String.Empty
+        'If StruGrdTk.UserId = Usr.PUsrID Then
+        'Dim UpSql As New List(Of String)
+        'For uu = 0 To UpGetSql.DefaultView.Count - 1
+        '    If UpGetSql.DefaultView(uu).Item("TkupUnread") = False Then
+        '        UpSql.Add("TkupSQL = " & UpGetSql.DefaultView(uu).Item("TkupSQL"))
+        '    Else
+        '        Exit For
+        '    End If
+        'Next
+        'If UpSql.Count > 0 Then
+        '    If Fn.InsUpdate("update TkEvent set TkupUnread = 1, TkupReDt = (Select GetDate())" & " where  " & String.Join(" OR ", UpSql) & ";", "1035&H") = Nothing Then
 
-                Else
-                    MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & Errmsg)
-                End If
-            End If
-        End If
-        UpGetSql.DefaultView.Sort = "TkupSTime desc"
+        '    Else
+        '        MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & Errmsg)
+        '    End If
+        'End If
+        'End If
+        'UpGetSql.DefaultView.Sort = "TkupSTime desc"
         Dim FolwID As String = ""
         If DBNull.Value.Equals(StruGrdTk.UserId) Then FolwID = "" Else FolwID = StruGrdTk.UserId
         UpdateFormt(GridUpdt, FolwID)
@@ -435,8 +478,8 @@ fileStream As Stream = File.Create(Environment.GetFolderPath(Environment.Special
         End If
 
 
-        GettAttchUpdtesFils()
-        CompareDataTables(FTPTable, UpdtCurrTbl, GridUpdt)  ' Compare Attached Table With Updtes Table On SQL Column and File Name
+        'GettAttchUpdtesFils()
+        'CompareDataTables(FTPTable, UpdtCurrTbl, GridUpdt)  ' Compare Attached Table With Updtes Table On SQL Column and File Name
         If Usr.PUsrUCatLvl < 3 Or Usr.PUsrUCatLvl > 5 Then
             If StruGrdTk.LstUpEvId = 902 Or StruGrdTk.LstUpEvId = 903 Or StruGrdTk.LstUpEvId = 904 Then
                 TimerEscOpen.Start()

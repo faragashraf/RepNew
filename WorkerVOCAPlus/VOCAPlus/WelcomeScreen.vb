@@ -52,14 +52,14 @@ Public Class WelcomeScreen
         End Get
     End Property
     Private Sub TimerTikCoun_Tick(sender As Object, e As EventArgs) Handles TimerTikCoun.Tick
-        If IsHandleCreated = True Then
-            Invoke(Sub()
-                       Dim WC As New APblicClss.Func
-                       If WkrTikCount.IsBusy = False Then
-                           Invoke(Sub() WkrTikCount.RunWorkerAsync(WC))
-                       End If
-                   End Sub)
-        End If
+        'If IsHandleCreated = True Then
+        '    Invoke(Sub()
+        '               Dim WC As New APblicClss.Func
+        '               If WkrTikCount.IsBusy = False Then
+        '                   Invoke(Sub() WkrTikCount.RunWorkerAsync(WC))
+        '               End If
+        '           End Sub)
+        'End If
     End Sub
     Private Sub TimerOp_Tick(sender As Object, e As EventArgs) Handles TimerOp.Tick
         If Opacity < 1 Then
@@ -98,18 +98,18 @@ Public Class WelcomeScreen
         PublicCode.InsUpd("UPDATE Int_user SET UsrActive = 0" & " WHERE (UsrId = " & Usr.PUsrID & ");", "1006&H")  'Update User Active = false
     End Sub
     Private Sub TimerCon_Tick(sender As Object, e As EventArgs) Handles TimerCon.Tick
-        If IsHandleCreated = True Then
-            Invoke(Sub()
-                       If sqlCon.State = ConnectionState.Closed Then
-                           Dim state As New APblicClss.Defntion
-                           Dim Cn As New APblicClss.Func
-                           If WChckConn.IsBusy = False Then
-                               Invoke(Sub() WChckConn.RunWorkerAsync(Cn))
-                           End If
-                       End If
+        'If IsHandleCreated = True Then
+        '    Invoke(Sub()
+        '               If sqlCon.State = ConnectionState.Closed Then
+        '                   Dim state As New APblicClss.Defntion
+        '                   Dim Cn As New APblicClss.Func
+        '                   If WChckConn.IsBusy = False Then
+        '                       Invoke(Sub() WChckConn.RunWorkerAsync(Cn))
+        '                   End If
+        '               End If
 
-                   End Sub)
-        End If
+        '           End Sub)
+        'End If
     End Sub
 #Region "Check Connection"
     Private Sub WChckConn_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles WChckConn.DoWork
@@ -119,18 +119,18 @@ Public Class WelcomeScreen
         WC1.Conoff(worker1)
     End Sub
     Private Sub WChckConn_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles WChckConn.ProgressChanged
-        If Me.IsHandleCreated = True Then
-            Invoke(Sub()
-                       Dim state As APblicClss.Defntion = CType(e.UserState, APblicClss.Defntion)
-                       If Bol = True Then
-                           StatusBar1.Invoke(Sub() StatBrPnlEn.Text = "Online " & ServerNm)
-                           StatusBar1.Invoke(Sub() StatBrPnlEn.Icon = My.Resources.WSOn032)
-                       ElseIf Bol = False Then
-                           StatusBar1.Invoke(Sub() StatBrPnlEn.Icon = My.Resources.WSOff032)
-                           StatusBar1.Invoke(Sub() StatBrPnlEn.Text = "Offline " & ServerNm)
-                       End If
-                   End Sub)
-        End If
+        'If Me.IsHandleCreated = True Then
+        '    Invoke(Sub()
+        '               Dim state As APblicClss.Defntion = CType(e.UserState, APblicClss.Defntion)
+        '               If Bol = True Then
+        '                   StatusBar1.Invoke(Sub() StatBrPnlEn.Text = "Online " & ServerNm)
+        '                   StatusBar1.Invoke(Sub() StatBrPnlEn.Icon = My.Resources.WSOn032)
+        '               ElseIf Bol = False Then
+        '                   StatusBar1.Invoke(Sub() StatBrPnlEn.Icon = My.Resources.WSOff032)
+        '                   StatusBar1.Invoke(Sub() StatBrPnlEn.Text = "Offline " & ServerNm)
+        '               End If
+        '           End Sub)
+        'End If
     End Sub
 #End Region
     'Declare Function SetProcessWorkingSetSize Lib "kernel32.dll" (ByVal process As IntPtr, ByVal minimumWorkingSetSize As Integer, ByVal maximumWorkingSetSize As Integer) As Integer
@@ -298,6 +298,7 @@ Public Class WelcomeScreen
             CompSurceTable = New DataTable
             dadPurchaseInfo.Fill(CompSurceTable)
             Invoke(Sub() Grid1.DataSource = CompSurceTable)
+            builder = New SqlCommandBuilder(dadPurchaseInfo)
 
             cmdSelectCommand.CommandTimeout = 30
             'dadPurchaseInfo = New SqlDataAdapter
@@ -305,7 +306,7 @@ Public Class WelcomeScreen
             'UpdtCmd.UpdateCommand = cmdSelectCommand
             'InsrtCmd.InsertCommand = cmdSelectCommand
 
-            'builder = New SqlCommandBuilder(dadPurchaseInfo)
+
 
 
         Catch ex As Exception
@@ -426,8 +427,8 @@ Public Class WelcomeScreen
             LblUsrRNm.Margin = New Padding(LblUsrRNm.Margin.Left, LblUsrRNm.Margin.Top, FlowLayoutPanel1.ClientRectangle.Width - (LblUsrRNm.Width + LblUsrRNm.Margin.Left), LblUsrRNm.Margin.Bottom)
             LblSrvrNm.Margin = New Padding(LblSrvrNm.Margin.Left, LblSrvrNm.Margin.Top, FlowLayoutPanel1.ClientRectangle.Width - (LblSrvrNm.Width + LblUsrRNm.Margin.Left), LblSrvrNm.Margin.Bottom)
             LblLstSeen.Margin = New Padding(LblLstSeen.Margin.Left, LblLstSeen.Margin.Top, FlowLayoutPanel1.ClientRectangle.Width - (LblLstSeen.Width + LblUsrRNm.Margin.Left), LblLstSeen.Margin.Bottom)
-            TimerTikCoun.Start()
-            TimrFlsh.Start()
+            'TimerTikCoun.Start()
+            'TimrFlsh.Start()
 
         End If
     End Sub

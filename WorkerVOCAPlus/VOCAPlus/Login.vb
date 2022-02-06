@@ -41,7 +41,7 @@ Our Mini CRM"
         'PrTblTswk.Start()
         'Exit Sub
         Cmbo.Items.Add("Eg Server")
-        Cmbo.Items.Add("My Labtop")
+        'Cmbo.Items.Add("My Labtop")
         Cmbo.Items.Add("Training")
         'Cmbo.Items.Add("OnLine")
         Cmbo.SelectedItem = "Eg Server"
@@ -222,7 +222,7 @@ GoodVer:  '       *****      End Check Ver.
             LblLogin.Refresh()
             If Usr.PUsrActv = True Or Usr.PUsrActv = False Then              'XXXXXXXXXXX to cancel this delete   *** Or Usr.PUsrActv = 1  ***     'if user Not Active
                 If Deployment.Application.ApplicationDeployment.IsNetworkDeployed Then
-                    If PublicCode.InsUpd("UPDATE Int_user SET UsrActive = 1, UsrIP ='" & OsIP() & "', UsrVer = '" & Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4) & "', UsrLastSeen = '" & Format(ServrTime(), "yyyy-MM-dd HH:mm:ss") & "' WHERE (UsrId = " & Usr.PUsrID & "');", "1007&H") <> Nothing Then  'Update User Active =  True    
+                    If PublicCode.InsUpd("UPDATE Int_user SET UsrActive = 1, UsrIP ='" & OsIP() & "', UsrVer = '" & Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4) & "', UsrLastSeen = '" & Format(ServrTime(), "yyyy-MM-dd HH:mm:ss") & "' WHERE (UsrId = " & Usr.PUsrID & ");", "1007&H") <> Nothing Then  'Update User Active =  True    
                         StatusBarPanel1.Icon = My.Resources.WSOff032
                         Exit Sub
                     End If
@@ -524,8 +524,8 @@ sec_UsrErr_:
             Invoke(Sub() WelcomeScreen.DbStat.BackgroundImage = My.Resources.DBOn)
             Invoke(Sub() WelcomeScreen.DbStat.Tag = "تم تحميل قواعد البيانات الأساسية بنجـــاح")
             Invoke(Sub() WelcomeScreen.LblLstSeen.Text = "Last Seen : " & Nw) 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-            Invoke(Sub() WelcomeScreen.StatBrPnlEn.Text = "  Online  ")
-            Invoke(Sub() WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOn032)
+            'Invoke(Sub() WelcomeScreen.StatBrPnlEn.Text = "  Online  ")
+            'Invoke(Sub() WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOn032)
 
             Invoke(Sub() WelcomeScreen.LblClrSys.BackColor = My.Settings.ClrSys)
             Invoke(Sub() WelcomeScreen.LblClrUsr.BackColor = My.Settings.ClrUsr)

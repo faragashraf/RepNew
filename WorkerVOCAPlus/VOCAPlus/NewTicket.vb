@@ -17,6 +17,7 @@ Public Class NewTicket
     Dim PrdBol As Boolean = False
     Dim TickSubmt As Thread
     Dim TickOffSubmt As Thread
+    Dim TeamIdentfier As Integer = 0
     Private Const CP_NOCLOSE_BUTTON As Integer = &H200      ' Disable close button
     'Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
     '    Get
@@ -1141,9 +1142,10 @@ Popul_:
 
                    Next
                End Sub)
-
+        Dim state As New APblicClss.Defntion
 
         lodingStr = "جاري تسجيل البيانات ..."
+        Trck = Replace(TrackMskBx.Text, " ", "")
         For Cnt_ = 1 To TrackMskBx.TextLength
             If Mid(TrackMskBx.Text, Cnt_, 1) <> " " Then
                 Trck &= Mid(TrackMskBx.Text, Cnt_, 1)
@@ -1157,14 +1159,15 @@ Popul_:
             TranDt = Format(TransDtPicker.Value, "yyyy/MM/dd").ToString
         End If
         Try
-            If sqlCon.State = ConnectionState.Closed Then
-                sqlCon.Open()
+
+            If state.CONSQL.State = ConnectionState.Closed Then
+                state.CONSQL.Open()
             End If
-            sqlComminsert_1.Connection = sqlCon
-            sqlComminsert_2.Connection = sqlCon            'insert Update into Update Table
-            sqlComminsert_3.Connection = sqlCon
-            sqlComminsert_4.Connection = sqlCon
-            sqlComm.Connection = sqlCon                    'Get ID & Date & UserID
+            sqlComminsert_1.Connection = state.CONSQL
+            sqlComminsert_2.Connection = state.CONSQL            'insert Update into Update Table
+            sqlComminsert_3.Connection = state.CONSQL
+            sqlComminsert_4.Connection = state.CONSQL
+            sqlComm.Connection = state.CONSQL                    'Get ID & Date & UserID
             sqlComminsert_1.CommandType = CommandType.Text
             sqlComminsert_2.CommandType = CommandType.Text
             sqlComminsert_3.CommandType = CommandType.Text
@@ -1189,29 +1192,23 @@ Popul_:
             'End If
             sqlComminsert_3.CommandText = "update Tickets set TkID = MaxID from (select MAX(TkSQL) AS MaxID, MAX(TkDtStart) AS MaxDt, TkEmpNm0 from Tickets where TkEmpNm0  = " & Usr.PUsrID & " GROUP BY TkEmpNm0) As MaxTable INNER JOIN Tickets ON Tickets.TkSQL = MaxTable.MaxID;"
             sqlComminsert_4.CommandText = "select MAX(TkSQL) AS MaxID, MAX(TkDtStart) AS MaxDt, MAX(TkID) AS Max_ from TkEvent INNER JOIN Tickets ON TkEvent.TkupTkSql = Tickets.TkSQL GROUP BY TkupUser HAVING (TkupUser  = " & Usr.PUsrID & ");"
-            Tran = sqlCon.BeginTransaction()
-            sqlComminsert_1.Transaction = Tran
-            sqlComminsert_2.Transaction = Tran
-            sqlComminsert_3.Transaction = Tran
-            sqlComminsert_4.Transaction = Tran
-            sqlComm.Transaction = Tran
+            state.Tran = state.CONSQL.BeginTransaction(IsolationLevel.ReadUncommitted)
+            sqlComminsert_1.Transaction = state.Tran
+            sqlComminsert_2.Transaction = state.Tran
+            sqlComminsert_3.Transaction = state.Tran
+            sqlComminsert_4.Transaction = state.Tran
+            sqlComm.Transaction = state.Tran
             sqlComminsert_1.ExecuteNonQuery()
             sqlComminsert_2.ExecuteNonQuery()
             sqlComminsert_3.ExecuteNonQuery()
             Reader_ = sqlComminsert_4.ExecuteReader
             Reader_.Read()
             SqlCuCnt_ = Reader_!MaxID
-            If TickKind = 0 Then
-                Invoke(Sub() ComRefLbl.Text = "Request No.:  " & Reader_!Max_)
-            Else
-                Invoke(Sub() ComRefLbl.Text = "Complaint No.: " & Reader_!Max_)
-            End If
-
             Invoke(Sub() DateTxtBx.Text = Reader_!MaxDt)
             Reader_.Close()
-            Tran.Commit()
-            'sqlCon.Close()
-            'SqlConnection.ClearPool(sqlCon)
+
+            'state.CONSQL.Close()
+            'SqlConnection.ClearPool(state.CONSQL)
             Invoke(Sub()
                        Dim CTRLLst As New List(Of Control)
                        GetAll(Me).ToList.ForEach(Sub(c)
@@ -1256,8 +1253,14 @@ Popul_:
             Invoke(Sub() Me.Enabled = True)
             Invoke(Sub() Me.Activate())
             Invoke(Sub() TimrPhons.Stop())
+            state.Tran.Commit()
+            If TickKind = 0 Then
+                Invoke(Sub() ComRefLbl.Text = "Request No.:  " & SqlCuCnt_)
+            Else
+                Invoke(Sub() ComRefLbl.Text = "Complaint No.: " & SqlCuCnt_)
+            End If
         Catch ex As Exception
-            Tran.Rollback()
+            state.Tran.Rollback()
             'Invoke(Sub() WelcomeScreen.TimerCon.Start())
             'Invoke(Sub() WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032)
             Invoke(Sub() LodngFrm.Close())
@@ -1275,19 +1278,198 @@ Popul_:
             'End If
 
             'TickSubmt.Abort()
+            AppLog("1011&H", ex.Message, sqlComminsert_1.CommandText & "_" & sqlComminsert_2.CommandText)
             MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
         End Try
         Invoke(Sub() Me.Enabled = True)
         Invoke(Sub() Me.Activate())
         Invoke(Sub() TimrPhons.Stop())
     End Sub
+    Private Function submitNew(kind As Boolean, cdfnid As Integer, src As Integer, clNm As String, ClPh As String, ClPh1 As String, ClAdr As String, ClNtID As String _
+                                                            , TkDetails As String, TkShpNo As String, TkGBNo As String, TkCardNo As String, TkAmount As Double, TkTransDate As String _
+                                                            , TkSndrCoun As String, TkConsigCoun As String, TkOffNm As String, EmpNm0 As Integer, EmpNm As Integer _
+                                                            , ClMail As String) As String
+        Dim msg As String = Nothing
+        Dim state As New APblicClss.Defntion
+        Dim sqlComminsert_1 As New SqlCommand            'SQL Command
+        Dim param(19) As SqlParameter
+        sqlComminsert_1.CommandType = CommandType.StoredProcedure
+        sqlComminsert_1.CommandText = "SP_OLD_TICKETS_INSERT"
+        sqlComminsert_1.Connection = state.CONSQL
+        param(0) = New SqlParameter("@TkKind", SqlDbType.Bit)
+        param(0).Value = kind
+        param(1) = New SqlParameter("@TkFnPrdCd", SqlDbType.Int)
+        param(1).Value = cdfnid
+        param(2) = New SqlParameter("@TkCompSrc", SqlDbType.Int)
+        param(2).Value = src
+        param(3) = New SqlParameter("@TkClNm", SqlDbType.NVarChar, 100)
+        param(3).Value = clNm
+        param(4) = New SqlParameter("@TkClPh", SqlDbType.NVarChar)
+        param(4).Value = ClPh
+        param(5) = New SqlParameter("@TkClPh1", SqlDbType.NVarChar)
+        If ClPh1.Length = 0 Then param(5).Value = DBNull.Value Else param(5).Value = ClPh1
+        param(6) = New SqlParameter("@TkClAdr", SqlDbType.NVarChar, 255)
+        If ClAdr.Length = 0 Then param(6).Value = DBNull.Value Else param(6).Value = ClAdr
+        param(7) = New SqlParameter("@TkClNtID", SqlDbType.NVarChar, 14)
+        If ClNtID.Length = 0 Then param(7).Value = DBNull.Value Else param(7).Value = ClNtID
+        param(8) = New SqlParameter("@TkDetails", SqlDbType.NVarChar)
+        If TkDetails.Length = 0 Then param(8).Value = DBNull.Value Else param(8).Value = TkDetails
+        param(9) = New SqlParameter("@TkShpNo", SqlDbType.NVarChar, 13)
+        If TkShpNo.Length = 0 Then param(9).Value = DBNull.Value Else param(9).Value = TkShpNo
+        param(10) = New SqlParameter("@TkGBNo", SqlDbType.NVarChar, 16)
+        If TkGBNo.Length = 0 Then param(10).Value = DBNull.Value Else param(10).Value = TkGBNo
+        param(11) = New SqlParameter("@TkAmount", SqlDbType.Int)
+        If TkAmount = 0 Then param(11).Value = DBNull.Value Else param(11).Value = TkAmount
+        param(12) = New SqlParameter("@TkTransDate", SqlDbType.Date)
+        If TkTransDate = "" Then param(12).Value = DBNull.Value Else param(12).Value = TkTransDate
+        param(13) = New SqlParameter("@TkSndrCoun", SqlDbType.NVarChar, 2)
+        If TkSndrCoun.Length = 0 Then param(13).Value = DBNull.Value Else param(13).Value = TkSndrCoun
+        param(14) = New SqlParameter("@TkConsigCoun", SqlDbType.NVarChar, 2)
+        If TkConsigCoun.Length = 0 Then param(14).Value = DBNull.Value Else param(14).Value = TkConsigCoun
+        param(15) = New SqlParameter("@TkOffNm", SqlDbType.NVarChar, 7)
+        If TkOffNm.Length = 0 Then param(15).Value = DBNull.Value Else param(15).Value = TkOffNm
+        param(16) = New SqlParameter("@TkEmpNm0", SqlDbType.Int)
+        param(16).Value = EmpNm0
+        param(17) = New SqlParameter("@TkEmpNm", SqlDbType.Int)
+        If EmpNm = 0 Then param(17).Value = DBNull.Value Else param(17).Value = EmpNm
+        param(18) = New SqlParameter("@TkMail", SqlDbType.NVarChar, 50)
+        If ClMail.Length = 0 Then param(18).Value = DBNull.Value Else param(18).Value = ClMail
+        param(19) = New SqlParameter("@TkCardNo", SqlDbType.NVarChar, 16)
+        If TkCardNo.Length = 0 Then param(19).Value = DBNull.Value Else param(19).Value = TkCardNo
+
+        ' Add Out Put Parameter
+        sqlComminsert_1.Parameters.AddRange(param)
+        sqlComminsert_1.Parameters.Add("@Comdid", SqlDbType.Int)
+        sqlComminsert_1.Parameters("@Comdid").Direction = ParameterDirection.Output
+        Try
+            If state.CONSQL.State = ConnectionState.Closed Then
+                state.CONSQL.Open()
+            End If
+            sqlComminsert_1.ExecuteNonQuery()
+            SqlCuCnt_ = Convert.ToInt32(sqlComminsert_1.Parameters("@Comdid").Value)
+            If SqlCuCnt_ <> 0 Then
+                If TickKind = 0 Then
+                    Invoke(Sub() ComRefLbl.Text = "Request No.:  " & SqlCuCnt_)
+                Else
+                    Invoke(Sub() ComRefLbl.Text = "Complaint No.: " & SqlCuCnt_)
+                End If
+            End If
+        Catch ex As Exception
+            msg = ex.Message
+            AppLog("1011&H", ex.Message, sqlComminsert_1.CommandText)
+            MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
+        End Try
+        Return msg
+    End Function
     Private Sub SubmitBtn_Click(sender As Object, e As EventArgs) Handles SubmitBtn.Click
-        TickSubmt = New Thread(AddressOf SubmtTick)
+
+        If Usr.PUsrUCatLvl >= 3 And Usr.PUsrUCatLvl <= 5 Then
+            TeamIdentfier = Usr.PUsrID
+        Else
+            ProdCompTable.DefaultView.RowFilter = "[FnSQL]  = " + TreeView1.SelectedNode.Name
+            Dim DRW As DataRow = ProdCompTable.Rows.Find(TreeView1.SelectedNode.Name)
+            TeamIdentfier = DRW.ItemArray(8)
+        End If
+
+
+        TickSubmt = New Thread(AddressOf InsertTick)
         TickSubmt.IsBackground = True
         WelcomeScreen.StatBrPnlAr.Text = "جاري تسجيل البيانات ..........."
         TreeView1.Visible = True
         TickSubmt.Start()
         Me.Enabled = False
+
+    End Sub
+    Private Sub InsertTick()
+        Dim TranDt As String
+        Dim Trck As String = ""
+        Dim lodingStr As String = ""
+        Invoke(Sub()
+                   Dim CTRLLst As New List(Of Control)
+                   GetAll(Me).ToList.ForEach(Sub(c)
+                                                 CTRLLst.Add(c)
+                                             End Sub)
+
+                   For Each Ctrol As Control In CTRLLst
+                       If TypeOf Ctrol Is TextBox Then
+                           If Ctrol.Text.Contains("'") Then
+                               WelcomeScreen.StatBrPnlAr.Text = ""
+                               MsgBox("غير مسموح بوضح رمز " & "' " & "بحقل " & Ctrol.Tag & " .... يرجى التأكد من البيان مرة أخرى")
+                               Invoke(Sub() Me.Enabled = True)
+                               Invoke(Sub() Me.Activate())
+                               TickSubmt.Abort()
+                           End If
+                       End If
+
+                   Next
+               End Sub)
+
+        lodingStr = "جاري تسجيل البيانات ..."
+        Trck = Replace(TrackMskBx.Text, " ", "")
+
+        If TransDtPicker.Value = Today.AddDays(1) Then
+            TranDt = Nothing
+        Else
+            TranDt = Format(TransDtPicker.Value, "yyyy/MM/dd").ToString
+        End If
+        Invoke(Sub()
+                   Dim dis As String
+                   If DistCmbBx.SelectedIndex = -1 Then
+                       dis = ""
+                   Else
+                       dis = DistCmbBx.SelectedValue.ToString
+                   End If
+                   Dim off As String
+                   If OffCmbBx.SelectedIndex = -1 Then
+                       off = ""
+                   Else
+                       off = OffCmbBx.SelectedValue.ToString
+                   End If
+
+                   If submitNew(TickKind, TreeView1.SelectedNode.Name, SrcCmbBx.SelectedValue, Trim(NameTxtBx.Text), Phon1TxtBx.Text, Phon2TxtBx.Text, AddTxtBx.Text, Trim(IDTxtBx.Text), DetailsTxtBx.Text & DubStr, Trck, GBTxtBx.Text, Replace(AccMskdBx.Text, " ", ""), AmountTxtBx.Text, (TranDt), "", dis, off, Usr.PUsrID, TeamIdentfier, MailTxtBx.Text) = Nothing Then
+                       Dim CTRLLst As New List(Of Control)
+                       GetAll(Me).ToList.ForEach(Sub(c)
+                                                     CTRLLst.Add(c)
+                                                 End Sub)
+
+                       For Each Ctrol As Control In CTRLLst
+                           If TypeOf Ctrol Is TextBox Then
+                               Dim TxtBox As TextBox = Ctrol
+                               Ctrol.Enabled = False
+                               If TxtBox.ReadOnly = False Then
+                                   Ctrol.BackColor = Color.White
+                                   Ctrol.ForeColor = Color.Black
+                               End If
+                           ElseIf TypeOf Ctrol Is MaskedTextBox Then
+                               Dim TxtBox As MaskedTextBox = Ctrol
+                               Ctrol.Enabled = False
+                               If TxtBox.ReadOnly = False Then
+                                   Ctrol.BackColor = Color.White
+                                   Ctrol.ForeColor = Color.Black
+                               End If
+                           ElseIf TypeOf Ctrol Is ComboBox Then
+                               Ctrol.Enabled = False
+                               Dim TxtBox As ComboBox = Ctrol
+                           ElseIf TypeOf Ctrol Is RadioButton Then
+                               Ctrol.Enabled = False
+                           ElseIf TypeOf Ctrol Is DateTimePicker Then
+                               Ctrol.Enabled = False
+                           End If
+                       Next
+                       TreeView1.Enabled = False
+                       Invoke(Sub() SubmitBtn.Visible = False)
+                       Invoke(Sub() Me.BackColor = Color.FromArgb(105, 255, 123))
+                       Invoke(Sub() TabPage1.BackColor = Color.FromArgb(105, 255, 123))
+                       Invoke(Sub() WelcomeScreen.StatBrPnlAr.Text = "تم تسجيل البيان بنجاح")
+                       Timer1.Stop()
+                       Invoke(Sub() BtnDublicate.Visible = True)
+                       DubStr = ""
+                   End If
+               End Sub)
+
+        Invoke(Sub() Me.Enabled = True)
+        Invoke(Sub() Me.Activate())
+        Invoke(Sub() TimrPhons.Stop())
     End Sub
     Private Sub AreaCmbBx_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles AreaCmbBx.Validating
         If AreaCmbBx.Text.Length > 0 Then

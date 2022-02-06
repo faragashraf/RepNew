@@ -30,7 +30,7 @@
     <PublisherName>Ashaf Farag</PublisherName>
     <SuiteName>VOCA Plus</SuiteName>
     <MinimumRequiredVersion>4.0.0.3</MinimumRequiredVersion>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -191,11 +191,6 @@
     <Compile Include="CompSetup.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataSetRep.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSetRep.xsd</DependentUpon>
-    </Compile>
     <Compile Include="DataSetRepVisible.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -218,12 +213,6 @@
       <DependentUpon>ExportAshraf.vb</DependentUpon>
     </Compile>
     <Compile Include="ExportAshraf.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ExportAdmin.Designer.vb">
-      <DependentUpon>ExportAdmin.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ExportAdmin.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TicketEditNew.Designer.vb">
@@ -581,9 +570,6 @@
     <EmbeddedResource Include="ExportAshraf.resx">
       <DependentUpon>ExportAshraf.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExportAdmin.resx">
-      <DependentUpon>ExportAdmin.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="TicketEditNew.resx">
       <DependentUpon>TicketEditNew.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -752,17 +738,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DataSetRep.xsc">
-      <DependentUpon>DataSetRep.xsd</DependentUpon>
-    </None>
-    <None Include="DataSetRep.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSetRep.Designer.vb</LastGenOutput>
-    </None>
-    <None Include="DataSetRep.xss">
-      <DependentUpon>DataSetRep.xsd</DependentUpon>
-    </None>
     <None Include="DataSetRepVisible.xsc">
       <DependentUpon>DataSetRepVisible.xsd</DependentUpon>
     </None>

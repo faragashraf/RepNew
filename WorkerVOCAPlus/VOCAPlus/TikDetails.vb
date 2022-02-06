@@ -44,28 +44,34 @@ Public Class TikDetails
         If Rslt = DialogResult.Yes Then
             BtnClos.Enabled = False
             Dim WDays As Integer = CalDate(StruGrdTk.DtStrt, Nw, "1036&H")
-            If Fn.InsTrans("update Tickets set TkDtClose = (Select GetDate())" & ", TkDuration = " & WDays & ", TkClsStatus = 1" & ", TkFolw = 1" & " where (TkSQL = " & StruGrdTk.Sql & ");",
-                    "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" &
-                    StruGrdTk.Sql & "','" & "The Complaint has been closed In " & WDays & " Working Days" & "','" & "1" & "','" & "900" & "','" & OsIP() & "','" & Usr.PUsrID & "')", "1037&H") = Nothing Then
+
+            If insupdate(StruGrdTk.Sql, "The Complaint has been closed In " & WDays & " Working Days", 1, 900, OsIP(), Usr.PUsrID) = Nothing Then
+
+                'End If
+
+
+                'If Fn.InsTrans("update Tickets set TkDtClose = (Select GetDate())" & ", TkDuration = " & WDays & ", TkClsStatus = 1" & ", TkFolw = 1" & " where (TkSQL = " & StruGrdTk.Sql & ");",
+                '        "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" &
+                '        StruGrdTk.Sql & "','" & "The Complaint has been closed In " & WDays & " Working Days" & "','" & "1" & "','" & "900" & "','" & OsIP() & "','" & Usr.PUsrID & "')", "1037&H") = Nothing Then
                 TcktImg.BackgroundImage = My.Resources.Tckoff
                 StruGrdTk.ClsStat = True
                 BtnClos.BackgroundImage = My.Resources.Tckoff
                 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                UpdtCurrTbl.DefaultView.RowFilter = "[TkupTkSql]" & " = " & StruGrdTk.Sql
-                Dim UpSql As New List(Of String)
-                For uu = 0 To UpdtCurrTbl.DefaultView.Count - 1
-                    If UpdtCurrTbl.DefaultView(uu).Item("TkupUnread") = False Then
-                        UpSql.Add("TkupSQL = " & UpdtCurrTbl.DefaultView(uu).Item("TkupSQL"))
-                    Else
-                        Exit For
-                    End If
-                Next
-                If UpSql.Count > 0 Then
-                    If Fn.InsUpdate("update TkEvent set TkupUnread = 1, TkupReDt = (Select GetDate())" & " where  " & String.Join(" OR ", UpSql) & ";", "1035&H") = Nothing Then
-                    Else
-                        MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & Errmsg)
-                    End If
-                End If
+                'UpdtCurrTbl.DefaultView.RowFilter = "[TkupTkSql]" & " = " & StruGrdTk.Sql
+                'Dim UpSql As New List(Of String)
+                'For uu = 0 To UpdtCurrTbl.DefaultView.Count - 1
+                '    If UpdtCurrTbl.DefaultView(uu).Item("TkupUnread") = False Then
+                '        UpSql.Add("TkupSQL = " & UpdtCurrTbl.DefaultView(uu).Item("TkupSQL"))
+                '    Else
+                '        Exit For
+                '    End If
+                'Next
+                'If UpSql.Count > 0 Then
+                '    If Fn.InsUpdate("update TkEvent set TkupUnread = 1, TkupReDt = (Select GetDate())" & " where  " & String.Join(" OR ", UpSql) & ";", "1035&H") = Nothing Then
+                '    Else
+                '        MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf & Errmsg)
+                '    End If
+                'End If
                 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                 BtnUpd.Visible = False
                 Usr.PUsrClsN -= 1   'to don't recieve notification with Ticket count trnasfered to 
@@ -73,7 +79,7 @@ Public Class TikDetails
                 Dim GrivVw_ As DataGridView = frm__.Controls(gridview_.Name)
                 If frm__.Name = "TikFolow" Then
                     If StruGrdTk.ClsStat = True Then
-                        GrivVw_.Rows.RemoveAt(GrivVw_.CurrentRow.Index)
+                        gridview_.Rows.RemoveAt(gridview_.CurrentRow.Index)
                     End If
                 End If
                 TikFormat(TickTblMain, UpdtCurrTbl, ProgBar)
@@ -89,7 +95,44 @@ Public Class TikDetails
             End If
         End If
     End Sub
+    Private Function insupdate(id As Integer, txt As String, read As Boolean, EvId As Integer, IP As String, Updateuser As Integer) As String
+        Dim msg As String = Nothing
+        Dim state As New APblicClss.Defntion
+        Dim sqlComminsert_1 As New SqlCommand            'SQL Command
+        Dim param(5) As SqlParameter
+        sqlComminsert_1.CommandType = CommandType.StoredProcedure
+        sqlComminsert_1.CommandText = "SP_TICKET_EVENT_INSERT"
+        sqlComminsert_1.Connection = state.CONSQL
+        param(0) = New SqlParameter("@TkupTkSql", SqlDbType.Int)
+        param(0).Value = id
+        param(1) = New SqlParameter("@TkupTxt", SqlDbType.NVarChar)
+        param(1).Value = txt
+        param(2) = New SqlParameter("@TkupUnread", SqlDbType.Bit)
+        param(2).Value = read
+        param(3) = New SqlParameter("@TkupEvtId", SqlDbType.Int)
+        param(3).Value = EvId
+        param(4) = New SqlParameter("@TkupUserIP", SqlDbType.NVarChar, 15)
+        param(4).Value = IP
+        param(5) = New SqlParameter("@TkupUser", SqlDbType.Int)
+        param(5).Value = Updateuser
 
+        For i = 0 To param.Length - 1
+            sqlComminsert_1.Parameters.Add(param(i))
+        Next
+
+        Try
+            If state.CONSQL.State = ConnectionState.Closed Then
+                state.CONSQL.Open()
+            End If
+            sqlComminsert_1.ExecuteNonQuery()
+        Catch ex As Exception
+            msg = ex.Message
+            AppLog("1011&H", ex.Message, sqlComminsert_1.CommandText)
+            MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
+        End Try
+
+        Return msg
+    End Function
     Private Sub TikDetails_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         If StruGrdTk.ClsStat = True Then
             TcktImg.BackgroundImage = My.Resources.Tckoff
@@ -157,8 +200,10 @@ Public Class TikDetails
         LblHelp.Text = StruGrdTk.Help_
         If StruGrdTk.Tick = 1 Then
             TxtTikID.Text = "شكوى رقم : " & StruGrdTk.Sql
+            Me.Text = "شكوى رقم " & StruGrdTk.Sql
         Else
             TxtTikID.Text = "طلب رقم : " & StruGrdTk.Sql
+            Me.Text = "طلب رقم " & StruGrdTk.Sql
         End If
         TxtTikID.RightToLeft = RightToLeft.Yes
         TxtTikID.Font = New Font("Times New Roman", 14, FontStyle.Bold)

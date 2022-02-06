@@ -37,6 +37,8 @@ namespace VOCAC.BL
             catch (Exception ex)
             {
                 DAL.Struc.msg = ex.Message;
+                function fn = function.getfn;
+                fn.AppLog(this.ToString(), ex.Message, "SP_A_USR_LOG_SLCT_UPDATE");
             }
             DAL.Close();
             return DAL.Struc;
@@ -48,24 +50,5 @@ namespace VOCAC.BL
             DAL.Close();
             return DAL.Struc;
         }
-        public DAL.DataAccessLayer.rturnStruct SwtchBoard()
-        {
-            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-            SqlParameter[] param = null;
-            DAL.Struc = DAL.SelectData("SP_SwitchBoard_SLCT", param);
-            DAL.Close();
-            return DAL.Struc;
-        }
-        //public DAL.DataAccessLayer.rturnStruct TeamTree(bool Stat)
-        //{
-        //    DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-        //    SqlParameter[] param = new SqlParameter[1];
-        //    param[0] = new SqlParameter("@Stat", SqlDbType.Bit);
-        //    param[0].Value = Stat;
-
-        //    DAL.Struc = DAL.SelectData("SP_MyTeam_SLCT", param);
-        //    DAL.Close();
-        //    return DAL.Struc;
-        //}
     }
 }

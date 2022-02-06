@@ -5,6 +5,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -38,7 +40,9 @@ namespace VOCAC
         #region DataTables
         public static DataTable MacTble, UserTable;
         public static TreeView _tree;
-        public static DataTable CompSurceTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, TreeUsrTbl;
+        public static DataTable CompSurceTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, TreeUsrTbl, SwitchTbl;
+        public static Image imge;
+        public static byte[] mainImageArray;
         #endregion
     }
     class menustrp
@@ -181,7 +185,8 @@ namespace VOCAC
             catch (Exception Ex)
             {
                 Msg = Ex.Message;
-                AppLog(" ", Ex.Message, SSqlStr);
+                function fn = function.getfn;
+                fn.AppLog(this.ToString(), Ex.Message, SSqlStr);
             }
             def.sqladptr.Dispose();
             defstac.CONSQL.Close();
@@ -469,8 +474,126 @@ namespace VOCAC
                         }
                     }
                 }
+                else
+                {
+                    rslt = "X";
+                }
             }
             return rslt;
+        }
+        public static byte[] preapareattachment()
+        {
+            using (OpenFileDialog fileD = new OpenFileDialog() { Filter = "JPG files| *.jpg", ValidateNames = true })
+            {
+                fileD.FilterIndex = 2;
+                if (fileD.ShowDialog() == DialogResult.OK)
+                {
+                    using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(fileD.FileName)))
+                    {
+                        imge = Image.FromStream(ms);
+                        //pictureViewer_.intialize_();
+                        zpicViewer.getviewerfrm.Load += new System.EventHandler(zpicViewer.getviewerfrm.ComboBox1_SelectedIndexChanged);
+                    }
+                    zpicViewer.getviewerfrm.ShowDialog();
+                }
+                else
+                {
+                    mainImageArray = null;
+                }
+            }
+            return mainImageArray;
+        }
+        public static Bitmap ResizeImage(Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
+        }
+        public static Image Crop(Image image, Rectangle selection)
+        {
+            Bitmap bmp = image as Bitmap;
+
+            // Check if it is a bitmap:
+            if (bmp == null)
+                throw new ArgumentException("Kein gültiges Bild (Bitmap)");
+
+            // Crop the image:
+            Bitmap cropBmp = bmp.Clone(selection, bmp.PixelFormat);
+
+            // Release the resources:
+            image.Dispose();
+
+            return cropBmp;
+        }
+        public static Image Fit2PictureBox(Image image, PictureBox picBox)
+        {
+            Bitmap bmp = null;
+            Graphics g;
+
+            // Scale:
+            double scaleY = (double)image.Width / picBox.Width;
+            double scaleX = (double)image.Height / picBox.Height;
+            double scale = scaleY < scaleX ? scaleX : scaleY;
+
+            // Create new bitmap:
+            bmp = new Bitmap(
+                (int)((double)image.Width / scale),
+                (int)((double)image.Height / scale));
+
+            // Set resolution of the new image:
+            bmp.SetResolution(
+                image.HorizontalResolution,
+                image.VerticalResolution);
+
+            // Create graphics:
+            g = Graphics.FromImage(bmp);
+
+            // Set interpolation mode:
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+
+            // Draw the new image:
+            g.DrawImage(
+                image,
+                new Rectangle(          // Ziel
+                    0, 0,
+                    bmp.Width, bmp.Height),
+                new Rectangle(          // Quelle
+                    0, 0,
+                    image.Width, image.Height),
+                GraphicsUnit.Pixel);
+
+            // Release the resources of the graphics:
+            g.Dispose();
+
+            // Release the resources of the origin image:
+            image.Dispose();
+
+            return bmp;
+        }
+        public static DataRow DRW(DataTable tbl, object key, DataColumn col)
+        {
+            tbl.PrimaryKey = new DataColumn[] { col };
+            DataRow DRW = tbl.Rows.Find(key);
+
+            return DRW;
         }
     }
     // Current User Class

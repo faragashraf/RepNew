@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +22,7 @@ namespace VOCAC.PL
     public delegate void delagatethread();
     public partial class WelcomeScreen : Form
     {
-        List<DataTable> DtblClction = new List<DataTable>();
+        int ConterWidt = 0;
         BL.CLS_LOGIN log = new BL.CLS_LOGIN();
         private string Ver = null;
         private static WelcomeScreen frm;
@@ -81,7 +85,6 @@ namespace VOCAC.PL
                 PubVerLbl1.Text = "Publish Ver. : This isn't a Publish version";
             }
 
-
             //Cmbo.Items.Add("My Labtop");
             Cmbo.Items.Add("Training");
             Cmbo.Items.Add("Eg Server");
@@ -91,15 +94,15 @@ namespace VOCAC.PL
         }
         private void WelcomeScreen_Load(object sender, EventArgs e)
         {
-            panellgin.Location = new Point((Statcdif.screenWidth - panellgin.Width) / 2, (Statcdif.screenHeight - 150 - panellgin.Height) / 2);
+            panellgin.Location = new Point((this.Width - panellgin.Width) / 2, (this.Height - 150 - panellgin.Height) / 2);
 
             MdiClient Mdiclnt1;
             foreach (Control ctrl in this.Controls)
             {
                 try
                 {
-                Mdiclnt1 = (MdiClient)ctrl;
-                Mdiclnt1.BackColor = Color.White;
+                    Mdiclnt1 = (MdiClient)ctrl;
+                    Mdiclnt1.BackColor = Color.White;
                 }
                 catch (Exception)
                 {
@@ -114,7 +117,7 @@ namespace VOCAC.PL
             Statcdif._MacStr = fn.GetMACAddressNew();
             Statcdif._IP = fn.OsIP();
             TxtUsrNm.Select();
-            TxtUsrNm.Text = "ashraf";
+            TxtUsrNm.Text = "ahmed_emam";
             TxtUsrPass.Text = "hemonad";
 
             Cmbo.SelectedItem = "Training";
@@ -196,31 +199,24 @@ namespace VOCAC.PL
                     //Ignore Cast Error
                 }
             }
-
-
-
-
-
         }
         private void IntializeSwitchBoard(function fn)
         {
-            DAL.DataAccessLayer.rturnStruct Swtchbordreslt = log.SwtchBoard();
-            if (Swtchbordreslt.dt.Rows.Count > 0)
+            if (Statcdif.SwitchTbl.Rows.Count > 0)
             {
-                fn.SwitchBoard(Swtchbordreslt.dt);
+                fn.SwitchBoard(Statcdif.SwitchTbl);
             }
-            this.Text = "Welcome " + CurrentUser.UsrRlNm;
+            this.Text = "VOCA Ultimate";
             Statcdif.Menu_.BackColor = Color.FromArgb(0, 192, 0);
             Statcdif.Menu_.Font = new Font("Times New Roman", 14, FontStyle.Regular);
             Statcdif.Menu_.RightToLeft = RightToLeft.Yes;
             Statcdif.Menu_.Dock = DockStyle.Left;
             Statcdif.Menu_.TextDirection = ToolStripTextDirection.Vertical270;
             this.Controls.Add(Statcdif.Menu_);
-            panellgin.Visible = false;
             FlowLayoutPanel1.Size = new Size(Statcdif.screenWidth - Statcdif.Menu_.Width, Statcdif.screenHeight - 120);
-            //FlowLayoutPanel1.Location = new Point(100, 30);
-            FlowLayoutPanel1.Visible = true;
             FlowLayoutPanel1.Dock = DockStyle.Fill;
+            FlowLayoutPanel1.Visible = true;
+            panellgin.Visible = false;
         }
         private void SelctMainTables()
         {
@@ -231,6 +227,7 @@ namespace VOCAC.PL
             Statcdif.CDHolDay = new DataTable();
             Statcdif.MendFildsTable = new DataTable();
             Statcdif.TreeUsrTbl = new DataTable();
+            Statcdif.SwitchTbl = new DataTable();
             DAL.DataAccessLayer.rturnStruct SlctMainreslt = log.slctmaintbls();
             if (SlctMainreslt.ds.Tables.Count > 0)
             {
@@ -241,6 +238,7 @@ namespace VOCAC.PL
                 Statcdif.CDHolDay = SlctMainreslt.ds.Tables[4];                         // Calendar Table
                 Statcdif.MendFildsTable = SlctMainreslt.ds.Tables[5];                   // Medatory Fields VS Products & complaints CDFN Table
                 Statcdif.TreeUsrTbl = SlctMainreslt.ds.Tables[6];                       // Users Table
+                Statcdif.SwitchTbl = SlctMainreslt.ds.Tables[7];                        // Switchboard Table
                 if (CurrentUser.UsrUCatLvl == 7)
                 {
                     Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" + 0 + " AND [srcCd] = '1'";     //     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm";
@@ -290,8 +288,6 @@ namespace VOCAC.PL
 
 
             LblUsrRNm.Text = "Welcome " + CurrentUser.UsrRlNm;
-
-            int ConterWidt = 0;
             if (CurrentUser.UsrUCatLvl >= 3 && CurrentUser.UsrUCatLvl <= 5)
             {
                 GrpCounters.Visible = true;
@@ -314,11 +310,7 @@ namespace VOCAC.PL
                 GrpCounters.Visible = false;
                 ConterWidt = 0;
             }
-            DbStat.Margin = new Padding(DbStat.Margin.Left, 30, Statcdif.screenWidth - 100 - (DbStat.Width + DbStat.Margin.Left), DbStat.Margin.Bottom);
-            PictureBox1.Margin = new Padding(PictureBox1.Margin.Left, 50, Statcdif.screenWidth - 100 - (GroupBox1.Width + GroupBox1.Margin.Right + GroupBox1.Margin.Left + ConterWidt + PictureBox1.Width + PictureBox1.Margin.Left + 20), PictureBox1.Margin.Bottom);
-            LblUsrRNm.Margin = new Padding(LblUsrRNm.Margin.Left, LblUsrRNm.Margin.Top, Statcdif.screenWidth - 100 - (LblUsrRNm.Width + LblUsrRNm.Margin.Left), LblUsrRNm.Margin.Bottom);
-            LblSrvrNm.Margin = new Padding(LblSrvrNm.Margin.Left, LblSrvrNm.Margin.Top, Statcdif.screenWidth - 100 - (LblSrvrNm.Width + LblUsrRNm.Margin.Left), LblSrvrNm.Margin.Bottom);
-            LblLstSeen.Margin = new Padding(LblLstSeen.Margin.Left, LblLstSeen.Margin.Top, Statcdif.screenWidth - 100 - (LblLstSeen.Width + LblUsrRNm.Margin.Left), LblLstSeen.Margin.Bottom);
+            AdjustSize();
         }
         private void getusrPic()
         {
@@ -332,68 +324,11 @@ namespace VOCAC.PL
                     PictureBox1.Image = img;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                string hh = ex.Message;
                 PictureBox1.Image = Resources.UsrResm;
             }
-            PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            PictureBox1.BorderStyle = BorderStyle.None;
-        }
-        private void Chckcont()
-        {
-            defintions def = new defintions();
-            function fn = function.getfn;
-            def.thread_ = new Thread(() =>
-            {
-
-                //defintions.CncStat = false;
-                //if (defintions.MacTble == null)
-                //{ getMac(); }
-
-                fn.CheckConnection();
-
-                Action action = () =>
-                {
-                    //StatBrPnlEn.Text = "connecting ...";
-                    if (Statcdif.MacTble != null)
-                    {
-                        if (Statcdif.MacTble.Rows.Count > 0)
-                        {
-                            this.Cmbo.Visible = true;
-                        }
-                        else
-                        {
-                            this.Cmbo.Visible = false;
-                        }
-                    }
-
-                    if (Statcdif.CncStat == true)
-                    {
-                        StatBrPnlEn.Text = "Online";
-                        LogInBtn.Enabled = true;
-                        ExitBtn.Enabled = true;
-                    }
-                    else if (Statcdif.CncStat == false)
-                    {
-                        StatBrPnlEn.Text = "Offline";
-                        LogInBtn.Enabled = false;
-                        ExitBtn.Enabled = false;
-                        //def.thread_.Abort();
-                    }
-                };
-                try
-                {
-                    this.BeginInvoke(action);
-                    Chckcont();
-                }
-                catch (Exception)
-                {
-
-                    return;
-                }
-            });
-            def.thread_.IsBackground = true;
-            def.thread_.Start();
         }
         public bool ThreadResult;
         public void threadresltAction()
@@ -458,7 +393,6 @@ namespace VOCAC.PL
         private void SnOutBt_Click(object sender, EventArgs e)
         {
             Statcdif.Menu_.Dispose();
-            DtblClction.Clear();
             this.Controls.RemoveByKey(Statcdif.Menu_.Name);
             List<Form> frmlst = new List<Form>();
             foreach (Form f in Application.OpenForms)
@@ -475,10 +409,6 @@ namespace VOCAC.PL
             FlowLayoutPanel1.Visible = false;
             panellgin.Visible = true;
             this.Text = "Login Screen";
-
-
-
-
         }
         private void getMac()
         {
@@ -502,9 +432,10 @@ namespace VOCAC.PL
         }
         private void Button1_Click(object sender, EventArgs e)
         {
-            string startPath = @"C:\Users\ashraf\Desktop\UserPic\XXXXX";
+            string startPath = @"C:\Users\ashraf\Desktop\CompUpdates\";
             DirectoryInfo d = new DirectoryInfo(startPath);
-            string[] files = Directory.GetFiles(startPath, "*.jpg", SearchOption.AllDirectories);
+            string[] files = Directory.GetFiles(startPath);
+            //string[] files = Directory.GetFiles(startPath, "*.jpg", SearchOption.AllDirectories);
 
             foreach (string oCurrent in files)
             {
@@ -514,12 +445,12 @@ namespace VOCAC.PL
 
                 SqlCommand sqlcmd = new SqlCommand();
                 sqlcmd.CommandType = CommandType.StoredProcedure;
-                sqlcmd.CommandText = "SP_A_USR_PIC";
+                sqlcmd.CommandText = "TSP_Test";
                 SqlConnection con = new SqlConnection(Statcdif.strConn);
                 sqlcmd.Connection = con;
                 SqlParameter[] param = new SqlParameter[2];
                 param[0] = new SqlParameter("@id", SqlDbType.Int);
-                param[0].Value = Convert.ToInt32(d1.Name.Split(' ')[0]);
+                param[0].Value = Convert.ToInt32(d1.Name.Split('.')[0]);
                 param[1] = new SqlParameter("@pic", SqlDbType.Image);
                 param[1].Value = image1;
                 sqlcmd.Parameters.Add(param[0]);
@@ -546,46 +477,71 @@ namespace VOCAC.PL
         }
         private void UploadYourPictureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            if (function.preapareattachment() != null)
             {
-                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-                openFileDialog.Filter = "JPG files (*.jpg)|*.*";
-                openFileDialog.FilterIndex = 2;
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                //Get the path of specified file
+                DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
+                SqlParameter[] param = new SqlParameter[2];
+                param[0] = new SqlParameter("@id", SqlDbType.Int);
+                param[0].Value = CurrentUser.UsrID;
+                param[1] = new SqlParameter("@pic", SqlDbType.Image);
+                param[1].Value = Statcdif.mainImageArray;
+                try
                 {
-                    //Get the path of specified file
-                    byte[] image1 = File.ReadAllBytes(openFileDialog.FileName);
-
-                    SqlCommand sqlcmd = new SqlCommand();
-                    sqlcmd.CommandType = CommandType.StoredProcedure;
-                    sqlcmd.CommandText = "AAAA";
-                    SqlConnection con = new SqlConnection(Statcdif.strConn);
-                    sqlcmd.Connection = con;
-                    SqlParameter[] param = new SqlParameter[2];
-                    param[0] = new SqlParameter("@id", SqlDbType.Int);
-                    param[0].Value = CurrentUser.UsrID;
-                    param[1] = new SqlParameter("@pic", SqlDbType.Image);
-                    param[1].Value = image1;
-                    sqlcmd.Parameters.Add(param[0]);
-                    sqlcmd.Parameters.Add(param[1]);
-                    try
+                    DAL.ExcuteCommand("SP_A_USR_PIC", param);
+                    using (MemoryStream ms = new MemoryStream(Statcdif.mainImageArray))
                     {
-                        con.Open();
-                        sqlcmd.ExecuteNonQuery();
-                        using (MemoryStream ms = new MemoryStream(image1))
-                        {
-                            PictureBox1.Image = Image.FromStream(ms);
-                        }
-                    }
-                    catch (Exception Ex)
-                    {
-                        function fn = function.getfn;
-                        fn.msg("خطأ في تحميل الصوره", "تحميل الصورة الشخصية");
+                        Image.FromStream(ms).Save(@"c:\\AAA.jpg");
+                        Size sze = new Size();
+                        sze = Image.FromStream(ms).Size;
+                        int lql = Image.FromStream(ms).Height;
+                        function.ResizeImage(Image.FromStream(ms), sze.Width / 8, sze.Height / 8).Save(@"c:\\AAASized.jpg");
+                        PictureBox1.Image = Image.FromStream(ms);
                     }
                 }
-
+                catch (Exception Ex)
+                {
+                    function fn = function.getfn;
+                    fn.msg("خطأ في تحميل الصوره", "تحميل الصورة الشخصية");
+                    fn.AppLog(this.ToString(), Ex.Message, "SP_A_USR_PIC");
+                }
             }
+        }
+        private void WelcomeScreen_SizeChanged(object sender, EventArgs e)
+        {
+            AdjustSize();
+        }
+        private void AdjustSize()
+        {
+            LblUsrIP.Margin = new Padding(LblUsrIP.Margin.Left, this.Height - (GroupBox1.Height + 370), LblUsrIP.Margin.Right, LblUsrIP.Margin.Bottom);
+            panellgin.Location = new Point((this.Width - panellgin.Width) / 2, (this.Height - 150 - panellgin.Height) / 2);
+            DbStat.Margin = new Padding(DbStat.Margin.Left, 30, this.Width - 100 - (DbStat.Width + DbStat.Margin.Left), DbStat.Margin.Bottom);
+            PictureBox1.Margin = new Padding(PictureBox1.Margin.Left, 50, this.Width - 100 - (GroupBox1.Width + GroupBox1.Margin.Right + GroupBox1.Margin.Left + ConterWidt + PictureBox1.Width + PictureBox1.Margin.Left + 20), PictureBox1.Margin.Bottom);
+            LblUsrRNm.Margin = new Padding(LblUsrRNm.Margin.Left, LblUsrRNm.Margin.Top, this.Width - 100 - (LblUsrRNm.Width + LblUsrRNm.Margin.Left), LblUsrRNm.Margin.Bottom);
+            LblSrvrNm.Margin = new Padding(LblSrvrNm.Margin.Left, LblSrvrNm.Margin.Top, this.Width - 100 - (LblSrvrNm.Width + LblUsrRNm.Margin.Left), LblSrvrNm.Margin.Bottom);
+            LblLstSeen.Margin = new Padding(LblLstSeen.Margin.Left, LblLstSeen.Margin.Top, this.Width - 100 - (LblLstSeen.Width + LblUsrRNm.Margin.Left), LblLstSeen.Margin.Bottom);
+        }
+        private void ToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            Bitmap tt = (Bitmap)PictureBox1.Image;
+            tt.RotateFlip(RotateFlipType.Rotate90FlipX);
+            PictureBox1.Image = tt;
+
+            PictureBox1.Refresh();
+        }
+
+        private void ToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            Bitmap tt = (Bitmap)PictureBox1.Image;
+            tt.RotateFlip(RotateFlipType.Rotate180FlipY);
+            PictureBox1.Image = tt;
+            PictureBox1.Refresh();
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+
+
         }
     }
 }

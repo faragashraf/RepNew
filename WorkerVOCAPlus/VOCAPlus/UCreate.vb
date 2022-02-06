@@ -22,7 +22,7 @@ Public Class UCreate
             BSave.Visible = False
         Else
             WelcomeScreen.StatBrPnlEn.Text = "  Offline - Can't open User Create Form...  "
-            WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+            'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
             MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
             Close()
         End If
@@ -43,20 +43,20 @@ Public Class UCreate
         Dim ReaderS As SqlDataReader
         Dim PUsername As String
         If Len(Me.TxtNm.Text) < 3 Then
-            FooterLbl.Text = "User name Must be more than 3 characters"
+            'FooterLbl.Text = "User name Must be more than 3 characters"
             TxtNm.Select()
         Else
             Try
                 If sqlCon.State = ConnectionState.Closed Then
                     sqlCon.Open()
-                    WelcomeScreen.StatBrPnlEn.Text = "  Online  "
-                    WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOn032
+                    'WelcomeScreen.StatBrPnlEn.Text = "  Online  "
+                    'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOn032
                 End If
             Catch ex As Exception
                 TxtNm.Text = ""
                 WelcomeScreen.TimerCon.Start()
-                WelcomeScreen.StatBrPnlEn.Text = "  Offline - Failed to check User Name"
-                WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+                'WelcomeScreen.StatBrPnlEn.Text = "  Offline - Failed to check User Name"
+                'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
                 AppLog("1017&H", ex.Message, "Failed to Failed to check User Name if it is dublicated in the table")
                 Exit Sub
             End Try
@@ -210,14 +210,14 @@ Public Class UCreate
         End If
         ' Start Saving Progress
         If PublicCode.InsUpd("INSERT INTO Int_User (UsrId, UsrNm, UsrCat, UsrPass, UsrKey, UsrRealNm, UsrGender, UsrGsm, UsrEmail) VALUES (" & TxtId.Text & ",'" & TxtNm.Text & "', '" & TxtCat.Text & "', 'HDJRJi0dIhNwY5H0iB7zjQ==' , 'A430FABA825' , '" & TxtRNm.Text & "' , '" & CBxGndr.Text & "' , '" & TxtGSM.Text & "' , '" & TxtEmail.Text & "' );", "1015&H") <> Nothing Then
-            WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+            'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
             FooterLbl.Text = "Fail To save Current new user Please try againg"
             Exit Sub
         End If
 
 ExitSec:
-        WelcomeScreen.StatBrPnlEn.Text = "  Online  "
-        WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOn032
+        'WelcomeScreen.StatBrPnlEn.Text = "  Online  "
+        'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOn032
         FrmReset()
         BtnUsrCreate.Select()
     End Sub
@@ -243,12 +243,12 @@ ExitSec:
             TxtNm.Visible = True
             TxtNm.Select()
             ProgBar.Value = 0
-            WelcomeScreen.StatBrPnlEn.Text = "  Online  "
-            WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOn032
+            'WelcomeScreen.StatBrPnlEn.Text = "  Online  "
+            'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOn032
         Catch ex As Exception
             WelcomeScreen.TimerCon.Start()
-            WelcomeScreen.StatBrPnlEn.Text = "  Offline  "
-            WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+            'WelcomeScreen.StatBrPnlEn.Text = "  Offline  "
+            'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
             AppLog("1014&H", ex.Message, sqlCommA.CommandText)
             Exit Sub
         End Try

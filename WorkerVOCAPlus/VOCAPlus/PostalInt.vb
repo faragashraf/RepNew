@@ -24,7 +24,7 @@ Public Class PostalInt
             SqlConnection.ClearPool(sqlCon)
         Catch ex As Exception
             WelcomeScreen.TimerCon.Start()
-            WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+            'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
             AppLog(ErrHndl, ex.Message, SSqlStr)
             Errmsg = "X"
         End Try

@@ -245,7 +245,7 @@ Public Class HeldPhNtf
             Tran.Rollback()
             AppLog("0000&H", ex.Message, "" & "_" & "")
             WelcomeScreen.TimerCon.Start()
-            WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+            'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
         End Try
         'sqlCon.Close()
         'SqlConnection.ClearPool(sqlCon)
@@ -289,7 +289,7 @@ Public Class HeldPhNtf
             Tran.Rollback()
             AppLog("0000&H", ex.Message, "" & "_" & "")
             WelcomeScreen.TimerCon.Start()
-            WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+            'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
         End Try
         'sqlCon.Close()
         'SqlConnection.ClearPool(sqlCon)

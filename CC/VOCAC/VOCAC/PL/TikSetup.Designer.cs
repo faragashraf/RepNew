@@ -72,7 +72,6 @@
             this.Prdct = new System.Windows.Forms.TextBox();
             this.Label5 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.MyGroupBox3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -191,12 +190,13 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(514, 437);
+            this.dataGridView1.Location = new System.Drawing.Point(976, 437);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(677, 304);
+            this.dataGridView1.Size = new System.Drawing.Size(215, 304);
             this.dataGridView1.TabIndex = 2047;
             this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridView1_CellMouseDoubleClick);
             // 
@@ -604,7 +604,6 @@
             this.flowLayoutPanel1.Controls.Add(this.btnaddnew);
             this.flowLayoutPanel1.Controls.Add(this.flowMend);
             this.flowLayoutPanel1.Controls.Add(this.dataGridView1);
-            this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.comboBox1);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(522, 4);
@@ -613,26 +612,14 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1194, 747);
             this.flowLayoutPanel1.TabIndex = 2045;
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(404, 437);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
-            this.button1.Name = "button1";
-            this.button1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.button1.Size = new System.Drawing.Size(97, 41);
-            this.button1.TabIndex = 2055;
-            this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
             // comboBox1
             // 
+            this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(204, 437);
+            this.comboBox1.Location = new System.Drawing.Point(776, 437);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.comboBox1.Size = new System.Drawing.Size(194, 21);
+            this.comboBox1.Size = new System.Drawing.Size(194, 29);
             this.comboBox1.TabIndex = 2056;
             // 
             // TikSetup
@@ -710,7 +697,6 @@
         internal System.Windows.Forms.TextBox Prdct;
         internal System.Windows.Forms.Label Label5;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBox1;
     }
 }

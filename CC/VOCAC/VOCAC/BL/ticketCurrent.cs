@@ -16,7 +16,7 @@ namespace VOCAC.BL
     {
         public struct currntTicket
         {
-            public static string _TkSQL;
+            public static int _TkSQL;
             public static string _TkKind;
             public static DateTime _TkDtStart;
             public static string _SrcNm;
@@ -52,12 +52,14 @@ namespace VOCAC.BL
             public static int _UCatLvl;
             public static bool _TkupUnread;
             public static List<string> SlctdFldLst = new List<string>();
+            public static int colCnt;
         }
         public static void currentRow(DataGridView gv)
         {
+            currntTicket.colCnt = 0;
             currntTicket._TkKind = Convert.ToString(gv.CurrentRow.Cells["TkKind"].Value);
             currntTicket._SrcNm = Convert.ToString(gv.CurrentRow.Cells["SrcNm"].Value);
-            currntTicket._TkSQL = Convert.ToString(gv.CurrentRow.Cells["TkSQL"].Value);
+            currntTicket._TkSQL = Convert.ToInt32(gv.CurrentRow.Cells["TkSQL"].Value);
             currntTicket._TkDtStart = Convert.ToDateTime(gv.CurrentRow.Cells["TkDtStart"].Value);
             currntTicket._TkClNm = Convert.ToString(gv.CurrentRow.Cells["TkClNm"].Value);
             currntTicket._TkClPh = Convert.ToString(gv.CurrentRow.Cells["TkClPh"].Value);
@@ -103,7 +105,16 @@ namespace VOCAC.BL
             currntTicket._updtusr = Convert.ToString(gv.CurrentRow.Cells["updtusr"].Value);
 
             currntTicket.SlctdFldLst.Clear();
-            for (int i = 36; i < gv.Columns.Count; i++)
+
+            if (gv.Columns[gv.Columns.Count - 1].Name == "توزيع/إستعادة")
+            {
+                currntTicket.colCnt = gv.Columns.Count - 1;
+            }
+            else
+            {
+                currntTicket.colCnt= gv.Columns.Count;
+            }
+            for (int i = 36; i < currntTicket.colCnt; i++)
             {
                 if (gv.CurrentRow.Cells[i].Value.ToString().Length > 0)
                 {
@@ -113,10 +124,7 @@ namespace VOCAC.BL
         }
         public void AssignToForm()
         {
-
-
             TikDetails.gettikdetlsfrm.FlwMend.Controls.Clear();
-
 
             if (currntTicket._TkClsStatus == true)
             {
@@ -186,7 +194,7 @@ namespace VOCAC.BL
                 TikDetails.gettikdetlsfrm.FlwMend.Controls.Add(TxtBx);
                 TxtBx.ReadOnly = true;
             }
-            if (currntTicket._TkKind.Equals("شكوى",StringComparison.OrdinalIgnoreCase))
+            if (currntTicket._TkKind.Equals("شكوى", StringComparison.OrdinalIgnoreCase))
             {
                 TikDetails.gettikdetlsfrm.TxtTikID.Text = "شكوى رقم : " + currntTicket._TkSQL;
                 TikDetails.gettikdetlsfrm.Text = "شكوى رقم : " + currntTicket._TkSQL;
@@ -215,6 +223,157 @@ namespace VOCAC.BL
 
             fn.ClorTxt(TikDetails.gettikdetlsfrm.TxtDetails, "تعديل : بواسطة", Color.Transparent, Color.Red, 16);
             fn.ClorTxt(TikDetails.gettikdetlsfrm.TxtDetails, "إضافة تلقائية من النظام:", Color.Transparent, Color.Green, 16);
+        }
+        public static DataTable attchtbl = new DataTable();
+        public static void getupdate()
+        {
+
+            Form frmpic;
+
+            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
+            SqlParameter[] param = new SqlParameter[1];
+            param[0] = new SqlParameter("@TkupTkSql", SqlDbType.Int);
+            param[0].Value = currntTicket._TkSQL;
+            DataTable gg = new DataTable();
+
+
+            DAL.Struc = DAL.SelectData("SP_TICKET_EVENT_SLCT", param);
+            if (DAL.Struc.dt.Rows.Count > 0)
+            {
+                //DAL.Struc.dt.PrimaryKey = new DataColumn[] { DAL.Struc.dt.Columns[0] };
+                attchtbl = DAL.Struc.dt.Copy();
+                DAL.Struc.dt.Columns.RemoveAt(10);
+                //attchtbl.PrimaryKey = new DataColumn[] { attchtbl.Columns[0] };
+                attchtbl.Columns.RemoveAt(9);
+                attchtbl.Columns.RemoveAt(8);
+                attchtbl.Columns.RemoveAt(7);
+                attchtbl.Columns.RemoveAt(6);
+                attchtbl.Columns.RemoveAt(5);
+                attchtbl.Columns.RemoveAt(4);
+                attchtbl.Columns.RemoveAt(3);
+                attchtbl.Columns.RemoveAt(2);
+                attchtbl.Columns.RemoveAt(1);
+
+                attchtbl.DefaultView.RowFilter = "[AttchImg] is not null";
+                DAL.Struc.dt.Columns.Add("File");
+                if (attchtbl.DefaultView.Count > 0)
+                {
+
+                    for (int i = 0; i < attchtbl.DefaultView.Count; i++)
+                    {
+                        DataRow DRW = function.DRW(DAL.Struc.dt, attchtbl.DefaultView[i][0], DAL.Struc.dt.Columns[0]);
+                        int Rowindex_ = DAL.Struc.dt.Rows.IndexOf(DRW);
+                        DAL.Struc.dt.Rows[Rowindex_][10] = "✔";
+                    }
+                }
+                DAL.Struc.dt.PrimaryKey = new DataColumn[] { DAL.Struc.dt.Columns[0] };
+
+                //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                DAL.Struc.dt.Columns.Add("عدد أيام عمل", typeof(string)).SetOrdinal(2);
+                DAL.Struc.dt.DefaultView.RowFilter = "EvSusp = 0 and TkupUser = " + currntTicket._TkEmpNm;
+                function fn = function.getfn;
+                DAL.Struc.dt.DefaultView.Sort = "TkupSTime ASC";
+                for (int i = 0; i < DAL.Struc.dt.DefaultView.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        DAL.Struc.dt.DefaultView[i]["عدد أيام عمل"] = "1_" + fn.CalDate(Convert.ToString(currntTicket._TkDtStart), Convert.ToString(DAL.Struc.dt.DefaultView[i]["TkupSTime"]));
+                    }
+                    else
+                    {
+                        DAL.Struc.dt.DefaultView[i]["عدد أيام عمل"] = fn.CalDate(Convert.ToString(DAL.Struc.dt.DefaultView[i - 1]["TkupSTime"]), Convert.ToString(DAL.Struc.dt.DefaultView[i]["TkupSTime"]));
+                    }
+                }
+                DAL.Struc.dt.DefaultView.RowFilter = string.Empty;
+                DAL.Struc.dt.DefaultView.Sort = "TkupSTime desc";
+                //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+                TikUpdate.getTikupdatefrm.GridUpdt.DataSource = DAL.Struc.dt;
+                if (currntTicket._TkKind.Equals("شكوى", StringComparison.OrdinalIgnoreCase))
+                {
+                    TikUpdate.getTikupdatefrm.Text = "تحديثات شكوى رقم : " + currntTicket._TkSQL;
+                }
+                else
+                {
+                    TikUpdate.getTikupdatefrm.Text = "تحديثات طلب رقم : " + currntTicket._TkSQL;
+                }
+                TikUpdate.getTikupdatefrm.Text += " _ عدد التحديثات : " + DAL.Struc.dt.Rows.Count;
+                TikUpdate.getTikupdatefrm.CmbEvent.DataSource = Statcdif.UpdateKTable;
+                TikUpdate.getTikupdatefrm.CmbEvent.DisplayMember = "EvNm";
+                TikUpdate.getTikupdatefrm.CmbEvent.ValueMember = "EvId";
+                TikUpdate.getTikupdatefrm.CmbEvent.SelectedValue = -1;
+                TikUpdate.getTikupdatefrm.TxtUpdt.Text = "";
+                TikUpdate.getTikupdatefrm.TxtUpdt.ReadOnly = true;
+                TikUpdate.getTikupdatefrm.CmbEvent.SelectedIndexChanged += new System.EventHandler(TikUpdate.getTikupdatefrm.CmbEvent_SelectedIndexChanged);
+                eventColor();
+                TikUpdate.getTikupdatefrm.GridUpdt.Columns[10].DefaultCellStyle.Font = new Font("Lucida Handwriting", 16, FontStyle.Bold);
+            }
+            else
+            {
+                function fn = function.getfn;
+                TikUpdate.getTikupdatefrm.Close();
+                fn.msg("لاتوجد هناك تحديثات للعرض", "تحميل التحديثات");
+
+            }
+        }
+        public static void eventColor()
+        {
+            foreach (DataGridViewRow item in TikUpdate.getTikupdatefrm.GridUpdt.Rows)
+            {
+                if (Convert.ToInt32(item.Cells["TkupEvtId"].Value) == 902)
+                {
+                    item.DefaultCellStyle.BackColor = Color.Red;
+                    item.DefaultCellStyle.ForeColor = Color.Yellow;
+                }
+                else if (Convert.ToBoolean(item.Cells["EvSusp"].Value) == true)
+                {
+                    item.DefaultCellStyle.BackColor = Settings.Default.ClrSys;
+                }
+                else if (Convert.ToInt32(item.Cells["TkupUser"].Value) == currntTicket._TkEmpNm)
+                {
+                    item.DefaultCellStyle.BackColor = Settings.Default.ClrUsr;
+                }
+                else if (Convert.ToInt32(item.Cells["TkupUser"].Value) != currntTicket._TkEmpNm)
+                {
+                    if (Convert.ToInt32(item.Cells["UCatLvl"].Value) >= 3 && Convert.ToInt32(item.Cells["UCatLvl"].Value) <= 5)
+                    {
+                        item.DefaultCellStyle.BackColor = Settings.Default.ClrSamCat;
+                    }
+                    else if (Convert.ToInt32(item.Cells["UCatLvl"].Value) == 200)
+                    {
+                        item.DefaultCellStyle.BackColor = Settings.Default.ClrOperation;
+                    }
+                    else
+                    {
+                        item.DefaultCellStyle.BackColor = Settings.Default.ClrNotUsr;
+                    }
+                }
+                if (Convert.ToBoolean(item.Cells["TkupUnread"].Value) == false)
+                {
+                    item.DefaultCellStyle.Font = new Font("Times New Roman", 16, FontStyle.Bold);
+                }
+                if (item.Cells["عدد أيام عمل"].Value.ToString().Split('_').Count() > 1)
+                {
+                    if (item.Cells["عدد أيام عمل"].Value.ToString().Split('_')[0] == "1")
+                    {
+                        item.DefaultCellStyle.BackColor = Color.Yellow;
+                        item.Cells["عدد أيام عمل"].Value = item.Cells["عدد أيام عمل"].Value.ToString().Split('_')[1];
+                        item.Cells["عدد أيام عمل"].Tag = "First";
+                    }
+                }
+                else if (item.Cells["عدد أيام عمل"].Tag == "First")
+                {
+                    item.DefaultCellStyle.BackColor = Color.Yellow;
+                }
+            }
+            TikUpdate.getTikupdatefrm.GridUpdt.AutoResizeColumns();
+            TikUpdate.getTikupdatefrm.GridUpdt.Columns["TkupTxt"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            TikUpdate.getTikupdatefrm.GridUpdt.Columns["TkupTxt"].Width = TikUpdate.getTikupdatefrm.GridUpdt.Width - (TikUpdate.getTikupdatefrm.GridUpdt.Columns["TkupSTime"].Width + TikUpdate.getTikupdatefrm.GridUpdt.Columns["عدد أيام عمل"].Width + TikUpdate.getTikupdatefrm.GridUpdt.Columns["EvNm"].Width + TikUpdate.getTikupdatefrm.GridUpdt.Columns["EvNm"].Width + TikUpdate.getTikupdatefrm.GridUpdt.Columns["UsrRealNm"].Width);
+            TikUpdate.getTikupdatefrm.GridUpdt.AutoResizeRows();
+            foreach (DataGridViewColumn item in TikUpdate.getTikupdatefrm.GridUpdt.Columns)
+            {
+                item.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
     }
 }

@@ -85,11 +85,11 @@ namespace VOCAC.PL
         }
         private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            this.comboBox1.SelectedIndexChanged -= new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             TreeView1.SelectedNode.Expand();
             if (TreeView1.SelectedNode.Level == 2)
             {
-                Statcdif.ProdCompTable.PrimaryKey = new DataColumn[] { Statcdif.ProdCompTable.Columns["FnSQL"] };
-                DataRow DRW = Statcdif.ProdCompTable.Rows.Find(TreeView1.SelectedNode.Name);
+                DataRow DRW = function.DRW(Statcdif.ProdCompTable, TreeView1.SelectedNode.Name, Statcdif.ProdCompTable.Columns["FnSQL"]);
                 btnaddnew.Visible = true;
                 PrdKind = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[0];
                 Prdct.Text = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[1];
@@ -113,6 +113,12 @@ namespace VOCAC.PL
                 else { MendsrcTable.DefaultView.RowFilter = string.Empty; }
 
                 dataGridView1.DataSource = MendsrcTable.DefaultView;
+                dataGridView1.Columns[0].Visible = false;
+                dataGridView1.Columns[2].Visible = false;
+                dataGridView1.Columns[3].Visible = false;
+                dataGridView1.Columns[4].Visible = false;
+                dataGridView1.Columns[5].Visible = false;
+
             }
             else if (TreeView1.SelectedNode.Level < 2)
             {
@@ -129,6 +135,7 @@ namespace VOCAC.PL
             {
                 PrdKind = "";
             }
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
         }
         private void Timertrigger_Tick(object sender, EventArgs e)
         {
@@ -443,7 +450,6 @@ namespace VOCAC.PL
             param[1].Value = MendField;
             param[2] = new SqlParameter("@MendStat", SqlDbType.Bit);
             param[2].Value = MendStat;
-            DAL.Open();
             try
             {
                 DAL.Struc = DAL.ExcuteCommand("SP_MendCDFN_INSERT", param);
@@ -517,8 +523,7 @@ namespace VOCAC.PL
         }
         private void Button1_Click(object sender, EventArgs e)
         {
-            TEST hh = new TEST();
-            hh.ShowDialog();
+
         }
         private void PopulateTree()
         {
@@ -612,8 +617,10 @@ namespace VOCAC.PL
         }
         private void udatedataset()
         {
+            this.comboBox1.SelectedIndexChanged -= new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             ds.Clear();
             da.Fill(ds);
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
         }
         private void checkbox_Click(object sender, EventArgs e)
         {
@@ -670,6 +677,25 @@ namespace VOCAC.PL
             else
             {
                 CKBOX.BackColor = Color.Red;
+            }
+        }
+
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
+            SqlParameter[] param = new SqlParameter[2];
+            param[0] = new SqlParameter("@FNSQL", SqlDbType.Int);
+            param[0].Value = TreeView1.SelectedNode.Name;
+            param[1] = new SqlParameter("@FnMngr", SqlDbType.Int);
+            param[1].Value = comboBox1.SelectedValue;
+            try
+            {
+                DAL.ExcuteCommand("SP_A_COMP_MANGER_UPDATE",param);
+            }
+            catch (Exception Ex)
+            {
+                function fn = function.getfn;
+                fn.msg("dd", "frfff");
             }
         }
     }

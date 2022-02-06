@@ -135,12 +135,13 @@ Partial Class TikUpdate
         'TxtUpdt
         '
         Me.TxtUpdt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtUpdt.Font = New System.Drawing.Font("Times New Roman", 12.0!)
+        Me.TxtUpdt.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.TxtUpdt.Location = New System.Drawing.Point(171, 40)
         Me.TxtUpdt.Multiline = True
         Me.TxtUpdt.Name = "TxtUpdt"
         Me.TxtUpdt.ReadOnly = True
         Me.TxtUpdt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.TxtUpdt.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.TxtUpdt.Size = New System.Drawing.Size(831, 146)
         Me.TxtUpdt.TabIndex = 2054
         '

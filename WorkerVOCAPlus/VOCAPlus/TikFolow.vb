@@ -341,7 +341,6 @@ Public Class TikFolow
             If GridTicket.CurrentRow.Index <> -1 Then
                 CurrRw = GridTicket.CurrentRow.Index
                 If Fn.TikGVDblClck(GridTicket) = Nothing Then
-                    TikDetails.Text = "شكوى رقم " & StruGrdTk.Sql
                     TikDetails.Show()
                     TikDetails.Activate()
                 Else

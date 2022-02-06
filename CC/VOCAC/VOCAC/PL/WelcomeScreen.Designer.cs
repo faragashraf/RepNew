@@ -39,10 +39,10 @@
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.CNTXMNUPic = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.UploadYourPictureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.LblSrvrNm = new System.Windows.Forms.Label();
             this.TimrFlsh = new System.Windows.Forms.Timer(this.components);
-            this.LblLanguage = new System.Windows.Forms.Label();
-            this.Label9 = new System.Windows.Forms.Label();
             this.FlowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.DbStat = new System.Windows.Forms.PictureBox();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
@@ -84,6 +84,7 @@
             this.TxtUsrNm = new System.Windows.Forms.TextBox();
             this.PubVerLbl1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.TimerCon = new System.Windows.Forms.Timer(this.components);
             this.CntxtMnuStrp = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TimerTikCoun = new System.Windows.Forms.Timer(this.components);
@@ -196,23 +197,25 @@
             // 
             // PictureBox1
             // 
-            this.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.PictureBox1.ContextMenuStrip = this.CNTXMNUPic;
             this.FlowLayoutPanel1.SetFlowBreak(this.PictureBox1, true);
-            this.PictureBox1.Location = new System.Drawing.Point(47, 41);
+            this.PictureBox1.Location = new System.Drawing.Point(495, 243);
             this.PictureBox1.Margin = new System.Windows.Forms.Padding(40, 0, 0, 0);
             this.PictureBox1.Name = "PictureBox1";
-            this.PictureBox1.Size = new System.Drawing.Size(148, 184);
-            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PictureBox1.Size = new System.Drawing.Size(200, 225);
+            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PictureBox1.TabIndex = 90;
             this.PictureBox1.TabStop = false;
             // 
             // CNTXMNUPic
             // 
             this.CNTXMNUPic.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.UploadYourPictureToolStripMenuItem});
+            this.UploadYourPictureToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3});
             this.CNTXMNUPic.Name = "CNTXMNUPic";
-            this.CNTXMNUPic.Size = new System.Drawing.Size(132, 26);
+            this.CNTXMNUPic.Size = new System.Drawing.Size(132, 70);
             // 
             // UploadYourPictureToolStripMenuItem
             // 
@@ -221,6 +224,20 @@
             this.UploadYourPictureToolStripMenuItem.Text = "اختيار صوره";
             this.UploadYourPictureToolStripMenuItem.Click += new System.EventHandler(this.UploadYourPictureToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(131, 22);
+            this.toolStripMenuItem2.Text = "90";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.ToolStripMenuItem2_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(131, 22);
+            this.toolStripMenuItem3.Text = "180";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.ToolStripMenuItem3_Click);
+            // 
             // LblSrvrNm
             // 
             this.LblSrvrNm.BackColor = System.Drawing.Color.Transparent;
@@ -228,7 +245,7 @@
             this.LblSrvrNm.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.LblSrvrNm.ForeColor = System.Drawing.Color.Red;
             this.LblSrvrNm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LblSrvrNm.Location = new System.Drawing.Point(3, 322);
+            this.LblSrvrNm.Location = new System.Drawing.Point(3, 515);
             this.LblSrvrNm.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.LblSrvrNm.Name = "LblSrvrNm";
             this.LblSrvrNm.Size = new System.Drawing.Size(289, 20);
@@ -240,56 +257,27 @@
             // 
             this.TimrFlsh.Interval = 1000;
             // 
-            // LblLanguage
-            // 
-            this.LblLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblLanguage.Font = new System.Drawing.Font("Times New Roman", 14F);
-            this.LblLanguage.ForeColor = System.Drawing.Color.Red;
-            this.LblLanguage.Location = new System.Drawing.Point(792, 46);
-            this.LblLanguage.Margin = new System.Windows.Forms.Padding(0, 5, 3, 0);
-            this.LblLanguage.Name = "LblLanguage";
-            this.LblLanguage.Size = new System.Drawing.Size(497, 25);
-            this.LblLanguage.TabIndex = 95;
-            this.LblLanguage.Text = "يرجى إتباع تعليمات تغيير اللغة أدناه وإعادة تشغيل البرنامج مرة أخرى";
-            this.LblLanguage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LblLanguage.Visible = false;
-            // 
-            // Label9
-            // 
-            this.Label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Label9.BackColor = System.Drawing.Color.Transparent;
-            this.FlowLayoutPanel1.SetFlowBreak(this.Label9, true);
-            this.Label9.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.Label9.Location = new System.Drawing.Point(988, 374);
-            this.Label9.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.Label9.Name = "Label9";
-            this.Label9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Label9.Size = new System.Drawing.Size(301, 139);
-            this.Label9.TabIndex = 94;
-            // 
             // FlowLayoutPanel1
             // 
             this.FlowLayoutPanel1.AutoScroll = true;
             this.FlowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.FlowLayoutPanel1.Controls.Add(this.DbStat);
-            this.FlowLayoutPanel1.Controls.Add(this.LblLanguage);
             this.FlowLayoutPanel1.Controls.Add(this.GroupBox1);
             this.FlowLayoutPanel1.Controls.Add(this.GrpCounters);
             this.FlowLayoutPanel1.Controls.Add(this.PictureBox1);
             this.FlowLayoutPanel1.Controls.Add(this.LblUsrRNm);
             this.FlowLayoutPanel1.Controls.Add(this.LblSrvrNm);
             this.FlowLayoutPanel1.Controls.Add(this.LblLstSeen);
-            this.FlowLayoutPanel1.Controls.Add(this.Label9);
             this.FlowLayoutPanel1.Controls.Add(this.LblUsrIP);
             this.FlowLayoutPanel1.Controls.Add(this.PubVerLbl);
             this.FlowLayoutPanel1.Controls.Add(this.Panel2);
             this.FlowLayoutPanel1.Controls.Add(this.Panel3);
             this.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.FlowLayoutPanel1.Location = new System.Drawing.Point(135, 33);
+            this.FlowLayoutPanel1.Location = new System.Drawing.Point(38, 49);
             this.FlowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.FlowLayoutPanel1.Name = "FlowLayoutPanel1";
             this.FlowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.FlowLayoutPanel1.Size = new System.Drawing.Size(409, 508);
+            this.FlowLayoutPanel1.Size = new System.Drawing.Size(686, 492);
             this.FlowLayoutPanel1.TabIndex = 99;
             this.FlowLayoutPanel1.Visible = false;
             // 
@@ -314,11 +302,11 @@
             this.GroupBox1.Controls.Add(this.LblClrNotUsr);
             this.GroupBox1.Controls.Add(this.LblClrSys);
             this.GroupBox1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GroupBox1.Location = new System.Drawing.Point(536, 44);
+            this.GroupBox1.Location = new System.Drawing.Point(1036, 246);
             this.GroupBox1.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.GroupBox1.Name = "GroupBox1";
             this.GroupBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.GroupBox1.Size = new System.Drawing.Size(246, 246);
+            this.GroupBox1.Size = new System.Drawing.Size(246, 237);
             this.GroupBox1.TabIndex = 87;
             this.GroupBox1.TabStop = false;
             this.GroupBox1.Text = "مفاتيح الألوان";
@@ -408,11 +396,11 @@
             this.GrpCounters.Controls.Add(this.Label0);
             this.GrpCounters.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.GrpCounters.ForeColor = System.Drawing.Color.ForestGreen;
-            this.GrpCounters.Location = new System.Drawing.Point(195, 44);
+            this.GrpCounters.Location = new System.Drawing.Point(695, 246);
             this.GrpCounters.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.GrpCounters.Name = "GrpCounters";
             this.GrpCounters.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.GrpCounters.Size = new System.Drawing.Size(338, 246);
+            this.GrpCounters.Size = new System.Drawing.Size(338, 237);
             this.GrpCounters.TabIndex = 88;
             this.GrpCounters.TabStop = false;
             this.GrpCounters.Text = "ملخص أرقامي :";
@@ -599,7 +587,7 @@
             this.LblUsrRNm.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
             this.LblUsrRNm.ForeColor = System.Drawing.Color.Blue;
             this.LblUsrRNm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LblUsrRNm.Location = new System.Drawing.Point(3, 296);
+            this.LblUsrRNm.Location = new System.Drawing.Point(3, 489);
             this.LblUsrRNm.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.LblUsrRNm.Name = "LblUsrRNm";
             this.LblUsrRNm.Size = new System.Drawing.Size(289, 20);
@@ -614,7 +602,7 @@
             this.LblLstSeen.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.LblLstSeen.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.LblLstSeen.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LblLstSeen.Location = new System.Drawing.Point(3, 348);
+            this.LblLstSeen.Location = new System.Drawing.Point(3, 541);
             this.LblLstSeen.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.LblLstSeen.Name = "LblLstSeen";
             this.LblLstSeen.Size = new System.Drawing.Size(289, 20);
@@ -627,7 +615,7 @@
             this.FlowLayoutPanel1.SetFlowBreak(this.LblUsrIP, true);
             this.LblUsrIP.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.LblUsrIP.ForeColor = System.Drawing.Color.Red;
-            this.LblUsrIP.Location = new System.Drawing.Point(985, 513);
+            this.LblUsrIP.Location = new System.Drawing.Point(985, 564);
             this.LblUsrIP.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
             this.LblUsrIP.Name = "LblUsrIP";
             this.LblUsrIP.Size = new System.Drawing.Size(297, 20);
@@ -642,7 +630,7 @@
             this.FlowLayoutPanel1.SetFlowBreak(this.PubVerLbl, true);
             this.PubVerLbl.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.PubVerLbl.ForeColor = System.Drawing.Color.Red;
-            this.PubVerLbl.Location = new System.Drawing.Point(985, 533);
+            this.PubVerLbl.Location = new System.Drawing.Point(985, 584);
             this.PubVerLbl.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
             this.PubVerLbl.Name = "PubVerLbl";
             this.PubVerLbl.Size = new System.Drawing.Size(297, 20);
@@ -657,7 +645,7 @@
             this.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.Panel2.Controls.Add(this.SnOutBt);
             this.Panel2.Controls.Add(this.ExtBt);
-            this.Panel2.Location = new System.Drawing.Point(1047, 582);
+            this.Panel2.Location = new System.Drawing.Point(1047, 633);
             this.Panel2.Name = "Panel2";
             this.Panel2.Size = new System.Drawing.Size(242, 40);
             this.Panel2.TabIndex = 97;
@@ -695,7 +683,7 @@
             this.Panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Panel3.BackColor = System.Drawing.Color.Transparent;
             this.Panel3.Controls.Add(this.Button2);
-            this.Panel3.Location = new System.Drawing.Point(917, 583);
+            this.Panel3.Location = new System.Drawing.Point(917, 634);
             this.Panel3.Name = "Panel3";
             this.Panel3.Size = new System.Drawing.Size(124, 39);
             this.Panel3.TabIndex = 97;
@@ -811,7 +799,7 @@
             this.PubVerLbl1.BackColor = System.Drawing.Color.Transparent;
             this.PubVerLbl1.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.PubVerLbl1.ForeColor = System.Drawing.Color.Red;
-            this.PubVerLbl1.Location = new System.Drawing.Point(349, 315);
+            this.PubVerLbl1.Location = new System.Drawing.Point(286, 312);
             this.PubVerLbl1.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
             this.PubVerLbl1.Name = "PubVerLbl1";
             this.PubVerLbl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -833,14 +821,33 @@
             this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Location = new System.Drawing.Point(71, 274);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 28);
+            this.button1.Size = new System.Drawing.Size(133, 28);
             this.button1.TabIndex = 115;
-            this.button1.Text = "Login";
+            this.button1.Text = "Add Users Pic";
             this.ToolTip1.SetToolTip(this.button1, "تسجيل الدخول");
             this.button1.UseCompatibleTextRendering = true;
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button3.BackColor = System.Drawing.Color.Transparent;
+            this.button3.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            this.button3.ForeColor = System.Drawing.Color.Black;
+            this.button3.Location = new System.Drawing.Point(71, 317);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(133, 28);
+            this.button3.TabIndex = 116;
+            this.button3.Text = "Convert PDF";
+            this.ToolTip1.SetToolTip(this.button3, "تسجيل الدخول");
+            this.button3.UseCompatibleTextRendering = true;
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // TimerCon
             // 
@@ -860,7 +867,7 @@
             // 
             this.StatBrPnlAr.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring;
             this.StatBrPnlAr.Name = "StatBrPnlAr";
-            this.StatBrPnlAr.Width = 1607;
+            this.StatBrPnlAr.Width = 1384;
             // 
             // StatBrPnlEn
             // 
@@ -873,14 +880,14 @@
             // 
             this.StatusBar1.Enabled = false;
             this.StatusBar1.Font = new System.Drawing.Font("Times New Roman", 14F);
-            this.StatusBar1.Location = new System.Drawing.Point(0, 643);
+            this.StatusBar1.Location = new System.Drawing.Point(0, 616);
             this.StatusBar1.Name = "StatusBar1";
             this.StatusBar1.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.StatBrPnlEn,
             this.StatBrPnlAr});
             this.StatusBar1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.StatusBar1.ShowPanels = true;
-            this.StatusBar1.Size = new System.Drawing.Size(1617, 33);
+            this.StatusBar1.Size = new System.Drawing.Size(1394, 33);
             this.StatusBar1.SizingGrip = false;
             this.StatusBar1.TabIndex = 98;
             // 
@@ -984,6 +991,7 @@
             // panellgin
             // 
             this.panellgin.BackColor = System.Drawing.Color.White;
+            this.panellgin.Controls.Add(this.button3);
             this.panellgin.Controls.Add(this.button1);
             this.panellgin.Controls.Add(this.PubVerLbl1);
             this.panellgin.Controls.Add(this.PictureBox2);
@@ -997,9 +1005,9 @@
             this.panellgin.Controls.Add(this.BtnShow);
             this.panellgin.Controls.Add(this.LblUsrNm);
             this.panellgin.Controls.Add(this.LblUsrPw);
-            this.panellgin.Location = new System.Drawing.Point(568, 89);
+            this.panellgin.Location = new System.Drawing.Point(748, 66);
             this.panellgin.Name = "panellgin";
-            this.panellgin.Size = new System.Drawing.Size(656, 355);
+            this.panellgin.Size = new System.Drawing.Size(615, 355);
             this.panellgin.TabIndex = 116;
             // 
             // ImageList1
@@ -1031,7 +1039,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1617, 676);
+            this.ClientSize = new System.Drawing.Size(1394, 649);
             this.Controls.Add(this.FlowLayoutPanel1);
             this.Controls.Add(this.panellgin);
             this.Controls.Add(this.StatusBar1);
@@ -1043,6 +1051,7 @@
             this.Text = "Login Screen";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.WelcomeScreen_Load);
+            this.SizeChanged += new System.EventHandler(this.WelcomeScreen_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.CNTXMNUPic.ResumeLayout(false);
             this.FlowLayoutPanel1.ResumeLayout(false);
@@ -1074,7 +1083,6 @@
         internal System.Windows.Forms.ToolStripMenuItem UploadYourPictureToolStripMenuItem;
         internal System.Windows.Forms.FlowLayoutPanel FlowLayoutPanel1;
         internal System.Windows.Forms.PictureBox DbStat;
-        internal System.Windows.Forms.Label LblLanguage;
         internal System.Windows.Forms.GroupBox GroupBox1;
         internal System.Windows.Forms.Label LblClrSamCat;
         internal System.Windows.Forms.Label LblClrOperation;
@@ -1099,7 +1107,6 @@
         internal System.Windows.Forms.Label LblUsrRNm;
         internal System.Windows.Forms.Label LblSrvrNm;
         internal System.Windows.Forms.Label LblLstSeen;
-        internal System.Windows.Forms.Label Label9;
         internal System.Windows.Forms.ToolTip ToolTip1;
         internal System.Windows.Forms.Panel Panel2;
         internal System.Windows.Forms.Button ExtBt;
@@ -1137,5 +1144,8 @@
         internal System.Windows.Forms.Button button1;
         public System.Windows.Forms.Panel panellgin;
         public System.Windows.Forms.PictureBox PictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        internal System.Windows.Forms.Button button3;
     }
 }

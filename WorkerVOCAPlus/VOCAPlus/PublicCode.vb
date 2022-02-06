@@ -389,7 +389,6 @@ End_:
             Dim SQLGetAdptr As New SqlDataAdapter            'SQL Table Adapter
             SQLGetAdptr.SelectCommand = sqlComm
             SQLGetAdptr.Fill(SqlTbl)
-            AppLogTbl(Split(ErrHndl, "&H")(0), 0, "", SSqlStr, SqlTbl.Rows.Count)
             If PreciFlag = True Then
                 If ErrHndl <> "1005&H" And ErrHndl <> "9999&H" And ErrHndl <> "8888&H" Then
                     If PublicCode.InsUpd("UPDATE Int_user SET UsrLastSeen = (Select GetDate()) WHERE (UsrId = " & Usr.PUsrID & ");", "1006&H") = Nothing Then  'Update User Active = false = 
@@ -406,7 +405,7 @@ End_:
             Dim frmCollection = Application.OpenForms
             If frmCollection.OfType(Of WelcomeScreen).Any Then
                 WelcomeScreen.TimerCon.Start()
-                WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+                'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
             End If
             AppLog(ErrHndl, ex.Message, SSqlStr)
             AppLogTbl(Split(ErrHndl, "&H")(0), 1, ex.Message, SSqlStr, SqlTbl.Rows.Count)
@@ -427,12 +426,11 @@ End_:
                 sqlCon.Open()
             End If
             sqlComm.ExecuteNonQuery()
-            AppLogTbl(Split(ErrHndl, "&H")(0), 0,, SSqlStr)
         Catch ex As Exception
             Dim frmCollection = Application.OpenForms
             If frmCollection.OfType(Of WelcomeScreen).Any Then
                 WelcomeScreen.TimerCon.Start()
-                WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+                'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
             End If
             AppLog(ErrHndl, ex.Message, SSqlStr)
             Errmsg = ex.Message
@@ -468,7 +466,7 @@ End_:
             Dim frmCollection = Application.OpenForms
             If frmCollection.OfType(Of WelcomeScreen).Any Then
                 WelcomeScreen.TimerCon.Start()
-                WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+                'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
             End If
             Errmsg = ex.Message
         End Try
@@ -562,7 +560,7 @@ End_:
                     End If
                 End If
 
-                If Year(GridUpd.Rows(Cnt_).Cells("TkupReDt").Value) < 2000 Then
+                If GridUpd.Rows(Cnt_).Cells("TkupReDt").Value.ToString.Length =0  Then
                     GridUpd.Rows(Cnt_).Cells("TkupReDt").Value = ""                                    'Read Date
                 End If
             Next
@@ -1283,7 +1281,7 @@ End_:
             Dim frmCollection = Application.OpenForms
             If frmCollection.OfType(Of WelcomeScreen).Any Then
                 WelcomeScreen.TimerCon.Start()
-                WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
+                'WelcomeScreen.StatBrPnlEn.Icon = My.Resources.WSOff032
             End If
         End Try
         Return Nw

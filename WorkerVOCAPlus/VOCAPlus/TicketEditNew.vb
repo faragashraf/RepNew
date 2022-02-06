@@ -712,10 +712,9 @@ Popul_:
         Invoke(Sub() LodngFrm.Close())
         Invoke(Sub() Me.Enabled = True)
         Invoke(Sub() Me.Activate())
-
     End Sub
     'Load Customer Data If Available
-    Private Sub Phon1TxtBx_TextChanged(sender As Object, e As EventArgs) Handles TkClPh.TextChanged
+    Private Sub Phon1TxtBx_TextChanged(sender As Object, e As EventArgs)
         Cnt_ = 0
         For cnt_1 = 1 To TkClPh.TextLength
             If Mid(TkClPh.Text, cnt_1, 1).CompareTo("[0-9]*") = 1 Then
@@ -1083,8 +1082,8 @@ Popul_:
                 Dim Piker As DateTimePicker = Ctrol
                 If Piker.Value <> EditTable.Rows(0).Item("TkTransDate").ToString Then
                     UpTxt &= vbCrLf & "تم تعديل " & Piker.Tag & " من " & Chr(34) & EditTable.Rows(0).Item(Piker.Name).ToString & Chr(34) & " إلى " & Chr(34) & Piker.Text & Chr(34)
+                    UpdtTicket &= " ," & Piker.Name & " = '" & Format(Piker.Value, "yyyy-MM-dd") & "'"
                 End If
-                UpdtTicket &= " ," & Piker.Name & " = '" & Format(Piker.Value, "yyyy-MM-dd") & "'"
             End If
         Next
         If ChckReAssign.Checked = True Then
@@ -1109,49 +1108,103 @@ Popul_:
             Dim Rslt As DialogResult
             Rslt = MessageBox.Show(UpTxt & vbCrLf & "هل تريد حفظ التعديلات؟", "رسالة معلومات", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading Or MessageBoxOptions.RightAlign)
             If Rslt = DialogResult.Yes Then
-                Try
-                    If Def.CONSQL.State = ConnectionState.Closed Then
-                        Def.CONSQL.Open()
+                If insupdate(EditTable.Rows(0).Item("TkSQL"), (UpTxt), 1, 901, OsIP(), Usr.PUsrID, UpdtTicket) = Nothing Then
+                    If ReAssgnTbl.Rows.Count > 0 Then
+                        If insupdate(TikID.Text, "The Complaint has been ReAssigned To " & ReAssgnTbl.Rows(0).Item(0).ToString, 1, 101, OsIP(), Usr.PUsrID) = Nothing Then
+
+                        End If
                     End If
-                    Def.sqlComminsert_1.Connection = Def.CONSQL
-                    Def.sqlComminsert_2.Connection = Def.CONSQL            'insert Update into Update Table
-                    Def.sqlComminsert_3.Connection = Def.CONSQL
-                    sqlComm.Connection = Def.CONSQL                    'Get ID & Date & UserID
-                    Def.sqlComminsert_1.CommandType = CommandType.Text
-                    Def.sqlComminsert_2.CommandType = CommandType.Text
-                    Def.sqlComminsert_3.CommandType = CommandType.Text
-                    sqlComm.CommandType = CommandType.Text
-                    Def.sqlComminsert_1.CommandText = UpdtTicket
-                    Def.sqlComminsert_2.CommandText = "INSERT into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES 
-                                                               (" & EditTable.Rows(0).Item("TkSQL") & ",'" & UpTxt & "','" & "0" & "','" & "901" & "','" & Fn.OsIP() & "','" & Usr.PUsrID & "');"
-                    If ReAssgnTbl.Rows.Count > 0 Then Def.sqlComminsert_3.CommandText = "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES
-(" & TikID.Text & ", 'The Complaint has been ReAssigned To " & ReAssgnTbl.Rows(0).Item(0).ToString & "', 0 , 101, '" & Fn.OsIP & "'," & Usr.PUsrID & ")"
-                    Def.Tran = Def.CONSQL.BeginTransaction()
-                    Def.sqlComminsert_1.Transaction = Def.Tran
-                    Def.sqlComminsert_2.Transaction = Def.Tran
-                    If ReAssgnTbl.Rows.Count > 0 Then Def.sqlComminsert_3.Transaction = Def.Tran
-                    sqlComm.Transaction = Def.Tran
-                    Def.sqlComminsert_1.ExecuteNonQuery()
-                    Def.sqlComminsert_2.ExecuteNonQuery()
-                    If ReAssgnTbl.Rows.Count > 0 Then Def.sqlComminsert_3.ExecuteNonQuery()
-                    Def.Tran.Commit()
-                    FlowLayoutPanel4.Enabled = False
-                    FlowLayoutPanel2.Enabled = False
-                    'FlowLayoutPanel5.Enabled = False
-                    ChckReAssign.Enabled = False
-                    Button1.Enabled = False
-                    MsgInf("تم تسجيل التعديلات بنجاح")
-                Catch ex As Exception
-                    Def.Tran.Rollback()
-                    Invoke(Sub() LodngFrm.Close())
-                    AppLog("1011&H", ex.Message, Def.sqlComminsert_1.CommandText & "_" & Def.sqlComminsert_2.CommandText)
-                    MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
-                End Try
+                Else
+                    MsgErr("Error : " & Errmsg)
+                End If
             End If
+#Region "OLD COCE"
+            '                Try
+            '                    If Def.CONSQL.State = ConnectionState.Closed Then
+            '                        Def.CONSQL.Open()
+            '                    End If
+            '                    Def.sqlComminsert_1.Connection = Def.CONSQL
+            '                    Def.sqlComminsert_2.Connection = Def.CONSQL            'insert Update into Update Table
+            '                    Def.sqlComminsert_3.Connection = Def.CONSQL
+            '                    sqlComm.Connection = Def.CONSQL                    'Get ID & Date & UserID
+            '                    Def.sqlComminsert_1.CommandType = CommandType.Text
+            '                    Def.sqlComminsert_2.CommandType = CommandType.Text
+            '                    Def.sqlComminsert_3.CommandType = CommandType.Text
+            '                    sqlComm.CommandType = CommandType.Text
+            'Def.sqlComminsert_1.CommandText = UpdtTicket
+            'Def.sqlComminsert_2.CommandText = "INSERT into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES 
+            '                                                               (" & EditTable.Rows(0).Item("TkSQL") & ",'" & UpTxt & "','" & "0" & "','" & "901" & "','" & Fn.OsIP() & "','" & Usr.PUsrID & "');"
+            'If ReAssgnTbl.Rows.Count > 0 Then Def.sqlComminsert_3.CommandText = "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES
+            '(" & TikID.Text & ", 'The Complaint has been ReAssigned To " & ReAssgnTbl.Rows(0).Item(0).ToString & "', 0 , 101, '" & Fn.OsIP & "'," & Usr.PUsrID & ")"
+            'Def.Tran = Def.CONSQL.BeginTransaction()
+            '                    Def.sqlComminsert_1.Transaction = Def.Tran
+            '                    Def.sqlComminsert_2.Transaction = Def.Tran
+            '                    If ReAssgnTbl.Rows.Count > 0 Then Def.sqlComminsert_3.Transaction = Def.Tran
+            '                    sqlComm.Transaction = Def.Tran
+            '                    Def.sqlComminsert_1.ExecuteNonQuery()
+            '                    Def.sqlComminsert_2.ExecuteNonQuery()
+            '                    If ReAssgnTbl.Rows.Count > 0 Then Def.sqlComminsert_3.ExecuteNonQuery()
+            '                    Def.Tran.Commit()
+            '                    FlowLayoutPanel4.Enabled = False
+            '                    FlowLayoutPanel2.Enabled = False
+            '                    'FlowLayoutPanel5.Enabled = False
+            '                    ChckReAssign.Enabled = False
+            '                    Button1.Enabled = False
+            '                    MsgInf("تم تسجيل التعديلات بنجاح")
+            '                Catch ex As Exception
+            '                    Def.Tran.Rollback()
+            '                    Invoke(Sub() LodngFrm.Close())
+            '                    AppLog("1011&H", ex.Message, Def.sqlComminsert_1.CommandText & "_" & Def.sqlComminsert_2.CommandText)
+            '                    MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
+            '                End Try
+            '   End If
+#End Region
+
+
+
         Else
             MsgInf("لا توجد تعديلات للحفظ")
         End If
     End Sub
+    Private Function insupdate(id As Integer, txt As String, read As Boolean, EvId As Integer, IP As String, user As Integer, Optional UpdatSTR As String = Nothing) As String
+        Dim msg As String = Nothing
+        Dim state As New APblicClss.Defntion
+        Dim sqlComminsert_1 As New SqlCommand            'SQL Command
+        Dim param(6) As SqlParameter
+        sqlComminsert_1.CommandType = CommandType.StoredProcedure
+        sqlComminsert_1.CommandText = "SP_TICKET_EVENT_INSERT"
+        sqlComminsert_1.Connection = state.CONSQL
+        param(0) = New SqlParameter("@TkupTkSql", SqlDbType.Int)
+        param(0).Value = id
+        param(1) = New SqlParameter("@TkupTxt", SqlDbType.NVarChar)
+        param(1).Value = txt
+        param(2) = New SqlParameter("@TkupUnread", SqlDbType.Bit)
+        param(2).Value = read
+        param(3) = New SqlParameter("@TkupEvtId", SqlDbType.Int)
+        param(3).Value = EvId
+        param(4) = New SqlParameter("@TkupUserIP", SqlDbType.NVarChar, 15)
+        param(4).Value = IP
+        param(5) = New SqlParameter("@TkupUser", SqlDbType.Int)
+        param(5).Value = user
+        param(6) = New SqlParameter("@UpdateStatement", SqlDbType.NVarChar)
+        param(6).Value = UpdatSTR
+        For i = 0 To param.Length - 1
+            sqlComminsert_1.Parameters.Add(param(i))
+        Next
+
+        Try
+            If state.CONSQL.State = ConnectionState.Closed Then
+                state.CONSQL.Open()
+            End If
+            sqlComminsert_1.ExecuteNonQuery()
+        Catch ex As Exception
+            msg = ex.Message
+            AppLog("1011&H", ex.Message, sqlComminsert_1.CommandText)
+            MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
+        End Try
+
+        Return msg
+    End Function
     Private Sub AreaCmbBx_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OffArea.Validating
         If OffArea.Text.Length > 0 Then
             If (OffArea.SelectedIndex = -1) Then
@@ -1229,7 +1282,7 @@ Popul_:
     Private Sub MailTxtBx_Enter(sender As Object, e As EventArgs) Handles TkMail.Enter
         InputLanguage.CurrentInputLanguage = EnglishInput
     End Sub
-    Private Sub DetailsTxtBx_Enter(sender As Object, e As EventArgs) 
+    Private Sub DetailsTxtBx_Enter(sender As Object, e As EventArgs)
         InputLanguage.CurrentInputLanguage = ArabicInput
     End Sub
     Private Sub AddTxtBx_Enter(sender As Object, e As EventArgs) Handles TkClAdr.Enter
@@ -1556,6 +1609,7 @@ Popul_:
         TmrActv.Stop()
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        RemoveHandler TkClPh.TextChanged, AddressOf Phon1TxtBx_TextChanged
         EditTable = New DataTable
         Dim Fn As New APblicClss.Func
         LblText.Text = "جاري تحميل البيانات ............."
@@ -1563,6 +1617,7 @@ Popul_:
         LblText.ForeColor = Color.DarkGreen
         If Fn.GetTblXX("SELECT TkSQL, TkKind, TkDtStart, TkID, SrcNm, TkClNm, TkClPh, TkClPh1, TkMail, TkClAdr, TkCardNo, TkShpNo, TkGBNo, TkClNtID, TkAmount, TkTransDate, PrdKind, PrdNm, CompNm, CounNmSender, CounNmConsign, OffNm1, OffArea, TkDetails, TkClsStatus, TkFolw, TkEmpNm, UsrRealNm, 0 AS LstSqlEv, '' AS LstUpdtTime, '' AS TkupTxt, 1 AS TkupUnread, 0 AS TkupEvtId, '' AS LstUpUsr, TkReOp, TkRecieveDt, TkEscTyp, ProdKNm, CompHelp,TkFnPrdCd, SrcNm2TkCompSrc,  CounNmSender2TkSndrCoun,  CounNmConsign2TkConsigCoun,  OffNm12TkOffNm FROM dbo.TicketsAll  where TkID = " & TikID.Text & " ORDER BY TkSQL DESC;", EditTable, "1050&H") = Nothing Then
             If EditTable.Rows.Count > 0 Then
+                ChckReAssign.Checked = False
                 If EditTable.Rows(0).Item("PrdKind") = 1 Then
                     PrdKind = "مالية"
                     FinancialGroup.Visible = True
@@ -1653,6 +1708,8 @@ Popul_:
                 FlowLayoutPanel2.Visible = True
                 FlowLayoutPanel3.Visible = True
                 FlowLayoutPanel4.Visible = True
+                SelctSerchTxt(TkDetails, "تعديل : بواسطة")
+                AddHandler TkClPh.TextChanged, AddressOf Phon1TxtBx_TextChanged
             Else
                 TreeView1.Visible = False
                 LblText.Text = ("لا توجد شكوى مسجلة بهذا الرقم" & ".... يرجى التأكد من الرقم وإعادة المحاولة")
@@ -1661,7 +1718,7 @@ Popul_:
         Else
             LblText.Text = "Error"
         End If
-        SelctSerchTxt(TkDetails, "تعديل : بواسطة")
+
         'If Usr.PUsrUCatLvl = 7 Then
         '    CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] = '1'"     '     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm"
         'Else
@@ -1676,9 +1733,9 @@ Popul_:
     End Sub
 
     Private Sub ChckReAssign_CheckedChanged(sender As Object, e As EventArgs) Handles ChckReAssign.CheckedChanged
+        ReAssgnTbl = New DataTable
         If ChckReAssign.Checked = True Then
             Dim Fn As New APblicClss.Func
-            ReAssgnTbl = New DataTable
             If Fn.GetTblXX("SELECT UsrRealNm, FnMngr, dbo.VwFnProd.FnSQL FROM dbo.VwFnProd INNER JOIN dbo.Int_user ON dbo.VwFnProd.FnMngr = UsrId WHERE (dbo.VwFnProd.FnSQL = " & TreeView1.SelectedNode.Name & ")", ReAssgnTbl, "0000&H") = Nothing Then
                 If ReAssgnTbl.Rows.Count > 0 Then
                     If UsrRealNm.Text <> ReAssgnTbl.Rows(0).Item(0) Then

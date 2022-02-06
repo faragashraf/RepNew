@@ -69,7 +69,7 @@
                 LblMsg.Text = "جاري تحميل البيانات ...."
                 LblMsg.ForeColor = Color.Green
                 '                   0          1          2         3      4      5      6       7        8         9        10       11        12      
-                If GetTbl("SELECT TkSQL, TkClsStatus, TkDtStart, TkKind, TkID, TkClNm, PrdNm, CompNm, UsrRealNm, TkClPh, TkDetails, TkShpNo, TkCardNo FROM TicketsAll WHERE (TkID = " & TxtCompId.Text & ") AND (TkClsStatus = 0) AND (" & UsrStr & ");", ReAsinTable, "1030&H") = Nothing Then
+                If GetTbl("SELECT TkSQL, TkClsStatus, TkDtStart, TkKind, TkID, TkClNm, PrdNm, CompNm, UsrRealNm, TkClPh, TkDetails, TkShpNo, TkCardNo FROM TicketsAll WHERE (TkID = " & TxtCompId.Text & ") AND (TkClsStatus = 0) ", ReAsinTable, "1030&H") = Nothing Then
                     If ReAsinTable.Rows.Count > 0 Then
                         BtnGet.Tag = "تحويل"
                         BtnGet.BackgroundImage = My.Resources.CpTrns
@@ -130,33 +130,45 @@
                                 BtnGet.Enabled = False
                                 LblMsg.Text = "جاري تحويل الشكوى ...."
                                 LblMsg.ForeColor = Color.Green
-                                Try
-                                    If sqlCon.State = ConnectionState.Closed Then
-                                        sqlCon.Open()
-                                    End If
-                                    sqlCominsert_1.Connection = sqlCon
-                                    sqlCominsert_2.Connection = sqlCon
-                                    sqlCominsert_1.CommandType = CommandType.Text
-                                    sqlCominsert_2.CommandType = CommandType.Text
-                                    sqlCominsert_1.CommandText = "update Tickets set TkEmpNm = " & Split(UserTree.SelectedNode.Text, " - ")(0) & ", TkFolw = 0, TkRecieveDt = (Select GetDate()) Where (TkSQL = " & ReAsinTable(0).Item(0) & ");"
-                                    sqlCominsert_2.CommandText = "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" & ReAsinTable(0).Item(0) & "','" & "The Complaint has been transfered to " & Split(UserTree.SelectedNode.Text, " - ")(2) & "','" & "1" & "','" & "100" & "','" & OsIP() & "','" & Usr.PUsrID & "')"
-                                    Tran = sqlCon.BeginTransaction()
-                                    sqlCominsert_1.Transaction = Tran
-                                    sqlCominsert_2.Transaction = Tran
-                                    sqlCominsert_1.ExecuteNonQuery()
-                                    sqlCominsert_2.ExecuteNonQuery()
-                                    Tran.Commit()
+                                If insupdate(ReAsinTable(0).Item(0), "The Complaint has been transfered to " & Split(UserTree.SelectedNode.Text, " - ")(2), 1, 100, OsIP(), Usr.PUsrID, Split(UserTree.SelectedNode.Text, " - ")(0)) = Nothing Then
                                     BtnGet.Tag = "تحميل"
                                     BtnGet.Enabled = True
                                     BtnGet.BackgroundImage = My.Resources.DbGet
                                     TxtFollNm.Text = Split(UserTree.SelectedNode.Text, " - ")(2)
                                     LblMsg.Text = "تم تحويل الشكوى رقم " & TxtCompId.Text & " إلى " & Split(UserTree.SelectedNode.Text, " - ")(2) & " بنجاح"
                                     LblMsg.ForeColor = Color.Green
-                                Catch ex As Exception
-                                    Tran.Rollback()
-                                    AppLog("1033&H", ex.Message, sqlCominsert_1.CommandText & "_" & sqlCominsert_2.CommandText)
-                                    MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
-                                End Try
+                                End If
+#Region "OLD CODE"
+                                'Try
+                                '    If sqlCon.State = ConnectionState.Closed Then
+                                '        sqlCon.Open()
+                                '    End If
+                                '    sqlCominsert_1.Connection = sqlCon
+                                '    sqlCominsert_2.Connection = sqlCon
+                                '    sqlCominsert_1.CommandType = CommandType.Text
+                                '    sqlCominsert_2.CommandType = CommandType.Text
+                                '    sqlCominsert_1.CommandText = "update Tickets set TkEmpNm = " & Split(UserTree.SelectedNode.Text, " - ")(0) & ", TkFolw = 0, TkRecieveDt = (Select GetDate()) Where (TkSQL = " & ReAsinTable(0).Item(0) & ");"
+                                '    sqlCominsert_2.CommandText = "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser) VALUES ('" &
+                                '        ReAsinTable(0).Item(0) & "','" & "The Complaint has been transfered to " & Split(UserTree.SelectedNode.Text, " - ")(2) & "','" & "1" & "','" & "100" & "','" & OsIP() & "','" & Usr.PUsrID & "')"
+                                '    Tran = sqlCon.BeginTransaction()
+                                '    sqlCominsert_1.Transaction = Tran
+                                '    sqlCominsert_2.Transaction = Tran
+                                '    sqlCominsert_1.ExecuteNonQuery()
+                                '    sqlCominsert_2.ExecuteNonQuery()
+                                '    Tran.Commit()
+                                '    BtnGet.Tag = "تحميل"
+                                '    BtnGet.Enabled = True
+                                '    BtnGet.BackgroundImage = My.Resources.DbGet
+                                '    TxtFollNm.Text = Split(UserTree.SelectedNode.Text, " - ")(2)
+                                '    LblMsg.Text = "تم تحويل الشكوى رقم " & TxtCompId.Text & " إلى " & Split(UserTree.SelectedNode.Text, " - ")(2) & " بنجاح"
+                                '    LblMsg.ForeColor = Color.Green
+                                'Catch ex As Exception
+                                '    Tran.Rollback()
+                                '    AppLog("1033&H", ex.Message, sqlCominsert_1.CommandText & "_" & sqlCominsert_2.CommandText)
+                                '    MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
+                                'End Try
+#End Region
+
                                 'sqlCon.Close()
                                 'SqlConnection.ClearPool(sqlCon)
 
@@ -190,7 +202,45 @@
         End If
         BtnGet.Enabled = True
     End Sub
+    Private Function insupdate(id As Integer, txt As String, read As Boolean, EvId As Integer, IP As String, Updateuser As Integer, user As Integer) As String
+        Dim msg As String = Nothing
+        Dim state As New APblicClss.Defntion
+        Dim sqlComminsert_1 As New SqlCommand            'SQL Command
+        Dim param(6) As SqlParameter
+        sqlComminsert_1.CommandType = CommandType.StoredProcedure
+        sqlComminsert_1.CommandText = "SP_TICKET_EVENT_INSERT"
+        sqlComminsert_1.Connection = state.CONSQL
+        param(0) = New SqlParameter("@TkupTkSql", SqlDbType.Int)
+        param(0).Value = id
+        param(1) = New SqlParameter("@TkupTxt", SqlDbType.NVarChar)
+        param(1).Value = txt
+        param(2) = New SqlParameter("@TkupUnread", SqlDbType.Bit)
+        param(2).Value = read
+        param(3) = New SqlParameter("@TkupEvtId", SqlDbType.Int)
+        param(3).Value = EvId
+        param(4) = New SqlParameter("@TkupUserIP", SqlDbType.NVarChar, 15)
+        param(4).Value = IP
+        param(5) = New SqlParameter("@TkupUser", SqlDbType.Int)
+        param(5).Value = Updateuser
+        param(6) = New SqlParameter("@TkEmpNm", SqlDbType.Int)
+        param(6).Value = user
+        For i = 0 To param.Length - 1
+            sqlComminsert_1.Parameters.Add(param(i))
+        Next
 
+        Try
+            If state.CONSQL.State = ConnectionState.Closed Then
+                state.CONSQL.Open()
+            End If
+            sqlComminsert_1.ExecuteNonQuery()
+        Catch ex As Exception
+            msg = ex.Message
+            AppLog("1011&H", ex.Message, sqlComminsert_1.CommandText)
+            MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
+        End Try
+
+        Return msg
+    End Function
     Private Sub BtnGet_MouseEnter(sender As Object, e As EventArgs) Handles BtnGet.MouseEnter
         ToolTip1.Show(BtnGet.Tag, BtnGet, 0, 20, 2000)
     End Sub
