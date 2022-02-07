@@ -33,12 +33,12 @@ Public Class NewTicket
             Beep()
         Else
             WelcomeScreen.StatBrPnlAr.Text = ""
-            CmbEvent.DataSource = UpdateKTable
+            CmbEvent.DataSource = UpdateKTable.DefaultView
             CmbEvent.DisplayMember = "EvNm"
             CmbEvent.ValueMember = "EvId"
             CmbEvent.SelectedIndex = -1
             TxtUpdt.ReadOnly = True
-            CmbEvent2.DataSource = UpdateKTable
+            CmbEvent2.DataSource = UpdateKTable.DefaultView
             CmbEvent2.DisplayMember = "EvNm"
             CmbEvent2.ValueMember = "EvId"
             CmbEvent2.SelectedIndex = -1
@@ -1288,11 +1288,11 @@ Popul_:
     Private Function submitNew(kind As Boolean, cdfnid As Integer, src As Integer, clNm As String, ClPh As String, ClPh1 As String, ClAdr As String, ClNtID As String _
                                                             , TkDetails As String, TkShpNo As String, TkGBNo As String, TkCardNo As String, TkAmount As Double, TkTransDate As String _
                                                             , TkSndrCoun As String, TkConsigCoun As String, TkOffNm As String, EmpNm0 As Integer, EmpNm As Integer _
-                                                            , ClMail As String) As String
+                                                            , ClMail As String, IP As String) As String
         Dim msg As String = Nothing
         Dim state As New APblicClss.Defntion
         Dim sqlComminsert_1 As New SqlCommand            'SQL Command
-        Dim param(19) As SqlParameter
+        Dim param(20) As SqlParameter
         sqlComminsert_1.CommandType = CommandType.StoredProcedure
         sqlComminsert_1.CommandText = "SP_OLD_TICKETS_INSERT"
         sqlComminsert_1.Connection = state.CONSQL
@@ -1318,7 +1318,7 @@ Popul_:
         If TkShpNo.Length = 0 Then param(9).Value = DBNull.Value Else param(9).Value = TkShpNo
         param(10) = New SqlParameter("@TkGBNo", SqlDbType.NVarChar, 16)
         If TkGBNo.Length = 0 Then param(10).Value = DBNull.Value Else param(10).Value = TkGBNo
-        param(11) = New SqlParameter("@TkAmount", SqlDbType.Int)
+        param(11) = New SqlParameter("@TkAmount", SqlDbType.Real)
         If TkAmount = 0 Then param(11).Value = DBNull.Value Else param(11).Value = TkAmount
         param(12) = New SqlParameter("@TkTransDate", SqlDbType.Date)
         If TkTransDate = "" Then param(12).Value = DBNull.Value Else param(12).Value = TkTransDate
@@ -1336,6 +1336,8 @@ Popul_:
         If ClMail.Length = 0 Then param(18).Value = DBNull.Value Else param(18).Value = ClMail
         param(19) = New SqlParameter("@TkCardNo", SqlDbType.NVarChar, 16)
         If TkCardNo.Length = 0 Then param(19).Value = DBNull.Value Else param(19).Value = TkCardNo
+        param(20) = New SqlParameter("@TkUserIP", SqlDbType.NVarChar, 15)
+        param(20).Value = IP
 
         ' Add Out Put Parameter
         sqlComminsert_1.Parameters.AddRange(param)
@@ -1426,7 +1428,7 @@ Popul_:
                        off = OffCmbBx.SelectedValue.ToString
                    End If
 
-                   If submitNew(TickKind, TreeView1.SelectedNode.Name, SrcCmbBx.SelectedValue, Trim(NameTxtBx.Text), Phon1TxtBx.Text, Phon2TxtBx.Text, AddTxtBx.Text, Trim(IDTxtBx.Text), DetailsTxtBx.Text & DubStr, Trck, GBTxtBx.Text, Replace(AccMskdBx.Text, " ", ""), AmountTxtBx.Text, (TranDt), "", dis, off, Usr.PUsrID, TeamIdentfier, MailTxtBx.Text) = Nothing Then
+                   If submitNew(TickKind, TreeView1.SelectedNode.Name, SrcCmbBx.SelectedValue, Trim(NameTxtBx.Text), Phon1TxtBx.Text, Phon2TxtBx.Text, AddTxtBx.Text, Trim(IDTxtBx.Text), DetailsTxtBx.Text & DubStr, Trck, GBTxtBx.Text, Replace(AccMskdBx.Text, " ", ""), AmountTxtBx.Text, (TranDt), "", dis, off, Usr.PUsrID, TeamIdentfier, MailTxtBx.Text, OsIP()) = Nothing Then
                        Dim CTRLLst As New List(Of Control)
                        GetAll(Me).ToList.ForEach(Sub(c)
                                                      CTRLLst.Add(c)
@@ -1651,7 +1653,7 @@ Popul_:
             AccMskdBx.Text = ""
             GBTxtBx.Text = ""
             IDTxtBx.Text = ""
-            AmountTxtBx.Text = ""
+            AmountTxtBx.Text = "0"
             TrackMskBx.Text = ""
             OriginTxtBx.Text = ""
             DistCmbBx.SelectedValue = ""

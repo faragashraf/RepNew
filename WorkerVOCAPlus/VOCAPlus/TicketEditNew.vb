@@ -1080,10 +1080,14 @@ Popul_:
                 End If
             ElseIf TypeOf Ctrol Is DateTimePicker Then
                 Dim Piker As DateTimePicker = Ctrol
-                If Piker.Value <> EditTable.Rows(0).Item("TkTransDate").ToString Then
+                If Piker.Value.Equals(EditTable.Rows(0).Item("TkTransDate")) = False Then
                     UpTxt &= vbCrLf & "تم تعديل " & Piker.Tag & " من " & Chr(34) & EditTable.Rows(0).Item(Piker.Name).ToString & Chr(34) & " إلى " & Chr(34) & Piker.Text & Chr(34)
                     UpdtTicket &= " ," & Piker.Name & " = '" & Format(Piker.Value, "yyyy-MM-dd") & "'"
                 End If
+
+                'If Piker.Value <> EditTable.Rows(0).Item("TkTransDate") Then
+
+                'End If
             End If
         Next
         If ChckReAssign.Checked = True Then

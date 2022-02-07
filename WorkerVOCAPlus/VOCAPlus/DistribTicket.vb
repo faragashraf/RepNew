@@ -61,7 +61,7 @@ Public Class DistribTicket
         FlowLayoutPanel1.Size = New Point(WelcomeScreen.Width - 12, WelcomeScreen.Height - 400)
         GridUsrTickCount.Size = New Point((WelcomeScreen.Width - 12) * 0.15, WelcomeScreen.Height - 450)
         UserTree.Size = New Point((WelcomeScreen.Width - 12) * 0.15, WelcomeScreen.Height - 450)
-        GridTicket.Size = New Point((WelcomeScreen.Width - 12) * 0.67, WelcomeScreen.Height - 450)
+        GridTicket.Size = New Point((WelcomeScreen.Width - 12) * 0.65, WelcomeScreen.Height - 450)
         'BtnSubmit.Margin = New System.Windows.Forms.Padding(3, 0, WelcomeScreen.Width - 100 - BtnSubmit.Width, 3)
         '
     End Sub
@@ -83,7 +83,7 @@ Public Class DistribTicket
     End Sub
     Private Sub BtnSubmit_Click(sender As Object, e As EventArgs) Handles BtnSubmit.Click
         submt()
-        FilTbls()
+
     End Sub
     Private Sub UserTree_BeforeSelect(sender As Object, e As TreeViewCancelEventArgs) Handles UserTree.BeforeSelect
         If UserTree.SelectedNode IsNot Nothing Then
@@ -227,6 +227,7 @@ Public Class DistribTicket
         Tbl.Columns.Add("SQLID")
         Tbl.Columns.Add("UserID")
         For Cnt_ = 0 To GridTicket.Rows.Count - 1
+
             If GridTicket.Rows(Cnt_).Cells(26).Value.ToString.Length > 0 Then
                 Tbl.Rows.Add(GridTicket.Rows(Cnt_).Cells(0).Value, GridTicket.Rows(Cnt_).Cells(25).Value)
             End If
@@ -269,36 +270,42 @@ Public Class DistribTicket
 
         Next Cnt_
 
-        Dim msg As String = Nothing
-        Dim state As New APblicClss.Defntion
-        Dim sqlComminsert_1 As New SqlCommand            'SQL Command
-        Dim param(2) As SqlParameter
-        sqlComminsert_1.CommandType = CommandType.StoredProcedure
-        sqlComminsert_1.CommandText = "SP_TICKET_Distribute"
-        sqlComminsert_1.Connection = state.CONSQL
-        param(0) = New SqlParameter("@TkupUserIP", SqlDbType.NVarChar, 15)
-        param(0).Value = OsIP()
-        param(1) = New SqlParameter("@UserDisID", SqlDbType.Int)
-        param(1).Value = Usr.PUsrID
-        param(2) = New SqlParameter()
-        param(2).ParameterName = "@TicketsCollection"
-        param(2).Value = Tbl
+        If Tbl.Rows.Count > 0 Then
+            Dim msg As String = Nothing
+            Dim state As New APblicClss.Defntion
+            Dim sqlComminsert_1 As New SqlCommand            'SQL Command
+            Dim param(2) As SqlParameter
+            sqlComminsert_1.CommandType = CommandType.StoredProcedure
+            sqlComminsert_1.CommandText = "SP_TICKET_Distribute"
+            sqlComminsert_1.Connection = state.CONSQL
+            param(0) = New SqlParameter("@TkupUserIP", SqlDbType.NVarChar, 15)
+            param(0).Value = OsIP()
+            param(1) = New SqlParameter("@UserDisID", SqlDbType.Int)
+            param(1).Value = Usr.PUsrID
+            param(2) = New SqlParameter()
+            param(2).ParameterName = "@TicketsCollection"
+            param(2).Value = Tbl
 
-        For i = 0 To param.Length - 1
-            sqlComminsert_1.Parameters.Add(param(i))
-        Next
+            For i = 0 To param.Length - 1
+                sqlComminsert_1.Parameters.Add(param(i))
+            Next
 
-        Try
-            If state.CONSQL.State = ConnectionState.Closed Then
-                state.CONSQL.Open()
-            End If
-            sqlComminsert_1.ExecuteNonQuery()
-            LblMsg.ForeColor = Color.Green
-        Catch ex As Exception
-            msg = ex.Message
-            AppLog("1011&H", ex.Message, sqlComminsert_1.CommandText)
-            MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
-        End Try
+            Try
+                If state.CONSQL.State = ConnectionState.Closed Then
+                    state.CONSQL.Open()
+                End If
+                sqlComminsert_1.ExecuteNonQuery()
+                LblMsg.ForeColor = Color.Green
+            Catch ex As Exception
+                msg = ex.Message
+                AppLog("1011&H", ex.Message, sqlComminsert_1.CommandText)
+                MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
+            End Try
+            FilTbls()
+        Else
+            MsgInf("لم يتم تحديد شكاوى للتوزيع")
+        End If
+
     End Sub
     Private Sub CloseBtn_Click(sender As Object, e As EventArgs) Handles CloseBtn.Click
         Dim Rslt As DialogResult
@@ -315,25 +322,25 @@ Public Class DistribTicket
         If GridTicket.Rows.Count > 0 Then
             'FncGrdCurrRow(GridTicket, GridTicket.CurrentRow.Index)
             TxtPh1.Text = GridTicket.CurrentRow.Cells(5).Value
-            TxtPh2.Text = GridTicket.CurrentRow.Cells(6).Value
+            TxtPh2.Text = GridTicket.CurrentRow.Cells(6).Value.ToString()
             TxtDt.Text = GridTicket.CurrentRow.Cells(1).Value
             TxtNm.Text = GridTicket.CurrentRow.Cells(4).Value
-            TxtAdd.Text = GridTicket.CurrentRow.Cells(8).Value
-            TxtEmail.Text = GridTicket.CurrentRow.Cells(7).Value
+            TxtAdd.Text = GridTicket.CurrentRow.Cells(8).Value.ToString()
+            TxtEmail.Text = GridTicket.CurrentRow.Cells(7).Value.ToString
             TxtDetails.Text = GridTicket.CurrentRow.Cells(22).Value
             TxtArea.Text = GridTicket.CurrentRow.Cells(21).Value.ToString
             TxtOff.Text = GridTicket.CurrentRow.Cells(20).Value.ToString
             TxtProd.Text = GridTicket.CurrentRow.Cells(16).Value
             TxtComp.Text = GridTicket.CurrentRow.Cells(17).Value
             TxtSrc.Text = GridTicket.CurrentRow.Cells(3).Value
-            TxtTrck.Text = GridTicket.CurrentRow.Cells(10).Value
+            TxtTrck.Text = GridTicket.CurrentRow.Cells(10).Value.ToString
             TxtOrgin.Text = GridTicket.CurrentRow.Cells(18).Value.ToString
             TxtDist.Text = GridTicket.CurrentRow.Cells(19).Value.ToString
             TxtCard.Text = GridTicket.CurrentRow.Cells(9).Value
-            TxtGP.Text = GridTicket.CurrentRow.Cells(11).Value
+            TxtGP.Text = GridTicket.CurrentRow.Cells(11).Value.ToString
             TxtNId.Text = GridTicket.CurrentRow.Cells(12).Value
-            TxtAmount.Text = GridTicket.CurrentRow.Cells(13).Value
-            TxtTransDt.Text = GridTicket.CurrentRow.Cells(14).Value
+            TxtAmount.Text = GridTicket.CurrentRow.Cells(13).Value.ToString
+            TxtTransDt.Text = GridTicket.CurrentRow.Cells(14).Value.ToString
             If GridTicket.CurrentRow.Cells(15).Value = 1 Then
                 GroupBox3.Visible = True
                 GroupBox4.Visible = False

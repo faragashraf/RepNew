@@ -22,7 +22,7 @@
             Me.Close()
         Else
             WelcomeScreen.StatBrPnlAr.Text = ""
-            CmbEvent.DataSource = UpdateKTable
+            CmbEvent.DataSource = UpdateKTable.DefaultView
             CmbEvent.DisplayMember = "EvNm"
             CmbEvent.ValueMember = "EvId"
             SerchTable.Rows.Clear()

@@ -435,7 +435,7 @@ fileStream As Stream = File.Create(Environment.GetFolderPath(Environment.Special
         End If
         LblMsg.Text = ""
         'End If
-        CmbEvent.DataSource = UpdateKTable
+        CmbEvent.DataSource = UpdateKTable.DefaultView
         CmbEvent.DisplayMember = "EvNm"
         CmbEvent.ValueMember = "EvId"
         CmbEvent.SelectedIndex = -1

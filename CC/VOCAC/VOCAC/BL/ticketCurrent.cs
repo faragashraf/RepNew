@@ -96,7 +96,7 @@ namespace VOCAC.BL
             currntTicket._EvNm = Convert.ToString(gv.CurrentRow.Cells["EvNm"].Value);
             currntTicket._EvSusp = Convert.ToBoolean(gv.CurrentRow.Cells["EvSusp"].Value);
             currntTicket._TkupEvtId = Convert.ToInt32(gv.CurrentRow.Cells["TkupEvtId"].Value);
-            currntTicket._TkupReDt = Convert.ToDateTime(gv.CurrentRow.Cells["TkupReDt"].Value);
+            if (gv.CurrentRow.Cells["TkupReDt"].Value.ToString().Length > 0) { currntTicket._TkupReDt = Convert.ToDateTime(gv.CurrentRow.Cells["TkupReDt"].Value); }
             currntTicket._TkupSTime = Convert.ToDateTime(gv.CurrentRow.Cells["TkupSTime"].Value);
             currntTicket._TkupTxt = Convert.ToString(gv.CurrentRow.Cells["TkupTxt"].Value);
             currntTicket._TkupUnread = Convert.ToBoolean(gv.CurrentRow.Cells["TkupUnread"].Value);

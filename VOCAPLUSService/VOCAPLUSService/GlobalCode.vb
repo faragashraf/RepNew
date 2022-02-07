@@ -21,8 +21,8 @@ Module GlobalCode
     Public FileExported As String
     Public Class APblicClss
         Public Class Defntion
-            Public sqlCcon As New SqlConnection("Data Source=MYTHINKBOOK\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046")
-            'Public sqlCcon As New SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046")
+            'Public sqlCcon As New SqlConnection("Data Source=MYTHINKBOOK\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046")
+            Public sqlCcon As New SqlConnection("Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046")
             Public sqlComm As New SqlCommand                    'SQL Command
             Public sqlComnd As New SqlCommand                    'SQL Command
             Public sqlCommUpddate_ As New SqlCommand            'SQL Command

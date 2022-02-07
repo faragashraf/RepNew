@@ -87,6 +87,7 @@ Partial Class WelcomeScreen
         Me.TimerColctLog = New System.Windows.Forms.Timer(Me.components)
         Me.WChckConn = New System.ComponentModel.BackgroundWorker()
         Me.WkrTikCount = New System.ComponentModel.BackgroundWorker()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.StatBrPnlEn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.StatBrPnlAr, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DbStat, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -114,7 +115,7 @@ Partial Class WelcomeScreen
         Me.StatusBar1.Panels.AddRange(New System.Windows.Forms.StatusBarPanel() {Me.StatBrPnlEn, Me.StatBrPnlAr})
         Me.StatusBar1.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.StatusBar1.ShowPanels = True
-        Me.StatusBar1.Size = New System.Drawing.Size(1317, 33)
+        Me.StatusBar1.Size = New System.Drawing.Size(1397, 33)
         Me.StatusBar1.SizingGrip = False
         Me.StatusBar1.TabIndex = 56
         '
@@ -122,14 +123,14 @@ Partial Class WelcomeScreen
         '
         Me.StatBrPnlEn.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring
         Me.StatBrPnlEn.Name = "StatBrPnlEn"
-        Me.StatBrPnlEn.Width = 658
+        Me.StatBrPnlEn.Width = 698
         '
         'StatBrPnlAr
         '
         Me.StatBrPnlAr.Alignment = System.Windows.Forms.HorizontalAlignment.Right
         Me.StatBrPnlAr.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring
         Me.StatBrPnlAr.Name = "StatBrPnlAr"
-        Me.StatBrPnlAr.Width = 658
+        Me.StatBrPnlAr.Width = 698
         '
         'TimerTikCoun
         '
@@ -143,7 +144,7 @@ Partial Class WelcomeScreen
         Me.MenuSw.Location = New System.Drawing.Point(0, 0)
         Me.MenuSw.Name = "MenuSw"
         Me.MenuSw.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.MenuSw.Size = New System.Drawing.Size(1317, 4)
+        Me.MenuSw.Size = New System.Drawing.Size(1397, 4)
         Me.MenuSw.TabIndex = 55
         Me.MenuSw.Text = "MenuStrip1"
         '
@@ -194,7 +195,7 @@ Partial Class WelcomeScreen
         Me.FlowLayoutPanel1.SetFlowBreak(Me.LblUsrIP, True)
         Me.LblUsrIP.Font = New System.Drawing.Font("Times New Roman", 9.0!)
         Me.LblUsrIP.ForeColor = System.Drawing.Color.Red
-        Me.LblUsrIP.Location = New System.Drawing.Point(993, 762)
+        Me.LblUsrIP.Location = New System.Drawing.Point(1073, 714)
         Me.LblUsrIP.Margin = New System.Windows.Forms.Padding(3, 0, 10, 0)
         Me.LblUsrIP.Name = "LblUsrIP"
         Me.LblUsrIP.Size = New System.Drawing.Size(297, 20)
@@ -209,7 +210,7 @@ Partial Class WelcomeScreen
         Me.FlowLayoutPanel1.SetFlowBreak(Me.PubVerLbl, True)
         Me.PubVerLbl.Font = New System.Drawing.Font("Times New Roman", 9.0!)
         Me.PubVerLbl.ForeColor = System.Drawing.Color.Red
-        Me.PubVerLbl.Location = New System.Drawing.Point(993, 782)
+        Me.PubVerLbl.Location = New System.Drawing.Point(1073, 734)
         Me.PubVerLbl.Margin = New System.Windows.Forms.Padding(3, 0, 10, 0)
         Me.PubVerLbl.Name = "PubVerLbl"
         Me.PubVerLbl.Size = New System.Drawing.Size(297, 20)
@@ -225,7 +226,7 @@ Partial Class WelcomeScreen
         Me.LblUsrRNm.Font = New System.Drawing.Font("Times New Roman", 14.0!, System.Drawing.FontStyle.Bold)
         Me.LblUsrRNm.ForeColor = System.Drawing.Color.Blue
         Me.LblUsrRNm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.LblUsrRNm.Location = New System.Drawing.Point(11, 545)
+        Me.LblUsrRNm.Location = New System.Drawing.Point(91, 497)
         Me.LblUsrRNm.Margin = New System.Windows.Forms.Padding(3, 3, 1000, 3)
         Me.LblUsrRNm.Name = "LblUsrRNm"
         Me.LblUsrRNm.Size = New System.Drawing.Size(289, 20)
@@ -239,7 +240,7 @@ Partial Class WelcomeScreen
         Me.DbStat.BackgroundImage = Global.VOCAPlus.My.Resources.Resources.DBOff
         Me.DbStat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.FlowLayoutPanel1.SetFlowBreak(Me.DbStat, True)
-        Me.DbStat.Location = New System.Drawing.Point(1264, 3)
+        Me.DbStat.Location = New System.Drawing.Point(1344, 3)
         Me.DbStat.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
         Me.DbStat.Name = "DbStat"
         Me.DbStat.Size = New System.Drawing.Size(36, 35)
@@ -307,11 +308,11 @@ Partial Class WelcomeScreen
         Me.GroupBox1.Controls.Add(Me.LblClrNotUsr)
         Me.GroupBox1.Controls.Add(Me.LblClrSys)
         Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(322, 44)
+        Me.GroupBox1.Location = New System.Drawing.Point(380, 44)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 3, 10, 3)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.GroupBox1.Size = New System.Drawing.Size(246, 246)
+        Me.GroupBox1.Size = New System.Drawing.Size(246, 263)
         Me.GroupBox1.TabIndex = 87
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "مفاتيح الألوان"
@@ -343,6 +344,7 @@ Partial Class WelcomeScreen
         'GrpCounters
         '
         Me.GrpCounters.BackColor = System.Drawing.Color.Transparent
+        Me.GrpCounters.Controls.Add(Me.Button1)
         Me.GrpCounters.Controls.Add(Me.LblFolwDy)
         Me.GrpCounters.Controls.Add(Me.Label10)
         Me.GrpCounters.Controls.Add(Me.LblClsUpdted)
@@ -365,14 +367,13 @@ Partial Class WelcomeScreen
         Me.GrpCounters.Controls.Add(Me.Label0)
         Me.GrpCounters.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold)
         Me.GrpCounters.ForeColor = System.Drawing.Color.ForestGreen
-        Me.GrpCounters.Location = New System.Drawing.Point(962, 296)
+        Me.GrpCounters.Location = New System.Drawing.Point(39, 44)
         Me.GrpCounters.Margin = New System.Windows.Forms.Padding(0, 3, 0, 0)
         Me.GrpCounters.Name = "GrpCounters"
         Me.GrpCounters.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.GrpCounters.Size = New System.Drawing.Size(338, 246)
+        Me.GrpCounters.Size = New System.Drawing.Size(338, 263)
         Me.GrpCounters.TabIndex = 88
         Me.GrpCounters.TabStop = False
-        Me.GrpCounters.Text = "ملخص أرقامي :"
         '
         'LblFolwDy
         '
@@ -385,6 +386,7 @@ Partial Class WelcomeScreen
         Me.LblFolwDy.Size = New System.Drawing.Size(137, 20)
         Me.LblFolwDy.TabIndex = 19
         Me.LblFolwDy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LblFolwDy.Visible = False
         '
         'Label10
         '
@@ -398,6 +400,7 @@ Partial Class WelcomeScreen
         Me.Label10.TabIndex = 18
         Me.Label10.Text = "تم التعامل اليوم :"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label10.Visible = False
         '
         'LblClsUpdted
         '
@@ -410,6 +413,7 @@ Partial Class WelcomeScreen
         Me.LblClsUpdted.Size = New System.Drawing.Size(137, 20)
         Me.LblClsUpdted.TabIndex = 17
         Me.LblClsUpdted.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LblClsUpdted.Visible = False
         '
         'Label7
         '
@@ -423,6 +427,7 @@ Partial Class WelcomeScreen
         Me.Label7.TabIndex = 16
         Me.Label7.Text = "تحديثات شكاوى مغلقة :"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label7.Visible = False
         '
         'LblRecivDy
         '
@@ -435,6 +440,7 @@ Partial Class WelcomeScreen
         Me.LblRecivDy.Size = New System.Drawing.Size(137, 20)
         Me.LblRecivDy.TabIndex = 15
         Me.LblRecivDy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LblRecivDy.Visible = False
         '
         'Label8
         '
@@ -448,6 +454,7 @@ Partial Class WelcomeScreen
         Me.Label8.TabIndex = 14
         Me.Label8.Text = "استلام اليوم :"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label8.Visible = False
         '
         'LblReOpY
         '
@@ -460,6 +467,7 @@ Partial Class WelcomeScreen
         Me.LblReOpY.Size = New System.Drawing.Size(137, 20)
         Me.LblReOpY.TabIndex = 13
         Me.LblReOpY.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LblReOpY.Visible = False
         '
         'LblReadYDy
         '
@@ -472,6 +480,7 @@ Partial Class WelcomeScreen
         Me.LblReadYDy.Size = New System.Drawing.Size(137, 20)
         Me.LblReadYDy.TabIndex = 12
         Me.LblReadYDy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LblReadYDy.Visible = False
         '
         'LblUnRead
         '
@@ -484,6 +493,7 @@ Partial Class WelcomeScreen
         Me.LblUnRead.Size = New System.Drawing.Size(137, 20)
         Me.LblUnRead.TabIndex = 11
         Me.LblUnRead.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LblUnRead.Visible = False
         '
         'LblEvDy
         '
@@ -496,6 +506,7 @@ Partial Class WelcomeScreen
         Me.LblEvDy.Size = New System.Drawing.Size(137, 20)
         Me.LblEvDy.TabIndex = 10
         Me.LblEvDy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LblEvDy.Visible = False
         '
         'LblClsYDy
         '
@@ -508,6 +519,7 @@ Partial Class WelcomeScreen
         Me.LblClsYDy.Size = New System.Drawing.Size(137, 20)
         Me.LblClsYDy.TabIndex = 9
         Me.LblClsYDy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LblClsYDy.Visible = False
         '
         'LblFlN
         '
@@ -520,6 +532,7 @@ Partial Class WelcomeScreen
         Me.LblFlN.Size = New System.Drawing.Size(137, 20)
         Me.LblFlN.TabIndex = 8
         Me.LblFlN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LblFlN.Visible = False
         '
         'LblClsN
         '
@@ -532,6 +545,7 @@ Partial Class WelcomeScreen
         Me.LblClsN.Size = New System.Drawing.Size(137, 20)
         Me.LblClsN.TabIndex = 7
         Me.LblClsN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LblClsN.Visible = False
         '
         'Label6
         '
@@ -545,6 +559,7 @@ Partial Class WelcomeScreen
         Me.Label6.TabIndex = 6
         Me.Label6.Text = "معاد فتحها :"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label6.Visible = False
         '
         'Label5
         '
@@ -558,6 +573,7 @@ Partial Class WelcomeScreen
         Me.Label5.TabIndex = 5
         Me.Label5.Text = "تحديثات مقروءه اليوم :"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label5.Visible = False
         '
         'Label4
         '
@@ -571,6 +587,7 @@ Partial Class WelcomeScreen
         Me.Label4.TabIndex = 4
         Me.Label4.Text = "تحديثات غير مقروءه :"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label4.Visible = False
         '
         'Label3
         '
@@ -584,6 +601,7 @@ Partial Class WelcomeScreen
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "عدد تحديثات اليوم :"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label3.Visible = False
         '
         'Label2
         '
@@ -597,6 +615,7 @@ Partial Class WelcomeScreen
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "تم الإغلاق اليوم :"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label2.Visible = False
         '
         'Label1
         '
@@ -610,6 +629,7 @@ Partial Class WelcomeScreen
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "لم يتم التعامل معها :"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label1.Visible = False
         '
         'Label0
         '
@@ -623,6 +643,7 @@ Partial Class WelcomeScreen
         Me.Label0.TabIndex = 0
         Me.Label0.Text = "مفتوحة :"
         Me.Label0.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label0.Visible = False
         '
         'PictureBox1
         '
@@ -630,7 +651,7 @@ Partial Class WelcomeScreen
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox1.ContextMenuStrip = Me.CNTXMNUPic
         Me.FlowLayoutPanel1.SetFlowBreak(Me.PictureBox1, True)
-        Me.PictureBox1.Location = New System.Drawing.Point(814, 293)
+        Me.PictureBox1.Location = New System.Drawing.Point(1232, 310)
         Me.PictureBox1.Margin = New System.Windows.Forms.Padding(40, 0, 0, 0)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(148, 184)
@@ -673,7 +694,7 @@ Partial Class WelcomeScreen
         Me.LblSrvrNm.Font = New System.Drawing.Font("Times New Roman", 9.0!)
         Me.LblSrvrNm.ForeColor = System.Drawing.Color.Red
         Me.LblSrvrNm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.LblSrvrNm.Location = New System.Drawing.Point(11, 571)
+        Me.LblSrvrNm.Location = New System.Drawing.Point(91, 523)
         Me.LblSrvrNm.Margin = New System.Windows.Forms.Padding(3, 3, 1000, 3)
         Me.LblSrvrNm.Name = "LblSrvrNm"
         Me.LblSrvrNm.Size = New System.Drawing.Size(289, 20)
@@ -691,7 +712,7 @@ Partial Class WelcomeScreen
         Me.Label9.BackColor = System.Drawing.Color.Transparent
         Me.FlowLayoutPanel1.SetFlowBreak(Me.Label9, True)
         Me.Label9.Font = New System.Drawing.Font("Times New Roman", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.Label9.Location = New System.Drawing.Point(996, 623)
+        Me.Label9.Location = New System.Drawing.Point(1076, 575)
         Me.Label9.Margin = New System.Windows.Forms.Padding(3, 3, 3, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -703,7 +724,7 @@ Partial Class WelcomeScreen
         Me.LblLanguage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblLanguage.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.LblLanguage.ForeColor = System.Drawing.Color.Red
-        Me.LblLanguage.Location = New System.Drawing.Point(800, 46)
+        Me.LblLanguage.Location = New System.Drawing.Point(880, 46)
         Me.LblLanguage.Margin = New System.Windows.Forms.Padding(0, 5, 3, 0)
         Me.LblLanguage.Name = "LblLanguage"
         Me.LblLanguage.Size = New System.Drawing.Size(497, 25)
@@ -735,7 +756,7 @@ Partial Class WelcomeScreen
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 4)
         Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(3, 3, 1000, 3)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1317, 635)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1397, 635)
         Me.FlowLayoutPanel1.TabIndex = 96
         '
         'FlowLayoutPanel2
@@ -743,18 +764,19 @@ Partial Class WelcomeScreen
         Me.FlowLayoutPanel2.Controls.Add(Me.RadioButton1)
         Me.FlowLayoutPanel2.Controls.Add(Me.RadioButton2)
         Me.FlowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(581, 44)
+        Me.FlowLayoutPanel2.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(639, 44)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(216, 27)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(238, 27)
         Me.FlowLayoutPanel2.TabIndex = 99
         '
         'RadioButton1
         '
         Me.RadioButton1.AutoSize = True
         Me.RadioButton1.Checked = True
-        Me.RadioButton1.Location = New System.Drawing.Point(116, 3)
+        Me.RadioButton1.Location = New System.Drawing.Point(132, 3)
         Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(97, 17)
+        Me.RadioButton1.Size = New System.Drawing.Size(103, 23)
         Me.RadioButton1.TabIndex = 0
         Me.RadioButton1.TabStop = True
         Me.RadioButton1.Text = "تثبيت الشاشات"
@@ -763,9 +785,9 @@ Partial Class WelcomeScreen
         'RadioButton2
         '
         Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(11, 3)
+        Me.RadioButton2.Location = New System.Drawing.Point(17, 3)
         Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(99, 17)
+        Me.RadioButton2.Size = New System.Drawing.Size(109, 23)
         Me.RadioButton2.TabIndex = 1
         Me.RadioButton2.Text = "تحريك الشاشات"
         Me.RadioButton2.UseVisualStyleBackColor = True
@@ -777,7 +799,7 @@ Partial Class WelcomeScreen
         Me.LblLstSeen.Font = New System.Drawing.Font("Times New Roman", 14.0!)
         Me.LblLstSeen.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.LblLstSeen.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.LblLstSeen.Location = New System.Drawing.Point(11, 597)
+        Me.LblLstSeen.Location = New System.Drawing.Point(91, 549)
         Me.LblLstSeen.Margin = New System.Windows.Forms.Padding(3, 3, 1000, 3)
         Me.LblLstSeen.Name = "LblLstSeen"
         Me.LblLstSeen.Size = New System.Drawing.Size(289, 20)
@@ -789,7 +811,7 @@ Partial Class WelcomeScreen
         '
         Me.Panel2.BackColor = System.Drawing.Color.Transparent
         Me.Panel2.Controls.Add(Me.ExtBt)
-        Me.Panel2.Location = New System.Drawing.Point(1179, 831)
+        Me.Panel2.Location = New System.Drawing.Point(1259, 783)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(118, 40)
         Me.Panel2.TabIndex = 97
@@ -798,7 +820,7 @@ Partial Class WelcomeScreen
         '
         Me.Panel1.BackColor = System.Drawing.Color.Transparent
         Me.Panel1.Controls.Add(Me.SnOutBt)
-        Me.Panel1.Location = New System.Drawing.Point(1049, 831)
+        Me.Panel1.Location = New System.Drawing.Point(1129, 783)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(124, 39)
         Me.Panel1.TabIndex = 96
@@ -807,7 +829,7 @@ Partial Class WelcomeScreen
         '
         Me.Panel3.BackColor = System.Drawing.Color.Transparent
         Me.Panel3.Controls.Add(Me.Button2)
-        Me.Panel3.Location = New System.Drawing.Point(919, 831)
+        Me.Panel3.Location = New System.Drawing.Point(999, 783)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(124, 39)
         Me.Panel3.TabIndex = 97
@@ -827,6 +849,18 @@ Partial Class WelcomeScreen
         Me.WkrTikCount.WorkerReportsProgress = True
         Me.WkrTikCount.WorkerSupportsCancellation = True
         '
+        'Button1
+        '
+        Me.Button1.BackgroundImage = Global.VOCAPlus.My.Resources.Resources.recgreen
+        Me.Button1.Font = New System.Drawing.Font("Times New Roman", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.Button1.Location = New System.Drawing.Point(122, 227)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(131, 30)
+        Me.Button1.TabIndex = 20
+        Me.Button1.Text = "تحديث الأرقام"
+        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
+        '
         'WelcomeScreen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -834,7 +868,7 @@ Partial Class WelcomeScreen
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1317, 672)
+        Me.ClientSize = New System.Drawing.Size(1397, 672)
         Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.StatusBar1)
         Me.Controls.Add(Me.MenuSw)
@@ -926,4 +960,5 @@ Partial Class WelcomeScreen
     Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
     Friend WithEvents RadioButton1 As RadioButton
     Friend WithEvents RadioButton2 As RadioButton
+    Friend WithEvents Button1 As Button
 End Class

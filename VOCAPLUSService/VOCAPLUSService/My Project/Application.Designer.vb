@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.VOCAPLUSService.AutoMail
+            Me.MainForm = Global.VOCAPLUSService.VOCAPlusService
         End Sub
     End Class
 End Namespace

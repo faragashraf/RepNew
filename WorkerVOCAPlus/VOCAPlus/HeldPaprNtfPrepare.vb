@@ -30,7 +30,7 @@
                 Else
                     DateTimePicker1.Value = DateTimePicker1.MaxDate
                 End If
-                GridHeld.Width = Me.Width - 50
+                'GridHeld.Width = Me.Width - 50
                 CloseBtn.Location = New Point(Me.Width - 80, CloseBtn.Location.Y)
                 FilPhPool()
             Else
@@ -45,7 +45,7 @@
     End Sub
     Private Sub FilPhPool()
         RemoveHandler GridHeld.SelectionChanged, AddressOf GridPHHeld_SelectionChanged
-        GridHeld.Visible = False
+        'GridHeld.Visible = False
         Dim Str As String = ""
         Ntf1 = 0
         NTF2 = 0

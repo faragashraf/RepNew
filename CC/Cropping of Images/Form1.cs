@@ -38,14 +38,6 @@ namespace WindowsFormsApplication1
             {
                 _selection.Width = e.X - _selection.X;
                 _selection.Height = e.Y - _selection.Y;
-                //BY ME
-
-
-                //if (_selection.Height < 0)
-                //{
-                //    _selection.Height = _selection.Height * -1;
-                //}
-                //BY ME
                 // Redraw the picturebox:
                 pictureBox1.Refresh();
             }

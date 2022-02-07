@@ -533,7 +533,7 @@ namespace VOCAC.PL
                         DateTimePicker Ctrl = new DateTimePicker();
                         Ctrl.Font = CtrlFont;
                         Ctrl.Size = Ctrlsize;
-                        Ctrl.MaxDate = DateTime.Now.AddDays(1);
+                        Ctrl.MaxDate = DateTime.Now.AddDays(2);
                         Ctrl.Format = DateTimePickerFormat.Short;
                         Ctrl.Value = DateTime.Now.AddDays(1);
                         Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendDatatype"].ToString();
@@ -803,7 +803,7 @@ namespace VOCAC.PL
             SqlParameter[] param = new SqlParameter[13];
             SqlCommand sqlcmd = new SqlCommand();
             sqlcmd.CommandType = CommandType.StoredProcedure;
-            sqlcmd.CommandText = "SP_TICKETS_INSERT";
+            sqlcmd.CommandText = "SP_OLD_TICKETS_INSERT";
             sqlcmd.Connection = sqlcon;
             param[0] = new SqlParameter("@TkKind", SqlDbType.Bit);
             param[0].Value = kind;

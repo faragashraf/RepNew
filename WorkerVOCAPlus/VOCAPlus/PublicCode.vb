@@ -560,7 +560,7 @@ End_:
                     End If
                 End If
 
-                If GridUpd.Rows(Cnt_).Cells("TkupReDt").Value.ToString.Length =0  Then
+                If GridUpd.Rows(Cnt_).Cells("TkupReDt").Value.ToString.Length = 0 Then
                     GridUpd.Rows(Cnt_).Cells("TkupReDt").Value = ""                                    'Read Date
                 End If
             Next
@@ -1268,7 +1268,7 @@ End_:
         TimeTble.Columns.Clear()
         Dim SQLGetAdptr As New SqlDataAdapter            'SQL Table Adapter
         Try
-            'sqlComm.CommandTimeout = 90
+            sqlComm = New SqlCommand()
             sqlComm.Connection = sqlCon
             SQLGetAdptr.SelectCommand = sqlComm
             sqlComm.CommandType = CommandType.Text

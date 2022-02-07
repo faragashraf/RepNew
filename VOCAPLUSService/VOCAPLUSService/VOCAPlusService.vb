@@ -550,13 +550,17 @@ SendMail_:
                                     EscID = 903
                                     EscCnt = 2
                                     Invoke(Sub() TxtErr.Text = Now & " : " & "Trying To Insert Update " & vbCrLf & TxtErr.Text)
-                                    If Fn.InsTrans("update Tickets set TkEscTyp = " & EscCnt & " where (TkSQL = " & EscAtoTable.Rows(Cnt).Item("TkID") & ")",
-                                                             "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser, TkupSendEsc) VALUES ('" & EscAtoTable.Rows(Cnt).Item("TkID") & "','" & Esc & "','" & "0" & "','" & EscID & "','" & OsIP() & "','" & "32000" & "','" & 1 & "')") = Nothing Then
+                                    'If Fn.InsTrans("update Tickets set TkEscTyp = " & EscCnt & " where (TkSQL = " & EscAtoTable.Rows(Cnt).Item("TkID") & ")",
+                                    '     "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser, TkupSendEsc) VALUES ('" &
+                                    '     EscAtoTable.Rows(Cnt).Item("TkID") & "','" & Esc & "','" & "0" & "','" & EscID & "','" & OsIP() & "','" & "32000" & "','" & 1 & "')") = Nothing Then
+                                    If insupdate(EscAtoTable.Rows(Cnt).Item("TkID"), Trim(Esc), 1, EscID, OsIP(), 32000, True) = Nothing Then
                                         If SendMailEx(Cnt) = 0 Then                     ' Send Mail
                                             Invoke(Sub() TxtErr.Text = Now & " : " & "Mail has been Sent " & vbCrLf & TxtErr.Text)
                                         Else
                                             Invoke(Sub() TxtErr.Text = Now & " : " & "Faild To Sending mail Of Ticket No." & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
                                         End If
+                                        'End If
+
                                     Else
                                         Invoke(Sub() TxtErr.Text = Now & " : " & "Faild To insert Update and sending mail Of Ticket No." & EscAtoTable.Rows(Cnt).Item("TkID") & vbCrLf & TxtErr.Text)
                                     End If
@@ -575,8 +579,10 @@ SendMail_:
                                 EscID = 904
                                 EscCnt = 3
                                 Invoke(Sub() TxtErr.Text = Now & " : " & "Trying To Insert Update " & vbCrLf & TxtErr.Text)
-                                If Fn.InsTrans("update Tickets set TkEscTyp = " & EscCnt & " where (TkSQL = " & EscAtoTable.Rows(Cnt).Item("TkID") & ")",
-                                                         "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser, TkupSendEsc) VALUES ('" & EscAtoTable.Rows(Cnt).Item("TkID") & "','" & Esc & "','" & "0" & "','" & EscID & "','" & OsIP() & "','" & "32000" & "','" & 1 & "')") = Nothing Then
+                                '                If Fn.InsTrans("update Tickets set TkEscTyp = " & EscCnt & " where (TkSQL = " & EscAtoTable.Rows(Cnt).Item("TkID") & ")",
+                                '                                         "insert into TkEvent (TkupTkSql, TkupTxt, TkupUnread, TkupEvtId, TkupUserIP, TkupUser, TkupSendEsc) VALUES ('" &
+                                'EscAtoTable.Rows(Cnt).Item("TkID") & "','" & Esc & "','" & "0" & "','" & EscID & "','" & OsIP() & "','" & "32000" & "','" & 1 & "')") = Nothing Then
+                                If insupdate(EscAtoTable.Rows(Cnt).Item("TkID"), Trim(Esc), 1, EscID, OsIP(), 32000, True) = Nothing Then
                                     If SendMailEx(Cnt) = 0 Then                     ' Send Mail
                                         Invoke(Sub() TxtErr.Text = Now & " : " & "Escalation has been done " & vbCrLf & TxtErr.Text)
                                     Else
@@ -609,6 +615,47 @@ SendMail_:
         Invoke(Sub() TxtErr.Text = Now & " :  Waiting For Next Job" & nxt & vbCrLf & TxtErr.Text)
         Exit Sub
     End Sub
+    Private Function insupdate(id As Integer, txt As String, read As Boolean, EvId As Integer, IP As String, user As Integer,
+                                                                                             TkupSendEsc As Boolean) As String
+        Dim Def As New APblicClss.Defntion
+        Dim msg As String = Nothing
+        Dim state As New APblicClss.Defntion
+        Dim sqlComminsert_1 As New SqlCommand            'SQL Command
+        Dim param(6) As SqlParameter
+        sqlComminsert_1.CommandType = CommandType.StoredProcedure
+        sqlComminsert_1.CommandText = "SP_TICKET_EVENT_INSERT"
+        sqlComminsert_1.Connection = Def.sqlCcon
+        param(0) = New SqlParameter("@TkupTkSql", SqlDbType.Int)
+        param(0).Value = id
+        param(1) = New SqlParameter("@TkupTxt", SqlDbType.NVarChar)
+        param(1).Value = txt
+        param(2) = New SqlParameter("@TkupUnread", SqlDbType.Bit)
+        param(2).Value = read
+        param(3) = New SqlParameter("@TkupEvtId", SqlDbType.Int)
+        param(3).Value = EvId
+        param(4) = New SqlParameter("@TkupUserIP", SqlDbType.NVarChar, 15)
+        param(4).Value = IP
+        param(5) = New SqlParameter("@TkupUser", SqlDbType.Int)
+        param(5).Value = user
+        param(6) = New SqlParameter("@TkupSendEsc", SqlDbType.Bit)
+        param(6).Value = TkupSendEsc
+
+        '
+        For i = 0 To param.Length - 1
+            sqlComminsert_1.Parameters.Add(param(i))
+        Next
+
+        Try
+            If Def.sqlCcon.State = ConnectionState.Closed Then
+                Def.sqlCcon.Open()
+            End If
+            sqlComminsert_1.ExecuteNonQuery()
+        Catch ex As Exception
+            msg = ex.Message
+        End Try
+
+        Return msg
+    End Function
     Private Function SndMail() As String
         ExrtErr = Nothing
 

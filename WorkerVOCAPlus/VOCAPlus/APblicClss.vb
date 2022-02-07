@@ -15,7 +15,7 @@ Module Public_
     Public ServerCD As String = "Eg Server"
     Public ServerNm As String = "VOCA Server"
     '@VocaPlus$21-7
-    Public strConn As String = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-127"
+    Public strConn As String = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-1237"
     '"Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaplus21;Password=@VocaPlus$21-4"
     '"Data Source=MYTHINKBOOK\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
     Public sqlCon As New SqlConnection(strConn) ' I Have assigned conn STR here and delete this row from all project
@@ -149,13 +149,13 @@ Public Class APblicClss
             state.Errmsg = Nothing
             strConn = Nothing
             If ServerCD = "Eg Server" Then
-                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-127"
+                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-1237"
                 ServerNm = "VOCA Server"
             ElseIf ServerCD = "My Labtop" Then
                 strConn = "Data Source=MyThinkbook\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
                 ServerNm = "My Labtop"
             ElseIf ServerCD = "Training" Then
-                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-127"
+                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-1237"
                 ServerNm = "Training"
             ElseIf ServerCD = "OnLine" Then
                 strConn = "Data Source=34.123.217.183;Initial Catalog=vocaplus;Persist Security Info=True;User ID=sqlserver;Password=Hemonad105046"
@@ -235,9 +235,9 @@ Public Class APblicClss
                 If state.CONSQL.State = ConnectionState.Closed Or state.CONSQL.State = ConnectionState.Broken Then
                     state.CONSQL.Open()
                 End If
-                state.Tran = state.CONSQL.BeginTransaction(IsolationLevel.Snapshot)
-                sqlCommW.Transaction = state.Tran
-                state.Tran.Commit()
+                'state.Tran = state.CONSQL.BeginTransaction(IsolationLevel.Snapshot)
+                'sqlCommW.Transaction = state.Tran
+                'state.Tran.Commit()
                 state.reader = sqlCommW.ExecuteReader
                 SqlTbl.Load(state.reader)
 
@@ -246,7 +246,7 @@ Public Class APblicClss
                 Dim TimSpn As TimeSpan = (StW.Elapsed)
                 ElapsedTimeSpan = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimSpn.Hours, TimSpn.Minutes, TimSpn.Seconds, TimSpn.Milliseconds / 10)
             Catch ex As Exception
-                state.Tran.Rollback()
+                'state.Tran.Rollback()
                 If ex.Message.Contains("The connection is broken and recovery is not possible") Then
                     state.CONSQL.Close()
                     SqlConnection.ClearPool(state.CONSQL)
@@ -270,16 +270,17 @@ Public Class APblicClss
                 If state.CONSQL.State = ConnectionState.Closed Or state.CONSQL.State = ConnectionState.Broken Then
                     state.CONSQL.Open()
                 End If
-                state.Tran = state.CONSQL.BeginTransaction(IsolationLevel.Snapshot)
-                sqlCommW.Transaction = state.Tran
-                state.Tran.Commit()
+                'state.Tran = state.CONSQL.BeginTransaction(IsolationLevel.ReadUncommitted)
+                'sqlCommW.Transaction = state.Tran
+
                 state.reader = sqlCommW.ExecuteReader
+                'state.Tran.Commit()
                 SqlTbl.Load(state.reader)
                 StW.Stop()
                 Dim TimSpn As TimeSpan = (StW.Elapsed)
                 ElapsedTimeSpan = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimSpn.Hours, TimSpn.Minutes, TimSpn.Seconds, TimSpn.Milliseconds / 10)
             Catch ex As Exception
-                state.Tran.Rollback()
+                'state.Tran.Rollback()
                 If ex.Message.Contains("The connection is broken and recovery is not possible") Then
                     state.CONSQL.Close()
                     SqlConnection.ClearPool(state.CONSQL)
@@ -570,106 +571,166 @@ Sec2:
                     ProdKTable = New DataTable
                     ProdCompTable = New DataTable
                     UpdateKTable = New DataTable
-                    Def.Str = "جاري تحميل أسماء المناطق ..."
-                    worker.ReportProgress(0, Def)
-                    If (Fn.GetTbl("SELECT OffArea FROM PostOff GROUP BY OffArea ORDER BY OffArea;", AreaTable, "1012&H", worker)) = Nothing Then
-                        PrciTblCnt += 1
-                    Else
-                        Def.Str = "لم يتم تحميل  أسماء المناطق "
-                        worker.ReportProgress(0, Def)
-                    End If
-
-                    Def.Str = "جاري تحميل أسماء المكاتب ..."
-                    worker.ReportProgress(0, Def)
-
-                    If (Fn.GetTbl("select OffNm1, OffFinCd, OffArea from PostOff ORDER BY OffNm1;", OfficeTable, "1012&H", worker)) = Nothing Then
-                        PrciTblCnt += 1
-                    Else
-                        Def.Str = "لم يتم تحميل  أسماء المكاتب  "
-                        worker.ReportProgress(0, Def)
-                    End If
 
 
+                    Dim DS As New DataSet
+                    DS = getMainTbles()
 
-                    Def.Str = "جاري تحميل مصادر الشكوى ..."
-                    worker.ReportProgress(0, Def)
+                    If DS.Tables.Count > 0 Then
+                        PrciTblCnt = 7
+                        AreaTable = DS.Tables(0)
+                        OfficeTable = DS.Tables(1)
+                        CompSurceTable = DS.Tables(2)
+                        CountryTable = DS.Tables(3)
+                        ProdKTable = DS.Tables(4)
+                        ProdCompTable = DS.Tables(5)
+                        UpdateKTable = DS.Tables(6)
 
-                    If (Fn.GetTbl("select SrcCd, SrcNm,SrcSusp from CDSrc ORDER BY SrcNm", CompSurceTable, "1012&H", worker)) = Nothing Then
-                        PrciTblCnt += 1
+
                         If Usr.PUsrUCatLvl = 7 Then
                             CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] = '1'"     '     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm"
                         Else
                             CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] > '1'"   '   SrcStr = "Select SrcCd, SrcNm from CDSrc where SrcSusp=0 And srcCd > 1 ORDER BY SrcNm"
                         End If
-                    Else
-                        Def.Str = "لم يتم تحميل  مصادر الشكوى  "
-                        worker.ReportProgress(0, Def)
-                    End If
 
-
-                    Def.Str = "جاري تحميل أسماء الدول ..."
-                    worker.ReportProgress(0, Def)
-
-                    If (Fn.GetTbl("Select CounCd,CounNm from CDCountry order by CounNm", CountryTable, "1012&H", worker)) = Nothing Then
                         primaryKey(0) = CountryTable.Columns("CounCd")
                         CountryTable.PrimaryKey = primaryKey
-                        PrciTblCnt += 1
-                    Else
-                        Def.Str = "لم يتم تحميل  أسماء الدول  "
-                        worker.ReportProgress(0, Def)
-                    End If
 
-
-                    Def.Str = "جاري تحميل أنواع الخدمات ..."
-                    worker.ReportProgress(0, Def)
-
-                    If (Fn.GetTbl("Select ProdKCd, ProdKNm, ProdKClr from CDProdK where ProdKSusp = 0 order by ProdKCd", ProdKTable, "1012&H", worker)) = Nothing Then
                         primaryKey(0) = ProdKTable.Columns("ProdKNm")
                         ProdKTable.PrimaryKey = primaryKey
-                        PrciTblCnt += 1
-                    Else
-                        Def.Str = "لم يتم تحميل  أنواع الخدمات "
-                        worker.ReportProgress(0, Def)
-                    End If
 
-
-                    Def.Str = "جاري تحميل أنواع المنتجات ..."
-                    worker.ReportProgress(0, Def)
-
-                    If (Fn.GetTbl("Select FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp,CompReqst FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
                         primaryKey(0) = ProdCompTable.Columns("FnSQL")
                         ProdCompTable.PrimaryKey = primaryKey
-                        PrciTblCnt += 1
-                    Else
-                        Def.Str = "لم يتم تحميل أنواع المنتجات  "
-                        worker.ReportProgress(0, Def)
-                    End If
 
-                    Def.Str = "جاري تحميل أنواع التحديثات ..."
-                    worker.ReportProgress(0, Def)
-                    If Usr.PUsrUCatLvl >= 3 And Usr.PUsrUCatLvl <= 5 Then
-                        If (Fn.GetTbl("Select EvId, EvNm FROM CDEvent where EvSusp = 0 And EvBkOfic = 1 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
-                            PrciTblCnt += 1
+                        If Usr.PUsrUCatLvl >= 3 And Usr.PUsrUCatLvl <= 5 Then
+                            UpdateKTable.DefaultView.RowFilter = "EvBkOfic = 1"
                         Else
-                            Def.Str = "لم يتم تحميل  أنواع التحديثات "
-                            worker.ReportProgress(0, Def)
-                        End If
-                    Else
-                        If (Fn.GetTbl("Select EvId, EvNm FROM CDEvent where EvSusp = 0 And EvBkOfic = 0 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
-                            PrciTblCnt += 1
-                        Else
-                            Def.Str = " أنواع التحديثات / "
-                            worker.ReportProgress(0, Def)
+                            UpdateKTable.DefaultView.RowFilter = "EvBkOfic = 0"
                         End If
                     End If
                 End If
+#Region "OLD CODE"
+                'Def.Str = "جاري تحميل أسماء المناطق ..."
+                'worker.ReportProgress(0, Def)
+                'If (Fn.GetTbl("SELECT OffArea FROM PostOff GROUP BY OffArea ORDER BY OffArea;", AreaTable, "1012&H", worker)) = Nothing Then
+                '    PrciTblCnt += 1
+                'Else
+                '    Def.Str = "لم يتم تحميل  أسماء المناطق "
+                '    worker.ReportProgress(0, Def)
+                'End If
 
+                'Def.Str = "جاري تحميل أسماء المكاتب ..."
+                'worker.ReportProgress(0, Def)
+
+                'If (Fn.GetTbl("select OffNm1, OffFinCd, OffArea from PostOff ORDER BY OffNm1;", OfficeTable, "1012&H", worker)) = Nothing Then
+                '    PrciTblCnt += 1
+                'Else
+                '    Def.Str = "لم يتم تحميل  أسماء المكاتب  "
+                '    worker.ReportProgress(0, Def)
+                'End If
+
+
+
+                'Def.Str = "جاري تحميل مصادر الشكوى ..."
+                'worker.ReportProgress(0, Def)
+
+                'If (Fn.GetTbl("select SrcCd, SrcNm,SrcSusp from CDSrc ORDER BY SrcNm", CompSurceTable, "1012&H", worker)) = Nothing Then
+                '    PrciTblCnt += 1
+                '    If Usr.PUsrUCatLvl = 7 Then
+                '        CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] = '1'"     '     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm"
+                '    Else
+                '        CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] > '1'"   '   SrcStr = "Select SrcCd, SrcNm from CDSrc where SrcSusp=0 And srcCd > 1 ORDER BY SrcNm"
+                '    End If
+                'Else
+                '    Def.Str = "لم يتم تحميل  مصادر الشكوى  "
+                '    worker.ReportProgress(0, Def)
+                'End If
+
+
+                'Def.Str = "جاري تحميل أسماء الدول ..."
+                'worker.ReportProgress(0, Def)
+
+                'If (Fn.GetTbl("Select CounCd,CounNm from CDCountry order by CounNm", CountryTable, "1012&H", worker)) = Nothing Then
+                '    primaryKey(0) = CountryTable.Columns("CounCd")
+                '    CountryTable.PrimaryKey = primaryKey
+                '    PrciTblCnt += 1
+                'Else
+                '    Def.Str = "لم يتم تحميل  أسماء الدول  "
+                '    worker.ReportProgress(0, Def)
+                'End If
+
+
+                'Def.Str = "جاري تحميل أنواع الخدمات ..."
+                'worker.ReportProgress(0, Def)
+
+                'If (Fn.GetTbl("Select ProdKCd, ProdKNm, ProdKClr from CDProdK where ProdKSusp = 0 order by ProdKCd", ProdKTable, "1012&H", worker)) = Nothing Then
+                '    primaryKey(0) = ProdKTable.Columns("ProdKNm")
+                '    ProdKTable.PrimaryKey = primaryKey
+                '    PrciTblCnt += 1
+                'Else
+                '    Def.Str = "لم يتم تحميل  أنواع الخدمات "
+                '    worker.ReportProgress(0, Def)
+                'End If
+
+
+                'Def.Str = "جاري تحميل أنواع المنتجات ..."
+                'worker.ReportProgress(0, Def)
+
+                'If (Fn.GetTbl("Select FnSQL, PrdKind, FnProdCd, PrdNm, FnCompCd, CompNm, FnMend, PrdRef, FnMngr, Prd3, FnSusp,CompHlp,CompReqst FROM VwFnProd where FnSusp = 0 ORDER BY PrdKind, PrdNm, CompNm", ProdCompTable, "1012&H", worker)) = Nothing Then
+                '    primaryKey(0) = ProdCompTable.Columns("FnSQL")
+                '    ProdCompTable.PrimaryKey = primaryKey
+                '    PrciTblCnt += 1
+                'Else
+                '    Def.Str = "لم يتم تحميل أنواع المنتجات  "
+                '    worker.ReportProgress(0, Def)
+                'End If
+
+                '    Def.Str = "جاري تحميل أنواع التحديثات ..."
+                '    worker.ReportProgress(0, Def)
+                '    If Usr.PUsrUCatLvl >= 3 And Usr.PUsrUCatLvl <= 5 Then
+                '        If (Fn.GetTbl("Select EvId, EvNm FROM CDEvent where EvSusp = 0 And EvBkOfic = 1 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
+                '            PrciTblCnt += 1
+                '        Else
+                '            Def.Str = "لم يتم تحميل  أنواع التحديثات "
+                '            worker.ReportProgress(0, Def)
+                '        End If
+                '    Else
+                '        If (Fn.GetTbl("Select EvId, EvNm FROM CDEvent where EvSusp = 0 And EvBkOfic = 0 ORDER BY EvNm", UpdateKTable, "1012&H", worker)) = Nothing Then
+                '            PrciTblCnt += 1
+                '        Else
+                '            Def.Str = " أنواع التحديثات / "
+                '            worker.ReportProgress(0, Def)
+                '        End If
+                '    End If
+                'End If
+#End Region
                 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
             Else
                 worker.ReportProgress(0, Def)
                 Fn.MsgErr(My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain & vbCrLf)
             End If
         End Sub
+        Private Function getMainTbles() As DataSet
+
+            Dim state As New APblicClss.Defntion
+            Dim sqlComminsert_1 As New SqlCommand            'SQL Command
+
+            sqlComminsert_1.CommandType = CommandType.StoredProcedure
+            sqlComminsert_1.CommandText = "SP_OLD_MAIN_TBL_SLCT"
+            sqlComminsert_1.Connection = state.CONSQL
+
+            Dim SQLcalDtAdptr As New SqlDataAdapter(sqlComminsert_1)
+            Dim ds As New DataSet()
+            Try
+                SQLcalDtAdptr.Fill(ds)
+            Catch ex As Exception
+
+                AppLog("1011&H", ex.Message, sqlComminsert_1.CommandText)
+                MsgErr("كود خطأ : " & "1011&H" & vbCrLf & My.Resources.ConnErr & vbCrLf & My.Resources.TryAgain)
+            End Try
+
+            Return ds
+        End Function
         Public Sub SwitchBoardXXXXXXXXXXXXXXXXXXXX(worker As System.ComponentModel.BackgroundWorker)
             Dim SwichTabTable As DataTable = New DataTable
             Dim SwichButTable As DataTable = New DataTable

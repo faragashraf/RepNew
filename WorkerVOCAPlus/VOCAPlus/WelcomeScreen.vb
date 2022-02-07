@@ -52,14 +52,17 @@ Public Class WelcomeScreen
         End Get
     End Property
     Private Sub TimerTikCoun_Tick(sender As Object, e As EventArgs) Handles TimerTikCoun.Tick
-        'If IsHandleCreated = True Then
-        '    Invoke(Sub()
-        '               Dim WC As New APblicClss.Func
-        '               If WkrTikCount.IsBusy = False Then
-        '                   Invoke(Sub() WkrTikCount.RunWorkerAsync(WC))
-        '               End If
-        '           End Sub)
+        'If GrpCounters.Visible = True Then
+        '    If IsHandleCreated = True Then
+        '        Invoke(Sub()
+        '                   Dim WC As New APblicClss.Func
+        '                   If WkrTikCount.IsBusy = False Then
+        '                       Invoke(Sub() WkrTikCount.RunWorkerAsync(WC))
+        '                   End If
+        '               End Sub)
+        '    End If
         'End If
+
     End Sub
     Private Sub TimerOp_Tick(sender As Object, e As EventArgs) Handles TimerOp.Tick
         If Opacity < 1 Then
@@ -405,18 +408,18 @@ Public Class WelcomeScreen
 
             Dim ConterWidt As Integer = 0
             If Usr.PUsrUCatLvl >= 3 And Usr.PUsrUCatLvl <= 5 Then
-                GrpCounters.Text = "ملخص أرقامي حتى : " & Now
-                GrpCounters.Visible = True
-                LblClsN.Text = Usr.PUsrClsN
-                LblFlN.Text = Usr.PUsrFlN
-                LblClsYDy.Text = Usr.PUsrClsYDy
-                LblEvDy.Text = Usr.PUsrEvDy
-                LblUnRead.Text = Usr.PUsrUnRead
-                LblReadYDy.Text = Usr.PUsrReadYDy
-                LblReOpY.Text = Usr.PUsrReOpY
-                LblRecivDy.Text = Usr.PUsrRecvDy
-                LblClsUpdted.Text = Usr.PUsrClsUpdtd
-                LblFolwDy.Text = Usr.PUsrFolwDay
+                'GrpCounters.Text = "ملخص أرقامي حتى : " & Now
+                'GrpCounters.Visible = True
+                'LblClsN.Text = Usr.PUsrClsN
+                'LblFlN.Text = Usr.PUsrFlN
+                'LblClsYDy.Text = Usr.PUsrClsYDy
+                'LblEvDy.Text = Usr.PUsrEvDy
+                'LblUnRead.Text = Usr.PUsrUnRead
+                'LblReadYDy.Text = Usr.PUsrReadYDy
+                'LblReOpY.Text = Usr.PUsrReOpY
+                'LblRecivDy.Text = Usr.PUsrRecvDy
+                'LblClsUpdted.Text = Usr.PUsrClsUpdtd
+                'LblFolwDy.Text = Usr.PUsrFolwDay
                 ConterWidt = GrpCounters.Width + GrpCounters.Margin.Left + GrpCounters.Margin.Right
             Else
                 GrpCounters.Visible = False
@@ -427,7 +430,6 @@ Public Class WelcomeScreen
             LblUsrRNm.Margin = New Padding(LblUsrRNm.Margin.Left, LblUsrRNm.Margin.Top, FlowLayoutPanel1.ClientRectangle.Width - (LblUsrRNm.Width + LblUsrRNm.Margin.Left), LblUsrRNm.Margin.Bottom)
             LblSrvrNm.Margin = New Padding(LblSrvrNm.Margin.Left, LblSrvrNm.Margin.Top, FlowLayoutPanel1.ClientRectangle.Width - (LblSrvrNm.Width + LblUsrRNm.Margin.Left), LblSrvrNm.Margin.Bottom)
             LblLstSeen.Margin = New Padding(LblLstSeen.Margin.Left, LblLstSeen.Margin.Top, FlowLayoutPanel1.ClientRectangle.Width - (LblLstSeen.Width + LblUsrRNm.Margin.Left), LblLstSeen.Margin.Bottom)
-            'TimerTikCoun.Start()
             'TimrFlsh.Start()
 
         End If
@@ -611,5 +613,9 @@ Public Class WelcomeScreen
                 MsgBox(ex.Message)
             End Try
         End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
     End Sub
 End Class

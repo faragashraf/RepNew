@@ -29,8 +29,8 @@
     <ProductName>VOCA Enterprise</ProductName>
     <PublisherName>Ashaf Farag</PublisherName>
     <SuiteName>VOCA Plus</SuiteName>
-    <MinimumRequiredVersion>4.0.0.3</MinimumRequiredVersion>
-    <ApplicationRevision>8</ApplicationRevision>
+    <MinimumRequiredVersion>4.0.0.5</MinimumRequiredVersion>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
