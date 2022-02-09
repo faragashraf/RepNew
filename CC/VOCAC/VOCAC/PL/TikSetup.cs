@@ -328,18 +328,6 @@ namespace VOCAC.PL
 
             }
         }
-        private void MaskedTextBox_ClientSizeChanged(object sender, EventArgs e)
-        {
-            if (MaskedTextBox.Checked == true)
-            {
-                txtmask.Enabled = true;
-                txtlength.Text = "0";
-            }
-            else
-            {
-                txtmask.Enabled = false;
-            }
-        }
         private void TextBox_CheckedChanged(object sender, EventArgs e)
         {
             if (TextBox.Checked == true)
@@ -362,14 +350,34 @@ namespace VOCAC.PL
         }
         private void Txtmask_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ((Keys)e.KeyChar == Keys.Back || (Keys)e.KeyChar == Keys.Space || ("0").IndexOf(e.KeyChar) == 0 ||
-                e.KeyChar == 76)
-            { }
+            if (TextNumber.Checked)
+            {
+                if ((Keys)e.KeyChar == Keys.Back || (Keys)e.KeyChar == Keys.Space || ("0").IndexOf(e.KeyChar) == 0 ||
+                    e.KeyChar == 76)
+                { }
+                else
+                {
+                    e.Handled = true;
+                    SystemSounds.Beep.Play();
+                    toolTip1.Show("الحقل يقبل فقط حرف L كابيتال" + Environment.NewLine + "حرف L يرمز للحروف", ActiveControl, 0, 20, 3000);
+                }
+            }
+            else if (Number.Checked)
+            {
+                if ((Keys)e.KeyChar == Keys.Back || (Keys)e.KeyChar == Keys.Space || ("0").IndexOf(e.KeyChar) == 0)
+                { }
+                else
+                {
+                    e.Handled = true;
+                    SystemSounds.Beep.Play();
+                    toolTip1.Show("الحقل يقبل فقط رقم 0" + Environment.NewLine + "ورقم 0 يرمز للأرقام", ActiveControl, 0, 20, 3000);
+                }
+            }
             else
             {
                 e.Handled = true;
                 SystemSounds.Beep.Play();
-                toolTip1.Show("الحقل يقبل فقط حرف L ورقم 0" + Environment.NewLine + "حرف L يرمز للحروف، ورقم 0 يرمز للأرقام", ActiveControl, 0, 20, 1000);
+                toolTip1.Show("برجاء اختيار نوع الحل أولاً" + Environment.NewLine, ActiveControl, 0, 20, 3000);
             }
         }
         private void Txtlength_KeyPress(object sender, KeyPressEventArgs e)
@@ -690,12 +698,27 @@ namespace VOCAC.PL
             param[1].Value = comboBox1.SelectedValue;
             try
             {
-                DAL.ExcuteCommand("SP_A_COMP_MANGER_UPDATE",param);
+                DAL.ExcuteCommand("SP_A_COMP_MANGER_UPDATE", param);
             }
             catch (Exception Ex)
             {
                 function fn = function.getfn;
                 fn.msg("dd", "frfff");
+            }
+        }
+
+        private void MaskedTextBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (MaskedTextBox.Checked == true)
+            {
+                txtmask.Enabled = true;
+                txtlength.Text = "0";
+                Amount.Enabled = false;
+            }
+            else
+            {
+                txtmask.Enabled = false;
+                Amount.Enabled = true;
             }
         }
     }

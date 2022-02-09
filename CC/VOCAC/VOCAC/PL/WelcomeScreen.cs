@@ -115,7 +115,6 @@ namespace VOCAC.PL
             //initialize Lables
 
             Statcdif._MacStr = fn.GetMACAddressNew();
-            Statcdif._IP = fn.OsIP();
             TxtUsrNm.Select();
             TxtUsrNm.Text = "ahmed_emam";
             TxtUsrPass.Text = "hemonad";
@@ -228,6 +227,7 @@ namespace VOCAC.PL
             Statcdif.MendFildsTable = new DataTable();
             Statcdif.TreeUsrTbl = new DataTable();
             Statcdif.SwitchTbl = new DataTable();
+            Statcdif.CDCountry = new DataTable();
             DAL.DataAccessLayer.rturnStruct SlctMainreslt = log.slctmaintbls();
             if (SlctMainreslt.ds.Tables.Count > 0)
             {
@@ -239,6 +239,7 @@ namespace VOCAC.PL
                 Statcdif.MendFildsTable = SlctMainreslt.ds.Tables[5];                   // Medatory Fields VS Products & complaints CDFN Table
                 Statcdif.TreeUsrTbl = SlctMainreslt.ds.Tables[6];                       // Users Table
                 Statcdif.SwitchTbl = SlctMainreslt.ds.Tables[7];                        // Switchboard Table
+                Statcdif.CDCountry = SlctMainreslt.ds.Tables[8];                        // CDCountry Table
                 if (CurrentUser.UsrUCatLvl == 7)
                 {
                     Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" + 0 + " AND [srcCd] = '1'";     //     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm";

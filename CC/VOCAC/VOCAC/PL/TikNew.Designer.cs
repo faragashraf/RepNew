@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TikNew));
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Rooting");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Rooting");
             this.BtnAdd = new System.Windows.Forms.Button();
             this.Label11 = new System.Windows.Forms.Label();
             this.Label29 = new System.Windows.Forms.Label();
@@ -72,6 +72,7 @@
             this.TimrPhons = new System.Windows.Forms.Timer(this.components);
             this.Label2 = new System.Windows.Forms.Label();
             this.FlowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.Timer1 = new System.Windows.Forms.Timer(this.components);
             this.Label21 = new System.Windows.Forms.Label();
             this.FlwMain = new System.Windows.Forms.FlowLayoutPanel();
@@ -100,6 +101,8 @@
             this.Label6 = new System.Windows.Forms.Label();
             this.DetailsTxtBx = new System.Windows.Forms.TextBox();
             this.lblhelp = new System.Windows.Forms.Label();
+            this.chckIDChange = new System.Windows.Forms.CheckBox();
+            this.chckphonechange = new System.Windows.Forms.CheckBox();
             this.Panel5.SuspendLayout();
             this.MyGroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).BeginInit();
@@ -162,17 +165,19 @@
             // 
             // IDTxtBx
             // 
-            this.IDTxtBx.AccessibleName = "رقم قومي";
+            this.IDTxtBx.AccessibleName = "الرقم القومي";
             this.IDTxtBx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.IDTxtBx.Location = new System.Drawing.Point(633, 0);
             this.IDTxtBx.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.IDTxtBx.Mask = "AAAAAAAAAAAAA";
             this.IDTxtBx.Name = "IDTxtBx";
             this.IDTxtBx.PromptChar = ' ';
-            this.IDTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.IDTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.IDTxtBx.Size = new System.Drawing.Size(286, 32);
             this.IDTxtBx.TabIndex = 1;
             this.IDTxtBx.Tag = "English-Number";
+            this.IDTxtBx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.IDTxtBx.TextChanged += new System.EventHandler(this.IDTxtBx_TextChanged);
             // 
             // RadNID
             // 
@@ -187,7 +192,7 @@
             this.RadNID.TabIndex = 504;
             this.RadNID.Text = "رقم قومي";
             this.RadNID.UseVisualStyleBackColor = true;
-            this.RadNID.Click += new System.EventHandler(this.RadNID_Click);
+            this.RadNID.CheckedChanged += new System.EventHandler(this.RadNID_CheckedChanged);
             // 
             // Panel5
             // 
@@ -217,16 +222,15 @@
             // 
             this.RadPss.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RadPss.Cursor = System.Windows.Forms.Cursors.Default;
-            this.FlwMainData.SetFlowBreak(this.RadPss, true);
-            this.RadPss.Location = new System.Drawing.Point(309, 0);
+            this.RadPss.Location = new System.Drawing.Point(378, 0);
             this.RadPss.Margin = new System.Windows.Forms.Padding(0);
             this.RadPss.Name = "RadPss";
             this.RadPss.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.RadPss.Size = new System.Drawing.Size(216, 38);
+            this.RadPss.Size = new System.Drawing.Size(147, 38);
             this.RadPss.TabIndex = 505;
-            this.RadPss.Text = "جواز سفر";
+            this.RadPss.Text = "رقم جواز السفر";
             this.RadPss.UseVisualStyleBackColor = true;
-            this.RadPss.Click += new System.EventHandler(this.RadNID_Click);
+            this.RadPss.CheckedChanged += new System.EventHandler(this.RadPss_CheckedChanged);
             // 
             // MyGroupBox2
             // 
@@ -294,12 +298,11 @@
             this.Label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Label1.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.Label1.ForeColor = System.Drawing.Color.Black;
-            this.Label1.Location = new System.Drawing.Point(509, 53);
+            this.Label1.Location = new System.Drawing.Point(406, 53);
             this.Label1.Margin = new System.Windows.Forms.Padding(3, 13, 3, 3);
-            this.Label1.MinimumSize = new System.Drawing.Size(70, 15);
             this.Label1.Name = "Label1";
             this.Label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Label1.Size = new System.Drawing.Size(118, 27);
+            this.Label1.Size = new System.Drawing.Size(60, 27);
             this.Label1.TabIndex = 2044;
             this.Label1.Text = "التاريخ :";
             this.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -310,12 +313,12 @@
             this.DateTxtBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.DateTxtBx.Enabled = false;
             this.FlwMainData.SetFlowBreak(this.DateTxtBx, true);
-            this.DateTxtBx.Location = new System.Drawing.Point(11, 53);
+            this.DateTxtBx.Location = new System.Drawing.Point(61, 53);
             this.DateTxtBx.Margin = new System.Windows.Forms.Padding(3, 13, 3, 3);
             this.DateTxtBx.Name = "DateTxtBx";
             this.DateTxtBx.ReadOnly = true;
             this.DateTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.DateTxtBx.Size = new System.Drawing.Size(492, 32);
+            this.DateTxtBx.Size = new System.Drawing.Size(339, 32);
             this.DateTxtBx.TabIndex = 2043;
             this.DateTxtBx.TabStop = false;
             this.DateTxtBx.Tag = "Date";
@@ -460,6 +463,7 @@
             this.Phon1TxtBx.Size = new System.Drawing.Size(286, 32);
             this.Phon1TxtBx.TabIndex = 0;
             this.Phon1TxtBx.Tag = "English-Number";
+            this.Phon1TxtBx.TextChanged += new System.EventHandler(this.Phon1TxtBx_TextChanged);
             // 
             // Label22
             // 
@@ -643,11 +647,19 @@
             this.FlowLayoutPanel5.Controls.Add(this.Panel1);
             this.FlowLayoutPanel5.Controls.Add(this.Panel2);
             this.FlowLayoutPanel5.Controls.Add(this.Panel3);
+            this.FlowLayoutPanel5.Controls.Add(this.progressBar1);
             this.FlowLayoutPanel5.Location = new System.Drawing.Point(28, 587);
             this.FlowLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.FlowLayoutPanel5.Name = "FlowLayoutPanel5";
-            this.FlowLayoutPanel5.Size = new System.Drawing.Size(267, 202);
+            this.FlowLayoutPanel5.Size = new System.Drawing.Size(267, 222);
             this.FlowLayoutPanel5.TabIndex = 2035;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(3, 187);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(252, 23);
+            this.progressBar1.TabIndex = 2039;
             // 
             // Timer1
             // 
@@ -682,6 +694,7 @@
             // 
             // FlwTree
             // 
+            this.FlwTree.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FlwTree.AutoScroll = true;
             this.FlwTree.Controls.Add(this.MyGroupBox3);
             this.FlwTree.Controls.Add(this.TreeView1);
@@ -747,12 +760,12 @@
             this.TreeView1.ImageKey = "Add.ico";
             this.TreeView1.Location = new System.Drawing.Point(7, 51);
             this.TreeView1.Name = "TreeView1";
-            treeNode2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            treeNode2.ForeColor = System.Drawing.Color.Red;
-            treeNode2.Name = "Rooting";
-            treeNode2.Text = "Rooting";
+            treeNode7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            treeNode7.ForeColor = System.Drawing.Color.Red;
+            treeNode7.Name = "Rooting";
+            treeNode7.Text = "Rooting";
             this.TreeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode7});
             this.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TreeView1.RightToLeftLayout = true;
             this.TreeView1.ShowNodeToolTips = true;
@@ -765,6 +778,7 @@
             // 
             // FlwSubMain
             // 
+            this.FlwSubMain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FlwSubMain.AutoScroll = true;
             this.FlwSubMain.Controls.Add(this.ComRefLbl);
             this.FlwSubMain.Controls.Add(this.TabControl2);
@@ -826,9 +840,11 @@
             this.FlwMainData.Controls.Add(this.IDTxtBx);
             this.FlwMainData.Controls.Add(this.RadNID);
             this.FlwMainData.Controls.Add(this.RadPss);
+            this.FlwMainData.Controls.Add(this.chckIDChange);
             this.FlwMainData.Controls.Add(this.MyGroupBox2);
             this.FlwMainData.Controls.Add(this.Label20);
             this.FlwMainData.Controls.Add(this.Phon1TxtBx);
+            this.FlwMainData.Controls.Add(this.chckphonechange);
             this.FlwMainData.Controls.Add(this.Label1);
             this.FlwMainData.Controls.Add(this.DateTxtBx);
             this.FlwMainData.Controls.Add(this.MyGroupBox1);
@@ -892,13 +908,14 @@
             this.MailTxtBx.AccessibleName = "";
             this.MailTxtBx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FlwMainData.SetFlowBreak(this.MailTxtBx, true);
-            this.MailTxtBx.Location = new System.Drawing.Point(165, 155);
+            this.MailTxtBx.Location = new System.Drawing.Point(61, 155);
             this.MailTxtBx.Name = "MailTxtBx";
             this.MailTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.MailTxtBx.Size = new System.Drawing.Size(336, 32);
+            this.MailTxtBx.Size = new System.Drawing.Size(440, 32);
             this.MailTxtBx.TabIndex = 73;
             this.MailTxtBx.TabStop = false;
             this.MailTxtBx.Tag = "English-Special";
+            this.MailTxtBx.Validating += new System.ComponentModel.CancelEventHandler(this.MailTxtBx_Validating);
             // 
             // Label16
             // 
@@ -1054,6 +1071,28 @@
             this.lblhelp.TabIndex = 2048;
             this.lblhelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // chckIDChange
+            // 
+            this.chckIDChange.AutoSize = true;
+            this.FlwMainData.SetFlowBreak(this.chckIDChange, true);
+            this.chckIDChange.Location = new System.Drawing.Point(247, 3);
+            this.chckIDChange.Name = "chckIDChange";
+            this.chckIDChange.Size = new System.Drawing.Size(128, 29);
+            this.chckIDChange.TabIndex = 2049;
+            this.chckIDChange.Text = "checkBox1";
+            this.chckIDChange.UseVisualStyleBackColor = true;
+            // 
+            // chckphonechange
+            // 
+            this.chckphonechange.AutoSize = true;
+            this.chckphonechange.Location = new System.Drawing.Point(472, 54);
+            this.chckphonechange.Margin = new System.Windows.Forms.Padding(3, 14, 3, 3);
+            this.chckphonechange.Name = "chckphonechange";
+            this.chckphonechange.Size = new System.Drawing.Size(155, 29);
+            this.chckphonechange.TabIndex = 2050;
+            this.chckphonechange.Text = "تغيير رقم التليفون";
+            this.chckphonechange.UseVisualStyleBackColor = true;
+            // 
             // TikNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1161,5 +1200,8 @@
         internal System.Windows.Forms.TabPage TabPage3;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label lblhelp;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.CheckBox chckIDChange;
+        private System.Windows.Forms.CheckBox chckphonechange;
     }
 }

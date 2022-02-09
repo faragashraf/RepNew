@@ -87,19 +87,22 @@ namespace VOCAC.PL
             {
                 if (chkboxattach.Checked)
                 {
-                    if (function.preapareattachment() != null)
+                    function.preapareattachment();
+
+                    if(Statcdif.mainImageArray == null)
                     {
-                        if (addevent(currntTicket._TkSQL, TxtUpdt.Text, false, Convert.ToInt32(CmbEvent.SelectedValue), fn.OsIP(), CurrentUser.UsrID, Statcdif.mainImageArray) == null)
-                        {
-                            getupdate();
-                            eventColor();
-                            CmbEvent.SelectedValue = -1;
-                            TxtUpdt.Text = "";
-                            TxtUpdt.ReadOnly = true;
-                            Statcdif.mainImageArray = null;
-                            chkboxattach.Checked = false;
-                        }
+                        return;
                     }
+                }
+                if (addevent(currntTicket._TkSQL, TxtUpdt.Text, false, Convert.ToInt32(CmbEvent.SelectedValue), fn.OsIP(), CurrentUser.UsrID, Statcdif.mainImageArray) == null)
+                {
+                    getupdate();
+                    eventColor();
+                    CmbEvent.SelectedValue = -1;
+                    TxtUpdt.Text = "";
+                    TxtUpdt.ReadOnly = true;
+                    Statcdif.mainImageArray = null;
+                    chkboxattach.Checked = false;
                 }
             }
             else
@@ -153,6 +156,7 @@ namespace VOCAC.PL
             if (Convert.ToInt32(CmbEvent.SelectedValue) != -1)
             {
                 TxtUpdt.ReadOnly = false;
+                TxtUpdt.Focus();
             }
             else
             {
@@ -174,7 +178,7 @@ namespace VOCAC.PL
         }
         private void getimagefromarray()
         {
-            
+
             DataRow DRW = function.DRW(attchtbl, GridUpdt.CurrentRow.Cells[0].Value, attchtbl.Columns[0]);
             byte[] data = (byte[])DRW.ItemArray[1];
             using (System.IO.MemoryStream ms = new System.IO.MemoryStream(data))

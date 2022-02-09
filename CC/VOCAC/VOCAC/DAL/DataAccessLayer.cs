@@ -18,6 +18,7 @@ namespace VOCAC.DAL
             public string msg;
             public DataTable dt;
             public DataSet ds;
+            public int returnInt_;
         }
         public struct treeStruct
         {
@@ -71,6 +72,8 @@ namespace VOCAC.DAL
         {
             Struc.msg = null;
             Struc.ds = null;
+            Struc.dt = null;
+            Struc.returnInt_ = 0;
             SqlCommand sqlcmd = new SqlCommand();
             sqlcmd.CommandType = CommandType.StoredProcedure;
             sqlcmd.CommandText = Stored_Procedure;
@@ -102,6 +105,7 @@ namespace VOCAC.DAL
             Struc.msg = null;
             Struc.ds = null;
             Struc.dt = null;
+            Struc.returnInt_ = 0;
             SqlCommand sqlcmd = new SqlCommand();
             sqlcmd.CommandType = CommandType.StoredProcedure;
             sqlcmd.CommandText = Stored_Procedure;
@@ -114,6 +118,7 @@ namespace VOCAC.DAL
             {
                 Open();
                 sqlcmd.ExecuteNonQuery();
+                Struc.returnInt_ = Convert.ToInt32(param[14].SqlValue);
             }
             catch (Exception Ex)
             {
@@ -129,6 +134,7 @@ namespace VOCAC.DAL
             Struc.msg = null;
             Struc.ds = null;
             Struc.dt = null;
+            Struc.returnInt_ = 0;
             SqlCommand sqlcmd = new SqlCommand();
             sqlcmd.CommandType = CommandType.StoredProcedure;
             sqlcmd.CommandText = Stored_Procedure;

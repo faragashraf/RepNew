@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using VOCAC.BL;
@@ -26,7 +27,7 @@ namespace VOCAC
         public static int screenHeight = Screen.PrimaryScreen.Bounds.Height;
         public static InputLanguage EnglishInput;
         public static InputLanguage ArabicInput;
-        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-32223";
+        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-1237";
         public SqlConnection CONSQL;
         public static String _ServerCD;
         public static String _serverNm;
@@ -40,7 +41,7 @@ namespace VOCAC
         #region DataTables
         public static DataTable MacTble, UserTable;
         public static TreeView _tree;
-        public static DataTable CompSurceTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, TreeUsrTbl, SwitchTbl;
+        public static DataTable CompSurceTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, TreeUsrTbl, SwitchTbl, CDCountry;
         public static Image imge;
         public static byte[] mainImageArray;
         #endregion
@@ -85,7 +86,7 @@ namespace VOCAC
             WelcomeScreen WlcmScren = WelcomeScreen.getwecmscrnfrm;
             if (_ServerCD == "Eg Server")
             {
-                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-32223";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-1237";
                 _serverNm = "VOCA Server";
                 WlcmScren.BackgroundImage = Resources.VocaWtr;
                 WlcmScren.BackgroundImageLayout = ImageLayout.Stretch;
@@ -99,7 +100,7 @@ namespace VOCAC
             }
             else if (_ServerCD == "Training")
             {
-                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-32223";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-1237";
                 _serverNm = "Training";
                 WlcmScren.BackgroundImage = Resources.Empty;
                 WlcmScren.BackColor = Color.White;
@@ -388,65 +389,7 @@ namespace VOCAC
 
                 throw;
             }
-        }
-        public static bool validateNationalID(string NationalID)
-        {
-            try
-            {
-                string centery = NationalID.Substring(0, 1);
-                string BirthDateS = "";
-                if (centery == "2")
-                    BirthDateS = "19";
-                else if (centery == "3")
-                    BirthDateS = "20";
-                BirthDateS += NationalID.Substring(1, 2) + "/" + NationalID.Substring(3, 2) + "/" + NationalID.Substring(5, 2);
-
-                try
-                {
-                    DateTime BithDateD = Convert.ToDateTime(BirthDateS);
-                }
-                catch
-                {
-                    return false;
-                }
-
-                SetGov();
-                string NaIdGovCode = NationalID.Substring(7, 2);
-                if (!GovCodeList.Contains(NaIdGovCode))
-                    return false;
-
-                string Factor = "2765432765432";
-                int Total = 0;
-                for (int i = 0; i < 13; i++)
-                {
-                    Total += int.Parse(Factor.Substring(i, 1)) * int.Parse(NationalID.Substring(i, 1));
-                }
-                int PreCode = Total % 11;
-                int code = 11 - PreCode;
-                if (code > 9)
-                {
-                    code = code - 10;
-                }
-                if (code != int.Parse(NationalID.Substring(13, 1)))
-                    return false;
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        private static List<string> GovCodeList = new List<string>();
-        private static void SetGov()
-        {
-            string[] arr = { "01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20"
-            ,"21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","88"};
-
-            foreach (string item in arr)
-            {
-                GovCodeList.Add(item);
-            }
-        }
+        }     
         public string exportxlsx(DataTable tbl, string filename)
         {
             string rslt = null;
@@ -595,6 +538,147 @@ namespace VOCAC
 
             return DRW;
         }
+        public static bool CheckArlanguage(string input)
+        {
+            return Regex.IsMatch(input, @"\p{IsArabic}");
+        }
+        public static bool validateNationalID(string NationalID)
+        {
+            try
+            {
+                string centery = NationalID.Substring(0, 1);
+                string BirthDateS = "";
+                if (centery == "2")
+                    BirthDateS = "19";
+                else if (centery == "3")
+                    BirthDateS = "20";
+                BirthDateS += NationalID.Substring(1, 2) + "/" + NationalID.Substring(3, 2) + "/" + NationalID.Substring(5, 2);
+
+                try
+                {
+                    DateTime BithDateD = Convert.ToDateTime(BirthDateS);
+                }
+                catch
+                {
+                    return false;
+                }
+
+                SetGov();
+                string NaIdGovCode = NationalID.Substring(7, 2);
+                if (!GovCodeList.Contains(NaIdGovCode))
+                    return false;
+
+                string Factor = "2765432765432";
+                int Total = 0;
+                for (int i = 0; i < 13; i++)
+                {
+                    Total += int.Parse(Factor.Substring(i, 1)) * int.Parse(NationalID.Substring(i, 1));
+                }
+                int PreCode = Total % 11;
+                int code = 11 - PreCode;
+                if (code > 9)
+                {
+                    code = code - 10;
+                }
+                if (code != int.Parse(NationalID.Substring(13, 1)))
+                    return false;
+                return true;
+
+
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        private static List<string> GovCodeList = new List<string>();
+        private static void SetGov()
+        {
+            GovCodeList.Clear();
+            string[] arr = { "01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20"
+            ,"21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","88"};
+
+            foreach (string item in arr)
+            {
+                GovCodeList.Add(item);
+            }
+        }
+        public static bool validatePhoneNumber(string PhoneNumber)
+        {
+            bool rsltr = false;
+            try
+            {
+                if (PhoneNumber.Length == 10)
+                {
+                    SetPhone(10);
+                    if (!PhoneCodeList.Contains(PhoneNumber.Substring(0, 3)) && !PhoneCodeList.Contains(PhoneNumber.Substring(0, 2)))
+                    {
+                        rsltr = false;
+                    }
+                    else
+                    {
+                        rsltr = true;
+                    }
+                }
+                else if (PhoneNumber.Length == 11)
+                {
+                    SetPhone(11);
+                    string pp = PhoneNumber.Substring(0, 3);
+                    if (!PhoneCodeList.Contains(PhoneNumber.Substring(0, 3)))
+                    {
+                        rsltr = false;
+                    }
+                    else
+                    {
+                        rsltr = true;
+                    }
+                }
+            }
+            catch
+            {
+
+                rsltr = false;
+            }
+            return rsltr;
+        }
+        private static List<string> PhoneCodeList = new List<string>();
+        private static void SetPhone(int PhoneLength)
+        {
+            PhoneCodeList.Clear();
+            string[] arrMobil = { "010", "011", "012", "015" };
+            string[] ArrEmarah = { "062", "02", "03", "055", "047", "057", "065", "045", "088", "064",
+                "092", "096", "069", "093", "084", "082", "066", "046", "086", "050", "097", "068", "048", "02", "095", "040" };
+            if (PhoneLength == 10)
+            {
+                foreach (string item in ArrEmarah)
+                {
+                    PhoneCodeList.Add(item);
+                }
+            }
+            else if (PhoneLength == 11)
+            {
+                foreach (string item in arrMobil)
+                {
+                    PhoneCodeList.Add(item);
+                }
+            }
+        }
+        static Regex ValidEmailRegex = CreateValidEmailRegex();
+        private static Regex CreateValidEmailRegex()
+        {
+            string validEmailPattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|"
+                + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)"
+                + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+
+            return new Regex(validEmailPattern, RegexOptions.IgnoreCase);
+        }
+
+        public static bool EmailIsValid(string emailAddress)
+        {
+            bool isValid = ValidEmailRegex.IsMatch(emailAddress);
+
+            return isValid;
+        }
     }
     // Current User Class
     public static class CurrentUser
@@ -691,46 +775,42 @@ namespace VOCAC
             {
                 TextBox TxtBox = (TextBox)Txtbx;
             }
-
-            Txtbx.Click -= new EventHandler(TxtSlctOn_Click);
-            Txtbx.Click += new EventHandler(TxtSlctOn_Click);
-            Txtbx.Enter -= new EventHandler(Text_Enter);
-            Txtbx.Enter += new EventHandler(Text_Enter);
+            Txtbx.MouseClick -= new MouseEventHandler(TxtTextChanged_Click);
+            Txtbx.MouseClick += new MouseEventHandler(TxtTextChanged_Click);
+            Txtbx.GotFocus -= new EventHandler(Text_Enter);
+            Txtbx.GotFocus += new EventHandler(Text_Enter);
             Txtbx.KeyDown -= new KeyEventHandler(TxtBox_KeyDown);
             Txtbx.KeyDown += new KeyEventHandler(TxtBox_KeyDown);
         }
-        private void TxtSlctOn_Click(object sender, EventArgs e)
+        private void TxtTextChanged_Click(object sender, MouseEventArgs e)
         {
             if (sender is TextBox)
             {
                 TextBox TxtBox = (TextBox)sender;
-                if (Statcdif.bolyy == false)
+                if (TxtBox.Text.Trim().Length ==0)
                 {
-                    Statcdif.bolyy = true;
-                    TxtBox.SelectAll();
+                TxtBox.SelectAll();
                 }
-                else
-                    Statcdif.bolyy = false;
             }
             else if (sender is MaskedTextBox)
             {
                 MaskedTextBox TxtBox = (MaskedTextBox)sender;
-                if (Statcdif.bolyy == false)
+                if (TxtBox.Text.Trim().Length == 0)
                 {
-                    Statcdif.bolyy = true;
                     TxtBox.SelectAll();
                 }
-                else
-                    Statcdif.bolyy = false;
             }
         }
         private void Text_Enter(object sender, EventArgs e)
         {
             if (sender is TextBox)
+
             {
                 TextBox TxtBox = (TextBox)sender;
                 if (TxtBox.ReadOnly == false)
                 {
+                    TxtBox.SelectionStart = 0;
+                    TxtBox.SelectionLength = TxtBox.Text.Length;
                     if (TxtBox.Tag.ToString().Split('-')[0].Trim() == "English")
                     { InputLanguage.CurrentInputLanguage = Statcdif.EnglishInput; }            // Tansfer writing to English
                     else if (TxtBox.Tag.ToString().Split('-')[0].Trim() == "Arabic")
@@ -759,9 +839,8 @@ namespace VOCAC
                     if (TxtBox.ReadOnly == false)
                     {
                         var ASDS = Clipboard.GetText();
-                        TxtBox.Text += Clipboard.GetText();
+                        //TxtBox.Text += Clipboard.GetText();
                     }
-
                 }
                 else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.C)
                 {
@@ -877,7 +956,6 @@ namespace VOCAC
             frm.Show();
         }
         #endregion
-
         public static bool FormIsOpen(FormCollection application, Type formType)
         {
             //usage sample: FormIsOpen(Application.OpenForms,typeof(Form2)

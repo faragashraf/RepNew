@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,7 +36,7 @@ namespace VOCAC.PL
         }
         frms forms = new frms();
         function fn = function.getfn;
-        DataTable RelatedTable = new DataTable();
+        DataTable customerTable = new DataTable();
         Form Frm;
         DataGridView GV;
         DataTable tbl;
@@ -65,7 +66,7 @@ namespace VOCAC.PL
 
             SubmitBtn.Visible = true;
             BtnDublicate.Visible = false;
-            RelatedTable.Rows.Clear();
+            customerTable.Rows.Clear();
 
             List<Control> CTRLLst = new List<Control>();
             CTRLLst = forms.GetAll(this).ToList();
@@ -107,6 +108,7 @@ namespace VOCAC.PL
             IDTxtBx.Text = "";
             IDTxtBx.Mask = "00000000000000";
             RadNID.Checked = true;
+            chckIDChange.Text = "تغيير الرقم القومي";
 
             TickKind = 0;
             PrdKind = "";
@@ -124,7 +126,15 @@ namespace VOCAC.PL
             {
                 if (PrdKind.Equals("مالية", StringComparison.OrdinalIgnoreCase))
                 {
-                    richTextBox1.Text += ("رقم قومي") + Environment.NewLine;
+                    if (RadNID.Checked)
+                    {
+                        richTextBox1.Text += ("الرقم القومي") + Environment.NewLine;
+                    }
+                    else
+                    {
+                        richTextBox1.Text += ("رقم جواز السفر") + Environment.NewLine;
+                    }
+
                 }
             }
 
@@ -137,8 +147,10 @@ namespace VOCAC.PL
         {
             Timer1.Stop();
             double Complete_ = 0;
+            double factor = FlwMend.Controls.Count / 2;
             if (PrdKind.Equals("مالية", StringComparison.OrdinalIgnoreCase))
             {
+                factor += 5;
                 //Check Customer ID
                 if (RadNID.Checked == true && IDTxtBx.Text.Replace(" ", "").Trim().Length == 14)
                 {
@@ -161,11 +173,12 @@ namespace VOCAC.PL
             }
             else
             {
+                factor += 4;
                 Label29.Visible = false;
             }
 
             //Check Customer Phone 1
-            if (Phon1TxtBx.Mask.Length == Phon1TxtBx.Text.Replace(" ", "").Trim().Length)
+            if (function.validatePhoneNumber(Phon1TxtBx.Text.Trim()) == true)
             {
                 Complete_ += 1;
                 toolTip1.Hide(Phon1TxtBx);
@@ -173,10 +186,33 @@ namespace VOCAC.PL
             }
             else
             {
-                if (ActiveControl == Phon1TxtBx) { toolTip1.Show("رقم التليفون لابد أنه تكون من " + Phon1TxtBx.Mask.Length + " رقم", ActiveControl, 0, 30, 1000); }
+                if (RadioButton8.Checked == true)
+                {
+                    if (ActiveControl == Phon1TxtBx) { toolTip1.Show("رقم الموبايل لابد أنه يبدأ بـ " + Environment.NewLine + " 010, 011, 012 أو 015 ", ActiveControl, 0, 30, 1000); }
+                }
+                else if (RadioButton9.Checked == true)
+                {
+                    if (ActiveControl == Phon1TxtBx) { toolTip1.Show("رقم التليفون لابد أن يبدأ بكود المحافظة" + Environment.NewLine + "مثال : \"02XXXXXXXX", ActiveControl, 0, 30, 1000); }
+                }
                 fn.ClorTxt(richTextBox1, Phon1TxtBx.AccessibleName, Color.White, Color.Red, 14);
             }
 
+            if (function.validatePhoneNumber(Phon2TxtBx.Text.Trim()) == true)
+            {
+                toolTip1.Hide(Phon2TxtBx);
+                fn.ClorTxt(richTextBox1, Phon2TxtBx.AccessibleName, Color.White, Color.Green, 14);
+            }
+            else
+            {
+                if (RadioButton11.Checked == true)
+                {
+                    if (ActiveControl == Phon2TxtBx) { toolTip1.Show("رقم الموبايل لابد أنه يبدأ بـ " + Environment.NewLine + " 010, 011, 012 أو 015 ", ActiveControl, 0, 30, 1000); }
+                }
+                else if (RadioButton12.Checked == true)
+                {
+                    if (ActiveControl == Phon2TxtBx) { toolTip1.Show("رقم التليفون لابد أن يبدأ بكود المحافظة" + Environment.NewLine + "مثال : \"02XXXXXXXX", ActiveControl, 0, 30, 1000); }
+                }
+            }
             //Check Tree Selection
             if (TreeView1.SelectedNode != null)
             {
@@ -211,151 +247,217 @@ namespace VOCAC.PL
 
             foreach (Control Ctrl in FlwMend.Controls)
             {
-                if (Ctrl.GetType() == typeof(TextBox))
-                {
-                    TextBox Ctrl1 = (TextBox)Ctrl;
-                    if (Ctrl.Text.Replace(" ", "").Trim().Length > 0)
-                    {
-                        Complete_ += 1;
-                        fn.ClorTxt(richTextBox1, GetNextControl(Ctrl, false).Text.ToString().Substring(0, GetNextControl(Ctrl, false).Text.Length - 3), Color.White, Color.Green, 14);
-                    }
-                    else
-                    {
-                        if (Ctrl1.ReadOnly == true)
-                        {
-                            if (ActiveControl == Ctrl) { toolTip1.Show("     إضغط F1  لإختيار " + GetNextControl((TextBox)Ctrl, false).Text.Substring(0, GetNextControl((TextBox)Ctrl, false).Text.Length - 2), ActiveControl, 0, 30, 3000); };
-                        }
-                    }
-                }
-                else if (Ctrl.GetType() == typeof(MaskedTextBox))
-                {
-                    MaskedTextBox mskd = new MaskedTextBox();
-                    mskd = (MaskedTextBox)Ctrl;
-                    if (mskd.Mask.Replace(" ", "").Trim().Length == mskd.Text.Replace(" ", "").Trim().Length)
-                    {
-                        if (Ctrl.Tag.ToString().Split('-').Count() > 2 && 
-                            Ctrl.Tag.ToString().Split('-')[2].Equals("N", StringComparison.OrdinalIgnoreCase) &&
-                            itemRef.Length > 0)
-                        {
-                            int CNT = itemRef.Split('-').Count<string>();
-                            if (CNT > 1)
-                            {
-                                bool chckidentefecation = false;
-                                string itemRefContent = null;
-                                for (int i = 0; i < CNT; i++)
-                                {
-                                    itemRefContent = itemRef.Split('-')[i];
-                                    if (Ctrl.Text.Replace(" ", "").Trim().Substring(0, itemRefContent.Length).ToString().Equals(itemRefContent, StringComparison.OrdinalIgnoreCase))
-                                    {
-                                        chckidentefecation = true;
-                                        break;
-                                    }
-                                }
-                                if (chckidentefecation == true)
-                                {
-                                    Complete_ += 1;
-                                    fn.ClorTxt(richTextBox1, GetNextControl(Ctrl, false).Text.ToString().Substring(0, GetNextControl(Ctrl, false).Text.Length - 3), Color.White, Color.Green, 14);
-                                }
-                                else
-                                {
-                                    if (ActiveControl == Ctrl) { toolTip1.Show(GetNextControl(Ctrl, false).Text.Substring(0, GetNextControl(Ctrl, false).Text.Length - 3) + " لابد أنه يبدأ بأحد الإختيارات التالية " + Environment.NewLine + itemRef, ActiveControl, 0, 30, 3000); };
-                                    Ctrl.Text = "";
-                                }
-                            }
-                            else
-                            {
-                                if (itemRef.Equals(Ctrl.Text.Replace(" ", "").Trim().Substring(0, itemRef.Length), StringComparison.OrdinalIgnoreCase))
-                                {
-                                    Complete_ += 1;
-                                    fn.ClorTxt(richTextBox1, GetNextControl(Ctrl, false).Text.ToString().Substring(0, GetNextControl(Ctrl, false).Text.Length - 3), Color.White, Color.Green, 14);
-                                }
-                                else
-                                {
-                                    if (ActiveControl == Ctrl) { toolTip1.Show(GetNextControl(Ctrl, false).Text.Substring(0, GetNextControl(Ctrl, false).Text.Length - 3) + " لابد أنه يبدأ بـ " + itemRef, ActiveControl, 0, 30, 3000); };
-                                    Ctrl.Text = itemRef;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Complete_ += 1;
-                            fn.ClorTxt(richTextBox1, GetNextControl(Ctrl, false).Text.ToString().Substring(0, GetNextControl(Ctrl, false).Text.Length - 3), Color.White, Color.Green, 14);
-                        }
-                    }
-                    else if (Ctrl.Tag.ToString().Split('-').Count() > 2 && itemRef.Length > 0)
-                    {
-                        if (ActiveControl == Ctrl) { toolTip1.Show(GetNextControl(Ctrl, false).Text.Substring(0, GetNextControl(Ctrl, false).Text.Length - 3) + " لابد أنه يبدأ بـ " + itemRef, Ctrl, 0, 30, 1000); };
-                    }
-                }
-                else if (Ctrl.GetType() == typeof(DateTimePicker))
-                {
-                    DateTimePicker Dpkr = new DateTimePicker();
-                    Dpkr = (DateTimePicker)Ctrl;
-                    if (Dpkr.Value.ToString("dd/MM/yyyy") != DateTime.Now.AddDays(1).ToString("dd/MM/yyyy"))
-                    {
-                        Complete_ += 1;
-                        fn.ClorTxt(richTextBox1, GetNextControl(Dpkr, false).Text.ToString().Substring(0, GetNextControl(Dpkr, false).Text.Length - 3), Color.White, Color.Green, 14);
-                    }
-                }
-                else if (Ctrl.GetType() == typeof(Label))
-                {
-                    fn.ClorTxt(richTextBox1, Ctrl.Text.ToString().Substring(0, Ctrl.Text.Length - 3), Color.White, Color.Red, 14);
-                }
+                Complete_ += validatectrl(Ctrl);
             }
 
-            if (PrdKind.Equals("مالية", StringComparison.OrdinalIgnoreCase))
-            {
-                if (Complete_ == 5 + (FlwMend.Controls.Count / 2))
-                {
-                    SubmitBtn.Enabled = true;
-                    SubmitBtn.BackgroundImage = Resources.SaveGreen1;
-                }
-                else if (Complete_ / (5 + (FlwMend.Controls.Count / 2)) <= 0.5)
-                {
-                    SubmitBtn.BackgroundImage = Resources.SaveRed;
-                    SubmitBtn.Enabled = false;
-                }
-                else if (Complete_ / (5 + (FlwMend.Controls.Count / 2)) > 0.5)
-                {
-                    SubmitBtn.BackgroundImage = Resources.SaveGreen;
-                    SubmitBtn.Enabled = false;
-                }
-                else
-                {
-                    SubmitBtn.Enabled = false;
-                    SubmitBtn.BackgroundImage = Resources.SaveRed1;
-                }
+            progressBar1.Maximum = 100;
+            double gg = Convert.ToInt32((Complete_ / factor) * 100);
+            progressBar1.Value = Convert.ToInt32(gg);
+            progressBar1.ForeColor = Color.Red;
 
-            }
-            else if (PrdKind.Equals("بريدية", StringComparison.OrdinalIgnoreCase))
+            if (Complete_ / factor == 1)
             {
-                if (Complete_ == 4 + (FlwMend.Controls.Count) / 2)
-                {
-                    SubmitBtn.Enabled = true;
-                    SubmitBtn.BackgroundImage = Resources.SaveGreen1;
-                }
-                else if (Complete_ / (4 + (FlwMend.Controls.Count) / 2) <= 0.5)
-                {
-                    SubmitBtn.BackgroundImage = Resources.SaveRed;
-                    SubmitBtn.Enabled = false;
-                }
-                else if (Complete_ / (4 + (FlwMend.Controls.Count) / 2) > 0.5)
-                {
-                    SubmitBtn.BackgroundImage = Resources.SaveGreen;
-                    SubmitBtn.Enabled = false;
-                }
-                //else
-                //    SubmitBtn.Enabled = false
-                //SubmitBtn.BackgroundImage = My.Resources.SaveRed1
+                SubmitBtn.Enabled = true;
+                SubmitBtn.BackgroundImage = Resources.SaveGreen1;
             }
-            else if (PrdKind.Equals("", StringComparison.OrdinalIgnoreCase))
+            else if (Complete_ / factor <= 0.5)
             {
                 SubmitBtn.BackgroundImage = Resources.SaveRed;
+                SubmitBtn.Enabled = false;
+            }
+            else if (Complete_ / factor > 0.5)
+            {
+                SubmitBtn.BackgroundImage = Resources.SaveGreen;
                 SubmitBtn.Enabled = false;
             }
             GC.Collect();
             Timer1.Start();
         }
+
+        private int validatectrl(Control C)
+        {
+            int intrsult = 0;
+            if (C.GetType() == typeof(TextBox))
+            {
+                TextBox Ctrl = (TextBox)C;
+                if (Ctrl.Text.Replace(" ", "").Trim().Length > 0)
+                {
+                    intrsult = 1;
+                    colorRichCox(Ctrl, Color.White, Color.Green);
+                }
+                else
+                {
+                    if (Ctrl.ReadOnly == true)
+                    {
+                        tooltipShow(Ctrl, " إضغط F1 ");
+                    }
+                }
+            }
+            else if (C.GetType() == typeof(MaskedTextBox))
+            {
+                MaskedTextBox mskd = new MaskedTextBox();
+                mskd = (MaskedTextBox)C;
+                if (mskd.Mask.Replace(" ", "").Trim().Length == mskd.Text.Replace(" ", "").Trim().Length)
+                {
+                    string mskedTag = mskd.Tag.ToString();                  //--------------------- Masked Box Tag Value ---------------------------
+                    int splitlength = mskedTag.Split('-').Count();          //--------------------- Masked Box Tag Split Count ---------------------
+                    if (splitlength > 2 &&
+                        mskedTag.Split('-')[2].Equals("N", StringComparison.OrdinalIgnoreCase) &&
+                                                                            itemRef.Length > 0)
+                    {
+                        int RefCnt = itemRef.Split('-').Count<string>();
+                        if (RefCnt > 1)
+                        {
+                            bool chckidentefecation = false;
+                            string itemRefContent;
+                            int validationresultkind = 0;
+                            for (int i = 0; i < RefCnt; i++)
+                            {
+                                itemRefContent = itemRef.Split('-')[i];
+                                string mskedMathrefLength = mskd.Text.Replace(" ", "").Trim().Substring(0, itemRefContent.Length).ToString();  //--------------------- Masked Box Matched With Product Ref. Length ---------------------
+                                if (mskedMathrefLength.Equals(itemRefContent, StringComparison.OrdinalIgnoreCase))
+                                {
+                                    string CtrlLblText = GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3);
+                                    if (CtrlLblText == "رقم الشحنة" || CtrlLblText == "رقم الشحنة 3")
+                                    {
+
+                                        DataRow DRW = function.DRW(Statcdif.CDCountry, mskd.Text.Substring(13, 2), Statcdif.CDCountry.Columns["CounCd"]);
+                                        if (DRW != null)
+                                        {
+                                            chckidentefecation = true;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            validationresultkind = 2;
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        chckidentefecation = true;
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    validationresultkind = 1;
+                                }
+                            }
+                            if (chckidentefecation == true)
+                            {
+                                intrsult = 1;
+                                colorRichCox(mskd, Color.White, Color.Green);
+                            }
+                            else
+                            {
+                                if (validationresultkind == 1)
+                                {
+                                    tooltipShow(mskd, " لابد أنه يبدأ بأحد الإختيارات التالية ", 1);
+                                }
+                                else if (validationresultkind == 2)
+                                {
+                                    tooltipShow(mskd, " لم يتم التعرف على كود الدولة ", 2);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (itemRef.Equals(mskd.Text.Replace(" ", "").Trim().Substring(0, itemRef.Length), StringComparison.OrdinalIgnoreCase))
+                            {
+                                if (mskd.Text.Replace(" ", "").Trim().Substring(0, itemRef.Length).ToString().Equals(itemRef, StringComparison.OrdinalIgnoreCase))
+                                {
+                                    string CtrlLblText = GetNextControl(mskd, false).Text.Substring(0, GetNextControl(mskd, false).Text.Length - 3);
+                                    if (CtrlLblText == "رقم الشحنة" || CtrlLblText == "رقم الشحنة 3")
+                                    {
+
+                                        DataRow DRW = function.DRW(Statcdif.CDCountry, mskd.Text.Substring(13, 2), Statcdif.CDCountry.Columns["CounCd"]);
+                                        if (DRW != null)
+                                        {
+                                            intrsult = 1;
+                                            colorRichCox(mskd, Color.White, Color.Green);
+                                        }
+                                        else
+                                        {
+                                            tooltipShow(mskd, "لم يتم التعرف على كود رمز الدولة", 2);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        intrsult = 1;
+                                        colorRichCox(mskd, Color.White, Color.Green);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                tooltipShow(mskd, " لابد أنه يبدأ بـ ");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        intrsult = 1;
+                        colorRichCox(mskd, Color.White, Color.Green);
+                    }
+                }
+                else if (C.Tag.ToString().Split('-').Count() > 2 && itemRef.Length > 0)
+                {
+                    tooltipShow(C, " لابد أنه يبدأ بـ ");
+                }
+            }
+            else if (C.GetType() == typeof(DateTimePicker))
+            {
+                DateTimePicker Dpkr = new DateTimePicker();
+                Dpkr = (DateTimePicker)C;
+                if (Dpkr.Value.ToString("dd/MM/yyyy") != DateTime.Now.AddDays(1).ToString("dd/MM/yyyy"))
+                {
+                    intrsult = 1;
+                    colorRichCox(Dpkr, Color.White, Color.Green);
+                }
+                else
+                {
+                    tooltipShow(Dpkr, " لابد أنه يكون يساوي أو أقل تاريخ اليوم");
+                }
+            }
+            else if (C.GetType() == typeof(Label))
+            {
+                fn.ClorTxt(richTextBox1, C.Text.ToString().Substring(0, C.Text.Length - 3), Color.White, Color.Red, 14);
+            }
+            return intrsult;
+        }
+        private void tooltipShow(Control c, string msg, [Optional] int Err)
+        {
+            string CtrlLblText = GetNextControl(c, false).Text.Substring(0, GetNextControl(c, false).Text.Length - 3);
+            if (c.GetType() == typeof(MaskedTextBox))
+            {
+                string nwline;
+                if (Err == 1)
+                {
+                    nwline = Environment.NewLine + itemRef;
+                }
+                else if (Err == 2)
+                {
+                    nwline = null;
+                }
+                else
+                {
+                    nwline = Environment.NewLine + itemRef;
+                }
+                if (ActiveControl == c) { toolTip1.Show(msg + nwline, ActiveControl, 0, 30, 3000); };
+            }
+            else
+            {
+                if (ActiveControl == c) { toolTip1.Show(CtrlLblText + msg, ActiveControl, 0, 30, 3000); };
+            }
+
+        }
+        private void colorRichCox(Control T, Color backclr, Color fontkclr)
+        {
+            string CtrlLblText = GetNextControl(T, false).Text;
+            fn.ClorTxt(richTextBox1, CtrlLblText.ToString().Substring(0, CtrlLblText.Length - 3), backclr, fontkclr, 14);
+        }
+
         private void CompReqst_CheckedChanged(object sender, EventArgs e)
         {
             this.TreeView1.AfterSelect -= new TreeViewEventHandler(this.TreeView1_AfterSelect);
@@ -436,7 +538,7 @@ namespace VOCAC.PL
             TreeView1.Visible = true;
             TreeView1.SelectedNode = null;
             MyGroupBox2.Enabled = true;
-            FlwMainData.Enabled = true;
+            FlwMainData.Enabled = false;
             this.TreeView1.AfterSelect += new TreeViewEventHandler(this.TreeView1_AfterSelect);
             this.TreeView1.BeforeSelect += new TreeViewCancelEventHandler(this.TreeView1_BeforeSelect);
         }
@@ -591,11 +693,31 @@ namespace VOCAC.PL
                 Phon1TxtBx.Mask = "0000000000";
             }
             Phon1TxtBx.Focus();
-            NameTxtBx.Text = "";
-            AddTxtBx.Text = "";
+            if (!chckphonechange.Checked)
+            {
+                NameTxtBx.Text = "";
+                AddTxtBx.Text = "";
+                Phon2TxtBx.Text = "";
+                MailTxtBx.Text = "";
+                customerTable.Rows.Clear();
+            }
+
+        }
+        private void RadioPhone2_Click(object sender, EventArgs e)
+        {
+            TimrPhons.Start();
+            Phon2TxtBx.Enabled = true;
             Phon2TxtBx.Text = "";
-            MailTxtBx.Text = "";
-            RelatedTable.Rows.Clear();
+            if (RadioButton11.Checked)
+            {
+                Phon2TxtBx.Mask = "00000000000";
+            }
+            else if (RadioButton12.Checked)
+            {
+                Phon2TxtBx.Mask = "0000000000";
+            }
+            Phon2TxtBx.Focus();
+
         }
         private void TimrPhons_Tick(object sender, EventArgs e)
         {
@@ -654,30 +776,14 @@ namespace VOCAC.PL
         }
         private DataTable populateTextCoise(DataTable Tbl, string selct)
         {
-            SqlConnection sqlcon = new SqlConnection(Statcdif.strConn);
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-            SqlCommand cmd;
-            SqlDataAdapter da;
             SqlParameter[] param = new SqlParameter[1];
 
             param[0] = new SqlParameter("@slctstat", SqlDbType.VarChar);
             param[0].Value = selct;
-            cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "SP_CHOISE_SLCT";
-            cmd.Connection = sqlcon;
-            cmd.Parameters.Add(param[0]);
-            da = new SqlDataAdapter(cmd);
-            try
-            {
-                da.Fill(Tbl);
-            }
-            catch (Exception ex)
-            {
-                fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "أختيار حقل");
-            }
+            DAL.DataAccessLayer.rturnStruct RsultPopulateChoice = DAL.SelectData("SP_CHOICE_SLCT", param);
             DAL.Close();
-            return Tbl;
+            return RsultPopulateChoice.dt;
         }
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
@@ -708,7 +814,7 @@ namespace VOCAC.PL
                 }
                 else
                 {
-                    fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "تحميل البيانات");
+                    //fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "تحميل البيانات");
                 }
             }
         }
@@ -723,7 +829,6 @@ namespace VOCAC.PL
             Frm.Size = new Size(GV.Width, TxBox.Height + GV.Height + 50);
             Frm.Text = "اختيار " + GetNextControl(sndr, false).Text + " عدد البيانات " + tbl.Rows.Count;
             Frm.BackColor = Color.White;
-
         }
         private void addnewTextBox()
         {
@@ -732,6 +837,11 @@ namespace VOCAC.PL
             TxBox.Font = new Font("Times New Roman", 14, FontStyle.Regular);
             TxBox.TextChanged += new EventHandler(Txt_TextChanged);
             TxBox.KeyDown += new System.Windows.Forms.KeyEventHandler(Frm_KeyDown);
+            TxBox.Enter += new EventHandler(TxtEnter);
+        }
+        private void TxtEnter(object sender, EventArgs e)
+        {
+            InputLanguage.CurrentInputLanguage = Statcdif.ArabicInput;
         }
         private void addnewGridview()
         {
@@ -783,6 +893,8 @@ namespace VOCAC.PL
         }
         private void SubmitBtn_Click(object sender, EventArgs e)
         {
+            this.RadioButton4.Click -= new System.EventHandler(this.CompReqst_CheckedChanged);
+            this.RadioButton5.Click -= new System.EventHandler(this.CompReqst_CheckedChanged);
             if (CurrentUser.UsrUCatLvl >= 3 && CurrentUser.UsrUCatLvl <= 5)
             {
                 AddNewTicket(CurrentUser.UsrID);
@@ -791,20 +903,14 @@ namespace VOCAC.PL
             {
                 AddNewTicket(TeamIdentfier);
             }
+            this.RadioButton4.Click += new System.EventHandler(this.CompReqst_CheckedChanged);
+            this.RadioButton5.Click += new System.EventHandler(this.CompReqst_CheckedChanged);
         }
-        private DAL.DataAccessLayer.rturnStruct insertTicket(bool kind, int cdfnid, int src, string clNm, string ClPh, string ClPh1, string ClAdr, string ClNtID
-                                                            , string TkDetails, int EmpNm0, int EmpNm, string ClMail, DataTable FIELDTABL)
+        private int insertTicket(bool kind, int cdfnid, int src, string clNm, string ClPh, string ClPh1, string ClAdr, string ClNtID
+                                                            , string TkDetails, int EmpNm0, int EmpNm, string ClMail, string IP, DataTable FIELDTABL)
         {
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-            DAL.Struc.msg = null;
-            DAL.Struc.dt = null;
-            DAL.Struc.ds = null;
-            SqlConnection sqlcon = new SqlConnection(Statcdif.strConn);
-            SqlParameter[] param = new SqlParameter[13];
-            SqlCommand sqlcmd = new SqlCommand();
-            sqlcmd.CommandType = CommandType.StoredProcedure;
-            sqlcmd.CommandText = "SP_OLD_TICKETS_INSERT";
-            sqlcmd.Connection = sqlcon;
+            SqlParameter[] param = new SqlParameter[15];
             param[0] = new SqlParameter("@TkKind", SqlDbType.Bit);
             param[0].Value = kind;
             param[1] = new SqlParameter("@TkFnPrdCd", SqlDbType.Int);
@@ -838,40 +944,19 @@ namespace VOCAC.PL
             param[12] = new SqlParameter();
             param[12].ParameterName = "@FIELDTABLETYPE";
             param[12].Value = FIELDTABL;
+            param[13] = new SqlParameter("@TkUserIP", SqlDbType.NVarChar, 15);
+            param[13].Value = IP;
+
             // Add Out Put Parameter
-            sqlcmd.Parameters.AddRange(param);
-            sqlcmd.Parameters.Add("@Comdid", SqlDbType.Int);
-            sqlcmd.Parameters["@Comdid"].Direction = ParameterDirection.Output;
-            try
-            {
-                sqlcon.Open();
-                sqlcmd.ExecuteNonQuery();
-                COMPID_ = Convert.ToInt32(sqlcmd.Parameters["@Comdid"].Value);
-                if (COMPID_ != 0)
-                {
-                    SubmitBtn.Visible = false;
-                    if (TickKind == 0)
-                    {
-                        ComRefLbl.Text = "طلب رقم : " + Convert.ToString(COMPID_);
-                    }
-                    else
-                    {
-                        ComRefLbl.Text = "شكوى رقم : " + Convert.ToString(COMPID_);
-                    }
-                    TimrPhons.Stop();
-                    FlwMainData.Enabled = false;
-                    FlwTree.Enabled = false;
-                    FlwMend.Enabled = false;
-                    BtnDublicate.Visible = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                DAL.Struc.msg = ex.Message;
-                function fn = function.getfn;
-                fn.msg(Resources.ConnErr + Environment.NewLine + ex, "Create New Tickect");
-            }
-            return DAL.Struc;
+            param[14] = new SqlParameter();
+            param[14].Direction = ParameterDirection.Output;
+            param[14].ParameterName = "@Comdid";
+            param[14].SqlDbType = SqlDbType.Int;
+
+
+            DAL.DataAccessLayer.rturnStruct RsultPopulateChoice = DAL.ExcuteCommand("SP_TICKETS_INSERT", param);
+            DAL.Close();
+            return Convert.ToInt32(param[14].Value);
         }
         private void CloseBtn_Click(object sender, EventArgs e)
         {
@@ -906,7 +991,7 @@ namespace VOCAC.PL
                 }
             }
             //Statcdif.ProdCompTable.DefaultView.RowFilter = "[FnSQL]  = " + TreeView1.SelectedNode.Name;
-            DAL.DataAccessLayer.rturnStruct Accesslogreslt = insertTicket(
+            int Insertreslt = insertTicket(
                 Convert.ToBoolean(TickKind)                                         //Ticket Kind
                 , Convert.ToInt32(TreeView1.SelectedNode.Name)  //Ticket Pcoduct & Cmplaint Code SQL
                 , Convert.ToInt32(SrcCmbBx.SelectedValue)                     //Ticket Source
@@ -919,14 +1004,32 @@ namespace VOCAC.PL
                 , CurrentUser.UsrID                                            //Ticket Creator ID
                 , usrid                                                        //Ticket Follower ID (It must be Zero Amount To Assign Null Value to Database)
                 , MailTxtBx.Text.ToString().Trim()                                        //Ticket Client Mail address
+                , Statcdif._IP
                 , mndtbl);                                                     //Ticket Mend Table send it as type table to Stored Procedure
-            if (COMPID_ != 0)
+
+            if (Insertreslt != 0)
             {
-                fn.msg("Done", "Add new Ticket");
+                SubmitBtn.Visible = false;
+                if (TickKind == 0)
+                {
+                    ComRefLbl.Text = "طلب رقم : " + Convert.ToString(Insertreslt);
+                }
+
+                else
+                {
+                    ComRefLbl.Text = "شكوى رقم : " + Convert.ToString(Insertreslt);
+                }
+                TimrPhons.Stop();
+                FlwMainData.Enabled = false;
+                FlwTree.Enabled = false;
+                FlwMend.Enabled = false;
+                BtnDublicate.Visible = true;
+
+                fn.msg("تم تسجيل الشكوى برقم " + Convert.ToString(Insertreslt), "تسجيل شكوى جديدة");
             }
             else
             {
-                fn.msg("لم ينجح الإتصال بقواعد البيانات" + Environment.NewLine + Accesslogreslt.msg, "Add new Ticket");
+                fn.msg("لم ينجح الإتصال بقواعد البيانات", "تسجيل شكوى جديدة");
             }
         }
         private void NewBtn_Click(object sender, EventArgs e)
@@ -935,13 +1038,105 @@ namespace VOCAC.PL
         }
         private void BtnDublicate_Click(object sender, EventArgs e)
         {
+            this.RadioButton4.Click -= new System.EventHandler(this.CompReqst_CheckedChanged);
+            this.RadioButton5.Click -= new System.EventHandler(this.CompReqst_CheckedChanged);
             SubmitBtn.Visible = true;
             FlwTree.Enabled = true;
             FlwMend.Enabled = true;
+            FlwMainData.Enabled = true;
             ComRefLbl.Text = "";
             BtnDublicate.Visible = false;
+            this.RadioButton4.Click += new System.EventHandler(this.CompReqst_CheckedChanged);
+            this.RadioButton5.Click += new System.EventHandler(this.CompReqst_CheckedChanged);
         }
         private void RadNID_Click(object sender, EventArgs e)
+        {
+
+
+          
+        }
+        private void Phon1TxtBx_TextChanged(object sender, EventArgs e)
+        {
+            if (!chckphonechange.Checked)
+            {
+                customerdata(Phon1TxtBx, "select top(1) TkClNm,TkClPh1,TkClNtID,TkClAdr,TkMail from Tickets where TkClPh ='");
+            }
+        }
+        private void IDTxtBx_TextChanged(object sender, EventArgs e)
+        {
+            if (!chckIDChange.Checked)
+            {
+                customerdata(IDTxtBx, "select top(1) TkClNm,TkClPh,TkClPh1,TkClAdr,TkMail from Tickets where TkClNtID ='");
+            }
+        }
+        private void customerdata(MaskedTextBox mskdTextBox, string SlctString)
+        {
+            if (mskdTextBox.Text.Length == mskdTextBox.Mask.Length)
+            {
+                StringBuilder selectString = new StringBuilder();
+                customerTable.Rows.Clear();
+                DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
+
+                selectString.Append(SlctString + mskdTextBox.Text.ToString());
+                if (mskdTextBox == Phon1TxtBx) { selectString.Append("' or  TkClPh1 ='" + mskdTextBox.Text.ToString()); }
+                selectString.Append("'  order by TkSQL desc");
+
+                SqlParameter[] param = new SqlParameter[1];
+                param[0] = new SqlParameter("@slctstat", SqlDbType.VarChar);
+                param[0].Value = selectString.ToString();
+                customerTable = DAL.SelectData("SP_CHOICE_SLCT", param).dt;
+                DAL.Close();
+                if (customerTable.Rows.Count > 0)
+                {
+                    if (mskdTextBox != Phon1TxtBx)
+                    {
+                        Phon1TxtBx.Text = customerTable.Rows[0]["TkClPh"].ToString();
+                    }
+                    if (mskdTextBox != IDTxtBx)
+                    {
+                        IDTxtBx.Text = customerTable.Rows[0]["TkClNtID"].ToString();
+                    }
+                    NameTxtBx.Text = customerTable.Rows[0]["TkClNm"].ToString();
+                    Phon2TxtBx.Text = customerTable.Rows[0]["TkClPh1"].ToString();
+                    AddTxtBx.Text = customerTable.Rows[0]["TkClAdr"].ToString();
+                    MailTxtBx.Text = customerTable.Rows[0]["TkMail"].ToString();
+                }
+            }
+            else
+            {
+                if (mskdTextBox != Phon1TxtBx)
+                {
+                    if (!chckphonechange.Checked) { Phon1TxtBx.Text = ""; }
+                }
+                if (mskdTextBox != IDTxtBx)
+                {
+                    if (!chckIDChange.Checked) { IDTxtBx.Text = ""; };
+                }
+                NameTxtBx.Text = "";
+                Phon2TxtBx.Text = "";
+                AddTxtBx.Text = "";
+                MailTxtBx.Text = "";
+                customerTable.Rows.Clear();
+            }
+        }
+
+        private void RadPss_CheckedChanged(object sender, EventArgs e)
+        {
+            IDTxtBx.Text = "";
+            if (RadPss.Checked == true)
+            {
+                IDTxtBx.Tag = "English-TextNumber";
+                IDTxtBx.Mask = "AAAAAAAAAAAAAA";
+                RadNID.Checked = false;
+                RadPss.Checked = true;
+                Label11.Text = "رقم جواز السفر : ";
+                IDTxtBx.AccessibleName = "رقم جواز السفر";
+                chckIDChange.Text = "تغيير رقم جواز السفر";
+                richTextBox1.Text = richTextBox1.Text.Replace("الرقم القومي", "رقم جواز السفر");
+            }
+        }
+
+        private void RadNID_CheckedChanged(object sender, EventArgs e)
         {
             IDTxtBx.Text = "";
             if (RadNID.Checked == true)
@@ -951,32 +1146,19 @@ namespace VOCAC.PL
                 RadNID.Checked = true;
                 RadPss.Checked = false;
                 Label11.Text = "الرقم القومي : ";
-            }
-
-            else
-            {
-                IDTxtBx.Tag = "English-TextNumber";
-                IDTxtBx.Mask = "AAAAAAAAAAAAAA";
-                RadNID.Checked = false;
-                RadPss.Checked = true;
-                Label11.Text = "رقم جواز السفر : ";
+                IDTxtBx.AccessibleName = "الرقم القومي";
+                chckIDChange.Text = "تغيير الرقم القومي";
+                richTextBox1.Text = richTextBox1.Text.Replace("رقم جواز السفر", "الرقم القومي");
             }
         }
-        private void RadioPhone2_Click(object sender, EventArgs e)
-        {
-            TimrPhons.Start();
-            Phon2TxtBx.Enabled = true;
-            Phon2TxtBx.Text = "";
-            if (RadioButton11.Checked)
-            {
-                Phon2TxtBx.Mask = "00000000000";
-            }
-            else if (RadioButton12.Checked)
-            {
-                Phon2TxtBx.Mask = "0000000000";
-            }
-            Phon2TxtBx.Focus();
 
+        private void MailTxtBx_Validating(object sender, CancelEventArgs e)
+        {
+            if (function.EmailIsValid(MailTxtBx.Text) == false && MailTxtBx.Text.Length > 0)
+            {
+                fn.msg("الإيميل الذي تم إدخاله غير صحيح", "فحص الإيميل");
+                MailTxtBx.Focus();
+            }
         }
     }
 }

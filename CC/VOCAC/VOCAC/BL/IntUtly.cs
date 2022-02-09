@@ -45,7 +45,7 @@ namespace VOCAC.BL
         }
         public static void ValdtIntLetter(KeyPressEventArgs e) // numeric & Letters & White Space & Backspace
         {
-            if (char.IsControl(e.KeyChar) == false && (char.IsDigit(e.KeyChar)) ||
+            if (char.IsControl(e.KeyChar) == true && (char.IsDigit(e.KeyChar)) ||
                                              (char.IsLetter(e.KeyChar)) ||
                                              (char.IsWhiteSpace(e.KeyChar)) ||
                                                (Keys)e.KeyChar == Keys.Back ||

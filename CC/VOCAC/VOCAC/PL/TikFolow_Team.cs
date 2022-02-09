@@ -4,9 +4,11 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using VOCAC.BL;
 using VOCAC.Properties;
+using static VOCAC.BL.ticketCurrent;
 
 namespace VOCAC.PL
 {
@@ -532,7 +534,7 @@ namespace VOCAC.PL
             trvw.Nodes.Add(Statcdif.TreeUsrTbl.DefaultView[0]["UCatId"].ToString(), Statcdif.TreeUsrTbl.DefaultView[0]["UsrMix"].ToString());
             if (treeView1.SelectedNode.Nodes.Count > 0)
             {
-                if (tabControl1.SelectedIndex != 1) {  }
+                if (tabControl1.SelectedIndex != 1) { }
                 else
                 {
                     UsrStr.Add(slctdId.ToString());
@@ -572,7 +574,10 @@ namespace VOCAC.PL
                     }
                     else
                     {
-                        exporTbl.Columns[i].ColumnName = GridTicket.Columns[i].HeaderText;
+                        if (function.CheckArlanguage(exporTbl.Columns[i].ColumnName) == false)
+                        {
+                            exporTbl.Columns[i].ColumnName = GridTicket.Columns[i].HeaderText;
+                        }
                     }
                 }
                 lst.Reverse();
@@ -687,8 +692,21 @@ namespace VOCAC.PL
                 {
                     GridTicket.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
                 }
+                //if (GridTicket.Columns[GridTicket.Columns.Count - 1].Name == "توزيع/إستعادة")
+                //{
+                //    currntTicket.colCnt = GridTicket.Columns.Count - 1;
+                //}
+                //else
+                //{
+                //    currntTicket.colCnt = GridTicket.Columns.Count;
+                //}
                 this.GridTicket.CellClick -= new System.Windows.Forms.DataGridViewCellEventHandler(this.GridTicket_CellClick);
-                GridTicket.Columns.RemoveAt(40);
+                if (GridTicket.Columns.Count > TickTblMain.Columns.Count)
+                {
+                    int kk = TickTblMain.Columns.Count;
+                    GridTicket.Columns.RemoveAt(GridTicket.Columns.Count -1);
+                }
+
                 flowLayoutPanel3.Enabled = true;
             }
             Filtr();
@@ -738,7 +756,7 @@ namespace VOCAC.PL
                 }
                 else if (GridTicket.CurrentRow.DefaultCellStyle.BackColor == Color.LimeGreen)
                 {
-                    
+
                     DataRow DRW = function.DRW(distributeTbl, GridTicket.CurrentRow.Cells["TkSQL"].Value, distributeTbl.Columns[0]);
                     distributeTbl.Rows.RemoveAt(distributeTbl.Rows.IndexOf(DRW));
                     GridTicket.CurrentRow.DefaultCellStyle.BackColor = Color.White;

@@ -311,7 +311,7 @@
             this.MaskedTextBox.TabIndex = 1;
             this.MaskedTextBox.Text = "Masked TextBox";
             this.MaskedTextBox.UseVisualStyleBackColor = true;
-            this.MaskedTextBox.ClientSizeChanged += new System.EventHandler(this.MaskedTextBox_ClientSizeChanged);
+            this.MaskedTextBox.CheckedChanged += new System.EventHandler(this.MaskedTextBox_CheckedChanged);
             // 
             // DateTimePicker
             // 

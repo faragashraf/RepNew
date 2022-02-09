@@ -1076,13 +1076,13 @@ Sec2:
                 StruGrdTk.Card = GrdTick.CurrentRow.Cells("TkCardNo").Value.ToString
                 StruGrdTk.Gp = GrdTick.CurrentRow.Cells("TkGBNo").Value.ToString
                 StruGrdTk.NID = GrdTick.CurrentRow.Cells("TkClNtID").Value.ToString
-                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkAmount").Value) = False Then StruGrdTk.Amnt = GrdTick.CurrentRow.Cells("TkAmount").Value
-                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkTransDate").Value) = False Then StruGrdTk.TransDt = GrdTick.CurrentRow.Cells("TkTransDate").Value
-                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("UsrRealNm").Value) = False Then StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("UsrRealNm").Value
+                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkAmount").Value) = False Then StruGrdTk.Amnt = GrdTick.CurrentRow.Cells("TkAmount").Value 'Else StruGrdTk.Amnt = 0
+                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkTransDate").Value) = False Then StruGrdTk.TransDt = GrdTick.CurrentRow.Cells("TkTransDate").Value 'Else StruGrdTk.TransDt = Nothing
+                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("UsrRealNm").Value) = False Then StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("UsrRealNm").Value 'Else StruGrdTk.UsrNm = Nothing
                 'StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("UsrRealNm").Value
                 StruGrdTk.Help_ = GrdTick.CurrentRow.Cells("CompHelp").Value.ToString
                 StruGrdTk.ProdK = GrdTick.CurrentRow.Cells("PrdKind").Value
-                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkEmpNm").Value) = False Then StruGrdTk.UserId = GrdTick.CurrentRow.Cells("TkEmpNm").Value
+                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkEmpNm").Value) = False Then StruGrdTk.UserId = GrdTick.CurrentRow.Cells("TkEmpNm").Value 'Else StruGrdTk.UserId = Nothing
                 'StruGrdTk.UserId = GrdTick.CurrentRow.Cells("TkEmpNm").Value
 
                 StruGrdTk.LstUpDt = GrdTick.CurrentRow.Cells("تاريخ آخر تحديث").Value

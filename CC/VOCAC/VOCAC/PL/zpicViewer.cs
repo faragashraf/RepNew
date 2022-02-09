@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -251,7 +252,7 @@ namespace VOCAC.PL
             }
         }
 
-        private void Button3_Click(object sender, EventArgs e)
+        private void btnprint_Click(object sender, EventArgs e)
         {
             //PrintPreviewDialog prv = new PrintPreviewDialog();
             //prv.Document = Doc_printpage;
@@ -273,5 +274,26 @@ namespace VOCAC.PL
             e.Graphics.DrawImage(bm, 0, 0);
             bm.Dispose();
         }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog sv = new SaveFileDialog() { Filter = "JPG files| *.jpg", ValidateNames = true })
+            {
+                sv.FilterIndex = 2;
+                if (sv.ShowDialog() == DialogResult.OK)
+                {
+                    using (MemoryStream ms = new MemoryStream(Statcdif.mainImageArray))
+                    {
+                        pictureBox1.Image.Save(sv.FileName);
+                        //Image.FromStream(ms).Save(@"c:\\AAA.jpg");
+                        //Size sze = new Size();
+                        //sze = Image.FromStream(ms).Size;
+                        //int lql = Image.FromStream(ms).Height;
+                    }
+                }
+            }
+
+        }
     }
 }
+
