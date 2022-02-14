@@ -126,5 +126,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VOCAC\VOCAC.csproj">
+      <Project>{95433346-a677-4259-9155-1f616f8f8f52}</Project>
+      <Name>VOCAC</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

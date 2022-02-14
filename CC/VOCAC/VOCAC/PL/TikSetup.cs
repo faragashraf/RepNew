@@ -54,6 +54,9 @@ namespace VOCAC.PL
                 MendsrcTable = new DataTable();
                 Statcdif.MendFildsTable.Rows.Clear();
                 ManagerTable = new DataTable();
+                dataGridView1.RightToLeft = RightToLeft.Yes;
+                dataGridView1.DefaultCellStyle.Font = new Font("Times new Roman", 14, FontStyle.Regular);
+                dataGridView1.ColumnHeadersDefaultCellStyle.Font= new Font("Times new Roman", 14, FontStyle.Bold);
 
                 MendsrcTable = setupDataSet1.Tables[0];
                 Statcdif.MendFildsTable = setupDataSet1.Tables[1];
@@ -62,6 +65,10 @@ namespace VOCAC.PL
                 comboBox1.DisplayMember = "UsrRealNm";
                 comboBox1.ValueMember = "UsrId";
                 comboBox1.ResetText();
+                panel2.Visible = false;
+                VCtheme.BtnCtrl(btnaddnew);
+                VCtheme.BtnCtrl(btnsubmit);
+                VCtheme.BtnCtrl(btncancel);
             }
 
         }
@@ -90,14 +97,14 @@ namespace VOCAC.PL
             if (TreeView1.SelectedNode.Level == 2)
             {
                 DataRow DRW = function.DRW(Statcdif.ProdCompTable, TreeView1.SelectedNode.Name, Statcdif.ProdCompTable.Columns["FnSQL"]);
-                btnaddnew.Visible = true;
+                panel2.Visible = true;
                 PrdKind = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[0];
                 Prdct.Text = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[1];
                 Comp.Text = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[2];
                 CdfnID.Text = TreeView1.SelectedNode.Name;
                 Statcdif.MendFildsTable.DefaultView.RowFilter = "[MendCdFn]  = " + TreeView1.SelectedNode.Name;
                 comboBox1.SelectedValue = DRW.ItemArray[8];
-                comboBox1.Visible = true;
+                txtprodIdent.Text = DRW.ItemArray[7].ToString();
                 FlwMend.Controls.Clear();
                 Statcdif.FildList.Clear();
                 for (int i = 0; i < Statcdif.MendFildsTable.DefaultView.Count; i++)
@@ -118,7 +125,8 @@ namespace VOCAC.PL
                 dataGridView1.Columns[3].Visible = false;
                 dataGridView1.Columns[4].Visible = false;
                 dataGridView1.Columns[5].Visible = false;
-
+                dataGridView1.Columns[1].HeaderText = "اسم الحقل";
+                btnaddnew.Enabled = true;
             }
             else if (TreeView1.SelectedNode.Level < 2)
             {
@@ -127,8 +135,9 @@ namespace VOCAC.PL
                 Comp.Text = "";
                 FlwMend.Controls.Clear();
                 CdfnID.Text = "";
-                btnaddnew.Visible = false;
-                comboBox1.Visible = false;
+                panel2.Visible = false;
+                btnaddnew.Enabled = false;
+                dataGridView1.DataSource = null;
                 DisposeAdditionFlowpanel();
             }
             if (TreeView1.SelectedNode.FullPath.ToString().Split('\\')[0] != PrdKind)
@@ -278,7 +287,7 @@ namespace VOCAC.PL
             if (insertnewMendField(fieldtyp, txtfldnm.Text, langues, Convert.ToInt32(length), mask) != null)
             {
                 function fn = function.getfn;
-                fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "متابعة الشكاوى");
+                fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "متابعة الشكاوى", MessageBoxButtons.OK);
             }
             else
             {
@@ -474,7 +483,7 @@ namespace VOCAC.PL
             if (addMendField(TreeView1.SelectedNode.Name, dataGridView1.CurrentRow.Cells[1].Value.ToString(), false) != null)
             {
                 function fn = function.getfn;
-                fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "متابعة الشكاوى");
+                fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "متابعة الشكاوى", MessageBoxButtons.OK);
             }
             else
             {
@@ -649,7 +658,7 @@ namespace VOCAC.PL
             else
             {
                 function fn = function.getfn;
-                fn.msg(Resources.ConnErr, "تحديث حالة الحقل");
+                fn.msg(Resources.ConnErr, "تحديث حالة الحقل", MessageBoxButtons.OK);
             }
         }
         private string updateMendField(int CDFNid, String FLDNAME, bool MendStat)
@@ -690,6 +699,8 @@ namespace VOCAC.PL
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+       //------------------To delete and be replaced with another procerure to update all complaints details -------------------------------------------
+
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             SqlParameter[] param = new SqlParameter[2];
             param[0] = new SqlParameter("@FNSQL", SqlDbType.Int);
@@ -703,7 +714,7 @@ namespace VOCAC.PL
             catch (Exception Ex)
             {
                 function fn = function.getfn;
-                fn.msg("dd", "frfff");
+                fn.msg("dd", "frfff", MessageBoxButtons.OK);
             }
         }
 
@@ -720,6 +731,36 @@ namespace VOCAC.PL
                 txtmask.Enabled = false;
                 Amount.Enabled = true;
             }
+        }
+
+        private void Btnaddnew_MouseEnter(object sender, EventArgs e)
+        {
+            VCtheme.BtnIncrease(btnaddnew);
+        }
+
+        private void Btnaddnew_MouseLeave(object sender, EventArgs e)
+        {
+            VCtheme.BtnDecrease(btnaddnew);
+        }
+
+        private void Btnsubmit_MouseEnter(object sender, EventArgs e)
+        {
+            VCtheme.BtnIncrease(btnsubmit);
+        }
+
+        private void Btnsubmit_MouseLeave(object sender, EventArgs e)
+        {
+            VCtheme.BtnDecrease(btnsubmit);
+        }
+
+        private void Btncancel_MouseEnter(object sender, EventArgs e)
+        {
+            VCtheme.BtnIncrease(btncancel);
+        }
+
+        private void Btncancel_MouseLeave(object sender, EventArgs e)
+        {
+            VCtheme.BtnDecrease(btncancel);
         }
     }
 }

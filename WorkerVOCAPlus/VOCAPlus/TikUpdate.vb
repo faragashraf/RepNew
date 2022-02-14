@@ -51,6 +51,7 @@ Public Class TikUpdate
                     StruGrdTk.LstUpUsrNm = Usr.PUsrRlNm
                     StruGrdTk.LstUpEvId = CmbEvent.SelectedValue
                     StruGrdTk.LstUpKind = CmbEvent.Text
+                    StruGrdTk.LstUpKind = CmbEvent.Text
                     If StruGrdTk.LstUpSys = True Then StruGrdTk.LstUpSys = False
                     '                       TkupSTime,              TkupTxt,     UsrRealNm,TkupReDt, TkupUser,TkupSQL,TkupTkSql,TkupEvtId, EvSusp, UCatLvl,TkupUnread
 
@@ -438,8 +439,11 @@ fileStream As Stream = File.Create(Environment.GetFolderPath(Environment.Special
         CmbEvent.DataSource = UpdateKTable.DefaultView
         CmbEvent.DisplayMember = "EvNm"
         CmbEvent.ValueMember = "EvId"
-        CmbEvent.SelectedIndex = -1
-        TxtUpdt.ReadOnly = True
+        If TxtUpdt.TextLength = 0 Then
+            CmbEvent.SelectedIndex = -1
+            TxtUpdt.ReadOnly = True
+        End If
+
         UpdtCurrTbl.DefaultView.RowFilter = "[TkupTkSql]" & " = " & StruGrdTk.Sql
         UpGetSql = New DataTable
         UpGetSql = UpdtCurrTbl.DefaultView.ToTable()

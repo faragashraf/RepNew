@@ -27,7 +27,7 @@ namespace VOCAC
         public static int screenHeight = Screen.PrimaryScreen.Bounds.Height;
         public static InputLanguage EnglishInput;
         public static InputLanguage ArabicInput;
-        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-1237";
+        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-12379";
         public SqlConnection CONSQL;
         public static String _ServerCD;
         public static String _serverNm;
@@ -86,7 +86,7 @@ namespace VOCAC
             WelcomeScreen WlcmScren = WelcomeScreen.getwecmscrnfrm;
             if (_ServerCD == "Eg Server")
             {
-                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-1237";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-12379";
                 _serverNm = "VOCA Server";
                 WlcmScren.BackgroundImage = Resources.VocaWtr;
                 WlcmScren.BackgroundImageLayout = ImageLayout.Stretch;
@@ -100,7 +100,7 @@ namespace VOCAC
             }
             else if (_ServerCD == "Training")
             {
-                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-1237";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-12379";
                 _serverNm = "Training";
                 WlcmScren.BackgroundImage = Resources.Empty;
                 WlcmScren.BackColor = Color.White;
@@ -108,7 +108,7 @@ namespace VOCAC
             }
             else if (_ServerCD == "servrMe")
             {
-                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusashraf;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-32223";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusashraf;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-12379";
                 _serverNm = "servrMe";
                 WlcmScren.BackgroundImage = Resources.Demo;
                 WlcmScren.BackgroundImageLayout = ImageLayout.Center;
@@ -355,9 +355,9 @@ namespace VOCAC
             dt.Dispose();
             SwichButTable.Dispose();
         }
-        public void msg(string Messd, string titl, MessageBoxButtons messageBoxButtons = MessageBoxButtons.OK, MessageBoxOptions messageBoxOptions = MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign)
+        public void msg(string Messg, string titl, MessageBoxButtons messageBoxButtons , MessageBoxOptions messageBoxOptions = MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign)
         {
-            MessageBox.Show(Messd, titl, messageBoxButtons, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, messageBoxOptions);
+            MessageBox.Show(Messg, titl,  MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1,MessageBoxOptions.RightAlign|MessageBoxOptions.RtlReading);
         }
         public int CalDate(string StDt, string EnDt)
         {
@@ -896,7 +896,7 @@ namespace VOCAC
                         IntUtly.ValdtLetter(TxtBox, e);
                     else if (TxtBox.Tag.ToString().Split('-')[1].Trim() == "All")
                     {
-                        IntUtly.ValdtAll(e);
+                        //IntUtly.ValdtAll(e);
                     }
                 }
             }

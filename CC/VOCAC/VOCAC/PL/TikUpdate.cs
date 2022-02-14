@@ -82,6 +82,7 @@ namespace VOCAC.PL
         }
         private void BtnSubmt_Click(object sender, EventArgs e)
         {
+            Statcdif.mainImageArray = null;
             function fn = function.getfn;
             if (TxtUpdt.Text.Trim().Length > 0 && Convert.ToInt32(CmbEvent.SelectedValue) != -1)
             {
@@ -94,7 +95,7 @@ namespace VOCAC.PL
                         return;
                     }
                 }
-                if (addevent(currntTicket._TkSQL, TxtUpdt.Text, false, Convert.ToInt32(CmbEvent.SelectedValue), fn.OsIP(), CurrentUser.UsrID, Statcdif.mainImageArray) == null)
+                if (ticketCurrent.addevent(currntTicket._TkSQL, TxtUpdt.Text, true, Convert.ToInt32(CmbEvent.SelectedValue), Statcdif._IP, CurrentUser.UsrID, Statcdif.mainImageArray) == null)
                 {
                     getupdate();
                     eventColor();
@@ -107,49 +108,9 @@ namespace VOCAC.PL
             }
             else
             {
-                fn.msg("برجاء كتابة التحديث أولاً", "إضافة تحديث جديد");
+                fn.msg("برجاء كتابة التحديث أولاً", "إضافة تحديث جديد", MessageBoxButtons.OK);
             }
 
-        }
-        private static string addevent(int id, string txt, bool read, int EvId, string IP, int user, [Optional] byte[] attach)
-        {
-            string rslt = null;
-            SqlCommand sqlcmd = new SqlCommand();
-            sqlcmd.CommandType = CommandType.StoredProcedure;
-            sqlcmd.CommandText = "SP_TICKET_EVENT_INSERT";
-            SqlConnection con = new SqlConnection(Statcdif.strConn);
-            sqlcmd.Connection = con;
-            SqlParameter[] param = new SqlParameter[7];
-            param[0] = new SqlParameter("@TkupTkSql", SqlDbType.Int);
-            param[0].Value = id;
-            param[1] = new SqlParameter("@TkupTxt", SqlDbType.NVarChar);
-            param[1].Value = txt;
-            param[2] = new SqlParameter("@TkupUnread", SqlDbType.Bit);
-            param[2].Value = read;
-            param[3] = new SqlParameter("@TkupEvtId", SqlDbType.Int);
-            param[3].Value = EvId;
-            param[4] = new SqlParameter("@TkupUserIP", SqlDbType.NVarChar, 15);
-            param[4].Value = IP;
-            param[5] = new SqlParameter("@TkupUser", SqlDbType.Int);
-            param[5].Value = user;
-            param[6] = new SqlParameter("@TkupAttch", SqlDbType.Image);
-            param[6].Value = attach;
-            for (int i = 0; i < param.Length; i++)
-            {
-                sqlcmd.Parameters.Add(param[i]);
-            }
-            try
-            {
-                con.Open();
-                sqlcmd.ExecuteNonQuery();
-            }
-            catch (Exception Ex)
-            {
-                rslt = Ex.Message;
-                function fn = function.getfn;
-                fn.msg("خطأ في إضافة التحديث", "إضافة تحديث جديد");
-            }
-            return rslt;
         }
         public void CmbEvent_SelectedIndexChanged(object sender, EventArgs e)
         {

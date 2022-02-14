@@ -15,7 +15,7 @@ Module Public_
     Public ServerCD As String = "Eg Server"
     Public ServerNm As String = "VOCA Server"
     '@VocaPlus$21-7
-    Public strConn As String = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-1237"
+    Public strConn As String = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-12379"
     '"Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaplus21;Password=@VocaPlus$21-4"
     '"Data Source=MYTHINKBOOK\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
     Public sqlCon As New SqlConnection(strConn) ' I Have assigned conn STR here and delete this row from all project
@@ -149,13 +149,13 @@ Public Class APblicClss
             state.Errmsg = Nothing
             strConn = Nothing
             If ServerCD = "Eg Server" Then
-                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-1237"
+                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-12379"
                 ServerNm = "VOCA Server"
             ElseIf ServerCD = "My Labtop" Then
                 strConn = "Data Source=MyThinkbook\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046"
                 ServerNm = "My Labtop"
             ElseIf ServerCD = "Training" Then
-                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-1237"
+                strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-12379"
                 ServerNm = "Training"
             ElseIf ServerCD = "OnLine" Then
                 strConn = "Data Source=34.123.217.183;Initial Catalog=vocaplus;Persist Security Info=True;User ID=sqlserver;Password=Hemonad105046"
@@ -969,6 +969,7 @@ Sec2:
                 '    Def.CompList.Add("TkupTkSql = " & GrdTick.Rows(GG).Cells("TkSQL").Value)
                 'Next
                 'CompIds = String.Join(" OR ", Def.CompList)
+
                 Tbl.Columns.Add("تاريخ آخر تحديث")
                 Tbl.Columns.Add("نوع التحديث")
                 Tbl.Columns.Add("نص آخر تحديث")
@@ -977,7 +978,7 @@ Sec2:
                 Tbl.Columns.Add("TkupUser")
                 Tbl.Columns.Add("LastUpdateID")
                 Tbl.Columns.Add("EvSusp")
-                Tbl.Columns.Add("UCatLvl")
+                Tbl.Columns.Add("UCatLvl", GetType(Integer))
                 Tbl.Columns.Add("TkupUnread")
             Catch ex As Exception
                 Def.Errmsg = ex.Message
@@ -1031,14 +1032,16 @@ Sec2:
             Errmsg = Nothing
             Try
                 Dim GrivVw_ As DataGridView = Frm.Controls(GV.Name)
-                GrivVw_.CurrentRow.Cells("TkDetails").Value = StruGrdTk.Detls
-                GrivVw_.CurrentRow.Cells("تاريخ آخر تحديث").Value = StruGrdTk.LstUpDt
-                GrivVw_.CurrentRow.Cells("نص آخر تحديث").Value = StruGrdTk.LstUpTxt
-                GrivVw_.CurrentRow.Cells("محرر آخر تحديث").Value = StruGrdTk.LstUpUsrNm
-                GrivVw_.CurrentRow.Cells("LastUpdateID").Value = StruGrdTk.LstUpEvId
-                GrivVw_.CurrentRow.Cells("TkClsStatus").Value = StruGrdTk.ClsStat
-                GrivVw_.CurrentRow.Cells("نوع التحديث").Value = StruGrdTk.LstUpKind
+                GV.CurrentRow.Cells("TkDetails").Value = StruGrdTk.Detls
+                GV.CurrentRow.Cells("تاريخ آخر تحديث").Value = StruGrdTk.LstUpDt
+                GV.CurrentRow.Cells("نص آخر تحديث").Value = StruGrdTk.LstUpTxt
+                GV.CurrentRow.Cells("محرر آخر تحديث").Value = StruGrdTk.LstUpUsrNm
+                GV.CurrentRow.Cells("LastUpdateID").Value = StruGrdTk.LstUpEvId
+                GV.CurrentRow.Cells("TkClsStatus").Value = StruGrdTk.ClsStat
+                GV.CurrentRow.Cells("نوع التحديث").Value = StruGrdTk.LstUpKind
 
+
+                '            StruGrdTk.LstUpKind = CmbEvent.Text
                 'If Frm.Name = "TikFolow" Then
                 '    If StruGrdTk.ClsStat = True Then
                 '        GrivVw_.Rows.RemoveAt(GrivVw_.CurrentRow.Index)
@@ -1053,6 +1056,7 @@ Sec2:
         Public Function TikGVDblClck(GrdTick As DataGridView) As String
             Errmsg = Nothing
             Dim Def As New APblicClss.Defntion
+            StruGrdTk = New Strc.TickFld
             Try
                 StruGrdTk.Tick = GrdTick.CurrentRow.Cells("TkKind").Value
                 StruGrdTk.FlwStat = GrdTick.CurrentRow.Cells("TkFolw").Value
@@ -1078,7 +1082,7 @@ Sec2:
                 StruGrdTk.NID = GrdTick.CurrentRow.Cells("TkClNtID").Value.ToString
                 If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkAmount").Value) = False Then StruGrdTk.Amnt = GrdTick.CurrentRow.Cells("TkAmount").Value 'Else StruGrdTk.Amnt = 0
                 If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("TkTransDate").Value) = False Then StruGrdTk.TransDt = GrdTick.CurrentRow.Cells("TkTransDate").Value 'Else StruGrdTk.TransDt = Nothing
-                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("UsrRealNm").Value) = False Then StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("UsrRealNm").Value 'Else StruGrdTk.UsrNm = Nothing
+                If DBNull.Value.Equals(GrdTick.CurrentRow.Cells("fOLLOWER").Value) = False Then StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("fOLLOWER").Value 'Else StruGrdTk.UsrNm = Nothing
                 'StruGrdTk.UsrNm = GrdTick.CurrentRow.Cells("UsrRealNm").Value
                 StruGrdTk.Help_ = GrdTick.CurrentRow.Cells("CompHelp").Value.ToString
                 StruGrdTk.ProdK = GrdTick.CurrentRow.Cells("PrdKind").Value

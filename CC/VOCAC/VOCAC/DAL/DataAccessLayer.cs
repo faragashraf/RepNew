@@ -118,7 +118,6 @@ namespace VOCAC.DAL
             {
                 Open();
                 sqlcmd.ExecuteNonQuery();
-                Struc.returnInt_ = Convert.ToInt32(param[14].SqlValue);
             }
             catch (Exception Ex)
             {

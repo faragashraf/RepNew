@@ -93,12 +93,12 @@ namespace VOCAC.PL
                 }
                 catch (Exception ex)
                 {
-                    fn.msg("هناك خطأ في الإتصال بقواعد البيانات" + Environment.NewLine + ex.Message, "متابعة الشكاوى");
+                    fn.msg("هناك خطأ في الإتصال بقواعد البيانات" + Environment.NewLine + ex.Message, "متابعة الشكاوى", MessageBoxButtons.OK);
                 }
             }
             else
             {
-                fn.msg("لا توجد شكاوى للمتابعة", "متابعة الشكاوى");
+                fn.msg("لا توجد شكاوى للمتابعة", "متابعة الشكاوى", MessageBoxButtons.OK);
                 flowLayoutPanel3.Visible = false;
             }
             frmAdjust();
@@ -448,7 +448,7 @@ namespace VOCAC.PL
             }
             catch (Exception ex)
             {
-                fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "متابعة الشكاوى");
+                fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "متابعة الشكاوى", MessageBoxButtons.OK);
             }
             DAL.Close();
             return TickTblMain;
@@ -495,20 +495,20 @@ namespace VOCAC.PL
                 string Rslt = fn.exportxlsx(exporTbl, CurrentUser.UsrRlNm);
                 if (Rslt == null)
                 {
-                    fn.msg("تم استخراج البيانات بنجاح", "استخراج البيانات");
+                    fn.msg("تم استخراج البيانات بنجاح", "استخراج البيانات", MessageBoxButtons.OK);
                 }
                 else if (Rslt == "X")
                 {
-                    fn.msg("لقد قمت بإلغاء استخراج البيانات", "استخراج البيانات");
+                    fn.msg("لقد قمت بإلغاء استخراج البيانات", "استخراج البيانات", MessageBoxButtons.OK);
                 }
                 else
                 {
-                    fn.msg("خطأ في استخراج البيانات", "استخراج البيانات");
+                    fn.msg("خطأ في استخراج البيانات", "استخراج البيانات", MessageBoxButtons.OK);
                 }
             }
             else
             {
-                fn.msg("لاتوجد بيانات للاستخراج", "استخراج البيانات");
+                fn.msg("لاتوجد بيانات للاستخراج", "استخراج البيانات", MessageBoxButtons.OK);
             }
         }
     }

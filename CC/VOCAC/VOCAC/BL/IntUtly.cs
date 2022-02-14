@@ -26,7 +26,7 @@ namespace VOCAC.BL
             {
 
             }
-            else if (char.IsControl(e.KeyChar) == true && (Keys)e.KeyChar != Keys.V)
+            else //if (char.IsControl(e.KeyChar) == true && (Keys)e.KeyChar != Keys.V)
 
             {
                 e.Handled = true;

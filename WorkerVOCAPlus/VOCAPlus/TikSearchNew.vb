@@ -153,7 +153,7 @@ Public Class TikSearchNew
             If FltrStr.Length > 0 Then
                 FltrStr = " Where " & FltrStr
                 Invoke(Sub() GridTicket.Visible = False)
-                If Fn.GetTblXX("SELECT TkSQL, TkKind, TkDtStart, TkID, SrcNm, TkClNm, TkClPh, TkClPh1, TkMail, TkClAdr, TkCardNo, TkShpNo, TkGBNo, TkClNtID, TkAmount, TkTransDate, PrdKind, PrdNm, CompNm, CounNmSender, CounNmConsign, OffNm1, OffArea, TkDetails, TkClsStatus, TkFolw, TkEmpNm, UsrRealNm, TkReOp, TkRecieveDt, TkEscTyp, ProdKNm, CompHelp FROM dbo.TicketsAll " & FltrStr & " ORDER BY TkSQL DESC;", TickSrchTable, "1042&H") = Nothing Then
+                If Fn.GetTblXX("SELECT TkSQL, TkKind, TkDtStart, TkID, SrcNm, TkClNm, TkClPh, TkClPh1, TkMail, TkClAdr, TkCardNo, TkShpNo, TkGBNo, TkClNtID, TkAmount, TkTransDate, PrdKind, PrdNm, CompNm, CounNmSender, CounNmConsign, OffNm1, OffArea, TkDetails, TkClsStatus, TkFolw, TkEmpNm, UsrRealNm AS 'fOLLOWER', TkReOp, TkRecieveDt, TkEscTyp, ProdKNm, CompHelp FROM dbo.TicketsAll " & FltrStr & " ORDER BY TkSQL DESC;", TickSrchTable, "1042&H") = Nothing Then
                     Invoke(Sub() Me.Text = "بحث الشكاوى والاستفسارات" & "_" & ElapsedTimeSpan)
                     If TickSrchTable.Rows.Count > 0 Then
                         Invoke(Sub() LblMsg.Text = "جاري تحميل التحديثات ...........")
@@ -211,9 +211,9 @@ Public Class TikSearchNew
                         GridCuntRtrn.NoFlwCount = Convert.ToInt32(TickSrchTable.Compute("count(TkFolw)", "TkFolw = 'False'"))
                         GridCuntRtrn.Recved = Convert.ToInt32(TickSrchTable.Compute("count(TkRecieveDt)", "TkRecieveDt = '" & Format(Nw, "yyyy/MM/dd").ToString & "'"))
                         GridCuntRtrn.ClsCount = Convert.ToInt32(TickSrchTable.Compute("count(TkClsStatus)", "TkClsStatus = 'True' And TkKind = 'True'"))
-                        GridCuntRtrn.UpdtFollow = Convert.ToInt32(TickSrchTable.Compute("count(UsrRealNm)", "[محرر آخر تحديث] = UsrRealNm"))
-                        GridCuntRtrn.UpdtColleg = Convert.ToInt32(TickSrchTable.Compute("count(UsrRealNm)", "[محرر آخر تحديث] <> UsrRealNm AND UCatLvl >= 3 And UCatLvl <= 5"))
-                        GridCuntRtrn.UpdtOthrs = Convert.ToInt32(TickSrchTable.Compute("count(UsrRealNm)", "[محرر آخر تحديث] <> UsrRealNm AND UCatLvl < 3 And UCatLvl > 5"))
+                        GridCuntRtrn.UpdtFollow = Convert.ToInt32(TickSrchTable.Compute("count(fOLLOWER)", "[محرر آخر تحديث] = fOLLOWER"))
+                        GridCuntRtrn.UpdtColleg = Convert.ToInt32(TickSrchTable.Compute("count(UCatLvl)", "[محرر آخر تحديث] <> fOLLOWER AND (UCatLvl >= 3 AND UCatLvl <= 5)"))
+                        GridCuntRtrn.UpdtOthrs = Convert.ToInt32(TickSrchTable.Compute("count(UCatLvl)", "[محرر آخر تحديث] <> fOLLOWER and (UCatLvl < 3 or UCatLvl > 5)"))
                         GridCuntRtrn.UnReadCount = Convert.ToInt32(TickSrchTable.Compute("count(TkupUnread)", "TkupUnread = 'False'"))
                         GridCuntRtrn.Esc1 = Convert.ToInt32(TickSrchTable.Compute("count(LastUpdateID)", "LastUpdateID = 902"))
                         GridCuntRtrn.Esc2 = Convert.ToInt32(TickSrchTable.Compute("count(LastUpdateID)", "LastUpdateID = 903"))

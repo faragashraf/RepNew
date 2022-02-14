@@ -49,11 +49,14 @@ namespace VOCAC.PL
         string itemRef;
         int TeamIdentfier;
         string Help_;
+        int lblColor = 35;
         public TikNew()
         {
             InitializeComponent();
             forms.FrmAllSub(this);
             NewTickSub();
+            this.Phon1TxtBx.TextChanged += new System.EventHandler(this.Phon1TxtBx_TextChanged);
+            this.IDTxtBx.TextChanged += new System.EventHandler(this.IDTxtBx_TextChanged);
         }
         private void NewTickSub()
         {
@@ -158,6 +161,10 @@ namespace VOCAC.PL
                     {
                         Complete_ += 1;
                         fn.ClorTxt(richTextBox1, IDTxtBx.AccessibleName, Color.White, Color.Green, 14);
+                    }
+                    else
+                    {
+                        fn.ClorTxt(richTextBox1, IDTxtBx.AccessibleName, Color.White, Color.Red, 14);
                     }
                 }
                 else if (RadPss.Checked == true && IDTxtBx.Text.Replace(" ", "").Trim().Length > 0)
@@ -270,6 +277,21 @@ namespace VOCAC.PL
                 SubmitBtn.BackgroundImage = Resources.SaveGreen;
                 SubmitBtn.Enabled = false;
             }
+
+            if (lblhelp.Text.Length > 0)
+            {
+                if (lblColor >= 100 && lblColor <= 250)
+                {
+                    lblhelp.ForeColor = Color.FromArgb(lblColor, lblColor, lblColor);
+                    lblColor -= 5;
+                }
+                else if (lblColor >= 10 && lblColor < 100)
+                {
+                    lblhelp.ForeColor = Color.FromArgb(lblColor, 230, lblColor);
+                    lblColor += 25;
+                }
+            }
+
             GC.Collect();
             Timer1.Start();
         }
@@ -457,7 +479,6 @@ namespace VOCAC.PL
             string CtrlLblText = GetNextControl(T, false).Text;
             fn.ClorTxt(richTextBox1, CtrlLblText.ToString().Substring(0, CtrlLblText.Length - 3), backclr, fontkclr, 14);
         }
-
         private void CompReqst_CheckedChanged(object sender, EventArgs e)
         {
             this.TreeView1.AfterSelect -= new TreeViewEventHandler(this.TreeView1_AfterSelect);
@@ -1024,12 +1045,10 @@ namespace VOCAC.PL
                 FlwTree.Enabled = false;
                 FlwMend.Enabled = false;
                 BtnDublicate.Visible = true;
-
-                fn.msg("تم تسجيل الشكوى برقم " + Convert.ToString(Insertreslt), "تسجيل شكوى جديدة");
             }
             else
             {
-                fn.msg("لم ينجح الإتصال بقواعد البيانات", "تسجيل شكوى جديدة");
+                fn.msg("لم ينجح الإتصال بقواعد البيانات", "تسجيل شكوى جديدة", MessageBoxButtons.OK);
             }
         }
         private void NewBtn_Click(object sender, EventArgs e)
@@ -1053,7 +1072,7 @@ namespace VOCAC.PL
         {
 
 
-          
+
         }
         private void Phon1TxtBx_TextChanged(object sender, EventArgs e)
         {
@@ -1071,8 +1090,15 @@ namespace VOCAC.PL
         }
         private void customerdata(MaskedTextBox mskdTextBox, string SlctString)
         {
-            if (mskdTextBox.Text.Length == mskdTextBox.Mask.Length)
+            this.Phon1TxtBx.TextChanged -= new System.EventHandler(this.Phon1TxtBx_TextChanged);
+            this.IDTxtBx.TextChanged -= new System.EventHandler(this.IDTxtBx_TextChanged);
+            string tmp="";
+            if (mskdTextBox.Text.Trim().Length == mskdTextBox.Mask.Length)
             {
+                tmp = lblhelp.Text;
+                Timer1.Stop();
+                this.Enabled = false;
+                lblhelp.Text = "جاري البحث عن بيانات العميل ....";
                 StringBuilder selectString = new StringBuilder();
                 customerTable.Rows.Clear();
                 DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
@@ -1101,23 +1127,37 @@ namespace VOCAC.PL
                     AddTxtBx.Text = customerTable.Rows[0]["TkClAdr"].ToString();
                     MailTxtBx.Text = customerTable.Rows[0]["TkMail"].ToString();
                 }
+                else
+                {
+                    clearcustomerdata(mskdTextBox);
+                }
             }
             else
             {
-                if (mskdTextBox != Phon1TxtBx)
-                {
-                    if (!chckphonechange.Checked) { Phon1TxtBx.Text = ""; }
-                }
-                if (mskdTextBox != IDTxtBx)
-                {
-                    if (!chckIDChange.Checked) { IDTxtBx.Text = ""; };
-                }
-                NameTxtBx.Text = "";
-                Phon2TxtBx.Text = "";
-                AddTxtBx.Text = "";
-                MailTxtBx.Text = "";
-                customerTable.Rows.Clear();
+                clearcustomerdata(mskdTextBox);
             }
+            this.Phon1TxtBx.TextChanged += new System.EventHandler(this.Phon1TxtBx_TextChanged);
+            this.IDTxtBx.TextChanged += new System.EventHandler(this.IDTxtBx_TextChanged);
+            this.Enabled = true;
+            lblhelp.Text = tmp;
+            Timer1.Start();
+        }
+
+        private void clearcustomerdata(MaskedTextBox mskdTextBox)
+        {
+            if (mskdTextBox != Phon1TxtBx)
+            {
+                if (!chckphonechange.Checked) { Phon1TxtBx.Text = ""; }
+            }
+            if (mskdTextBox != IDTxtBx)
+            {
+                if (!chckIDChange.Checked) { IDTxtBx.Text = ""; };
+            }
+            NameTxtBx.Text = "";
+            Phon2TxtBx.Text = "";
+            AddTxtBx.Text = "";
+            MailTxtBx.Text = "";
+            customerTable.Rows.Clear();
         }
 
         private void RadPss_CheckedChanged(object sender, EventArgs e)
@@ -1156,7 +1196,7 @@ namespace VOCAC.PL
         {
             if (function.EmailIsValid(MailTxtBx.Text) == false && MailTxtBx.Text.Length > 0)
             {
-                fn.msg("الإيميل الذي تم إدخاله غير صحيح", "فحص الإيميل");
+                fn.msg("الإيميل الذي تم إدخاله غير صحيح", "فحص الإيميل", MessageBoxButtons.OK);
                 MailTxtBx.Focus();
             }
         }

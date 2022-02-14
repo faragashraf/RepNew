@@ -340,11 +340,19 @@ Public Class TicketEditNew
             TkGBNo.AccessibleName = "None"
         End If
         If Mid(MendRw.ItemArray(6), 10, 1) = "Y" Then
-
-            If IsNothing(Replace(TkClNtID.Text, " ", "")) = True Then
-                TkClNtID.AccessibleName = "Mendatory"
+            '
+            If RadNID.Checked = True Then
+                If IsNothing(Replace(TkClNtID.Text, " ", "")) = True Then
+                    TkClNtID.AccessibleName = "Mendatory"
+                Else
+                    If Replace(TkClNtID.Text, " ", "").Length <> 14 Then
+                        TkClNtID.AccessibleName = "Mendatory"
+                    Else
+                        TkClNtID.AccessibleName = "None"
+                    End If
+                End If
             Else
-                If Replace(TkClNtID.Text, " ", "").Length <> 14 Then
+                If IsNothing(Replace(TkClNtID.Text, " ", "")) = True Then
                     TkClNtID.AccessibleName = "Mendatory"
                 Else
                     TkClNtID.AccessibleName = "None"
@@ -1118,6 +1126,7 @@ Popul_:
 
                         End If
                     End If
+                    getcompdata()
                 Else
                     MsgErr("Error : " & Errmsg)
                 End If
@@ -1613,6 +1622,16 @@ Popul_:
         TmrActv.Stop()
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        getcompdata()
+        'If Usr.PUsrUCatLvl = 7 Then
+        '    CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] = '1'"     '     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm"
+        'Else
+        '    CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] > '1'"   '   SrcStr = "Select SrcCd, SrcNm from CDSrc where SrcSusp=0 And srcCd > 1 ORDER BY SrcNm"
+        'End If
+
+    End Sub
+    Private Sub getcompdata()
         RemoveHandler TkClPh.TextChanged, AddressOf Phon1TxtBx_TextChanged
         EditTable = New DataTable
         Dim Fn As New APblicClss.Func
@@ -1722,13 +1741,6 @@ Popul_:
         Else
             LblText.Text = "Error"
         End If
-
-        'If Usr.PUsrUCatLvl = 7 Then
-        '    CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] = '1'"     '     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm"
-        'Else
-        '    CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" & 0 & " AND [srcCd] > '1'"   '   SrcStr = "Select SrcCd, SrcNm from CDSrc where SrcSusp=0 And srcCd > 1 ORDER BY SrcNm"
-        'End If
-
     End Sub
     Private Sub TikID_TextChanged(sender As Object, e As EventArgs) Handles TikID.TextChanged
         NewTickSub()

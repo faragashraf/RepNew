@@ -25,16 +25,18 @@ Public Class TotView
             MyUsrsTable.Columns.Add("Nm")
         End If
         UserTree.ImageList = ImgLst
+        WelcomeScreen.StatBrPnlAr.Text = "جاري تحميل البيانات ...................."
         If Mid(Usr.PUsrLvl, 17, 1) = "A" Then
             Dim Fn As New APblicClss.Func
-            Fn.GetTblXX("SELECT IntUserCat.UCatId, IntUserCat.UCatNm + N' - ' + Int_user.UsrRealNm + N' - ' +  CAST(Int_user.UsrId as varchar(10))  , Int_user.UsrId, Int_user.UsrCat FROM IntUserCat INNER JOIN Int_user ON IntUserCat.UCatId = Int_user.UsrCat WHERE (Int_user.UsrCat = 0)", tempTable, "0000&H")
-            UserTree.Nodes.Add(tempTable(0).Item(0).ToString, tempTable(0).Item(1).ToString, 1, 3)
+            If Fn.GetTblXX("SELECT IntUserCat.UCatId, IntUserCat.UCatNm + N' - ' + Int_user.UsrRealNm + N' - ' +  CAST(Int_user.UsrId as varchar(10))  , Int_user.UsrId, Int_user.UsrCat FROM IntUserCat INNER JOIN Int_user ON IntUserCat.UCatId = Int_user.UsrCat WHERE (Int_user.UsrCat = 0)", tempTable, "0000&H") = Nothing Then
+                UserTree.Nodes.Add(tempTable(0).Item(0).ToString, tempTable(0).Item(1).ToString, 1, 3)
+            End If
         Else
             UserTree.Nodes.Add(Usr.PUsrCat.ToString, Usr.PUsrID & " - " & Usr.PUsrCatNm & " - " & Usr.PUsrRlNm, 1, 3)
         End If
-        WelcomeScreen.StatBrPnlAr.Text = "جاري تحميل البيانات ...................."
+
         '                   0  ,    1  ,     2    ,    3   ,     4     as mix name                 ***   
-        If GetTbl("Select UsrId, UCatId, UCatIdSub, UCatLvl, UCatNm + N' - ' + UsrRealNm AS UsrMix From Int_user RIGHT OUTER Join IntUserCat On UsrCat = UCatId Where (UsrSusp = 0)  Order By UCatIdSub, UsrRealNm", UserTable, "1038&H") = Nothing Then
+        If GetTbl("Select UsrId, UCatId, UCatIdSub, UCatLvl, UCatNm + N' - ' + UsrRealNm AS UsrMix From Int_user RIGHT OUTER Join IntUserCat On UsrCat = UCatId Where (UsrSusp = 0)   Order By UCatIdSub, UsrRealNm", UserTable, "1038&H") = Nothing Then
             'Select UsrId, UCatId, UCatIdSub, UCatLvl, UCatNm + N' - ' + UsrRealNm AS UsrMix From Int_user RIGHT OUTER Join IntUserCat On UsrCat = UCatId Where (UsrSusp = 0) AND (UCatLvl between 3 and 5) Order By UCatIdSub, UsrRealNm
             For Cnt_ = 0 To UserTable.Rows.Count - 1
                 TempNode = UserTree.Nodes.Find(UserTable(Cnt_).Item(2).ToString, True)
@@ -55,23 +57,39 @@ Public Class TotView
             MyUsrsTable.Rows.Clear()
             MyUsrsTable.Columns.Clear()
             '      SELECT UsrId, UsrRealNm, (CASE WHEN UsrClsN = 0 THEN '' ELSE CONVERT(varchar(20), UsrClsN) END) AS UsrClsN, (CASE WHEN UsrFlN = 0 THEN '' ELSE CONVERT(varchar(20), UsrFlN) END)AS UsrFlN, (CASE WHEN UsrReOpY = 0 THEN '' ELSE CONVERT(varchar(20), UsrReOpY) END)AS UsrReOpY, (CASE WHEN UsrUnRead = 0 THEN '' ELSE CONVERT(varchar(20), UsrUnRead) END) AS UsrUnRead, (CASE WHEN UsrEvDy = 0 THEN '' ELSE CONVERT(varchar(20), UsrEvDy) END)AS UsrEvDy, (CASE WHEN UsrClsYDy = 0 THEN '' ELSE CONVERT(varchar(20), UsrClsYDy) END) AS UsrClsYDy, (CASE WHEN UsrReadYDy = 0 THEN '' ELSE CONVERT(varchar(20), UsrReadYDy) END) AS UsrReadYDy, (CASE WHEN UsrRecevDy = 0 THEN '' ELSE CONVERT(varchar(20), UsrRecevDy) END) AS UsrRecevDy FROM Int_user
-            If GetTbl("SELECT UsrId, UsrRealNm, UsrClsN, UsrFlN, UsrReOpY, UsrUnRead, UsrTikFlowDy, UsrEvDy, UsrClsYDy, UsrReadYDy, UsrRecevDy, UsrClsUpdtd, UsrEsc1, UsrEsc2, UsrEsc3 FROM Int_user " & UsrStr & " order by UsrRealNm", MyUsrsTable, "1049&H") = Nothing Then
+            If GetTbl("SELECT UsrId
+      ,UsrRealNm
+      ,UsrClsN
+      ,UsrFlN
+      ,UsrReOpY
+      ,UsrEventflowr
+      ,UsrEventColeg
+      ,UsrEventOther
+      ,UsrEvDy
+      ,UsrClsYDy
+      ,UsrRecevDy
+      ,UsrClsUpdtd
+      ,UsrTikFlowDy
+      ,UsrEsc1
+      ,UsrEsc2
+      ,UsrEsc3 FROM Int_user " & UsrStr & " order by UsrRealNm", MyUsrsTable, "1049&H") = Nothing Then
                 GridTicket1.DataSource = MyUsrsTable
                 GridTicket1.Columns(0).Visible = False
-                GridTicket1.Columns(1).HeaderText = "اسم الموظف"
-                GridTicket1.Columns(2).HeaderText = "مفتوحة"
-                GridTicket1.Columns(3).HeaderText = "بدون متابعة"
-                GridTicket1.Columns(4).HeaderText = "معادة الفتح"
-                GridTicket1.Columns(5).HeaderText = "تحديثات غير مقروءه"
-                GridTicket1.Columns(6).HeaderText = "تعامل اليوم"
-                GridTicket1.Columns(7).HeaderText = "تحديثات اليوم"
-                GridTicket1.Columns(8).HeaderText = "إغلاق اليوم"
-                GridTicket1.Columns(9).HeaderText = "تحديثات مقرءه"
-                GridTicket1.Columns(10).HeaderText = "استلام اليوم"
-                GridTicket1.Columns(11).HeaderText = "تحديثات شكاوى مغلقة"
-                GridTicket1.Columns(12).HeaderText = "متابعة 1"
-                GridTicket1.Columns(13).HeaderText = "متابعة 2"
-                GridTicket1.Columns(14).HeaderText = "متابعة 3"
+                GridTicket1.Columns("UsrRealNm").HeaderText = "اسم الموظف"
+                GridTicket1.Columns("UsrClsN").HeaderText = "مفتوحة"
+                GridTicket1.Columns("UsrFlN").HeaderText = "بدون متابعة"
+                GridTicket1.Columns("UsrEventflowr").HeaderText = "تحديثات المتابع"
+                GridTicket1.Columns("UsrEventColeg").HeaderText = "تحديثات الزملاء"
+                GridTicket1.Columns("UsrEventOther").HeaderText = "تحديثات الغير"
+                GridTicket1.Columns("UsrReOpY").HeaderText = "معادة الفتح"
+                GridTicket1.Columns("UsrTikFlowDy").HeaderText = "تعامل اليوم"
+                GridTicket1.Columns("UsrEvDy").HeaderText = "تحديثات اليوم"
+                GridTicket1.Columns("UsrClsYDy").HeaderText = "إغلاق اليوم"
+                GridTicket1.Columns("UsrRecevDy").HeaderText = "استلام اليوم"
+                GridTicket1.Columns("UsrClsUpdtd").HeaderText = "تحديثات شكاوى مغلقة"
+                GridTicket1.Columns("UsrEsc1").HeaderText = "متابعة 1"
+                GridTicket1.Columns("UsrEsc2").HeaderText = "متابعة 2"
+                GridTicket1.Columns("UsrEsc3").HeaderText = "متابعة 3"
                 For Cnt_ = 2 To GridTicket1.Columns.Count - 1
                     GridTicket1.Columns(Cnt_).Width = 55
                 Next
@@ -94,61 +112,40 @@ Public Class TotView
     End Sub
     Private Sub Cal_()
         Label4.Text = GridTicket1.Rows.Count.ToString("N0")
-
-        'If MyUsrsTable.Rows.Count - RwCnt <> 1 Then
-        '    RwCnt = MyUsrsTable.Rows.Count
-        '    MyUsrsTable.Rows.Add()
-        'End If
-
-        'For TT = 2 To MyUsrsTable.Columns.Count - 1
-        '    Dim Sumd As Integer = 0
-        '    For GH = 0 To MyUsrsTable.DefaultView.Count - 2
-        '        If DBNull.Value.Equals(MyUsrsTable.DefaultView(GH).Item(TT)) = False Then
-        '            Sumd += MyUsrsTable.DefaultView(GH).Item(TT)
-        '        End If
-        '    Next
-        '    MyUsrsTable.Rows(RwCnt).Item(TT) = 0
-        '    MyUsrsTable.Rows(RwCnt).Item(TT) = Sumd
-        'Next
-        'GridTicket1.Rows(MyUsrsTable.DefaultView.Count - 1).DefaultCellStyle.ForeColor = Color.Green
-        'GridTicket1.Rows(MyUsrsTable.DefaultView.Count - 1).DefaultCellStyle.Font = New Font("Times New Roman", 14, FontStyle.Bold)
 #Region "Delete"
-        LblOpen.Text = (From row As DataGridViewRow In GridTicket1.Rows
-                        Where row.Cells(2).FormattedValue.ToString() <> String.Empty
-                        Select Convert.ToInt32(row.Cells(2).FormattedValue)).Sum().ToString("N0")
-        LblNoFollow.Text = (From row As DataGridViewRow In GridTicket1.Rows
-                            Where row.Cells(3).FormattedValue.ToString() <> String.Empty
-                            Select Convert.ToInt32(row.Cells(3).FormattedValue)).Sum().ToString("N0")
-        LblReOpen.Text = (From row As DataGridViewRow In GridTicket1.Rows
-                          Where row.Cells(4).FormattedValue.ToString() <> String.Empty
-                          Select Convert.ToInt32(row.Cells(4).FormattedValue)).Sum().ToString("N0")
-        LblUnrd.Text = (From row As DataGridViewRow In GridTicket1.Rows
-                        Where row.Cells(5).FormattedValue.ToString() <> String.Empty
-                        Select Convert.ToInt32(row.Cells(5).FormattedValue)).Sum().ToString("N0")
-        LblFolwDy.Text = (From row As DataGridViewRow In GridTicket1.Rows
-                          Where row.Cells(6).FormattedValue.ToString() <> String.Empty
-                          Select Convert.ToInt32(row.Cells(6).FormattedValue)).Sum().ToString("N0")
-        LblEvt.Text = (From row As DataGridViewRow In GridTicket1.Rows
-                       Where row.Cells(7).FormattedValue.ToString() <> String.Empty
-                       Select Convert.ToInt32(row.Cells(7).FormattedValue)).Sum().ToString("N0")
-        LblCls.Text = (From row As DataGridViewRow In GridTicket1.Rows
-                       Where row.Cells(8).FormattedValue.ToString() <> String.Empty
-                       Select Convert.ToInt32(row.Cells(8).FormattedValue)).Sum().ToString("N0")
-        LblRead.Text = (From row As DataGridViewRow In GridTicket1.Rows
-                        Where row.Cells(9).FormattedValue.ToString() <> String.Empty
-                        Select Convert.ToInt32(row.Cells(9).FormattedValue)).Sum().ToString("N0")
-        LblRecived.Text = (From row As DataGridViewRow In GridTicket1.Rows
-                           Where row.Cells(10).FormattedValue.ToString() <> String.Empty
-                           Select Convert.ToInt32(row.Cells(10).FormattedValue)).Sum().ToString("N0")
-        LblClsUpted.Text = (From row As DataGridViewRow In GridTicket1.Rows
-                            Where row.Cells(11).FormattedValue.ToString() <> String.Empty
-                            Select Convert.ToInt32(row.Cells(11).FormattedValue)).Sum().ToString("N0")
+
+        'MyUsrsTable.DefaultView.RowFilter = UsrStr
+        If MyUsrsTable.DefaultView.Count > 0 Then
+            LblOpen.Text = Convert.ToInt32(MyUsrsTable.DefaultView.ToTable().Compute("sum(UsrClsN)", String.Empty))
+            LblNoFollow.Text = Convert.ToInt32(MyUsrsTable.DefaultView.ToTable().Compute("sum(UsrFlN)", String.Empty))
+            LblReOpen.Text = Convert.ToInt32(MyUsrsTable.DefaultView.ToTable().Compute("sum(UsrReOpY)", String.Empty))
+            Lblfollowe.Text = Convert.ToInt32(MyUsrsTable.DefaultView.ToTable().Compute("sum(UsrEventflowr)", String.Empty))
+            LblColleg.Text = Convert.ToInt32(MyUsrsTable.DefaultView.ToTable().Compute("sum(UsrEventColeg)", String.Empty))
+            LblOthers.Text = Convert.ToInt32(MyUsrsTable.DefaultView.ToTable().Compute("sum(UsrEventOther)", String.Empty))
+            LblFolwDy.Text = Convert.ToInt32(MyUsrsTable.DefaultView.ToTable().Compute("sum(UsrTikFlowDy)", String.Empty))
+            LblEvt.Text = Convert.ToInt32(MyUsrsTable.DefaultView.ToTable().Compute("sum(UsrEvDy)", String.Empty))
+            LblCls.Text = Convert.ToInt32(MyUsrsTable.DefaultView.ToTable().Compute("sum(UsrClsYDy)", String.Empty))
+            LblRecived.Text = Convert.ToInt32(MyUsrsTable.DefaultView.ToTable().Compute("sum(UsrRecevDy)", String.Empty))
+            LblClsUpted.Text = Convert.ToInt32(MyUsrsTable.DefaultView.ToTable().Compute("sum(UsrClsUpdtd)", String.Empty))
+        Else
+            LblOpen.Text = 0
+            LblNoFollow.Text = 0
+            LblReOpen.Text = 0
+            Lblfollowe.Text = 0
+            LblColleg.Text = 0
+            LblOthers.Text = 0
+            LblFolwDy.Text = 0
+            LblEvt.Text = 0
+            LblCls.Text = 0
+            LblRecived.Text = 0
+            LblClsUpted.Text = 0
+        End If
 #End Region
         WelcomeScreen.StatBrPnlAr.Text = ""
         ChckColor()
     End Sub
     Private Sub ChckColor()
-        For Each c In GroupBox1.Controls
+        For Each c In FlowLayoutPanel1.Controls
             'If TypeOf c Is RadioButton Then
             '    If c.Checked = True Then
             '        c.BackColor = Color.LimeGreen
@@ -161,7 +158,7 @@ Public Class TotView
                 If Mid(c.Name, 1, 3) = "Lbl" Then
                     If CDbl(Val(c.Text)) > 0 Then
                         c.ForeColor = Color.Green
-                        c.Font = New Font("Times New Roman", 12, FontStyle.Bold)
+                        c.Font = New Font("Times New Roman", 14, FontStyle.Bold)
                     Else
                         c.ForeColor = Color.Black
                         c.Font = New Font("Times New Roman", 6, FontStyle.Regular)

@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TikNew));
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Rooting");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Rooting");
             this.BtnAdd = new System.Windows.Forms.Button();
             this.Label11 = new System.Windows.Forms.Label();
             this.Label29 = new System.Windows.Forms.Label();
@@ -86,6 +86,8 @@
             this.TabControl2 = new System.Windows.Forms.TabControl();
             this.TabPage3 = new System.Windows.Forms.TabPage();
             this.FlwMainData = new System.Windows.Forms.FlowLayoutPanel();
+            this.chckIDChange = new System.Windows.Forms.CheckBox();
+            this.chckphonechange = new System.Windows.Forms.CheckBox();
             this.NameTxtBx = new System.Windows.Forms.TextBox();
             this.Label15 = new System.Windows.Forms.Label();
             this.MailTxtBx = new System.Windows.Forms.TextBox();
@@ -101,8 +103,6 @@
             this.Label6 = new System.Windows.Forms.Label();
             this.DetailsTxtBx = new System.Windows.Forms.TextBox();
             this.lblhelp = new System.Windows.Forms.Label();
-            this.chckIDChange = new System.Windows.Forms.CheckBox();
-            this.chckphonechange = new System.Windows.Forms.CheckBox();
             this.Panel5.SuspendLayout();
             this.MyGroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).BeginInit();
@@ -177,7 +177,6 @@
             this.IDTxtBx.TabIndex = 1;
             this.IDTxtBx.Tag = "English-Number";
             this.IDTxtBx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.IDTxtBx.TextChanged += new System.EventHandler(this.IDTxtBx_TextChanged);
             // 
             // RadNID
             // 
@@ -463,7 +462,6 @@
             this.Phon1TxtBx.Size = new System.Drawing.Size(286, 32);
             this.Phon1TxtBx.TabIndex = 0;
             this.Phon1TxtBx.Tag = "English-Number";
-            this.Phon1TxtBx.TextChanged += new System.EventHandler(this.Phon1TxtBx_TextChanged);
             // 
             // Label22
             // 
@@ -760,12 +758,12 @@
             this.TreeView1.ImageKey = "Add.ico";
             this.TreeView1.Location = new System.Drawing.Point(7, 51);
             this.TreeView1.Name = "TreeView1";
-            treeNode7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            treeNode7.ForeColor = System.Drawing.Color.Red;
-            treeNode7.Name = "Rooting";
-            treeNode7.Text = "Rooting";
+            treeNode1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            treeNode1.ForeColor = System.Drawing.Color.Red;
+            treeNode1.Name = "Rooting";
+            treeNode1.Text = "Rooting";
             this.TreeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode7});
+            treeNode1});
             this.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TreeView1.RightToLeftLayout = true;
             this.TreeView1.ShowNodeToolTips = true;
@@ -875,6 +873,28 @@
             this.FlwMainData.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.FlwMainData.Size = new System.Drawing.Size(1168, 508);
             this.FlwMainData.TabIndex = 0;
+            // 
+            // chckIDChange
+            // 
+            this.chckIDChange.AutoSize = true;
+            this.FlwMainData.SetFlowBreak(this.chckIDChange, true);
+            this.chckIDChange.Location = new System.Drawing.Point(247, 3);
+            this.chckIDChange.Name = "chckIDChange";
+            this.chckIDChange.Size = new System.Drawing.Size(128, 29);
+            this.chckIDChange.TabIndex = 2049;
+            this.chckIDChange.Text = "checkBox1";
+            this.chckIDChange.UseVisualStyleBackColor = true;
+            // 
+            // chckphonechange
+            // 
+            this.chckphonechange.AutoSize = true;
+            this.chckphonechange.Location = new System.Drawing.Point(472, 54);
+            this.chckphonechange.Margin = new System.Windows.Forms.Padding(3, 14, 3, 3);
+            this.chckphonechange.Name = "chckphonechange";
+            this.chckphonechange.Size = new System.Drawing.Size(155, 29);
+            this.chckphonechange.TabIndex = 2050;
+            this.chckphonechange.Text = "تغيير رقم التليفون";
+            this.chckphonechange.UseVisualStyleBackColor = true;
             // 
             // NameTxtBx
             // 
@@ -1070,28 +1090,6 @@
             this.lblhelp.Size = new System.Drawing.Size(1154, 72);
             this.lblhelp.TabIndex = 2048;
             this.lblhelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // chckIDChange
-            // 
-            this.chckIDChange.AutoSize = true;
-            this.FlwMainData.SetFlowBreak(this.chckIDChange, true);
-            this.chckIDChange.Location = new System.Drawing.Point(247, 3);
-            this.chckIDChange.Name = "chckIDChange";
-            this.chckIDChange.Size = new System.Drawing.Size(128, 29);
-            this.chckIDChange.TabIndex = 2049;
-            this.chckIDChange.Text = "checkBox1";
-            this.chckIDChange.UseVisualStyleBackColor = true;
-            // 
-            // chckphonechange
-            // 
-            this.chckphonechange.AutoSize = true;
-            this.chckphonechange.Location = new System.Drawing.Point(472, 54);
-            this.chckphonechange.Margin = new System.Windows.Forms.Padding(3, 14, 3, 3);
-            this.chckphonechange.Name = "chckphonechange";
-            this.chckphonechange.Size = new System.Drawing.Size(155, 29);
-            this.chckphonechange.TabIndex = 2050;
-            this.chckphonechange.Text = "تغيير رقم التليفون";
-            this.chckphonechange.UseVisualStyleBackColor = true;
             // 
             // TikNew
             // 

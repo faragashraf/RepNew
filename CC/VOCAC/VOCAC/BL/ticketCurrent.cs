@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -312,7 +313,7 @@ namespace VOCAC.BL
             {
                 function fn = function.getfn;
                 TikUpdate.getTikupdatefrm.Close();
-                fn.msg("لاتوجد هناك تحديثات للعرض", "تحميل التحديثات");
+                fn.msg("لاتوجد هناك تحديثات للعرض", "تحميل التحديثات", MessageBoxButtons.OK);
 
             }
         }
@@ -374,6 +375,46 @@ namespace VOCAC.BL
             {
                 item.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+        }
+        public static string addevent(int id, string txt, bool read, int EvId, string IP, int user, [Optional] byte[] attach)
+        {
+            string rslt = null;
+            SqlCommand sqlcmd = new SqlCommand();
+            sqlcmd.CommandType = CommandType.StoredProcedure;
+            sqlcmd.CommandText = "SP_TICKET_EVENT_INSERT";
+            SqlConnection con = new SqlConnection(Statcdif.strConn);
+            sqlcmd.Connection = con;
+            SqlParameter[] param = new SqlParameter[7];
+            param[0] = new SqlParameter("@TkupTkSql", SqlDbType.Int);
+            param[0].Value = id;
+            param[1] = new SqlParameter("@TkupTxt", SqlDbType.NVarChar);
+            param[1].Value = txt;
+            param[2] = new SqlParameter("@TkupUnread", SqlDbType.Bit);
+            param[2].Value = read;
+            param[3] = new SqlParameter("@TkupEvtId", SqlDbType.Int);
+            param[3].Value = EvId;
+            param[4] = new SqlParameter("@TkupUserIP", SqlDbType.NVarChar, 15);
+            param[4].Value = IP;
+            param[5] = new SqlParameter("@TkupUser", SqlDbType.Int);
+            param[5].Value = user;
+            param[6] = new SqlParameter("@TkupAttch", SqlDbType.Image);
+            param[6].Value = attach;
+            for (int i = 0; i < param.Length; i++)
+            {
+                sqlcmd.Parameters.Add(param[i]);
+            }
+            try
+            {
+                con.Open();
+                sqlcmd.ExecuteNonQuery();
+            }
+            catch (Exception Ex)
+            {
+                rslt = Ex.Message;
+                function fn = function.getfn;
+                fn.msg("لم يتم إضافة التحديث", "إضافة تحديث جديد", MessageBoxButtons.OK);
+            }
+            return rslt;
         }
     }
 }

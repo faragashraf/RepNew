@@ -107,6 +107,12 @@
     <Compile Include="BL\ticketCurrent.cs" />
     <Compile Include="BL\TicketsSelectBulk.cs" />
     <Compile Include="DAL\DataAccessLayer.cs" />
+    <Compile Include="PL\userPasschange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\userPasschange.Designer.cs">
+      <DependentUpon>userPasschange.cs</DependentUpon>
+    </Compile>
     <Compile Include="PL\TikFolow_Team.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +176,9 @@
     <Compile Include="PL\WelcomeScreen.Designer.cs">
       <DependentUpon>WelcomeScreen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="PL\userPasschange.resx">
+      <DependentUpon>userPasschange.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PL\TikFolow_Team.resx">
       <DependentUpon>TikFolow_Team.cs</DependentUpon>
     </EmbeddedResource>

@@ -35,6 +35,7 @@ namespace VOCAC.PL
             this.flwCmboPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.lbl = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btnSave = new System.Windows.Forms.Button();
             this.btnprint = new System.Windows.Forms.Button();
             this.flwRotatePanel = new System.Windows.Forms.FlowLayoutPanel();
             this.Radio90 = new System.Windows.Forms.RadioButton();
@@ -47,7 +48,6 @@ namespace VOCAC.PL
             this.StatBrPnlEn = new System.Windows.Forms.StatusBarPanel();
             this.StatBrPnlAr = new System.Windows.Forms.StatusBarPanel();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.flwMainPanel.SuspendLayout();
             this.flwCmboPanel.SuspendLayout();
             this.flwRotatePanel.SuspendLayout();
@@ -66,7 +66,7 @@ namespace VOCAC.PL
             this.flwMainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flwMainPanel.Location = new System.Drawing.Point(0, 0);
             this.flwMainPanel.Name = "flwMainPanel";
-            this.flwMainPanel.Size = new System.Drawing.Size(1289, 794);
+            this.flwMainPanel.Size = new System.Drawing.Size(796, 532);
             this.flwMainPanel.TabIndex = 0;
             // 
             // flwCmboPanel
@@ -78,7 +78,7 @@ namespace VOCAC.PL
             this.flwCmboPanel.Controls.Add(this.btnprint);
             this.flwMainPanel.SetFlowBreak(this.flwCmboPanel, true);
             this.flwCmboPanel.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flwCmboPanel.Location = new System.Drawing.Point(844, 3);
+            this.flwCmboPanel.Location = new System.Drawing.Point(710, 3);
             this.flwCmboPanel.Name = "flwCmboPanel";
             this.flwCmboPanel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.flwCmboPanel.Size = new System.Drawing.Size(442, 57);
@@ -110,6 +110,18 @@ namespace VOCAC.PL
             this.comboBox1.ValueMember = "value";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             // 
+            // btnSave
+            // 
+            this.btnSave.BackgroundImage = global::VOCAC.Properties.Resources.SaveGreen1;
+            this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSave.Location = new System.Drawing.Point(120, 5);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(0, 5, 10, 10);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(52, 40);
+            this.btnSave.TabIndex = 4;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            // 
             // btnprint
             // 
             this.btnprint.BackgroundImage = global::VOCAC.Properties.Resources.print;
@@ -134,7 +146,7 @@ namespace VOCAC.PL
             this.flwRotatePanel.Controls.Add(this.btncdispose);
             this.flwMainPanel.SetFlowBreak(this.flwRotatePanel, true);
             this.flwRotatePanel.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flwRotatePanel.Location = new System.Drawing.Point(792, 66);
+            this.flwRotatePanel.Location = new System.Drawing.Point(658, 66);
             this.flwRotatePanel.Name = "flwRotatePanel";
             this.flwRotatePanel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.flwRotatePanel.Size = new System.Drawing.Size(494, 52);
@@ -202,7 +214,7 @@ namespace VOCAC.PL
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(137, 124);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 124);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(1149, 512);
             this.pictureBox1.TabIndex = 1;
@@ -216,14 +228,14 @@ namespace VOCAC.PL
             // 
             this.StatusBar1.Enabled = false;
             this.StatusBar1.Font = new System.Drawing.Font("Times New Roman", 14F);
-            this.StatusBar1.Location = new System.Drawing.Point(0, 794);
+            this.StatusBar1.Location = new System.Drawing.Point(0, 532);
             this.StatusBar1.Name = "StatusBar1";
             this.StatusBar1.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.StatBrPnlEn,
             this.StatBrPnlAr});
             this.StatusBar1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.StatusBar1.ShowPanels = true;
-            this.StatusBar1.Size = new System.Drawing.Size(1289, 22);
+            this.StatusBar1.Size = new System.Drawing.Size(796, 22);
             this.StatusBar1.SizingGrip = false;
             this.StatusBar1.TabIndex = 99;
             // 
@@ -238,7 +250,7 @@ namespace VOCAC.PL
             // 
             this.StatBrPnlAr.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring;
             this.StatBrPnlAr.Name = "StatBrPnlAr";
-            this.StatBrPnlAr.Width = 1279;
+            this.StatBrPnlAr.Width = 786;
             // 
             // button2
             // 
@@ -249,24 +261,12 @@ namespace VOCAC.PL
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // btnSave
-            // 
-            this.btnSave.BackgroundImage = global::VOCAC.Properties.Resources.SaveGreen1;
-            this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSave.Location = new System.Drawing.Point(120, 5);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(0, 5, 10, 10);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(52, 40);
-            this.btnSave.TabIndex = 4;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
-            // 
             // zpicViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1289, 816);
+            this.ClientSize = new System.Drawing.Size(796, 554);
             this.Controls.Add(this.flwMainPanel);
             this.Controls.Add(this.StatusBar1);
             this.Controls.Add(this.button2);

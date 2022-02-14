@@ -60,12 +60,12 @@ Partial Class CompSetup
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.RadSusp = New System.Windows.Forms.RadioButton()
         Me.RadActv = New System.Windows.Forms.RadioButton()
+        Me.TreeComp = New System.Windows.Forms.TreeView()
         Me.TreeProd = New System.Windows.Forms.TreeView()
         Me.RadActvs = New System.Windows.Forms.RadioButton()
         Me.RadSusps = New System.Windows.Forms.RadioButton()
         Me.RadAlls = New System.Windows.Forms.RadioButton()
         Me.LblTrCnt = New System.Windows.Forms.Label()
-        Me.TreeComp = New System.Windows.Forms.TreeView()
         Me.RadAl = New System.Windows.Forms.RadioButton()
         Me.RadSsp = New System.Windows.Forms.RadioButton()
         Me.RadAcv = New System.Windows.Forms.RadioButton()
@@ -470,7 +470,6 @@ Partial Class CompSetup
         Me.GroupBox1.Controls.Add(Me.RadActv)
         Me.GroupBox1.Controls.Add(Me.Label9)
         Me.GroupBox1.Controls.Add(Me.TxtFnMngr)
-        Me.GroupBox1.Controls.Add(Me.TreeComp)
         Me.GroupBox1.Controls.Add(Me.ComboBox1)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label10)
@@ -508,6 +507,16 @@ Partial Class CompSetup
         Me.RadActv.TabStop = True
         Me.RadActv.Text = "تعمل"
         Me.RadActv.UseVisualStyleBackColor = True
+        '
+        'TreeComp
+        '
+        Me.TreeComp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TreeComp.Font = New System.Drawing.Font("Times New Roman", 14.0!)
+        Me.TreeComp.Location = New System.Drawing.Point(556, 44)
+        Me.TreeComp.Name = "TreeComp"
+        Me.TreeComp.RightToLeftLayout = True
+        Me.TreeComp.Size = New System.Drawing.Size(696, 589)
+        Me.TreeComp.TabIndex = 105
         '
         'TreeProd
         '
@@ -567,16 +576,6 @@ Partial Class CompSetup
         Me.LblTrCnt.Size = New System.Drawing.Size(60, 21)
         Me.LblTrCnt.TabIndex = 103
         Me.LblTrCnt.Text = "Label1"
-        '
-        'TreeComp
-        '
-        Me.TreeComp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TreeComp.Font = New System.Drawing.Font("Times New Roman", 14.0!)
-        Me.TreeComp.Location = New System.Drawing.Point(94, 49)
-        Me.TreeComp.Name = "TreeComp"
-        Me.TreeComp.RightToLeftLayout = True
-        Me.TreeComp.Size = New System.Drawing.Size(183, 213)
-        Me.TreeComp.TabIndex = 105
         '
         'RadAl
         '
@@ -668,6 +667,7 @@ Partial Class CompSetup
         Me.Controls.Add(Me.LblHelp)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.TreeComp)
         Me.Controls.Add(Me.LblTrCnt)
         Me.Controls.Add(Me.RadAlls)
         Me.Controls.Add(Me.RadSusps)

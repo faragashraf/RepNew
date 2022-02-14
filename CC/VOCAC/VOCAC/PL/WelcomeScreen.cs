@@ -72,6 +72,11 @@ namespace VOCAC.PL
             function fn = function.getfn;
             Statcdif._IP = fn.OsIP();
             LblUsrIP.Text = "IP: " + Statcdif._IP;
+            lblIp.Text = "IP: " + Statcdif._IP;
+            if (Encoding.Default.HeaderName != "windows-1256")
+            {
+
+            }
             if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
             {
                 Ver = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4);
@@ -81,8 +86,8 @@ namespace VOCAC.PL
             else
             {
                 Ver = "Publish version";
-                PubVerLbl.Text = "Publish Ver. : This isn't a Publish version";
-                PubVerLbl1.Text = "Publish Ver. : This isn't a Publish version";
+                PubVerLbl.Text = "Publish Ver. : Not Deployed Version";
+                PubVerLbl1.Text = "Publish Ver. : Not Deployed Version";
             }
 
             //Cmbo.Items.Add("My Labtop");
@@ -96,34 +101,55 @@ namespace VOCAC.PL
         {
             panellgin.Location = new Point((this.Width - panellgin.Width) / 2, (this.Height - 150 - panellgin.Height) / 2);
 
-            MdiClient Mdiclnt1;
-            foreach (Control ctrl in this.Controls)
+            if (Encoding.Default.HeaderName == "windows-1256") // Current Languaes for non-Unocode Programs is Arabic
             {
-                try
+                MdiClient Mdiclnt1;
+                foreach (Control ctrl in this.Controls)
                 {
-                    Mdiclnt1 = (MdiClient)ctrl;
-                    Mdiclnt1.BackColor = Color.White;
-                }
-                catch (Exception)
-                {
+                    try
+                    {
+                        Mdiclnt1 = (MdiClient)ctrl;
+                        Mdiclnt1.BackColor = Color.White;
+                    }
+                    catch (Exception)
+                    {
 
+                    }
                 }
+                frms forms = new frms();
+                forms.FrmAllSub(this);
+                function fn = function.getfn;
+                //initialize Lables
+
+                Statcdif._MacStr = fn.GetMACAddressNew();
+                TxtUsrNm.Select();
+                TxtUsrNm.Text = "ahmed_emam";
+                TxtUsrPass.Text = "hemonad";
+
+                Cmbo.SelectedItem = "Training";
+                //Cmbo.SelectedItem = "Eg Server";
+                Statcdif._ServerCD = Cmbo.SelectedItem.ToString();
+                LblSrvrNm.Text = Statcdif._ServerCD;
+                this.Cmbo.SelectedIndexChanged += new System.EventHandler(this.Cmbo_SelectedIndexChanged);
             }
-            frms forms = new frms();
-            forms.FrmAllSub(this);
-            function fn = function.getfn;
-            //initialize Lables
+            else
+            {
+                FlowLayoutPanel1.Size = new Size(Statcdif.screenWidth, Statcdif.screenHeight - 120);
+                FlowLayoutPanel1.Dock = DockStyle.Fill;
+                FlowLayoutPanel1.Visible = true;
+                panellgin.Visible = false;
+                GroupBox1.Visible = false;
+                GrpCounters.Visible = false;
+                PictureBox1.Visible = false;
+                LblUsrIP.Visible = false;
+                PubVerLbl.Visible = false;
+                Panel2.Visible = false;
+                FlowLayoutPanel1.BackgroundImage = Resources.Language_for_Non_Unicode_Programs;
+                FlowLayoutPanel1.BackgroundImageLayout = ImageLayout.Stretch;
+                StatBrPnlAr.Text = "يرجى إتباع تعليمات تغيير اللغة أعلاه وإعادة تشغيل البرنامج مرة أخرى";
+                StatBrPnlAr.Alignment = HorizontalAlignment.Center;
+            }
 
-            Statcdif._MacStr = fn.GetMACAddressNew();
-            TxtUsrNm.Select();
-            TxtUsrNm.Text = "ahmed_emam";
-            TxtUsrPass.Text = "hemonad";
-
-            Cmbo.SelectedItem = "Training";
-            //Cmbo.SelectedItem = "Eg Server";
-            Statcdif._ServerCD = Cmbo.SelectedItem.ToString();
-            LblSrvrNm.Text = Statcdif._ServerCD;
-            this.Cmbo.SelectedIndexChanged += new System.EventHandler(this.Cmbo_SelectedIndexChanged);
         }
         private void LogInBtn_Click(object sender, EventArgs e)
         {
@@ -147,6 +173,22 @@ namespace VOCAC.PL
                 if (logreslt.dt.Rows.Count > 0)
                 {
                     Statcdif.UserTable = logreslt.dt;
+                    CurrentUser.UsrPWrd = Statcdif.UserTable.Rows[0].Field<String>("UsrPassTmp");
+                    CurrentUser.UsrRlNm = Statcdif.UserTable.Rows[0].Field<String>("UsrRealNm");
+                    if (Statcdif.UserTable.Rows[0].Field<String>("UsrPassTmp").Equals("0000") == true)
+                    {
+                        userPasschange usrfrm = new userPasschange();
+                        //usrfrm.MdiParent = WelcomeScreen.ActiveForm;
+                        usrfrm.ShowDialog();
+                        panellgin.Enabled = false;
+                    }
+                    if (CurrentUser.UsrPWrd.Equals("0000") == true)
+                    {
+                        LogInBtn.Enabled = true;
+                        panellgin.Enabled = true;
+                        return;
+                    }
+                    StatBrPnlEn.Text = "Loging In ...";
                     IntializeUser();
                     SelctMainTables();
                     IntializeSwitchBoard(fn);
@@ -154,6 +196,8 @@ namespace VOCAC.PL
                     LblLogin.Text = "";
                     LblLogin.Image = Resources.Empty;
                     DbStat.BackgroundImage = Resources.DBOn;
+                    panellgin.Enabled = true;
+                    StatBrPnlEn.Text = "";
                 }
                 else
                 {
@@ -169,8 +213,9 @@ namespace VOCAC.PL
                 LblLogin.Text = "";
                 StatBrPnlEn.Text = "Offline";
                 this.Refresh();
-                fn.msg("لم ينجح الإتصال بقواعد البيانات" + Environment.NewLine + logreslt.msg, "Login");
+                fn.msg("لم ينجح الإتصال بقواعد البيانات" + Environment.NewLine + logreslt.msg, "Login", MessageBoxButtons.OK);
             }
+
             LogInBtn.Enabled = true;
             GC.Collect();
 
@@ -421,7 +466,7 @@ namespace VOCAC.PL
             }
             else
             {
-                fn.msg(fn.Gettable("SELECT * from AMac WHERE Mac='" + Statcdif._MacStr + "'", Statcdif.MacTble, "1000&H").ToString(), "ddd");
+                fn.msg(fn.Gettable("SELECT * from AMac WHERE Mac='" + Statcdif._MacStr + "'", Statcdif.MacTble, "1000&H").ToString(), "ddd", MessageBoxButtons.OK);
             }
         }
         private void TxtUsrPass_KeyDown(object sender, KeyEventArgs e)
@@ -464,7 +509,7 @@ namespace VOCAC.PL
                 catch (Exception Ex)
                 {
                     function fn = function.getfn;
-                    fn.msg("dd", "frfff");
+                    fn.msg("dd", "frfff", MessageBoxButtons.OK);
                 }
             }
 
@@ -503,7 +548,7 @@ namespace VOCAC.PL
                 catch (Exception Ex)
                 {
                     function fn = function.getfn;
-                    fn.msg("خطأ في تحميل الصوره", "تحميل الصورة الشخصية");
+                    fn.msg("خطأ في تحميل الصوره", "تحميل الصورة الشخصية", MessageBoxButtons.OK);
                     fn.AppLog(this.ToString(), Ex.Message, "SP_A_USR_PIC");
                 }
             }
@@ -530,7 +575,6 @@ namespace VOCAC.PL
 
             PictureBox1.Refresh();
         }
-
         private void ToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             Bitmap tt = (Bitmap)PictureBox1.Image;
@@ -538,11 +582,72 @@ namespace VOCAC.PL
             PictureBox1.Image = tt;
             PictureBox1.Refresh();
         }
-
         private void Button3_Click(object sender, EventArgs e)
         {
-
+            int oo = CountNumberOfLinesInCSFilesOfDirectory(@"E:\RepNew\CC\VOCAC\VOCAC");
 
         }
+
+
+        #region Project Code Lines Count In any Directory
+        private int CountNumberOfLinesInCSFilesOfDirectory(string dirPath)
+        {
+            FileInfo[] csFiles = new DirectoryInfo(dirPath.Trim())
+                                        .GetFiles("*.cs", SearchOption.AllDirectories);
+
+            int totalNumberOfLines = 0;
+            Parallel.ForEach(csFiles, fo =>
+            {
+                Interlocked.Add(ref totalNumberOfLines, CountNumberOfLine(fo));
+            });
+            return totalNumberOfLines;
+        }
+        private int CountNumberOfLine(Object tc)
+        {
+            FileInfo fo = (FileInfo)tc;
+            int count = 0;
+            int inComment = 0;
+            using (StreamReader sr = fo.OpenText())
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (IsRealCode(line.Trim(), ref inComment))
+                        count++;
+                }
+            }
+            return count;
+        }
+        private bool IsRealCode(string trimmed, ref int inComment)
+        {
+            if (trimmed.StartsWith("/*") && trimmed.EndsWith("*/"))
+                return false;
+            else if (trimmed.StartsWith("/*"))
+            {
+                inComment++;
+                return false;
+            }
+            else if (trimmed.EndsWith("*/"))
+            {
+                inComment--;
+                return false;
+            }
+
+            return
+                   inComment == 0
+                && !trimmed.StartsWith("//")
+                && (trimmed.StartsWith("if")
+                    || trimmed.StartsWith("else if")
+                    || trimmed.StartsWith("using (")
+                    || trimmed.StartsWith("else  if")
+                    || trimmed.Contains(";")
+                    || trimmed.StartsWith("public") //method signature
+                    || trimmed.StartsWith("private") //method signature
+                    || trimmed.StartsWith("protected") //method signature
+                    );
+        }
+        #endregion
+
+
     }
 }

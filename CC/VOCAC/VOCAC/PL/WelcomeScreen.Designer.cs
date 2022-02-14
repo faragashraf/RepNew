@@ -104,6 +104,7 @@
             this.panellgin = new System.Windows.Forms.Panel();
             this.ImageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tmrbringfront = new System.Windows.Forms.Timer(this.components);
+            this.lblIp = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.CNTXMNUPic.SuspendLayout();
             this.FlowLayoutPanel1.SuspendLayout();
@@ -277,7 +278,7 @@
             this.FlowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.FlowLayoutPanel1.Name = "FlowLayoutPanel1";
             this.FlowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.FlowLayoutPanel1.Size = new System.Drawing.Size(686, 492);
+            this.FlowLayoutPanel1.Size = new System.Drawing.Size(486, 393);
             this.FlowLayoutPanel1.TabIndex = 99;
             this.FlowLayoutPanel1.Visible = false;
             // 
@@ -827,6 +828,7 @@
             this.ToolTip1.SetToolTip(this.button1, "تسجيل الدخول");
             this.button1.UseCompatibleTextRendering = true;
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // button3
@@ -847,6 +849,7 @@
             this.ToolTip1.SetToolTip(this.button3, "تسجيل الدخول");
             this.button3.UseCompatibleTextRendering = true;
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // TimerCon
@@ -905,13 +908,13 @@
             // label11
             // 
             this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.Font = new System.Drawing.Font("Californian FB", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.DarkRed;
+            this.label11.Font = new System.Drawing.Font("Californian FB", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.label11.Location = new System.Drawing.Point(132, 88);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(348, 57);
+            this.label11.Size = new System.Drawing.Size(289, 57);
             this.label11.TabIndex = 113;
-            this.label11.Text = "Welcome TO VOCA Enterprise";
+            this.label11.Text = "VOCA Ultimate";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel4
@@ -987,10 +990,12 @@
             this.Cmbo.Name = "Cmbo";
             this.Cmbo.Size = new System.Drawing.Size(121, 21);
             this.Cmbo.TabIndex = 110;
+            this.Cmbo.Visible = false;
             // 
             // panellgin
             // 
             this.panellgin.BackColor = System.Drawing.Color.White;
+            this.panellgin.Controls.Add(this.lblIp);
             this.panellgin.Controls.Add(this.button3);
             this.panellgin.Controls.Add(this.button1);
             this.panellgin.Controls.Add(this.PubVerLbl1);
@@ -1033,6 +1038,20 @@
             // 
             this.tmrbringfront.Enabled = true;
             this.tmrbringfront.Tick += new System.EventHandler(this.tmrbringfront1);
+            // 
+            // lblIp
+            // 
+            this.lblIp.BackColor = System.Drawing.Color.Transparent;
+            this.lblIp.Font = new System.Drawing.Font("Times New Roman", 9F);
+            this.lblIp.ForeColor = System.Drawing.Color.Red;
+            this.lblIp.Location = new System.Drawing.Point(289, 283);
+            this.lblIp.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
+            this.lblIp.Name = "lblIp";
+            this.lblIp.Size = new System.Drawing.Size(297, 20);
+            this.lblIp.TabIndex = 117;
+            this.lblIp.Text = "User IP: ";
+            this.lblIp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ToolTip1.SetToolTip(this.lblIp, "IP Address Of Current Mashine");
             // 
             // WelcomeScreen
             // 
@@ -1147,5 +1166,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         internal System.Windows.Forms.Button button3;
+        internal System.Windows.Forms.Label lblIp;
     }
 }

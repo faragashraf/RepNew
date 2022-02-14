@@ -86,7 +86,7 @@ namespace VOCAC.PL
             }
             this.Size = frmsze;
             //this.MaximumSize = frmsze;
-            //this.MinimumSize = frmsze;
+            this.MinimumSize = new Size (800,600);
 
             //flwCmboPanel.Size = new Size((comboBox1.Width + lbl.Width + 50), 50);
             //flwRotatePanel.Size = new Size(Radio90.Width + Radio180.Width + button1.Width + 55, 50);
