@@ -173,9 +173,9 @@ namespace VOCAC.PL
                 if (logreslt.dt.Rows.Count > 0)
                 {
                     Statcdif.UserTable = logreslt.dt;
-                    CurrentUser.UsrPWrd = Statcdif.UserTable.Rows[0].Field<String>("UsrPassTmp");
+                    CurrentUser.UsrPWrd = Statcdif.UserTable.Rows[0].Field<String>("UsrPassNew");
                     CurrentUser.UsrRlNm = Statcdif.UserTable.Rows[0].Field<String>("UsrRealNm");
-                    if (Statcdif.UserTable.Rows[0].Field<String>("UsrPassTmp").Equals("0000") == true)
+                    if (Statcdif.UserTable.Rows[0].Field<String>("UsrPassNew").Equals("0000") == true)
                     {
                         userPasschange usrfrm = new userPasschange();
                         //usrfrm.MdiParent = WelcomeScreen.ActiveForm;
@@ -301,7 +301,7 @@ namespace VOCAC.PL
             CurrentUser.UsrID = Statcdif.UserTable.Rows[0].Field<int>("UsrId");                  //store user ID
             CurrentUser.UsrCat = Statcdif.UserTable.Rows[0].Field<int>("UsrCat");                //Current User Catagory
             CurrentUser.UsrNm = Statcdif.UserTable.Rows[0].Field<String>("UsrNm");               //Current User Name
-            CurrentUser.UsrPWrd = Statcdif.UserTable.Rows[0].Field<String>("UsrPassTmp");        //Current User Password
+            CurrentUser.UsrPWrd = Statcdif.UserTable.Rows[0].Field<String>("UsrPassNew");        //Current User Password
             CurrentUser.UsrLvl = Statcdif.UserTable.Rows[0].Field<String>("UsrLevel");           //Current User Class
             CurrentUser.UsrRlNm = Statcdif.UserTable.Rows[0].Field<String>("UsrRealNm");         //Current user Real Name
             CurrentUser.UsrMail = Statcdif.UserTable.Rows[0].Field<String>("UsrEmail");          //Current user UsrEmail

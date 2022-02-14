@@ -59,7 +59,7 @@ namespace VOCAC.PL
                     }
                     else
                     {
-                        if (changePasswrd("update Int_user set UsrPassTmp='" + TxtUsrPass.Text + "' where usrid = " + Statcdif.UserTable.Rows[0].Field<int>("UsrId")) == null)
+                        if (changePasswrd("update Int_user set UsrPassNew ='" + TxtUsrPass.Text + "' where usrid = " + Statcdif.UserTable.Rows[0].Field<int>("UsrId")) == null)
                         {
                             CurrentUser.UsrPWrd = TxtUsrPass.Text;
                             LblHint.Text = "تم تغيير كملمة المرور بنجاج";

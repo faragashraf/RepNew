@@ -955,8 +955,14 @@ Sec2:
                         GrdTick.Columns(HH).HeaderText = "اسم المنتج"
                     ElseIf Tbl.Columns(HH).ColumnName = "CompNm" Then
                         GrdTick.Columns(HH).HeaderText = "نوع الشكوى"
-                    ElseIf Tbl.Columns(HH).ColumnName = "UsrRealNm" Then
+                    ElseIf Tbl.Columns(HH).ColumnName = "fOLLOWER" Then
                         GrdTick.Columns(HH).HeaderText = "متابع الشكوى"
+                    ElseIf Tbl.Columns(HH).ColumnName = "TkClNtID" Then
+                        GrdTick.Columns(HH).HeaderText = "الرقم القومي"
+                    ElseIf Tbl.Columns(HH).ColumnName = "TkCardNo" Then
+                        GrdTick.Columns(HH).HeaderText = "رقم الكارت"
+                    ElseIf Tbl.Columns(HH).ColumnName = "TkShpNo" Then
+                        GrdTick.Columns(HH).HeaderText = "رقم الشحنة"
                     Else
                         GrdTick.Columns(HH).HeaderText = "unknown"
                         GrdTick.Columns(HH).Visible = False

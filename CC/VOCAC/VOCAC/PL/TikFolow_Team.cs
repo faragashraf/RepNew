@@ -107,6 +107,7 @@ namespace VOCAC.PL
                         Filtr();
                         assignfltrTXTintoCtrlTag();
                         frmAdjust();
+                        counersGrid();
                         GridTicket.ClearSelection();
                         treeView1.SelectedNode = treeView1.Nodes[0];
                         //this.GridTicket.SelectionChanged += new System.EventHandler(this.GridTicket_SelectionChanged);
@@ -121,7 +122,7 @@ namespace VOCAC.PL
             else
             {
                 fn.msg("لا توجد شكاوى للمتابعة", "متابعة الشكاوى", MessageBoxButtons.OK);
-                flowLayoutPanel3.Visible = false;
+                flwCounters.Visible = false;
             }
             WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
         }
@@ -173,7 +174,6 @@ namespace VOCAC.PL
         {
             refereshtbl();
         }
-
         private void refereshtbl()
         {
             sqlcmb = new SqlCommandBuilder(da);
@@ -189,7 +189,6 @@ namespace VOCAC.PL
                 fn.AppLog(this.ToString(), ex.Message, "Referesh TickTblMain");
             }
         }
-
         private void Filtr()
         {
             this.GridTicket.SelectionChanged -= new EventHandler(this.GridTicket_SelectionChanged);
@@ -304,7 +303,7 @@ namespace VOCAC.PL
         private void radioButtonFilter()
         {
             frms frm = new frms();
-            IEnumerable<Control> rdlist = frm.GetAll(flowLayoutPanel3, typeof(RadioButton));
+            IEnumerable<Control> rdlist = frm.GetAll(flwCounters, typeof(RadioButton));
             foreach (RadioButton c in rdlist)
             {
                 if (c.Checked == true)
@@ -339,9 +338,9 @@ namespace VOCAC.PL
                 FltrStr.Append(" or [TkClNm]" + LK + strt + searchbox.Text + end_);
                 FltrStr.Append(" or [TkClPh]" + LK + strt + searchbox.Text + end_);
                 FltrStr.Append(" or [TkClPh1]" + LK + strt + searchbox.Text + end_);
-                int ColCount =0;
+                int ColCount = 0;
                 if (tabControl1.SelectedTab.Name == "tabDistribute") { ColCount = GridTicket.Columns.Count - 1; } else { ColCount = GridTicket.Columns.Count; }
-                    for (int i = 37; i < ColCount; i++)
+                for (int i = 37; i < ColCount; i++)
                 {
                     FltrStr.Append(" or [" + GridTicket.Columns[i].Name.ToString() + "]" + LK + strt + searchbox.Text + end_);
                 }
@@ -355,7 +354,7 @@ namespace VOCAC.PL
         }
         private void Color_()
         {
-            foreach (Control c in flowLayoutPanel3.Controls)
+            foreach (Control c in flwCounters.Controls)
             {
                 if (c.GetType() == typeof(RadioButton))
                 {
@@ -399,10 +398,11 @@ namespace VOCAC.PL
             //GridTicket.Size = new Size(this.Width - treeView1.Width - 50, this.Height - 260);
             //GridTicket.Margin = new Padding((this.Width - treeView1.Width - GridTicket.Width) / 2, GridTicket.Margin.Top, GridTicket.Margin.Right, GridTicket.Margin.Bottom);
             //treeView1.Height = GridTicket.Height;
-            splitContainer1.Size = new Size(this.Width - 35, this.Height - (FlowLayoutPanel2.Height + flowLayoutPanel3.Height + 100));
-            FlowLayoutPanel2.Margin = new Padding((this.Width - FlowLayoutPanel2.Width) / 2, FlowLayoutPanel2.Margin.Top, FlowLayoutPanel2.Margin.Right, FlowLayoutPanel2.Margin.Bottom);
-            flowLayoutPanel3.Margin = new Padding((this.Width - flowLayoutPanel3.Width) / 2, flowLayoutPanel3.Margin.Top, flowLayoutPanel3.Margin.Right, flowLayoutPanel3.Margin.Bottom);
+            splitContainer1.Size = new Size(this.Width - 35, this.Height - (FlwtopBar.Height + flwCounters.Height + 115));
+            FlwtopBar.Margin = new Padding((this.Width - FlwtopBar.Width) / 2, FlwtopBar.Margin.Top, FlwtopBar.Margin.Right, FlwtopBar.Margin.Bottom);
+            flwCounters.Margin = new Padding((this.Width - flwCounters.Width - Panel3.Width) / 2, flwCounters.Margin.Top, flwCounters.Margin.Right, flwCounters.Margin.Bottom);
             trackBar1.Value = splitContainer1.SplitterDistance;
+            trackBar2.Value = splitContainer2.SplitterDistance;
         }
         private void SerchTxt_TextChanged(object sender, EventArgs e)
         {
@@ -520,15 +520,19 @@ namespace VOCAC.PL
             }
         }
         private List<string> listTeam = new List<string>();
+        DataTable usercountrsTbl = new DataTable();
         public void MyTeamOnLoad(int LedrCat, int LedrId, bool Stat = false)
         {
             TreeNode[] TempNode = new TreeNode[0];
-
+            usercountrsTbl.Columns.Add("ID");
+            usercountrsTbl.Columns.Add("Team");
+            usercountrsTbl.Columns.Add("الاسم");
+            usercountrsTbl.Columns.Add("العدد");
             if (CurrentUser.UsrLvl.Substring(16, 1) == "A")
             {
                 Statcdif.TreeUsrTbl.DefaultView.RowFilter = "UsrSusp = 0 and UCatId = 0";
                 treeView1.Nodes.Add(Statcdif.TreeUsrTbl.DefaultView[0]["UCatId"].ToString(),
-                    Statcdif.TreeUsrTbl.DefaultView[0]["UsrMix"].ToString());
+                Statcdif.TreeUsrTbl.DefaultView[0]["UsrMix"].ToString());
                 listTeam.Add(CurrentUser.UsrID.ToString());
             }
             else
@@ -553,9 +557,32 @@ namespace VOCAC.PL
                     else { gndr = 1; }
                     TempNode[0].Nodes.Add(Statcdif.TreeUsrTbl.DefaultView[i]["UCatId"].ToString(), Statcdif.TreeUsrTbl.DefaultView[i]["UsrMix"].ToString(), gndr);
                     listTeam.Add(Statcdif.TreeUsrTbl.DefaultView[i][0].ToString());
+                    usercountrsTbl.Rows.Add(Statcdif.TreeUsrTbl.DefaultView[i][0].ToString(), Statcdif.TreeUsrTbl.DefaultView[i]["UsrMix"].ToString().Split('-')[0].Trim(), Statcdif.TreeUsrTbl.DefaultView[i]["UsrMix"].ToString().Split('-')[1].Trim(), 0);
                 }
             }
             CurrentUser.UsrTeam = string.Join(", ", listTeam);
+        }
+        private void counersGrid()
+        {
+            dataGridView1.DataSource = usercountrsTbl;
+            dataGridView1.Columns["ID"].Visible = false;
+            DataTable temptbl = new DataTable();
+            temptbl = TickTblMain.Copy();
+            for (int i = 0; i < usercountrsTbl.Rows.Count; i++)
+            {
+                temptbl.DefaultView.RowFilter = "TkEmpNm = " + usercountrsTbl.Rows[i][0];
+                int cnt = Convert.ToInt32(temptbl.DefaultView.ToTable().Compute("count(TkRecieveDt)", "TkRecieveDt = '" + DateTime.Parse(Statcdif.servrTime).ToString("yyyy/MM/dd") + "'"));
+                if (cnt > 0)
+                {
+                    usercountrsTbl.Rows[i]["العدد"] = Convert.ToString(temptbl.DefaultView.ToTable().Compute("count(TkRecieveDt)", "TkRecieveDt = '" + DateTime.Parse(Statcdif.servrTime).ToString("yyyy/MM/dd") + "'"));
+                }
+                else
+                {
+                    usercountrsTbl.Rows[i]["العدد"] = "";
+                }
+            }
+            temptbl.Dispose();
+            GC.Collect();
         }
         private void TreeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
@@ -689,7 +716,6 @@ namespace VOCAC.PL
                 txtReopen.Text = "";
                 GridTicket.DataSource = TickTblMain.DefaultView;
                 gridadjst();
-                //Filtr();
             }
             // Reopen tree if current user is team leader and tree is closed
             if ((treeView1.GetNodeCount(true) > 1 && splitContainer1.Panel1Collapsed == true) || CurrentUser.UsrLvl.Substring(16, 1) == "A")
@@ -719,10 +745,10 @@ namespace VOCAC.PL
                 distributeTbl.Columns.Add("followerNm");
                 distributeTbl.Rows.Clear();
 
-                this.GridTicket.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridTicket_CellClick);
+                this.GridTicket.CellClick += new DataGridViewCellEventHandler(this.GridTicket_CellClick);
                 if (treeView1.SelectedNode.Nodes.Count > 0) { slctdNodestate = true; } else { slctdNodestate = false; }
                 slctdNodetxt = treeView1.SelectedNode.Text.Split('-')[2];
-                flowLayoutPanel3.Enabled = false;
+                flwCounters.Enabled = false;
                 SerchTxt.Text = "";
             }
             else if (tabControl1.SelectedTab.Name == "tabReopen")
@@ -746,13 +772,19 @@ namespace VOCAC.PL
                 this.GridTicket.CellClick -= new System.Windows.Forms.DataGridViewCellEventHandler(this.GridTicket_CellClick);
                 if (GridTicket.Columns.Count > TickTblMain.Columns.Count)
                 {
-                    int kk = TickTblMain.Columns.Count;
-                    GridTicket.Columns.RemoveAt(GridTicket.Columns.Count - 1);
+                    try
+                    {
+                        GridTicket.Columns.RemoveAt(GridTicket.Columns.Count - 1);
+                    }
+                    catch (Exception){}
                 }
-                flowLayoutPanel3.Enabled = true;
+                flwCounters.Enabled = true;
                 textDistrSearch.Text = "";
             }
-            if (GridTicket.DataSource != null) { Filtr(); }
+            if (GridTicket.DataSource != null)
+            {
+                Filtr();
+            }
             this.GridTicket.SelectionChanged += new EventHandler(this.GridTicket_SelectionChanged);
         }
         private void filtercounters(DataTable tblfilter)
@@ -778,42 +810,80 @@ namespace VOCAC.PL
         {
             if (GridTicket.CurrentCell.ColumnIndex == GridTicket.Columns.Count - 1)
             {
-                DataGridViewButtonColumn column_ = new DataGridViewButtonColumn();
-                column_ = (DataGridViewButtonColumn)GridTicket.Columns[GridTicket.CurrentCell.ColumnIndex];
-                column_.UseColumnTextForButtonValue = false;
-                if (GridTicket.CurrentRow.DefaultCellStyle.BackColor != Color.LimeGreen)
-                {
-                    if (treeView1.SelectedNode.Text.Split('-')[2].Trim() != GridTicket.CurrentRow.Cells["TkEmpNm"].Value.ToString())
-                    {
-                        WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
-                        GridTicket.CurrentRow.DefaultCellStyle.BackColor = Color.LimeGreen;
+                //DataGridViewButtonColumn column_ = new DataGridViewButtonColumn();
+                //column_ = (DataGridViewButtonColumn)GridTicket.Columns[GridTicket.CurrentCell.ColumnIndex];
+                //column_.UseColumnTextForButtonValue = false;
+                rowDis(GridTicket.CurrentRow.Index);
+                //if (GridTicket.CurrentRow.DefaultCellStyle.BackColor != Color.LimeGreen)
+                //{
+                //    if (treeView1.SelectedNode.Text.Split('-')[2].Trim() != GridTicket.CurrentRow.Cells["TkEmpNm"].Value.ToString())
+                //    {
+                //        WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
+                //        GridTicket.CurrentRow.DefaultCellStyle.BackColor = Color.LimeGreen;
 
-                        GridTicket.CurrentRow.Cells[GridTicket.CurrentCell.ColumnIndex].Value = "استعاده";
-                        string stat;
-                        if (GridTicket.CurrentRow.Cells["TkRecieveDt"].Value.ToString().Length > 0)
-                        { stat = "false"; }
-                        else { stat = "true"; }
-                        distributeTbl.Rows.Add(GridTicket.CurrentRow.Cells["TkSQL"].Value, treeView1.SelectedNode.Text.Split('-')[2].Trim(), stat, treeView1.SelectedNode.Text.Split('-')[1].Trim());
-                        // Change follower name in only the datagrid to user point view
-                        GridTicket.CurrentRow.Cells["folowusr"].Value = treeView1.SelectedNode.Text.Split('-')[1].Trim();
-                    }
-                    else
-                    {
-                        WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "               برجاء اختيار الموظف أولاً";
-                    }
-                }
-                else if (GridTicket.CurrentRow.DefaultCellStyle.BackColor == Color.LimeGreen)
-                {
+                //        GridTicket.CurrentRow.Cells[GridTicket.CurrentCell.ColumnIndex].Value = "استعاده";
+                //        string stat;
+                //        if (GridTicket.CurrentRow.Cells["TkRecieveDt"].Value.ToString().Length > 0)
+                //        { stat = "false"; }
+                //        else { stat = "true"; }
+                //        distributeTbl.Rows.Add(GridTicket.CurrentRow.Cells["TkSQL"].Value, treeView1.SelectedNode.Text.Split('-')[2].Trim(), stat, treeView1.SelectedNode.Text.Split('-')[1].Trim());
+                //        // Change follower name in only the datagrid to user point view
+                //        GridTicket.CurrentRow.Cells["folowusr"].Value = treeView1.SelectedNode.Text.Split('-')[1].Trim();
+                //    }
+                //    else
+                //    {
+                //        WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "               برجاء اختيار الموظف أولاً";
+                //    }
+                //}
+                //else if (GridTicket.CurrentRow.DefaultCellStyle.BackColor == Color.LimeGreen)
+                //{
 
-                    DataRow DRW = function.DRW(distributeTbl, GridTicket.CurrentRow.Cells["TkSQL"].Value, distributeTbl.Columns[0]) ;
-                    distributeTbl.Rows.RemoveAt(distributeTbl.Rows.IndexOf(DRW));
-                    GridTicket.CurrentRow.DefaultCellStyle.BackColor = Color.White;
-                    GridTicket.CurrentRow.Cells[GridTicket.CurrentCell.ColumnIndex].Value = "توزيع";
-                    // Back the leader name in only the datagrid to user point view
-                    GridTicket.CurrentRow.Cells["folowusr"].Value = CurrentUser.UsrRlNm;
-                }
+                //    DataRow DRW = function.DRW(distributeTbl, GridTicket.CurrentRow.Cells["TkSQL"].Value, distributeTbl.Columns[0]);
+                //    distributeTbl.Rows.RemoveAt(distributeTbl.Rows.IndexOf(DRW));
+                //    GridTicket.CurrentRow.DefaultCellStyle.BackColor = Color.White;
+                //    GridTicket.CurrentRow.Cells[GridTicket.CurrentCell.ColumnIndex].Value = "توزيع";
+                //    // Back the leader name in only the datagrid to user point view
+                //    GridTicket.CurrentRow.Cells["folowusr"].Value = CurrentUser.UsrRlNm;
+                //}
             }
 
+        }
+        private void rowDis(int rowindex)
+        {
+            DataGridViewButtonColumn column_ = new DataGridViewButtonColumn();
+            column_ = (DataGridViewButtonColumn)GridTicket.Columns[GridTicket.Columns.Count - 1];
+            column_.UseColumnTextForButtonValue = false;
+            if (GridTicket.Rows[rowindex].DefaultCellStyle.BackColor != Color.LimeGreen)
+            {
+                if (treeView1.SelectedNode.Text.Split('-')[2].Trim() != GridTicket.Rows[rowindex].Cells["TkEmpNm"].Value.ToString())
+                {
+                    WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
+                    GridTicket.Rows[rowindex].DefaultCellStyle.BackColor = Color.LimeGreen;
+
+                    GridTicket.Rows[rowindex].Cells[GridTicket.Columns.Count - 1].Value = "استعاده";
+                    string stat;
+                    if (GridTicket.Rows[rowindex].Cells["TkRecieveDt"].Value.ToString().Length > 0)
+                    { stat = "false"; }
+                    else { stat = "true"; }
+                    distributeTbl.Rows.Add(GridTicket.Rows[rowindex].Cells["TkSQL"].Value, treeView1.SelectedNode.Text.Split('-')[2].Trim(), stat, treeView1.SelectedNode.Text.Split('-')[1].Trim());
+                    // Change follower name in only the datagrid to user point view
+                    GridTicket.Rows[rowindex].Tag = GridTicket.Rows[rowindex].Cells["folowusr"].Value;
+                    GridTicket.Rows[rowindex].Cells["folowusr"].Value = treeView1.SelectedNode.Text.Split('-')[1].Trim();
+                }
+                else
+                {
+                    WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "               برجاء اختيار الموظف أولاً";
+                }
+            }
+            else if (GridTicket.Rows[rowindex].DefaultCellStyle.BackColor == Color.LimeGreen)
+            {
+                DataRow DRW = function.DRW(distributeTbl, GridTicket.Rows[rowindex].Cells["TkSQL"].Value, distributeTbl.Columns[0]);
+                distributeTbl.Rows.RemoveAt(distributeTbl.Rows.IndexOf(DRW));
+                GridTicket.Rows[rowindex].DefaultCellStyle.BackColor = Color.White;
+                GridTicket.Rows[rowindex].Cells[GridTicket.Columns.Count - 1].Value = "توزيع";
+                // Back the leader name in only the datagrid to user point view
+                GridTicket.Rows[rowindex].Cells["folowusr"].Value = GridTicket.Rows[rowindex].Tag;
+            }
         }
         private void btnDistrebute_Click(object sender, EventArgs e)
         {
@@ -853,22 +923,32 @@ namespace VOCAC.PL
                             TickTblMain.Rows[TickTblMain.Rows.IndexOf(DRW)]["updtusr"] = CurrentUser.UsrRlNm;
                             TickTblMain.Rows[TickTblMain.Rows.IndexOf(DRW)]["UCatLvl"] = CurrentUser.UsrUCatLvl;
                             TickTblMain.Rows[TickTblMain.Rows.IndexOf(DRW)]["TkRecieveDt"] = DateTime.Parse(Statcdif.servrTime).ToString("yyyy/MM/dd");
-
                         }
-                        Filtr();
+                        if (checkAll.Checked == true)
+                        {
+                            checkAll.BackColor = Color.Red;
+                            checkAll.Text = "اختيار الكل";
+                            checkAll.Checked = false;
+                            tabControl1.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            filtbl();
+                        }
+                        counersGrid();
+                        fn.msg("Done", "توزيع الشكاوى", MessageBoxButtons.OK);
                     }
                     else
                     {
                         fn.msg("لم يتم توزيع عدد " + distributeTbl.Rows.Count + Environment.NewLine, "توزيع الشكاوى", MessageBoxButtons.OK);
                     }
-
                 }
             }
             else
             {
                 fn.msg("برجاء اختيار الشكاوى للتوزيع", "توزيع الشكاوى", MessageBoxButtons.OK);
             }
-
+            distributeTbl.Rows.Clear();
         }
         private String DistributeTicket(int EmpNm, string IP, DataTable FIELDTABL)
         {
@@ -948,7 +1028,6 @@ namespace VOCAC.PL
             btnGet.Tag = tag;
             btnGet.BackgroundImage = img;
         }
-
         private void TxtReopen_TextChanged(object sender, EventArgs e)
         {
             adjustButton("تحميل", Resources.DbGet);
@@ -958,10 +1037,49 @@ namespace VOCAC.PL
                 GridTicket.DataSource = null;
             }
         }
-
         private void TextDistrSearch_TextChanged(object sender, EventArgs e)
         {
             Filtr();
+        }
+        private void CheckAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkAll.Checked)
+            {
+                checkAll.BackColor = Color.Green;
+                checkAll.Text = "إلغاء اختيار الكل";
+            }
+            else if (!checkAll.Checked)
+            {
+                checkAll.BackColor = Color.Red;
+                checkAll.Text = "اختيار الكل";
+            }
+            for (int i = 0; i < GridTicket.Rows.Count; i++)
+            {
+                rowDis(i);
+            }
+        }
+        private void GridTicket_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
+        }
+
+        private void TrackBar2_Scroll(object sender, EventArgs e)
+        {
+            splitContainer2.SplitterDistance = trackBar2.Value;
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            if (splitContainer2.Panel1Collapsed == true)
+            {
+                splitContainer2.Panel1Collapsed = false;
+                button3.Text = "غلق الأعداد";
+            }
+            else
+            {
+                splitContainer2.Panel1Collapsed = true;
+                button3.Text = "فتح الأعداد";
+            }
         }
     }
 }
