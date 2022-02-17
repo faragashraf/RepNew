@@ -121,6 +121,7 @@
             this.ContextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ChckRegions = new System.Windows.Forms.RadioButton();
             this.LblRegions = new System.Windows.Forms.Label();
+            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
             this.Panel3.SuspendLayout();
             this.FlwtopBar.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
@@ -131,7 +132,6 @@
             this.pnlBtnSttng.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabSearch.SuspendLayout();
-            this.flowSearch.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.PnlBtnRfrsh.SuspendLayout();
@@ -163,12 +163,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlAr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlEn)).BeginInit();
             this.ContextMenuStrip2.SuspendLayout();
+            this.flowLayoutPanel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // Panel3
             // 
             this.Panel3.Controls.Add(this.CloseBtn);
-            this.Panel3.Location = new System.Drawing.Point(137, 613);
+            this.Panel3.Location = new System.Drawing.Point(120, 740);
             this.Panel3.Name = "Panel3";
             this.Panel3.Size = new System.Drawing.Size(76, 72);
             this.Panel3.TabIndex = 2172;
@@ -195,10 +196,11 @@
             this.FlwtopBar.Controls.Add(this.flowLayoutPanel4);
             this.FlwtopBar.Controls.Add(this.tabControl1);
             this.FlwtopBar.Controls.Add(this.checkAll);
+            this.FlwtopBar.Controls.Add(this.flowLayoutPanel7);
             this.FlowLayoutPanel1.SetFlowBreak(this.FlwtopBar, true);
-            this.FlwtopBar.Location = new System.Drawing.Point(66, 3);
+            this.FlwtopBar.Location = new System.Drawing.Point(49, 3);
             this.FlwtopBar.Name = "FlwtopBar";
-            this.FlwtopBar.Size = new System.Drawing.Size(1493, 122);
+            this.FlwtopBar.Size = new System.Drawing.Size(1493, 195);
             this.FlwtopBar.TabIndex = 2173;
             // 
             // flowLayoutPanel4
@@ -331,6 +333,7 @@
             this.tabControl1.Controls.Add(this.tabExport);
             this.tabControl1.Font = new System.Drawing.Font("Times New Roman", 18F);
             this.tabControl1.Location = new System.Drawing.Point(129, 3);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.RightToLeftLayout = true;
@@ -353,17 +356,10 @@
             // 
             // flowSearch
             // 
-            this.flowSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowSearch.Controls.Add(this.panel4);
-            this.flowSearch.Controls.Add(this.panel5);
-            this.flowSearch.Controls.Add(this.SerchTxt);
-            this.flowSearch.Controls.Add(this.PnlBtnRfrsh);
-            this.flowSearch.Controls.Add(this.chckShwResult);
-            this.flowSearch.Controls.Add(this.chckShowClose);
-            this.flowSearch.Controls.Add(this.pnlBtnClose);
-            this.flowSearch.Location = new System.Drawing.Point(-55, 5);
+            this.flowSearch.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowSearch.Location = new System.Drawing.Point(3, 3);
             this.flowSearch.Name = "flowSearch";
-            this.flowSearch.Size = new System.Drawing.Size(1141, 65);
+            this.flowSearch.Size = new System.Drawing.Size(1086, 65);
             this.flowSearch.TabIndex = 0;
             // 
             // panel4
@@ -372,9 +368,10 @@
             this.panel4.Controls.Add(this.Rd_contain);
             this.panel4.Controls.Add(this.Rd_endwith);
             this.panel4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.panel4.Location = new System.Drawing.Point(881, 3);
+            this.panel4.Location = new System.Drawing.Point(784, 3);
+            this.panel4.Margin = new System.Windows.Forms.Padding(275, 3, 3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(257, 52);
+            this.panel4.Size = new System.Drawing.Size(268, 52);
             this.panel4.TabIndex = 2175;
             // 
             // Rd_strtwith
@@ -382,7 +379,7 @@
             this.Rd_strtwith.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Rd_strtwith.AutoSize = true;
             this.Rd_strtwith.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.Rd_strtwith.Location = new System.Drawing.Point(187, 18);
+            this.Rd_strtwith.Location = new System.Drawing.Point(198, 18);
             this.Rd_strtwith.Name = "Rd_strtwith";
             this.Rd_strtwith.Size = new System.Drawing.Size(63, 26);
             this.Rd_strtwith.TabIndex = 2172;
@@ -396,7 +393,7 @@
             this.Rd_contain.AutoSize = true;
             this.Rd_contain.Checked = true;
             this.Rd_contain.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.Rd_contain.Location = new System.Drawing.Point(-2, 18);
+            this.Rd_contain.Location = new System.Drawing.Point(9, 18);
             this.Rd_contain.Name = "Rd_contain";
             this.Rd_contain.Size = new System.Drawing.Size(99, 26);
             this.Rd_contain.TabIndex = 2174;
@@ -410,7 +407,7 @@
             this.Rd_endwith.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Rd_endwith.AutoSize = true;
             this.Rd_endwith.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.Rd_endwith.Location = new System.Drawing.Point(103, 18);
+            this.Rd_endwith.Location = new System.Drawing.Point(114, 18);
             this.Rd_endwith.Name = "Rd_endwith";
             this.Rd_endwith.Size = new System.Drawing.Size(77, 26);
             this.Rd_endwith.TabIndex = 2173;
@@ -423,7 +420,7 @@
             this.panel5.Controls.Add(this.Rd_Equal);
             this.panel5.Controls.Add(this.Rd_Like);
             this.panel5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.panel5.Location = new System.Drawing.Point(765, 3);
+            this.panel5.Location = new System.Drawing.Point(668, 3);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(110, 52);
             this.panel5.TabIndex = 2176;
@@ -461,7 +458,7 @@
             this.SerchTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SerchTxt.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.SerchTxt.ForeColor = System.Drawing.Color.Black;
-            this.SerchTxt.Location = new System.Drawing.Point(557, 15);
+            this.SerchTxt.Location = new System.Drawing.Point(460, 15);
             this.SerchTxt.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
             this.SerchTxt.Name = "SerchTxt";
             this.SerchTxt.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -474,7 +471,7 @@
             // PnlBtnRfrsh
             // 
             this.PnlBtnRfrsh.Controls.Add(this.BtnRefrsh);
-            this.PnlBtnRfrsh.Location = new System.Drawing.Point(448, 10);
+            this.PnlBtnRfrsh.Location = new System.Drawing.Point(351, 10);
             this.PnlBtnRfrsh.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.PnlBtnRfrsh.Name = "PnlBtnRfrsh";
             this.PnlBtnRfrsh.Size = new System.Drawing.Size(103, 41);
@@ -496,10 +493,10 @@
             // 
             this.chckShwResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chckShwResult.AutoSize = true;
-            this.chckShwResult.Location = new System.Drawing.Point(297, 20);
+            this.chckShwResult.Location = new System.Drawing.Point(220, 20);
             this.chckShwResult.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.chckShwResult.Name = "chckShwResult";
-            this.chckShwResult.Size = new System.Drawing.Size(145, 25);
+            this.chckShwResult.Size = new System.Drawing.Size(125, 23);
             this.chckShwResult.TabIndex = 0;
             this.chckShwResult.Text = "إظهار فوري للنتائج";
             this.chckShwResult.UseVisualStyleBackColor = true;
@@ -507,10 +504,10 @@
             // chckShowClose
             // 
             this.chckShowClose.AutoSize = true;
-            this.chckShowClose.Location = new System.Drawing.Point(153, 20);
+            this.chckShowClose.Location = new System.Drawing.Point(93, 20);
             this.chckShowClose.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.chckShowClose.Name = "chckShowClose";
-            this.chckShowClose.Size = new System.Drawing.Size(138, 25);
+            this.chckShowClose.Size = new System.Drawing.Size(121, 23);
             this.chckShowClose.TabIndex = 2179;
             this.chckShowClose.Text = "إظهار زر الإغلاق";
             this.chckShowClose.UseVisualStyleBackColor = true;
@@ -519,7 +516,7 @@
             // pnlBtnClose
             // 
             this.pnlBtnClose.Controls.Add(this.btnCls);
-            this.pnlBtnClose.Location = new System.Drawing.Point(63, 3);
+            this.pnlBtnClose.Location = new System.Drawing.Point(3, 3);
             this.pnlBtnClose.Name = "pnlBtnClose";
             this.pnlBtnClose.Size = new System.Drawing.Size(84, 59);
             this.pnlBtnClose.TabIndex = 2178;
@@ -635,7 +632,7 @@
             this.tabReopen.Location = new System.Drawing.Point(4, 39);
             this.tabReopen.Name = "tabReopen";
             this.tabReopen.Padding = new System.Windows.Forms.Padding(3);
-            this.tabReopen.Size = new System.Drawing.Size(1153, 73);
+            this.tabReopen.Size = new System.Drawing.Size(1092, 73);
             this.tabReopen.TabIndex = 3;
             this.tabReopen.Text = "إعادة فتح";
             // 
@@ -647,13 +644,13 @@
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(1147, 67);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(1086, 67);
             this.flowLayoutPanel3.TabIndex = 2186;
             // 
             // Label11
             // 
             this.Label11.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Label11.Location = new System.Drawing.Point(879, 22);
+            this.Label11.Location = new System.Drawing.Point(818, 22);
             this.Label11.Margin = new System.Windows.Forms.Padding(150, 22, 3, 3);
             this.Label11.Name = "Label11";
             this.Label11.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -667,7 +664,7 @@
             this.txtReopen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtReopen.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.txtReopen.ForeColor = System.Drawing.Color.Black;
-            this.txtReopen.Location = new System.Drawing.Point(776, 22);
+            this.txtReopen.Location = new System.Drawing.Point(715, 22);
             this.txtReopen.Margin = new System.Windows.Forms.Padding(3, 22, 3, 3);
             this.txtReopen.Name = "txtReopen";
             this.txtReopen.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -681,7 +678,7 @@
             // 
             this.pnlBtnReopn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlBtnReopn.Controls.Add(this.btnGet);
-            this.pnlBtnReopn.Location = new System.Drawing.Point(683, 3);
+            this.pnlBtnReopn.Location = new System.Drawing.Point(622, 3);
             this.pnlBtnReopn.Name = "pnlBtnReopn";
             this.pnlBtnReopn.Size = new System.Drawing.Size(87, 56);
             this.pnlBtnReopn.TabIndex = 2183;
@@ -757,7 +754,7 @@
             this.tabExport.Margin = new System.Windows.Forms.Padding(0);
             this.tabExport.Name = "tabExport";
             this.tabExport.Padding = new System.Windows.Forms.Padding(3);
-            this.tabExport.Size = new System.Drawing.Size(1153, 73);
+            this.tabExport.Size = new System.Drawing.Size(1092, 73);
             this.tabExport.TabIndex = 1;
             this.tabExport.Text = "استخراج بيانات";
             // 
@@ -767,14 +764,14 @@
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(1147, 67);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(1086, 67);
             this.flowLayoutPanel5.TabIndex = 2182;
             // 
             // pnlBtnExport
             // 
             this.pnlBtnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlBtnExport.Controls.Add(this.btnExport);
-            this.pnlBtnExport.Location = new System.Drawing.Point(929, 3);
+            this.pnlBtnExport.Location = new System.Drawing.Point(868, 3);
             this.pnlBtnExport.Margin = new System.Windows.Forms.Padding(150, 3, 3, 3);
             this.pnlBtnExport.Name = "pnlBtnExport";
             this.pnlBtnExport.Size = new System.Drawing.Size(68, 59);
@@ -813,7 +810,7 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Location = new System.Drawing.Point(66, 131);
+            this.splitContainer1.Location = new System.Drawing.Point(49, 204);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -825,7 +822,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.GridTicket);
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer1.Size = new System.Drawing.Size(1493, 476);
+            this.splitContainer1.Size = new System.Drawing.Size(1493, 530);
             this.splitContainer1.SplitterDistance = 651;
             this.splitContainer1.TabIndex = 2176;
             // 
@@ -844,7 +841,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.treeView1);
             this.splitContainer2.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer2.Size = new System.Drawing.Size(651, 476);
+            this.splitContainer2.Size = new System.Drawing.Size(651, 530);
             this.splitContainer2.SplitterDistance = 279;
             this.splitContainer2.TabIndex = 2179;
             // 
@@ -861,7 +858,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(279, 476);
+            this.dataGridView1.Size = new System.Drawing.Size(279, 530);
             this.dataGridView1.TabIndex = 2176;
             // 
             // treeView1
@@ -877,7 +874,7 @@
             this.treeView1.ShowLines = false;
             this.treeView1.ShowPlusMinus = false;
             this.treeView1.ShowRootLines = false;
-            this.treeView1.Size = new System.Drawing.Size(368, 476);
+            this.treeView1.Size = new System.Drawing.Size(368, 530);
             this.treeView1.StateImageList = this.imageList1;
             this.treeView1.TabIndex = 2175;
             this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeView1_BeforeSelect);
@@ -905,7 +902,7 @@
             this.GridTicket.ReadOnly = true;
             this.GridTicket.RowHeadersVisible = false;
             this.GridTicket.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.GridTicket.Size = new System.Drawing.Size(838, 476);
+            this.GridTicket.Size = new System.Drawing.Size(838, 530);
             this.GridTicket.TabIndex = 123;
             this.GridTicket.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.GridTicket_CellPainting);
             this.GridTicket.DoubleClick += new System.EventHandler(this.GridTicket_DoubleClick);
@@ -938,7 +935,7 @@
             this.flwCounters.Controls.Add(this.LabelCompCount);
             this.flwCounters.Controls.Add(this.LblRequest);
             this.flwCounters.Controls.Add(this.LblRegions);
-            this.flwCounters.Location = new System.Drawing.Point(219, 613);
+            this.flwCounters.Location = new System.Drawing.Point(202, 740);
             this.flwCounters.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.flwCounters.Name = "flwCounters";
             this.flwCounters.Size = new System.Drawing.Size(1343, 72);
@@ -1355,6 +1352,23 @@
             this.LblRegions.Text = "LblRegions";
             this.LblRegions.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // flowLayoutPanel7
+            // 
+            this.flowLayoutPanel7.AutoSize = true;
+            this.flowLayoutPanel7.Controls.Add(this.panel4);
+            this.flowLayoutPanel7.Controls.Add(this.panel5);
+            this.flowLayoutPanel7.Controls.Add(this.SerchTxt);
+            this.flowLayoutPanel7.Controls.Add(this.PnlBtnRfrsh);
+            this.flowLayoutPanel7.Controls.Add(this.chckShwResult);
+            this.flowLayoutPanel7.Controls.Add(this.chckShowClose);
+            this.flowLayoutPanel7.Controls.Add(this.pnlBtnClose);
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(166, 119);
+            this.flowLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
+            this.flowLayoutPanel7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(1327, 65);
+            this.flowLayoutPanel7.TabIndex = 2189;
+            // 
             // TikFolow_Team
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -1382,8 +1396,6 @@
             this.pnlBtnSttng.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabSearch.ResumeLayout(false);
-            this.flowSearch.ResumeLayout(false);
-            this.flowSearch.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -1419,6 +1431,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlAr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlEn)).EndInit();
             this.ContextMenuStrip2.ResumeLayout(false);
+            this.flowLayoutPanel7.ResumeLayout(false);
+            this.flowLayoutPanel7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1517,5 +1531,6 @@
         internal System.Windows.Forms.Button btnToRegion;
         internal System.Windows.Forms.RadioButton ChckRegions;
         internal System.Windows.Forms.Label LblRegions;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
     }
 }

@@ -64,7 +64,7 @@ namespace VOCAC.PL
             ChckFlN.Tag = "TkFolw = 'False'";
             ChckTrnsDy.Tag = "TkRecieveDt = '" + DateTime.Parse(Statcdif.servrTime).ToString("yyyy/MM/dd") + "'";
             ChckRead.Tag = "TkupUnread = 'False'";
-            ChckRegions.Tag = "TaskUserID <> 0";
+            ChckRegions.Tag = "TaskUserID > 0";
             ChckEsc1.Tag = "TkupEvtId = 902";
             ChckEsc2.Tag = "TkupEvtId = 903";
             ChckEsc3.Tag = "TkupEvtId = 904";
@@ -265,13 +265,13 @@ namespace VOCAC.PL
                 {
                     counersGrid();
                     splitContainer2.Panel1Collapsed = false;
-                    pnlBtnSttng.Visible = true;
+                    btnseting.Visible = true;
                     trackBar2.Visible = true;
                 }
                 else if (tabControl1.SelectedTab.Name == "tabTask")
                 {
                     tabControl1.TabPages["tabTask"].Text = "إرسال للمناطق " + slctdNode.Text.Split('-')[1].Trim() + " للمناطق";
-                    SerchTxt.Clear();
+
                     tabControl1.TabPages.RemoveByKey("tabDistribute");
 
                     treeView1.AfterSelect -= new TreeViewEventHandler(TreeView_AfterSelect);
@@ -279,7 +279,6 @@ namespace VOCAC.PL
                     treeView1.AfterSelect += new TreeViewEventHandler(TreeView_AfterSelect);
                 }
                 flwCounters.Enabled = false;
-                SerchTxt.Clear();
             }
             else if (tabControl1.SelectedTab.Name == "tabReopen")
             {
@@ -288,14 +287,15 @@ namespace VOCAC.PL
                 if (GridTicket.Columns.Count == 1) { GridTicket.Columns.RemoveAt(0); }
                 SerchTxt.Clear();
                 txtReopen.Clear();
-                textDistrSearch.Clear();
                 StatBrPnlAr.Text = "";
                 StatBrPnlAr.Icon = null;
+                flowLayoutPanel7.Visible = false;
             }
             else
             {
+                flowLayoutPanel7.Visible = true;
                 splitContainer2.Panel1Collapsed = true;
-                pnlBtnSttng.Visible = false;
+                btnseting.Visible = false;
                 trackBar2.Visible = false;
                 tabControl1.TabPages["tabTask"].Text = "إرسال للمناطق";
                 if (!tabControl1.Contains(tabDistribute))
@@ -386,28 +386,30 @@ namespace VOCAC.PL
         {
             if (GridTicket.Rows.Count > 0)
             {
-                if (currntTicket._TkSQL != Convert.ToInt32(GridTicket.CurrentRow.Cells["TkSql"].Value))
+                if (GridTicket.CurrentRow != null)
                 {
-                    if (GridTicket.CurrentRow != null)
+                    if (currntTicket._TkSQL != Convert.ToInt32(GridTicket.CurrentRow.Cells["TkSql"].Value))
                     {
-                        this.StatBrPnlAr.Text = Fltrreslt + (GridTicket.CurrentRow.Index + 1) + " / " + TickTblMain.DefaultView.Count.ToString() + "     ";
-                    }
+                        if (GridTicket.CurrentRow != null)
+                        {
+                            this.StatBrPnlAr.Text = Fltrreslt + (GridTicket.CurrentRow.Index + 1) + " / " + TickTblMain.DefaultView.Count.ToString() + "     ";
+                        }
 
-                    ticketCurrent.currentRow(GridTicket);
-                    bool bolTikDetails = frms.FormIsOpen(Application.OpenForms, typeof(TikDetails));
-                    bool bolTikUpdate = frms.FormIsOpen(Application.OpenForms, typeof(TikUpdate));
+                        ticketCurrent.currentRow(GridTicket);
+                        bool bolTikDetails = frms.FormIsOpen(Application.OpenForms, typeof(TikDetails));
+                        bool bolTikUpdate = frms.FormIsOpen(Application.OpenForms, typeof(TikUpdate));
 
-                    if (bolTikDetails == true)
-                    {
-                        ShowResult();
-                    }
+                        if (bolTikDetails == true)
+                        {
+                            ShowResult();
+                        }
 
-                    if (bolTikUpdate == true)
-                    {
-                        ticketCurrent.getupdate();
+                        if (bolTikUpdate == true)
+                        {
+                            ticketCurrent.getupdate();
+                        }
                     }
                 }
-
             }
             GC.Collect();
         }
@@ -578,23 +580,24 @@ namespace VOCAC.PL
             this.GridTicket.SelectionChanged -= new EventHandler(this.GridTicket_SelectionChanged);
             FltrStr.Clear();                                                        //Clear Filter string
 
+            textBoxFilter(SerchTxt);                                                //Add string to Filter string if TextBox length > 0
+
             radioButtonFilter();                                                    //Add string To Filter string from RadioButton if Slected
             if (tabControl1.SelectedTab.Name == "tabDistribute" || tabControl1.SelectedTab.Name == "tabTask")                                 //If Distribute Page has been selected
             {
-                textBoxFilter(textDistrSearch);                                      //Add string to Filter string if TextBox length > 0
                 treeFilter(slctdNode.Text.Split('-')[2]);                                            //Get team filter string Targeted Node Before selected Tab Page
                 TickTblMain.DefaultView.RowFilter = FltrStr.ToString();              //Confirm DefaultView For the Tickets Table Filter
                 DataTable usrtickets = new DataTable();
                 usrtickets = TickTblMain.Copy();                                     //Copy Tickets dataTable
 
-                FltrStr.Clear();                                                     //Clear Filter string
+                //FltrStr.Clear();                                                     //Clear Filter string
                 treeFilter(treeView1.SelectedNode.Text.Split('-')[2]);               //Get team filter string as current selected Node
                 usrtickets.DefaultView.RowFilter = FltrStr.ToString();               //Assign Filter string to the Copied Datatable
                 filtercounters(usrtickets);                                          //Assign Counters to RadioButtons Values as the Copied Datatable DefaultView
             }
             else                               //If Distribute Page has been NOT selected
             {
-                textBoxFilter(SerchTxt);                                                //Add string to Filter string if TextBox length > 0
+
                 if (treeView1.SelectedNode != null)
                 {
                     treeFilter(treeView1.SelectedNode.Text.Split('-')[2]);
@@ -778,7 +781,7 @@ namespace VOCAC.PL
             LblFl1.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TkupEvtId)", "TkupEvtId = 902"));
             LblFl2.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TkupEvtId)", "TkupEvtId = 903"));
             LblFl3.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TkupEvtId)", "TkupEvtId = 904"));
-            LblRegions.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TaskUserID)", "TaskUserID <> 0"));
+            LblRegions.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TaskUserID)", "TaskUserID > 0"));
         }
         private void counersGrid()
         {
@@ -870,11 +873,10 @@ namespace VOCAC.PL
                 FltrStr.Append(" or [TkClNm]" + LK + strt + searchbox.Text + end_);
                 FltrStr.Append(" or [TkClPh]" + LK + strt + searchbox.Text + end_);
                 FltrStr.Append(" or [TkClPh1]" + LK + strt + searchbox.Text + end_);
-                int ColCount = 0;
-                if (tabControl1.SelectedTab.Name == "tabDistribute") { ColCount = GridTicket.Columns.Count - 1; } else { ColCount = GridTicket.Columns.Count; }
-                for (int i = 37; i < ColCount; i++)
+
+                for (int i = 0; i < currntTicket.fieldlst.Count; i++)
                 {
-                    FltrStr.Append(" or [" + GridTicket.Columns[i].Name.ToString() + "]" + LK + strt + searchbox.Text + end_);
+                    FltrStr.Append(" or Convert([" + currntTicket.fieldlst[i].ToString() + "],System.String)" + LK + strt + searchbox.Text + end_);
                 }
                 FltrStr.Append(" or [TkClNtID]" + LK + strt + searchbox.Text + end_);
                 FltrStr.Append(" or [PrdNm]" + LK + strt + searchbox.Text + end_);
