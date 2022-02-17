@@ -361,7 +361,7 @@ namespace VOCAC
         }
         public int CalDate(string StDt, string EnDt)
         {
-            Statcdif.CDHolDay.DefaultView.RowFilter = "HDate >= '" + StDt + "' and HDate <= '" + EnDt + "'";
+            Statcdif.CDHolDay.DefaultView.RowFilter = "HDate >= '" + StDt + "' and HDate <= '" + EnDt + "' and HDy = 1";
             int Wdays = Statcdif.CDHolDay.DefaultView.Count;
             return Wdays;
         }

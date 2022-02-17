@@ -372,49 +372,10 @@ SendMail_:
                 End If
             End If
         ElseIf Format(_Now, "HH") = Format(_EndTime, "HH") And Format(_Now, "mm") = HourMin_ Then 'Send Daily Report On The End Working Day Time
-            If Fn.GetTbl("select * from AutoMail where AutoMail.MailRule = 'D'", MailTbl) = Nothing Then
-                If MailTbl.Rows.Count > 0 Then
-                    Invoke(Sub() TxtErr.Text = Now & " :  Starting Auto Mail ..." & vbCrLf & TxtErr.Text)
-                    Invoke(Sub() TxtErr.Refresh())
-                    Try
-                        Invoke(Sub() TxtErr.Text = Now & " :  Trying to send " & MailTbl.Rows.Count & " Mails ..." & vbCrLf & TxtErr.Text)
-                        Invoke(Sub() TxtErr.Refresh())
-                        For YY = 0 To MailTbl.Rows.Count - 1
-                            Invoke(Sub() TxtErr.Text = Now & " :  Trying to send " & YY + 1 & " Of " & MailTbl.Rows.Count & " Mails ..." & vbCrLf & TxtErr.Text)
-                            Invoke(Sub() TxtErr.Refresh())
-                            Mail_.Slct_ = MailTbl.Rows(YY).Item(1).ToString
-                            Mail_.To_ = MailTbl.Rows(YY).Item(2).ToString
-                            Mail_.CC_ = MailTbl.Rows(YY).Item(3).ToString
-                            Mail_.BCc_ = ""
-                            Mail_.Sub_ = MailTbl.Rows(YY).Item(4).ToString & "_" & Format(WW, "yyyy/MM/dd,dddd")
-                            Mail_.Body_ = BdyStrt & MailTbl.Rows(YY).Item(5).ToString & BdyEnd
-                            Invoke(Sub() TxtErr.Text = Now & " :  Exporting " & Mail_.Sub_ & vbCrLf & TxtErr.Text)
-                            Invoke(Sub() TxtErr.Refresh())
-                            If Exprt(MailTbl.Rows(YY).Item(4).ToString & "_" & Format(Now, "yyMMdd")) = Nothing Then
-                                Invoke(Sub() TxtErr.Text = Now & " :  Sending Mail to " & Mail_.To_ & " ..." & vbCrLf & TxtErr.Text)
-                                Invoke(Sub() TxtErr.Refresh())
-                                If SndMail() = Nothing Then
-                                    Invoke(Sub() TxtErr.Text = Now & " :  Mail to " & Mail_.To_ & " has been sent ..." & vbCrLf & TxtErr.Text)
-                                    Invoke(Sub() TxtErr.Refresh())
-                                Else
-                                    Invoke(Sub() TxtErr.Text = Now & " :  Error : " & ExrtErr & Mail_.To_ & vbCrLf & TxtErr.Text)
-                                    Invoke(Sub() TxtErr.Refresh())
-                                End If
-                            Else
-                                Invoke(Sub() TxtErr.Text = Now & " :  Error : " & ExrtErr & Mail_.Sub_ & vbCrLf & TxtErr.Text)
-                                Invoke(Sub() TxtErr.Refresh())
-                            End If
-                        Next
-                    Catch exs As Exception
-                        Invoke(Sub() TxtErr.Text = Now & " :  Error : " & exs.Message & vbCrLf & TxtErr.Text)
-                        Invoke(Sub() TxtErr.Refresh())
-                    End Try
-                Else
-                    Exit Sub
-                End If
-            Else
-                Invoke(Sub() TxtErr.Text = Now & " :  Error : " & ExrtErr & Mail_.Sub_ & vbCrLf & TxtErr.Text)
-                Invoke(Sub() TxtErr.Refresh())
+            NightReports("select * from AutoMail where AutoMail.MailRule = 'D'")
+        ElseIf Format(_Now, "HH") = Format(_EndTime, "HH") And Format(_Now, "mm") = HourMin_ Then 'Send Weekly Report On The End Working Day Time
+            If Weekday(Now) = 7 Then
+                NightReports("select * from AutoMail where AutoMail.MailRule = 'W'")
             End If
         End If
 
@@ -433,7 +394,6 @@ SendMail_:
         If Fn.GetTbl("select HDate, HDay, HDayW, HDy from CDHolDay where HDate = (Select CONVERT(nvarchar, GetDate(),111) as Now_)", WdysTable) = Nothing Then
             If WdysTable.Rows(0).Item("HDy") = 1 Then
                 If _Now < _ACBEnd And _Now > _ACBStrt Then
-                    TimerEsc.Stop()
                     ''    DataGridView1.DataSource = ""
                     ''    EscAtoTable.Rows.Clear()
                     ''    If Fn.GetTbl("SELECT TkID, TkClNm, TkDtStart, TkRecieveDt, TkClsStatus, SrcNm, TkEscTyp, LstUpdtTime, TkupTxt, dbo.Int_user.UsrRealNm AS LstUpUsr, ProdKNm, PrdNm, CompNm, TkupEvtId, TkFolw, TkupSendEsc, TkupSQL FROM dbo.TicketsAll INNER JOIN dbo.TkEvent ON TkSQL = TkupTkSql INNER JOIN dbo.TicLstEv ON TkupSQL = dbo.TicLstEv.LstSqlEv INNER JOIN dbo.CDEvent ON TkupEvtId = dbo.CDEvent.EvId INNER JOIN dbo.Int_user ON TkupUser = dbo.Int_user.UsrId
@@ -459,6 +419,55 @@ SendMail_:
             Else
 
             End If
+        End If
+    End Sub
+    Private Sub NightReports(Select_ As String)
+        Dim Fn As New APblicClss.Func
+        Dim WW = Fn.ServrTime()
+
+        If Fn.GetTbl("select * from AutoMail where AutoMail.MailRule = 'D'", MailTbl) = Nothing Then
+            If MailTbl.Rows.Count > 0 Then
+                Invoke(Sub() TxtErr.Text = Now & " :  Starting Auto Mail ..." & vbCrLf & TxtErr.Text)
+                Invoke(Sub() TxtErr.Refresh())
+                Try
+                    Invoke(Sub() TxtErr.Text = Now & " :  Trying to send " & MailTbl.Rows.Count & " Mails ..." & vbCrLf & TxtErr.Text)
+                    Invoke(Sub() TxtErr.Refresh())
+                    For YY = 0 To MailTbl.Rows.Count - 1
+                        Invoke(Sub() TxtErr.Text = Now & " :  Trying to send " & YY + 1 & " Of " & MailTbl.Rows.Count & " Mails ..." & vbCrLf & TxtErr.Text)
+                        Invoke(Sub() TxtErr.Refresh())
+                        Mail_.Slct_ = MailTbl.Rows(YY).Item(1).ToString
+                        Mail_.To_ = MailTbl.Rows(YY).Item(2).ToString
+                        Mail_.CC_ = MailTbl.Rows(YY).Item(3).ToString
+                        Mail_.BCc_ = ""
+                        Mail_.Sub_ = MailTbl.Rows(YY).Item(4).ToString & "_" & Format(WW, "yyyy/MM/dd,dddd")
+                        Mail_.Body_ = BdyStrt & MailTbl.Rows(YY).Item(5).ToString & BdyEnd
+                        Invoke(Sub() TxtErr.Text = Now & " :  Exporting " & Mail_.Sub_ & vbCrLf & TxtErr.Text)
+                        Invoke(Sub() TxtErr.Refresh())
+                        If Exprt(MailTbl.Rows(YY).Item(4).ToString & "_" & Format(Now, "yyMMdd")) = Nothing Then
+                            Invoke(Sub() TxtErr.Text = Now & " :  Sending Mail to " & Mail_.To_ & " ..." & vbCrLf & TxtErr.Text)
+                            Invoke(Sub() TxtErr.Refresh())
+                            If SndMail() = Nothing Then
+                                Invoke(Sub() TxtErr.Text = Now & " :  Mail to " & Mail_.To_ & " has been sent ..." & vbCrLf & TxtErr.Text)
+                                Invoke(Sub() TxtErr.Refresh())
+                            Else
+                                Invoke(Sub() TxtErr.Text = Now & " :  Error : " & ExrtErr & Mail_.To_ & vbCrLf & TxtErr.Text)
+                                Invoke(Sub() TxtErr.Refresh())
+                            End If
+                        Else
+                            Invoke(Sub() TxtErr.Text = Now & " :  Error : " & ExrtErr & Mail_.Sub_ & vbCrLf & TxtErr.Text)
+                            Invoke(Sub() TxtErr.Refresh())
+                        End If
+                    Next
+                Catch exs As Exception
+                    Invoke(Sub() TxtErr.Text = Now & " :  Error : " & exs.Message & vbCrLf & TxtErr.Text)
+                    Invoke(Sub() TxtErr.Refresh())
+                End Try
+            Else
+                Exit Sub
+            End If
+        Else
+            Invoke(Sub() TxtErr.Text = Now & " :  Error : " & ExrtErr & Mail_.Sub_ & vbCrLf & TxtErr.Text)
+            Invoke(Sub() TxtErr.Refresh())
         End If
     End Sub
     Private Sub EscSub()
@@ -662,7 +671,7 @@ SendMail_:
 
         Try
             Dim exchange As ExchangeService
-            exchange = New ExchangeService(ExchangeVersion.Exchange2010)
+            exchange = New ExchangeService(ExchangeVersion.Exchange2013_SP1)
             exchange.Credentials = New WebCredentials(My.Settings.MlUsr, My.Settings.MlPss)
             exchange.Url() = New Uri("https://mail.egyptpost.org/ews/exchange.asmx")
             Dim message As New EmailMessage(exchange)

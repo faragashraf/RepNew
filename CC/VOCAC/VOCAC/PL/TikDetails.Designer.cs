@@ -30,12 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.FlowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.TcktImg = new System.Windows.Forms.PictureBox();
             this.Panel1 = new System.Windows.Forms.Panel();
             this.BtnUpd = new System.Windows.Forms.Button();
+            this.TcktImg = new System.Windows.Forms.PictureBox();
+            this.lblRegion = new System.Windows.Forms.Label();
             this.TxtDetailsAdd = new System.Windows.Forms.TextBox();
-            this.Panel3 = new System.Windows.Forms.Panel();
-            this.BtnClos = new System.Windows.Forms.Button();
             this.Panel2 = new System.Windows.Forms.Panel();
             this.BtnAddEdt = new System.Windows.Forms.Button();
             this.LblWDays = new System.Windows.Forms.Label();
@@ -75,43 +74,35 @@
             this.FlowDetls = new System.Windows.Forms.FlowLayoutPanel();
             this.TxtTikID = new System.Windows.Forms.Label();
             this.TimerVisInvs = new System.Windows.Forms.Timer(this.components);
+            this.panel3 = new System.Windows.Forms.Panel();
             this.FlowLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TcktImg)).BeginInit();
             this.Panel1.SuspendLayout();
-            this.Panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TcktImg)).BeginInit();
             this.Panel2.SuspendLayout();
             this.FlowLayoutPanel1.SuspendLayout();
             this.FlowDetls.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // FlowLayoutPanel2
             // 
             this.FlowLayoutPanel2.AutoScroll = true;
-            this.FlowLayoutPanel2.Controls.Add(this.TcktImg);
             this.FlowLayoutPanel2.Controls.Add(this.Panel1);
+            this.FlowLayoutPanel2.Controls.Add(this.TcktImg);
+            this.FlowLayoutPanel2.Controls.Add(this.panel3);
             this.FlowLayoutPanel2.Controls.Add(this.TxtDetailsAdd);
-            this.FlowLayoutPanel2.Controls.Add(this.Panel3);
             this.FlowLayoutPanel2.Controls.Add(this.Panel2);
             this.FlowLayoutPanel2.Controls.Add(this.LblWDays);
-            this.FlowLayoutPanel2.Location = new System.Drawing.Point(52, 26);
+            this.FlowLayoutPanel2.Location = new System.Drawing.Point(26, 26);
             this.FlowLayoutPanel2.Name = "FlowLayoutPanel2";
-            this.FlowLayoutPanel2.Size = new System.Drawing.Size(605, 633);
+            this.FlowLayoutPanel2.Size = new System.Drawing.Size(631, 720);
             this.FlowLayoutPanel2.TabIndex = 2116;
-            // 
-            // TcktImg
-            // 
-            this.TcktImg.Location = new System.Drawing.Point(330, 3);
-            this.TcktImg.Name = "TcktImg";
-            this.TcktImg.Size = new System.Drawing.Size(272, 215);
-            this.TcktImg.TabIndex = 2054;
-            this.TcktImg.TabStop = false;
             // 
             // Panel1
             // 
             this.Panel1.Controls.Add(this.BtnUpd);
-            this.FlowLayoutPanel2.SetFlowBreak(this.Panel1, true);
-            this.Panel1.Location = new System.Drawing.Point(212, 7);
-            this.Panel1.Margin = new System.Windows.Forms.Padding(3, 7, 3, 3);
+            this.Panel1.Location = new System.Drawing.Point(434, 7);
+            this.Panel1.Margin = new System.Windows.Forms.Padding(85, 7, 3, 3);
             this.Panel1.Name = "Panel1";
             this.Panel1.Size = new System.Drawing.Size(112, 53);
             this.Panel1.TabIndex = 2167;
@@ -134,51 +125,47 @@
             this.BtnUpd.UseVisualStyleBackColor = true;
             this.BtnUpd.Click += new System.EventHandler(this.BtnUpd_Click);
             // 
+            // TcktImg
+            // 
+            this.TcktImg.Location = new System.Drawing.Point(9, 3);
+            this.TcktImg.Margin = new System.Windows.Forms.Padding(150, 3, 3, 3);
+            this.TcktImg.Name = "TcktImg";
+            this.TcktImg.Size = new System.Drawing.Size(272, 215);
+            this.TcktImg.TabIndex = 2054;
+            this.TcktImg.TabStop = false;
+            // 
+            // lblRegion
+            // 
+            this.lblRegion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblRegion.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold);
+            this.lblRegion.ForeColor = System.Drawing.Color.Green;
+            this.lblRegion.Location = new System.Drawing.Point(196, 9);
+            this.lblRegion.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.lblRegion.Name = "lblRegion";
+            this.lblRegion.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblRegion.Size = new System.Drawing.Size(381, 30);
+            this.lblRegion.TabIndex = 2169;
+            this.lblRegion.Text = "Label2";
+            this.lblRegion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // TxtDetailsAdd
             // 
             this.TxtDetailsAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtDetailsAdd.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxtDetailsAdd.Location = new System.Drawing.Point(104, 224);
+            this.TxtDetailsAdd.Location = new System.Drawing.Point(9, 276);
             this.TxtDetailsAdd.Multiline = true;
             this.TxtDetailsAdd.Name = "TxtDetailsAdd";
             this.TxtDetailsAdd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TxtDetailsAdd.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtDetailsAdd.Size = new System.Drawing.Size(498, 220);
+            this.TxtDetailsAdd.Size = new System.Drawing.Size(619, 190);
             this.TxtDetailsAdd.TabIndex = 2111;
             this.TxtDetailsAdd.TabStop = false;
             this.TxtDetailsAdd.Tag = "Details";
             // 
-            // Panel3
-            // 
-            this.Panel3.Controls.Add(this.BtnClos);
-            this.FlowLayoutPanel2.SetFlowBreak(this.Panel3, true);
-            this.Panel3.Location = new System.Drawing.Point(7, 228);
-            this.Panel3.Margin = new System.Windows.Forms.Padding(3, 7, 3, 3);
-            this.Panel3.Name = "Panel3";
-            this.Panel3.Size = new System.Drawing.Size(91, 85);
-            this.Panel3.TabIndex = 2169;
-            // 
-            // BtnClos
-            // 
-            this.BtnClos.BackgroundImage = global::VOCAC.Properties.Resources.CpClose;
-            this.BtnClos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnClos.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.BtnClos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.BtnClos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.BtnClos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnClos.Location = new System.Drawing.Point(9, 4);
-            this.BtnClos.Name = "BtnClos";
-            this.BtnClos.Size = new System.Drawing.Size(75, 76);
-            this.BtnClos.TabIndex = 2164;
-            this.BtnClos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.ToolTip1.SetToolTip(this.BtnClos, "إغلاق");
-            this.BtnClos.UseVisualStyleBackColor = true;
-            this.BtnClos.Visible = false;
-            // 
             // Panel2
             // 
             this.Panel2.Controls.Add(this.BtnAddEdt);
-            this.Panel2.Location = new System.Drawing.Point(450, 450);
+            this.Panel2.Location = new System.Drawing.Point(476, 472);
             this.Panel2.Name = "Panel2";
             this.Panel2.Size = new System.Drawing.Size(152, 51);
             this.Panel2.TabIndex = 2168;
@@ -205,7 +192,7 @@
             this.FlowLayoutPanel2.SetFlowBreak(this.LblWDays, true);
             this.LblWDays.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.LblWDays.ForeColor = System.Drawing.Color.Green;
-            this.LblWDays.Location = new System.Drawing.Point(63, 452);
+            this.LblWDays.Location = new System.Drawing.Point(89, 474);
             this.LblWDays.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.LblWDays.Name = "LblWDays";
             this.LblWDays.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -667,6 +654,7 @@
             // 
             // FlwMend
             // 
+            this.FlwMend.AutoScroll = true;
             this.FlwMend.Location = new System.Drawing.Point(9, 450);
             this.FlwMend.Margin = new System.Windows.Forms.Padding(80, 3, 3, 3);
             this.FlwMend.Name = "FlwMend";
@@ -702,6 +690,15 @@
             // 
             this.TimerVisInvs.Enabled = true;
             this.TimerVisInvs.Interval = 500;
+            this.TimerVisInvs.Tick += new System.EventHandler(this.TimerVisInvs_Tick);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.lblRegion);
+            this.panel3.Location = new System.Drawing.Point(9, 224);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(619, 46);
+            this.panel3.TabIndex = 2170;
             // 
             // TikDetails
             // 
@@ -717,13 +714,13 @@
             this.Load += new System.EventHandler(this.TikDetails_Load);
             this.FlowLayoutPanel2.ResumeLayout(false);
             this.FlowLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TcktImg)).EndInit();
             this.Panel1.ResumeLayout(false);
-            this.Panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.TcktImg)).EndInit();
             this.Panel2.ResumeLayout(false);
             this.FlowLayoutPanel1.ResumeLayout(false);
             this.FlowLayoutPanel1.PerformLayout();
             this.FlowDetls.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -735,8 +732,6 @@
         internal System.Windows.Forms.Panel Panel1;
         internal System.Windows.Forms.Button BtnUpd;
         internal System.Windows.Forms.TextBox TxtDetailsAdd;
-        internal System.Windows.Forms.Panel Panel3;
-        internal System.Windows.Forms.Button BtnClos;
         internal System.Windows.Forms.ToolTip ToolTip1;
         internal System.Windows.Forms.Panel Panel2;
         internal System.Windows.Forms.Button BtnAddEdt;
@@ -776,5 +771,7 @@
         internal System.Windows.Forms.TextBox TxtTikCreat;
         internal System.Windows.Forms.Label label3;
         internal System.Windows.Forms.TextBox TxtTikCreatTeam;
+        internal System.Windows.Forms.Label lblRegion;
+        private System.Windows.Forms.Panel panel3;
     }
 }

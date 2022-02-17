@@ -53,5 +53,20 @@ namespace VOCAC.PL
             TikUpdate.getTikupdatefrm.WindowState = FormWindowState.Normal;
             TikUpdate.getTikupdatefrm.Show();
         }
+
+        private void TimerVisInvs_Tick(object sender, EventArgs e)
+        {
+            if(lblRegion.Text.Length > 0 )
+            {
+                if(lblRegion.Visible == false)
+                {
+                    lblRegion.Visible = true;
+                }
+                else
+                {
+                    lblRegion.Visible = false;
+                }
+            }
+        }
     }
 }

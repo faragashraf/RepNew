@@ -35,12 +35,15 @@
             this.FlwtopBar = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.pnlBtnTree = new System.Windows.Forms.Panel();
+            this.btnTree = new System.Windows.Forms.Button();
+            this.pnlBtnGrid = new System.Windows.Forms.Panel();
+            this.btnTicket = new System.Windows.Forms.Button();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.pnlBtnSttng = new System.Windows.Forms.Panel();
+            this.btnseting = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabSearch = new System.Windows.Forms.TabPage();
             this.flowSearch = new System.Windows.Forms.FlowLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.Rd_strtwith = new System.Windows.Forms.RadioButton();
@@ -50,31 +53,39 @@
             this.Rd_Equal = new System.Windows.Forms.RadioButton();
             this.Rd_Like = new System.Windows.Forms.RadioButton();
             this.SerchTxt = new System.Windows.Forms.TextBox();
-            this.Panel1 = new System.Windows.Forms.Panel();
+            this.PnlBtnRfrsh = new System.Windows.Forms.Panel();
             this.BtnRefrsh = new System.Windows.Forms.Button();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chckShwResult = new System.Windows.Forms.CheckBox();
+            this.chckShowClose = new System.Windows.Forms.CheckBox();
+            this.pnlBtnClose = new System.Windows.Forms.Panel();
+            this.btnCls = new System.Windows.Forms.Button();
             this.tabDistribute = new System.Windows.Forms.TabPage();
-            this.checkAll = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textDistrSearch = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.btnDistrebute = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textDistrSearch = new System.Windows.Forms.TextBox();
+            this.checkAll = new System.Windows.Forms.CheckBox();
             this.tabReopen = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.Label11 = new System.Windows.Forms.Label();
             this.txtReopen = new System.Windows.Forms.TextBox();
-            this.panel10 = new System.Windows.Forms.Panel();
+            this.pnlBtnReopn = new System.Windows.Forms.Panel();
             this.btnGet = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.tabTask = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnToRegion = new System.Windows.Forms.Button();
+            this.tabExport = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlBtnExport = new System.Windows.Forms.Panel();
             this.btnExport = new System.Windows.Forms.Button();
             this.FlowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.GridTicket = new System.Windows.Forms.DataGridView();
             this.flwCounters = new System.Windows.Forms.FlowLayoutPanel();
             this.ChckAll = new System.Windows.Forms.RadioButton();
@@ -108,50 +119,56 @@
             this.StatusBar1 = new System.Windows.Forms.StatusBar();
             this.StatBrPnlEn = new System.Windows.Forms.StatusBarPanel();
             this.ContextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.ChckRegions = new System.Windows.Forms.RadioButton();
+            this.LblRegions = new System.Windows.Forms.Label();
             this.Panel3.SuspendLayout();
             this.FlwtopBar.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            this.panel8.SuspendLayout();
-            this.panel9.SuspendLayout();
+            this.pnlBtnTree.SuspendLayout();
+            this.pnlBtnGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
+            this.pnlBtnSttng.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabSearch.SuspendLayout();
             this.flowSearch.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.Panel1.SuspendLayout();
-            this.panel6.SuspendLayout();
+            this.PnlBtnRfrsh.SuspendLayout();
+            this.pnlBtnClose.SuspendLayout();
             this.tabDistribute.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.panel7.SuspendLayout();
             this.tabReopen.SuspendLayout();
-            this.panel10.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
+            this.pnlBtnReopn.SuspendLayout();
+            this.tabTask.SuspendLayout();
+            this.flowLayoutPanel6.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.tabExport.SuspendLayout();
+            this.flowLayoutPanel5.SuspendLayout();
+            this.pnlBtnExport.SuspendLayout();
             this.FlowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridTicket)).BeginInit();
             this.flwCounters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlAr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlEn)).BeginInit();
             this.ContextMenuStrip2.SuspendLayout();
-            this.panel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // Panel3
             // 
             this.Panel3.Controls.Add(this.CloseBtn);
-            this.Panel3.Location = new System.Drawing.Point(372, 653);
+            this.Panel3.Location = new System.Drawing.Point(137, 613);
             this.Panel3.Name = "Panel3";
             this.Panel3.Size = new System.Drawing.Size(76, 72);
             this.Panel3.TabIndex = 2172;
@@ -175,24 +192,23 @@
             // FlwtopBar
             // 
             this.FlwtopBar.AutoScroll = true;
-            this.FlwtopBar.AutoSize = true;
             this.FlwtopBar.Controls.Add(this.flowLayoutPanel4);
             this.FlwtopBar.Controls.Add(this.tabControl1);
+            this.FlwtopBar.Controls.Add(this.checkAll);
             this.FlowLayoutPanel1.SetFlowBreak(this.FlwtopBar, true);
-            this.FlwtopBar.Location = new System.Drawing.Point(234, 3);
-            this.FlwtopBar.Margin = new System.Windows.Forms.Padding(50, 3, 3, 3);
+            this.FlwtopBar.Location = new System.Drawing.Point(66, 3);
             this.FlwtopBar.Name = "FlwtopBar";
-            this.FlwtopBar.Size = new System.Drawing.Size(1327, 119);
+            this.FlwtopBar.Size = new System.Drawing.Size(1493, 122);
             this.FlwtopBar.TabIndex = 2173;
             // 
             // flowLayoutPanel4
             // 
             this.flowLayoutPanel4.Controls.Add(this.trackBar1);
-            this.flowLayoutPanel4.Controls.Add(this.panel8);
-            this.flowLayoutPanel4.Controls.Add(this.panel9);
+            this.flowLayoutPanel4.Controls.Add(this.pnlBtnTree);
+            this.flowLayoutPanel4.Controls.Add(this.pnlBtnGrid);
             this.flowLayoutPanel4.Controls.Add(this.trackBar2);
-            this.flowLayoutPanel4.Controls.Add(this.panel11);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(1069, 3);
+            this.flowLayoutPanel4.Controls.Add(this.pnlBtnSttng);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(1235, 3);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(255, 109);
             this.flowLayoutPanel4.TabIndex = 2185;
@@ -213,87 +229,127 @@
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar1.Scroll += new System.EventHandler(this.TrackBar1_Scroll);
             // 
-            // panel8
+            // pnlBtnTree
             // 
-            this.panel8.Controls.Add(this.button1);
-            this.panel8.Location = new System.Drawing.Point(148, 30);
-            this.panel8.Margin = new System.Windows.Forms.Padding(0);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(107, 44);
-            this.panel8.TabIndex = 2180;
+            this.pnlBtnTree.Controls.Add(this.btnTree);
+            this.pnlBtnTree.Location = new System.Drawing.Point(132, 30);
+            this.pnlBtnTree.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlBtnTree.Name = "pnlBtnTree";
+            this.pnlBtnTree.Size = new System.Drawing.Size(123, 44);
+            this.pnlBtnTree.TabIndex = 2180;
             // 
-            // button1
+            // btnTree
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(5, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(97, 33);
-            this.button1.TabIndex = 129;
-            this.button1.Text = "غلق الشجرة";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.btnTree.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTree.BackColor = System.Drawing.Color.White;
+            this.btnTree.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnTree.BackgroundImage")));
+            this.btnTree.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnTree.FlatAppearance.BorderSize = 0;
+            this.btnTree.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTree.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTree.Location = new System.Drawing.Point(13, 6);
+            this.btnTree.Name = "btnTree";
+            this.btnTree.Size = new System.Drawing.Size(94, 32);
+            this.btnTree.TabIndex = 129;
+            this.btnTree.Text = "الشجرة";
+            this.btnTree.UseVisualStyleBackColor = false;
+            this.btnTree.Click += new System.EventHandler(this.btnTree_Click);
             // 
-            // panel9
+            // pnlBtnGrid
             // 
-            this.panel9.Controls.Add(this.button2);
-            this.panel9.Location = new System.Drawing.Point(42, 30);
-            this.panel9.Margin = new System.Windows.Forms.Padding(0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(106, 44);
-            this.panel9.TabIndex = 2181;
+            this.pnlBtnGrid.Controls.Add(this.btnTicket);
+            this.pnlBtnGrid.Location = new System.Drawing.Point(19, 30);
+            this.pnlBtnGrid.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlBtnGrid.Name = "pnlBtnGrid";
+            this.pnlBtnGrid.Size = new System.Drawing.Size(113, 44);
+            this.pnlBtnGrid.TabIndex = 2181;
             // 
-            // button2
+            // btnTicket
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(7, 6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(97, 33);
-            this.button2.TabIndex = 129;
-            this.button2.Text = "غلق الشكاوى";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            this.btnTicket.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTicket.BackColor = System.Drawing.Color.White;
+            this.btnTicket.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnTicket.BackgroundImage")));
+            this.btnTicket.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnTicket.FlatAppearance.BorderSize = 0;
+            this.btnTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTicket.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTicket.Location = new System.Drawing.Point(9, 6);
+            this.btnTicket.Name = "btnTicket";
+            this.btnTicket.Size = new System.Drawing.Size(97, 33);
+            this.btnTicket.TabIndex = 129;
+            this.btnTicket.Text = "الشكاوى";
+            this.btnTicket.UseVisualStyleBackColor = false;
+            this.btnTicket.Click += new System.EventHandler(this.btnTicket_Click);
+            // 
+            // trackBar2
+            // 
+            this.trackBar2.AutoSize = false;
+            this.trackBar2.BackColor = System.Drawing.Color.DodgerBlue;
+            this.trackBar2.LargeChange = 50;
+            this.trackBar2.Location = new System.Drawing.Point(138, 77);
+            this.trackBar2.Maximum = 1500;
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Size = new System.Drawing.Size(114, 28);
+            this.trackBar2.TabIndex = 2177;
+            this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBar2.Scroll += new System.EventHandler(this.TrackBar2_Scroll);
+            // 
+            // pnlBtnSttng
+            // 
+            this.pnlBtnSttng.Controls.Add(this.btnseting);
+            this.pnlBtnSttng.Location = new System.Drawing.Point(13, 74);
+            this.pnlBtnSttng.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlBtnSttng.Name = "pnlBtnSttng";
+            this.pnlBtnSttng.Size = new System.Drawing.Size(122, 33);
+            this.pnlBtnSttng.TabIndex = 2185;
+            // 
+            // btnseting
+            // 
+            this.btnseting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnseting.BackColor = System.Drawing.Color.White;
+            this.btnseting.BackgroundImage = global::VOCAC.Properties.Resources.recblue;
+            this.btnseting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnseting.FlatAppearance.BorderSize = 0;
+            this.btnseting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnseting.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnseting.Location = new System.Drawing.Point(18, 4);
+            this.btnseting.Name = "btnseting";
+            this.btnseting.Size = new System.Drawing.Size(80, 26);
+            this.btnseting.TabIndex = 129;
+            this.btnseting.Text = "الأعداد";
+            this.btnseting.UseVisualStyleBackColor = false;
+            this.btnseting.Click += new System.EventHandler(this.btnseting_Click);
             // 
             // tabControl1
             // 
             this.tabControl1.AllowDrop = true;
             this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.Buttons;
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabSearch);
             this.tabControl1.Controls.Add(this.tabDistribute);
             this.tabControl1.Controls.Add(this.tabReopen);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabTask);
+            this.tabControl1.Controls.Add(this.tabExport);
             this.tabControl1.Font = new System.Drawing.Font("Times New Roman", 18F);
-            this.tabControl1.Location = new System.Drawing.Point(3, 3);
+            this.tabControl1.Location = new System.Drawing.Point(129, 3);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.RightToLeftLayout = true;
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1060, 113);
+            this.tabControl1.Size = new System.Drawing.Size(1100, 116);
             this.tabControl1.TabIndex = 2183;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
             // 
-            // tabPage1
+            // tabSearch
             // 
-            this.tabPage1.BackColor = System.Drawing.Color.White;
-            this.tabPage1.Controls.Add(this.flowSearch);
-            this.tabPage1.Font = new System.Drawing.Font("Times New Roman", 14F);
-            this.tabPage1.Location = new System.Drawing.Point(4, 39);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1052, 70);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "بحث";
+            this.tabSearch.BackColor = System.Drawing.Color.White;
+            this.tabSearch.Controls.Add(this.flowSearch);
+            this.tabSearch.Font = new System.Drawing.Font("Times New Roman", 14F);
+            this.tabSearch.Location = new System.Drawing.Point(4, 39);
+            this.tabSearch.Name = "tabSearch";
+            this.tabSearch.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSearch.Size = new System.Drawing.Size(1092, 73);
+            this.tabSearch.TabIndex = 0;
+            this.tabSearch.Text = "بحث";
             // 
             // flowSearch
             // 
@@ -301,11 +357,13 @@
             this.flowSearch.Controls.Add(this.panel4);
             this.flowSearch.Controls.Add(this.panel5);
             this.flowSearch.Controls.Add(this.SerchTxt);
-            this.flowSearch.Controls.Add(this.Panel1);
-            this.flowSearch.Controls.Add(this.panel6);
-            this.flowSearch.Location = new System.Drawing.Point(81, 5);
+            this.flowSearch.Controls.Add(this.PnlBtnRfrsh);
+            this.flowSearch.Controls.Add(this.chckShwResult);
+            this.flowSearch.Controls.Add(this.chckShowClose);
+            this.flowSearch.Controls.Add(this.pnlBtnClose);
+            this.flowSearch.Location = new System.Drawing.Point(-55, 5);
             this.flowSearch.Name = "flowSearch";
-            this.flowSearch.Size = new System.Drawing.Size(965, 66);
+            this.flowSearch.Size = new System.Drawing.Size(1141, 65);
             this.flowSearch.TabIndex = 0;
             // 
             // panel4
@@ -314,9 +372,9 @@
             this.panel4.Controls.Add(this.Rd_contain);
             this.panel4.Controls.Add(this.Rd_endwith);
             this.panel4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.panel4.Location = new System.Drawing.Point(692, 3);
+            this.panel4.Location = new System.Drawing.Point(881, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(270, 52);
+            this.panel4.Size = new System.Drawing.Size(257, 52);
             this.panel4.TabIndex = 2175;
             // 
             // Rd_strtwith
@@ -324,7 +382,7 @@
             this.Rd_strtwith.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Rd_strtwith.AutoSize = true;
             this.Rd_strtwith.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.Rd_strtwith.Location = new System.Drawing.Point(200, 18);
+            this.Rd_strtwith.Location = new System.Drawing.Point(187, 18);
             this.Rd_strtwith.Name = "Rd_strtwith";
             this.Rd_strtwith.Size = new System.Drawing.Size(63, 26);
             this.Rd_strtwith.TabIndex = 2172;
@@ -338,7 +396,7 @@
             this.Rd_contain.AutoSize = true;
             this.Rd_contain.Checked = true;
             this.Rd_contain.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.Rd_contain.Location = new System.Drawing.Point(11, 18);
+            this.Rd_contain.Location = new System.Drawing.Point(-2, 18);
             this.Rd_contain.Name = "Rd_contain";
             this.Rd_contain.Size = new System.Drawing.Size(99, 26);
             this.Rd_contain.TabIndex = 2174;
@@ -352,7 +410,7 @@
             this.Rd_endwith.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Rd_endwith.AutoSize = true;
             this.Rd_endwith.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.Rd_endwith.Location = new System.Drawing.Point(116, 18);
+            this.Rd_endwith.Location = new System.Drawing.Point(103, 18);
             this.Rd_endwith.Name = "Rd_endwith";
             this.Rd_endwith.Size = new System.Drawing.Size(77, 26);
             this.Rd_endwith.TabIndex = 2173;
@@ -365,9 +423,9 @@
             this.panel5.Controls.Add(this.Rd_Equal);
             this.panel5.Controls.Add(this.Rd_Like);
             this.panel5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.panel5.Location = new System.Drawing.Point(543, 3);
+            this.panel5.Location = new System.Drawing.Point(765, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(143, 52);
+            this.panel5.Size = new System.Drawing.Size(110, 52);
             this.panel5.TabIndex = 2176;
             // 
             // Rd_Equal
@@ -375,7 +433,7 @@
             this.Rd_Equal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Rd_Equal.AutoSize = true;
             this.Rd_Equal.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.Rd_Equal.Location = new System.Drawing.Point(84, 18);
+            this.Rd_Equal.Location = new System.Drawing.Point(66, 19);
             this.Rd_Equal.Name = "Rd_Equal";
             this.Rd_Equal.Size = new System.Drawing.Size(39, 26);
             this.Rd_Equal.TabIndex = 2172;
@@ -389,7 +447,7 @@
             this.Rd_Like.AutoSize = true;
             this.Rd_Like.Checked = true;
             this.Rd_Like.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.Rd_Like.Location = new System.Drawing.Point(9, 18);
+            this.Rd_Like.Location = new System.Drawing.Point(1, 18);
             this.Rd_Like.Name = "Rd_Like";
             this.Rd_Like.Size = new System.Drawing.Size(58, 26);
             this.Rd_Like.TabIndex = 2173;
@@ -401,90 +459,137 @@
             // SerchTxt
             // 
             this.SerchTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SerchTxt.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.SerchTxt.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.SerchTxt.ForeColor = System.Drawing.Color.Black;
-            this.SerchTxt.Location = new System.Drawing.Point(319, 22);
-            this.SerchTxt.Margin = new System.Windows.Forms.Padding(3, 22, 3, 3);
+            this.SerchTxt.Location = new System.Drawing.Point(557, 15);
+            this.SerchTxt.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
             this.SerchTxt.Name = "SerchTxt";
             this.SerchTxt.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.SerchTxt.Size = new System.Drawing.Size(218, 26);
+            this.SerchTxt.Size = new System.Drawing.Size(202, 29);
             this.SerchTxt.TabIndex = 2024;
             this.SerchTxt.Tag = "Arabic-All";
             this.SerchTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.SerchTxt.TextChanged += new System.EventHandler(this.SerchTxt_TextChanged);
             // 
-            // Panel1
+            // PnlBtnRfrsh
             // 
-            this.Panel1.Controls.Add(this.BtnRefrsh);
-            this.Panel1.Location = new System.Drawing.Point(210, 10);
-            this.Panel1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.Panel1.Name = "Panel1";
-            this.Panel1.Size = new System.Drawing.Size(103, 45);
-            this.Panel1.TabIndex = 2170;
+            this.PnlBtnRfrsh.Controls.Add(this.BtnRefrsh);
+            this.PnlBtnRfrsh.Location = new System.Drawing.Point(448, 10);
+            this.PnlBtnRfrsh.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.PnlBtnRfrsh.Name = "PnlBtnRfrsh";
+            this.PnlBtnRfrsh.Size = new System.Drawing.Size(103, 41);
+            this.PnlBtnRfrsh.TabIndex = 2170;
             // 
             // BtnRefrsh
             // 
             this.BtnRefrsh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnRefrsh.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
-            this.BtnRefrsh.Location = new System.Drawing.Point(6, 8);
+            this.BtnRefrsh.Location = new System.Drawing.Point(6, 6);
             this.BtnRefrsh.Name = "BtnRefrsh";
-            this.BtnRefrsh.Size = new System.Drawing.Size(90, 31);
+            this.BtnRefrsh.Size = new System.Drawing.Size(90, 30);
             this.BtnRefrsh.TabIndex = 2034;
             this.BtnRefrsh.Text = "تحديث";
             this.BtnRefrsh.UseVisualStyleBackColor = true;
             this.BtnRefrsh.Click += new System.EventHandler(this.BtnRefrsh_Click);
             // 
-            // panel6
+            // chckShwResult
             // 
-            this.panel6.Controls.Add(this.checkBox1);
-            this.panel6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.panel6.Location = new System.Drawing.Point(24, 3);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(180, 52);
-            this.panel6.TabIndex = 2177;
+            this.chckShwResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chckShwResult.AutoSize = true;
+            this.chckShwResult.Location = new System.Drawing.Point(297, 20);
+            this.chckShwResult.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.chckShwResult.Name = "chckShwResult";
+            this.chckShwResult.Size = new System.Drawing.Size(145, 25);
+            this.chckShwResult.TabIndex = 0;
+            this.chckShwResult.Text = "إظهار فوري للنتائج";
+            this.chckShwResult.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // chckShowClose
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(45, 12);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(128, 23);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "إظهار فوري للنتائج";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chckShowClose.AutoSize = true;
+            this.chckShowClose.Location = new System.Drawing.Point(153, 20);
+            this.chckShowClose.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.chckShowClose.Name = "chckShowClose";
+            this.chckShowClose.Size = new System.Drawing.Size(138, 25);
+            this.chckShowClose.TabIndex = 2179;
+            this.chckShowClose.Text = "إظهار زر الإغلاق";
+            this.chckShowClose.UseVisualStyleBackColor = true;
+            this.chckShowClose.CheckedChanged += new System.EventHandler(this.chckShowClose_CheckedChanged);
+            // 
+            // pnlBtnClose
+            // 
+            this.pnlBtnClose.Controls.Add(this.btnCls);
+            this.pnlBtnClose.Location = new System.Drawing.Point(63, 3);
+            this.pnlBtnClose.Name = "pnlBtnClose";
+            this.pnlBtnClose.Size = new System.Drawing.Size(84, 59);
+            this.pnlBtnClose.TabIndex = 2178;
+            this.pnlBtnClose.Visible = false;
+            // 
+            // btnCls
+            // 
+            this.btnCls.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCls.BackgroundImage = global::VOCAC.Properties.Resources.CpClose;
+            this.btnCls.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCls.Location = new System.Drawing.Point(5, 5);
+            this.btnCls.Name = "btnCls";
+            this.btnCls.Size = new System.Drawing.Size(73, 49);
+            this.btnCls.TabIndex = 2034;
+            this.btnCls.UseVisualStyleBackColor = true;
+            this.btnCls.Click += new System.EventHandler(this.btnCls_Click);
             // 
             // tabDistribute
             // 
             this.tabDistribute.BackColor = System.Drawing.Color.White;
-            this.tabDistribute.Controls.Add(this.checkAll);
-            this.tabDistribute.Controls.Add(this.label1);
-            this.tabDistribute.Controls.Add(this.textDistrSearch);
-            this.tabDistribute.Controls.Add(this.panel7);
+            this.tabDistribute.Controls.Add(this.flowLayoutPanel2);
             this.tabDistribute.Location = new System.Drawing.Point(4, 39);
             this.tabDistribute.Name = "tabDistribute";
             this.tabDistribute.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDistribute.Size = new System.Drawing.Size(1052, 70);
+            this.tabDistribute.Size = new System.Drawing.Size(1092, 73);
             this.tabDistribute.TabIndex = 2;
             this.tabDistribute.Text = "توزيع وتحويل الشكاوى";
             // 
-            // checkAll
+            // flowLayoutPanel2
             // 
-            this.checkAll.AutoSize = true;
-            this.checkAll.BackColor = System.Drawing.Color.Red;
-            this.checkAll.ForeColor = System.Drawing.Color.Yellow;
-            this.checkAll.Location = new System.Drawing.Point(210, 21);
-            this.checkAll.Name = "checkAll";
-            this.checkAll.Size = new System.Drawing.Size(116, 31);
-            this.checkAll.TabIndex = 2188;
-            this.checkAll.Text = "اختيار الكل";
-            this.checkAll.UseVisualStyleBackColor = false;
-            this.checkAll.Click += new System.EventHandler(this.CheckAll_CheckedChanged);
+            this.flowLayoutPanel2.Controls.Add(this.panel7);
+            this.flowLayoutPanel2.Controls.Add(this.label1);
+            this.flowLayoutPanel2.Controls.Add(this.textDistrSearch);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(1086, 67);
+            this.flowLayoutPanel2.TabIndex = 2189;
+            // 
+            // panel7
+            // 
+            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel7.Controls.Add(this.btnDistrebute);
+            this.panel7.Location = new System.Drawing.Point(804, 0);
+            this.panel7.Margin = new System.Windows.Forms.Padding(150, 0, 3, 3);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(132, 65);
+            this.panel7.TabIndex = 2182;
+            // 
+            // btnDistrebute
+            // 
+            this.btnDistrebute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDistrebute.BackColor = System.Drawing.Color.White;
+            this.btnDistrebute.BackgroundImage = global::VOCAC.Properties.Resources.Distribute;
+            this.btnDistrebute.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDistrebute.FlatAppearance.BorderSize = 0;
+            this.btnDistrebute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDistrebute.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDistrebute.Location = new System.Drawing.Point(28, 4);
+            this.btnDistrebute.Name = "btnDistrebute";
+            this.btnDistrebute.Size = new System.Drawing.Size(67, 58);
+            this.btnDistrebute.TabIndex = 129;
+            this.btnDistrebute.UseVisualStyleBackColor = false;
+            this.btnDistrebute.Click += new System.EventHandler(this.btnDistrebute_Click);
             // 
             // label1
             // 
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(798, 21);
-            this.label1.Margin = new System.Windows.Forms.Padding(3);
+            this.label1.Location = new System.Drawing.Point(721, 15);
+            this.label1.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(77, 27);
@@ -497,8 +602,8 @@
             this.textDistrSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textDistrSearch.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.textDistrSearch.ForeColor = System.Drawing.Color.Black;
-            this.textDistrSearch.Location = new System.Drawing.Point(574, 22);
-            this.textDistrSearch.Margin = new System.Windows.Forms.Padding(3, 22, 3, 3);
+            this.textDistrSearch.Location = new System.Drawing.Point(497, 15);
+            this.textDistrSearch.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
             this.textDistrSearch.Name = "textDistrSearch";
             this.textDistrSearch.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.textDistrSearch.Size = new System.Drawing.Size(218, 26);
@@ -507,50 +612,49 @@
             this.textDistrSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textDistrSearch.TextChanged += new System.EventHandler(this.TextDistrSearch_TextChanged);
             // 
-            // panel7
+            // checkAll
             // 
-            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel7.Controls.Add(this.btnDistrebute);
-            this.panel7.Location = new System.Drawing.Point(898, 12);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(129, 45);
-            this.panel7.TabIndex = 2182;
-            // 
-            // btnDistrebute
-            // 
-            this.btnDistrebute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDistrebute.BackColor = System.Drawing.Color.White;
-            this.btnDistrebute.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
-            this.btnDistrebute.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnDistrebute.FlatAppearance.BorderSize = 0;
-            this.btnDistrebute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDistrebute.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDistrebute.Location = new System.Drawing.Point(12, 4);
-            this.btnDistrebute.Name = "btnDistrebute";
-            this.btnDistrebute.Size = new System.Drawing.Size(109, 37);
-            this.btnDistrebute.TabIndex = 129;
-            this.btnDistrebute.Text = "تسجيل";
-            this.btnDistrebute.UseVisualStyleBackColor = false;
-            this.btnDistrebute.Click += new System.EventHandler(this.btnDistrebute_Click);
+            this.checkAll.AutoSize = true;
+            this.checkAll.BackColor = System.Drawing.Color.Red;
+            this.checkAll.ForeColor = System.Drawing.Color.Yellow;
+            this.checkAll.Location = new System.Drawing.Point(40, 80);
+            this.checkAll.Margin = new System.Windows.Forms.Padding(3, 80, 3, 3);
+            this.checkAll.Name = "checkAll";
+            this.checkAll.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.checkAll.Size = new System.Drawing.Size(83, 23);
+            this.checkAll.TabIndex = 2188;
+            this.checkAll.Text = "اختيار الكل";
+            this.checkAll.UseVisualStyleBackColor = false;
+            this.checkAll.Visible = false;
+            this.checkAll.CheckedChanged += new System.EventHandler(this.CheckAll_CheckedChanged);
             // 
             // tabReopen
             // 
             this.tabReopen.BackColor = System.Drawing.Color.White;
-            this.tabReopen.Controls.Add(this.Label11);
-            this.tabReopen.Controls.Add(this.txtReopen);
-            this.tabReopen.Controls.Add(this.panel10);
+            this.tabReopen.Controls.Add(this.flowLayoutPanel3);
             this.tabReopen.Location = new System.Drawing.Point(4, 39);
             this.tabReopen.Name = "tabReopen";
             this.tabReopen.Padding = new System.Windows.Forms.Padding(3);
-            this.tabReopen.Size = new System.Drawing.Size(1052, 70);
+            this.tabReopen.Size = new System.Drawing.Size(1153, 73);
             this.tabReopen.TabIndex = 3;
             this.tabReopen.Text = "إعادة فتح";
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.Label11);
+            this.flowLayoutPanel3.Controls.Add(this.txtReopen);
+            this.flowLayoutPanel3.Controls.Add(this.pnlBtnReopn);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(1147, 67);
+            this.flowLayoutPanel3.TabIndex = 2186;
             // 
             // Label11
             // 
             this.Label11.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Label11.Location = new System.Drawing.Point(898, 16);
-            this.Label11.Margin = new System.Windows.Forms.Padding(3);
+            this.Label11.Location = new System.Drawing.Point(879, 22);
+            this.Label11.Margin = new System.Windows.Forms.Padding(150, 22, 3, 3);
             this.Label11.Name = "Label11";
             this.Label11.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Label11.Size = new System.Drawing.Size(118, 27);
@@ -563,7 +667,7 @@
             this.txtReopen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtReopen.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.txtReopen.ForeColor = System.Drawing.Color.Black;
-            this.txtReopen.Location = new System.Drawing.Point(797, 17);
+            this.txtReopen.Location = new System.Drawing.Point(776, 22);
             this.txtReopen.Margin = new System.Windows.Forms.Padding(3, 22, 3, 3);
             this.txtReopen.Name = "txtReopen";
             this.txtReopen.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -573,14 +677,14 @@
             this.txtReopen.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtReopen.TextChanged += new System.EventHandler(this.TxtReopen_TextChanged);
             // 
-            // panel10
+            // pnlBtnReopn
             // 
-            this.panel10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel10.Controls.Add(this.btnGet);
-            this.panel10.Location = new System.Drawing.Point(702, 4);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(87, 56);
-            this.panel10.TabIndex = 2183;
+            this.pnlBtnReopn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlBtnReopn.Controls.Add(this.btnGet);
+            this.pnlBtnReopn.Location = new System.Drawing.Point(683, 3);
+            this.pnlBtnReopn.Name = "pnlBtnReopn";
+            this.pnlBtnReopn.Size = new System.Drawing.Size(87, 56);
+            this.pnlBtnReopn.TabIndex = 2183;
             // 
             // btnGet
             // 
@@ -588,6 +692,7 @@
             this.btnGet.BackColor = System.Drawing.Color.White;
             this.btnGet.BackgroundImage = global::VOCAC.Properties.Resources.DbGet;
             this.btnGet.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnGet.Enabled = false;
             this.btnGet.FlatAppearance.BorderSize = 0;
             this.btnGet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGet.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -598,26 +703,82 @@
             this.btnGet.UseVisualStyleBackColor = false;
             this.btnGet.Click += new System.EventHandler(this.BtnReOen_Click);
             // 
-            // tabPage2
+            // tabTask
             // 
-            this.tabPage2.BackColor = System.Drawing.Color.White;
-            this.tabPage2.Controls.Add(this.panel2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 39);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(0);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1052, 70);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "استخراج بيانات";
+            this.tabTask.BackColor = System.Drawing.Color.White;
+            this.tabTask.Controls.Add(this.flowLayoutPanel6);
+            this.tabTask.Location = new System.Drawing.Point(4, 39);
+            this.tabTask.Name = "tabTask";
+            this.tabTask.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTask.Size = new System.Drawing.Size(1092, 73);
+            this.tabTask.TabIndex = 4;
+            this.tabTask.Text = "إرسال للمناطق";
             // 
-            // panel2
+            // flowLayoutPanel6
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Controls.Add(this.btnExport);
-            this.panel2.Location = new System.Drawing.Point(967, 6);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(68, 59);
-            this.panel2.TabIndex = 2181;
+            this.flowLayoutPanel6.Controls.Add(this.panel1);
+            this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(1086, 67);
+            this.flowLayoutPanel6.TabIndex = 2190;
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.btnToRegion);
+            this.panel1.Location = new System.Drawing.Point(804, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(150, 0, 3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(132, 65);
+            this.panel1.TabIndex = 2182;
+            // 
+            // btnToRegion
+            // 
+            this.btnToRegion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnToRegion.BackColor = System.Drawing.Color.White;
+            this.btnToRegion.BackgroundImage = global::VOCAC.Properties.Resources.owner;
+            this.btnToRegion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnToRegion.FlatAppearance.BorderSize = 0;
+            this.btnToRegion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnToRegion.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToRegion.Location = new System.Drawing.Point(28, 5);
+            this.btnToRegion.Name = "btnToRegion";
+            this.btnToRegion.Size = new System.Drawing.Size(67, 58);
+            this.btnToRegion.TabIndex = 129;
+            this.btnToRegion.UseVisualStyleBackColor = false;
+            this.btnToRegion.Click += new System.EventHandler(this.BtnToRegion_Click);
+            // 
+            // tabExport
+            // 
+            this.tabExport.BackColor = System.Drawing.Color.White;
+            this.tabExport.Controls.Add(this.flowLayoutPanel5);
+            this.tabExport.Location = new System.Drawing.Point(4, 39);
+            this.tabExport.Margin = new System.Windows.Forms.Padding(0);
+            this.tabExport.Name = "tabExport";
+            this.tabExport.Padding = new System.Windows.Forms.Padding(3);
+            this.tabExport.Size = new System.Drawing.Size(1153, 73);
+            this.tabExport.TabIndex = 1;
+            this.tabExport.Text = "استخراج بيانات";
+            // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.Controls.Add(this.pnlBtnExport);
+            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(1147, 67);
+            this.flowLayoutPanel5.TabIndex = 2182;
+            // 
+            // pnlBtnExport
+            // 
+            this.pnlBtnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlBtnExport.Controls.Add(this.btnExport);
+            this.pnlBtnExport.Location = new System.Drawing.Point(929, 3);
+            this.pnlBtnExport.Margin = new System.Windows.Forms.Padding(150, 3, 3, 3);
+            this.pnlBtnExport.Name = "pnlBtnExport";
+            this.pnlBtnExport.Size = new System.Drawing.Size(68, 59);
+            this.pnlBtnExport.TabIndex = 2181;
             // 
             // btnExport
             // 
@@ -647,12 +808,12 @@
             this.FlowLayoutPanel1.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.FlowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.FlowLayoutPanel1.Name = "FlowLayoutPanel1";
-            this.FlowLayoutPanel1.Size = new System.Drawing.Size(1562, 753);
+            this.FlowLayoutPanel1.Size = new System.Drawing.Size(1562, 739);
             this.FlowLayoutPanel1.TabIndex = 2172;
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Location = new System.Drawing.Point(3, 128);
+            this.splitContainer1.Location = new System.Drawing.Point(66, 131);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -664,59 +825,9 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.GridTicket);
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer1.Size = new System.Drawing.Size(1605, 519);
-            this.splitContainer1.SplitterDistance = 700;
+            this.splitContainer1.Size = new System.Drawing.Size(1493, 476);
+            this.splitContainer1.SplitterDistance = 651;
             this.splitContainer1.TabIndex = 2176;
-            // 
-            // trackBar2
-            // 
-            this.trackBar2.AutoSize = false;
-            this.trackBar2.BackColor = System.Drawing.Color.DodgerBlue;
-            this.trackBar2.LargeChange = 50;
-            this.trackBar2.Location = new System.Drawing.Point(138, 77);
-            this.trackBar2.Maximum = 1500;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(114, 28);
-            this.trackBar2.TabIndex = 2177;
-            this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar2.Scroll += new System.EventHandler(this.TrackBar2_Scroll);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(300, 519);
-            this.dataGridView1.TabIndex = 2176;
-            // 
-            // treeView1
-            // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Font = new System.Drawing.Font("Times New Roman", 14F);
-            this.treeView1.ImageIndex = 0;
-            this.treeView1.ImageList = this.imageList1;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.RightToLeftLayout = true;
-            this.treeView1.SelectedImageIndex = 3;
-            this.treeView1.ShowLines = false;
-            this.treeView1.ShowPlusMinus = false;
-            this.treeView1.ShowRootLines = false;
-            this.treeView1.Size = new System.Drawing.Size(396, 519);
-            this.treeView1.StateImageList = this.imageList1;
-            this.treeView1.TabIndex = 2175;
-            this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeView1_BeforeSelect);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "Male.png");
-            this.imageList1.Images.SetKeyName(1, "Female.png");
-            this.imageList1.Images.SetKeyName(2, "team.png");
-            this.imageList1.Images.SetKeyName(3, "Back.png");
             // 
             // splitContainer2
             // 
@@ -733,9 +844,52 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.treeView1);
             this.splitContainer2.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer2.Size = new System.Drawing.Size(700, 519);
-            this.splitContainer2.SplitterDistance = 300;
+            this.splitContainer2.Size = new System.Drawing.Size(651, 476);
+            this.splitContainer2.SplitterDistance = 279;
             this.splitContainer2.TabIndex = 2179;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(279, 476);
+            this.dataGridView1.TabIndex = 2176;
+            // 
+            // treeView1
+            // 
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Font = new System.Drawing.Font("Times New Roman", 14F);
+            this.treeView1.ImageIndex = 0;
+            this.treeView1.ImageList = this.imageList1;
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.RightToLeftLayout = true;
+            this.treeView1.SelectedImageIndex = 3;
+            this.treeView1.ShowLines = false;
+            this.treeView1.ShowPlusMinus = false;
+            this.treeView1.ShowRootLines = false;
+            this.treeView1.Size = new System.Drawing.Size(368, 476);
+            this.treeView1.StateImageList = this.imageList1;
+            this.treeView1.TabIndex = 2175;
+            this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeView1_BeforeSelect);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "Male.png");
+            this.imageList1.Images.SetKeyName(1, "Female.png");
+            this.imageList1.Images.SetKeyName(2, "team.png");
+            this.imageList1.Images.SetKeyName(3, "Back.png");
             // 
             // GridTicket
             // 
@@ -749,10 +903,11 @@
             this.GridTicket.MultiSelect = false;
             this.GridTicket.Name = "GridTicket";
             this.GridTicket.ReadOnly = true;
+            this.GridTicket.RowHeadersVisible = false;
             this.GridTicket.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.GridTicket.Size = new System.Drawing.Size(901, 519);
+            this.GridTicket.Size = new System.Drawing.Size(838, 476);
             this.GridTicket.TabIndex = 123;
-            this.GridTicket.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.GridTicket_DataError);
+            this.GridTicket.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.GridTicket_CellPainting);
             this.GridTicket.DoubleClick += new System.EventHandler(this.GridTicket_DoubleClick);
             // 
             // flwCounters
@@ -769,6 +924,7 @@
             this.flwCounters.Controls.Add(this.ChckEsc3);
             this.flwCounters.Controls.Add(this.ChckComp);
             this.flwCounters.Controls.Add(this.ChckRequest);
+            this.flwCounters.Controls.Add(this.ChckRegions);
             this.flwCounters.Controls.Add(this.LblAll);
             this.flwCounters.Controls.Add(this.LblRecved);
             this.flwCounters.Controls.Add(this.LblNoFlwCount);
@@ -781,17 +937,18 @@
             this.flwCounters.Controls.Add(this.LblFl3);
             this.flwCounters.Controls.Add(this.LabelCompCount);
             this.flwCounters.Controls.Add(this.LblRequest);
-            this.flwCounters.Location = new System.Drawing.Point(454, 653);
+            this.flwCounters.Controls.Add(this.LblRegions);
+            this.flwCounters.Location = new System.Drawing.Point(219, 613);
             this.flwCounters.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.flwCounters.Name = "flwCounters";
-            this.flwCounters.Size = new System.Drawing.Size(1157, 72);
+            this.flwCounters.Size = new System.Drawing.Size(1343, 72);
             this.flwCounters.TabIndex = 2174;
             // 
             // ChckAll
             // 
             this.ChckAll.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckAll.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckAll.Location = new System.Drawing.Point(1064, 3);
+            this.ChckAll.Location = new System.Drawing.Point(1250, 3);
             this.ChckAll.Name = "ChckAll";
             this.ChckAll.Size = new System.Drawing.Size(90, 32);
             this.ChckAll.TabIndex = 2069;
@@ -804,7 +961,7 @@
             // 
             this.ChckTrnsDy.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckTrnsDy.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckTrnsDy.Location = new System.Drawing.Point(968, 3);
+            this.ChckTrnsDy.Location = new System.Drawing.Point(1154, 3);
             this.ChckTrnsDy.Name = "ChckTrnsDy";
             this.ChckTrnsDy.Size = new System.Drawing.Size(90, 32);
             this.ChckTrnsDy.TabIndex = 2053;
@@ -817,7 +974,7 @@
             // 
             this.ChckFlN.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckFlN.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckFlN.Location = new System.Drawing.Point(872, 3);
+            this.ChckFlN.Location = new System.Drawing.Point(1058, 3);
             this.ChckFlN.Name = "ChckFlN";
             this.ChckFlN.Size = new System.Drawing.Size(90, 32);
             this.ChckFlN.TabIndex = 2054;
@@ -830,7 +987,7 @@
             // 
             this.ChckRead.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckRead.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckRead.Location = new System.Drawing.Point(776, 3);
+            this.ChckRead.Location = new System.Drawing.Point(962, 3);
             this.ChckRead.Name = "ChckRead";
             this.ChckRead.Size = new System.Drawing.Size(90, 32);
             this.ChckRead.TabIndex = 2061;
@@ -843,7 +1000,7 @@
             // 
             this.ChckUpdMe.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckUpdMe.Font = new System.Drawing.Font("Times New Roman", 8F);
-            this.ChckUpdMe.Location = new System.Drawing.Point(680, 3);
+            this.ChckUpdMe.Location = new System.Drawing.Point(866, 3);
             this.ChckUpdMe.Name = "ChckUpdMe";
             this.ChckUpdMe.Size = new System.Drawing.Size(90, 32);
             this.ChckUpdMe.TabIndex = 2055;
@@ -856,7 +1013,7 @@
             // 
             this.ChckUpdColeg.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckUpdColeg.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckUpdColeg.Location = new System.Drawing.Point(584, 3);
+            this.ChckUpdColeg.Location = new System.Drawing.Point(770, 3);
             this.ChckUpdColeg.Name = "ChckUpdColeg";
             this.ChckUpdColeg.Size = new System.Drawing.Size(90, 32);
             this.ChckUpdColeg.TabIndex = 2052;
@@ -869,7 +1026,7 @@
             // 
             this.ChckUpdOther.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckUpdOther.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckUpdOther.Location = new System.Drawing.Point(488, 3);
+            this.ChckUpdOther.Location = new System.Drawing.Point(674, 3);
             this.ChckUpdOther.Name = "ChckUpdOther";
             this.ChckUpdOther.Size = new System.Drawing.Size(90, 32);
             this.ChckUpdOther.TabIndex = 2050;
@@ -882,7 +1039,7 @@
             // 
             this.ChckEsc1.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckEsc1.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckEsc1.Location = new System.Drawing.Point(392, 3);
+            this.ChckEsc1.Location = new System.Drawing.Point(578, 3);
             this.ChckEsc1.Name = "ChckEsc1";
             this.ChckEsc1.Size = new System.Drawing.Size(90, 32);
             this.ChckEsc1.TabIndex = 2067;
@@ -895,7 +1052,7 @@
             // 
             this.ChckEsc2.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckEsc2.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckEsc2.Location = new System.Drawing.Point(296, 3);
+            this.ChckEsc2.Location = new System.Drawing.Point(482, 3);
             this.ChckEsc2.Name = "ChckEsc2";
             this.ChckEsc2.Size = new System.Drawing.Size(90, 32);
             this.ChckEsc2.TabIndex = 2065;
@@ -908,7 +1065,7 @@
             // 
             this.ChckEsc3.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckEsc3.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckEsc3.Location = new System.Drawing.Point(200, 3);
+            this.ChckEsc3.Location = new System.Drawing.Point(386, 3);
             this.ChckEsc3.Name = "ChckEsc3";
             this.ChckEsc3.Size = new System.Drawing.Size(90, 32);
             this.ChckEsc3.TabIndex = 2063;
@@ -921,7 +1078,7 @@
             // 
             this.ChckComp.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckComp.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckComp.Location = new System.Drawing.Point(104, 3);
+            this.ChckComp.Location = new System.Drawing.Point(290, 3);
             this.ChckComp.Name = "ChckComp";
             this.ChckComp.Size = new System.Drawing.Size(90, 32);
             this.ChckComp.TabIndex = 2056;
@@ -933,9 +1090,8 @@
             // ChckRequest
             // 
             this.ChckRequest.Appearance = System.Windows.Forms.Appearance.Button;
-            this.flwCounters.SetFlowBreak(this.ChckRequest, true);
             this.ChckRequest.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckRequest.Location = new System.Drawing.Point(8, 3);
+            this.ChckRequest.Location = new System.Drawing.Point(194, 3);
             this.ChckRequest.Name = "ChckRequest";
             this.ChckRequest.Size = new System.Drawing.Size(90, 32);
             this.ChckRequest.TabIndex = 2071;
@@ -948,7 +1104,7 @@
             // 
             this.LblAll.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblAll.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblAll.Location = new System.Drawing.Point(1064, 41);
+            this.LblAll.Location = new System.Drawing.Point(1250, 41);
             this.LblAll.Margin = new System.Windows.Forms.Padding(3);
             this.LblAll.Name = "LblAll";
             this.LblAll.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -961,7 +1117,7 @@
             // 
             this.LblRecved.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblRecved.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblRecved.Location = new System.Drawing.Point(968, 41);
+            this.LblRecved.Location = new System.Drawing.Point(1154, 41);
             this.LblRecved.Margin = new System.Windows.Forms.Padding(3);
             this.LblRecved.Name = "LblRecved";
             this.LblRecved.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -974,7 +1130,7 @@
             // 
             this.LblNoFlwCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblNoFlwCount.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblNoFlwCount.Location = new System.Drawing.Point(872, 41);
+            this.LblNoFlwCount.Location = new System.Drawing.Point(1058, 41);
             this.LblNoFlwCount.Margin = new System.Windows.Forms.Padding(3);
             this.LblNoFlwCount.Name = "LblNoFlwCount";
             this.LblNoFlwCount.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -987,7 +1143,7 @@
             // 
             this.LblUnReadCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblUnReadCount.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblUnReadCount.Location = new System.Drawing.Point(776, 41);
+            this.LblUnReadCount.Location = new System.Drawing.Point(962, 41);
             this.LblUnReadCount.Margin = new System.Windows.Forms.Padding(3);
             this.LblUnReadCount.Name = "LblUnReadCount";
             this.LblUnReadCount.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1000,7 +1156,7 @@
             // 
             this.LblUpdtFollow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblUpdtFollow.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblUpdtFollow.Location = new System.Drawing.Point(680, 41);
+            this.LblUpdtFollow.Location = new System.Drawing.Point(866, 41);
             this.LblUpdtFollow.Margin = new System.Windows.Forms.Padding(3);
             this.LblUpdtFollow.Name = "LblUpdtFollow";
             this.LblUpdtFollow.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1013,7 +1169,7 @@
             // 
             this.LblUpdtColleg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblUpdtColleg.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblUpdtColleg.Location = new System.Drawing.Point(584, 41);
+            this.LblUpdtColleg.Location = new System.Drawing.Point(770, 41);
             this.LblUpdtColleg.Margin = new System.Windows.Forms.Padding(3);
             this.LblUpdtColleg.Name = "LblUpdtColleg";
             this.LblUpdtColleg.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1026,7 +1182,7 @@
             // 
             this.LblUpdtOthrs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblUpdtOthrs.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblUpdtOthrs.Location = new System.Drawing.Point(488, 41);
+            this.LblUpdtOthrs.Location = new System.Drawing.Point(674, 41);
             this.LblUpdtOthrs.Margin = new System.Windows.Forms.Padding(3);
             this.LblUpdtOthrs.Name = "LblUpdtOthrs";
             this.LblUpdtOthrs.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1039,7 +1195,7 @@
             // 
             this.LblFl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblFl1.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblFl1.Location = new System.Drawing.Point(392, 41);
+            this.LblFl1.Location = new System.Drawing.Point(578, 41);
             this.LblFl1.Margin = new System.Windows.Forms.Padding(3);
             this.LblFl1.Name = "LblFl1";
             this.LblFl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1052,7 +1208,7 @@
             // 
             this.LblFl2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblFl2.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblFl2.Location = new System.Drawing.Point(296, 41);
+            this.LblFl2.Location = new System.Drawing.Point(482, 41);
             this.LblFl2.Margin = new System.Windows.Forms.Padding(3);
             this.LblFl2.Name = "LblFl2";
             this.LblFl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1065,7 +1221,7 @@
             // 
             this.LblFl3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblFl3.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblFl3.Location = new System.Drawing.Point(200, 41);
+            this.LblFl3.Location = new System.Drawing.Point(386, 41);
             this.LblFl3.Margin = new System.Windows.Forms.Padding(3);
             this.LblFl3.Name = "LblFl3";
             this.LblFl3.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1078,7 +1234,7 @@
             // 
             this.LabelCompCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LabelCompCount.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LabelCompCount.Location = new System.Drawing.Point(104, 41);
+            this.LabelCompCount.Location = new System.Drawing.Point(290, 41);
             this.LabelCompCount.Margin = new System.Windows.Forms.Padding(3);
             this.LabelCompCount.Name = "LabelCompCount";
             this.LabelCompCount.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1091,7 +1247,7 @@
             // 
             this.LblRequest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblRequest.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblRequest.Location = new System.Drawing.Point(8, 41);
+            this.LblRequest.Location = new System.Drawing.Point(194, 41);
             this.LblRequest.Margin = new System.Windows.Forms.Padding(3);
             this.LblRequest.Name = "LblRequest";
             this.LblRequest.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1143,7 +1299,7 @@
             // 
             this.StatusBar1.Enabled = false;
             this.StatusBar1.Font = new System.Drawing.Font("Times New Roman", 14F);
-            this.StatusBar1.Location = new System.Drawing.Point(0, 753);
+            this.StatusBar1.Location = new System.Drawing.Point(0, 739);
             this.StatusBar1.Name = "StatusBar1";
             this.StatusBar1.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.StatBrPnlEn,
@@ -1172,38 +1328,39 @@
             this.ContextMenuStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.ContextMenuStrip2.Size = new System.Drawing.Size(185, 70);
             // 
-            // panel11
+            // ChckRegions
             // 
-            this.panel11.Controls.Add(this.button3);
-            this.panel11.Location = new System.Drawing.Point(13, 74);
-            this.panel11.Margin = new System.Windows.Forms.Padding(0);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(122, 33);
-            this.panel11.TabIndex = 2185;
+            this.ChckRegions.Appearance = System.Windows.Forms.Appearance.Button;
+            this.flwCounters.SetFlowBreak(this.ChckRegions, true);
+            this.ChckRegions.Font = new System.Drawing.Font("Times New Roman", 10F);
+            this.ChckRegions.Location = new System.Drawing.Point(39, 3);
+            this.ChckRegions.Name = "ChckRegions";
+            this.ChckRegions.Size = new System.Drawing.Size(149, 32);
+            this.ChckRegions.TabIndex = 2073;
+            this.ChckRegions.TabStop = true;
+            this.ChckRegions.Text = "مناطق";
+            this.ChckRegions.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ChckRegions.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // LblRegions
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.BackgroundImage = global::VOCAC.Properties.Resources.recblue;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(11, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(107, 26);
-            this.button3.TabIndex = 129;
-            this.button3.Text = "غلق الأعداد";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.Button3_Click);
+            this.LblRegions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LblRegions.Font = new System.Drawing.Font("Times New Roman", 10F);
+            this.LblRegions.Location = new System.Drawing.Point(39, 41);
+            this.LblRegions.Margin = new System.Windows.Forms.Padding(3);
+            this.LblRegions.Name = "LblRegions";
+            this.LblRegions.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.LblRegions.Size = new System.Drawing.Size(149, 27);
+            this.LblRegions.TabIndex = 2074;
+            this.LblRegions.Text = "LblRegions";
+            this.LblRegions.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // TikFolow_Team
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1562, 789);
+            this.ClientSize = new System.Drawing.Size(1562, 775);
             this.Controls.Add(this.FlowLayoutPanel1);
             this.Controls.Add(this.StatusBar1);
             this.Font = new System.Drawing.Font("Times New Roman", 8F);
@@ -1211,52 +1368,57 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "متابعة شكاوى الفريق";
+            this.Text = "إدارة الشكاوى";
             this.Load += new System.EventHandler(this.TikFolow_Load);
             this.SizeChanged += new System.EventHandler(this.TikFolow_SizeChanged);
             this.Panel3.ResumeLayout(false);
             this.FlwtopBar.ResumeLayout(false);
+            this.FlwtopBar.PerformLayout();
             this.flowLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            this.panel8.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
+            this.pnlBtnTree.ResumeLayout(false);
+            this.pnlBtnGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
+            this.pnlBtnSttng.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tabSearch.ResumeLayout(false);
             this.flowSearch.ResumeLayout(false);
             this.flowSearch.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.Panel1.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
+            this.PnlBtnRfrsh.ResumeLayout(false);
+            this.pnlBtnClose.ResumeLayout(false);
             this.tabDistribute.ResumeLayout(false);
-            this.tabDistribute.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.tabReopen.ResumeLayout(false);
-            this.tabReopen.PerformLayout();
-            this.panel10.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.flowLayoutPanel3.ResumeLayout(false);
+            this.flowLayoutPanel3.PerformLayout();
+            this.pnlBtnReopn.ResumeLayout(false);
+            this.tabTask.ResumeLayout(false);
+            this.flowLayoutPanel6.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.tabExport.ResumeLayout(false);
+            this.flowLayoutPanel5.ResumeLayout(false);
+            this.pnlBtnExport.ResumeLayout(false);
             this.FlowLayoutPanel1.ResumeLayout(false);
-            this.FlowLayoutPanel1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridTicket)).EndInit();
             this.flwCounters.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlAr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlEn)).EndInit();
             this.ContextMenuStrip2.ResumeLayout(false);
-            this.panel11.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1304,14 +1466,14 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        internal System.Windows.Forms.Panel panel8;
-        internal System.Windows.Forms.Button button1;
-        internal System.Windows.Forms.Panel panel9;
-        internal System.Windows.Forms.Button button2;
+        internal System.Windows.Forms.Panel pnlBtnTree;
+        internal System.Windows.Forms.Button btnTree;
+        internal System.Windows.Forms.Panel pnlBtnGrid;
+        internal System.Windows.Forms.Button btnTicket;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabSearch;
         private System.Windows.Forms.FlowLayoutPanel flowSearch;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.RadioButton Rd_strtwith;
@@ -1321,28 +1483,39 @@
         private System.Windows.Forms.RadioButton Rd_Equal;
         private System.Windows.Forms.RadioButton Rd_Like;
         internal System.Windows.Forms.TextBox SerchTxt;
-        internal System.Windows.Forms.Panel Panel1;
+        internal System.Windows.Forms.Panel PnlBtnRfrsh;
         internal System.Windows.Forms.Button BtnRefrsh;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chckShwResult;
         private System.Windows.Forms.TabPage tabDistribute;
         internal System.Windows.Forms.Panel panel7;
         internal System.Windows.Forms.Button btnDistrebute;
-        private System.Windows.Forms.TabPage tabPage2;
-        internal System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TabPage tabExport;
+        internal System.Windows.Forms.Panel pnlBtnExport;
         internal System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.TabPage tabReopen;
-        internal System.Windows.Forms.Panel panel10;
+        internal System.Windows.Forms.Panel pnlBtnReopn;
         internal System.Windows.Forms.Button btnGet;
         internal System.Windows.Forms.TextBox txtReopen;
         internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.TextBox textDistrSearch;
         internal System.Windows.Forms.Label Label11;
         private System.Windows.Forms.CheckBox checkAll;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        internal System.Windows.Forms.Panel panel11;
-        internal System.Windows.Forms.Button button3;
+        internal System.Windows.Forms.Panel pnlBtnSttng;
+        internal System.Windows.Forms.Button btnseting;
+        internal System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.TabPage tabTask;
+        internal System.Windows.Forms.Panel pnlBtnClose;
+        internal System.Windows.Forms.Button btnCls;
+        private System.Windows.Forms.CheckBox chckShowClose;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
+        internal System.Windows.Forms.Panel panel1;
+        internal System.Windows.Forms.Button btnToRegion;
+        internal System.Windows.Forms.RadioButton ChckRegions;
+        internal System.Windows.Forms.Label LblRegions;
     }
 }

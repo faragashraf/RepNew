@@ -43,6 +43,7 @@ namespace VOCAC.PL
             {
                 frm = this;
             }
+            TikUpdate.getTikupdatefrm.Load += new EventHandler(TikUpdate_SizeChanged);
         }
 
         private void TikUpdate_Load(object sender, EventArgs e)
@@ -67,8 +68,6 @@ namespace VOCAC.PL
             GridUpdt.Columns["EvSusp"].Visible = false;
             GridUpdt.Columns["UCatLvl"].Visible = false;
             GridUpdt.Columns["TkupUnread"].Visible = false;
-            adjustfrmsize();
-            eventColor();
         }
         private void TikUpdate_SizeChanged(object sender, EventArgs e)
         {

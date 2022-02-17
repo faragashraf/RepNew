@@ -107,6 +107,12 @@
     <Compile Include="BL\ticketCurrent.cs" />
     <Compile Include="BL\TicketsSelectBulk.cs" />
     <Compile Include="DAL\DataAccessLayer.cs" />
+    <Compile Include="PL\TikEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TikEdit.Designer.cs">
+      <DependentUpon>TikEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="PL\userPasschange.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,6 +182,9 @@
     <Compile Include="PL\WelcomeScreen.Designer.cs">
       <DependentUpon>WelcomeScreen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="PL\TikEdit.resx">
+      <DependentUpon>TikEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PL\userPasschange.resx">
       <DependentUpon>userPasschange.cs</DependentUpon>
     </EmbeddedResource>
@@ -543,6 +552,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Frstaid.ico" />
+    <None Include="Resources\owner.png" />
+    <None Include="Resources\Distribute.png" />
     <None Include="Resources\print.png" />
     <None Include="Resources\team.png" />
     <None Include="Resources\Male.png" />

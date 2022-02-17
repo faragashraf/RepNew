@@ -85,6 +85,7 @@
             this.PubVerLbl1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.lblIp = new System.Windows.Forms.Label();
             this.TimerCon = new System.Windows.Forms.Timer(this.components);
             this.CntxtMnuStrp = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TimerTikCoun = new System.Windows.Forms.Timer(this.components);
@@ -104,7 +105,6 @@
             this.panellgin = new System.Windows.Forms.Panel();
             this.ImageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tmrbringfront = new System.Windows.Forms.Timer(this.components);
-            this.lblIp = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.CNTXMNUPic.SuspendLayout();
             this.FlowLayoutPanel1.SuspendLayout();
@@ -852,6 +852,20 @@
             this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
+            // lblIp
+            // 
+            this.lblIp.BackColor = System.Drawing.Color.Transparent;
+            this.lblIp.Font = new System.Drawing.Font("Times New Roman", 9F);
+            this.lblIp.ForeColor = System.Drawing.Color.Red;
+            this.lblIp.Location = new System.Drawing.Point(289, 283);
+            this.lblIp.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
+            this.lblIp.Name = "lblIp";
+            this.lblIp.Size = new System.Drawing.Size(297, 20);
+            this.lblIp.TabIndex = 117;
+            this.lblIp.Text = "User IP: ";
+            this.lblIp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ToolTip1.SetToolTip(this.lblIp, "IP Address Of Current Mashine");
+            // 
             // TimerCon
             // 
             this.TimerCon.Interval = 1000;
@@ -868,6 +882,7 @@
             // 
             // StatBrPnlAr
             // 
+            this.StatBrPnlAr.Alignment = System.Windows.Forms.HorizontalAlignment.Center;
             this.StatBrPnlAr.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring;
             this.StatBrPnlAr.Name = "StatBrPnlAr";
             this.StatBrPnlAr.Width = 1384;
@@ -990,7 +1005,6 @@
             this.Cmbo.Name = "Cmbo";
             this.Cmbo.Size = new System.Drawing.Size(121, 21);
             this.Cmbo.TabIndex = 110;
-            this.Cmbo.Visible = false;
             // 
             // panellgin
             // 
@@ -1038,20 +1052,6 @@
             // 
             this.tmrbringfront.Enabled = true;
             this.tmrbringfront.Tick += new System.EventHandler(this.tmrbringfront1);
-            // 
-            // lblIp
-            // 
-            this.lblIp.BackColor = System.Drawing.Color.Transparent;
-            this.lblIp.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.lblIp.ForeColor = System.Drawing.Color.Red;
-            this.lblIp.Location = new System.Drawing.Point(289, 283);
-            this.lblIp.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
-            this.lblIp.Name = "lblIp";
-            this.lblIp.Size = new System.Drawing.Size(297, 20);
-            this.lblIp.TabIndex = 117;
-            this.lblIp.Text = "User IP: ";
-            this.lblIp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ToolTip1.SetToolTip(this.lblIp, "IP Address Of Current Mashine");
             // 
             // WelcomeScreen
             // 

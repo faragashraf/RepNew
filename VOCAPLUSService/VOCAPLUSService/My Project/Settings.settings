@@ -6,7 +6,7 @@
       <Value Profile="(Default)">egyptpost\voca-support</Value>
     </Setting>
     <Setting Name="MlPss" Type="System.String" Scope="User">
-      <Value Profile="(Default)">asd.ASD123</Value>
+      <Value Profile="(Default)">ASD_asd123</Value>
     </Setting>
     <Setting Name="TimeStart" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)">08/05/2021 08:00:00</Value>
@@ -24,10 +24,10 @@
       <Value Profile="(Default)">08/05/2021 10:30:00</Value>
     </Setting>
     <Setting Name="TO_" Type="System.String" Scope="User">
-      <Value Profile="(Default)">RTM_TEAM@EgyptPost.Org;WFM_RTM@EgyptPost.Org</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Cc_" Type="System.String" Scope="User">
-      <Value Profile="(Default)">sameh_gharabawy@EgyptPost.Org;VOCA-SUPPORT@EgyptPost.Org;a.farag@egyptpost.org</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

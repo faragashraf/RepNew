@@ -68,7 +68,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("asd.ASD123")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("ASD_asd123")>  _
         Public Property MlPss() As String
             Get
                 Return CType(Me("MlPss"),String)
@@ -140,7 +140,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("RTM_TEAM@EgyptPost.Org;WFM_RTM@EgyptPost.Org")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
         Public Property TO_() As String
             Get
                 Return CType(Me("TO_"),String)
@@ -152,7 +152,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("sameh_gharabawy@EgyptPost.Org;VOCA-SUPPORT@EgyptPost.Org;a.farag@egyptpost.org")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
         Public Property Cc_() As String
             Get
                 Return CType(Me("Cc_"),String)
