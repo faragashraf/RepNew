@@ -27,7 +27,7 @@
     <ProductName>VOCA Ultimate</ProductName>
     <PublisherName>Ashraf Farag</PublisherName>
     <SuiteName>VOCA Ultimate</SuiteName>
-    <ApplicationRevision>13</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -157,12 +157,6 @@
     <Compile Include="PL\TikDetails.Designer.cs">
       <DependentUpon>TikDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="PL\TikFolow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PL\TikFolow.Designer.cs">
-      <DependentUpon>TikFolow.cs</DependentUpon>
-    </Compile>
     <Compile Include="PL\TikSearchNew.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -218,9 +212,6 @@
     </Compile>
     <EmbeddedResource Include="PL\TikDetails.resx">
       <DependentUpon>TikDetails.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PL\TikFolow.resx">
-      <DependentUpon>TikFolow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PL\TikSearchNew.resx">
       <DependentUpon>TikSearchNew.cs</DependentUpon>

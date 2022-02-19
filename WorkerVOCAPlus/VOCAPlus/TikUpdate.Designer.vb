@@ -32,12 +32,12 @@ Partial Class TikUpdate
         Me.CmbEvent = New System.Windows.Forms.ComboBox()
         Me.TxtUpdt = New System.Windows.Forms.TextBox()
         Me.BtnSubmt = New System.Windows.Forms.Button()
-        Me.TxtBrws = New System.Windows.Forms.TextBox()
         Me.LblMsg = New System.Windows.Forms.Label()
         Me.TimerEscOpen = New System.Windows.Forms.Timer(Me.components)
         Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.TxtBrws = New System.Windows.Forms.TextBox()
         CType(Me.GridUpdt, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip2.SuspendLayout()
         Me.FlowLayoutPanel2.SuspendLayout()
@@ -163,17 +163,6 @@ Partial Class TikUpdate
         Me.BtnSubmt.Text = "تسجيل"
         Me.BtnSubmt.UseVisualStyleBackColor = True
         '
-        'TxtBrws
-        '
-        Me.TxtBrws.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtBrws.Font = New System.Drawing.Font("Times New Roman", 12.0!)
-        Me.TxtBrws.Location = New System.Drawing.Point(875, 192)
-        Me.TxtBrws.Name = "TxtBrws"
-        Me.TxtBrws.ReadOnly = True
-        Me.TxtBrws.Size = New System.Drawing.Size(127, 26)
-        Me.TxtBrws.TabIndex = 2159
-        Me.TxtBrws.Visible = False
-        '
         'LblMsg
         '
         Me.LblMsg.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -198,7 +187,7 @@ Partial Class TikUpdate
         Me.FlowLayoutPanel2.Location = New System.Drawing.Point(251, 359)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
         Me.FlowLayoutPanel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(1005, 188)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(1005, 266)
         Me.FlowLayoutPanel2.TabIndex = 2161
         '
         'Panel1
@@ -223,6 +212,17 @@ Partial Class TikUpdate
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1259, 665)
         Me.FlowLayoutPanel1.TabIndex = 2162
+        '
+        'TxtBrws
+        '
+        Me.TxtBrws.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtBrws.Font = New System.Drawing.Font("Times New Roman", 12.0!)
+        Me.TxtBrws.Location = New System.Drawing.Point(875, 192)
+        Me.TxtBrws.Name = "TxtBrws"
+        Me.TxtBrws.ReadOnly = True
+        Me.TxtBrws.Size = New System.Drawing.Size(127, 26)
+        Me.TxtBrws.TabIndex = 2159
+        Me.TxtBrws.Visible = False
         '
         'TikUpdate
         '
@@ -251,7 +251,6 @@ Partial Class TikUpdate
     Friend WithEvents CmbEvent As ComboBox
     Friend WithEvents TxtUpdt As TextBox
     Friend WithEvents BtnSubmt As Button
-    Friend WithEvents TxtBrws As TextBox
     Friend WithEvents LblMsg As Label
     Friend WithEvents ContextMenuStrip2 As ContextMenuStrip
     Friend WithEvents CopyToolStripitem As ToolStripMenuItem
@@ -261,4 +260,5 @@ Partial Class TikUpdate
     Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents TxtBrws As TextBox
 End Class

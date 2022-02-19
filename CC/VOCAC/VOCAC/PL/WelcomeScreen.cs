@@ -287,11 +287,11 @@ namespace VOCAC.PL
                 Statcdif.CDCountry = SlctMainreslt.ds.Tables[8];                        // CDCountry Table
                 if (CurrentUser.UsrUCatLvl == 7)
                 {
-                    Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" + 0 + " AND [srcCd] = '1'";     //     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm";
+                    Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] = 0 AND [srcCd] = '1'";     //     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm";
                 }
                 else
                 {
-                    Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" + 0 + " AND [srcCd] > '1'";   //  SrcStr = "Select SrcCd, SrcNm from CDSrc where SrcSusp=0 And srcCd > 1 ORDER BY SrcNm"
+                    Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] = 0 AND [srcCd] > '1'";   //  SrcStr = "Select SrcCd, SrcNm from CDSrc where SrcSusp=0 And srcCd > 1 ORDER BY SrcNm"
                 }
                 if (CurrentUser.UsrUCatLvl >= 3 && CurrentUser.UsrUCatLvl <= 5)
                 {

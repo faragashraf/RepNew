@@ -50,6 +50,8 @@ namespace VOCAC.PL
         int TeamIdentfier;
         string Help_;
         int lblColor = 35;
+        TreeNode[] TempNode = new TreeNode[0];
+        List<string> ctrlList;
         public TikEdit()
         {
             InitializeComponent();
@@ -57,15 +59,16 @@ namespace VOCAC.PL
             NewTickSub();
             this.Phon1TxtBx.TextChanged += new System.EventHandler(this.Phon1TxtBx_TextChanged);
             this.IDTxtBx.TextChanged += new System.EventHandler(this.IDTxtBx_TextChanged);
+            Statcdif.CompSurceTable.DefaultView.RowFilter = string.Empty;
         }
         private void NewTickSub()
         {
             FlwMend.Enabled = true;
             FlwMend.Controls.Clear();
             WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
-            TreeView1.Enabled = true;
-            TreeView1.Visible = false;
-            TreeView1.CollapseAll();
+            //TreeView1.Enabled = true;
+            //TreeView1.Visible = false;
+            //TreeView1.Nodes.Clear();
 
             SubmitBtn.Visible = true;
             BtnDublicate.Visible = false;
@@ -81,7 +84,7 @@ namespace VOCAC.PL
                     TextBox TB = new TextBox();
                     MaskedTextBox MTB = new MaskedTextBox();
                     try { TB = (TextBox)c; } catch (Exception) { MTB = (MaskedTextBox)c; }
-                    c.Text = "";
+                    if (c.Name != ComRefLbl.Name) { c.Text = ""; }
                     if (TB.ReadOnly == false)
                     {
                         TB.BackColor = Color.White;
@@ -102,12 +105,10 @@ namespace VOCAC.PL
             RadioButton11.Checked = false;
             RadioButton12.Checked = false;
 
-            BtnAdd.Visible = false;
-            BtnClr.Visible = false;
 
             Phon1TxtBx.Enabled = false;
             Phon2TxtBx.Enabled = false;
-            ComRefLbl.Text = "";
+            //ComRefLbl.Text = "";
             IDTxtBx.Text = "";
             IDTxtBx.Mask = "00000000000000";
             RadNID.Checked = true;
@@ -480,18 +481,22 @@ namespace VOCAC.PL
         }
         private void CompReqst_CheckedChanged(object sender, EventArgs e)
         {
+            populateTree();
+        }
+        private void populateTree()
+        {
             this.TreeView1.AfterSelect -= new TreeViewEventHandler(this.TreeView1_AfterSelect);
             this.TreeView1.BeforeSelect -= new TreeViewCancelEventHandler(TreeView1_BeforeSelect);
             if (RadioButton4.Checked)
             {
                 TickKind = 0;
-                this.Text = "تسجيل طلب جديد";
+                this.Text = "طلب " + ComRefLbl.Text;
             }
 
             else if (RadioButton5.Checked)
             {
                 TickKind = 1;
-                this.Text = "تسجيل شكوى جديدة";
+                this.Text = "شكوى " + ComRefLbl.Text;
             }
 
             if (SrcCmbBx.Items.Count == 0)
@@ -501,7 +506,9 @@ namespace VOCAC.PL
             }
 
             TreeView1.Visible = true;
+
             TreeView1.Nodes.Clear();
+
 
             if (TreeView1.Nodes.Count == 0)
             {
@@ -513,11 +520,11 @@ namespace VOCAC.PL
                 }
                 if (TickKind == 0)
                 {
-                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + true;
+                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + 1;
                 }
                 else
                 {
-                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + false;
+                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + 0;
                 }
                 //Populate Products Nodes
                 for (int i = 0; i < Statcdif.ProdCompTable.DefaultView.Count; i++)
@@ -544,6 +551,12 @@ namespace VOCAC.PL
                             if (TreeView1.Nodes[o].Nodes[p].ToString().Split(':')[1].Trim().Equals(Statcdif.ProdCompTable.DefaultView[i]["PrdNm"].ToString(), StringComparison.OrdinalIgnoreCase))
                             {
                                 TreeView1.Nodes[o].Nodes[p].Nodes.Add(Statcdif.ProdCompTable.DefaultView[i]["FnSQL"].ToString(), Statcdif.ProdCompTable.DefaultView[i]["CompNm"].ToString(), 0, 2);
+                                string k = editStruct.dt.Rows[0]["TkFnPrdCd"].ToString();
+                                string l = Statcdif.ProdCompTable.DefaultView[i]["FnSQL"].ToString();
+                                if (editStruct.dt.Rows[0]["TkFnPrdCd"].ToString() == Statcdif.ProdCompTable.DefaultView[i]["FnSQL"].ToString())
+                                {   //this Node Value Will Be a Selected Node
+                                    TempNode = TreeView1.Nodes.Find(editStruct.dt.Rows[0]["TkFnPrdCd"].ToString(), true);  //this Node Value Will Be a Selected Node
+                                }
                                 for (int q = 0; q < TreeView1.Nodes[o].Nodes[p].GetNodeCount(true); q++)
                                 {
                                     TreeView1.Nodes[o].Nodes[p].Nodes[q].ForeColor = Color.Green;
@@ -579,7 +592,6 @@ namespace VOCAC.PL
         private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeView1.SelectedNode.Expand();
-            BtnAdd.Enabled = true;
             if (TreeView1.SelectedNode.Level == 2)
             {
                 DataRow DRW = function.DRW(Statcdif.ProdCompTable, TreeView1.SelectedNode.Name, Statcdif.ProdCompTable.Columns["FnSQL"]);
@@ -588,8 +600,6 @@ namespace VOCAC.PL
                 Help_ = DRW.ItemArray[11].ToString();
                 lblhelp.Text = Help_;
                 Timer1.Start();
-                BtnAdd.Visible = true;
-                BtnClr.Visible = false;
                 PrdKind = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[0];
                 Prdct.Text = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[1];
                 Comp.Text = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[2];
@@ -611,6 +621,7 @@ namespace VOCAC.PL
                     Lbl.Font = CtrlFont;
                     Lbl.Size = lblsize;
                     Lbl.Text = Statcdif.MendFildsTable.DefaultView[i]["CDMendTxt"] + " : ";
+                    Lbl.Name = Statcdif.MendFildsTable.DefaultView[i]["CDMendTxt"].ToString();
                     FlwMend.Controls.Add(Lbl);
                     richTextBox1.Text += (Statcdif.MendFildsTable.DefaultView[i]["CDMendTxt"]) + Environment.NewLine;
                     if (Statcdif.MendFildsTable.DefaultView[i]["CDMendType"].ToString().Equals("TextBox", StringComparison.OrdinalIgnoreCase))
@@ -672,8 +683,6 @@ namespace VOCAC.PL
                 PrdKind = "";
                 Prdct.Text = "";
                 Comp.Text = "";
-                BtnAdd.Visible = false;
-                BtnClr.Visible = false;
                 FlwMend.Controls.Clear();
                 richTextBox1.Text = "";
                 itemRef = "";
@@ -915,14 +924,40 @@ namespace VOCAC.PL
         {
             this.RadioButton4.Click -= new System.EventHandler(this.CompReqst_CheckedChanged);
             this.RadioButton5.Click -= new System.EventHandler(this.CompReqst_CheckedChanged);
-            if (CurrentUser.UsrUCatLvl >= 3 && CurrentUser.UsrUCatLvl <= 5)
+            StringBuilder updateString = new StringBuilder();
+            if (SrcCmbBx.Text != editStruct.dt.Rows[0]["SrcNm"].ToString())
             {
-                AddNewTicket(CurrentUser.UsrID);
+                updateString.Append("SrcCd ='" + SrcCmbBx.SelectedValue + "'");
             }
-            else
+            if (NameTxtBx.Text != editStruct.dt.Rows[0]["TkClNm"].ToString())
             {
-                AddNewTicket(TeamIdentfier);
+                updateString.Append("TkClNm = '" + NameTxtBx.Text + "'");
             }
+            if (Phon1TxtBx.Text != editStruct.dt.Rows[0]["TkClPh"].ToString())
+            {
+                updateString.Append("TkClPh = '" + Phon1TxtBx.Text + "'");
+            }
+            if (Phon2TxtBx.Text != editStruct.dt.Rows[0]["TkClPh1"].ToString())
+            {
+                updateString.Append("TkClPh1 = '" + Phon2TxtBx.Text + "'");
+            }
+            if (MailTxtBx.Text != editStruct.dt.Rows[0]["TkMail"].ToString())
+            {
+                updateString.Append("TkMail = '" + MailTxtBx.Text + "'");
+            }
+            if (AddTxtBx.Text != editStruct.dt.Rows[0]["TkClAdr"].ToString())
+            {
+                updateString.Append("TkClAdr = '" + AddTxtBx.Text + "'");
+            }
+            if (DetailsTxtBx.Text != editStruct.dt.Rows[0]["TkDetails"].ToString())
+            {
+                updateString.Append("TkDetails = '" + DetailsTxtBx.Text + "'");
+            }
+            if (TreeView1.SelectedNode.Name != editStruct.dt.Rows[0]["TkFnPrdCd"].ToString())
+            {
+                updateString.Append("TkFnPrdCd =" + TreeView1.SelectedNode.Name);
+            }
+            string ll = updateString.ToString();
             this.RadioButton4.Click += new System.EventHandler(this.CompReqst_CheckedChanged);
             this.RadioButton5.Click += new System.EventHandler(this.CompReqst_CheckedChanged);
         }
@@ -941,39 +976,6 @@ namespace VOCAC.PL
             param[3].Value = clNm;
             param[4] = new SqlParameter("@TkClPh", SqlDbType.NVarChar, 14);
             param[4].Value = ClPh;
-            param[5] = new SqlParameter("@TkClPh1", SqlDbType.NVarChar, 14);
-            if (ClPh1.Length == 0) { param[5].Value = DBNull.Value; }
-            else { param[5].Value = ClPh1; }
-            param[6] = new SqlParameter("@TkClAdr", SqlDbType.NVarChar, 255);
-            if (ClAdr.Length == 0) { param[6].Value = DBNull.Value; }
-            else { param[6].Value = ClAdr; }
-            param[7] = new SqlParameter("@TkClNtID", SqlDbType.NVarChar, 14);
-            if (ClNtID.Length == 0) { param[7].Value = DBNull.Value; }
-            else { param[7].Value = ClNtID; }
-            param[8] = new SqlParameter("@TkDetails", SqlDbType.NVarChar);
-            if (TkDetails.Length == 0) { param[8].Value = DBNull.Value; }
-            else { param[8].Value = TkDetails; }
-            param[9] = new SqlParameter("@TkEmpNm0", SqlDbType.Int);
-            param[9].Value = EmpNm0;
-            param[10] = new SqlParameter("@TkEmpNm", SqlDbType.Int);
-            if (EmpNm == 0) { param[10].Value = DBNull.Value; }
-            else { param[10].Value = EmpNm; }
-            param[11] = new SqlParameter("@TkMail", SqlDbType.NVarChar, 50);
-            if (ClMail.Length == 0) { param[11].Value = DBNull.Value; }
-            else { param[11].Value = ClMail; }
-            param[12] = new SqlParameter();
-            param[12].ParameterName = "@FIELDTABLETYPE";
-            param[12].Value = FIELDTABL;
-            param[13] = new SqlParameter("@TkUserIP", SqlDbType.NVarChar, 15);
-            param[13].Value = IP;
-
-            // Add Out Put Parameter
-            param[14] = new SqlParameter();
-            param[14].Direction = ParameterDirection.Output;
-            param[14].ParameterName = "@Comdid";
-            param[14].SqlDbType = SqlDbType.Int;
-
-
             DAL.DataAccessLayer.rturnStruct RsultPopulateChoice = DAL.ExcuteCommand("SP_TICKETS_INSERT", param);
             DAL.Close();
             return Convert.ToInt32(param[14].Value);
@@ -1009,45 +1011,6 @@ namespace VOCAC.PL
                     string KK = GetNextControl(Ctrl, false).Text.Substring(0, GetNextControl(Ctrl, false).Text.Length - 3);
                     mndtbl.Rows.Add(0, KK, Dpkr.Value);
                 }
-            }
-            //Statcdif.ProdCompTable.DefaultView.RowFilter = "[FnSQL]  = " + TreeView1.SelectedNode.Name;
-            int Insertreslt = insertTicket(
-                Convert.ToBoolean(TickKind)                                         //Ticket Kind
-                , Convert.ToInt32(TreeView1.SelectedNode.Name)  //Ticket Pcoduct & Cmplaint Code SQL
-                , Convert.ToInt32(SrcCmbBx.SelectedValue)                     //Ticket Source
-                , NameTxtBx.Text.ToString()                                       //Ticket Client Name
-                , Phon1TxtBx.Text.ToString()                                       //Ticket Client Phone Number 1
-                , Phon2TxtBx.Text.ToString().Replace(" ", "")                                       //Ticket Client Phone Number 2
-                , AddTxtBx.Text.ToString().Trim()                                         //Ticket Client Address
-                , IDTxtBx.Text.ToString().Trim()                                          //Ticket Clients National ID
-                , DetailsTxtBx.Text.ToString().Trim()                                     //Ticket Details
-                , CurrentUser.UsrID                                            //Ticket Creator ID
-                , usrid                                                        //Ticket Follower ID (It must be Zero Amount To Assign Null Value to Database)
-                , MailTxtBx.Text.ToString().Trim()                                        //Ticket Client Mail address
-                , Statcdif._IP
-                , mndtbl);                                                     //Ticket Mend Table send it as type table to Stored Procedure
-
-            if (Insertreslt != 0)
-            {
-                SubmitBtn.Visible = false;
-                if (TickKind == 0)
-                {
-                    ComRefLbl.Text = "طلب رقم : " + Convert.ToString(Insertreslt);
-                }
-
-                else
-                {
-                    ComRefLbl.Text = "شكوى رقم : " + Convert.ToString(Insertreslt);
-                }
-                TimrPhons.Stop();
-                FlwMainData.Enabled = false;
-                FlwTree.Enabled = false;
-                FlwMend.Enabled = false;
-                BtnDublicate.Visible = true;
-            }
-            else
-            {
-                fn.msg("لم ينجح الإتصال بقواعد البيانات", "تسجيل شكوى جديدة", MessageBoxButtons.OK);
             }
         }
         private void NewBtn_Click(object sender, EventArgs e)
@@ -1195,43 +1158,163 @@ namespace VOCAC.PL
                 MailTxtBx.Focus();
             }
         }
-        DAL.DataAccessLayer.rturnStruct RsultReOpen;
+        DAL.DataAccessLayer.rturnStruct editStruct;
         private String GetTicket(string SQLID)
         {
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             SqlParameter[] param = new SqlParameter[1];
             param[0] = new SqlParameter("@TicketID", SqlDbType.NVarChar);
             param[0].Value = SQLID;
-            RsultReOpen = DAL.SelectData("SP_TICKETS_SLCT", param);
+            editStruct = DAL.SelectData("SP_TICKETS_SLCT", param);
             DAL.Close();
-            return RsultReOpen.msg;
+            return editStruct.msg;
         }
         private void BtnLoad_Click(object sender, EventArgs e)
         {
-            if (RsultReOpen.dt.Rows.Count > 0)
+            NewTickSub();
+            TreeView1.CollapseAll();
+            if (GetTicket(ComRefLbl.Text) == null && editStruct.dt.Rows.Count > 0)
             {
-                if (Convert.ToBoolean(RsultReOpen.dt.Rows[0]["TkClsStatus"]) == false)
+                if (editStruct.dt.Rows.Count > 0)
                 {
-                    adjustButton("تعديل", Resources.CpOpen); adjustButton("تعديل", Resources.CpOpen);
-                    DataGridView dv = new DataGridView();
-                    dv.DataSource = RsultReOpen.dt;
-                    ticketCurrent.currentRow(dv);
-                }
-                else
-                {
-                    fn.msg("الشكوى مغلقة ولا يمكن تعديلها", "تعديل الشكوى", MessageBoxButtons.YesNo);
+                    if (Convert.ToBoolean(editStruct.dt.Rows[0]["TkClsStatus"]) == false)
+                    {
+                        assignTicket();
+                    }
+                    else
+                    {
+                        fn.msg("الشكوى مغلقة ولا يمكن تعديلها", "تعديل الشكوى", MessageBoxButtons.YesNo);
+                    }
                 }
             }
             else
             {
-                adjustButton("تحميل", Resources.DbGet);
                 fn.msg("لم يتم العثور على الشكوى" + Environment.NewLine + "من فضلك تأكد من الرقم وأعد المحاولة", "تعديل الشكوى", MessageBoxButtons.OK);
             }
         }
-        private void adjustButton(string tag, Image img)
+        private void assignTicket()
         {
-            btnLoad.Tag = tag;
-            btnLoad.BackgroundImage = img;
+
+            this.Phon1TxtBx.TextChanged -= new System.EventHandler(this.Phon1TxtBx_TextChanged);
+            this.IDTxtBx.TextChanged -= new System.EventHandler(this.IDTxtBx_TextChanged);
+            this.TreeView1.AfterSelect -= new TreeViewEventHandler(this.TreeView1_AfterSelect);
+            this.TreeView1.BeforeSelect -= new TreeViewCancelEventHandler(TreeView1_BeforeSelect);
+
+            if (editStruct.dt.Rows[0]["TkKind"].ToString() == "شكوى") { RadioButton5.Checked = true; TickKind = 1; this.Text = "شكوى رقم : " + ComRefLbl.Text; } else { RadioButton4.Checked = true; TickKind = 0; this.Text = "طلب رقم : " + ComRefLbl.Text; }
+
+            DateTxtBx.Text = editStruct.dt.Rows[0]["TkDtStart"].ToString();
+            DataRow DRW = function.DRW(Statcdif.CompSurceTable, editStruct.dt.Rows[0]["SrcNm"].ToString(), Statcdif.CompSurceTable.Columns[1]);
+
+            SrcCmbBx.Text = editStruct.dt.Rows[0]["SrcNm"].ToString();
+
+            NameTxtBx.Text = editStruct.dt.Rows[0]["TkClNm"].ToString();
+            if (editStruct.dt.Rows[0]["TkClPh"].ToString().Length > 0)
+            {
+                if (editStruct.dt.Rows[0]["TkClPh"].ToString().Length == 11)
+                {
+                    Phon1TxtBx.Text = editStruct.dt.Rows[0]["TkClPh"].ToString();
+                    RadioButton8.Checked = true;
+                }
+                else if (editStruct.dt.Rows[0]["TkClPh"].ToString().Length == 10)
+                {
+                    Phon1TxtBx.Text = editStruct.dt.Rows[0]["TkClPh"].ToString();
+                    RadioButton9.Checked = true;
+                }
+                Phon1TxtBx.Enabled = true;
+            }
+            else
+            {
+                Phon1TxtBx.Enabled = false;
+            }
+            if (editStruct.dt.Rows[0]["TkClPh1"].ToString().Length > 0)
+            {
+                if (editStruct.dt.Rows[0]["TkClPh1"].ToString().Length == 11)
+                {
+                    Phon2TxtBx.Text = editStruct.dt.Rows[0]["TkClPh1"].ToString();
+                    RadioButton11.Checked = true;
+                }
+                else if (editStruct.dt.Rows[0]["TkClPh1"].ToString().Length == 10)
+                {
+                    Phon2TxtBx.Text = editStruct.dt.Rows[0]["TkClPh1"].ToString();
+                    RadioButton12.Checked = true;
+                }
+                Phon2TxtBx.Enabled = true;
+            }
+            else
+            {
+                Phon2TxtBx.Enabled = false;
+            }
+            MailTxtBx.Text = editStruct.dt.Rows[0]["TkMail"].ToString();
+            AddTxtBx.Text = editStruct.dt.Rows[0]["TkClAdr"].ToString();
+
+
+            bool isnumber = true;
+            for (int i = 0; i < editStruct.dt.Rows[0]["TkClNtID"].ToString().Length; i++)
+            {
+                if (!char.IsNumber(Convert.ToChar(editStruct.dt.Rows[0]["TkClNtID"].ToString().Substring(i, 1))))
+                {
+                    isnumber = false;
+                    break;
+                }
+            }
+
+            if (isnumber == true)
+            {
+                RadNID.Checked = true;
+            }
+            else
+            {
+                RadPss.Checked = true;
+            }
+            IDTxtBx.Text = editStruct.dt.Rows[0]["TkClNtID"].ToString();
+            Prdct.Text = editStruct.dt.Rows[0]["PrdNm"].ToString();
+            Comp.Text = editStruct.dt.Rows[0]["CompNm"].ToString();
+            DetailsTxtBx.Text = editStruct.dt.Rows[0]["TkDetails"].ToString();
+            populateTree();
+
+            this.TreeView1.AfterSelect += new TreeViewEventHandler(this.TreeView1_AfterSelect);
+            this.TreeView1.BeforeSelect += new TreeViewCancelEventHandler(TreeView1_BeforeSelect);
+
+            TreeView1.SelectedNode = TempNode[0];
+            FlwMend.Refresh();
+
+            ctrlList = new List<string>();
+            for (int i = 0; i < editStruct.dt.Columns.Count; i++)
+            {
+                if (function.CheckArlanguage(editStruct.dt.Columns[i].ColumnName) == true)
+                {
+                    ctrlList.Add(editStruct.dt.Columns[i].ColumnName);
+                }
+            }
+            for (int i = 0; i < ctrlList.Count; i++)
+            {
+                Label ll = FlwMend.Controls.Find(ctrlList[i].ToString(), false).FirstOrDefault() as Label;
+                GetNextControl(ll, true).Text = editStruct.dt.Rows[0][ctrlList[i].ToString()].ToString();
+            }
+            this.Phon1TxtBx.TextChanged += new System.EventHandler(this.Phon1TxtBx_TextChanged);
+            this.IDTxtBx.TextChanged += new System.EventHandler(this.IDTxtBx_TextChanged);
+        }
+        private void ComRefLbl_TextChanged(object sender, EventArgs e)
+        {
+            Statcdif.CompSurceTable.DefaultView.RowFilter = string.Empty;
+            if (editStruct.dt != null && editStruct.dt.Rows.Count > 0)
+            {
+                editStruct.dt.Rows.Clear();
+                NewTickSub();
+            }
+            if (ComRefLbl.Text.Length > 0)
+            {
+                btnLoad.Enabled = true;
+            }
+            else
+            {
+                btnLoad.Enabled = false;
+            }
+        }
+
+        private void TikEdit_Load(object sender, EventArgs e)
+        {
+            ComRefLbl.Select();
         }
     }
 }

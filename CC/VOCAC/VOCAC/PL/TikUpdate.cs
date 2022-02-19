@@ -48,7 +48,6 @@ namespace VOCAC.PL
             }
             TikUpdate.getTikupdatefrm.Load += new EventHandler(TikUpdate_SizeChanged);
         }
-
         private void TikUpdate_Load(object sender, EventArgs e)
         {
             GridUpdt.Columns["TkupSTime"].HeaderText = "تاريخ التحديث";
@@ -71,6 +70,14 @@ namespace VOCAC.PL
             GridUpdt.Columns["EvSusp"].Visible = false;
             GridUpdt.Columns["UCatLvl"].Visible = false;
             GridUpdt.Columns["TkupUnread"].Visible = false;
+            if (currntTicket._TkupEvtId == 902)
+            {
+                TimerEscOpen.Start();
+            }
+            else
+            {
+                TimerEscOpen.Stop();
+            }
         }
         private void TikUpdate_SizeChanged(object sender, EventArgs e)
         {
@@ -214,16 +221,13 @@ namespace VOCAC.PL
             function fn = function.getfn;
 
             DateTime Minutws = Convert.ToDateTime(fn.ServrTime());
-            //TimeSpan d= Convert.ToDateTime(Statcdif.servrTime).Subtract(currntTicket._TkupSTime);
-            //TimeSpan c = new TimeSpan(0,120,0);
-            //TimeSpan w = TimeSpan.FromMinutes(120- Minutws);
             double Minuts = Convert.ToDateTime(Minutws).Subtract(currntTicket._TkupSTime).TotalMinutes;
             double MinutsDef = (120 - Minuts);
             if (currntTicket._TkupEvtId == 902)
             {
                 if (Minuts < 120)
                 {
-                    LblMsg.Text = ("تم عمل متابعه 1 وسيتم الرد عليها خلال " + 120 + " متبقى " +  TimeSpan.FromMinutes(MinutsDef).ToString().Split('.')[0] + " دقيقة");
+                    LblMsg.Text = ("تم عمل متابعه 1 وسيتم الرد عليها خلال " + 120 + " متبقى " + TimeSpan.FromMinutes(MinutsDef).ToString().Split('.')[0] + " دقيقة");
                     //LblMsg.Refresh();
                     CmbEvent.Enabled = false;
                     BtnSubmt.Enabled = false;

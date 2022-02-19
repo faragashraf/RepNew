@@ -93,6 +93,7 @@ namespace VOCAC.DAL
             }
             catch (Exception Ex)
             {
+                Struc.dt = null;
                 Struc.msg = Ex.Message;
                 function fn = function.getfn;
                 fn.AppLog(this.ToString(), Ex.Message, Stored_Procedure);

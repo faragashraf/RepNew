@@ -30,14 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TikEdit));
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Rooting");
             this.BtnAdd = new System.Windows.Forms.Button();
             this.Label11 = new System.Windows.Forms.Label();
             this.Label29 = new System.Windows.Forms.Label();
             this.IDTxtBx = new System.Windows.Forms.MaskedTextBox();
             this.RadNID = new System.Windows.Forms.RadioButton();
             this.Panel5 = new System.Windows.Forms.Panel();
-            this.BtnClr = new System.Windows.Forms.Button();
             this.RadPss = new System.Windows.Forms.RadioButton();
             this.MyGroupBox2 = new System.Windows.Forms.Panel();
             this.PictureBox2 = new System.Windows.Forms.PictureBox();
@@ -52,8 +50,6 @@
             this.RadioButton11 = new System.Windows.Forms.RadioButton();
             this.RadioButton12 = new System.Windows.Forms.RadioButton();
             this.FlwMend = new System.Windows.Forms.FlowLayoutPanel();
-            this.Panel6 = new System.Windows.Forms.Panel();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SrcCmbBx = new System.Windows.Forms.ComboBox();
             this.Label20 = new System.Windows.Forms.Label();
@@ -105,6 +101,8 @@
             this.Label6 = new System.Windows.Forms.Label();
             this.DetailsTxtBx = new System.Windows.Forms.TextBox();
             this.lblhelp = new System.Windows.Forms.Label();
+            this.Panel6 = new System.Windows.Forms.Panel();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.Panel5.SuspendLayout();
             this.MyGroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).BeginInit();
@@ -112,7 +110,6 @@
             this.MyGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox3)).BeginInit();
-            this.Panel6.SuspendLayout();
             this.Panel4.SuspendLayout();
             this.Panel1.SuspendLayout();
             this.Panel2.SuspendLayout();
@@ -126,6 +123,7 @@
             this.TabControl2.SuspendLayout();
             this.TabPage3.SuspendLayout();
             this.FlwMainData.SuspendLayout();
+            this.Panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnAdd
@@ -140,6 +138,7 @@
             this.BtnAdd.TabIndex = 2;
             this.BtnAdd.Text = "إضافة حقل";
             this.BtnAdd.UseVisualStyleBackColor = true;
+            this.BtnAdd.Visible = false;
             // 
             // Label11
             // 
@@ -200,25 +199,10 @@
             // 
             this.Panel5.BackColor = System.Drawing.Color.Transparent;
             this.Panel5.Controls.Add(this.BtnAdd);
-            this.Panel5.Location = new System.Drawing.Point(281, 617);
+            this.Panel5.Location = new System.Drawing.Point(298, 582);
             this.Panel5.Name = "Panel5";
             this.Panel5.Size = new System.Drawing.Size(107, 52);
             this.Panel5.TabIndex = 2036;
-            this.Panel5.Visible = false;
-            // 
-            // BtnClr
-            // 
-            this.BtnClr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnClr.BackgroundImage = global::VOCAC.Properties.Resources.recorange;
-            this.BtnClr.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnClr.Enabled = false;
-            this.BtnClr.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.BtnClr.Location = new System.Drawing.Point(200, 5);
-            this.BtnClr.Name = "BtnClr";
-            this.BtnClr.Size = new System.Drawing.Size(52, 28);
-            this.BtnClr.TabIndex = 3;
-            this.BtnClr.Text = "Clear";
-            this.BtnClr.UseVisualStyleBackColor = true;
             // 
             // RadPss
             // 
@@ -386,36 +370,11 @@
             // 
             this.FlwMend.AutoScroll = true;
             this.FlwMend.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.FlwMend.Location = new System.Drawing.Point(657, 617);
+            this.FlwMend.Location = new System.Drawing.Point(674, 582);
             this.FlwMend.Name = "FlwMend";
-            this.FlwMend.Size = new System.Drawing.Size(551, 271);
+            this.FlwMend.Size = new System.Drawing.Size(551, 262);
             this.FlwMend.TabIndex = 6;
             this.FlwMend.TabStop = true;
-            // 
-            // Panel6
-            // 
-            this.Panel6.BackColor = System.Drawing.Color.Transparent;
-            this.Panel6.Controls.Add(this.richTextBox1);
-            this.Panel6.Controls.Add(this.BtnClr);
-            this.Panel6.Enabled = false;
-            this.Panel6.Location = new System.Drawing.Point(394, 617);
-            this.Panel6.Name = "Panel6";
-            this.Panel6.Size = new System.Drawing.Size(257, 271);
-            this.Panel6.TabIndex = 2037;
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Enabled = false;
-            this.richTextBox1.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.ForeColor = System.Drawing.Color.Red;
-            this.richTextBox1.Location = new System.Drawing.Point(17, 6);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.richTextBox1.Size = new System.Drawing.Size(174, 247);
-            this.richTextBox1.TabIndex = 4;
-            this.richTextBox1.TabStop = false;
-            this.richTextBox1.Text = "";
             // 
             // SrcCmbBx
             // 
@@ -649,7 +608,7 @@
             this.FlowLayoutPanel5.Controls.Add(this.Panel2);
             this.FlowLayoutPanel5.Controls.Add(this.Panel3);
             this.FlowLayoutPanel5.Controls.Add(this.progressBar1);
-            this.FlowLayoutPanel5.Location = new System.Drawing.Point(11, 614);
+            this.FlowLayoutPanel5.Location = new System.Drawing.Point(28, 579);
             this.FlowLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.FlowLayoutPanel5.Name = "FlowLayoutPanel5";
             this.FlowLayoutPanel5.Size = new System.Drawing.Size(267, 222);
@@ -690,7 +649,7 @@
             this.FlwMain.Location = new System.Drawing.Point(0, 0);
             this.FlwMain.Name = "FlwMain";
             this.FlwMain.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.FlwMain.Size = new System.Drawing.Size(1796, 890);
+            this.FlwMain.Size = new System.Drawing.Size(1796, 860);
             this.FlwMain.TabIndex = 1;
             // 
             // FlwTree
@@ -703,7 +662,7 @@
             this.FlwTree.Location = new System.Drawing.Point(1306, 3);
             this.FlwTree.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.FlwTree.Name = "FlwTree";
-            this.FlwTree.Size = new System.Drawing.Size(480, 875);
+            this.FlwTree.Size = new System.Drawing.Size(480, 835);
             this.FlwTree.TabIndex = 0;
             // 
             // MyGroupBox3
@@ -761,17 +720,11 @@
             this.TreeView1.ImageKey = "Add.ico";
             this.TreeView1.Location = new System.Drawing.Point(7, 51);
             this.TreeView1.Name = "TreeView1";
-            treeNode2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            treeNode2.ForeColor = System.Drawing.Color.Red;
-            treeNode2.Name = "Rooting";
-            treeNode2.Text = "Rooting";
-            this.TreeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
             this.TreeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TreeView1.RightToLeftLayout = true;
             this.TreeView1.ShowNodeToolTips = true;
             this.TreeView1.ShowPlusMinus = false;
-            this.TreeView1.Size = new System.Drawing.Size(470, 810);
+            this.TreeView1.Size = new System.Drawing.Size(470, 764);
             this.TreeView1.TabIndex = 2022;
             this.TreeView1.TabStop = false;
             this.TreeView1.Tag = "نوع الخدمة & نوع الشكوى";
@@ -791,7 +744,7 @@
             this.FlwSubMain.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.FlwSubMain.Location = new System.Drawing.Point(72, 3);
             this.FlwSubMain.Name = "FlwSubMain";
-            this.FlwSubMain.Size = new System.Drawing.Size(1228, 875);
+            this.FlwSubMain.Size = new System.Drawing.Size(1228, 850);
             this.FlwSubMain.TabIndex = 2034;
             // 
             // ComRefLbl
@@ -800,34 +753,35 @@
             this.ComRefLbl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ComRefLbl.Font = new System.Drawing.Font("Times New Roman", 16F);
             this.ComRefLbl.ForeColor = System.Drawing.Color.Red;
-            this.ComRefLbl.Location = new System.Drawing.Point(523, 15);
-            this.ComRefLbl.Margin = new System.Windows.Forms.Padding(3, 15, 20, 3);
+            this.ComRefLbl.Location = new System.Drawing.Point(918, 12);
+            this.ComRefLbl.Margin = new System.Windows.Forms.Padding(3, 12, 150, 3);
             this.ComRefLbl.Name = "ComRefLbl";
-            this.ComRefLbl.Size = new System.Drawing.Size(668, 32);
+            this.ComRefLbl.Size = new System.Drawing.Size(160, 32);
             this.ComRefLbl.TabIndex = 2034;
-            this.ComRefLbl.TabStop = false;
+            this.ComRefLbl.Tag = "English-Number";
             this.ComRefLbl.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ComRefLbl.TextChanged += new System.EventHandler(this.ComRefLbl_TextChanged);
             // 
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.Transparent;
             this.panel7.Controls.Add(this.btnLoad);
-            this.panel7.Location = new System.Drawing.Point(410, 3);
+            this.panel7.Location = new System.Drawing.Point(840, 3);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(107, 52);
+            this.panel7.Size = new System.Drawing.Size(72, 52);
             this.panel7.TabIndex = 2038;
             // 
             // btnLoad
             // 
             this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoad.BackgroundImage = global::VOCAC.Properties.Resources.recpurple;
+            this.btnLoad.BackgroundImage = global::VOCAC.Properties.Resources.DbGet;
             this.btnLoad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnLoad.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnLoad.Location = new System.Drawing.Point(3, 5);
+            this.btnLoad.Location = new System.Drawing.Point(4, 8);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(100, 40);
+            this.btnLoad.Size = new System.Drawing.Size(62, 39);
             this.btnLoad.TabIndex = 2;
-            this.btnLoad.Text = "Load";
+            this.btnLoad.Tag = "تحميل";
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
@@ -835,13 +789,13 @@
             // 
             this.TabControl2.Controls.Add(this.TabPage3);
             this.TabControl2.Font = new System.Drawing.Font("Times New Roman", 16F);
-            this.TabControl2.Location = new System.Drawing.Point(9, 61);
+            this.TabControl2.Location = new System.Drawing.Point(26, 61);
             this.TabControl2.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
             this.TabControl2.Name = "TabControl2";
             this.TabControl2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TabControl2.RightToLeftLayout = true;
             this.TabControl2.SelectedIndex = 0;
-            this.TabControl2.Size = new System.Drawing.Size(1182, 550);
+            this.TabControl2.Size = new System.Drawing.Size(1182, 515);
             this.TabControl2.TabIndex = 2033;
             // 
             // TabPage3
@@ -850,7 +804,7 @@
             this.TabPage3.Location = new System.Drawing.Point(4, 32);
             this.TabPage3.Name = "TabPage3";
             this.TabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage3.Size = new System.Drawing.Size(1174, 514);
+            this.TabPage3.Size = new System.Drawing.Size(1174, 479);
             this.TabPage3.TabIndex = 0;
             this.TabPage3.Text = "البيانات الأساسية";
             this.TabPage3.UseVisualStyleBackColor = true;
@@ -896,7 +850,7 @@
             this.FlwMainData.Location = new System.Drawing.Point(3, 3);
             this.FlwMainData.Name = "FlwMainData";
             this.FlwMainData.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.FlwMainData.Size = new System.Drawing.Size(1168, 508);
+            this.FlwMainData.Size = new System.Drawing.Size(1168, 473);
             this.FlwMainData.TabIndex = 0;
             // 
             // chckIDChange
@@ -1077,7 +1031,7 @@
             this.AddTxtBx.Multiline = true;
             this.AddTxtBx.Name = "AddTxtBx";
             this.AddTxtBx.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.AddTxtBx.Size = new System.Drawing.Size(910, 61);
+            this.AddTxtBx.Size = new System.Drawing.Size(910, 41);
             this.AddTxtBx.TabIndex = 4;
             this.AddTxtBx.Tag = "Arabic-All";
             // 
@@ -1086,7 +1040,7 @@
             this.Label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Label6.Font = new System.Drawing.Font("Times New Roman", 16F);
             this.Label6.ForeColor = System.Drawing.Color.Black;
-            this.Label6.Location = new System.Drawing.Point(959, 332);
+            this.Label6.Location = new System.Drawing.Point(959, 312);
             this.Label6.MinimumSize = new System.Drawing.Size(70, 15);
             this.Label6.Name = "Label6";
             this.Label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -1098,34 +1052,59 @@
             // DetailsTxtBx
             // 
             this.FlwMainData.SetFlowBreak(this.DetailsTxtBx, true);
-            this.DetailsTxtBx.Location = new System.Drawing.Point(11, 335);
+            this.DetailsTxtBx.Location = new System.Drawing.Point(11, 315);
             this.DetailsTxtBx.Margin = new System.Windows.Forms.Padding(35, 3, 3, 3);
             this.DetailsTxtBx.Multiline = true;
             this.DetailsTxtBx.Name = "DetailsTxtBx";
             this.DetailsTxtBx.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.DetailsTxtBx.Size = new System.Drawing.Size(910, 98);
+            this.DetailsTxtBx.Size = new System.Drawing.Size(910, 81);
             this.DetailsTxtBx.TabIndex = 5;
             this.DetailsTxtBx.Tag = "Arabic-All";
             // 
             // lblhelp
             // 
             this.lblhelp.ForeColor = System.Drawing.Color.Green;
-            this.lblhelp.Location = new System.Drawing.Point(11, 436);
+            this.lblhelp.Location = new System.Drawing.Point(11, 399);
             this.lblhelp.Name = "lblhelp";
             this.lblhelp.Size = new System.Drawing.Size(1154, 72);
             this.lblhelp.TabIndex = 2048;
             this.lblhelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // Panel6
+            // 
+            this.Panel6.BackColor = System.Drawing.Color.Transparent;
+            this.Panel6.Controls.Add(this.richTextBox1);
+            this.Panel6.Enabled = false;
+            this.Panel6.Location = new System.Drawing.Point(411, 582);
+            this.Panel6.Name = "Panel6";
+            this.Panel6.Size = new System.Drawing.Size(257, 262);
+            this.Panel6.TabIndex = 2037;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Enabled = false;
+            this.richTextBox1.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.ForeColor = System.Drawing.Color.Red;
+            this.richTextBox1.Location = new System.Drawing.Point(17, 6);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.richTextBox1.Size = new System.Drawing.Size(174, 247);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.TabStop = false;
+            this.richTextBox1.Text = "";
+            // 
             // TikEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1796, 890);
+            this.ClientSize = new System.Drawing.Size(1796, 860);
             this.Controls.Add(this.FlwMain);
             this.Name = "TikEdit";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.TikEdit_Load);
             this.Panel5.ResumeLayout(false);
             this.MyGroupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).EndInit();
@@ -1133,7 +1112,6 @@
             this.MyGroupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox3)).EndInit();
-            this.Panel6.ResumeLayout(false);
             this.Panel4.ResumeLayout(false);
             this.Panel1.ResumeLayout(false);
             this.Panel2.ResumeLayout(false);
@@ -1149,6 +1127,7 @@
             this.TabPage3.ResumeLayout(false);
             this.FlwMainData.ResumeLayout(false);
             this.FlwMainData.PerformLayout();
+            this.Panel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1161,7 +1140,6 @@
         internal System.Windows.Forms.MaskedTextBox IDTxtBx;
         internal System.Windows.Forms.RadioButton RadNID;
         internal System.Windows.Forms.Panel Panel5;
-        internal System.Windows.Forms.Button BtnClr;
         internal System.Windows.Forms.RadioButton RadPss;
         internal System.Windows.Forms.FlowLayoutPanel FlwMainData;
         internal System.Windows.Forms.Panel MyGroupBox2;
@@ -1199,7 +1177,6 @@
         internal System.Windows.Forms.Label Label6;
         internal System.Windows.Forms.TextBox DetailsTxtBx;
         internal System.Windows.Forms.FlowLayoutPanel FlwMend;
-        internal System.Windows.Forms.Panel Panel6;
         internal System.Windows.Forms.Panel Panel4;
         internal System.Windows.Forms.Button NewBtn;
         internal System.Windows.Forms.Panel Panel1;
@@ -1222,12 +1199,13 @@
         internal System.Windows.Forms.TextBox ComRefLbl;
         internal System.Windows.Forms.TabControl TabControl2;
         internal System.Windows.Forms.TabPage TabPage3;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label lblhelp;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.CheckBox chckIDChange;
         private System.Windows.Forms.CheckBox chckphonechange;
         internal System.Windows.Forms.Panel panel7;
         internal System.Windows.Forms.Button btnLoad;
+        internal System.Windows.Forms.Panel Panel6;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

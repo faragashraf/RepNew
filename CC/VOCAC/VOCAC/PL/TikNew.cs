@@ -57,6 +57,14 @@ namespace VOCAC.PL
             NewTickSub();
             this.Phon1TxtBx.TextChanged += new System.EventHandler(this.Phon1TxtBx_TextChanged);
             this.IDTxtBx.TextChanged += new System.EventHandler(this.IDTxtBx_TextChanged);
+            if (CurrentUser.UsrUCatLvl == 7)
+            {
+                Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] = 0 AND [srcCd] = '1'";     //     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm";
+            }
+            else
+            {
+                Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] = 0 AND [srcCd] > '1'";   //  SrcStr = "Select SrcCd, SrcNm from CDSrc where SrcSusp=0 And srcCd > 1 ORDER BY SrcNm"
+            }
         }
         private void NewTickSub()
         {
