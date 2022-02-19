@@ -44,6 +44,7 @@
             this.FlowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.chkboxattach = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.GridUpdt)).BeginInit();
             this.ContextMenuStrip2.SuspendLayout();
             this.FlowLayoutPanel1.SuspendLayout();
@@ -145,9 +146,9 @@
             // 
             this.LblMsg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LblMsg.Font = new System.Drawing.Font("Times New Roman", 14F);
-            this.LblMsg.Location = new System.Drawing.Point(913, 728);
+            this.LblMsg.Location = new System.Drawing.Point(47, 199);
             this.LblMsg.Name = "LblMsg";
-            this.LblMsg.Size = new System.Drawing.Size(339, 33);
+            this.LblMsg.Size = new System.Drawing.Size(1188, 46);
             this.LblMsg.TabIndex = 2168;
             this.LblMsg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -183,7 +184,9 @@
             // 
             // TimerEscOpen
             // 
+            this.TimerEscOpen.Enabled = true;
             this.TimerEscOpen.Interval = 1000;
+            this.TimerEscOpen.Tick += new System.EventHandler(this.TimerEscOpen_Tick);
             // 
             // FlowLayoutPanel1
             // 
@@ -206,11 +209,12 @@
             this.FlowLayoutPanel2.Controls.Add(this.TxtUpdt);
             this.FlowLayoutPanel2.Controls.Add(this.BtnSubmt);
             this.FlowLayoutPanel2.Controls.Add(this.chkboxattach);
+            this.FlowLayoutPanel2.Controls.Add(this.LblMsg);
             this.FlowLayoutPanel1.SetFlowBreak(this.FlowLayoutPanel2, true);
             this.FlowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.FlowLayoutPanel2.Location = new System.Drawing.Point(12, 364);
             this.FlowLayoutPanel2.Name = "FlowLayoutPanel2";
-            this.FlowLayoutPanel2.Size = new System.Drawing.Size(1238, 212);
+            this.FlowLayoutPanel2.Size = new System.Drawing.Size(1238, 288);
             this.FlowLayoutPanel2.TabIndex = 2161;
             // 
             // label1
@@ -245,7 +249,6 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1253, 761);
             this.Controls.Add(this.FlowLayoutPanel1);
-            this.Controls.Add(this.LblMsg);
             this.Controls.Add(this.Label60);
             this.Name = "TikUpdate";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -280,5 +283,6 @@
         internal System.Windows.Forms.FlowLayoutPanel FlowLayoutPanel2;
         internal System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkboxattach;
+        internal System.Windows.Forms.ToolTip toolTip1;
     }
 }

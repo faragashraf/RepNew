@@ -41,9 +41,11 @@ namespace VOCAC
         #region DataTables
         public static DataTable MacTble, UserTable;
         public static TreeView _tree;
+        public static DataTable TickTblMain = new DataTable();
         public static DataTable CompSurceTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, TreeUsrTbl, SwitchTbl, CDCountry;
         public static Image imge;
         public static byte[] mainImageArray;
+        public static string extAttch;
         #endregion
     }
     class menustrp
@@ -355,9 +357,9 @@ namespace VOCAC
             dt.Dispose();
             SwichButTable.Dispose();
         }
-        public void msg(string Messg, string titl, MessageBoxButtons messageBoxButtons , MessageBoxOptions messageBoxOptions = MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign)
+        public void msg(string Messg, string titl, MessageBoxButtons messageBoxButtons, MessageBoxOptions messageBoxOptions = MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign)
         {
-            MessageBox.Show(Messg, titl,  MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1,MessageBoxOptions.RightAlign|MessageBoxOptions.RtlReading);
+            MessageBox.Show(Messg, titl, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
         }
         public int CalDate(string StDt, string EnDt)
         {
@@ -389,7 +391,7 @@ namespace VOCAC
 
                 throw;
             }
-        }     
+        }
         public string exportxlsx(DataTable tbl, string filename)
         {
             string rslt = null;
@@ -426,22 +428,39 @@ namespace VOCAC
         }
         public static byte[] preapareattachment()
         {
-            using (OpenFileDialog fileD = new OpenFileDialog() { Filter = "JPG files| *.jpg", ValidateNames = true })
+            string[] arr = { ".JPG", ".JPEG", ".PNG" };
+            using (OpenFileDialog fileD = new OpenFileDialog())// { Filter = "JPG files| *.jpg", ValidateNames = true })
             {
                 fileD.FilterIndex = 2;
                 if (fileD.ShowDialog() == DialogResult.OK)
                 {
+                    extAttch = Path.GetExtension(fileD.FileName);
                     using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(fileD.FileName)))
                     {
-                        imge = Image.FromStream(ms);
-                        //pictureViewer_.intialize_();
-                        zpicViewer.getviewerfrm.Load += new System.EventHandler(zpicViewer.getviewerfrm.ComboBox1_SelectedIndexChanged);
+                        if (arr.Contains(extAttch.ToUpper()))
+                        {
+                            imge = Image.FromStream(ms);
+                            zpicViewer.getviewerfrm.Load += new System.EventHandler(zpicViewer.getviewerfrm.ComboBox1_SelectedIndexChanged);
+                        }
+                        else
+                        {
+                            Statcdif.mainImageArray = ms.ToArray();
+                        }
+
                     }
-                    zpicViewer.getviewerfrm.ShowDialog();
+                    if (arr.Contains(extAttch.ToUpper()))
+                    {
+                        zpicViewer.getviewerfrm.ShowDialog();
+                    }
+                    else
+                    {
+
+                    }
                 }
                 else
                 {
                     mainImageArray = null;
+                    extAttch = null;
                 }
             }
             return mainImageArray;
@@ -787,9 +806,9 @@ namespace VOCAC
             if (sender is TextBox)
             {
                 TextBox TxtBox = (TextBox)sender;
-                if (TxtBox.Text.Trim().Length ==0)
+                if (TxtBox.Text.Trim().Length == 0)
                 {
-                TxtBox.SelectAll();
+                    TxtBox.SelectAll();
                 }
             }
             else if (sender is MaskedTextBox)

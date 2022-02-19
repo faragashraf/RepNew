@@ -88,12 +88,7 @@ namespace VOCAC.PL
             //this.MaximumSize = frmsze;
             this.MinimumSize = new Size (800,600);
 
-            //flwCmboPanel.Size = new Size((comboBox1.Width + lbl.Width + 50), 50);
-            //flwRotatePanel.Size = new Size(Radio90.Width + Radio180.Width + button1.Width + 55, 50);
-            //flwCmboPanel.Margin = new Padding(((frmsze.Width - flwCmboPanel.Width) / 2) - 45, 0, 0, 0);
-            //flwRotatePanel.Margin = new Padding(((frmsze.Width - flwRotatePanel.Width) / 2) - 45, 0, 0, 0);
             pictureBox1.Margin = new Padding(((frmsze.Width - sze.Width) / 2) - 10, 0, 0, 0);
-            //Statcdif.imge = function.ResizeImage(Statcdif.imge, sze.Width, sze.Height);
             pictureBox1.Image = function.ResizeImage(Statcdif.imge, sze.Width, sze.Height);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             using (var ms = new System.IO.MemoryStream())
@@ -248,8 +243,10 @@ namespace VOCAC.PL
             if (rsult == false)
             {
                 Statcdif.mainImageArray = null;
+                Statcdif.extAttch = null;
                 Statcdif.imge = null;
             }
+            GC.Collect();
         }
 
         private void btnprint_Click(object sender, EventArgs e)
@@ -277,7 +274,7 @@ namespace VOCAC.PL
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            using (SaveFileDialog sv = new SaveFileDialog() { Filter = "JPG files| *.jpg", ValidateNames = true })
+            using (SaveFileDialog sv = new SaveFileDialog() { Filter = Statcdif.extAttch.Split('.')[1].ToUpper() +" files| *" + Statcdif.extAttch, ValidateNames = true })
             {
                 sv.FilterIndex = 2;
                 if (sv.ShowDialog() == DialogResult.OK)

@@ -293,6 +293,14 @@ namespace VOCAC.PL
                 {
                     Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] =" + 0 + " AND [srcCd] > '1'";   //  SrcStr = "Select SrcCd, SrcNm from CDSrc where SrcSusp=0 And srcCd > 1 ORDER BY SrcNm"
                 }
+                if (CurrentUser.UsrUCatLvl >= 3 && CurrentUser.UsrUCatLvl <= 5)
+                {
+                    Statcdif.UpdateKTable.DefaultView.RowFilter = "EvBkOfic = 1";
+                }
+                else
+                {
+                    Statcdif.UpdateKTable.DefaultView.RowFilter = "EvBkOfic = 0";
+                }
             }
         }
         private void IntializeUser()

@@ -20,6 +20,9 @@ namespace VOCAC.PL
     public partial class TikUpdate : Form
     {
         private static TikUpdate frm;
+        string[] arr = { ".JPG", ".JPEG", ".PNG" };
+        private DataRow DRW;
+        byte[] data;
         static void frm_Closed(object sender, FormClosedEventArgs e)
         {
             frm = null;
@@ -89,18 +92,27 @@ namespace VOCAC.PL
                 {
                     function.preapareattachment();
 
-                    if(Statcdif.mainImageArray == null)
+                    if (Statcdif.mainImageArray == null)
                     {
                         return;
                     }
                 }
-                if (ticketCurrent.addevent(currntTicket._TkSQL, TxtUpdt.Text, true, Convert.ToInt32(CmbEvent.SelectedValue), Statcdif._IP, CurrentUser.UsrID, Statcdif.mainImageArray) == null)
+                if (ticketCurrent.addevent(currntTicket._TkSQL, TxtUpdt.Text, true, Convert.ToInt32(CmbEvent.SelectedValue), Statcdif._IP, CurrentUser.UsrID, Statcdif.mainImageArray, Statcdif.extAttch) == null)
                 {
+
+                    if (TikFolow_Team.getTikFolltemfrm != null)
+                    {
+                        DataRow DRW = function.DRW(Statcdif.TickTblMain, currntTicket._TkSQL, Statcdif.TickTblMain.Columns[0]);
+                        Statcdif.TickTblMain.Rows[Statcdif.TickTblMain.Rows.IndexOf(DRW)]["TkupTxt"] = TxtUpdt.Text;
+                        Statcdif.TickTblMain.Rows[Statcdif.TickTblMain.Rows.IndexOf(DRW)]["TkupEvtId"] = CmbEvent.SelectedValue;
+                        Statcdif.TickTblMain.Rows[Statcdif.TickTblMain.Rows.IndexOf(DRW)]["EvNm"] = CmbEvent.Text;
+                        Statcdif.TickTblMain.Rows[Statcdif.TickTblMain.Rows.IndexOf(DRW)]["TkupSTime"] = Statcdif.servrTime;
+                        Statcdif.TickTblMain.Rows[Statcdif.TickTblMain.Rows.IndexOf(DRW)]["updtusr"] = CurrentUser.UsrRlNm;
+                        Statcdif.TickTblMain.Rows[Statcdif.TickTblMain.Rows.IndexOf(DRW)]["TkupUser"] = CurrentUser.UsrID;
+                    }
                     getupdate();
                     eventColor();
-                    CmbEvent.SelectedValue = -1;
-                    TxtUpdt.Text = "";
-                    TxtUpdt.ReadOnly = true;
+
                     Statcdif.mainImageArray = null;
                     chkboxattach.Checked = false;
                 }
@@ -138,20 +150,31 @@ namespace VOCAC.PL
         }
         private void getimagefromarray()
         {
-
-            DataRow DRW = function.DRW(attchtbl, GridUpdt.CurrentRow.Cells[0].Value, attchtbl.Columns[0]);
-            byte[] data = (byte[])DRW.ItemArray[1];
-            using (System.IO.MemoryStream ms = new System.IO.MemoryStream(data))
+            if (!arr.Contains(DRW.ItemArray[2].ToString().ToUpper()))
             {
-                Statcdif.imge = Image.FromStream(ms);
-                zpicViewer.getviewerfrm.Load += new System.EventHandler(zpicViewer.getviewerfrm.ComboBox1_SelectedIndexChanged);
-                zpicViewer.getviewerfrm.ShowDialog();
-                //Size sze = new Size(Image.FromStream(ms).Width / Convert.ToInt32(cmb.SelectedItem), Image.FromStream(ms).Height / Convert.ToInt32(cmb.SelectedItem));
-                //frmpic.Size = sze;
-                //picBox.Size = sze;
-                //picBox.Image = function.ResizeImage(Image.FromStream(ms), sze.Width, sze.Height);
-                //picBox.Dock = DockStyle.Fill;
+                using (SaveFileDialog sv = new SaveFileDialog() { Filter = DRW.ItemArray[2].ToString().ToUpper() + " files| *" + DRW.ItemArray[2].ToString(), ValidateNames = true })
+                {
+                    if (sv.ShowDialog() == DialogResult.OK)
+                    {
+                        File.WriteAllBytes(sv.FileName, data);
+                    }
+                }
             }
+            else
+            {
+                using (System.IO.MemoryStream ms = new System.IO.MemoryStream(data))
+                {
+                    Statcdif.imge = Image.FromStream(ms);
+                    zpicViewer.getviewerfrm.Load += new System.EventHandler(zpicViewer.getviewerfrm.ComboBox1_SelectedIndexChanged);
+                    zpicViewer.getviewerfrm.ShowDialog();
+                    //Size sze = new Size(Image.FromStream(ms).Width / Convert.ToInt32(cmb.SelectedItem), Image.FromStream(ms).Height / Convert.ToInt32(cmb.SelectedItem));
+                    //frmpic.Size = sze;
+                    //picBox.Size = sze;
+                    //picBox.Image = function.ResizeImage(Image.FromStream(ms), sze.Width, sze.Height);
+                    //picBox.Dock = DockStyle.Fill;
+                }
+            }
+
 
         }
         private void cmb_selectionchanged(object sender, EventArgs e)
@@ -162,9 +185,21 @@ namespace VOCAC.PL
         {
             if (GridUpdt.CurrentRow != null)
             {
-                if (GridUpdt.CurrentRow.Cells[11].Value.ToString().Length > 0)
+                if (GridUpdt.CurrentRow.Cells["File"].Value.ToString().Length > 0)
                 {
+                    DRW = function.DRW(attchtbl, GridUpdt.CurrentRow.Cells[0].Value, attchtbl.Columns[0]);
+                    data = (byte[])DRW.ItemArray[1];
+                    Statcdif.extAttch = DRW.ItemArray[2].ToString();
+                    //toolTip1.Show("رقم التليفون لابد أن يبدأ بكود المحافظة" + Environment.NewLine + "مثال : \"02XXXXXXXX", GridUpdt, 0, 30, 1000);
                     ContextMenuStrip2.Items[2].Enabled = true;
+                    if (arr.Contains(Statcdif.extAttch.ToString().ToUpper()))
+                    {
+                        ContextMenuStrip2.Items[2].Text = "DownLoad Picture";
+                    }
+                    else
+                    {
+                        ContextMenuStrip2.Items[2].Text = "DownLoad File";
+                    }
                 }
                 else
                 {
@@ -172,6 +207,57 @@ namespace VOCAC.PL
                 }
             }
 
+        }
+
+        private void TimerEscOpen_Tick(object sender, EventArgs e)
+        {
+            function fn = function.getfn;
+
+            DateTime Minutws = Convert.ToDateTime(fn.ServrTime());
+            //TimeSpan d= Convert.ToDateTime(Statcdif.servrTime).Subtract(currntTicket._TkupSTime);
+            //TimeSpan c = new TimeSpan(0,120,0);
+            //TimeSpan w = TimeSpan.FromMinutes(120- Minutws);
+            double Minuts = Convert.ToDateTime(Minutws).Subtract(currntTicket._TkupSTime).TotalMinutes;
+            double MinutsDef = (120 - Minuts);
+            if (currntTicket._TkupEvtId == 902)
+            {
+                if (Minuts < 120)
+                {
+                    LblMsg.Text = ("تم عمل متابعه 1 وسيتم الرد عليها خلال " + 120 + " متبقى " +  TimeSpan.FromMinutes(MinutsDef).ToString().Split('.')[0] + " دقيقة");
+                    //LblMsg.Refresh();
+                    CmbEvent.Enabled = false;
+                    BtnSubmt.Enabled = false;
+                    chkboxattach.Enabled = false;
+                    TxtUpdt.Text = "لا يمكن عمل تحديث أثناء فترة المتابعه، ويتم السماح بإضافة تعديل إما بإنتهاء فترة المتابعه أو عمل تحديث من الخطوط الخلفية";
+                    TxtUpdt.Font = new Font("Times New Roman", 16, FontStyle.Regular);
+                    TxtUpdt.TextAlign = HorizontalAlignment.Center;
+                    TxtUpdt.ReadOnly = true;
+                    return;
+                }
+                else
+                {
+                    LblMsg.Text = "";
+                    CmbEvent.Enabled = true;
+                    BtnSubmt.Enabled = true;
+                    chkboxattach.Enabled = true;
+                    // TxtUpdt.Text = ""
+                    TxtUpdt.Font = new Font("Times New Roman", 14, FontStyle.Regular);
+                    TxtUpdt.TextAlign = HorizontalAlignment.Left;
+                    TxtUpdt.ReadOnly = false;
+                }
+            }
+            else
+            {
+                LblMsg.Text = "";
+                CmbEvent.Enabled = true;
+                BtnSubmt.Enabled = true;
+                chkboxattach.Enabled = true;
+                TxtUpdt.Text = "";
+                TxtUpdt.Font = new Font("Times New Roman", 14, FontStyle.Regular);
+                TxtUpdt.TextAlign = HorizontalAlignment.Left;
+                TxtUpdt.ReadOnly = false;
+            }
+            GC.Collect();
         }
     }
 }

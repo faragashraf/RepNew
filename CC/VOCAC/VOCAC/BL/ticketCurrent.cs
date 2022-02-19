@@ -182,7 +182,7 @@ namespace VOCAC.BL
             TikDetails.gettikdetlsfrm.TxtTikCreat.Text = currntTicket._TikCreat;
             TikDetails.gettikdetlsfrm.TxtTikCreatTeam.Text = currntTicket._TikCreatTeam;
 
-            if (currntTicket._TaskUserNm.Length > 0) { TikDetails.gettikdetlsfrm.lblRegion.Text = "✅     تم تحويل ال"  + currntTicket._TkKind  + " لـ" + currntTicket._TaskUserNm; } else { TikDetails.gettikdetlsfrm.lblRegion.Text = ""; }
+            if (currntTicket._TaskUserNm.Length > 0) { TikDetails.gettikdetlsfrm.lblRegion.Text = "✅     تم تحويل ال" + currntTicket._TkKind + " لـ" + currntTicket._TaskUserNm; } else { TikDetails.gettikdetlsfrm.lblRegion.Text = ""; }
             function fn = function.getfn;
             TikDetails.gettikdetlsfrm.LblWDays.Text = "تم تسجيل ال" + currntTicket._TkKind + " منذ : " + fn.CalDate(currntTicket._TkDtStart.ToString(), Statcdif.servrTime).ToString() + " يوم عمل";
 
@@ -245,6 +245,7 @@ namespace VOCAC.BL
             {
                 //DAL.Struc.dt.PrimaryKey = new DataColumn[] { DAL.Struc.dt.Columns[0] };
                 attchtbl = DAL.Struc.dt.Copy();
+                DAL.Struc.dt.Columns.RemoveAt(11);
                 DAL.Struc.dt.Columns.RemoveAt(10);
                 //attchtbl.PrimaryKey = new DataColumn[] { attchtbl.Columns[0] };
                 attchtbl.Columns.RemoveAt(9);
@@ -273,6 +274,7 @@ namespace VOCAC.BL
 
                 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                 DAL.Struc.dt.Columns.Add("عدد أيام عمل", typeof(string)).SetOrdinal(2);
+                TikUpdate.getTikupdatefrm.GridUpdt.DataSource = DAL.Struc.dt;
                 DAL.Struc.dt.DefaultView.RowFilter = "EvSusp = 0 and TkupUser = " + currntTicket._TkEmpNm;
                 function fn = function.getfn;
                 DAL.Struc.dt.DefaultView.Sort = "TkupSTime ASC";
@@ -280,7 +282,7 @@ namespace VOCAC.BL
                 {
                     if (i == 0)
                     {
-                        DAL.Struc.dt.DefaultView[i]["عدد أيام عمل"] = "1_" + fn.CalDate(Convert.ToString(currntTicket._TkDtStart), Convert.ToString(DAL.Struc.dt.DefaultView[i]["TkupSTime"]));
+                        DAL.Struc.dt.DefaultView[i]["عدد أيام عمل"] = "(" + fn.CalDate(Convert.ToString(currntTicket._TkDtStart), Convert.ToString(DAL.Struc.dt.DefaultView[i]["TkupSTime"])) + ")";
                     }
                     else
                     {
@@ -291,7 +293,6 @@ namespace VOCAC.BL
                 DAL.Struc.dt.DefaultView.Sort = "TkupSTime desc";
                 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-                TikUpdate.getTikupdatefrm.GridUpdt.DataSource = DAL.Struc.dt;
                 if (currntTicket._TkKind.Equals("شكوى", StringComparison.OrdinalIgnoreCase))
                 {
                     TikUpdate.getTikupdatefrm.Text = "تحديثات شكوى رقم : " + currntTicket._TkSQL;
@@ -320,13 +321,17 @@ namespace VOCAC.BL
             }
         }
         public static void eventColor()
-        {
+        { //  foreach (DataGridViewRow item in TikUpdate.getTikupdatefrm.GridUpdt.Rows)
+            foreach (DataGridViewColumn item in TikUpdate.getTikupdatefrm.GridUpdt.Columns)
+            {
+                item.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
             foreach (DataGridViewRow item in TikUpdate.getTikupdatefrm.GridUpdt.Rows)
             {
                 if (Convert.ToInt32(item.Cells["TkupEvtId"].Value) == 902)
                 {
-                    item.DefaultCellStyle.BackColor = Color.Red;
-                    item.DefaultCellStyle.ForeColor = Color.Yellow;
+                    //item.DefaultCellStyle.BackColor = Color.Red;
+                    item.DefaultCellStyle.ForeColor = Color.Red;
                 }
                 else if (Convert.ToBoolean(item.Cells["EvSusp"].Value) == true)
                 {
@@ -334,7 +339,24 @@ namespace VOCAC.BL
                 }
                 else if (Convert.ToInt32(item.Cells["TkupUser"].Value) == currntTicket._TkEmpNm)
                 {
-                    item.DefaultCellStyle.BackColor = Settings.Default.ClrUsr;
+                    //if (item.Cells["عدد أيام عمل"].Value.ToString().Split('_').Count() > 1)
+                    //{
+                    //    if (item.Cells["عدد أيام عمل"].Value.ToString().Split('_')[0] == "1")
+                    //    {
+                    //        item.Cells["عدد أيام عمل"].Value = item.Cells["عدد أيام عمل"].Value.ToString().Split('_')[1];
+                    //        item.Cells["عدد أيام عمل"].Tag = "First";
+                    //        item.DefaultCellStyle.BackColor = Color.Yellow;
+                    //    }
+                    //}
+                    if (item.Cells["عدد أيام عمل"].Value.ToString().Split('(').Count() > 1)
+                    {
+                        item.DefaultCellStyle.BackColor = Color.Yellow;
+                    }
+                    else
+                    {
+                        item.DefaultCellStyle.BackColor = Settings.Default.ClrUsr;
+                    }
+
                 }
                 else if (Convert.ToInt32(item.Cells["TkupUser"].Value) != currntTicket._TkEmpNm)
                 {
@@ -355,30 +377,14 @@ namespace VOCAC.BL
                 {
                     item.DefaultCellStyle.Font = new Font("Times New Roman", 16, FontStyle.Bold);
                 }
-                if (item.Cells["عدد أيام عمل"].Value.ToString().Split('_').Count() > 1)
-                {
-                    if (item.Cells["عدد أيام عمل"].Value.ToString().Split('_')[0] == "1")
-                    {
-                        item.DefaultCellStyle.BackColor = Color.Yellow;
-                        item.Cells["عدد أيام عمل"].Value = item.Cells["عدد أيام عمل"].Value.ToString().Split('_')[1];
-                        item.Cells["عدد أيام عمل"].Tag = "First";
-                    }
-                }
-                if (item.Cells["عدد أيام عمل"].Tag == "First")
-                {
-                    item.DefaultCellStyle.BackColor = Color.Yellow;
-                }
+
             }
             TikUpdate.getTikupdatefrm.GridUpdt.AutoResizeColumns();
             TikUpdate.getTikupdatefrm.GridUpdt.Columns["TkupTxt"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             TikUpdate.getTikupdatefrm.GridUpdt.Columns["TkupTxt"].Width = TikUpdate.getTikupdatefrm.GridUpdt.Width - (TikUpdate.getTikupdatefrm.GridUpdt.Columns["TkupSTime"].Width + TikUpdate.getTikupdatefrm.GridUpdt.Columns["عدد أيام عمل"].Width + TikUpdate.getTikupdatefrm.GridUpdt.Columns["EvNm"].Width + TikUpdate.getTikupdatefrm.GridUpdt.Columns["EvNm"].Width + TikUpdate.getTikupdatefrm.GridUpdt.Columns["UsrRealNm"].Width);
             TikUpdate.getTikupdatefrm.GridUpdt.AutoResizeRows();
-            foreach (DataGridViewColumn item in TikUpdate.getTikupdatefrm.GridUpdt.Columns)
-            {
-                item.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
         }
-        public static string addevent(int id, string txt, bool read, int EvId, string IP, int user, [Optional] byte[] attach)
+        public static string addevent(int id, string txt, bool read, int EvId, string IP, int user, [Optional] byte[] attach, [Optional] string Ext)
         {
             string rslt = null;
             SqlCommand sqlcmd = new SqlCommand();
@@ -386,7 +392,7 @@ namespace VOCAC.BL
             sqlcmd.CommandText = "SP_TICKET_EVENT_INSERT";
             SqlConnection con = new SqlConnection(Statcdif.strConn);
             sqlcmd.Connection = con;
-            SqlParameter[] param = new SqlParameter[7];
+            SqlParameter[] param = new SqlParameter[8];
             param[0] = new SqlParameter("@TkupTkSql", SqlDbType.Int);
             param[0].Value = id;
             param[1] = new SqlParameter("@TkupTxt", SqlDbType.NVarChar);
@@ -401,6 +407,8 @@ namespace VOCAC.BL
             param[5].Value = user;
             param[6] = new SqlParameter("@TkupAttch", SqlDbType.Image);
             param[6].Value = attach;
+            param[7] = new SqlParameter("@Extention", SqlDbType.NVarChar, 10);
+            param[7].Value = Ext;
             for (int i = 0; i < param.Length; i++)
             {
                 sqlcmd.Parameters.Add(param[i]);
