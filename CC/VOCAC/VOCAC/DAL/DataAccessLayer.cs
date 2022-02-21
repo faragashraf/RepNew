@@ -12,18 +12,12 @@ namespace VOCAC.DAL
     class DataAccessLayer
     {
         public rturnStruct Struc;
-        public treeStruct treStruc;
         public struct rturnStruct
         {
             public string msg;
             public DataTable dt;
             public DataSet ds;
             public int returnInt_;
-        }
-        public struct treeStruct
-        {
-            public string msg;
-            public TreeView tree;
         }
         SqlConnection sqlconnection;
         //This Constructor Insialize the connection Object

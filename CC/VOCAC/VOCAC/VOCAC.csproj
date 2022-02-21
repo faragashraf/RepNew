@@ -137,6 +137,12 @@
     <Compile Include="PL\TikUpdate.Designer.cs">
       <DependentUpon>TikUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="PL\UsrPermission.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\UsrPermission.Designer.cs">
+      <DependentUpon>UsrPermission.cs</DependentUpon>
+    </Compile>
     <Compile Include="PL\zpicViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PL\TikUpdate.resx">
       <DependentUpon>TikUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\UsrPermission.resx">
+      <DependentUpon>UsrPermission.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PL\zpicViewer.resx">
       <DependentUpon>zpicViewer.cs</DependentUpon>

@@ -62,7 +62,7 @@ namespace VOCAC.PL
                         if (changePasswrd("update Int_user set UsrPassNew ='" + TxtUsrPass.Text + "' where usrid = " + Statcdif.UserTable.Rows[0].Field<int>("UsrId")) == null)
                         {
                             CurrentUser.UsrPWrd = TxtUsrPass.Text;
-                            LblHint.Text = "تم تغيير كملمة المرور بنجاج";
+                            LblHint.Text = "تم تغيير كلمة المرور بنجاح";
                             LblHint.ForeColor = Color.Green;
                             BtSub.Enabled = false;
                         }

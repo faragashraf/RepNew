@@ -106,8 +106,7 @@ namespace VOCAC.PL
                 }
                 if (ticketCurrent.addevent(currntTicket._TkSQL, TxtUpdt.Text, true, Convert.ToInt32(CmbEvent.SelectedValue), Statcdif._IP, CurrentUser.UsrID, Statcdif.mainImageArray, Statcdif.extAttch) == null)
                 {
-
-                    if (TikFolow_Team.getTikFolltemfrm != null)
+                        if (TikFolow_Team.getTikFolltemfrm != null)
                     {
                         DataRow DRW = function.DRW(Statcdif.TickTblMain, currntTicket._TkSQL, Statcdif.TickTblMain.Columns[0]);
                         Statcdif.TickTblMain.Rows[Statcdif.TickTblMain.Rows.IndexOf(DRW)]["TkupTxt"] = TxtUpdt.Text;
@@ -119,7 +118,10 @@ namespace VOCAC.PL
                     }
                     getupdate();
                     eventColor();
-
+                    if (Convert.ToInt32(GridUpdt.Rows[0].Cells["TkupEvtId"].Value) == 902)
+                    {
+                        TimerEscOpen.Start();
+                    }
                     Statcdif.mainImageArray = null;
                     chkboxattach.Checked = false;
                 }
@@ -221,13 +223,13 @@ namespace VOCAC.PL
             function fn = function.getfn;
 
             DateTime Minutws = Convert.ToDateTime(fn.ServrTime());
-            double Minuts = Convert.ToDateTime(Minutws).Subtract(currntTicket._TkupSTime).TotalMinutes;
+            double Minuts = Convert.ToDateTime(Minutws).Subtract(Convert.ToDateTime(GridUpdt.Rows[0].Cells["TkupSTime"].Value)).TotalMinutes;
             double MinutsDef = (120 - Minuts);
-            if (currntTicket._TkupEvtId == 902)
+            if (Convert.ToInt32(GridUpdt.Rows[0].Cells["TkupEvtId"].Value) == 902)
             {
                 if (Minuts < 120)
                 {
-                    LblMsg.Text = ("تم عمل متابعه 1 وسيتم الرد عليها خلال " + 120 + " متبقى " + TimeSpan.FromMinutes(MinutsDef).ToString().Split('.')[0] + " دقيقة");
+                    LblMsg.Text = ("تم عمل متابعه 1 وسيتم الرد عليها خلال " + 120 + " متبقى " + TimeSpan.FromMinutes(MinutsDef).ToString().Split('.')[0] );
                     //LblMsg.Refresh();
                     CmbEvent.Enabled = false;
                     BtnSubmt.Enabled = false;

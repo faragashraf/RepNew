@@ -625,7 +625,7 @@ namespace VOCAC.PL
             {
                 da.Fill(ds);
             }
-            catch (Exception Ex)
+            catch (Exception )
             {
                 function fn = function.getfn;
 
@@ -711,7 +711,7 @@ namespace VOCAC.PL
             {
                 DAL.ExcuteCommand("SP_A_COMP_MANGER_UPDATE", param);
             }
-            catch (Exception Ex)
+            catch (Exception )
             {
                 function fn = function.getfn;
                 fn.msg("dd", "frfff", MessageBoxButtons.OK);

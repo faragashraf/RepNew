@@ -61,7 +61,7 @@
             this.TxtUsrOPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TxtUsrOPass.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtUsrOPass.Location = new System.Drawing.Point(147, 188);
-            this.TxtUsrOPass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtUsrOPass.Margin = new System.Windows.Forms.Padding(4);
             this.TxtUsrOPass.Name = "TxtUsrOPass";
             this.TxtUsrOPass.PasswordChar = '*';
             this.TxtUsrOPass.Size = new System.Drawing.Size(335, 19);
@@ -78,11 +78,11 @@
             this.ExitBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.ExitBtn.ForeColor = System.Drawing.Color.Black;
             this.ExitBtn.Location = new System.Drawing.Point(488, 305);
-            this.ExitBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ExitBtn.Margin = new System.Windows.Forms.Padding(4);
             this.ExitBtn.Name = "ExitBtn";
             this.ExitBtn.Size = new System.Drawing.Size(106, 44);
             this.ExitBtn.TabIndex = 80;
-            this.ExitBtn.Text = "Exit";
+            this.ExitBtn.Text = "خروج";
             this.ExitBtn.UseVisualStyleBackColor = false;
             this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
             // 
@@ -107,7 +107,7 @@
             this.TxtUsCnt_lNm.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtUsCnt_lNm.ForeColor = System.Drawing.Color.Black;
             this.TxtUsCnt_lNm.Location = new System.Drawing.Point(147, 144);
-            this.TxtUsCnt_lNm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtUsCnt_lNm.Margin = new System.Windows.Forms.Padding(4);
             this.TxtUsCnt_lNm.MaxLength = 150;
             this.TxtUsCnt_lNm.Name = "TxtUsCnt_lNm";
             this.TxtUsCnt_lNm.ReadOnly = true;
@@ -150,12 +150,12 @@
             this.BtSub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtSub.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtSub.Location = new System.Drawing.Point(344, 305);
-            this.BtSub.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtSub.Margin = new System.Windows.Forms.Padding(4);
             this.BtSub.Name = "BtSub";
             this.BtSub.Size = new System.Drawing.Size(122, 42);
             this.BtSub.TabIndex = 79;
             this.BtSub.Tag = "Submit the new password";
-            this.BtSub.Text = "Submit";
+            this.BtSub.Text = "تسجيل";
             this.BtSub.UseVisualStyleBackColor = false;
             this.BtSub.Click += new System.EventHandler(this.BtSub_Click);
             // 
@@ -179,7 +179,7 @@
             this.TxtUsCnt_Pass.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TxtUsCnt_Pass.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtUsCnt_Pass.Location = new System.Drawing.Point(147, 267);
-            this.TxtUsCnt_Pass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtUsCnt_Pass.Margin = new System.Windows.Forms.Padding(4);
             this.TxtUsCnt_Pass.Name = "TxtUsCnt_Pass";
             this.TxtUsCnt_Pass.PasswordChar = '*';
             this.TxtUsCnt_Pass.Size = new System.Drawing.Size(335, 19);
@@ -191,7 +191,7 @@
             this.TxtUsrPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TxtUsrPass.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtUsrPass.Location = new System.Drawing.Point(147, 226);
-            this.TxtUsrPass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtUsrPass.Margin = new System.Windows.Forms.Padding(4);
             this.TxtUsrPass.Name = "TxtUsrPass";
             this.TxtUsrPass.PasswordChar = '*';
             this.TxtUsrPass.Size = new System.Drawing.Size(335, 19);
@@ -203,7 +203,7 @@
             this.PictureBox2.BackgroundImage = global::VOCAC.Properties.Resources.ChangePass;
             this.PictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PictureBox2.Location = new System.Drawing.Point(18, 18);
-            this.PictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.PictureBox2.Name = "PictureBox2";
             this.PictureBox2.Size = new System.Drawing.Size(150, 110);
             this.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -229,7 +229,7 @@
             this.Controls.Add(this.TxtUsrPass);
             this.Controls.Add(this.PictureBox2);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "userPasschange";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;

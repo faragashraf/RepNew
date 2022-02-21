@@ -309,9 +309,10 @@ namespace VOCAC
 
                 ToolStripMenuItem NewTab = new ToolStripMenuItem(tabTable.Rows[i].Field<string>("SwNm"));
                 ToolStripMenuItem NewTabCx = new ToolStripMenuItem(tabTable.Rows[i].Field<string>("SwNm"));  //YYYYYYYYYYY
-
-                if (CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID") - 1, 1) == "A" ||
-                    CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID") - 1, 1) == "H")
+                if (tabTable.Rows[i].Field<int>("SwID_New") > 0) // To Confirm That SerID not Equal Zero
+                {
+                if (CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID_New") - 1, 1) == "A" ||
+                    CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID_New") - 1, 1) == "H")
                 {
                     Menu_.Items.Add(NewTab);
                     CntxMenu.Items.Add(NewTabCx);                    //YYYYYYYYYYY
@@ -323,36 +324,42 @@ namespace VOCAC
                     {
                         ToolStripMenuItem subItem = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
                         ToolStripMenuItem subItemCx = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
-                        if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID") - 1, 1) == "A")
+                        if (butTable.Rows[u].Field<int>("SwID_New") > 0) // To Confirm That SerID not Equal Zero
                         {
-                            if (butTable.Rows[u].Field<bool>("NewNew") == true)  // Populate Switchboard Button If form Added
+                            if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID_New") - 1, 1) == "A")
                             {
-                                subItem.Tag = butTable.Rows[u].Field<string>("SwObjNm1");
-                                if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID") - 1, 1) == "A")
+                                if (butTable.Rows[u].Field<bool>("NewNew") == true)  // Populate Switchboard Button If form Added
                                 {
-                                    subItem.AccessibleName = "True";
-                                    subItemCx.AccessibleName = "True";
-                                }
-                                // Assign Icon To every Button
-                                if (DBNull.Value.Equals(butTable.Rows[u].Field<string>("SwObjImg")) == false)
-                                {
-                                    ImageList imglst = new ImageList();
-                                    //imglst = Login.ControlCollection["ImageList1"];
-                                    Image Cnt_ = Logfrm.ImageList1.Images[butTable.Rows[u].Field<string>("SwObjImg")];
-                                    //Image Cnt_ = (Image)Resources.ResourceManager.GetObject(butTable.Rows[u].Field<string>("SwObjImg"));
-                                    subItem.Image = Cnt_;
-                                    subItemCx.Image = Cnt_;
-                                    subItemCx.Tag = butTable.Rows[u].Field<string>("SwObjNm1");
-                                    NewTab.DropDownItems.Add(subItem);
-                                    NewTabCx.DropDownItems.Add(subItemCx);
-                                    frms GG = new frms();
-                                    subItem.Click += new System.EventHandler(GG.ClkEvntClick);
-                                    subItemCx.Click += new System.EventHandler(GG.ClkEvntClick);
+                                    subItem.Tag = butTable.Rows[u].Field<string>("SwObjNm1");
+                                    if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID_New") - 1, 1) == "A")
+                                    {
+                                        subItem.AccessibleName = "True";
+                                        subItemCx.AccessibleName = "True";
+                                    }
+                                    // Assign Icon To every Button
+                                    if (DBNull.Value.Equals(butTable.Rows[u].Field<string>("SwObjImg")) == false)
+                                    {
+                                        ImageList imglst = new ImageList();
+                                        //imglst = Login.ControlCollection["ImageList1"];
+                                        Image Cnt_ = Logfrm.ImageList1.Images[butTable.Rows[u].Field<string>("SwObjImg")];
+                                        //Image Cnt_ = (Image)Resources.ResourceManager.GetObject(butTable.Rows[u].Field<string>("SwObjImg"));
+                                        subItem.Image = Cnt_;
+                                        subItemCx.Image = Cnt_;
+                                        subItemCx.Tag = butTable.Rows[u].Field<string>("SwObjNm1");
+                                        NewTab.DropDownItems.Add(subItem);
+                                        NewTabCx.DropDownItems.Add(subItemCx);
+                                        frms GG = new frms();
+                                        subItem.Click += new System.EventHandler(GG.ClkEvntClick);
+                                        subItemCx.Click += new System.EventHandler(GG.ClkEvntClick);
+                                    }
                                 }
                             }
                         }
+
                     }
                 }
+                }
+    
             }
             dt.Dispose();
             SwichButTable.Dispose();
@@ -386,7 +393,7 @@ namespace VOCAC
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -706,7 +713,7 @@ namespace VOCAC
         public static int UsrCat;         //UsrCat
         public static String UsrNm;        //UsrNm
         public static String UsrPWrd;       //UsrPass
-        public static String UsrLvl;      //UsrLevel
+        public static String UsrLvl;      //UsrLevel_New
         public static String UsrRlNm;    //UsrRealNm
         public static String UsrMail;   //UsrEmail
         public static String UsrSisco;  //UsrSisco

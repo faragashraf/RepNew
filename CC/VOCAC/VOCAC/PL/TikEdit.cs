@@ -45,7 +45,6 @@ namespace VOCAC.PL
         TextBox sndr;
         int TickKind;
         string PrdKind;
-        int COMPID_ = 0;
         string itemRef;
         int TeamIdentfier;
         string Help_;
@@ -551,8 +550,7 @@ namespace VOCAC.PL
                             if (TreeView1.Nodes[o].Nodes[p].ToString().Split(':')[1].Trim().Equals(Statcdif.ProdCompTable.DefaultView[i]["PrdNm"].ToString(), StringComparison.OrdinalIgnoreCase))
                             {
                                 TreeView1.Nodes[o].Nodes[p].Nodes.Add(Statcdif.ProdCompTable.DefaultView[i]["FnSQL"].ToString(), Statcdif.ProdCompTable.DefaultView[i]["CompNm"].ToString(), 0, 2);
-                                string k = editStruct.dt.Rows[0]["TkFnPrdCd"].ToString();
-                                string l = Statcdif.ProdCompTable.DefaultView[i]["FnSQL"].ToString();
+
                                 if (editStruct.dt.Rows[0]["TkFnPrdCd"].ToString() == Statcdif.ProdCompTable.DefaultView[i]["FnSQL"].ToString())
                                 {   //this Node Value Will Be a Selected Node
                                     TempNode = TreeView1.Nodes.Find(editStruct.dt.Rows[0]["TkFnPrdCd"].ToString(), true);  //this Node Value Will Be a Selected Node
@@ -957,7 +955,6 @@ namespace VOCAC.PL
             {
                 updateString.Append("TkFnPrdCd =" + TreeView1.SelectedNode.Name);
             }
-            string ll = updateString.ToString();
             this.RadioButton4.Click += new System.EventHandler(this.CompReqst_CheckedChanged);
             this.RadioButton5.Click += new System.EventHandler(this.CompReqst_CheckedChanged);
         }
@@ -1199,10 +1196,12 @@ namespace VOCAC.PL
             this.IDTxtBx.TextChanged -= new System.EventHandler(this.IDTxtBx_TextChanged);
             this.TreeView1.AfterSelect -= new TreeViewEventHandler(this.TreeView1_AfterSelect);
             this.TreeView1.BeforeSelect -= new TreeViewCancelEventHandler(TreeView1_BeforeSelect);
-
+  
             if (editStruct.dt.Rows[0]["TkKind"].ToString() == "شكوى") { RadioButton5.Checked = true; TickKind = 1; this.Text = "شكوى رقم : " + ComRefLbl.Text; } else { RadioButton4.Checked = true; TickKind = 0; this.Text = "طلب رقم : " + ComRefLbl.Text; }
-
+            populateTree();
+            TreeView1.SelectedNode = TempNode[0];
             DateTxtBx.Text = editStruct.dt.Rows[0]["TkDtStart"].ToString();
+
             DataRow DRW = function.DRW(Statcdif.CompSurceTable, editStruct.dt.Rows[0]["SrcNm"].ToString(), Statcdif.CompSurceTable.Columns[1]);
 
             SrcCmbBx.Text = editStruct.dt.Rows[0]["SrcNm"].ToString();
@@ -1247,7 +1246,6 @@ namespace VOCAC.PL
             MailTxtBx.Text = editStruct.dt.Rows[0]["TkMail"].ToString();
             AddTxtBx.Text = editStruct.dt.Rows[0]["TkClAdr"].ToString();
 
-
             bool isnumber = true;
             for (int i = 0; i < editStruct.dt.Rows[0]["TkClNtID"].ToString().Length; i++)
             {
@@ -1270,12 +1268,11 @@ namespace VOCAC.PL
             Prdct.Text = editStruct.dt.Rows[0]["PrdNm"].ToString();
             Comp.Text = editStruct.dt.Rows[0]["CompNm"].ToString();
             DetailsTxtBx.Text = editStruct.dt.Rows[0]["TkDetails"].ToString();
-            populateTree();
 
-            this.TreeView1.AfterSelect += new TreeViewEventHandler(this.TreeView1_AfterSelect);
-            this.TreeView1.BeforeSelect += new TreeViewCancelEventHandler(TreeView1_BeforeSelect);
 
-            TreeView1.SelectedNode = TempNode[0];
+
+
+
             FlwMend.Refresh();
 
             ctrlList = new List<string>();
@@ -1293,6 +1290,8 @@ namespace VOCAC.PL
             }
             this.Phon1TxtBx.TextChanged += new System.EventHandler(this.Phon1TxtBx_TextChanged);
             this.IDTxtBx.TextChanged += new System.EventHandler(this.IDTxtBx_TextChanged);
+            this.TreeView1.AfterSelect += new TreeViewEventHandler(this.TreeView1_AfterSelect);
+            this.TreeView1.BeforeSelect += new TreeViewCancelEventHandler(TreeView1_BeforeSelect);
         }
         private void ComRefLbl_TextChanged(object sender, EventArgs e)
         {

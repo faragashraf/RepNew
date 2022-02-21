@@ -45,7 +45,7 @@ namespace VOCAC.PL
         TextBox sndr;
         int TickKind;
         string PrdKind;
-        int COMPID_ = 0;
+        //int COMPID_ = 0;
         string itemRef;
         int TeamIdentfier;
         string Help_;

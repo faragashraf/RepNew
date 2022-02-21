@@ -230,9 +230,6 @@ namespace VOCAC.BL
         public static DataTable attchtbl = new DataTable();
         public static void getupdate()
         {
-
-            Form frmpic;
-
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             SqlParameter[] param = new SqlParameter[1];
             param[0] = new SqlParameter("@TkupTkSql", SqlDbType.Int);

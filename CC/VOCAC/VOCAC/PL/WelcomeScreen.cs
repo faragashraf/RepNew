@@ -123,8 +123,8 @@ namespace VOCAC.PL
 
                 Statcdif._MacStr = fn.GetMACAddressNew();
                 TxtUsrNm.Select();
-                TxtUsrNm.Text = "ahmed_emam";
-                TxtUsrPass.Text = "hemonad";
+                //TxtUsrNm.Text = "ahmed_emam";
+                //TxtUsrPass.Text = "hemonad";
 
                 Cmbo.SelectedItem = "Training";
                 //Cmbo.SelectedItem = "Eg Server";
@@ -310,7 +310,7 @@ namespace VOCAC.PL
             CurrentUser.UsrCat = Statcdif.UserTable.Rows[0].Field<int>("UsrCat");                //Current User Catagory
             CurrentUser.UsrNm = Statcdif.UserTable.Rows[0].Field<String>("UsrNm");               //Current User Name
             CurrentUser.UsrPWrd = Statcdif.UserTable.Rows[0].Field<String>("UsrPassNew");        //Current User Password
-            CurrentUser.UsrLvl = Statcdif.UserTable.Rows[0].Field<String>("UsrLevel");           //Current User Class
+            CurrentUser.UsrLvl = Statcdif.UserTable.Rows[0].Field<String>("UsrLevel_New");           //Current User Class
             CurrentUser.UsrRlNm = Statcdif.UserTable.Rows[0].Field<String>("UsrRealNm");         //Current user Real Name
             CurrentUser.UsrMail = Statcdif.UserTable.Rows[0].Field<String>("UsrEmail");          //Current user UsrEmail
             CurrentUser.UsrSisco = Statcdif.UserTable.Rows[0].Field<String>("UsrSisco");         //Current user UsrSisco
@@ -514,7 +514,7 @@ namespace VOCAC.PL
                     con.Open();
                     sqlcmd.ExecuteNonQuery();
                 }
-                catch (Exception Ex)
+                catch (Exception )
                 {
                     function fn = function.getfn;
                     fn.msg("dd", "frfff", MessageBoxButtons.OK);

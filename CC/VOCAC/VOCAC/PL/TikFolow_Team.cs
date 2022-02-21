@@ -43,7 +43,7 @@ namespace VOCAC.PL
 
         StringBuilder FltrStr = new StringBuilder();
         TreeNode slctdNode;
-        bool slctdNodestate;
+        //bool slctdNodestate;
         bool bolTeamTree;
 
         DataTable distributeTbl;        //Distribute Table To be filled manually as Grid Row Select Button
@@ -169,6 +169,8 @@ namespace VOCAC.PL
             usercountrsTbl.Columns.Add("الاسم");
             usercountrsTbl.Columns.Add("العدد", typeof(int));
             MyTeamOnLoad();
+            Statcdif.TickTblMain.DefaultView.RowFilter = string.Empty;
+            Statcdif.TickTblMain.Rows.Clear();
             if (filtbl().Rows.Count > 0)
             {
                 try
@@ -622,7 +624,7 @@ namespace VOCAC.PL
             }
             this.GridTicket.CellClick -= new System.Windows.Forms.DataGridViewCellEventHandler(this.GridTicket_CellClick);
             this.GridTicket.CellClick += new DataGridViewCellEventHandler(this.GridTicket_CellClick);
-            if (treeView1.SelectedNode.Nodes.Count > 0) { slctdNodestate = true; } else { slctdNodestate = false; }
+            //if (treeView1.SelectedNode.Nodes.Count > 0) { slctdNodestate = true; } else { slctdNodestate = false; }
             slctdNode = treeView1.SelectedNode;
         }
         private void Filtr()
@@ -1144,8 +1146,11 @@ namespace VOCAC.PL
             else if (splitContainer1.Panel2Collapsed != true)
             {
                 splitContainer1.Panel2Collapsed = true;
-                btnseting.Visible = true;
-                trackBar2.Visible = true;
+                if (bolTeamLeader == true)
+                {
+                    btnseting.Visible = true;
+                    trackBar2.Visible = true;
+                }
             }
         }
         private void btnTree_Click(object sender, EventArgs e)
@@ -1153,8 +1158,11 @@ namespace VOCAC.PL
             if (splitContainer1.Panel1Collapsed == true)
             {
                 splitContainer1.Panel1Collapsed = false;
-                btnseting.Visible = true;
-                trackBar2.Visible = true;
+                if (bolTeamLeader == true)
+                {
+                    btnseting.Visible = true;
+                    trackBar2.Visible = true;
+                }
             }
             else if (splitContainer1.Panel1Collapsed != true)
             {
@@ -1170,6 +1178,8 @@ namespace VOCAC.PL
                 DialogResult dialogResult = MessageBox.Show("سيتم توزيع عدد " + distributeTbl.Rows.Count + Environment.NewLine + "هل تريد الإستمرار؟", "توزيع الشكاوى", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 if (dialogResult == DialogResult.Yes)
                 {
+                    TikFolow_Team.getTikFolltemfrm.StatBrPnlAr.Text = "  جاري التحويل  .......";
+                    TikFolow_Team.getTikFolltemfrm.Refresh();
                     DataTable paramtbl = new DataTable();
                     paramtbl = distributeTbl.Copy();
                     paramtbl.Columns.RemoveAt(3);
@@ -1200,8 +1210,8 @@ namespace VOCAC.PL
                             Statcdif.TickTblMain.Rows[Statcdif.TickTblMain.Rows.IndexOf(DRW)]["updtusr"] = CurrentUser.UsrRlNm;
                             Statcdif.TickTblMain.Rows[Statcdif.TickTblMain.Rows.IndexOf(DRW)]["UCatLvl"] = CurrentUser.UsrUCatLvl;
                             Statcdif.TickTblMain.Rows[Statcdif.TickTblMain.Rows.IndexOf(DRW)]["TkRecieveDt"] = DateTime.Parse(Statcdif.servrTime).ToString("yyyy/MM/dd");
-                            Filtr();
                         }
+                        Filtr();
                         distributeTbl.Rows.Clear();
                         if (checkAll.Checked)
                         {
