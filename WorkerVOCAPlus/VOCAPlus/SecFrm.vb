@@ -64,11 +64,7 @@
                 Chldnode2.NodeFont = New Font("Times New Roman", 12, FontStyle.Bold)
             Next Cnt_1
         Next Cnt_
-        'SwTable.Rows.Clear()
-        'GetTbl("SELECT SwNm, SwID, SwSer FROM ASwitchboard WHERE  (SwType = N'Button') ORDER BY SwID", SwTable, "1022&H")
-        'For Cnt_ = 0 To SwTable.Rows.Count - 1                      ' fill Button
-        '    SecTree.Nodes(1).Nodes.Add(SwTable.Rows(Cnt_).Item(1).ToString, SwTable.Rows(Cnt_).Item(1).ToString & "-" & SwTable.Rows(Cnt_).Item(0).ToString)
-        'Next
+
         SwTable.Rows.Clear()
         Fn.GetTblXX("SELECT SwNm, SwID, SwSer FROM ASwitchboard WHERE  (SwType = N'System') ORDER BY SwID", SwTable, "1022&H")
         For Cnt_ = 0 To SwTable.Rows.Count - 1                      ' fill System
@@ -84,8 +80,6 @@
         '    AppLog("1003&H" & ex.Message)
         '    MsgInf("فشل في الاتصال، يرجى إعادة المحاولة")
         '    'Me.Close()
-
-
     End Sub
     Private Sub UserTree_AfterSelect(sender As Object, e As TreeViewEventArgs)
         If e.Action <> TreeViewAction.Unknown Then  ' The code only executes if the user caused the checked state to change.

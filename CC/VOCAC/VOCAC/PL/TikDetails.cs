@@ -27,7 +27,6 @@ namespace VOCAC.PL
                 if (frm == null)
                 {
                     frm = new TikDetails();
-                    frm.FormClosed += new FormClosedEventHandler(frm_Closed);
                 }
                 return frm;
             }
@@ -42,6 +41,8 @@ namespace VOCAC.PL
         }
         private void TikDetails_Load(object sender, EventArgs e)
         {
+            frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
+            frm.FormClosed += new FormClosedEventHandler(frm_Closed);
             frms forms = new frms();
             forms.FrmAllSub(this);
             //هأكمل بقيت الكود هنا

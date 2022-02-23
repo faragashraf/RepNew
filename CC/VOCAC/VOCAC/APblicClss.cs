@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
@@ -27,7 +28,7 @@ namespace VOCAC
         public static int screenHeight = Screen.PrimaryScreen.Bounds.Height;
         public static InputLanguage EnglishInput;
         public static InputLanguage ArabicInput;
-        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-12379";
+        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237w9";
         public SqlConnection CONSQL;
         public static String _ServerCD;
         public static String _serverNm;
@@ -42,7 +43,8 @@ namespace VOCAC
         public static DataTable MacTble, UserTable;
         public static TreeView _tree;
         public static DataTable TickTblMain = new DataTable();
-        public static DataTable CompSurceTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, TreeUsrTbl, SwitchTbl, CDCountry;
+        public static DataTable CompSurceTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, TreeUsrTbl, SwitchTbl, CDCountry, CDMend, AppSettings;
+        public static DataTable EcryptionTbl = new DataTable();                // Datatable To Initialize Encryption Base Table
         public static Image imge;
         public static byte[] mainImageArray;
         public static string extAttch;
@@ -88,7 +90,7 @@ namespace VOCAC
             WelcomeScreen WlcmScren = WelcomeScreen.getwecmscrnfrm;
             if (_ServerCD == "Eg Server")
             {
-                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-12379";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237w9";
                 _serverNm = "VOCA Server";
                 WlcmScren.BackgroundImage = Resources.VocaWtr;
                 WlcmScren.BackgroundImageLayout = ImageLayout.Stretch;
@@ -102,7 +104,7 @@ namespace VOCAC
             }
             else if (_ServerCD == "Training")
             {
-                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaenterprise;Password=@VocaPlus$21-12379";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237w9";
                 _serverNm = "Training";
                 WlcmScren.BackgroundImage = Resources.Empty;
                 WlcmScren.BackColor = Color.White;
@@ -289,7 +291,7 @@ namespace VOCAC
         public void AppLog(String ErrHndls, String LogMsg, String SSqlStrs)                                  //Insert Exception Into Log FIle
         {
             string _path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VOCALog" + Convert.ToDateTime(DateTime.Now).ToString("MM-yy") + ".Vlg";
-            string _content = DateTime.Now + " ," + ErrHndls + LogMsg + " &H" + SSqlStrs + Environment.NewLine;
+            string _content = DateTime.Now + " ," + encrypt(ErrHndls) + "&H" + encrypt(LogMsg) + "&H" + encrypt(SSqlStrs) + Environment.NewLine;
             File.AppendAllText(_path, _content);
         }
         public void SwitchBoard(DataTable dt)
@@ -311,55 +313,55 @@ namespace VOCAC
                 ToolStripMenuItem NewTabCx = new ToolStripMenuItem(tabTable.Rows[i].Field<string>("SwNm"));  //YYYYYYYYYYY
                 if (tabTable.Rows[i].Field<int>("SwID_New") > 0) // To Confirm That SerID not Equal Zero
                 {
-                if (CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID_New") - 1, 1) == "A" ||
-                    CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID_New") - 1, 1) == "H")
-                {
-                    Menu_.Items.Add(NewTab);
-                    CntxMenu.Items.Add(NewTabCx);                    //YYYYYYYYYYY
-
-                    String Filtr_ = tabTable.Rows[i].Field<string>("SwSer");
-                    SwichButTable.DefaultView.RowFilter = "(([SwType] <> '" + "Tab" + "') AND ([SwNm] <> '" + "NA" + "') AND ([SwSer] ='" + Filtr_ + "'))";
-                    DataTable butTable = SwichButTable.DefaultView.ToTable();
-                    for (int u = 0; u < SwichButTable.DefaultView.Count; u++)
+                    if (CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID_New") - 1, 1) == "A" ||
+                        CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID_New") - 1, 1) == "H")
                     {
-                        ToolStripMenuItem subItem = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
-                        ToolStripMenuItem subItemCx = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
-                        if (butTable.Rows[u].Field<int>("SwID_New") > 0) // To Confirm That SerID not Equal Zero
+                        Menu_.Items.Add(NewTab);
+                        CntxMenu.Items.Add(NewTabCx);                    //YYYYYYYYYYY
+
+                        String Filtr_ = tabTable.Rows[i].Field<string>("SwSer");
+                        SwichButTable.DefaultView.RowFilter = "(([SwType] <> '" + "Tab" + "') AND ([SwNm] <> '" + "NA" + "') AND ([SwSer] ='" + Filtr_ + "'))";
+                        DataTable butTable = SwichButTable.DefaultView.ToTable();
+                        for (int u = 0; u < SwichButTable.DefaultView.Count; u++)
                         {
-                            if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID_New") - 1, 1) == "A")
+                            ToolStripMenuItem subItem = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
+                            ToolStripMenuItem subItemCx = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
+                            if (butTable.Rows[u].Field<int>("SwID_New") > 0) // To Confirm That SerID not Equal Zero
                             {
-                                if (butTable.Rows[u].Field<bool>("NewNew") == true)  // Populate Switchboard Button If form Added
+                                if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID_New") - 1, 1) == "A")
                                 {
-                                    subItem.Tag = butTable.Rows[u].Field<string>("SwObjNm1");
-                                    if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID_New") - 1, 1) == "A")
+                                    if (butTable.Rows[u].Field<bool>("NewNew") == true)  // Populate Switchboard Button If form Added
                                     {
-                                        subItem.AccessibleName = "True";
-                                        subItemCx.AccessibleName = "True";
-                                    }
-                                    // Assign Icon To every Button
-                                    if (DBNull.Value.Equals(butTable.Rows[u].Field<string>("SwObjImg")) == false)
-                                    {
-                                        ImageList imglst = new ImageList();
-                                        //imglst = Login.ControlCollection["ImageList1"];
-                                        Image Cnt_ = Logfrm.ImageList1.Images[butTable.Rows[u].Field<string>("SwObjImg")];
-                                        //Image Cnt_ = (Image)Resources.ResourceManager.GetObject(butTable.Rows[u].Field<string>("SwObjImg"));
-                                        subItem.Image = Cnt_;
-                                        subItemCx.Image = Cnt_;
-                                        subItemCx.Tag = butTable.Rows[u].Field<string>("SwObjNm1");
-                                        NewTab.DropDownItems.Add(subItem);
-                                        NewTabCx.DropDownItems.Add(subItemCx);
-                                        frms GG = new frms();
-                                        subItem.Click += new System.EventHandler(GG.ClkEvntClick);
-                                        subItemCx.Click += new System.EventHandler(GG.ClkEvntClick);
+                                        subItem.Tag = butTable.Rows[u].Field<string>("SwObjNm1");
+                                        if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID_New") - 1, 1) == "A")
+                                        {
+                                            subItem.AccessibleName = "True";
+                                            subItemCx.AccessibleName = "True";
+                                        }
+                                        // Assign Icon To every Button
+                                        if (DBNull.Value.Equals(butTable.Rows[u].Field<string>("SwObjImg")) == false)
+                                        {
+                                            ImageList imglst = new ImageList();
+                                            //imglst = Login.ControlCollection["ImageList1"];
+                                            Image Cnt_ = Logfrm.ImageList1.Images[butTable.Rows[u].Field<string>("SwObjImg")];
+                                            //Image Cnt_ = (Image)Resources.ResourceManager.GetObject(butTable.Rows[u].Field<string>("SwObjImg"));
+                                            subItem.Image = Cnt_;
+                                            subItemCx.Image = Cnt_;
+                                            subItemCx.Tag = butTable.Rows[u].Field<string>("SwObjNm1");
+                                            NewTab.DropDownItems.Add(subItem);
+                                            NewTabCx.DropDownItems.Add(subItemCx);
+                                            frms GG = new frms();
+                                            subItem.Click += new System.EventHandler(GG.ClkEvntClick);
+                                            subItemCx.Click += new System.EventHandler(GG.ClkEvntClick);
+                                        }
                                     }
                                 }
                             }
-                        }
 
+                        }
                     }
                 }
-                }
-    
+
             }
             dt.Dispose();
             SwichButTable.Dispose();
@@ -441,27 +443,36 @@ namespace VOCAC
                 fileD.FilterIndex = 2;
                 if (fileD.ShowDialog() == DialogResult.OK)
                 {
-                    extAttch = Path.GetExtension(fileD.FileName);
-                    using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(fileD.FileName)))
+                    var size = new FileInfo(fileD.FileName).Length;
+                    if (size <= Convert.ToInt32(AppSettings.Rows[0]["AttachSize"]))
                     {
+                        extAttch = Path.GetExtension(fileD.FileName);
+                        using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(fileD.FileName)))
+                        {
+                            if (arr.Contains(extAttch.ToUpper()))
+                            {
+                                imge = Image.FromStream(ms);
+                                zpicViewer.getviewerfrm.Load += new System.EventHandler(zpicViewer.getviewerfrm.ComboBox1_SelectedIndexChanged);
+                            }
+                            else
+                            {
+                                Statcdif.mainImageArray = ms.ToArray();
+                            }
+
+                        }
                         if (arr.Contains(extAttch.ToUpper()))
                         {
-                            imge = Image.FromStream(ms);
-                            zpicViewer.getviewerfrm.Load += new System.EventHandler(zpicViewer.getviewerfrm.ComboBox1_SelectedIndexChanged);
+                            zpicViewer.getviewerfrm.ShowDialog();
                         }
                         else
                         {
-                            Statcdif.mainImageArray = ms.ToArray();
-                        }
 
-                    }
-                    if (arr.Contains(extAttch.ToUpper()))
-                    {
-                        zpicViewer.getviewerfrm.ShowDialog();
+                        }
                     }
                     else
                     {
-
+                        function fn = function.getfn;
+                        fn.msg("لقد تجاوزت حجم المرفق المسموح \" 5 ميجا بايت \"" + Environment.NewLine + "برجاء تقليل مساحة المرفق وإعادة المحاولة", "تحميل مرفق", MessageBoxButtons.OK);
                     }
                 }
                 else
@@ -698,12 +709,82 @@ namespace VOCAC
 
             return new Regex(validEmailPattern, RegexOptions.IgnoreCase);
         }
-
         public static bool EmailIsValid(string emailAddress)
         {
             bool isValid = ValidEmailRegex.IsMatch(emailAddress);
 
             return isValid;
+        }
+        public static string encrypt(string EncryptedString)
+        {
+            Random rnd = new Random();                      // Encryption Random
+            int intKey;
+            string author = EncryptedString;
+            // Convert a C# string to a byte array  
+            string Separtor = "₨";                          // Encryption Separator
+            if (EcryptionTbl.Rows.Count == 0)
+            {
+                EcryptionTbl.Columns.Add("key", typeof(int));            // Add two Columns to the Ecryption Table
+                EcryptionTbl.Columns.Add("Cahr_");
+                EcryptionTbl.Rows.Add(1, "$");                           // Add Encryption Rows to the Ecryption Table
+                EcryptionTbl.Rows.Add(2, "℆");
+                EcryptionTbl.Rows.Add(3, "§");
+                EcryptionTbl.Rows.Add(4, "№");
+                EcryptionTbl.Rows.Add(5, "¥");
+                EcryptionTbl.Rows.Add(6, "℀");
+                EcryptionTbl.Rows.Add(7, "₡");
+                EcryptionTbl.Rows.Add(8, "₯");
+                EcryptionTbl.Rows.Add(9, "₠");
+            }
+
+            // Get Bytes from String 
+            byte[] bytes = Encoding.UTF8.GetBytes(EncryptedString);
+            List<string> encryptList = new List<string>();
+            foreach (byte b in bytes)
+            {
+                intKey = rnd.Next(1, 10);                                       // creates a number between 1 and 9
+                DataRow DRW = function.DRW(EcryptionTbl, intKey, EcryptionTbl.Columns[0]);        // Get Symbole from table based on Random int from 1 - 9
+                encryptList.Add((b * intKey).ToString() + DRW.ItemArray[1]);    // store in String List the result of random * byte & Symbole
+            }
+            string Encrypted = string.Join(Separtor, encryptList);              // Join string list using Separator "₨"
+            return Encrypted;                                                   // Return Ecrypted String
+        }
+        public static string discrypt(string DiscryptedString)
+        {
+
+            string[] Encripted = DiscryptedString.Split('₨');
+            byte[] discripted = new byte[Encripted.Length];
+            for (int i = 0; i < Encripted.Length; i++)
+            {
+                string Sympole = Encripted[i].ToString().Substring(Encripted[i].ToString().Length - 1, 1);                               // Splite symbole from string
+                string byte_ = Encripted[i].ToString().Substring(0, Encripted[i].ToString().Length - 1);                                 // Splite Byte from string
+                DataRow DRW = function.DRW(EcryptionTbl, Sympole, EcryptionTbl.Columns[1]);        // Get int from Encryption Table based on Symbole from
+                int OriginalByte = Convert.ToInt32(byte_) / Convert.ToInt32(DRW.ItemArray[0]);     // Return the Original Byte with by Operation
+                discripted[i] = (byte)OriginalByte;
+            }
+
+            return Encoding.UTF8.GetString(discripted);
+        }
+        public static string[] readLog()
+        {
+            string[] lines = null;
+            StringBuilder Lines = new StringBuilder();
+            using (OpenFileDialog fileD = new OpenFileDialog() { Filter = "VLG files | *.Vlg", ValidateNames = true })
+            {
+                fileD.FilterIndex = 2;
+                fileD.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                if (fileD.ShowDialog() == DialogResult.OK)
+                {
+                    var size = new FileInfo(fileD.FileName).Length;
+                    string text = File.ReadAllText(fileD.FileName);
+
+                    // Example #2
+                    // Read each line of the file into a string array. Each element
+                    // of the array is one line of the file.
+                    lines = File.ReadAllLines(fileD.FileName);
+                }
+            }
+            return lines;
         }
     }
     // Current User Class

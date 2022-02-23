@@ -381,7 +381,7 @@ namespace VOCAC.BL
             TikUpdate.getTikupdatefrm.GridUpdt.Columns["TkupTxt"].Width = TikUpdate.getTikupdatefrm.GridUpdt.Width - (TikUpdate.getTikupdatefrm.GridUpdt.Columns["TkupSTime"].Width + TikUpdate.getTikupdatefrm.GridUpdt.Columns["عدد أيام عمل"].Width + TikUpdate.getTikupdatefrm.GridUpdt.Columns["EvNm"].Width + TikUpdate.getTikupdatefrm.GridUpdt.Columns["EvNm"].Width + TikUpdate.getTikupdatefrm.GridUpdt.Columns["UsrRealNm"].Width);
             TikUpdate.getTikupdatefrm.GridUpdt.AutoResizeRows();
         }
-        public static string addevent(int id, string txt, bool read, int EvId, string IP, int user, [Optional] byte[] attach, [Optional] string Ext)
+        public static string addevent(int id, string txt,  int EvId, string IP, int user, [Optional] string UpdateSTR, [Optional] byte[] attach, [Optional] string Ext)
         {
             string rslt = null;
             SqlCommand sqlcmd = new SqlCommand();
@@ -394,14 +394,14 @@ namespace VOCAC.BL
             param[0].Value = id;
             param[1] = new SqlParameter("@TkupTxt", SqlDbType.NVarChar);
             param[1].Value = txt;
-            param[2] = new SqlParameter("@TkupUnread", SqlDbType.Bit);
-            param[2].Value = read;
-            param[3] = new SqlParameter("@TkupEvtId", SqlDbType.Int);
-            param[3].Value = EvId;
-            param[4] = new SqlParameter("@TkupUserIP", SqlDbType.NVarChar, 15);
-            param[4].Value = IP;
-            param[5] = new SqlParameter("@TkupUser", SqlDbType.Int);
-            param[5].Value = user;
+            param[2] = new SqlParameter("@TkupEvtId", SqlDbType.Int);
+            param[2].Value = EvId;
+            param[3] = new SqlParameter("@TkupUserIP", SqlDbType.NVarChar, 15);
+            param[3].Value = IP;
+            param[4] = new SqlParameter("@TkupUser", SqlDbType.Int);
+            param[4].Value = user;
+            param[5] = new SqlParameter("@UpdateStatement", SqlDbType.NVarChar);
+            param[5].Value = UpdateSTR;
             param[6] = new SqlParameter("@TkupAttch", SqlDbType.Image);
             param[6].Value = attach;
             param[7] = new SqlParameter("@Extention", SqlDbType.NVarChar, 10);

@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.GridUpdt = new System.Windows.Forms.DataGridView();
             this.ContextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.CopyToolStripitem = new System.Windows.Forms.ToolStripMenuItem();
-            this.UplodAtchToolStripitem = new System.Windows.Forms.ToolStripMenuItem();
             this.DonlodAttchToolStripitem = new System.Windows.Forms.ToolStripMenuItem();
             this.TxtUpdt = new System.Windows.Forms.TextBox();
             this.CmbEvent = new System.Windows.Forms.ComboBox();
@@ -73,33 +71,11 @@
             // ContextMenuStrip2
             // 
             this.ContextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CopyToolStripitem,
-            this.UplodAtchToolStripitem,
             this.DonlodAttchToolStripitem});
             this.ContextMenuStrip2.Name = "ContextMenuStrip1";
             this.ContextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.ContextMenuStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.ContextMenuStrip2.Size = new System.Drawing.Size(185, 70);
-            // 
-            // CopyToolStripitem
-            // 
-            this.CopyToolStripitem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.CopyToolStripitem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.CopyToolStripitem.Name = "CopyToolStripitem";
-            this.CopyToolStripitem.RightToLeftAutoMirrorImage = true;
-            this.CopyToolStripitem.Size = new System.Drawing.Size(184, 22);
-            this.CopyToolStripitem.Text = "Copy Selected Cell";
-            // 
-            // UplodAtchToolStripitem
-            // 
-            this.UplodAtchToolStripitem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.UplodAtchToolStripitem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.UplodAtchToolStripitem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.UplodAtchToolStripitem.Name = "UplodAtchToolStripitem";
-            this.UplodAtchToolStripitem.RightToLeftAutoMirrorImage = true;
-            this.UplodAtchToolStripitem.Size = new System.Drawing.Size(184, 22);
-            this.UplodAtchToolStripitem.Text = "Upload Attachement";
-            this.UplodAtchToolStripitem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ContextMenuStrip2.Size = new System.Drawing.Size(181, 48);
             // 
             // DonlodAttchToolStripitem
             // 
@@ -109,7 +85,7 @@
             this.DonlodAttchToolStripitem.Name = "DonlodAttchToolStripitem";
             this.DonlodAttchToolStripitem.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.DonlodAttchToolStripitem.RightToLeftAutoMirrorImage = true;
-            this.DonlodAttchToolStripitem.Size = new System.Drawing.Size(184, 22);
+            this.DonlodAttchToolStripitem.Size = new System.Drawing.Size(180, 22);
             this.DonlodAttchToolStripitem.Text = "Download attached";
             this.DonlodAttchToolStripitem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.DonlodAttchToolStripitem.Click += new System.EventHandler(this.DonlodAttchToolStripitem_Click);
@@ -270,8 +246,6 @@
 
         internal System.Windows.Forms.DataGridView GridUpdt;
         internal System.Windows.Forms.ContextMenuStrip ContextMenuStrip2;
-        internal System.Windows.Forms.ToolStripMenuItem CopyToolStripitem;
-        internal System.Windows.Forms.ToolStripMenuItem UplodAtchToolStripitem;
         internal System.Windows.Forms.ToolStripMenuItem DonlodAttchToolStripitem;
         internal System.Windows.Forms.TextBox TxtUpdt;
         internal System.Windows.Forms.ComboBox CmbEvent;

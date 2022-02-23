@@ -26,7 +26,6 @@ namespace VOCAC.PL
                 if (frm == null)
                 {
                     frm = new userPasschange();
-                    frm.FormClosed += new FormClosedEventHandler(frm_Closed);
                 }
                 return frm;
             }
@@ -39,12 +38,12 @@ namespace VOCAC.PL
                 frm = this;
             }
         }
-
         private void ChangePassword_Load(object sender, EventArgs e)
         {
+            frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
+            frm.FormClosed += new FormClosedEventHandler(frm_Closed);
             TxtUsCnt_lNm.Text = CurrentUser.UsrRlNm;
         }
-
         private void BtSub_Click(object sender, EventArgs e)
         {
             this.Enabled = false;

@@ -29,7 +29,7 @@ namespace VOCAC.PL
                 if (frm == null)
                 {
                     frm = new TikEdit();
-                    frm.FormClosed += new FormClosedEventHandler(frm_Closed);
+
                 }
                 return frm;
             }
@@ -51,13 +51,20 @@ namespace VOCAC.PL
         int lblColor = 35;
         TreeNode[] TempNode = new TreeNode[0];
         List<string> ctrlList;
+        Size Ctrlsize = new Size(150, 32);
+        Size lblsize = new Size(100, 25);
+        Font CtrlFont = new Font("Times new Roman", 12, FontStyle.Bold);
         public TikEdit()
         {
             InitializeComponent();
+            if (frm == null)
+            {
+                frm = this;
+            }
             forms.FrmAllSub(this);
             NewTickSub();
-            this.Phon1TxtBx.TextChanged += new System.EventHandler(this.Phon1TxtBx_TextChanged);
-            this.IDTxtBx.TextChanged += new System.EventHandler(this.IDTxtBx_TextChanged);
+            this.TkClPh.TextChanged += new System.EventHandler(this.Phon1TxtBx_TextChanged);
+            this.TkClNtID.TextChanged += new System.EventHandler(this.IDTxtBx_TextChanged);
             Statcdif.CompSurceTable.DefaultView.RowFilter = string.Empty;
         }
         private void NewTickSub()
@@ -70,7 +77,6 @@ namespace VOCAC.PL
             //TreeView1.Nodes.Clear();
 
             SubmitBtn.Visible = true;
-            BtnDublicate.Visible = false;
             customerTable.Rows.Clear();
 
             List<Control> CTRLLst = new List<Control>();
@@ -105,11 +111,11 @@ namespace VOCAC.PL
             RadioButton12.Checked = false;
 
 
-            Phon1TxtBx.Enabled = false;
-            Phon2TxtBx.Enabled = false;
+            TkClPh.Enabled = false;
+            TkClPh1.Enabled = false;
             //ComRefLbl.Text = "";
-            IDTxtBx.Text = "";
-            IDTxtBx.Mask = "00000000000000";
+            TkClNtID.Text = "";
+            TkClNtID.Mask = "00000000000000";
             RadNID.Checked = true;
             chckIDChange.Text = "تغيير الرقم القومي";
 
@@ -117,7 +123,6 @@ namespace VOCAC.PL
             PrdKind = "";
             MyGroupBox3.Enabled = true;
             FlwTree.Enabled = true;
-            BtnDublicate.Visible = false;
             FlwMainData.Enabled = false;
             richTextBox1.Text = "";
             lblhelp.Text = "";
@@ -155,26 +160,26 @@ namespace VOCAC.PL
             {
                 factor += 5;
                 //Check Customer ID
-                if (RadNID.Checked == true && IDTxtBx.Text.Replace(" ", "").Trim().Length == 14)
+                if (RadNID.Checked == true && TkClNtID.Text.Replace(" ", "").Trim().Length == 14)
                 {
-                    if (function.validateNationalID(IDTxtBx.Text.Replace(" ", "").Trim().ToString()) == true)
+                    if (function.validateNationalID(TkClNtID.Text.Replace(" ", "").Trim().ToString()) == true)
                     {
                         Complete_ += 1;
-                        fn.ClorTxt(richTextBox1, IDTxtBx.AccessibleName, Color.White, Color.Green, 14);
+                        fn.ClorTxt(richTextBox1, TkClNtID.AccessibleName, Color.White, Color.Green, 14);
                     }
                     else
                     {
-                        fn.ClorTxt(richTextBox1, IDTxtBx.AccessibleName, Color.White, Color.Red, 14);
+                        fn.ClorTxt(richTextBox1, TkClNtID.AccessibleName, Color.White, Color.Red, 14);
                     }
                 }
-                else if (RadPss.Checked == true && IDTxtBx.Text.Replace(" ", "").Trim().Length > 0)
+                else if (RadPss.Checked == true && TkClNtID.Text.Replace(" ", "").Trim().Length > 0)
                 {
                     Complete_ += 1;
-                    fn.ClorTxt(richTextBox1, IDTxtBx.AccessibleName, Color.White, Color.Green, 14);
+                    fn.ClorTxt(richTextBox1, TkClNtID.AccessibleName, Color.White, Color.Green, 14);
                 }
                 else
                 {
-                    fn.ClorTxt(richTextBox1, IDTxtBx.AccessibleName, Color.White, Color.Red, 14);
+                    fn.ClorTxt(richTextBox1, TkClNtID.AccessibleName, Color.White, Color.Red, 14);
                 }
                 Label29.Visible = true;
             }
@@ -185,39 +190,39 @@ namespace VOCAC.PL
             }
 
             //Check Customer Phone 1
-            if (function.validatePhoneNumber(Phon1TxtBx.Text.Trim()) == true)
+            if (function.validatePhoneNumber(TkClPh.Text.Trim()) == true)
             {
                 Complete_ += 1;
-                toolTip1.Hide(Phon1TxtBx);
-                fn.ClorTxt(richTextBox1, Phon1TxtBx.AccessibleName, Color.White, Color.Green, 14);
+                toolTip1.Hide(TkClPh);
+                fn.ClorTxt(richTextBox1, TkClPh.AccessibleName, Color.White, Color.Green, 14);
             }
             else
             {
                 if (RadioButton8.Checked == true)
                 {
-                    if (ActiveControl == Phon1TxtBx) { toolTip1.Show("رقم الموبايل لابد أنه يبدأ بـ " + Environment.NewLine + " 010, 011, 012 أو 015 ", ActiveControl, 0, 30, 1000); }
+                    if (ActiveControl == TkClPh) { toolTip1.Show("رقم الموبايل لابد أنه يبدأ بـ " + Environment.NewLine + " 010, 011, 012 أو 015 ", ActiveControl, 0, 30, 1000); }
                 }
                 else if (RadioButton9.Checked == true)
                 {
-                    if (ActiveControl == Phon1TxtBx) { toolTip1.Show("رقم التليفون لابد أن يبدأ بكود المحافظة" + Environment.NewLine + "مثال : \"02XXXXXXXX", ActiveControl, 0, 30, 1000); }
+                    if (ActiveControl == TkClPh) { toolTip1.Show("رقم التليفون لابد أن يبدأ بكود المحافظة" + Environment.NewLine + "مثال : \"02XXXXXXXX", ActiveControl, 0, 30, 1000); }
                 }
-                fn.ClorTxt(richTextBox1, Phon1TxtBx.AccessibleName, Color.White, Color.Red, 14);
+                fn.ClorTxt(richTextBox1, TkClPh.AccessibleName, Color.White, Color.Red, 14);
             }
 
-            if (function.validatePhoneNumber(Phon2TxtBx.Text.Trim()) == true)
+            if (function.validatePhoneNumber(TkClPh1.Text.Trim()) == true)
             {
-                toolTip1.Hide(Phon2TxtBx);
-                fn.ClorTxt(richTextBox1, Phon2TxtBx.AccessibleName, Color.White, Color.Green, 14);
+                toolTip1.Hide(TkClPh1);
+                fn.ClorTxt(richTextBox1, TkClPh1.AccessibleName, Color.White, Color.Green, 14);
             }
             else
             {
                 if (RadioButton11.Checked == true)
                 {
-                    if (ActiveControl == Phon2TxtBx) { toolTip1.Show("رقم الموبايل لابد أنه يبدأ بـ " + Environment.NewLine + " 010, 011, 012 أو 015 ", ActiveControl, 0, 30, 1000); }
+                    if (ActiveControl == TkClPh1) { toolTip1.Show("رقم الموبايل لابد أنه يبدأ بـ " + Environment.NewLine + " 010, 011, 012 أو 015 ", ActiveControl, 0, 30, 1000); }
                 }
                 else if (RadioButton12.Checked == true)
                 {
-                    if (ActiveControl == Phon2TxtBx) { toolTip1.Show("رقم التليفون لابد أن يبدأ بكود المحافظة" + Environment.NewLine + "مثال : \"02XXXXXXXX", ActiveControl, 0, 30, 1000); }
+                    if (ActiveControl == TkClPh1) { toolTip1.Show("رقم التليفون لابد أن يبدأ بكود المحافظة" + Environment.NewLine + "مثال : \"02XXXXXXXX", ActiveControl, 0, 30, 1000); }
                 }
             }
             //Check Tree Selection
@@ -229,27 +234,27 @@ namespace VOCAC.PL
                 }
             }
             //Check Customer Name 
-            if (NameTxtBx.Text.Trim().ToCharArray().Count(c => c == Convert.ToChar(" ")) > 1)
+            if (TkClNm.Text.Trim().ToCharArray().Count(c => c == Convert.ToChar(" ")) > 1)
             {
                 Complete_ += 1;
-                toolTip1.Hide(NameTxtBx);
-                fn.ClorTxt(richTextBox1, NameTxtBx.AccessibleName, Color.White, Color.Green, 14);
+                toolTip1.Hide(TkClNm);
+                fn.ClorTxt(richTextBox1, TkClNm.AccessibleName, Color.White, Color.Green, 14);
             }
             else
             {
-                if (ActiveControl == NameTxtBx) { toolTip1.Show("اسم العميل لابد أن يكون ثلاثي على الأقل", NameTxtBx, 0, 30, 3000); }
+                if (ActiveControl == TkClNm) { toolTip1.Show("اسم العميل لابد أن يكون ثلاثي على الأقل", TkClNm, 0, 30, 3000); }
 
-                fn.ClorTxt(richTextBox1, NameTxtBx.AccessibleName, Color.White, Color.Red, 14);
+                fn.ClorTxt(richTextBox1, TkClNm.AccessibleName, Color.White, Color.Red, 14);
             }
             //Check Complaint Source
-            if (SrcCmbBx.SelectedIndex != -1)
+            if (TkCompSrc.SelectedIndex != -1)
             {
                 Complete_ += 1;
-                fn.ClorTxt(richTextBox1, SrcCmbBx.AccessibleName, Color.White, Color.Green, 14);
+                fn.ClorTxt(richTextBox1, TkCompSrc.AccessibleName, Color.White, Color.Green, 14);
             }
             else
             {
-                fn.ClorTxt(richTextBox1, SrcCmbBx.AccessibleName, Color.White, Color.Red, 14);
+                fn.ClorTxt(richTextBox1, TkCompSrc.AccessibleName, Color.White, Color.Red, 14);
             }
 
             foreach (Control Ctrl in FlwMend.Controls)
@@ -498,10 +503,10 @@ namespace VOCAC.PL
                 this.Text = "شكوى " + ComRefLbl.Text;
             }
 
-            if (SrcCmbBx.Items.Count == 0)
+            if (TkCompSrc.Items.Count == 0)
             {
-                SrcCmbBx.DataSource = Statcdif.CompSurceTable;
-                SrcCmbBx.SelectedIndex = -1;
+                TkCompSrc.DataSource = Statcdif.CompSurceTable;
+                TkCompSrc.SelectedIndex = -1;
             }
 
             TreeView1.Visible = true;
@@ -513,17 +518,19 @@ namespace VOCAC.PL
             {
                 String Child1 = "";
                 TreeView1.ImageList = ImgLst;
-                for (int i = 0; i < Statcdif.ProdKTable.Rows.Count; i++)
+                //;
+                Statcdif.ProdKTable.DefaultView.RowFilter = "ProdKNm = '" + editStruct.dt.Rows[0]["ProdKNm"].ToString() + "'";
+                for (int i = 0; i < Statcdif.ProdKTable.DefaultView.Count; i++)
                 {
-                    TreeView1.Nodes.Add(Statcdif.ProdKTable.Rows[i][0].ToString(), Statcdif.ProdKTable.Rows[i][1].ToString(), 1, 3);
+                    TreeView1.Nodes.Add(Statcdif.ProdKTable.DefaultView[i][0].ToString(), Statcdif.ProdKTable.DefaultView[i][1].ToString(), 1, 3);
                 }
                 if (TickKind == 0)
                 {
-                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + 1;
+                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + 1 + " AND PrdKind = '" + Statcdif.ProdKTable.DefaultView[0][0].ToString() + "'";
                 }
                 else
                 {
-                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + 0;
+                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + 0 + " AND PrdKind = '" + Statcdif.ProdKTable.DefaultView[0][0].ToString() + "'";
                 }
                 //Populate Products Nodes
                 for (int i = 0; i < Statcdif.ProdCompTable.DefaultView.Count; i++)
@@ -570,6 +577,7 @@ namespace VOCAC.PL
             TreeView1.SelectedNode = null;
             MyGroupBox2.Enabled = true;
             FlwMainData.Enabled = false;
+            this.TreeView1.AfterSelect -= new TreeViewEventHandler(this.TreeView1_AfterSelect);
             this.TreeView1.AfterSelect += new TreeViewEventHandler(this.TreeView1_AfterSelect);
             this.TreeView1.BeforeSelect += new TreeViewCancelEventHandler(this.TreeView1_BeforeSelect);
         }
@@ -589,27 +597,52 @@ namespace VOCAC.PL
         }
         private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeView1.SelectedNode.Expand();
-            if (TreeView1.SelectedNode.Level == 2)
+            if (e.Action != TreeViewAction.Unknown)
             {
-                DataRow DRW = function.DRW(Statcdif.ProdCompTable, TreeView1.SelectedNode.Name, Statcdif.ProdCompTable.Columns["FnSQL"]);
-                itemRef = DRW.ItemArray[7].ToString();
-                TeamIdentfier = Convert.ToInt32(DRW.ItemArray[8]);
-                Help_ = DRW.ItemArray[11].ToString();
-                lblhelp.Text = Help_;
-                Timer1.Start();
-                PrdKind = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[0];
-                Prdct.Text = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[1];
-                Comp.Text = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[2];
-                Statcdif.MendFildsTable.DefaultView.RowFilter = "[MendCdFn]  = " + TreeView1.SelectedNode.Name + " and MendStat = 0";
-                FlwMend.Controls.Clear();
-                mendlstlbl();
+                TreeView1.SelectedNode.Expand();
+                if (TreeView1.SelectedNode.Level == 2)
+                {
+                    DataRow DRW = function.DRW(Statcdif.ProdCompTable, TreeView1.SelectedNode.Name, Statcdif.ProdCompTable.Columns["FnSQL"]);
+                    itemRef = DRW.ItemArray[7].ToString();
+                    TeamIdentfier = Convert.ToInt32(DRW.ItemArray[8]);
+                    Help_ = DRW.ItemArray[11].ToString();
+                    lblhelp.Text = Help_;
+                    Timer1.Start();
+                    PrdKind = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[0];
+                    PrdNm.Text = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[1];
+                    CompNm.Text = TreeView1.SelectedNode.FullPath.ToString().Split('\\')[2];
+                    Statcdif.MendFildsTable.DefaultView.RowFilter = "[MendCdFn]  = " + TreeView1.SelectedNode.Name + " and MendStat = 0";
 
-                Font CtrlFont = new Font("Times new Roman", 12, FontStyle.Bold);
-                Size Ctrlsize = new Size(150, 32);
-                Size lblsize = new Size(100, 25);
-
-                for (int i = 0; i < Statcdif.MendFildsTable.DefaultView.Count; i++)
+                    mendFlowWithText();
+                    populateFlowMend();
+                    FlwMainData.Enabled = true;
+                }
+                else if (TreeView1.SelectedNode.Level < 2)
+                {
+                    FlwMainData.Enabled = false;
+                    PrdKind = "";
+                    PrdNm.Text = "";
+                    CompNm.Text = "";
+                    FlwMend.Controls.Clear();
+                    richTextBox1.Text = "";
+                    itemRef = "";
+                    TeamIdentfier = 0;
+                    Help_ = "";
+                    lblhelp.Text = "";
+                    Timer1.Stop();
+                }
+                if (TreeView1.SelectedNode.FullPath.ToString().Split('\\')[0] != PrdKind)
+                {
+                    PrdKind = "";
+                }
+            }
+        }
+        private void populateFlowMend()
+        {
+            //FlwMend.Controls.Clear();
+            for (int i = 0; i < Statcdif.MendFildsTable.DefaultView.Count; i++)
+            {
+                if (!ctrlList.Contains(Statcdif.MendFildsTable.DefaultView[i]["CDMendTxt"]))
                 {
                     Label Lbl = new Label();
                     Lbl.AutoSize = false;
@@ -630,6 +663,7 @@ namespace VOCAC.PL
                         Ctrl.Font = CtrlFont;
                         Ctrl.Size = Ctrlsize;
                         Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendDatatype"].ToString();
+                        Ctrl.Name = Statcdif.MendFildsTable.DefaultView[i]["CDMendTxt"].ToString();
                         if (DBNull.Value.Equals(Statcdif.MendFildsTable.DefaultView[i]["CDMendLenght"]) == false) { Ctrl.MaxLength = Convert.ToInt32(Statcdif.MendFildsTable.DefaultView[i]["CDMendLenght"]); };
                         FlwMend.Controls.Add(Ctrl);
                     }
@@ -642,6 +676,7 @@ namespace VOCAC.PL
                         Ctrl.Size = Ctrlsize;
                         Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendDatatype"].ToString();
                         Ctrl.AccessibleName = Statcdif.MendFildsTable.DefaultView[i]["CDMendTbl"].ToString();
+                        Ctrl.Name = Statcdif.MendFildsTable.DefaultView[i]["CDMendTxt"].ToString();
                         FlwMend.Controls.Add(Ctrl);
                         Ctrl.ReadOnly = true;
                         Ctrl.KeyDown += new KeyEventHandler(TextBox_KeyDown);
@@ -656,6 +691,7 @@ namespace VOCAC.PL
                         Ctrl.Size = Ctrlsize;
                         Ctrl.Mask = Statcdif.MendFildsTable.DefaultView[i]["CDMendmask"].ToString();
                         Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendDatatype"].ToString();
+                        Ctrl.Name = Statcdif.MendFildsTable.DefaultView[i]["CDMendTxt"].ToString();
                         Ctrl.PromptChar = Convert.ToChar(" ");
                         FlwMend.Controls.Add(Ctrl);
                     }
@@ -668,31 +704,12 @@ namespace VOCAC.PL
                         Ctrl.Format = DateTimePickerFormat.Short;
                         Ctrl.Value = DateTime.Now.AddDays(1);
                         Ctrl.Tag = Statcdif.MendFildsTable.DefaultView[i]["CDMendDatatype"].ToString();
+                        Ctrl.Name = Statcdif.MendFildsTable.DefaultView[i]["CDMendTxt"].ToString();
                         FlwMend.Controls.Add(Ctrl);
                     }
-
                 }
-                forms.FrmAllSub(this);
-                FlwMainData.Enabled = true;
             }
-            else if (TreeView1.SelectedNode.Level < 2)
-            {
-                FlwMainData.Enabled = false;
-                PrdKind = "";
-                Prdct.Text = "";
-                Comp.Text = "";
-                FlwMend.Controls.Clear();
-                richTextBox1.Text = "";
-                itemRef = "";
-                TeamIdentfier = 0;
-                Help_ = "";
-                lblhelp.Text = "";
-                Timer1.Stop();
-            }
-            if (TreeView1.SelectedNode.FullPath.ToString().Split('\\')[0] != PrdKind)
-            {
-                PrdKind = "";
-            }
+            forms.FrmAllSub(this);
         }
         private void TextBox_LEAVE(object sender, EventArgs e)
         {
@@ -709,23 +726,23 @@ namespace VOCAC.PL
         private void RadioPhone1_Click(object sender, EventArgs e)
         {
             TimrPhons.Start();
-            Phon1TxtBx.Enabled = true;
-            Phon1TxtBx.Text = "";
+            TkClPh.Enabled = true;
+            TkClPh.Text = "";
             if (RadioButton8.Checked)
             {
-                Phon1TxtBx.Mask = "00000000000";
+                TkClPh.Mask = "00000000000";
             }
             else if (RadioButton9.Checked)
             {
-                Phon1TxtBx.Mask = "0000000000";
+                TkClPh.Mask = "0000000000";
             }
-            Phon1TxtBx.Focus();
+            TkClPh.Focus();
             if (!chckphonechange.Checked)
             {
-                NameTxtBx.Text = "";
-                AddTxtBx.Text = "";
-                Phon2TxtBx.Text = "";
-                MailTxtBx.Text = "";
+                TkClNm.Text = "";
+                TkClAdr.Text = "";
+                TkClPh1.Text = "";
+                TkMail.Text = "";
                 customerTable.Rows.Clear();
             }
 
@@ -733,17 +750,17 @@ namespace VOCAC.PL
         private void RadioPhone2_Click(object sender, EventArgs e)
         {
             TimrPhons.Start();
-            Phon2TxtBx.Enabled = true;
-            Phon2TxtBx.Text = "";
+            TkClPh1.Enabled = true;
+            TkClPh1.Text = "";
             if (RadioButton11.Checked)
             {
-                Phon2TxtBx.Mask = "00000000000";
+                TkClPh1.Mask = "00000000000";
             }
             else if (RadioButton12.Checked)
             {
-                Phon2TxtBx.Mask = "0000000000";
+                TkClPh1.Mask = "0000000000";
             }
-            Phon2TxtBx.Focus();
+            TkClPh1.Focus();
 
         }
         private void TimrPhons_Tick(object sender, EventArgs e)
@@ -920,112 +937,150 @@ namespace VOCAC.PL
         }
         private void SubmitBtn_Click(object sender, EventArgs e)
         {
-            this.RadioButton4.Click -= new System.EventHandler(this.CompReqst_CheckedChanged);
-            this.RadioButton5.Click -= new System.EventHandler(this.CompReqst_CheckedChanged);
-            StringBuilder updateString = new StringBuilder();
-            if (SrcCmbBx.Text != editStruct.dt.Rows[0]["SrcNm"].ToString())
+            this.RadioButton4.Click -= new EventHandler(this.CompReqst_CheckedChanged);
+            this.RadioButton5.Click -= new EventHandler(this.CompReqst_CheckedChanged);
+            List<string> updateString = new List<string>();
+            List<string> updateStrMend = new List<string>();
+            StringBuilder UpTxt = new StringBuilder();
+            if (TkCompSrc.Text != editStruct.dt.Rows[0]["SrcNm"].ToString())
             {
-                updateString.Append("SrcCd ='" + SrcCmbBx.SelectedValue + "'");
+                UpTxt.Append(Environment.NewLine + "تم تعديل " + TkCompSrc.AccessibleName + " من " + "\"" + editStruct.dt.Rows[0]["SrcNm"].ToString() + "\"" + " إلى " + "\"" + TkCompSrc.Text + "\"");
+                updateString.Add("TkCompSrc ='" + TkCompSrc.SelectedValue + "'");
             }
-            if (NameTxtBx.Text != editStruct.dt.Rows[0]["TkClNm"].ToString())
+
+            IEnumerable<Control> lstCTRL;
+            frms frm = new frms();
+            lstCTRL = frm.GetAll(this, typeof(TextBox));
+
+            foreach (Control item in lstCTRL)
             {
-                updateString.Append("TkClNm = '" + NameTxtBx.Text + "'");
+                TextBox c = (TextBox)item;
+                if (function.CheckArlanguage(c.Name))
+                {
+                    if (ctrlList.Contains(c.Name))
+                    {
+                        if (c.Text != editStruct.dt.Rows[0][c.Name].ToString())
+                        {
+                            UpTxt.Append(Environment.NewLine + "تم تعديل " + c.Name + " من " + "\"" + editStruct.dt.Rows[0][c.Name].ToString() + "\"" + " إلى " + "\"" + c.Text + "\"");
+                            updateStrMend.Add("Update TKMendFields set FildTxt = '" + c.Text.Replace(" ", "") + "' where FildKind = '" + c.Name + "' AND FildRelted = " + ComRefLbl.Text);
+                        }
+                    }
+                    else if (!ctrlList.Contains(c.Name))
+                    {
+                        UpTxt.Append(Environment.NewLine + "تم إضاقة " + c.AccessibleName + "\"" + c.Text + "\"");
+                        updateStrMend.Add("INSERT INTO TKMendFields (FildRelted, FildKind, FildTxt) VALUES (" + ComRefLbl.Text + ", '" + c.Name + "', '" + c.Text.Replace(" ", "") + "')");
+                    }
+                }
+                else if (!function.CheckArlanguage(c.Name))
+                {
+                    if (c.ReadOnly == false && c.Name != "ComRefLbl")
+                    {
+                        if (c.Text != editStruct.dt.Rows[0][c.Name].ToString())
+                        {
+                            if (c.Text.Length == 0)
+                            {
+                                UpTxt.Append(Environment.NewLine + "تم حذف " + c.AccessibleName + "\"" + editStruct.dt.Rows[0][c.Name].ToString() + "\"");
+                            }
+                            else if (editStruct.dt.Rows[0][c.Name].ToString().Length == 0)
+                            {
+                                UpTxt.Append(Environment.NewLine + "تم إضافة " + c.AccessibleName + "\"" + c.Text + "\"");
+                            }
+                            else
+                            {
+                                UpTxt.Append(Environment.NewLine + "تم تعديل " + c.AccessibleName + " من " + "\"" + editStruct.dt.Rows[0][c.Name].ToString() + "\"" + " إلى " + "\"" + c.Text + "\"");
+                            }
+                            updateString.Add(c.Name + " ='" + c.Text + "'");
+                        }
+                    }
+                }
             }
-            if (Phon1TxtBx.Text != editStruct.dt.Rows[0]["TkClPh"].ToString())
+
+            lstCTRL = frm.GetAll(this, typeof(MaskedTextBox));
+
+            foreach (Control item in lstCTRL)
             {
-                updateString.Append("TkClPh = '" + Phon1TxtBx.Text + "'");
+                MaskedTextBox c = (MaskedTextBox)item;
+                if (function.CheckArlanguage(c.Name))
+                {
+                    if (ctrlList.Contains(c.Name))
+                    {
+                        if (c.Text.Replace(" ", "") != editStruct.dt.Rows[0][c.Name].ToString())
+                        {
+                            UpTxt.Append(Environment.NewLine + "تم تعديل " + c.AccessibleName + " من " + "\"" + editStruct.dt.Rows[0][c.Name].ToString() + "\"" + " إلى " + "\"" + c.Text.Replace(" ", "") + "\"");
+                            updateStrMend.Add("Update TKMendFields set FildTxt = '" + c.Text.Replace(" ", "") + "' where FildKind = '" + c.Name + "' AND FildRelted = " + ComRefLbl.Text);
+                        }
+                    }
+                    else if (!ctrlList.Contains(c.Name))
+                    {
+                        UpTxt.Append(Environment.NewLine + "تم إضاقة " + c.AccessibleName + "\"" + c.Text.Replace(" ", "") + "\"");
+                        updateStrMend.Add("INSERT INTO TKMendFields (FildRelted, FildKind, FildTxt) VALUES (" + ComRefLbl.Text + ", '" + c.Name + "', '" + c.Text.Replace(" ", "") + "')");
+                    }
+                }
+                else if (!function.CheckArlanguage(c.Name))
+                {
+                    if (c.Text.Replace(" ", "") != editStruct.dt.Rows[0][c.Name].ToString())
+                    {
+                        if (c.Text.Replace(" ", "").Length == 0)
+                        {
+                            UpTxt.Append(Environment.NewLine + "تم حذف " + c.AccessibleName + "\"" + editStruct.dt.Rows[0][c.Name].ToString() + "\"");
+                        }
+                        else if (editStruct.dt.Rows[0][c.Name].ToString().Length == 0)
+                        {
+                            UpTxt.Append(Environment.NewLine + "تم إضافة " + c.AccessibleName + "\"" + c.Text.Replace(" ", "") + "\"");
+                        }
+                        else
+                        {
+                            UpTxt.Append(Environment.NewLine + "تم تعديل " + c.AccessibleName + " من " + "\"" + editStruct.dt.Rows[0][c.Name].ToString() + "\"" + " إلى " + "\"" + c.Text.Replace(" ", "") + "\"");
+                        }
+                        updateString.Add(c.Name + " ='" + c.Text.Replace(" ", "") + "'");
+                    }
+                }
             }
-            if (Phon2TxtBx.Text != editStruct.dt.Rows[0]["TkClPh1"].ToString())
+            lstCTRL = frm.GetAll(this, typeof(DateTimePicker));
+            foreach (Control item in lstCTRL)
             {
-                updateString.Append("TkClPh1 = '" + Phon2TxtBx.Text + "'");
+                DateTimePicker c = (DateTimePicker)item;
+                if (ctrlList.Contains(c.Name))
+                {
+                    if (c.Text != editStruct.dt.Rows[0][c.Name].ToString())
+                    {
+                        UpTxt.Append(Environment.NewLine + "تم تعديل " + c.AccessibleName + " من " + "\"" + editStruct.dt.Rows[0][c.Name].ToString() + "\"" + " إلى " + "\"" + c.Text + "\"");
+                        updateStrMend.Add("Update TKMendFields set FildTxt = " + "CONVERT(VARCHAR, '" + c.Text + "', 111)" + " where FildKind = '" + c.Name + "' AND FildRelted = " + ComRefLbl.Text);
+                    }
+                }
+                else if (!ctrlList.Contains(c.Name))
+                {
+                    UpTxt.Append(Environment.NewLine + "تم إضاقة " + c.AccessibleName + "\"" + string.Format(c.Text, "yyyy-mm-dd") + "\"");
+                    updateStrMend.Add("INSERT INTO TKMendFields (FildRelted, FildKind, FildTxt) VALUES (" + ComRefLbl.Text + ", '" + c.Name + "', " + "CONVERT(VARCHAR, '" + c.Text + "', 111)" + ")");
+                }
+
             }
-            if (MailTxtBx.Text != editStruct.dt.Rows[0]["TkMail"].ToString())
-            {
-                updateString.Append("TkMail = '" + MailTxtBx.Text + "'");
-            }
-            if (AddTxtBx.Text != editStruct.dt.Rows[0]["TkClAdr"].ToString())
-            {
-                updateString.Append("TkClAdr = '" + AddTxtBx.Text + "'");
-            }
-            if (DetailsTxtBx.Text != editStruct.dt.Rows[0]["TkDetails"].ToString())
-            {
-                updateString.Append("TkDetails = '" + DetailsTxtBx.Text + "'");
-            }
+
             if (TreeView1.SelectedNode.Name != editStruct.dt.Rows[0]["TkFnPrdCd"].ToString())
             {
-                updateString.Append("TkFnPrdCd =" + TreeView1.SelectedNode.Name);
+                updateString.Add("TkFnPrdCd =" + TreeView1.SelectedNode.Name);
+                if(PrdNm.Text != editStruct.dt.Rows[0]["PrdNm"].ToString())
+                {
+                    UpTxt.Append(Environment.NewLine + "تم تعديل الخدمة من " + "\"" + editStruct.dt.Rows[0]["PrdNm"].ToString().Trim() + "\"" + " إلى " + "\"" + PrdNm.Text.Trim() + "\"");
+                }
+                if (CompNm.Text != editStruct.dt.Rows[0]["CompNm"].ToString())
+                {
+                    UpTxt.Append(Environment.NewLine + "تم تعديل الشكوى من " + "\"" + editStruct.dt.Rows[0]["CompNm"].ToString().Trim() + "\"" + " إلى " + "\"" + CompNm.Text.Trim() + "\"");
+                }
             }
-            this.RadioButton4.Click += new System.EventHandler(this.CompReqst_CheckedChanged);
-            this.RadioButton5.Click += new System.EventHandler(this.CompReqst_CheckedChanged);
-        }
-        private int insertTicket(bool kind, int cdfnid, int src, string clNm, string ClPh, string ClPh1, string ClAdr, string ClNtID
-                                                            , string TkDetails, int EmpNm0, int EmpNm, string ClMail, string IP, DataTable FIELDTABL)
-        {
-            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-            SqlParameter[] param = new SqlParameter[15];
-            param[0] = new SqlParameter("@TkKind", SqlDbType.Bit);
-            param[0].Value = kind;
-            param[1] = new SqlParameter("@TkFnPrdCd", SqlDbType.Int);
-            param[1].Value = cdfnid;
-            param[2] = new SqlParameter("@TkCompSrc", SqlDbType.Int);
-            param[2].Value = src;
-            param[3] = new SqlParameter("@TkClNm", SqlDbType.NVarChar, 100);
-            param[3].Value = clNm;
-            param[4] = new SqlParameter("@TkClPh", SqlDbType.NVarChar, 14);
-            param[4].Value = ClPh;
-            DAL.DataAccessLayer.rturnStruct RsultPopulateChoice = DAL.ExcuteCommand("SP_TICKETS_INSERT", param);
-            DAL.Close();
-            return Convert.ToInt32(param[14].Value);
+            string kk = UpTxt.ToString();
+            string qqqw = string.Join(" ; ", updateStrMend);
+            string qqw = "Update Tickets set " + string.Join(", ", updateString) + " Where TKSQL = " + Convert.ToInt32(ComRefLbl.Text);
+            if (ticketCurrent.addevent(Convert.ToInt32(ComRefLbl.Text), kk, 901, Statcdif._IP, CurrentUser.UsrID, qqw + ";" + qqqw, null, null) == null)
+            {
+                fn.msg("Done", "", MessageBoxButtons.OK);
+            }
+            this.RadioButton4.Click += new EventHandler(this.CompReqst_CheckedChanged);
+            this.RadioButton5.Click += new EventHandler(this.CompReqst_CheckedChanged);
         }
         private void CloseBtn_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-        private void AddNewTicket(int usrid)
-        {
-            DataTable mndtbl = new DataTable();
-            mndtbl.Columns.Add("A", typeof(int));
-            mndtbl.Columns.Add("B", typeof(string));
-            mndtbl.Columns.Add("C", typeof(string));
-
-            foreach (Control Ctrl in FlwMend.Controls)
-            {
-                if (Ctrl.GetType() == typeof(TextBox))
-                {
-
-                    string KK = GetNextControl(Ctrl, false).Text.Substring(0, GetNextControl(Ctrl, false).Text.Length - 3);
-                    mndtbl.Rows.Add(0, KK, Ctrl.Text);
-                }
-                else if (Ctrl.GetType() == typeof(MaskedTextBox))
-                {
-                    string KK = GetNextControl(Ctrl, false).Text.Substring(0, GetNextControl(Ctrl, false).Text.Length - 3);
-                    mndtbl.Rows.Add(0, KK, Ctrl.Text.Replace(" ", ""));
-                }
-                else if (Ctrl.GetType() == typeof(DateTimePicker))
-                {
-                    DateTimePicker Dpkr = new DateTimePicker();
-                    Dpkr = (DateTimePicker)Ctrl;
-                    string KK = GetNextControl(Ctrl, false).Text.Substring(0, GetNextControl(Ctrl, false).Text.Length - 3);
-                    mndtbl.Rows.Add(0, KK, Dpkr.Value);
-                }
-            }
-        }
-        private void NewBtn_Click(object sender, EventArgs e)
-        {
-            NewTickSub();
-        }
-        private void BtnDublicate_Click(object sender, EventArgs e)
-        {
-            this.RadioButton4.Click -= new System.EventHandler(this.CompReqst_CheckedChanged);
-            this.RadioButton5.Click -= new System.EventHandler(this.CompReqst_CheckedChanged);
-            SubmitBtn.Visible = true;
-            FlwTree.Enabled = true;
-            FlwMend.Enabled = true;
-            FlwMainData.Enabled = true;
-            ComRefLbl.Text = "";
-            BtnDublicate.Visible = false;
-            this.RadioButton4.Click += new System.EventHandler(this.CompReqst_CheckedChanged);
-            this.RadioButton5.Click += new System.EventHandler(this.CompReqst_CheckedChanged);
         }
         private void RadNID_Click(object sender, EventArgs e)
         {
@@ -1037,20 +1092,20 @@ namespace VOCAC.PL
         {
             if (!chckphonechange.Checked)
             {
-                customerdata(Phon1TxtBx, "select top(1) TkClNm,TkClPh1,TkClNtID,TkClAdr,TkMail from Tickets where TkClPh ='");
+                customerdata(TkClPh, "select top(1) TkClNm,TkClPh1,TkClNtID,TkClAdr,TkMail from Tickets where TkClPh ='");
             }
         }
         private void IDTxtBx_TextChanged(object sender, EventArgs e)
         {
             if (!chckIDChange.Checked)
             {
-                customerdata(IDTxtBx, "select top(1) TkClNm,TkClPh,TkClPh1,TkClAdr,TkMail from Tickets where TkClNtID ='");
+                customerdata(TkClNtID, "select top(1) TkClNm,TkClPh,TkClPh1,TkClAdr,TkMail from Tickets where TkClNtID ='");
             }
         }
         private void customerdata(MaskedTextBox mskdTextBox, string SlctString)
         {
-            this.Phon1TxtBx.TextChanged -= new System.EventHandler(this.Phon1TxtBx_TextChanged);
-            this.IDTxtBx.TextChanged -= new System.EventHandler(this.IDTxtBx_TextChanged);
+            this.TkClPh.TextChanged -= new System.EventHandler(this.Phon1TxtBx_TextChanged);
+            this.TkClNtID.TextChanged -= new System.EventHandler(this.IDTxtBx_TextChanged);
             string tmp = "";
             if (mskdTextBox.Text.Trim().Length == mskdTextBox.Mask.Length)
             {
@@ -1063,7 +1118,7 @@ namespace VOCAC.PL
                 DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
 
                 selectString.Append(SlctString + mskdTextBox.Text.ToString());
-                if (mskdTextBox == Phon1TxtBx) { selectString.Append("' or  TkClPh1 ='" + mskdTextBox.Text.ToString()); }
+                if (mskdTextBox == TkClPh) { selectString.Append("' or  TkClPh1 ='" + mskdTextBox.Text.ToString()); }
                 selectString.Append("'  order by TkSQL desc");
 
                 SqlParameter[] param = new SqlParameter[1];
@@ -1073,18 +1128,18 @@ namespace VOCAC.PL
                 DAL.Close();
                 if (customerTable.Rows.Count > 0)
                 {
-                    if (mskdTextBox != Phon1TxtBx)
+                    if (mskdTextBox != TkClPh)
                     {
-                        Phon1TxtBx.Text = customerTable.Rows[0]["TkClPh"].ToString();
+                        TkClPh.Text = customerTable.Rows[0]["TkClPh"].ToString();
                     }
-                    if (mskdTextBox != IDTxtBx)
+                    if (mskdTextBox != TkClNtID)
                     {
-                        IDTxtBx.Text = customerTable.Rows[0]["TkClNtID"].ToString();
+                        TkClNtID.Text = customerTable.Rows[0]["TkClNtID"].ToString();
                     }
-                    NameTxtBx.Text = customerTable.Rows[0]["TkClNm"].ToString();
-                    Phon2TxtBx.Text = customerTable.Rows[0]["TkClPh1"].ToString();
-                    AddTxtBx.Text = customerTable.Rows[0]["TkClAdr"].ToString();
-                    MailTxtBx.Text = customerTable.Rows[0]["TkMail"].ToString();
+                    TkClNm.Text = customerTable.Rows[0]["TkClNm"].ToString();
+                    TkClPh1.Text = customerTable.Rows[0]["TkClPh1"].ToString();
+                    TkClAdr.Text = customerTable.Rows[0]["TkClAdr"].ToString();
+                    TkMail.Text = customerTable.Rows[0]["TkMail"].ToString();
                 }
                 else
                 {
@@ -1095,64 +1150,64 @@ namespace VOCAC.PL
             {
                 clearcustomerdata(mskdTextBox);
             }
-            this.Phon1TxtBx.TextChanged += new System.EventHandler(this.Phon1TxtBx_TextChanged);
-            this.IDTxtBx.TextChanged += new System.EventHandler(this.IDTxtBx_TextChanged);
+            this.TkClPh.TextChanged += new System.EventHandler(this.Phon1TxtBx_TextChanged);
+            this.TkClNtID.TextChanged += new System.EventHandler(this.IDTxtBx_TextChanged);
             this.Enabled = true;
             lblhelp.Text = tmp;
             Timer1.Start();
         }
         private void clearcustomerdata(MaskedTextBox mskdTextBox)
         {
-            if (mskdTextBox != Phon1TxtBx)
+            if (mskdTextBox != TkClPh)
             {
-                if (!chckphonechange.Checked) { Phon1TxtBx.Text = ""; }
+                if (!chckphonechange.Checked) { TkClPh.Text = ""; }
             }
-            if (mskdTextBox != IDTxtBx)
+            if (mskdTextBox != TkClNtID)
             {
-                if (!chckIDChange.Checked) { IDTxtBx.Text = ""; };
+                if (!chckIDChange.Checked) { TkClNtID.Text = ""; };
             }
-            NameTxtBx.Text = "";
-            Phon2TxtBx.Text = "";
-            AddTxtBx.Text = "";
-            MailTxtBx.Text = "";
+            TkClNm.Text = "";
+            TkClPh1.Text = "";
+            TkClAdr.Text = "";
+            TkMail.Text = "";
             customerTable.Rows.Clear();
         }
         private void RadPss_CheckedChanged(object sender, EventArgs e)
         {
-            IDTxtBx.Text = "";
+            TkClNtID.Text = "";
             if (RadPss.Checked == true)
             {
-                IDTxtBx.Tag = "English-TextNumber";
-                IDTxtBx.Mask = "AAAAAAAAAAAAAA";
+                TkClNtID.Tag = "English-TextNumber";
+                TkClNtID.Mask = "AAAAAAAAAAAAAA";
                 RadNID.Checked = false;
                 RadPss.Checked = true;
                 Label11.Text = "رقم جواز السفر : ";
-                IDTxtBx.AccessibleName = "رقم جواز السفر";
+                TkClNtID.AccessibleName = "رقم جواز السفر";
                 chckIDChange.Text = "تغيير رقم جواز السفر";
                 richTextBox1.Text = richTextBox1.Text.Replace("الرقم القومي", "رقم جواز السفر");
             }
         }
         private void RadNID_CheckedChanged(object sender, EventArgs e)
         {
-            IDTxtBx.Text = "";
+            TkClNtID.Text = "";
             if (RadNID.Checked == true)
             {
-                IDTxtBx.Tag = "English-Number";
-                IDTxtBx.Mask = "00000000000000";
+                TkClNtID.Tag = "English-Number";
+                TkClNtID.Mask = "00000000000000";
                 RadNID.Checked = true;
                 RadPss.Checked = false;
                 Label11.Text = "الرقم القومي : ";
-                IDTxtBx.AccessibleName = "الرقم القومي";
+                TkClNtID.AccessibleName = "الرقم القومي";
                 chckIDChange.Text = "تغيير الرقم القومي";
                 richTextBox1.Text = richTextBox1.Text.Replace("رقم جواز السفر", "الرقم القومي");
             }
         }
         private void MailTxtBx_Validating(object sender, CancelEventArgs e)
         {
-            if (function.EmailIsValid(MailTxtBx.Text) == false && MailTxtBx.Text.Length > 0)
+            if (function.EmailIsValid(TkMail.Text) == false && TkMail.Text.Length > 0)
             {
                 fn.msg("الإيميل الذي تم إدخاله غير صحيح", "فحص الإيميل", MessageBoxButtons.OK);
-                MailTxtBx.Focus();
+                TkMail.Focus();
             }
         }
         DAL.DataAccessLayer.rturnStruct editStruct;
@@ -1160,7 +1215,7 @@ namespace VOCAC.PL
         {
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             SqlParameter[] param = new SqlParameter[1];
-            param[0] = new SqlParameter("@TicketID", SqlDbType.NVarChar);
+            param[0] = new SqlParameter("@Any", SqlDbType.NVarChar);
             param[0].Value = SQLID;
             editStruct = DAL.SelectData("SP_TICKETS_SLCT", param);
             DAL.Close();
@@ -1170,7 +1225,7 @@ namespace VOCAC.PL
         {
             NewTickSub();
             TreeView1.CollapseAll();
-            if (GetTicket(ComRefLbl.Text) == null && editStruct.dt.Rows.Count > 0)
+            if (GetTicket(" AND TKSQL = " + ComRefLbl.Text) == null && editStruct.dt.Rows.Count > 0)
             {
                 if (editStruct.dt.Rows.Count > 0)
                 {
@@ -1192,59 +1247,57 @@ namespace VOCAC.PL
         private void assignTicket()
         {
 
-            this.Phon1TxtBx.TextChanged -= new System.EventHandler(this.Phon1TxtBx_TextChanged);
-            this.IDTxtBx.TextChanged -= new System.EventHandler(this.IDTxtBx_TextChanged);
+            this.TkClPh.TextChanged -= new EventHandler(this.Phon1TxtBx_TextChanged);
+            this.TkClNtID.TextChanged -= new EventHandler(this.IDTxtBx_TextChanged);
             this.TreeView1.AfterSelect -= new TreeViewEventHandler(this.TreeView1_AfterSelect);
             this.TreeView1.BeforeSelect -= new TreeViewCancelEventHandler(TreeView1_BeforeSelect);
-  
+
             if (editStruct.dt.Rows[0]["TkKind"].ToString() == "شكوى") { RadioButton5.Checked = true; TickKind = 1; this.Text = "شكوى رقم : " + ComRefLbl.Text; } else { RadioButton4.Checked = true; TickKind = 0; this.Text = "طلب رقم : " + ComRefLbl.Text; }
             populateTree();
             TreeView1.SelectedNode = TempNode[0];
             DateTxtBx.Text = editStruct.dt.Rows[0]["TkDtStart"].ToString();
 
-            DataRow DRW = function.DRW(Statcdif.CompSurceTable, editStruct.dt.Rows[0]["SrcNm"].ToString(), Statcdif.CompSurceTable.Columns[1]);
+            TkCompSrc.Text = editStruct.dt.Rows[0]["SrcNm"].ToString();
 
-            SrcCmbBx.Text = editStruct.dt.Rows[0]["SrcNm"].ToString();
-
-            NameTxtBx.Text = editStruct.dt.Rows[0]["TkClNm"].ToString();
+            TkClNm.Text = editStruct.dt.Rows[0]["TkClNm"].ToString();
             if (editStruct.dt.Rows[0]["TkClPh"].ToString().Length > 0)
             {
                 if (editStruct.dt.Rows[0]["TkClPh"].ToString().Length == 11)
                 {
-                    Phon1TxtBx.Text = editStruct.dt.Rows[0]["TkClPh"].ToString();
+                    TkClPh.Text = editStruct.dt.Rows[0]["TkClPh"].ToString();
                     RadioButton8.Checked = true;
                 }
                 else if (editStruct.dt.Rows[0]["TkClPh"].ToString().Length == 10)
                 {
-                    Phon1TxtBx.Text = editStruct.dt.Rows[0]["TkClPh"].ToString();
+                    TkClPh.Text = editStruct.dt.Rows[0]["TkClPh"].ToString();
                     RadioButton9.Checked = true;
                 }
-                Phon1TxtBx.Enabled = true;
+                TkClPh.Enabled = true;
             }
             else
             {
-                Phon1TxtBx.Enabled = false;
+                TkClPh.Enabled = false;
             }
             if (editStruct.dt.Rows[0]["TkClPh1"].ToString().Length > 0)
             {
                 if (editStruct.dt.Rows[0]["TkClPh1"].ToString().Length == 11)
                 {
-                    Phon2TxtBx.Text = editStruct.dt.Rows[0]["TkClPh1"].ToString();
+                    TkClPh1.Text = editStruct.dt.Rows[0]["TkClPh1"].ToString();
                     RadioButton11.Checked = true;
                 }
                 else if (editStruct.dt.Rows[0]["TkClPh1"].ToString().Length == 10)
                 {
-                    Phon2TxtBx.Text = editStruct.dt.Rows[0]["TkClPh1"].ToString();
+                    TkClPh1.Text = editStruct.dt.Rows[0]["TkClPh1"].ToString();
                     RadioButton12.Checked = true;
                 }
-                Phon2TxtBx.Enabled = true;
+                TkClPh1.Enabled = true;
             }
             else
             {
-                Phon2TxtBx.Enabled = false;
+                TkClPh1.Enabled = false;
             }
-            MailTxtBx.Text = editStruct.dt.Rows[0]["TkMail"].ToString();
-            AddTxtBx.Text = editStruct.dt.Rows[0]["TkClAdr"].ToString();
+            TkMail.Text = editStruct.dt.Rows[0]["TkMail"].ToString();
+            TkClAdr.Text = editStruct.dt.Rows[0]["TkClAdr"].ToString();
 
             bool isnumber = true;
             for (int i = 0; i < editStruct.dt.Rows[0]["TkClNtID"].ToString().Length; i++)
@@ -1264,14 +1317,10 @@ namespace VOCAC.PL
             {
                 RadPss.Checked = true;
             }
-            IDTxtBx.Text = editStruct.dt.Rows[0]["TkClNtID"].ToString();
-            Prdct.Text = editStruct.dt.Rows[0]["PrdNm"].ToString();
-            Comp.Text = editStruct.dt.Rows[0]["CompNm"].ToString();
-            DetailsTxtBx.Text = editStruct.dt.Rows[0]["TkDetails"].ToString();
-
-
-
-
+            TkClNtID.Text = editStruct.dt.Rows[0]["TkClNtID"].ToString();
+            PrdNm.Text = editStruct.dt.Rows[0]["PrdNm"].ToString();
+            CompNm.Text = editStruct.dt.Rows[0]["CompNm"].ToString();
+            TkDetails.Text = editStruct.dt.Rows[0]["TkDetails"].ToString();
 
             FlwMend.Refresh();
 
@@ -1283,15 +1332,97 @@ namespace VOCAC.PL
                     ctrlList.Add(editStruct.dt.Columns[i].ColumnName);
                 }
             }
-            for (int i = 0; i < ctrlList.Count; i++)
-            {
-                Label ll = FlwMend.Controls.Find(ctrlList[i].ToString(), false).FirstOrDefault() as Label;
-                GetNextControl(ll, true).Text = editStruct.dt.Rows[0][ctrlList[i].ToString()].ToString();
-            }
-            this.Phon1TxtBx.TextChanged += new System.EventHandler(this.Phon1TxtBx_TextChanged);
-            this.IDTxtBx.TextChanged += new System.EventHandler(this.IDTxtBx_TextChanged);
+            //Statcdif.MendFildsTable.DefaultView.RowFilter = "[MendCdFn]  = " + TreeView1.SelectedNode.Name + " and MendStat = 0";
+
+            //populateFlowMend();
+            mendFlowWithText();
+            this.TkClPh.TextChanged += new EventHandler(this.Phon1TxtBx_TextChanged);
+            this.TkClNtID.TextChanged += new EventHandler(this.IDTxtBx_TextChanged);
+            this.TreeView1.AfterSelect -= new TreeViewEventHandler(this.TreeView1_AfterSelect);
             this.TreeView1.AfterSelect += new TreeViewEventHandler(this.TreeView1_AfterSelect);
             this.TreeView1.BeforeSelect += new TreeViewCancelEventHandler(TreeView1_BeforeSelect);
+        }
+        private void mendFlowWithText()
+        {
+            FlwMend.Controls.Clear();
+            FlwMainData.Enabled = true;
+            DataRow DRW1 = function.DRW(Statcdif.ProdCompTable, TreeView1.SelectedNode.Name, Statcdif.ProdCompTable.Columns["FnSQL"]);
+            itemRef = DRW1.ItemArray[7].ToString();
+            mendlstlbl();
+            for (int i = 0; i < ctrlList.Count; i++)
+            {
+                DataRow DRW = function.DRW(Statcdif.CDMend, ctrlList[i].ToString(), Statcdif.CDMend.Columns[2]);
+                Label Lbl = new Label();
+                Lbl.AutoSize = false;
+                Lbl.RightToLeft = RightToLeft.Yes;
+                Lbl.TextAlign = ContentAlignment.MiddleRight;
+                Lbl.Margin = new Padding(3, 3, 3, 3);
+                Lbl.Font = CtrlFont;
+                Lbl.Size = lblsize;
+                Lbl.Text = DRW.ItemArray[2] + " : ";
+                Lbl.Name = DRW.ItemArray[2].ToString();
+                FlwMend.Controls.Add(Lbl);
+                richTextBox1.Text += DRW.ItemArray[2].ToString() + Environment.NewLine;
+
+                Control Ctrl = new Control();
+
+                if (DRW.ItemArray[1].ToString().Equals("TextBox", StringComparison.OrdinalIgnoreCase))
+                {
+                    TextBox txtBx = new TextBox();
+                    txtBx.RightToLeft = RightToLeft.Yes;
+                    txtBx.Font = CtrlFont;
+                    txtBx.Size = Ctrlsize;
+                    txtBx.Tag = DRW.ItemArray[4].ToString();
+                    txtBx.AccessibleName = DRW.ItemArray[3].ToString();
+                    txtBx.TextAlign = HorizontalAlignment.Center;
+                    if (DBNull.Value.Equals(DRW.ItemArray[5]) == false) { txtBx.MaxLength = Convert.ToInt32(DRW.ItemArray[5]); };
+                    FlwMend.Controls.Add(txtBx);
+                }
+                else if (DRW.ItemArray[1].ToString().Equals("TextBoxC", StringComparison.OrdinalIgnoreCase))
+                {
+                    TextBox txtBx = new TextBox();
+                    txtBx.RightToLeft = RightToLeft.Yes;
+                    txtBx.Font = CtrlFont;
+                    txtBx.Size = Ctrlsize;
+                    txtBx.Tag = DRW.ItemArray[4].ToString();
+                    txtBx.AccessibleName = DRW.ItemArray[3].ToString();
+                    txtBx.TextAlign = HorizontalAlignment.Center;
+                    txtBx.ReadOnly = true;
+                    txtBx.KeyDown += new KeyEventHandler(TextBox_KeyDown);
+                    txtBx.Enter += new EventHandler(TextBox_ENTER);
+                    txtBx.Leave += new EventHandler(TextBox_LEAVE);
+                    FlwMend.Controls.Add(txtBx);
+                }
+                else if (DRW.ItemArray[1].ToString().Equals("MaskedTextBox", StringComparison.OrdinalIgnoreCase))
+                {
+                    MaskedTextBox MsktxtBx = new MaskedTextBox();
+                    MsktxtBx.RightToLeft = RightToLeft.No;
+                    MsktxtBx.Font = CtrlFont;
+                    MsktxtBx.Size = Ctrlsize;
+                    MsktxtBx.Tag = DRW.ItemArray[4].ToString();
+                    MsktxtBx.AccessibleName = DRW.ItemArray[3].ToString();
+                    MsktxtBx.TextAlign = HorizontalAlignment.Center;
+                    MsktxtBx.Mask = DRW.ItemArray[6].ToString();
+                    MsktxtBx.PromptChar = Convert.ToChar(" ");
+                    FlwMend.Controls.Add(MsktxtBx);
+                }
+                else if (DRW.ItemArray[1].ToString().Equals("DateTimePicker", StringComparison.OrdinalIgnoreCase))
+                {
+                    DateTimePicker pkrtxtBx = new DateTimePicker();
+                    pkrtxtBx.RightToLeft = RightToLeft.No;
+                    pkrtxtBx.Font = CtrlFont;
+                    pkrtxtBx.Size = Ctrlsize;
+                    pkrtxtBx.Tag = DRW.ItemArray[4].ToString();
+                    pkrtxtBx.MaxDate = DateTime.Now.AddDays(2);
+                    pkrtxtBx.Format = DateTimePickerFormat.Short;
+                    pkrtxtBx.Value = DateTime.Now.AddDays(1);
+                    FlwMend.Controls.Add(pkrtxtBx);
+                }
+                GetNextControl(Lbl, true).Text = editStruct.dt.Rows[0][ctrlList[i].ToString()].ToString();
+                GetNextControl(Lbl, true).Name = Lbl.Text.ToString().Split(':')[0].ToString().Trim();
+            }
+
+            Timer1.Start();
         }
         private void ComRefLbl_TextChanged(object sender, EventArgs e)
         {
@@ -1310,9 +1441,10 @@ namespace VOCAC.PL
                 btnLoad.Enabled = false;
             }
         }
-
         private void TikEdit_Load(object sender, EventArgs e)
         {
+            frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
+            frm.FormClosed += new FormClosedEventHandler(frm_Closed);
             ComRefLbl.Select();
         }
     }

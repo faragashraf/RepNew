@@ -34,7 +34,6 @@ namespace VOCAC.PL
                 if (frm == null)
                 {
                     frm = new TikUpdate();
-                    frm.FormClosed += new FormClosedEventHandler(frm_Closed);
                 }
                 return frm;
             }
@@ -50,6 +49,8 @@ namespace VOCAC.PL
         }
         private void TikUpdate_Load(object sender, EventArgs e)
         {
+            frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
+            frm.FormClosed += new FormClosedEventHandler(frm_Closed);
             GridUpdt.Columns["TkupSTime"].HeaderText = "تاريخ التحديث";
             GridUpdt.Columns["EvNm"].HeaderText = "نوع التحديث";
             GridUpdt.Columns["TkupTxt"].HeaderText = "نص التحديث";
@@ -104,9 +105,9 @@ namespace VOCAC.PL
                         return;
                     }
                 }
-                if (ticketCurrent.addevent(currntTicket._TkSQL, TxtUpdt.Text, true, Convert.ToInt32(CmbEvent.SelectedValue), Statcdif._IP, CurrentUser.UsrID, Statcdif.mainImageArray, Statcdif.extAttch) == null)
+                if (ticketCurrent.addevent(currntTicket._TkSQL, TxtUpdt.Text, Convert.ToInt32(CmbEvent.SelectedValue), Statcdif._IP, CurrentUser.UsrID, null, Statcdif.mainImageArray, Statcdif.extAttch) == null)
                 {
-                        if (TikFolow_Team.getTikFolltemfrm != null)
+                    if (TikFolow_Team.getTikFolltemfrm != null)
                     {
                         DataRow DRW = function.DRW(Statcdif.TickTblMain, currntTicket._TkSQL, Statcdif.TickTblMain.Columns[0]);
                         Statcdif.TickTblMain.Rows[Statcdif.TickTblMain.Rows.IndexOf(DRW)]["TkupTxt"] = TxtUpdt.Text;
@@ -200,19 +201,19 @@ namespace VOCAC.PL
                     data = (byte[])DRW.ItemArray[1];
                     Statcdif.extAttch = DRW.ItemArray[2].ToString();
                     //toolTip1.Show("رقم التليفون لابد أن يبدأ بكود المحافظة" + Environment.NewLine + "مثال : \"02XXXXXXXX", GridUpdt, 0, 30, 1000);
-                    ContextMenuStrip2.Items[2].Enabled = true;
+                    ContextMenuStrip2.Items[0].Enabled = true;
                     if (arr.Contains(Statcdif.extAttch.ToString().ToUpper()))
                     {
-                        ContextMenuStrip2.Items[2].Text = "DownLoad Picture";
+                        ContextMenuStrip2.Items[0].Text = "DownLoad Picture";
                     }
                     else
                     {
-                        ContextMenuStrip2.Items[2].Text = "DownLoad File";
+                        ContextMenuStrip2.Items[0].Text = "DownLoad File";
                     }
                 }
                 else
                 {
-                    ContextMenuStrip2.Items[2].Enabled = false;
+                    ContextMenuStrip2.Items[0].Enabled = false;
                 }
             }
 
@@ -229,7 +230,7 @@ namespace VOCAC.PL
             {
                 if (Minuts < 120)
                 {
-                    LblMsg.Text = ("تم عمل متابعه 1 وسيتم الرد عليها خلال " + 120 + " متبقى " + TimeSpan.FromMinutes(MinutsDef).ToString().Split('.')[0] );
+                    LblMsg.Text = ("تم عمل متابعه 1 وسيتم الرد عليها خلال " + 120 + " متبقى " + TimeSpan.FromMinutes(MinutsDef).ToString().Split('.')[0]);
                     //LblMsg.Refresh();
                     CmbEvent.Enabled = false;
                     BtnSubmt.Enabled = false;

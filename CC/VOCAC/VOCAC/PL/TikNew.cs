@@ -29,7 +29,6 @@ namespace VOCAC.PL
                 if (frm == null)
                 {
                     frm = new TikNew();
-                    frm.FormClosed += new FormClosedEventHandler(frm_Closed);
                 }
                 return frm;
             }
@@ -1207,6 +1206,12 @@ namespace VOCAC.PL
                 fn.msg("الإيميل الذي تم إدخاله غير صحيح", "فحص الإيميل", MessageBoxButtons.OK);
                 MailTxtBx.Focus();
             }
+        }
+
+        private void TikNew_Load(object sender, EventArgs e)
+        {
+            frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
+            frm.FormClosed += new FormClosedEventHandler(frm_Closed);
         }
     }
 }

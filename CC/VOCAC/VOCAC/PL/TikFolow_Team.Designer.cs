@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TikFolow_Team));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Panel3 = new System.Windows.Forms.Panel();
             this.CloseBtn = new System.Windows.Forms.Button();
             this.FlwtopBar = new System.Windows.Forms.FlowLayoutPanel();
@@ -75,9 +75,9 @@
             this.PnlBtnRfrsh = new System.Windows.Forms.Panel();
             this.BtnRefrsh = new System.Windows.Forms.Button();
             this.chckShwResult = new System.Windows.Forms.CheckBox();
-            this.chckShowClose = new System.Windows.Forms.CheckBox();
             this.pnlBtnClose = new System.Windows.Forms.Panel();
             this.btnCls = new System.Windows.Forms.Button();
+            this.chckShowClose = new System.Windows.Forms.CheckBox();
             this.FlowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -724,18 +724,6 @@
             this.chckShwResult.Text = "إظهار فوري للنتائج";
             this.chckShwResult.UseVisualStyleBackColor = true;
             // 
-            // chckShowClose
-            // 
-            this.chckShowClose.AutoSize = true;
-            this.chckShowClose.Location = new System.Drawing.Point(116, 17);
-            this.chckShowClose.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
-            this.chckShowClose.Name = "chckShowClose";
-            this.chckShowClose.Size = new System.Drawing.Size(121, 23);
-            this.chckShowClose.TabIndex = 2179;
-            this.chckShowClose.Text = "إظهار زر الإغلاق";
-            this.chckShowClose.UseVisualStyleBackColor = true;
-            this.chckShowClose.CheckedChanged += new System.EventHandler(this.chckShowClose_CheckedChanged);
-            // 
             // pnlBtnClose
             // 
             this.pnlBtnClose.Controls.Add(this.btnCls);
@@ -757,6 +745,18 @@
             this.btnCls.UseVisualStyleBackColor = true;
             this.btnCls.Visible = false;
             this.btnCls.Click += new System.EventHandler(this.btnCls_Click);
+            // 
+            // chckShowClose
+            // 
+            this.chckShowClose.AutoSize = true;
+            this.chckShowClose.Location = new System.Drawing.Point(116, 17);
+            this.chckShowClose.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.chckShowClose.Name = "chckShowClose";
+            this.chckShowClose.Size = new System.Drawing.Size(121, 23);
+            this.chckShowClose.TabIndex = 2179;
+            this.chckShowClose.Text = "إظهار زر الإغلاق";
+            this.chckShowClose.UseVisualStyleBackColor = true;
+            this.chckShowClose.CheckedChanged += new System.EventHandler(this.chckShowClose_CheckedChanged);
             // 
             // FlowLayoutPanel1
             // 
@@ -857,8 +857,8 @@
             // 
             this.GridTicket.AllowUserToAddRows = false;
             this.GridTicket.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.GridTicket.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.GridTicket.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.GridTicket.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GridTicket.BackgroundColor = System.Drawing.Color.White;
             this.GridTicket.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;

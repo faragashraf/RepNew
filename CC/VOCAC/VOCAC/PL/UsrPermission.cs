@@ -10,6 +10,22 @@ namespace VOCAC.PL
 {
     public partial class UsrPermission : Form
     {
+        private static UsrPermission frm;
+        static void frm_Closed(object sender, FormClosedEventArgs e)
+        {
+            frm = null;
+        }
+        public static UsrPermission getuserPassChangefrm
+        {
+            get
+            {
+                if (frm == null)
+                {
+                    frm = new UsrPermission();
+                }
+                return frm;
+            }
+        }
         private readonly List<TreeNode> SecNODESTHATMATCH = new List<TreeNode>(); // Tree Search Function
         private readonly List<TreeNode> NODESTHATMATCH = new List<TreeNode>(); // Tree Search Function
         TreeNode SlctedNode;
@@ -18,6 +34,10 @@ namespace VOCAC.PL
         public UsrPermission()
         {
             InitializeComponent();
+            if (frm == null)
+            {
+                frm = this;
+            }
             this.Size = new Size(WelcomeScreen.getwecmscrnfrm.Size.Width - 100, WelcomeScreen.getwecmscrnfrm.Size.Height - 100);
             splitContainer1.Size = new Size(WelcomeScreen.getwecmscrnfrm.Size.Width - 200 - FlowLayoutPanel1.Width, WelcomeScreen.getwecmscrnfrm.Size.Height - 180);
             trackBar1.Maximum = splitContainer1.Size.Width;
@@ -28,6 +48,8 @@ namespace VOCAC.PL
 
         private void UsrPermission_Load(object sender, EventArgs e)
         {
+            frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
+            frm.FormClosed += new FormClosedEventHandler(frm_Closed);
             Usertree();
             SeCTree();
         }
@@ -65,14 +87,14 @@ namespace VOCAC.PL
         {
             TreeNode Chldnode2;
 
-            Statcdif.SwitchTbl.DefaultView.RowFilter = "SwType = 'Tab'";
+            Statcdif.SwitchTbl.DefaultView.RowFilter = "SwType = 'Tab' and SwID_New > 0";
             DataTable tabTbl = new DataTable();
             tabTbl = Statcdif.SwitchTbl.DefaultView.ToTable();
 
             for (int i = 0; i < tabTbl.Rows.Count; i++)
             {
                 SecTree.Nodes[0].Nodes.Add(tabTbl.Rows[i]["SwID_New"].ToString(), tabTbl.Rows[i]["SwID_New"].ToString() + "-" + tabTbl.Rows[i]["SwNm"].ToString());
-                Statcdif.SwitchTbl.DefaultView.RowFilter = "SwType <> 'Tab' and SwSer = '" + tabTbl.Rows[i]["SwSer"].ToString() + "'";
+                Statcdif.SwitchTbl.DefaultView.RowFilter = "SwType <> 'Tab' and SwID_New > 0 and SwSer = '" + tabTbl.Rows[i]["SwSer"].ToString() + "'";
                 Chldnode2 = SecTree.Nodes[0].Nodes[i];
                 for (int u = 0; u < Statcdif.SwitchTbl.DefaultView.Count; u++)
                 {
@@ -81,7 +103,7 @@ namespace VOCAC.PL
                     Chldnode2.NodeFont = new Font("Times New Roman", 12, FontStyle.Bold);
                 }
             }
-            Statcdif.SwitchTbl.DefaultView.RowFilter = "SwType = 'System' ";
+            Statcdif.SwitchTbl.DefaultView.RowFilter = "SwType = 'System'  and SwID_New > 0";
 
             for (int u = 0; u < Statcdif.SwitchTbl.DefaultView.Count; u++)
             {
@@ -94,7 +116,6 @@ namespace VOCAC.PL
         {
             splitContainer1.SplitterDistance = trackBar1.Value;
         }
-
         private void UserTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Action != TreeViewAction.Unknown)// The code only executes if the user caused the checked state to change.

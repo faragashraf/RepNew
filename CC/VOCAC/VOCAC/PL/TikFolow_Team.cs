@@ -17,7 +17,6 @@ namespace VOCAC.PL
 {
     public partial class TikFolow_Team : Form
     {
-        [DebuggerDisplay("lstint: {lstint}")]
         BL.ticketCurrent Crnt = new ticketCurrent();
         private static TikFolow_Team frm;
         static void frm_Closed(object sender, FormClosedEventArgs e)
@@ -31,7 +30,6 @@ namespace VOCAC.PL
                 if (frm == null)
                 {
                     frm = new TikFolow_Team();
-                    frm.FormClosed += new FormClosedEventHandler(frm_Closed);
                 }
                 return frm;
             }
@@ -45,11 +43,15 @@ namespace VOCAC.PL
         TreeNode slctdNode;
         //bool slctdNodestate;
         bool bolTeamTree;
-
+        function fn = function.getfn;
         DataTable distributeTbl;        //Distribute Table To be filled manually as Grid Row Select Button
         public TikFolow_Team()
         {
             InitializeComponent();
+            if (frm == null)
+            {
+                frm = this;
+            }
             adjustButton("تحميل", Resources.DbGet);
         }
         //assign Filtr TEXT into Control Tag and assign Event EventHandler
@@ -85,7 +87,6 @@ namespace VOCAC.PL
             this.ChckUpdOther.CheckedChanged += new System.EventHandler(this.Chckfltr_CheckedChanged);
             this.ChckRegions.CheckedChanged += new System.EventHandler(this.Chckfltr_CheckedChanged);
         }
-        function fn = function.getfn;
         string Fltrreslt;
         bool bolTeamLeader;
         private void ShowResult()
@@ -119,10 +120,8 @@ namespace VOCAC.PL
         {
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             SqlParameter[] param = new SqlParameter[1];
-            param[0] = new SqlParameter("@TicketID", SqlDbType.NVarChar);
+            param[0] = new SqlParameter("@Any", SqlDbType.NVarChar);
             param[0].Value = SQLID;
-            //param[1] = new SqlParameter("@STATUS_", SqlDbType.Bit);
-            //param[1].Value = 1;
             RsultReOpen = DAL.SelectData("SP_TICKETS_SLCT", param);
             DAL.Close();
             return RsultReOpen.msg;
@@ -145,13 +144,17 @@ namespace VOCAC.PL
             da = new SqlDataAdapter(cmd);
             try
             {
+                Statcdif.TickTblMain.Rows.Clear();
+                Statcdif.TickTblMain.Columns.Clear();
                 da.Fill(Statcdif.TickTblMain);
                 GridTicket.DataSource = Statcdif.TickTblMain.DefaultView;
                 Statcdif.TickTblMain.PrimaryKey = new DataColumn[] { Statcdif.TickTblMain.Columns[0] };
             }
             catch (Exception ex)
             {
-                fn.msg("هناك خطأ في الإتصال بقواعد البيانات" + Environment.NewLine + ex.Message, "متابعة الشكاوى", MessageBoxButtons.OK);
+                function fn = function.getfn;
+                fn.AppLog(this.ToString(), ex.Message, "TikFollowTeam");
+                fn.msg("هناك خطأ في الإتصال بقواعد البيانات" + Environment.NewLine, "متابعة الشكاوى", MessageBoxButtons.OK);
             }
             DAL.Close();
             return Statcdif.TickTblMain;
@@ -161,60 +164,67 @@ namespace VOCAC.PL
 
         private void TikFolow_Load(object sender, EventArgs e)
         {
-            frms forms = new frms();
-            forms.FrmAllSub(this);
-            WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "  جاري تحميل البيانات .......";
-            usercountrsTbl.Columns.Add("ID");
-            usercountrsTbl.Columns.Add("Team");
-            usercountrsTbl.Columns.Add("الاسم");
-            usercountrsTbl.Columns.Add("العدد", typeof(int));
-            MyTeamOnLoad();
-            Statcdif.TickTblMain.DefaultView.RowFilter = string.Empty;
-            Statcdif.TickTblMain.Rows.Clear();
-            if (filtbl().Rows.Count > 0)
+            frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
+            frm.FormClosed += new FormClosedEventHandler(frm_Closed);
+            if (Convert.ToBoolean(Statcdif.AppSettings.Rows[0]["Regions"]) == true)
             {
-                try
+                tabControl1.TabPages.RemoveByKey("tabTask");
+            }
+            {
+                frms forms = new frms();
+                forms.FrmAllSub(this);
+                WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "  جاري تحميل البيانات .......";
+                usercountrsTbl.Columns.Add("ID");
+                usercountrsTbl.Columns.Add("Team");
+                usercountrsTbl.Columns.Add("الاسم");
+                usercountrsTbl.Columns.Add("العدد", typeof(int));
+                MyTeamOnLoad();
+                Statcdif.TickTblMain = new DataTable();
+                if (filtbl().Rows.Count > 0)
                 {
-                    if (Statcdif.TickTblMain.DefaultView.Count > 0)
+                    try
                     {
-                        if (treeView1.GetNodeCount(true) == 1) { bolTeamLeader = false; } else { bolTeamLeader = true; }
-                        if (bolTeamLeader == false)
+                        if (Statcdif.TickTblMain.DefaultView.Count > 0)
                         {
-                            splitContainer1.Panel1Collapsed = true;
-                            tabControl1.TabPages.RemoveAt(1);
-                            tabControl1.TabPages.RemoveAt(1);
-                            btnTree.Visible = false;
-                            btnTicket.Visible = false;
-                            trackBar1.Visible = false;
-                            trackBar2.Visible = false;
+                            if (treeView1.GetNodeCount(true) == 1) { bolTeamLeader = false; } else { bolTeamLeader = true; }
+                            if (bolTeamLeader == false)
+                            {
+                                splitContainer1.Panel1Collapsed = true;
+                                tabControl1.TabPages.RemoveAt(1);
+                                tabControl1.TabPages.RemoveAt(1);
+                                btnTree.Visible = false;
+                                btnTicket.Visible = false;
+                                trackBar1.Visible = false;
+                                trackBar2.Visible = false;
+                                btnseting.Visible = false;
+                                this.Text = "متابعة الشكاوى";
+                            }
+                            splitContainer2.Panel1Collapsed = true;
                             btnseting.Visible = false;
-                            this.Text = "متابعة الشكاوى";
+                            trackBar2.Visible = false;
+                            gridadjst(Statcdif.TickTblMain);
+                            Filtr();
+                            assignfltrTXTintoCtrlTag();
+                            frmAdjust();
+                            counersGrid();
+                            GridTicket.ClearSelection();
+                            treeView1.SelectedNode = treeView1.Nodes[0];
+                            //this.GridTicket.SelectionChanged += new System.EventHandler(this.GridTicket_SelectionChanged);
+                            treeView1.AfterSelect += new TreeViewEventHandler(TreeView_AfterSelect);
                         }
-                        splitContainer2.Panel1Collapsed = true;
-                        btnseting.Visible = false;
-                        trackBar2.Visible = false;
-                        gridadjst(Statcdif.TickTblMain);
-                        Filtr();
-                        assignfltrTXTintoCtrlTag();
-                        frmAdjust();
-                        counersGrid();
-                        GridTicket.ClearSelection();
-                        treeView1.SelectedNode = treeView1.Nodes[0];
-                        //this.GridTicket.SelectionChanged += new System.EventHandler(this.GridTicket_SelectionChanged);
-                        treeView1.AfterSelect += new TreeViewEventHandler(TreeView_AfterSelect);
+                    }
+                    catch (Exception ex)
+                    {
+                        fn.msg("هناك خطأ في الإتصال بقواعد البيانات" + Environment.NewLine + ex.Message, "متابعة الشكاوى", MessageBoxButtons.OK);
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    fn.msg("هناك خطأ في الإتصال بقواعد البيانات" + Environment.NewLine + ex.Message, "متابعة الشكاوى", MessageBoxButtons.OK);
+                    fn.msg("لا توجد شكاوى للمتابعة", "متابعة الشكاوى", MessageBoxButtons.OK);
+                    flwCounters.Visible = false;
                 }
+                WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
             }
-            else
-            {
-                fn.msg("لا توجد شكاوى للمتابعة", "متابعة الشكاوى", MessageBoxButtons.OK);
-                flwCounters.Visible = false;
-            }
-            WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
         }
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -251,7 +261,7 @@ namespace VOCAC.PL
                     splitContainer2.Panel1Collapsed = true;
                     btnseting.Visible = false;
                     trackBar2.Visible = false;
-                    tabControl1.TabPages["tabTask"].Text = "إرسال شكاوى " + slctdNode.Text.Split('-')[1].Trim() + " للمناطق";
+                    if (tabControl1.TabPages.Contains(tabTask)) { tabControl1.TabPages["tabTask"].Text = "إرسال شكاوى " + slctdNode.Text.Split('-')[1].Trim() + " للمناطق"; }
 
                     tabControl1.TabPages.RemoveByKey("tabDistribute");
 
@@ -281,7 +291,7 @@ namespace VOCAC.PL
                 btnseting.Visible = false;
                 trackBar2.Visible = false;
                 pnlBtnClose.Visible = true;
-                tabControl1.TabPages["tabTask"].Text = "إرسال للمناطق";
+                if (tabControl1.TabPages.Contains(tabTask)) { tabControl1.TabPages["tabTask"].Text = "إرسال للمناطق"; }
                 if (bolTeamLeader == true)
                 {
                     if (!tabControl1.Contains(tabDistribute))
@@ -726,7 +736,8 @@ namespace VOCAC.PL
             else
             {
                 bolTeamTree = true;
-                if (CurrentUser.UsrLvl.Substring(16, 1) == "A")
+                // User Level For Master Flag is Match Number 70 in SwitchBoard Table
+                if (CurrentUser.UsrLvl.Substring(69, 1) == "A")
                 {
                     Statcdif.TreeUsrTbl.DefaultView.RowFilter = "UsrSusp = 0 and UCatId = 0";
                     treeView1.Nodes.Add(Statcdif.TreeUsrTbl.DefaultView[0]["UCatId"].ToString(),
@@ -1121,7 +1132,20 @@ namespace VOCAC.PL
                 string Rslt = fn.exportxlsx(exporTbl, CurrentUser.UsrRlNm);
                 if (Rslt == null)
                 {
-                    fn.msg("تم استخراج البيانات بنجاح", "استخراج البيانات", MessageBoxButtons.OK);
+                    string Req = Convert.ToString(exporTbl.Compute("count([شكوى/ طلب]) ", "[شكوى/ طلب] = 'طلب'"));
+                    string Comp = Convert.ToString(exporTbl.Compute("count([شكوى/ طلب]) ", "[شكوى/ طلب] = 'شكوى'"));
+
+                    string Msg = "";
+                    if (Comp != "0")
+                    {
+                        Msg += Environment.NewLine + Environment.NewLine + Comp + " شكوى";
+                    }
+                    if (Req != "0")
+                    {
+                        Msg += Environment.NewLine + Req + " طلب";
+                    }
+
+                    fn.msg("تم استخراج عدد " + Msg, "استخراج البيانات", MessageBoxButtons.OK);
                 }
                 else if (Rslt == "X")
                 {
@@ -1295,19 +1319,19 @@ namespace VOCAC.PL
                             //filtbl();
                         }
                         counersGrid();
-                        fn.msg("Done", "توزيع الشكاوى", MessageBoxButtons.OK);
+                        fn.msg("تم توزيع الشكاوى بنجاح", "توزيع الشكاوى", MessageBoxButtons.OK);
                     }
                     else
                     {
                         fn.msg("لم يتم توزيع عدد " + distributeTbl.Rows.Count + Environment.NewLine, "توزيع الشكاوى", MessageBoxButtons.OK);
                     }
+                    distributeTbl.Rows.Clear();
                 }
             }
             else
             {
                 fn.msg("برجاء اختيار الشكاوى للتوزيع", "توزيع الشكاوى", MessageBoxButtons.OK);
             }
-            distributeTbl.Rows.Clear();
         }
         private void btnseting_Click(object sender, EventArgs e)
         {
@@ -1326,7 +1350,7 @@ namespace VOCAC.PL
         {
             if (btnGet.Tag.Equals("تحميل"))
             {
-                if (GetTicket(txtReopen.Text) == null && RsultReOpen.dt.Rows.Count > 0)
+                if (GetTicket(" AND TKSQL = " + txtReopen.Text) == null && RsultReOpen.dt.Rows.Count > 0)
                 {
                     this.GridTicket.SelectionChanged -= new EventHandler(this.GridTicket_SelectionChanged);
                     GridTicket.DataSource = RsultReOpen.dt;
@@ -1358,7 +1382,7 @@ namespace VOCAC.PL
             }
             else if (btnGet.Tag.Equals("فتح"))
             {
-                if (ticketCurrent.addevent(Convert.ToInt32(txtReopen.Text), "The Complaint has been Reopened", true, 999, Statcdif._IP, CurrentUser.UsrID) == null)
+                if (ticketCurrent.addevent(Convert.ToInt32(txtReopen.Text), "The Complaint has been Reopened", 999, Statcdif._IP, CurrentUser.UsrID) == null)
                 {
                     refereshtbl();
                     adjustButton("تحميل", Resources.DbGet);
@@ -1381,7 +1405,7 @@ namespace VOCAC.PL
             DialogResult dialogResult = MessageBox.Show("سيتم إغلاق الشكوى نهائياً " + Environment.NewLine + " في " + WDays.ToString() + " يوم عمل" + Environment.NewLine + "هل تريد الإستمرار؟", "إغلاق الشكوى", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
             if (dialogResult == DialogResult.Yes)
             {
-                if (ticketCurrent.addevent(Convert.ToInt32(GridTicket.CurrentRow.Cells["TkSQL"].Value), "The Complaint has been closed In " + WDays.ToString() + " Working Days", true, 900, Statcdif._IP, CurrentUser.UsrID) == null)
+                if (ticketCurrent.addevent(Convert.ToInt32(GridTicket.CurrentRow.Cells["TkSQL"].Value), "The Complaint has been closed In " + WDays.ToString() + " Working Days", 900, Statcdif._IP, CurrentUser.UsrID) == null)
                 {
                     DataRow DRW = function.DRW(Statcdif.TickTblMain, GridTicket.CurrentRow.Cells["TkSQL"].Value, Statcdif.TickTblMain.Columns["TkSQL"]);
                     Statcdif.TickTblMain.Rows.RemoveAt(Statcdif.TickTblMain.Rows.IndexOf(DRW));

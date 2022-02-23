@@ -23,7 +23,6 @@ namespace VOCAC.PL
                 if (frm == null)
                 {
                     frm = new TikSetup();
-                    frm.FormClosed += new FormClosedEventHandler(frm_Closed);
                 }
                 return frm;
             }
@@ -48,6 +47,8 @@ namespace VOCAC.PL
         }
         private void TikSetup_Load(object sender, EventArgs e)
         {
+            frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
+            frm.FormClosed += new FormClosedEventHandler(frm_Closed);
             DataSet setupDataSet1 = SetupDataSet();
             if (setupDataSet1.Tables.Count > 0)
             {

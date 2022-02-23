@@ -285,6 +285,8 @@ namespace VOCAC.PL
                 Statcdif.TreeUsrTbl = SlctMainreslt.ds.Tables[6];                       // Users Table
                 Statcdif.SwitchTbl = SlctMainreslt.ds.Tables[7];                        // Switchboard Table
                 Statcdif.CDCountry = SlctMainreslt.ds.Tables[8];                        // CDCountry Table
+                Statcdif.CDMend = SlctMainreslt.ds.Tables[9];                           // CDMend Table
+                Statcdif.AppSettings = SlctMainreslt.ds.Tables[10];                     // ALib Table
                 if (CurrentUser.UsrUCatLvl == 7)
                 {
                     Statcdif.CompSurceTable.DefaultView.RowFilter = "[SrcSusp] = 0 AND [srcCd] = '1'";     //     SrcStr = "select SrcCd, SrcNm from CDSrc where SrcSusp=0 and srcCd = 1 ORDER BY SrcNm";
@@ -514,7 +516,7 @@ namespace VOCAC.PL
                     con.Open();
                     sqlcmd.ExecuteNonQuery();
                 }
-                catch (Exception )
+                catch (Exception)
                 {
                     function fn = function.getfn;
                     fn.msg("dd", "frfff", MessageBoxButtons.OK);
@@ -592,8 +594,14 @@ namespace VOCAC.PL
         }
         private void Button3_Click(object sender, EventArgs e)
         {
+            string ll = "[4:32 pm, 23/02/2022] Ashraf Farag: السلام عليكم الدوام لله يا رانيا وربنا يجعلها اخر الاحزان ان شاء الله"
++ "[4:33 pm, 23 / 02 / 2022] Ashraf Farag: مش عايز اكلمك والله عارف ان الوقت دلوقتي ممكن ما يكونش مناسب";
+            string hhws = function.encrypt(ll);
+            string hh = function.discrypt(hhws);
+            string[] dd = null;
+            dd = function.readLog();
+            string jjj = dd.ToString();
             int oo = CountNumberOfLinesInCSFilesOfDirectory(@"E:\RepNew\CC\VOCAC\VOCAC");
-
         }
 
 
