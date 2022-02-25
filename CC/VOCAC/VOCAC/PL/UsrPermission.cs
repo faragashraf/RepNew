@@ -381,7 +381,6 @@ namespace VOCAC.PL
             fn.ExcuteStr("update Int_user set UsrLevel_New= '" + String.Join("", PerStr) + "' WHERE (UsrId = " + UserTree.SelectedNode.Text.ToString().Split('-')[2].Trim() + ");");
             fn.msg("تم تعديل صلاحية المستخدم", "تعديل الصلاحيات", MessageBoxButtons.OK);
         }
-
         private void BtnCls_Click(object sender, EventArgs e)
         {
            this.Close();
