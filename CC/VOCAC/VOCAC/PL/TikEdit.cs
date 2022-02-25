@@ -21,6 +21,7 @@ namespace VOCAC.PL
         static void frm_Closed(object sender, FormClosedEventArgs e)
         {
             frm = null;
+            GC.Collect();
         }
         public static TikEdit getTiknewfrm
         {
@@ -818,17 +819,6 @@ namespace VOCAC.PL
                 }
             }
         }
-        private DataTable populateTextCoise(DataTable Tbl, string selct)
-        {
-            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-            SqlParameter[] param = new SqlParameter[1];
-
-            param[0] = new SqlParameter("@slctstat", SqlDbType.VarChar);
-            param[0].Value = selct;
-            DAL.DataAccessLayer.rturnStruct RsultPopulateChoice = DAL.SelectData("SP_CHOICE_SLCT", param);
-            DAL.Close();
-            return RsultPopulateChoice.dt;
-        }
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             // NOTE: set form's KeyPreview property to True
@@ -836,7 +826,7 @@ namespace VOCAC.PL
             {
                 sndr = (TextBox)sender;
                 tbl = new DataTable();
-                tbl = populateTextCoise(tbl, sndr.AccessibleName);
+                tbl = fn.returntbl(sndr.AccessibleName);
                 if (tbl.Rows.Count > 0)
                 {
                     tbl.DefaultView.RowFilter = string.Empty;
@@ -967,7 +957,7 @@ namespace VOCAC.PL
                     }
                     else if (!ctrlList.Contains(c.Name))
                     {
-                        UpTxt.Append(Environment.NewLine + "تم إضاقة " + c.AccessibleName + "\"" + c.Text + "\"");
+                        UpTxt.Append(Environment.NewLine + "تم إضاقة " + c.Name + "\"" + c.Text + "\"");
                         updateStrMend.Add("INSERT INTO TKMendFields (FildRelted, FildKind, FildTxt) VALUES (" + ComRefLbl.Text + ", '" + c.Name + "', '" + c.Text.Replace(" ", "") + "')");
                     }
                 }
@@ -1006,13 +996,13 @@ namespace VOCAC.PL
                     {
                         if (c.Text.Replace(" ", "") != editStruct.dt.Rows[0][c.Name].ToString())
                         {
-                            UpTxt.Append(Environment.NewLine + "تم تعديل " + c.AccessibleName + " من " + "\"" + editStruct.dt.Rows[0][c.Name].ToString() + "\"" + " إلى " + "\"" + c.Text.Replace(" ", "") + "\"");
+                            UpTxt.Append(Environment.NewLine + "تم تعديل " + c.Name + " من " + "\"" + editStruct.dt.Rows[0][c.Name].ToString() + "\"" + " إلى " + "\"" + c.Text.Replace(" ", "") + "\"");
                             updateStrMend.Add("Update TKMendFields set FildTxt = '" + c.Text.Replace(" ", "") + "' where FildKind = '" + c.Name + "' AND FildRelted = " + ComRefLbl.Text);
                         }
                     }
                     else if (!ctrlList.Contains(c.Name))
                     {
-                        UpTxt.Append(Environment.NewLine + "تم إضاقة " + c.AccessibleName + "\"" + c.Text.Replace(" ", "") + "\"");
+                        UpTxt.Append(Environment.NewLine + "تم إضاقة " + c.Name + "\"" + c.Text.Replace(" ", "") + "\"");
                         updateStrMend.Add("INSERT INTO TKMendFields (FildRelted, FildKind, FildTxt) VALUES (" + ComRefLbl.Text + ", '" + c.Name + "', '" + c.Text.Replace(" ", "") + "')");
                     }
                 }
@@ -1044,13 +1034,13 @@ namespace VOCAC.PL
                 {
                     if (c.Text != editStruct.dt.Rows[0][c.Name].ToString())
                     {
-                        UpTxt.Append(Environment.NewLine + "تم تعديل " + c.AccessibleName + " من " + "\"" + editStruct.dt.Rows[0][c.Name].ToString() + "\"" + " إلى " + "\"" + c.Text + "\"");
+                        UpTxt.Append(Environment.NewLine + "تم تعديل " + c.Name + " من " + "\"" + editStruct.dt.Rows[0][c.Name].ToString() + "\"" + " إلى " + "\"" + c.Text + "\"");
                         updateStrMend.Add("Update TKMendFields set FildTxt = " + "CONVERT(VARCHAR, '" + c.Text + "', 111)" + " where FildKind = '" + c.Name + "' AND FildRelted = " + ComRefLbl.Text);
                     }
                 }
                 else if (!ctrlList.Contains(c.Name))
                 {
-                    UpTxt.Append(Environment.NewLine + "تم إضاقة " + c.AccessibleName + "\"" + string.Format(c.Text, "yyyy-mm-dd") + "\"");
+                    UpTxt.Append(Environment.NewLine + "تم إضاقة " + c.Name + "\"" + string.Format(c.Text, "yyyy-mm-dd") + "\"");
                     updateStrMend.Add("INSERT INTO TKMendFields (FildRelted, FildKind, FildTxt) VALUES (" + ComRefLbl.Text + ", '" + c.Name + "', " + "CONVERT(VARCHAR, '" + c.Text + "', 111)" + ")");
                 }
 
@@ -1059,7 +1049,7 @@ namespace VOCAC.PL
             if (TreeView1.SelectedNode.Name != editStruct.dt.Rows[0]["TkFnPrdCd"].ToString())
             {
                 updateString.Add("TkFnPrdCd =" + TreeView1.SelectedNode.Name);
-                if(PrdNm.Text != editStruct.dt.Rows[0]["PrdNm"].ToString())
+                if (PrdNm.Text != editStruct.dt.Rows[0]["PrdNm"].ToString())
                 {
                     UpTxt.Append(Environment.NewLine + "تم تعديل الخدمة من " + "\"" + editStruct.dt.Rows[0]["PrdNm"].ToString().Trim() + "\"" + " إلى " + "\"" + PrdNm.Text.Trim() + "\"");
                 }
@@ -1068,13 +1058,32 @@ namespace VOCAC.PL
                     UpTxt.Append(Environment.NewLine + "تم تعديل الشكوى من " + "\"" + editStruct.dt.Rows[0]["CompNm"].ToString().Trim() + "\"" + " إلى " + "\"" + CompNm.Text.Trim() + "\"");
                 }
             }
-            string kk = UpTxt.ToString();
-            string qqqw = string.Join(" ; ", updateStrMend);
-            string qqw = "Update Tickets set " + string.Join(", ", updateString) + " Where TKSQL = " + Convert.ToInt32(ComRefLbl.Text);
-            if (ticketCurrent.addevent(Convert.ToInt32(ComRefLbl.Text), kk, 901, Statcdif._IP, CurrentUser.UsrID, qqw + ";" + qqqw, null, null) == null)
+            string UpdtString = UpTxt.ToString();
+            string Up_Insrt_Str = string.Join(" ; ", updateStrMend);
+            string TickStrUpdateStr = "";
+            if (updateString.Count > 0)
             {
-                fn.msg("Done", "", MessageBoxButtons.OK);
+                TickStrUpdateStr = "Update Tickets set " + string.Join(", ", updateString) + " Where TKSQL = " + Convert.ToInt32(ComRefLbl.Text);
             }
+            if (UpdtString.Length > 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("سيتم عمل التالي وتسجيل هذا التحديث: " + Environment.NewLine + UpdtString + Environment.NewLine + "هل تريد الإستمرار؟", "شاشة التعديل", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                if (dialogResult == DialogResult.Yes)
+                {
+
+                    if (ticketCurrent.addevent(Convert.ToInt32(ComRefLbl.Text), UpdtString, 901, Statcdif._IP, CurrentUser.UsrID, TickStrUpdateStr + ";" + Up_Insrt_Str, null, null) == null)
+                    {
+                        GetTicket(" AND TKSQL = " + ComRefLbl.Text);
+                        assignTicket();
+                        fn.msg("تم تعديل الشكوى بنجاح", "تعديل الشكوى", MessageBoxButtons.OK);
+                    }
+                }
+            }
+            else
+            {
+                fn.msg("لا توجد تعديلات للحفظ", "تعديل الشكوى", MessageBoxButtons.OK);
+            }
+
             this.RadioButton4.Click += new EventHandler(this.CompReqst_CheckedChanged);
             this.RadioButton5.Click += new EventHandler(this.CompReqst_CheckedChanged);
         }
@@ -1115,17 +1124,12 @@ namespace VOCAC.PL
                 lblhelp.Text = "جاري البحث عن بيانات العميل ....";
                 StringBuilder selectString = new StringBuilder();
                 customerTable.Rows.Clear();
-                DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
 
                 selectString.Append(SlctString + mskdTextBox.Text.ToString());
                 if (mskdTextBox == TkClPh) { selectString.Append("' or  TkClPh1 ='" + mskdTextBox.Text.ToString()); }
                 selectString.Append("'  order by TkSQL desc");
 
-                SqlParameter[] param = new SqlParameter[1];
-                param[0] = new SqlParameter("@slctstat", SqlDbType.VarChar);
-                param[0].Value = selectString.ToString();
-                customerTable = DAL.SelectData("SP_CHOICE_SLCT", param).dt;
-                DAL.Close();
+                customerTable = fn.returntbl(selectString.ToString());
                 if (customerTable.Rows.Count > 0)
                 {
                     if (mskdTextBox != TkClPh)
@@ -1235,7 +1239,7 @@ namespace VOCAC.PL
                     }
                     else
                     {
-                        fn.msg("الشكوى مغلقة ولا يمكن تعديلها", "تعديل الشكوى", MessageBoxButtons.YesNo);
+                        fn.msg("الشكوى مغلقة ولا يمكن تعديلها", "تعديل الشكوى", MessageBoxButtons.OK);
                     }
                 }
             }

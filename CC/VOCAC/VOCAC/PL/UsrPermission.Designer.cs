@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Tab");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("System Varible");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Free Button");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Tab");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("System Varible");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Free Button");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UsrPermission));
             this.FlowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.FlowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -49,6 +49,7 @@
             this.Panel5 = new System.Windows.Forms.Panel();
             this.BtnAply = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.UserTree = new System.Windows.Forms.TreeView();
             this.SecTree = new System.Windows.Forms.TreeView();
@@ -57,7 +58,6 @@
             this.StatusBar1 = new System.Windows.Forms.StatusBar();
             this.ImgLst = new System.Windows.Forms.ImageList(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.FlowLayoutPanel2.SuspendLayout();
             this.FlowLayoutPanel1.SuspendLayout();
             this.Panel3.SuspendLayout();
@@ -245,6 +245,7 @@
             this.BtnCls.TabIndex = 134;
             this.BtnCls.Text = "Close";
             this.BtnCls.UseVisualStyleBackColor = true;
+            this.BtnCls.Click += new System.EventHandler(this.BtnCls_Click);
             // 
             // Panel5
             // 
@@ -283,6 +284,16 @@
             this.trackBar1.Size = new System.Drawing.Size(342, 45);
             this.trackBar1.TabIndex = 2066;
             this.trackBar1.Scroll += new System.EventHandler(this.TrackBar1_Scroll);
+            // 
+            // treeView1
+            // 
+            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView1.Location = new System.Drawing.Point(48, 251);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.treeView1.RightToLeftLayout = true;
+            this.treeView1.Size = new System.Drawing.Size(380, 553);
+            this.treeView1.TabIndex = 2080;
             // 
             // splitContainer1
             // 
@@ -328,16 +339,16 @@
             this.SecTree.Location = new System.Drawing.Point(0, 0);
             this.SecTree.Margin = new System.Windows.Forms.Padding(0);
             this.SecTree.Name = "SecTree";
-            treeNode4.Name = "Tab";
-            treeNode4.Text = "Tab";
-            treeNode5.Name = "SystemVarible";
-            treeNode5.Text = "System Varible";
-            treeNode6.Name = "FreeButton";
-            treeNode6.Text = "Free Button";
+            treeNode1.Name = "Tab";
+            treeNode1.Text = "Tab";
+            treeNode2.Name = "SystemVarible";
+            treeNode2.Text = "System Varible";
+            treeNode3.Name = "FreeButton";
+            treeNode3.Text = "Free Button";
             this.SecTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode5,
-            treeNode6});
+            treeNode1,
+            treeNode2,
+            treeNode3});
             this.SecTree.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.SecTree.RightToLeftLayout = true;
             this.SecTree.Size = new System.Drawing.Size(269, 681);
@@ -389,16 +400,6 @@
             this.imageList1.Images.SetKeyName(1, "Female.png");
             this.imageList1.Images.SetKeyName(2, "team.png");
             this.imageList1.Images.SetKeyName(3, "Back.png");
-            // 
-            // treeView1
-            // 
-            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView1.Location = new System.Drawing.Point(48, 251);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.treeView1.RightToLeftLayout = true;
-            this.treeView1.Size = new System.Drawing.Size(380, 553);
-            this.treeView1.TabIndex = 2080;
             // 
             // UsrPermission
             // 

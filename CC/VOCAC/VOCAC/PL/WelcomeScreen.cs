@@ -22,6 +22,7 @@ namespace VOCAC.PL
     public delegate void delagatethread();
     public partial class WelcomeScreen : Form
     {
+        function fn = function.getfn;
         int ConterWidt = 0;
         BL.CLS_LOGIN log = new BL.CLS_LOGIN();
         private string Ver = null;
@@ -29,7 +30,7 @@ namespace VOCAC.PL
         static void frm_Closed(object sender, FormClosedEventArgs e)
         {
             frm = null;
-            frm.Dispose();
+            GC.Collect();
         }
         public static WelcomeScreen getwecmscrnfrm
         {
@@ -68,8 +69,7 @@ namespace VOCAC.PL
             this.LblClrNotUsr.BackColor = Settings.Default.ClrNotUsr;
             this.LblClrOperation.BackColor = Settings.Default.ClrOperation;
 
-            Label1.Text = "Welcome TO VOCA Enterprise" + Environment.NewLine + "Our Mini CRM";
-            function fn = function.getfn;
+
             Statcdif._IP = fn.OsIP();
             LblUsrIP.Text = "IP: " + Statcdif._IP;
             lblIp.Text = "IP: " + Statcdif._IP;
@@ -95,12 +95,11 @@ namespace VOCAC.PL
             Cmbo.Items.Add("Eg Server");
             Cmbo.Items.Add("servrMe");
             Cmbo.Items.Add("Lab");
-            Statcdif.servrTime = fn.ServrTime();
         }
         private void WelcomeScreen_Load(object sender, EventArgs e)
         {
             panellgin.Location = new Point((this.Width - panellgin.Width) / 2, (this.Height - 150 - panellgin.Height) / 2);
-
+            function.populateEncryptTbl();
             if (Encoding.Default.HeaderName == "windows-1256") // Current Languaes for non-Unocode Programs is Arabic
             {
                 MdiClient Mdiclnt1;
@@ -118,12 +117,11 @@ namespace VOCAC.PL
                 }
                 frms forms = new frms();
                 forms.FrmAllSub(this);
-                function fn = function.getfn;
                 //initialize Lables
 
                 Statcdif._MacStr = fn.GetMACAddressNew();
                 TxtUsrNm.Select();
-                //TxtUsrNm.Text = "ahmed_emam";
+                TxtUsrNm.Text = "ahmed_emam";
                 //TxtUsrPass.Text = "hemonad";
 
                 Cmbo.SelectedItem = "Training";
@@ -158,8 +156,7 @@ namespace VOCAC.PL
         public string SQLSTR;
         private void Log()
         {
-            function fn = function.getfn;
-
+            Statcdif.servrTime = fn.ServrTime();
             LogInBtn.Enabled = false;
             StatBrPnlEn.Text = "Connecting ...........";
             LblLogin.Text = "          Authenticating";
@@ -178,7 +175,6 @@ namespace VOCAC.PL
                     if (Statcdif.UserTable.Rows[0].Field<String>("UsrPassNew").Equals("0000") == true)
                     {
                         userPasschange usrfrm = new userPasschange();
-                        //usrfrm.MdiParent = WelcomeScreen.ActiveForm;
                         usrfrm.ShowDialog();
                         panellgin.Enabled = false;
                     }
@@ -213,7 +209,7 @@ namespace VOCAC.PL
                 LblLogin.Text = "";
                 StatBrPnlEn.Text = "Offline";
                 this.Refresh();
-                fn.msg("لم ينجح الإتصال بقواعد البيانات" + Environment.NewLine + logreslt.msg, "Login", MessageBoxButtons.OK);
+                fn.msg("لم ينجح الإتصال بقواعد البيانات" + Environment.NewLine, "Login", MessageBoxButtons.OK);
             }
 
             LogInBtn.Enabled = true;
@@ -250,7 +246,7 @@ namespace VOCAC.PL
             {
                 fn.SwitchBoard(Statcdif.SwitchTbl);
             }
-            this.Text = "VOCA Ultimate";
+            this.Text = "VOCA Ultimate - " + Cmbo.Text;
             Statcdif.Menu_.BackColor = Color.FromArgb(0, 192, 0);
             Statcdif.Menu_.Font = new Font("Times New Roman", 14, FontStyle.Regular);
             Statcdif.Menu_.RightToLeft = RightToLeft.Yes;
@@ -343,7 +339,7 @@ namespace VOCAC.PL
             LblLogin.Refresh();
 
 
-            LblUsrRNm.Text = "Welcome " + CurrentUser.UsrRlNm;
+            LblUsrRNm.Text = "Welcome ( " + CurrentUser.UsrID + " ) " + CurrentUser.UsrRlNm;
             if (CurrentUser.UsrUCatLvl >= 3 && CurrentUser.UsrUCatLvl <= 5)
             {
                 GrpCounters.Visible = true;
@@ -408,7 +404,6 @@ namespace VOCAC.PL
         }
         private void Cmbo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            function fn = function.getfn;
             //defintions.CncStat = false;
             Statcdif._ServerCD = Cmbo.SelectedItem.ToString();
             fn.ConStrFn();
@@ -465,18 +460,22 @@ namespace VOCAC.PL
             FlowLayoutPanel1.Visible = false;
             panellgin.Visible = true;
             this.Text = "Login Screen";
+            Cmbo.Visible = false;
         }
         private void getMac()
         {
-            //Populate ComboBox If MAC Table rows > 0
-            if (Statcdif.MacTble == null) Statcdif.MacTble = new DataTable();
-            function fn = function.getfn;
-            if (fn.Gettable("SELECT * from AMac WHERE Mac='" + Statcdif._MacStr + "'", Statcdif.MacTble, "1000&H") == null)
+            Statcdif.MacTble = new DataTable();
+            Statcdif.MacTble = fn.returntbl("SELECT * from AMac WHERE Mac='" + Statcdif._MacStr + "'");
+
+            if (Statcdif.MacTble.Rows.Count > 0)
             {
+                Cmbo.Visible = true;
             }
             else
             {
-                fn.msg(fn.Gettable("SELECT * from AMac WHERE Mac='" + Statcdif._MacStr + "'", Statcdif.MacTble, "1000&H").ToString(), "ddd", MessageBoxButtons.OK);
+                Cmbo.Visible = false;
+                fn.msg("Your Mac Address is : " + Statcdif._MacStr, "MAC Address", MessageBoxButtons.OK);
+                Clipboard.SetText(Statcdif._MacStr.ToString());
             }
         }
         private void TxtUsrPass_KeyDown(object sender, KeyEventArgs e)
@@ -518,7 +517,6 @@ namespace VOCAC.PL
                 }
                 catch (Exception)
                 {
-                    function fn = function.getfn;
                     fn.msg("dd", "frfff", MessageBoxButtons.OK);
                 }
             }
@@ -555,11 +553,10 @@ namespace VOCAC.PL
                         PictureBox1.Image = Image.FromStream(ms);
                     }
                 }
-                catch (Exception Ex)
+                catch (Exception ex)
                 {
-                    function fn = function.getfn;
                     fn.msg("خطأ في تحميل الصوره", "تحميل الصورة الشخصية", MessageBoxButtons.OK);
-                    fn.AppLog(this.ToString(), Ex.Message, "SP_A_USR_PIC");
+                    function.AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), "SP_A_USR_PIC");
                 }
             }
         }
@@ -594,8 +591,7 @@ namespace VOCAC.PL
         }
         private void Button3_Click(object sender, EventArgs e)
         {
-            string ll = "[4:32 pm, 23/02/2022] Ashraf Farag: السلام عليكم الدوام لله يا رانيا وربنا يجعلها اخر الاحزان ان شاء الله"
-+ "[4:33 pm, 23 / 02 / 2022] Ashraf Farag: مش عايز اكلمك والله عارف ان الوقت دلوقتي ممكن ما يكونش مناسب";
+            string ll = "Ashraf Farag";
             string hhws = function.encrypt(ll);
             string hh = function.discrypt(hhws);
             string[] dd = null;
@@ -603,8 +599,6 @@ namespace VOCAC.PL
             string jjj = dd.ToString();
             int oo = CountNumberOfLinesInCSFilesOfDirectory(@"E:\RepNew\CC\VOCAC\VOCAC");
         }
-
-
         #region Project Code Lines Count In any Directory
         private int CountNumberOfLinesInCSFilesOfDirectory(string dirPath)
         {
@@ -662,8 +656,11 @@ namespace VOCAC.PL
                     || trimmed.StartsWith("protected") //method signature
                     );
         }
+
         #endregion
-
-
+        private void LblIp_Click(object sender, EventArgs e)
+        {
+            getMac();
+        }
     }
 }

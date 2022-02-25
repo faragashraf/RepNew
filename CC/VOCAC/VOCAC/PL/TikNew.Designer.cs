@@ -103,6 +103,7 @@
             this.Label6 = new System.Windows.Forms.Label();
             this.DetailsTxtBx = new System.Windows.Forms.TextBox();
             this.lblhelp = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.Panel5.SuspendLayout();
             this.MyGroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).BeginInit();
@@ -385,7 +386,7 @@
             this.FlwMend.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.FlwMend.Location = new System.Drawing.Point(674, 590);
             this.FlwMend.Name = "FlwMend";
-            this.FlwMend.Size = new System.Drawing.Size(551, 271);
+            this.FlwMend.Size = new System.Drawing.Size(551, 253);
             this.FlwMend.TabIndex = 6;
             this.FlwMend.TabStop = true;
             // 
@@ -397,7 +398,7 @@
             this.Panel6.Enabled = false;
             this.Panel6.Location = new System.Drawing.Point(411, 590);
             this.Panel6.Name = "Panel6";
-            this.Panel6.Size = new System.Drawing.Size(257, 271);
+            this.Panel6.Size = new System.Drawing.Size(257, 253);
             this.Panel6.TabIndex = 2037;
             // 
             // richTextBox1
@@ -687,7 +688,7 @@
             this.FlwMain.Location = new System.Drawing.Point(0, 0);
             this.FlwMain.Name = "FlwMain";
             this.FlwMain.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.FlwMain.Size = new System.Drawing.Size(1796, 890);
+            this.FlwMain.Size = new System.Drawing.Size(1796, 897);
             this.FlwMain.TabIndex = 1;
             // 
             // FlwTree
@@ -700,7 +701,7 @@
             this.FlwTree.Location = new System.Drawing.Point(1306, 3);
             this.FlwTree.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.FlwTree.Name = "FlwTree";
-            this.FlwTree.Size = new System.Drawing.Size(480, 875);
+            this.FlwTree.Size = new System.Drawing.Size(480, 882);
             this.FlwTree.TabIndex = 0;
             // 
             // MyGroupBox3
@@ -784,10 +785,11 @@
             this.FlwSubMain.Controls.Add(this.Panel6);
             this.FlwSubMain.Controls.Add(this.Panel5);
             this.FlwSubMain.Controls.Add(this.FlowLayoutPanel5);
+            this.FlwSubMain.Controls.Add(this.label8);
             this.FlwSubMain.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.FlwSubMain.Location = new System.Drawing.Point(72, 3);
             this.FlwSubMain.Name = "FlwSubMain";
-            this.FlwSubMain.Size = new System.Drawing.Size(1228, 875);
+            this.FlwSubMain.Size = new System.Drawing.Size(1228, 882);
             this.FlwSubMain.TabIndex = 2034;
             // 
             // ComRefLbl
@@ -833,6 +835,7 @@
             // FlwMainData
             // 
             this.FlwMainData.AutoScroll = true;
+            this.FlwMainData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.FlwMainData.Controls.Add(this.Label11);
             this.FlwMainData.Controls.Add(this.Label29);
             this.FlwMainData.Controls.Add(this.IDTxtBx);
@@ -1091,11 +1094,23 @@
             this.lblhelp.TabIndex = 2048;
             this.lblhelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold);
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label8.Location = new System.Drawing.Point(25, 587);
+            this.label8.Name = "label8";
+            this.label8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label8.Size = new System.Drawing.Size(0, 25);
+            this.label8.TabIndex = 2039;
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // TikNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1796, 890);
+            this.ClientSize = new System.Drawing.Size(1796, 897);
             this.Controls.Add(this.FlwMain);
             this.Name = "TikNew";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -1202,5 +1217,6 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.CheckBox chckIDChange;
         private System.Windows.Forms.CheckBox chckphonechange;
+        private System.Windows.Forms.Label label8;
     }
 }

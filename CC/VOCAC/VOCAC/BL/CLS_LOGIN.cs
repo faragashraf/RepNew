@@ -37,8 +37,7 @@ namespace VOCAC.BL
             catch (Exception ex)
             {
                 DAL.Struc.msg = ex.Message;
-                function fn = function.getfn;
-                fn.AppLog(this.ToString(), ex.Message, "SP_A_USR_LOG_SLCT_UPDATE");
+                function.AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), "SP_A_USR_LOG_SLCT_UPDATE");
             }
             DAL.Close();
             return DAL.Struc;

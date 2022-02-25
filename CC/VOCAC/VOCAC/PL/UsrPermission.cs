@@ -10,10 +10,12 @@ namespace VOCAC.PL
 {
     public partial class UsrPermission : Form
     {
+        function fn = function.getfn;
         private static UsrPermission frm;
         static void frm_Closed(object sender, FormClosedEventArgs e)
         {
             frm = null;
+            GC.Collect();
         }
         public static UsrPermission getuserPassChangefrm
         {
@@ -30,7 +32,6 @@ namespace VOCAC.PL
         private readonly List<TreeNode> NODESTHATMATCH = new List<TreeNode>(); // Tree Search Function
         TreeNode SlctedNode;
         private int NodeCnt = 1;
-        int SlctUsrID = 0;
         public UsrPermission()
         {
             InitializeComponent();
@@ -45,7 +46,6 @@ namespace VOCAC.PL
             FlowLayoutPanel1.Height = UserTree.Height;
             treeView1.Size = new Size(treeView1.Size.Width - 20, UserTree.Size.Height - 243);
         }
-
         private void UsrPermission_Load(object sender, EventArgs e)
         {
             frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
@@ -108,6 +108,12 @@ namespace VOCAC.PL
             for (int u = 0; u < Statcdif.SwitchTbl.DefaultView.Count; u++)
             {
                 SecTree.Nodes[1].Nodes.Add(Statcdif.SwitchTbl.DefaultView[u]["SwID_New"].ToString(), Statcdif.SwitchTbl.DefaultView[u]["SwID_New"].ToString() + "-" + Statcdif.SwitchTbl.DefaultView[u]["SwNm"].ToString());
+            }
+            Statcdif.SwitchTbl.DefaultView.RowFilter = "SwType = 'Button'  and SwID_New > 0";
+
+            for (int u = 0; u < Statcdif.SwitchTbl.DefaultView.Count; u++)
+            {
+                SecTree.Nodes[2].Nodes.Add(Statcdif.SwitchTbl.DefaultView[u]["SwID_New"].ToString(), Statcdif.SwitchTbl.DefaultView[u]["SwID_New"].ToString() + "-" + Statcdif.SwitchTbl.DefaultView[u]["SwNm"].ToString());
             }
             SecTree.ExpandAll();
             UserTree.SelectedNode = null;
@@ -311,7 +317,6 @@ namespace VOCAC.PL
                 Search();
             }
         }
-
         private void SecTree_AfterCheck(object sender, TreeViewEventArgs e)
         {
             if (e.Action != TreeViewAction.Unknown)
@@ -349,13 +354,10 @@ namespace VOCAC.PL
                 }
             }
         }
-
         private void BtnAply_Click(object sender, EventArgs e)
         {
             TreeNode SecTreeNode;
             string[] PerStr = new string[100];
-            string LblSecLvl_;
-
             for (int i = 0; i < PerStr.Length; i++)
             {
                 SecTreeNode = SecSearchTreeView(SecTree, (i + 1).ToString());
@@ -376,24 +378,12 @@ namespace VOCAC.PL
                     PerStr[i] = "X";
                 }
             }
-
-
-            LblSecLvl_ = string.Join("", PerStr);
-
-            applyPermission("update Int_user set UsrLevel_New= '" + String.Join("", PerStr) + "' WHERE (UsrId = " + UserTree.SelectedNode.Text.ToString().Split('-')[2].Trim() + ");");
-            function fn = function.getfn;
-            fn.msg("Done", "", MessageBoxButtons.OK);
+            fn.ExcuteStr("update Int_user set UsrLevel_New= '" + String.Join("", PerStr) + "' WHERE (UsrId = " + UserTree.SelectedNode.Text.ToString().Split('-')[2].Trim() + ");");
+            fn.msg("تم تعديل صلاحية المستخدم", "تعديل الصلاحيات", MessageBoxButtons.OK);
         }
-        private string applyPermission(string UpdateSTR)
+        private void BtnCls_Click(object sender, EventArgs e)
         {
-            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-            SqlParameter[] param = new SqlParameter[1];
-
-            param[0] = new SqlParameter("@slctstat", SqlDbType.VarChar);
-            param[0].Value = UpdateSTR;
-            DAL.DataAccessLayer.rturnStruct RsultPopulateChoice = DAL.ExcuteCommand("SP_CHOICE_SLCT", param);
-            DAL.Close();
-            return RsultPopulateChoice.msg;
+           this.Close();
         }
     }
 }

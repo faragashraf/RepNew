@@ -22,6 +22,7 @@ namespace VOCAC.PL
         static void frm_Closed(object sender, FormClosedEventArgs e)
         {
             frm = null;
+            GC.Collect();
         }
         public static TikFolow_Team getTikFolltemfrm
         {
@@ -65,7 +66,6 @@ namespace VOCAC.PL
             ChckUpdOther.Tag = "[updtusr] <> folowusr AND UCatLvl < 3 or UCatLvl > 5";
             ChckFlN.Tag = "TkFolw = 'False'";
             ChckTrnsDy.Tag = "TkRecieveDt = '" + DateTime.Parse(Statcdif.servrTime).ToString("yyyy/MM/dd") + "'";
-            ChckRead.Tag = "TkupUnread = 'False'";
             ChckRegions.Tag = "TaskUserID > 0";
             ChckEsc1.Tag = "TkupEvtId = 902";
             ChckEsc2.Tag = "TkupEvtId = 903";
@@ -79,7 +79,6 @@ namespace VOCAC.PL
             this.ChckEsc2.CheckedChanged += new System.EventHandler(this.Chckfltr_CheckedChanged);
             this.ChckEsc3.CheckedChanged += new System.EventHandler(this.Chckfltr_CheckedChanged);
             this.ChckFlN.CheckedChanged += new System.EventHandler(this.Chckfltr_CheckedChanged);
-            this.ChckRead.CheckedChanged += new System.EventHandler(this.Chckfltr_CheckedChanged);
             this.ChckRequest.CheckedChanged += new System.EventHandler(this.Chckfltr_CheckedChanged);
             this.ChckTrnsDy.CheckedChanged += new System.EventHandler(this.Chckfltr_CheckedChanged);
             this.ChckUpdColeg.CheckedChanged += new System.EventHandler(this.Chckfltr_CheckedChanged);
@@ -144,6 +143,7 @@ namespace VOCAC.PL
             da = new SqlDataAdapter(cmd);
             try
             {
+                Statcdif.TickTblMain.PrimaryKey = null;
                 Statcdif.TickTblMain.Rows.Clear();
                 Statcdif.TickTblMain.Columns.Clear();
                 da.Fill(Statcdif.TickTblMain);
@@ -153,7 +153,7 @@ namespace VOCAC.PL
             catch (Exception ex)
             {
                 function fn = function.getfn;
-                fn.AppLog(this.ToString(), ex.Message, "TikFollowTeam");
+                function.AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), "TikFollowTeam");
                 fn.msg("هناك خطأ في الإتصال بقواعد البيانات" + Environment.NewLine, "متابعة الشكاوى", MessageBoxButtons.OK);
             }
             DAL.Close();
@@ -166,6 +166,21 @@ namespace VOCAC.PL
         {
             frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
             frm.FormClosed += new FormClosedEventHandler(frm_Closed);
+
+            //bool bolTikSearch = frms.FormIsOpen(Application.OpenForms, typeof(TikSearchNew));
+            //if (bolTikSearch)
+            //{
+            //    DialogResult dialogResult = MessageBox.Show("سيتم إغلاق شاشة بحث الشكاوى والطلبات للإستمرار" + Environment.NewLine + "هل تريد الإستمرار؟", "شاشة إدارة الشكاوى", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+            //    if (dialogResult == DialogResult.Yes)
+            //    {
+            //        TikSearchNew.getTikSearchfrm.Close();
+            //    }
+            //    else
+            //    {
+
+            //        TikFolow_Team.getTikFolltemfrm.BeginInvoke(new MethodInvoker(Close));
+            //    }
+            //}
             if (Convert.ToBoolean(Statcdif.AppSettings.Rows[0]["Regions"]) == true)
             {
                 tabControl1.TabPages.RemoveByKey("tabTask");
@@ -252,6 +267,7 @@ namespace VOCAC.PL
                 {
                     tabControl1.TabPages["tabDistribute"].Text = "تحويل وتوزيع شكاوى " + slctdNode.Text.Split('-')[1].Trim();
                     counersGrid();
+
                     splitContainer2.Panel1Collapsed = false;
                     btnseting.Visible = true;
                     trackBar2.Visible = true;
@@ -332,6 +348,55 @@ namespace VOCAC.PL
             if (GridTicket.DataSource != null)
             {
                 Filtr();
+                if (tabControl1.SelectedTab.Name == "tabDistribute")
+                {
+                    this.StatBrPnlEn.Text = "جاري تحميل بيانات العملاء المرتبطة ...";
+                    //------------- Customer 360 ------------------------------XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                    List<string> TkSQLlst = new List<string>();
+                    List<string> phone1lst = new List<string>();
+                    //List<string> phone2lst = new List<string>();
+                    List<string> NIDlst = new List<string>();
+                    StringBuilder where_ = new StringBuilder();
+                    for (int i = 0; i < Statcdif.TickTblMain.DefaultView.Count; i++)
+                    {
+                        if (Statcdif.TickTblMain.DefaultView[i]["TKSQL"].ToString().Length > 0) { TkSQLlst.Add("'" + Statcdif.TickTblMain.DefaultView[i]["TKSQL"].ToString() + "'"); }
+                        if (Statcdif.TickTblMain.DefaultView[i]["TkClPh"].ToString().Length > 0) { phone1lst.Add("'" + Statcdif.TickTblMain.DefaultView[i]["TkClPh"].ToString() + "'"); }
+                        //if (Statcdif.TickTblMain.DefaultView[i]["TkClPh1"].ToString().Length > 0) { phone2lst.Add("'" + Statcdif.TickTblMain.DefaultView[i]["TkClPh1"].ToString() + "'"); }
+                        if (Statcdif.TickTblMain.DefaultView[i]["TkClNtID"].ToString().Length > 0) { NIDlst.Add("'" + Statcdif.TickTblMain.DefaultView[i]["TkClNtID"].ToString() + "'"); }
+                    }
+                    if (TkSQLlst.Count > 0) { where_.Append(" (TKSQL NOT in (" + string.Join(", ", TkSQLlst) + "))"); }
+                    if (phone1lst.Count > 0) { where_.Append(" AND (TkClPh in (" + string.Join(", ", phone1lst) + ")"); }
+                    //if (phone2lst.Count > 0) { where_.Append(" or TkClPh1 in (" + string.Join(", ", phone2lst) + ")"); }
+                    if (NIDlst.Count > 0) { where_.Append(" or TkClNtID in (" + string.Join(", ", NIDlst) + ")"); }
+                    Statcdif.tik360.Rows.Clear();
+                    Statcdif.tik360 = fn.returntbl("select TkSQL,TkDtStart,TkClNm,TkClPh,TkClPh1,TkClNtID,PrdNm+' \\ '+CompNm 'comp',Tikfolowusr+' \\ '+TikfolowusrTeam 'Folower',CASE WHEN TkClsStatus = 0 THEN 'مفتوحة' ELSE 'مغلقة' END 'TkClsStatus' " +
+                        "from All_Tickets where " + where_.ToString() + ")");
+                    foreach (DataGridViewRow item in GridTicket.Rows)
+                    {
+                        Statcdif.tik360.DefaultView.RowFilter = "TkClPh = '" + item.Cells["TkClPh"].Value + "' or TkClNtID = '" + item.Cells["TkClNtID"].Value + "'";
+                        if (Statcdif.tik360.DefaultView.Count > 0)
+                        {
+                            item.DefaultCellStyle.ForeColor = Color.Blue;
+                            item.Cells["TkClPh"].Style.BackColor = Color.Yellow;
+                            item.Cells["TkClNtID"].Style.BackColor = Color.Yellow;
+                            item.DefaultCellStyle.Font = new Font("Times new Roman", 12, FontStyle.Bold);
+                            item.Tag = Statcdif.tik360.DefaultView[0][6];
+                        }
+                        //else
+                        //{
+                        //    Statcdif.tik360.DefaultView.RowFilter = "TkClNtID = '" + item.Cells["TkClNtID"].Value + "'";
+                        //    if (Statcdif.tik360.DefaultView.Count > 0)
+                        //    {
+                        //        item.DefaultCellStyle.ForeColor = Color.Blue;
+                        //        item.Cells["TkClNtID"].Style.BackColor = Color.Yellow;
+                        //        item.DefaultCellStyle.Font = new Font("Times new Roman", 12, FontStyle.Bold);
+                        //        item.Tag = Statcdif.tik360.DefaultView[0][6];
+                        //    }
+                        //}
+                    }
+                    //------------- Customer 360 -------------------------------XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                    this.StatBrPnlEn.Text = "إجمالي العدد : " + Statcdif.TickTblMain.Rows.Count.ToString();
+                }
             }
             this.GridTicket.SelectionChanged -= new EventHandler(this.GridTicket_SelectionChanged);
             this.GridTicket.SelectionChanged += new EventHandler(this.GridTicket_SelectionChanged);
@@ -418,6 +483,18 @@ namespace VOCAC.PL
                         if (GridTicket.CurrentRow != null)
                         {
                             this.StatBrPnlAr.Text = Fltrreslt + (GridTicket.CurrentRow.Index + 1) + " / " + Statcdif.TickTblMain.DefaultView.Count.ToString() + "     ";
+                            bool bolTikPrifile = frms.FormIsOpen(Application.OpenForms, typeof(TikFolow360));
+                            if (GridTicket.CurrentRow.DefaultCellStyle.ForeColor == Color.Blue)
+                            {
+                         Statcdif.tik360.DefaultView.RowFilter = "TkClPh = '" + GridTicket.CurrentRow.Cells["TkClPh"].Value + "' or TkClNtID = '" + GridTicket.CurrentRow.Cells["TkClNtID"].Value + "'"; 
+                                if (GridTicket.CurrentRow.Tag != null) { this.StatBrPnlEn.Text = "آخر متابع شكوى للعميل : " + GridTicket.CurrentRow.Tag.ToString() + "   ( " + Statcdif.tik360.DefaultView.Count + " )"; }
+                            }
+                            else
+                            {
+                                if (bolTikPrifile) { Statcdif.tik360.DefaultView.RowFilter = "TkClPh = '" + 1 + "'"; }
+                                this.StatBrPnlEn.Text = "إجمالي العدد : " + Statcdif.TickTblMain.Rows.Count.ToString();
+                            }
+
                         }
 
                         ticketCurrent.currentRow(GridTicket);
@@ -595,6 +672,17 @@ namespace VOCAC.PL
         private void Radio_CheckedChanged(object sender, EventArgs e)
         {
             Filtr();
+        }
+        private void StatusBar1_PanelClick(object sender, StatusBarPanelClickEventArgs e)
+        {
+            int panelIndex = StatusBar1.Panels.IndexOf(e.StatusBarPanel);
+            if (tabControl1.TabPages.Contains(tabDistribute) && panelIndex == 0 && Statcdif.tik360.DefaultView.Count > 0)
+            {
+                Statcdif.tik360.DefaultView.RowFilter = Statcdif.tik360.DefaultView.RowFilter = "TkClPh = '" + GridTicket.CurrentRow.Cells["TkClPh"].Value + "' or TkClNtID = '" + GridTicket.CurrentRow.Cells["TkClNtID"].Value + "'";
+                TikFolow360.getTikFol360frm.MdiParent = WelcomeScreen.ActiveForm;
+                TikFolow360.getTikFol360frm.WindowState = FormWindowState.Normal;
+                TikFolow360.getTikFol360frm.Show();
+            }
         }
 
         #endregion
@@ -812,7 +900,6 @@ namespace VOCAC.PL
             LblUpdtOthrs.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(updtusr)", "[updtusr] <> folowusr AND UCatLvl < 3 or UCatLvl > 5"));
             LblNoFlwCount.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TkFolw)", "TkFolw = 'False'"));
             LblRecved.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TkRecieveDt)", "TkRecieveDt = '" + DateTime.Parse(Statcdif.servrTime).ToString("yyyy/MM/dd") + "'"));
-            LblUnReadCount.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TkupUnread)", "TkupUnread = 'False'"));
             LblFl1.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TkupEvtId)", "TkupEvtId = 902"));
             LblFl2.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TkupEvtId)", "TkupEvtId = 903"));
             LblFl3.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TkupEvtId)", "TkupEvtId = 904"));
@@ -872,13 +959,17 @@ namespace VOCAC.PL
             Statcdif.TickTblMain.Rows.Clear();
             try
             {
+                this.StatBrPnlEn.Text = "جاري تحميل البيانات ...";
                 da.Fill(Statcdif.TickTblMain);
+                GridTicket.DataSource = Statcdif.TickTblMain.DefaultView;
+                gridadjst(Statcdif.TickTblMain);
+                Statcdif.TickTblMain.PrimaryKey = new DataColumn[] { Statcdif.TickTblMain.Columns[0] };
                 if (Statcdif.TickTblMain.Rows.Count > 0) { Filtr(); }
                 this.StatBrPnlEn.Text = "إجمالي العدد : " + Statcdif.TickTblMain.Rows.Count.ToString();
             }
             catch (Exception ex)
             {
-                fn.AppLog(this.ToString(), ex.Message, "Referesh Statcdif.TickTblMain");
+                function.AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), "Referesh Statcdif.TickTblMain");
             }
         }
         private void treeFilter(string teamfilter)
@@ -1425,6 +1516,14 @@ namespace VOCAC.PL
         private void CloseBtn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void TikFolow_Team_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            bool bolTikPrifile = frms.FormIsOpen(Application.OpenForms, typeof(TikFolow360));
+            if (bolTikPrifile)
+            {
+                TikFolow360.getTikFol360frm.Close();
+            }
         }
         #endregion
     }

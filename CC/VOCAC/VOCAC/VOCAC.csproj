@@ -27,7 +27,7 @@
     <ProductName>VOCA Ultimate</ProductName>
     <PublisherName>Ashraf Farag</PublisherName>
     <SuiteName>VOCA Ultimate</SuiteName>
-    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -113,6 +113,12 @@
     <Compile Include="PL\TikEdit.Designer.cs">
       <DependentUpon>TikEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="PL\TikFolow360.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TikFolow360.Designer.cs">
+      <DependentUpon>TikFolow360.cs</DependentUpon>
+    </Compile>
     <Compile Include="PL\userPasschange.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,11 +143,23 @@
     <Compile Include="PL\TikUpdate.Designer.cs">
       <DependentUpon>TikUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="PL\UserResetPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\UserResetPassword.Designer.cs">
+      <DependentUpon>UserResetPassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="PL\UsrPermission.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PL\UsrPermission.Designer.cs">
       <DependentUpon>UsrPermission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\zLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\zLog.Designer.cs">
+      <DependentUpon>zLog.cs</DependentUpon>
     </Compile>
     <Compile Include="PL\zpicViewer.cs">
       <SubType>Form</SubType>
@@ -185,6 +203,9 @@
     <EmbeddedResource Include="PL\TikEdit.resx">
       <DependentUpon>TikEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PL\TikFolow360.resx">
+      <DependentUpon>TikFolow360.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PL\userPasschange.resx">
       <DependentUpon>userPasschange.cs</DependentUpon>
     </EmbeddedResource>
@@ -200,8 +221,14 @@
     <EmbeddedResource Include="PL\TikUpdate.resx">
       <DependentUpon>TikUpdate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PL\UserResetPassword.resx">
+      <DependentUpon>UserResetPassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PL\UsrPermission.resx">
       <DependentUpon>UsrPermission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\zLog.resx">
+      <DependentUpon>zLog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PL\zpicViewer.resx">
       <DependentUpon>zpicViewer.cs</DependentUpon>

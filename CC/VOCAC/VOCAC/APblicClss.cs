@@ -28,7 +28,7 @@ namespace VOCAC
         public static int screenHeight = Screen.PrimaryScreen.Bounds.Height;
         public static InputLanguage EnglishInput;
         public static InputLanguage ArabicInput;
-        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237w9";
+        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237wxz9";
         public SqlConnection CONSQL;
         public static String _ServerCD;
         public static String _serverNm;
@@ -44,6 +44,7 @@ namespace VOCAC
         public static TreeView _tree;
         public static DataTable TickTblMain = new DataTable();
         public static DataTable CompSurceTable, ProdKTable, ProdCompTable, UpdateKTable, CDHolDay, MendFildsTable, TreeUsrTbl, SwitchTbl, CDCountry, CDMend, AppSettings;
+        public static DataTable tik360 = new DataTable();
         public static DataTable EcryptionTbl = new DataTable();                // Datatable To Initialize Encryption Base Table
         public static Image imge;
         public static byte[] mainImageArray;
@@ -90,7 +91,7 @@ namespace VOCAC
             WelcomeScreen WlcmScren = WelcomeScreen.getwecmscrnfrm;
             if (_ServerCD == "Eg Server")
             {
-                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237w9";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237wxz9";
                 _serverNm = "VOCA Server";
                 WlcmScren.BackgroundImage = Resources.VocaWtr;
                 WlcmScren.BackgroundImageLayout = ImageLayout.Stretch;
@@ -104,7 +105,7 @@ namespace VOCAC
             }
             else if (_ServerCD == "Training")
             {
-                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237w9";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237wxz9";
                 _serverNm = "Training";
                 WlcmScren.BackgroundImage = Resources.Empty;
                 WlcmScren.BackColor = Color.White;
@@ -112,7 +113,7 @@ namespace VOCAC
             }
             else if (_ServerCD == "servrMe")
             {
-                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusashraf;Persist Security Info=True;User ID=vocac;Password=@VocaPlus$21-12379";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusashraf;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237wxz9";
                 _serverNm = "servrMe";
                 WlcmScren.BackgroundImage = Resources.Demo;
                 WlcmScren.BackgroundImageLayout = ImageLayout.Center;
@@ -122,18 +123,15 @@ namespace VOCAC
             WlcmScren.LblSrvrNm.Text = Statcdif._ServerCD;
             try
             {
-                CONSQL.ConnectionString = Statcdif.strConn;
                 MacTble.Rows.Clear();
-                if (Gettable("SELECT * from AMac WHERE Mac='" + _MacStr + "'", MacTble, "1000&H") == null)
+                if (returntbl("SELECT * from AMac WHERE Mac='" + _MacStr + "'").Rows.Count > 0)
                 {
-                    if (MacTble.Rows.Count > 0)
-                    {
-                    }
+
                 }
             }
             catch (global::System.Exception ex)
             {
-                AppLog("0000&H", ex.Message, "Conecting String");
+                AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), "Conecting String");
             }
             return strConn;
         }
@@ -153,10 +151,10 @@ namespace VOCAC
                         CncStat = true;
                     }
                 }
-                catch (SqlException Ex)
+                catch (SqlException ex)
                 {
                     CncStat = false;
-                    AppLog("1002&H", Ex.Message, "Trying To Open Connection");
+                    AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), "Trying To Open Connection");
                 }
             }
             else
@@ -167,7 +165,7 @@ namespace VOCAC
             SqlConnection.ClearPool(defstac.CONSQL);
             return CncStat;
         }
-        public string Gettable(String SSqlStr, DataTable SqlTbl, String ErrHndl)                             //Get Data and Fill DataTable
+        public string Gettable(String SSqlStr, DataTable SqlTbl)                             //Get Data and Fill DataTable
         {
             defintions def = new defintions();
             Statcdif defstac = new Statcdif();
@@ -187,11 +185,10 @@ namespace VOCAC
                 Stp.Stop();
                 this.ElapsedTimeSpan = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimSpn.Hours, TimSpn.Minutes, TimSpn.Seconds, TimSpn.Milliseconds);
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                Msg = Ex.Message;
-                function fn = function.getfn;
-                fn.AppLog(this.ToString(), Ex.Message, SSqlStr);
+                Msg = ex.Message;
+                function.AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), SSqlStr);
             }
             def.sqladptr.Dispose();
             defstac.CONSQL.Close();
@@ -222,9 +219,9 @@ namespace VOCAC
                 Stp.Stop();
                 this.ElapsedTimeSpan = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimSpn.Hours, TimSpn.Minutes, TimSpn.Seconds, TimSpn.Milliseconds);
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                AppLog(" ", Ex.Message, SSqlStr);
+                AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), SSqlStr);
             }
             defstac.CONSQL.Close();
             SqlConnection.ClearPool(defstac.CONSQL);
@@ -248,10 +245,10 @@ namespace VOCAC
                 }
                 def.SqlComm.ExecuteNonQuery();
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                Errmsg = Ex.Message;
-                AppLog(" ", Ex.Message, SSqlStr);
+                Errmsg = ex.Message;
+                AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), SSqlStr);
             }
             def.SqlComm.Dispose();
             defstac.CONSQL.Close();
@@ -282,16 +279,16 @@ namespace VOCAC
         public string ServrTime()
         {
             DataTable TimeTbl = new DataTable();
-            if (Gettable("Select GetDate() as Now_", TimeTbl, "1003&H") == null)
+            if (Gettable("Select GetDate() as Now_", TimeTbl) == null)
             {
                 servrTime = TimeTbl.Rows[0].Field<DateTime>("Now_").ToString(); // TimeTbl.Rows[0].Field<DateTime>("Now_");
             }
             return servrTime;
         }
-        public void AppLog(String ErrHndls, String LogMsg, String SSqlStrs)                                  //Insert Exception Into Log FIle
+        public static void AppLog(String LogMsg, String ErrCd, String SSqlStrs)                                  //Insert Exception Into Log FIle
         {
             string _path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VOCALog" + Convert.ToDateTime(DateTime.Now).ToString("MM-yy") + ".Vlg";
-            string _content = DateTime.Now + " ," + encrypt(ErrHndls) + "&H" + encrypt(LogMsg) + "&H" + encrypt(SSqlStrs) + Environment.NewLine;
+            string _content = DateTime.Now + "," + encrypt(LogMsg) + "$" + encrypt(ErrCd) + "$" + encrypt(SSqlStrs) + Environment.NewLine;
             File.AppendAllText(_path, _content);
         }
         public void SwitchBoard(DataTable dt)
@@ -722,21 +719,6 @@ namespace VOCAC
             string author = EncryptedString;
             // Convert a C# string to a byte array  
             string Separtor = "₨";                          // Encryption Separator
-            if (EcryptionTbl.Rows.Count == 0)
-            {
-                EcryptionTbl.Columns.Add("key", typeof(int));            // Add two Columns to the Ecryption Table
-                EcryptionTbl.Columns.Add("Cahr_");
-                EcryptionTbl.Rows.Add(1, "$");                           // Add Encryption Rows to the Ecryption Table
-                EcryptionTbl.Rows.Add(2, "℆");
-                EcryptionTbl.Rows.Add(3, "§");
-                EcryptionTbl.Rows.Add(4, "№");
-                EcryptionTbl.Rows.Add(5, "¥");
-                EcryptionTbl.Rows.Add(6, "℀");
-                EcryptionTbl.Rows.Add(7, "₡");
-                EcryptionTbl.Rows.Add(8, "₯");
-                EcryptionTbl.Rows.Add(9, "₠");
-            }
-
             // Get Bytes from String 
             byte[] bytes = Encoding.UTF8.GetBytes(EncryptedString);
             List<string> encryptList = new List<string>();
@@ -748,6 +730,20 @@ namespace VOCAC
             }
             string Encrypted = string.Join(Separtor, encryptList);              // Join string list using Separator "₨"
             return Encrypted;                                                   // Return Ecrypted String
+        }
+        public static void populateEncryptTbl()
+        {
+            EcryptionTbl.Columns.Add("key", typeof(int));            // Add two Columns to the Ecryption Table
+            EcryptionTbl.Columns.Add("Cahr_");
+            EcryptionTbl.Rows.Add(1, "℠");                           // Add Encryption Rows to the Ecryption Table
+            EcryptionTbl.Rows.Add(2, "℆");
+            EcryptionTbl.Rows.Add(3, "§");
+            EcryptionTbl.Rows.Add(4, "№");
+            EcryptionTbl.Rows.Add(5, "¥");
+            EcryptionTbl.Rows.Add(6, "℀");
+            EcryptionTbl.Rows.Add(7, "₡");
+            EcryptionTbl.Rows.Add(8, "₯");
+            EcryptionTbl.Rows.Add(9, "₠");
         }
         public static string discrypt(string DiscryptedString)
         {
@@ -785,6 +781,26 @@ namespace VOCAC
                 }
             }
             return lines;
+        }
+        public string ExcuteStr(string selct)
+        {
+            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@slctstat", SqlDbType.VarChar);
+            param[0].Value = selct;
+            DAL.Struc = DAL.ExcuteCommand("SP_CHOICE_SLCT", param);
+            return DAL.Struc.msg;
+        }
+        public DataTable returntbl(string selct)
+        {
+            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@slctstat", SqlDbType.VarChar);
+            param[0].Value = selct;
+            DAL.Struc = DAL.SelectData("SP_CHOICE_SLCT", param);
+            return DAL.Struc.dt;
         }
     }
     // Current User Class
@@ -1068,7 +1084,6 @@ namespace VOCAC
             //usage sample: FormIsOpen(Application.OpenForms,typeof(Form2)
             return Application.OpenForms.Cast<Form>().Any(openForm => openForm.GetType() == formType);
         }
-
     }
 }
 

@@ -25,7 +25,10 @@ namespace VOCAC.PL
         byte[] data;
         static void frm_Closed(object sender, FormClosedEventArgs e)
         {
+            getTikupdatefrm.TimerEscOpen.Stop();
+            getTikupdatefrm.WindowState = FormWindowState.Normal;
             frm = null;
+            GC.Collect();
         }
         public static TikUpdate getTikupdatefrm
         {
@@ -218,7 +221,6 @@ namespace VOCAC.PL
             }
 
         }
-
         private void TimerEscOpen_Tick(object sender, EventArgs e)
         {
             function fn = function.getfn;

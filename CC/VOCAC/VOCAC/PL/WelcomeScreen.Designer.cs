@@ -53,15 +53,11 @@
             this.LblClrSys = new System.Windows.Forms.Label();
             this.GrpCounters = new System.Windows.Forms.GroupBox();
             this.LblFolwDy = new System.Windows.Forms.Label();
-            this.LblReadYDy = new System.Windows.Forms.Label();
-            this.LblUnRead = new System.Windows.Forms.Label();
             this.LblEvDy = new System.Windows.Forms.Label();
             this.LblClsYDy = new System.Windows.Forms.Label();
             this.LblFlN = new System.Windows.Forms.Label();
             this.LblClsN = new System.Windows.Forms.Label();
             this.Label6 = new System.Windows.Forms.Label();
-            this.Label5 = new System.Windows.Forms.Label();
-            this.Label4 = new System.Windows.Forms.Label();
             this.Label3 = new System.Windows.Forms.Label();
             this.Label2 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
@@ -382,15 +378,11 @@
             this.GrpCounters.Controls.Add(this.LblRecivDy);
             this.GrpCounters.Controls.Add(this.Label8);
             this.GrpCounters.Controls.Add(this.LblReOpY);
-            this.GrpCounters.Controls.Add(this.LblReadYDy);
-            this.GrpCounters.Controls.Add(this.LblUnRead);
             this.GrpCounters.Controls.Add(this.LblEvDy);
             this.GrpCounters.Controls.Add(this.LblClsYDy);
             this.GrpCounters.Controls.Add(this.LblFlN);
             this.GrpCounters.Controls.Add(this.LblClsN);
             this.GrpCounters.Controls.Add(this.Label6);
-            this.GrpCounters.Controls.Add(this.Label5);
-            this.GrpCounters.Controls.Add(this.Label4);
             this.GrpCounters.Controls.Add(this.Label3);
             this.GrpCounters.Controls.Add(this.Label2);
             this.GrpCounters.Controls.Add(this.Label1);
@@ -417,30 +409,6 @@
             this.LblFolwDy.Size = new System.Drawing.Size(137, 20);
             this.LblFolwDy.TabIndex = 19;
             this.LblFolwDy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // LblReadYDy
-            // 
-            this.LblReadYDy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblReadYDy.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblReadYDy.ForeColor = System.Drawing.Color.Black;
-            this.LblReadYDy.Location = new System.Drawing.Point(44, 164);
-            this.LblReadYDy.Name = "LblReadYDy";
-            this.LblReadYDy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblReadYDy.Size = new System.Drawing.Size(137, 20);
-            this.LblReadYDy.TabIndex = 12;
-            this.LblReadYDy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // LblUnRead
-            // 
-            this.LblUnRead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblUnRead.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblUnRead.ForeColor = System.Drawing.Color.Black;
-            this.LblUnRead.Location = new System.Drawing.Point(44, 144);
-            this.LblUnRead.Name = "LblUnRead";
-            this.LblUnRead.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblUnRead.Size = new System.Drawing.Size(137, 20);
-            this.LblUnRead.TabIndex = 11;
-            this.LblUnRead.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // LblEvDy
             // 
@@ -502,32 +470,6 @@
             this.Label6.TabIndex = 6;
             this.Label6.Text = "معاد فتحها :";
             this.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // Label5
-            // 
-            this.Label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Label5.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label5.ForeColor = System.Drawing.Color.Black;
-            this.Label5.Location = new System.Drawing.Point(178, 164);
-            this.Label5.Name = "Label5";
-            this.Label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Label5.Size = new System.Drawing.Size(154, 20);
-            this.Label5.TabIndex = 5;
-            this.Label5.Text = "تحديثات مقروءه اليوم :";
-            this.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // Label4
-            // 
-            this.Label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Label4.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label4.ForeColor = System.Drawing.Color.Black;
-            this.Label4.Location = new System.Drawing.Point(178, 144);
-            this.Label4.Name = "Label4";
-            this.Label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Label4.Size = new System.Drawing.Size(154, 20);
-            this.Label4.TabIndex = 4;
-            this.Label4.Text = "تحديثات غير مقروءه :";
-            this.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Label3
             // 
@@ -849,6 +791,7 @@
             this.ToolTip1.SetToolTip(this.button3, "تسجيل الدخول");
             this.button3.UseCompatibleTextRendering = true;
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // lblIp
@@ -864,6 +807,7 @@
             this.lblIp.Text = "User IP: ";
             this.lblIp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ToolTip1.SetToolTip(this.lblIp, "IP Address Of Current Mashine");
+            this.lblIp.Click += new System.EventHandler(this.LblIp_Click);
             // 
             // TimerCon
             // 
@@ -1110,15 +1054,11 @@
         internal System.Windows.Forms.Label LblClrSys;
         internal System.Windows.Forms.GroupBox GrpCounters;
         internal System.Windows.Forms.Label LblFolwDy;
-        internal System.Windows.Forms.Label LblReadYDy;
-        internal System.Windows.Forms.Label LblUnRead;
         internal System.Windows.Forms.Label LblEvDy;
         internal System.Windows.Forms.Label LblClsYDy;
         internal System.Windows.Forms.Label LblFlN;
         internal System.Windows.Forms.Label LblClsN;
         internal System.Windows.Forms.Label Label6;
-        internal System.Windows.Forms.Label Label5;
-        internal System.Windows.Forms.Label Label4;
         internal System.Windows.Forms.Label Label3;
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.Label Label1;

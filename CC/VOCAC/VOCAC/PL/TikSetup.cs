@@ -15,6 +15,7 @@ namespace VOCAC.PL
         static void frm_Closed(object sender, FormClosedEventArgs e)
         {
             frm = null;
+            GC.Collect();
         }
         public static TikSetup getTiksetupfrm
         {
@@ -444,7 +445,6 @@ namespace VOCAC.PL
             param[3].Value = length;
             param[4] = new SqlParameter("@mask", SqlDbType.VarChar, 30);
             param[4].Value = mask;
-            DAL.Open();
             try
             {
                 DAL.Struc = DAL.ExcuteCommand("SP_Mend_INSERT", param);

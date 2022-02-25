@@ -21,6 +21,7 @@ namespace VOCAC.PL
         static void frm_Closed(object sender, FormClosedEventArgs e)
         {
             frm = null;
+            GC.Collect();
         }
         public static TikNew getTiknewfrm
         {
@@ -38,7 +39,7 @@ namespace VOCAC.PL
         DataTable customerTable = new DataTable();
         Form Frm;
         DataGridView GV;
-        DataTable tbl;
+        DataTable choicetbl;
         FlowLayoutPanel Flow;
         TextBox TxBox;
         TextBox sndr;
@@ -48,10 +49,16 @@ namespace VOCAC.PL
         string itemRef;
         int TeamIdentfier;
         string Help_;
+        DataTable DublicatedTbl;
+        bool bolDublicted = false;
         int lblColor = 35;
         public TikNew()
         {
             InitializeComponent();
+            if (frm == null)
+            {
+                frm = this;
+            }
             forms.FrmAllSub(this);
             NewTickSub();
             this.Phon1TxtBx.TextChanged += new System.EventHandler(this.Phon1TxtBx_TextChanged);
@@ -126,8 +133,14 @@ namespace VOCAC.PL
             FlwTree.Enabled = true;
             BtnDublicate.Visible = false;
             FlwMainData.Enabled = false;
+            FlwMainData.BackColor = Color.FromArgb(192, 255, 255);
+            label8.Text = "";
+            label8.BackColor = Color.White;
             richTextBox1.Text = "";
             lblhelp.Text = "";
+            chckIDChange.Checked = false;
+            chckphonechange.Checked = false;
+
         }
         private void mendlstlbl()
         {
@@ -166,6 +179,7 @@ namespace VOCAC.PL
                 {
                     if (function.validateNationalID(IDTxtBx.Text.Replace(" ", "").Trim().ToString()) == true)
                     {
+                        DublicatedTik();
                         Complete_ += 1;
                         fn.ClorTxt(richTextBox1, IDTxtBx.AccessibleName, Color.White, Color.Green, 14);
                     }
@@ -194,12 +208,17 @@ namespace VOCAC.PL
             //Check Customer Phone 1
             if (function.validatePhoneNumber(Phon1TxtBx.Text.Trim()) == true)
             {
+                DublicatedTik();
                 Complete_ += 1;
                 toolTip1.Hide(Phon1TxtBx);
                 fn.ClorTxt(richTextBox1, Phon1TxtBx.AccessibleName, Color.White, Color.Green, 14);
             }
             else
             {
+                bolDublicted = false;
+                FlwMainData.BackColor = Color.FromArgb(192, 255, 255);
+                label8.Text = "";
+                label8.BackColor = Color.White;
                 if (RadioButton8.Checked == true)
                 {
                     if (ActiveControl == Phon1TxtBx) { toolTip1.Show("رقم الموبايل لابد أنه يبدأ بـ " + Environment.NewLine + " 010, 011, 012 أو 015 ", ActiveControl, 0, 30, 1000); }
@@ -287,15 +306,15 @@ namespace VOCAC.PL
 
             if (lblhelp.Text.Length > 0)
             {
-                if (lblColor >= 100 && lblColor <= 250)
+                if (lblColor >= 150 && lblColor <= 250)
                 {
-                    lblhelp.ForeColor = Color.FromArgb(lblColor, lblColor, lblColor);
+                    lblhelp.ForeColor = Color.FromArgb(lblColor, 10, lblColor);
                     lblColor -= 5;
                 }
-                else if (lblColor >= 10 && lblColor < 100)
+                else if (lblColor >= 10 && lblColor < 150)
                 {
-                    lblhelp.ForeColor = Color.FromArgb(lblColor, 230, lblColor);
-                    lblColor += 25;
+                    lblhelp.ForeColor = Color.FromArgb(0, 255, 0);
+                    lblColor +=30;
                 }
             }
 
@@ -575,14 +594,18 @@ namespace VOCAC.PL
             if (TreeView1.SelectedNode == null)
             {
             }
-            else if (TreeView1.SelectedNode.Level == 2)
-                TreeView1.SelectedNode.Parent.Parent.Collapse(false);  // True to leave the child nodes in their Current state; false to collapse the child nodes.
-            else if (TreeView1.SelectedNode.Level == 1)
-                // CombProdRef.Items.Clear()
-                TreeView1.SelectedNode.Parent.Collapse(false);
-            else if (TreeView1.SelectedNode.Level == 0)
-                // CombProdRef.Items.Clear()
-                TreeView1.SelectedNode.Collapse(false);
+            else
+            {
+                bolDublicted = false;
+                if (TreeView1.SelectedNode.Level == 2)
+                    TreeView1.SelectedNode.Parent.Parent.Collapse(false);  // True to leave the child nodes in their Current state; false to collapse the child nodes.
+                else if (TreeView1.SelectedNode.Level == 1)
+                    // CombProdRef.Items.Clear()
+                    TreeView1.SelectedNode.Parent.Collapse(false);
+                else if (TreeView1.SelectedNode.Level == 0)
+                    // CombProdRef.Items.Clear()
+                    TreeView1.SelectedNode.Collapse(false);
+            }
         }
         private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -590,6 +613,7 @@ namespace VOCAC.PL
             BtnAdd.Enabled = true;
             if (TreeView1.SelectedNode.Level == 2)
             {
+                DublicatedTik();
                 DataRow DRW = function.DRW(Statcdif.ProdCompTable, TreeView1.SelectedNode.Name, Statcdif.ProdCompTable.Columns["FnSQL"]);
                 itemRef = DRW.ItemArray[7].ToString();
                 TeamIdentfier = Convert.ToInt32(DRW.ItemArray[8]);
@@ -676,6 +700,7 @@ namespace VOCAC.PL
             }
             else if (TreeView1.SelectedNode.Level < 2)
             {
+                bolDublicted = false;
                 FlwMainData.Enabled = false;
                 PrdKind = "";
                 Prdct.Text = "";
@@ -802,28 +827,17 @@ namespace VOCAC.PL
                 }
             }
         }
-        private DataTable populateTextCoise(DataTable Tbl, string selct)
-        {
-            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-            SqlParameter[] param = new SqlParameter[1];
-
-            param[0] = new SqlParameter("@slctstat", SqlDbType.VarChar);
-            param[0].Value = selct;
-            DAL.DataAccessLayer.rturnStruct RsultPopulateChoice = DAL.SelectData("SP_CHOICE_SLCT", param);
-            DAL.Close();
-            return RsultPopulateChoice.dt;
-        }
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             // NOTE: set form's KeyPreview property to True
             if (e.KeyCode == Keys.F1)
             {
                 sndr = (TextBox)sender;
-                tbl = new DataTable();
-                tbl = populateTextCoise(tbl, sndr.AccessibleName);
-                if (tbl.Rows.Count > 0)
+                choicetbl = new DataTable();
+                choicetbl = fn.returntbl(sndr.AccessibleName);
+                if (choicetbl.Rows.Count > 0)
                 {
-                    tbl.DefaultView.RowFilter = string.Empty;
+                    choicetbl.DefaultView.RowFilter = string.Empty;
                     addnewTextBox();
                     addnewGridview();
                     addnewFowoutpanel();
@@ -836,7 +850,7 @@ namespace VOCAC.PL
                     WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "    يرجى الضغط المزدوج على " + GetNextControl((TextBox)sender, false).Text.Substring(0, GetNextControl((TextBox)sender, false).Text.Length - 2) + " للرجوع بالإختيار وإغلاق شاشة البحث.";
                     Frm.ShowDialog();
                     WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
-                    tbl.Dispose();
+                    choicetbl.Dispose();
                     Frm.Dispose();
                     GC.Collect();
                 }
@@ -855,7 +869,7 @@ namespace VOCAC.PL
             Frm.StartPosition = FormStartPosition.CenterScreen;
             Frm.SizeChanged += new EventHandler(Frm_sizechanged);
             Frm.Size = new Size(GV.Width, TxBox.Height + GV.Height + 50);
-            Frm.Text = "اختيار " + GetNextControl(sndr, false).Text + " عدد البيانات " + tbl.Rows.Count;
+            Frm.Text = "اختيار " + GetNextControl(sndr, false).Text + " عدد البيانات " + choicetbl.Rows.Count;
             Frm.BackColor = Color.White;
         }
         private void addnewTextBox()
@@ -874,7 +888,7 @@ namespace VOCAC.PL
         private void addnewGridview()
         {
             GV = new DataGridView();
-            GV.DataSource = tbl.DefaultView;
+            GV.DataSource = choicetbl.DefaultView;
             GV.AllowUserToAddRows = false;
             GV.AllowUserToDeleteRows = false;
             GV.ReadOnly = true;
@@ -906,8 +920,8 @@ namespace VOCAC.PL
         }
         private void Txt_TextChanged(object sender, EventArgs e)
         {
-            tbl.DefaultView.RowFilter = "[" + tbl.Columns[0].ColumnName + "]" + " like '%" + TxBox.Text + "%'";
-            GV.DataSource = tbl.DefaultView;
+            choicetbl.DefaultView.RowFilter = "[" + choicetbl.Columns[0].ColumnName + "]" + " like '%" + TxBox.Text + "%'";
+            GV.DataSource = choicetbl.DefaultView;
         }
         private void DataGridView_CellClick(object sender, EventArgs e)
         {
@@ -1023,8 +1037,8 @@ namespace VOCAC.PL
                 Convert.ToBoolean(TickKind)                                         //Ticket Kind
                 , Convert.ToInt32(TreeView1.SelectedNode.Name)  //Ticket Pcoduct & Cmplaint Code SQL
                 , Convert.ToInt32(SrcCmbBx.SelectedValue)                     //Ticket Source
-                , NameTxtBx.Text.ToString()                                       //Ticket Client Name
-                , Phon1TxtBx.Text.ToString()                                       //Ticket Client Phone Number 1
+                , NameTxtBx.Text.ToString().Trim()                                      //Ticket Client Name
+                , Phon1TxtBx.Text.ToString().Trim()                                       //Ticket Client Phone Number 1
                 , Phon2TxtBx.Text.ToString().Replace(" ", "")                                       //Ticket Client Phone Number 2
                 , AddTxtBx.Text.ToString().Trim()                                         //Ticket Client Address
                 , IDTxtBx.Text.ToString().Trim()                                          //Ticket Clients National ID
@@ -1099,7 +1113,8 @@ namespace VOCAC.PL
         {
             this.Phon1TxtBx.TextChanged -= new System.EventHandler(this.Phon1TxtBx_TextChanged);
             this.IDTxtBx.TextChanged -= new System.EventHandler(this.IDTxtBx_TextChanged);
-            string tmp="";
+            string tmp = "";
+            bolDublicted = false;
             if (mskdTextBox.Text.Trim().Length == mskdTextBox.Mask.Length)
             {
                 tmp = lblhelp.Text;
@@ -1108,17 +1123,12 @@ namespace VOCAC.PL
                 lblhelp.Text = "جاري البحث عن بيانات العميل ....";
                 StringBuilder selectString = new StringBuilder();
                 customerTable.Rows.Clear();
-                DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-
                 selectString.Append(SlctString + mskdTextBox.Text.ToString());
                 if (mskdTextBox == Phon1TxtBx) { selectString.Append("' or  TkClPh1 ='" + mskdTextBox.Text.ToString()); }
                 selectString.Append("'  order by TkSQL desc");
 
-                SqlParameter[] param = new SqlParameter[1];
-                param[0] = new SqlParameter("@slctstat", SqlDbType.VarChar);
-                param[0].Value = selectString.ToString();
-                customerTable = DAL.SelectData("SP_CHOICE_SLCT", param).dt;
-                DAL.Close();
+                customerTable = fn.returntbl(selectString.ToString());
+
                 if (customerTable.Rows.Count > 0)
                 {
                     if (mskdTextBox != Phon1TxtBx)
@@ -1127,6 +1137,28 @@ namespace VOCAC.PL
                     }
                     if (mskdTextBox != IDTxtBx)
                     {
+                        bool bol = true;
+                        for (int i = 0; i < customerTable.Rows[0]["TkClNtID"].ToString().Length; i++)
+                        {
+                            try
+                            {
+                                int hh = Convert.ToInt32(customerTable.Rows[0]["TkClNtID"].ToString().Substring(i, 1));
+                            }
+                            catch (Exception)
+                            {
+                                bol = false;
+
+                            }
+                        }
+                        if (bol == true)
+                        {
+                            RadNID.Checked = true;
+                        }
+                        else
+                        {
+                            RadPss.Checked = true;
+                        }
+
                         IDTxtBx.Text = customerTable.Rows[0]["TkClNtID"].ToString();
                     }
                     NameTxtBx.Text = customerTable.Rows[0]["TkClNm"].ToString();
@@ -1149,7 +1181,6 @@ namespace VOCAC.PL
             lblhelp.Text = tmp;
             Timer1.Start();
         }
-
         private void clearcustomerdata(MaskedTextBox mskdTextBox)
         {
             if (mskdTextBox != Phon1TxtBx)
@@ -1166,14 +1197,13 @@ namespace VOCAC.PL
             MailTxtBx.Text = "";
             customerTable.Rows.Clear();
         }
-
         private void RadPss_CheckedChanged(object sender, EventArgs e)
         {
             IDTxtBx.Text = "";
             if (RadPss.Checked == true)
             {
                 IDTxtBx.Tag = "English-TextNumber";
-                IDTxtBx.Mask = "AAAAAAAAAAAAAA";
+                IDTxtBx.Mask = "AAAAAAAAAAAAA";
                 RadNID.Checked = false;
                 RadPss.Checked = true;
                 Label11.Text = "رقم جواز السفر : ";
@@ -1182,7 +1212,6 @@ namespace VOCAC.PL
                 richTextBox1.Text = richTextBox1.Text.Replace("الرقم القومي", "رقم جواز السفر");
             }
         }
-
         private void RadNID_CheckedChanged(object sender, EventArgs e)
         {
             IDTxtBx.Text = "";
@@ -1198,7 +1227,6 @@ namespace VOCAC.PL
                 richTextBox1.Text = richTextBox1.Text.Replace("رقم جواز السفر", "الرقم القومي");
             }
         }
-
         private void MailTxtBx_Validating(object sender, CancelEventArgs e)
         {
             if (function.EmailIsValid(MailTxtBx.Text) == false && MailTxtBx.Text.Length > 0)
@@ -1207,11 +1235,42 @@ namespace VOCAC.PL
                 MailTxtBx.Focus();
             }
         }
-
         private void TikNew_Load(object sender, EventArgs e)
         {
             frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
             frm.FormClosed += new FormClosedEventHandler(frm_Closed);
+        }
+        private void DublicatedTik()
+        {
+            if (TreeView1.SelectedNode != null)
+            {
+                if (TreeView1.SelectedNode.Level == 2 && Phon1TxtBx.Text.Length == Phon1TxtBx.Mask.Length)
+                {
+                    if (bolDublicted == false)
+                    {
+                        DublicatedTbl = new DataTable();
+
+                        bolDublicted = true;
+                        choicetbl = fn.returntbl("select TkSQL, TkDtStart, TkClNm, Tikfolowusr + ' \\ ' + TikfolowusrTeam 'Folower' " +
+                                "from All_Tickets where (TkClPh= '" + Phon1TxtBx.Text + "' OR TkClNtID = '" + IDTxtBx.Text + "') AND (TkFnPrdCd = " + TreeView1.SelectedNode.Name + ") AND TkClsStatus = 0");
+                        if (choicetbl.Rows.Count > 0)
+                        {
+                            FlwMainData.BackColor = Color.FromArgb(128, 255, 128);
+                            string L;
+                            if (TickKind == 0) { L = "طلب"; } else { L = "شكوى"; }
+                            label8.Text = "هناك " + L + " قيد المتابعة الآن من نفس النوع لدى " + choicetbl.Rows[0]["Folower"];
+                            label8.BackColor = Color.Black;
+                            label8.Margin = new Padding(label8.Margin.Left, label8.Margin.Top, (FlwSubMain.Width - label8.Width) / 2, label8.Margin.Bottom);
+                        }
+                        else
+                        {
+                            label8.Text = "";
+                            label8.BackColor = Color.White;
+                            FlwMainData.BackColor = Color.FromArgb(192, 255, 255);
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TikFolow_Team));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Panel3 = new System.Windows.Forms.Panel();
             this.CloseBtn = new System.Windows.Forms.Button();
             this.FlwtopBar = new System.Windows.Forms.FlowLayoutPanel();
@@ -89,7 +89,6 @@
             this.ChckAll = new System.Windows.Forms.RadioButton();
             this.ChckTrnsDy = new System.Windows.Forms.RadioButton();
             this.ChckFlN = new System.Windows.Forms.RadioButton();
-            this.ChckRead = new System.Windows.Forms.RadioButton();
             this.ChckUpdMe = new System.Windows.Forms.RadioButton();
             this.ChckUpdColeg = new System.Windows.Forms.RadioButton();
             this.ChckUpdOther = new System.Windows.Forms.RadioButton();
@@ -102,7 +101,6 @@
             this.LblAll = new System.Windows.Forms.Label();
             this.LblRecved = new System.Windows.Forms.Label();
             this.LblNoFlwCount = new System.Windows.Forms.Label();
-            this.LblUnReadCount = new System.Windows.Forms.Label();
             this.LblUpdtFollow = new System.Windows.Forms.Label();
             this.LblUpdtColleg = new System.Windows.Forms.Label();
             this.LblUpdtOthrs = new System.Windows.Forms.Label();
@@ -165,7 +163,7 @@
             // Panel3
             // 
             this.Panel3.Controls.Add(this.CloseBtn);
-            this.Panel3.Location = new System.Drawing.Point(120, 740);
+            this.Panel3.Location = new System.Drawing.Point(242, 740);
             this.Panel3.Name = "Panel3";
             this.Panel3.Size = new System.Drawing.Size(76, 72);
             this.Panel3.TabIndex = 2172;
@@ -708,7 +706,7 @@
             this.BtnRefrsh.Name = "BtnRefrsh";
             this.BtnRefrsh.Size = new System.Drawing.Size(90, 30);
             this.BtnRefrsh.TabIndex = 2034;
-            this.BtnRefrsh.Text = "تحديث";
+            this.BtnRefrsh.Text = "تحديث الشاشه";
             this.BtnRefrsh.UseVisualStyleBackColor = true;
             this.BtnRefrsh.Click += new System.EventHandler(this.BtnRefrsh_Click);
             // 
@@ -857,8 +855,8 @@
             // 
             this.GridTicket.AllowUserToAddRows = false;
             this.GridTicket.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.GridTicket.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.GridTicket.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.GridTicket.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GridTicket.BackgroundColor = System.Drawing.Color.White;
             this.GridTicket.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -879,7 +877,6 @@
             this.flwCounters.Controls.Add(this.ChckAll);
             this.flwCounters.Controls.Add(this.ChckTrnsDy);
             this.flwCounters.Controls.Add(this.ChckFlN);
-            this.flwCounters.Controls.Add(this.ChckRead);
             this.flwCounters.Controls.Add(this.ChckUpdMe);
             this.flwCounters.Controls.Add(this.ChckUpdColeg);
             this.flwCounters.Controls.Add(this.ChckUpdOther);
@@ -892,7 +889,6 @@
             this.flwCounters.Controls.Add(this.LblAll);
             this.flwCounters.Controls.Add(this.LblRecved);
             this.flwCounters.Controls.Add(this.LblNoFlwCount);
-            this.flwCounters.Controls.Add(this.LblUnReadCount);
             this.flwCounters.Controls.Add(this.LblUpdtFollow);
             this.flwCounters.Controls.Add(this.LblUpdtColleg);
             this.flwCounters.Controls.Add(this.LblUpdtOthrs);
@@ -902,17 +898,17 @@
             this.flwCounters.Controls.Add(this.LabelCompCount);
             this.flwCounters.Controls.Add(this.LblRequest);
             this.flwCounters.Controls.Add(this.LblRegions);
-            this.flwCounters.Location = new System.Drawing.Point(202, 740);
+            this.flwCounters.Location = new System.Drawing.Point(324, 740);
             this.flwCounters.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.flwCounters.Name = "flwCounters";
-            this.flwCounters.Size = new System.Drawing.Size(1343, 72);
+            this.flwCounters.Size = new System.Drawing.Size(1221, 72);
             this.flwCounters.TabIndex = 2174;
             // 
             // ChckAll
             // 
             this.ChckAll.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckAll.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckAll.Location = new System.Drawing.Point(1250, 3);
+            this.ChckAll.Location = new System.Drawing.Point(1128, 3);
             this.ChckAll.Name = "ChckAll";
             this.ChckAll.Size = new System.Drawing.Size(90, 32);
             this.ChckAll.TabIndex = 2069;
@@ -925,7 +921,7 @@
             // 
             this.ChckTrnsDy.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckTrnsDy.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckTrnsDy.Location = new System.Drawing.Point(1154, 3);
+            this.ChckTrnsDy.Location = new System.Drawing.Point(1032, 3);
             this.ChckTrnsDy.Name = "ChckTrnsDy";
             this.ChckTrnsDy.Size = new System.Drawing.Size(90, 32);
             this.ChckTrnsDy.TabIndex = 2053;
@@ -938,7 +934,7 @@
             // 
             this.ChckFlN.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckFlN.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckFlN.Location = new System.Drawing.Point(1058, 3);
+            this.ChckFlN.Location = new System.Drawing.Point(936, 3);
             this.ChckFlN.Name = "ChckFlN";
             this.ChckFlN.Size = new System.Drawing.Size(90, 32);
             this.ChckFlN.TabIndex = 2054;
@@ -947,24 +943,11 @@
             this.ChckFlN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ChckFlN.UseVisualStyleBackColor = true;
             // 
-            // ChckRead
-            // 
-            this.ChckRead.Appearance = System.Windows.Forms.Appearance.Button;
-            this.ChckRead.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckRead.Location = new System.Drawing.Point(962, 3);
-            this.ChckRead.Name = "ChckRead";
-            this.ChckRead.Size = new System.Drawing.Size(90, 32);
-            this.ChckRead.TabIndex = 2061;
-            this.ChckRead.TabStop = true;
-            this.ChckRead.Text = "غير مقروء";
-            this.ChckRead.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ChckRead.UseVisualStyleBackColor = true;
-            // 
             // ChckUpdMe
             // 
             this.ChckUpdMe.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckUpdMe.Font = new System.Drawing.Font("Times New Roman", 8F);
-            this.ChckUpdMe.Location = new System.Drawing.Point(866, 3);
+            this.ChckUpdMe.Location = new System.Drawing.Point(840, 3);
             this.ChckUpdMe.Name = "ChckUpdMe";
             this.ChckUpdMe.Size = new System.Drawing.Size(90, 32);
             this.ChckUpdMe.TabIndex = 2055;
@@ -977,7 +960,7 @@
             // 
             this.ChckUpdColeg.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckUpdColeg.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckUpdColeg.Location = new System.Drawing.Point(770, 3);
+            this.ChckUpdColeg.Location = new System.Drawing.Point(744, 3);
             this.ChckUpdColeg.Name = "ChckUpdColeg";
             this.ChckUpdColeg.Size = new System.Drawing.Size(90, 32);
             this.ChckUpdColeg.TabIndex = 2052;
@@ -990,7 +973,7 @@
             // 
             this.ChckUpdOther.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckUpdOther.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckUpdOther.Location = new System.Drawing.Point(674, 3);
+            this.ChckUpdOther.Location = new System.Drawing.Point(648, 3);
             this.ChckUpdOther.Name = "ChckUpdOther";
             this.ChckUpdOther.Size = new System.Drawing.Size(90, 32);
             this.ChckUpdOther.TabIndex = 2050;
@@ -1003,7 +986,7 @@
             // 
             this.ChckEsc1.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckEsc1.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckEsc1.Location = new System.Drawing.Point(578, 3);
+            this.ChckEsc1.Location = new System.Drawing.Point(552, 3);
             this.ChckEsc1.Name = "ChckEsc1";
             this.ChckEsc1.Size = new System.Drawing.Size(90, 32);
             this.ChckEsc1.TabIndex = 2067;
@@ -1016,7 +999,7 @@
             // 
             this.ChckEsc2.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckEsc2.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckEsc2.Location = new System.Drawing.Point(482, 3);
+            this.ChckEsc2.Location = new System.Drawing.Point(456, 3);
             this.ChckEsc2.Name = "ChckEsc2";
             this.ChckEsc2.Size = new System.Drawing.Size(90, 32);
             this.ChckEsc2.TabIndex = 2065;
@@ -1029,7 +1012,7 @@
             // 
             this.ChckEsc3.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckEsc3.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckEsc3.Location = new System.Drawing.Point(386, 3);
+            this.ChckEsc3.Location = new System.Drawing.Point(360, 3);
             this.ChckEsc3.Name = "ChckEsc3";
             this.ChckEsc3.Size = new System.Drawing.Size(90, 32);
             this.ChckEsc3.TabIndex = 2063;
@@ -1042,7 +1025,7 @@
             // 
             this.ChckComp.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckComp.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckComp.Location = new System.Drawing.Point(290, 3);
+            this.ChckComp.Location = new System.Drawing.Point(264, 3);
             this.ChckComp.Name = "ChckComp";
             this.ChckComp.Size = new System.Drawing.Size(90, 32);
             this.ChckComp.TabIndex = 2056;
@@ -1055,7 +1038,7 @@
             // 
             this.ChckRequest.Appearance = System.Windows.Forms.Appearance.Button;
             this.ChckRequest.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckRequest.Location = new System.Drawing.Point(194, 3);
+            this.ChckRequest.Location = new System.Drawing.Point(168, 3);
             this.ChckRequest.Name = "ChckRequest";
             this.ChckRequest.Size = new System.Drawing.Size(90, 32);
             this.ChckRequest.TabIndex = 2071;
@@ -1069,7 +1052,7 @@
             this.ChckRegions.Appearance = System.Windows.Forms.Appearance.Button;
             this.flwCounters.SetFlowBreak(this.ChckRegions, true);
             this.ChckRegions.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.ChckRegions.Location = new System.Drawing.Point(39, 3);
+            this.ChckRegions.Location = new System.Drawing.Point(13, 3);
             this.ChckRegions.Name = "ChckRegions";
             this.ChckRegions.Size = new System.Drawing.Size(149, 32);
             this.ChckRegions.TabIndex = 2073;
@@ -1082,7 +1065,7 @@
             // 
             this.LblAll.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblAll.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblAll.Location = new System.Drawing.Point(1250, 41);
+            this.LblAll.Location = new System.Drawing.Point(1128, 41);
             this.LblAll.Margin = new System.Windows.Forms.Padding(3);
             this.LblAll.Name = "LblAll";
             this.LblAll.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1095,7 +1078,7 @@
             // 
             this.LblRecved.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblRecved.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblRecved.Location = new System.Drawing.Point(1154, 41);
+            this.LblRecved.Location = new System.Drawing.Point(1032, 41);
             this.LblRecved.Margin = new System.Windows.Forms.Padding(3);
             this.LblRecved.Name = "LblRecved";
             this.LblRecved.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1108,7 +1091,7 @@
             // 
             this.LblNoFlwCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblNoFlwCount.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblNoFlwCount.Location = new System.Drawing.Point(1058, 41);
+            this.LblNoFlwCount.Location = new System.Drawing.Point(936, 41);
             this.LblNoFlwCount.Margin = new System.Windows.Forms.Padding(3);
             this.LblNoFlwCount.Name = "LblNoFlwCount";
             this.LblNoFlwCount.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1117,24 +1100,11 @@
             this.LblNoFlwCount.Text = "LblNoFlwCount";
             this.LblNoFlwCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // LblUnReadCount
-            // 
-            this.LblUnReadCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LblUnReadCount.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblUnReadCount.Location = new System.Drawing.Point(962, 41);
-            this.LblUnReadCount.Margin = new System.Windows.Forms.Padding(3);
-            this.LblUnReadCount.Name = "LblUnReadCount";
-            this.LblUnReadCount.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.LblUnReadCount.Size = new System.Drawing.Size(90, 27);
-            this.LblUnReadCount.TabIndex = 2062;
-            this.LblUnReadCount.Text = "LblUnReadCount";
-            this.LblUnReadCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // LblUpdtFollow
             // 
             this.LblUpdtFollow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblUpdtFollow.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblUpdtFollow.Location = new System.Drawing.Point(866, 41);
+            this.LblUpdtFollow.Location = new System.Drawing.Point(840, 41);
             this.LblUpdtFollow.Margin = new System.Windows.Forms.Padding(3);
             this.LblUpdtFollow.Name = "LblUpdtFollow";
             this.LblUpdtFollow.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1147,7 +1117,7 @@
             // 
             this.LblUpdtColleg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblUpdtColleg.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblUpdtColleg.Location = new System.Drawing.Point(770, 41);
+            this.LblUpdtColleg.Location = new System.Drawing.Point(744, 41);
             this.LblUpdtColleg.Margin = new System.Windows.Forms.Padding(3);
             this.LblUpdtColleg.Name = "LblUpdtColleg";
             this.LblUpdtColleg.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1160,7 +1130,7 @@
             // 
             this.LblUpdtOthrs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblUpdtOthrs.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblUpdtOthrs.Location = new System.Drawing.Point(674, 41);
+            this.LblUpdtOthrs.Location = new System.Drawing.Point(648, 41);
             this.LblUpdtOthrs.Margin = new System.Windows.Forms.Padding(3);
             this.LblUpdtOthrs.Name = "LblUpdtOthrs";
             this.LblUpdtOthrs.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1173,7 +1143,7 @@
             // 
             this.LblFl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblFl1.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblFl1.Location = new System.Drawing.Point(578, 41);
+            this.LblFl1.Location = new System.Drawing.Point(552, 41);
             this.LblFl1.Margin = new System.Windows.Forms.Padding(3);
             this.LblFl1.Name = "LblFl1";
             this.LblFl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1186,7 +1156,7 @@
             // 
             this.LblFl2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblFl2.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblFl2.Location = new System.Drawing.Point(482, 41);
+            this.LblFl2.Location = new System.Drawing.Point(456, 41);
             this.LblFl2.Margin = new System.Windows.Forms.Padding(3);
             this.LblFl2.Name = "LblFl2";
             this.LblFl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1199,7 +1169,7 @@
             // 
             this.LblFl3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblFl3.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblFl3.Location = new System.Drawing.Point(386, 41);
+            this.LblFl3.Location = new System.Drawing.Point(360, 41);
             this.LblFl3.Margin = new System.Windows.Forms.Padding(3);
             this.LblFl3.Name = "LblFl3";
             this.LblFl3.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1212,7 +1182,7 @@
             // 
             this.LabelCompCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LabelCompCount.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LabelCompCount.Location = new System.Drawing.Point(290, 41);
+            this.LabelCompCount.Location = new System.Drawing.Point(264, 41);
             this.LabelCompCount.Margin = new System.Windows.Forms.Padding(3);
             this.LabelCompCount.Name = "LabelCompCount";
             this.LabelCompCount.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1225,7 +1195,7 @@
             // 
             this.LblRequest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblRequest.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblRequest.Location = new System.Drawing.Point(194, 41);
+            this.LblRequest.Location = new System.Drawing.Point(168, 41);
             this.LblRequest.Margin = new System.Windows.Forms.Padding(3);
             this.LblRequest.Name = "LblRequest";
             this.LblRequest.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1238,7 +1208,7 @@
             // 
             this.LblRegions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblRegions.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.LblRegions.Location = new System.Drawing.Point(39, 41);
+            this.LblRegions.Location = new System.Drawing.Point(13, 41);
             this.LblRegions.Margin = new System.Windows.Forms.Padding(3);
             this.LblRegions.Name = "LblRegions";
             this.LblRegions.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1288,7 +1258,6 @@
             // 
             // StatusBar1
             // 
-            this.StatusBar1.Enabled = false;
             this.StatusBar1.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.StatusBar1.Location = new System.Drawing.Point(0, 739);
             this.StatusBar1.Name = "StatusBar1";
@@ -1300,6 +1269,7 @@
             this.StatusBar1.Size = new System.Drawing.Size(1562, 36);
             this.StatusBar1.SizingGrip = false;
             this.StatusBar1.TabIndex = 2171;
+            this.StatusBar1.PanelClick += new System.Windows.Forms.StatusBarPanelClickEventHandler(this.StatusBar1_PanelClick);
             // 
             // StatBrPnlEn
             // 
@@ -1333,6 +1303,7 @@
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "إدارة الشكاوى";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TikFolow_Team_FormClosing);
             this.Load += new System.EventHandler(this.TikFolow_Load);
             this.SizeChanged += new System.EventHandler(this.TikFolow_SizeChanged);
             this.Panel3.ResumeLayout(false);
@@ -1407,8 +1378,6 @@
         internal System.Windows.Forms.RadioButton ChckEsc2;
         internal System.Windows.Forms.Label LblFl3;
         internal System.Windows.Forms.RadioButton ChckEsc3;
-        internal System.Windows.Forms.Label LblUnReadCount;
-        internal System.Windows.Forms.RadioButton ChckRead;
         internal System.Windows.Forms.Label LabelCompCount;
         internal System.Windows.Forms.Label LblNoFlwCount;
         internal System.Windows.Forms.Label LblRecved;

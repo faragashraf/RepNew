@@ -13,11 +13,12 @@ namespace VOCAC.PL
 {
     public partial class userPasschange : Form
     {
+        function fn = function.getfn;
         private static userPasschange frm;
         static void frm_Closed(object sender, FormClosedEventArgs e)
         {
             frm = null;
-            frm.Dispose();
+            GC.Collect();
         }
         public static userPasschange getuserPassChangefrm
         {
@@ -58,7 +59,7 @@ namespace VOCAC.PL
                     }
                     else
                     {
-                        if (changePasswrd("update Int_user set UsrPassNew ='" + TxtUsrPass.Text + "' where usrid = " + Statcdif.UserTable.Rows[0].Field<int>("UsrId")) == null)
+                        if (fn.ExcuteStr("update Int_user set UsrPassNew ='" + TxtUsrPass.Text + "' where usrid = " + Statcdif.UserTable.Rows[0].Field<int>("UsrId")) == null)
                         {
                             CurrentUser.UsrPWrd = TxtUsrPass.Text;
                             LblHint.Text = "تم تغيير كلمة المرور بنجاح";
@@ -83,17 +84,6 @@ namespace VOCAC.PL
                 LblHint.ForeColor = Color.Red;
             }
             this.Enabled = true;
-        }
-        private string changePasswrd(string selct)
-        {
-            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-            SqlParameter[] param = new SqlParameter[1];
-
-            param[0] = new SqlParameter("@slctstat", SqlDbType.VarChar);
-            param[0].Value = selct;
-            DAL.DataAccessLayer.rturnStruct RsultPopulateChoice = DAL.ExcuteCommand("SP_CHOICE_SLCT", param);
-            DAL.Close();
-            return RsultPopulateChoice.msg;
         }
         private void ExitBtn_Click(object sender, EventArgs e)
         {

@@ -37,10 +37,9 @@ namespace VOCAC.DAL
                     sqlconnection.Open();
                     GC.Collect();
                 }
-                catch (Exception Ex)
+                catch (Exception ex)
                 {
-                    function fn = function.getfn;
-                    fn.AppLog(this.ToString(), Ex.Message, "Error On Open Connection");
+                    function.AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), "Error On Open Connection");
                 }
             }
         }
@@ -54,10 +53,9 @@ namespace VOCAC.DAL
                     sqlconnection.Close();
                     GC.Collect();
                 }
-                catch (Exception Ex)
+                catch (Exception ex)
                 {
-                    function fn = function.getfn;
-                    fn.AppLog(this.ToString(), Ex.Message, "Error On Close Connection");
+                    function.AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), "Error On Close Connection");
                 }
             }
         }
@@ -85,12 +83,11 @@ namespace VOCAC.DAL
             {
                 da.Fill(Struc.dt);
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
                 Struc.dt = null;
-                Struc.msg = Ex.Message;
-                function fn = function.getfn;
-                fn.AppLog(this.ToString(), Ex.Message, Stored_Procedure);
+                Struc.msg = ex.Message;
+                function.AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), Stored_Procedure);
             }
             return Struc;
         }
@@ -114,12 +111,12 @@ namespace VOCAC.DAL
                 Open();
                 sqlcmd.ExecuteNonQuery();
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                Struc.msg = Ex.Message;
-                function fn = function.getfn;
-                fn.AppLog(this.ToString(), Ex.Message, Stored_Procedure);
+                Struc.msg = ex.Message;
+                function.AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), Stored_Procedure);
             }
+            Close();
             return Struc;
         }
         //Method to Read Data From Database And Return A Dataset
@@ -140,12 +137,12 @@ namespace VOCAC.DAL
             {
                 da.Fill(Struc.ds);
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                function fn = function.getfn;
-                Struc.msg = Ex.Message;
-                fn.AppLog(this.ToString(), Ex.Message, Stored_Procedure);
+                Struc.msg = ex.Message;
+                function.AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), Stored_Procedure);
             }
+            Close();
             return Struc;
         }
     }

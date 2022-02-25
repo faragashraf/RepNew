@@ -19,6 +19,7 @@ namespace VOCAC.PL
         static void frm_Closed(object sender, FormClosedEventArgs e)
         {
             frm = null;
+            GC.Collect();
         }
         public static TikSearchNew getTikSearchfrm
         {
@@ -45,6 +46,19 @@ namespace VOCAC.PL
         }
         private void TikSearchNew_Load(object sender, EventArgs e)
         {
+            //bool bolTikFollow = frms.FormIsOpen(Application.OpenForms, typeof(TikFolow_Team));
+            //if(bolTikFollow)
+            //{
+            //    DialogResult dialogResult = MessageBox.Show("سيتم إغلاق شاشة إدارة الشكاوى للإستمرار" + Environment.NewLine + "هل تريد الإستمرار؟", "شاشة بحث الشكاوى والطلبات", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+            //    if (dialogResult == DialogResult.Yes)
+            //    {
+            //        TikFolow_Team.getTikFolltemfrm.Close();
+            //    }
+            //    else
+            //    {
+            //        TikSearchNew.getTikSearchfrm.BeginInvoke(new MethodInvoker(Close));
+            //    }
+            //}
             frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
             frm.FormClosed += new FormClosedEventHandler(frm_Closed);
             searchTbl.Rows.Clear();
@@ -124,11 +138,13 @@ namespace VOCAC.PL
             {
                 if (Struc.dt != null && Struc.dt.Rows.Count > 0)
                 {
-                    Statcdif.TickTblMain = new DataTable();
-                    Statcdif.TickTblMain = Struc.dt.Copy();
+                    //Statcdif.TickTblMain.PrimaryKey = null;
+                    //Statcdif.TickTblMain.Rows.Clear();
+                    //Statcdif.TickTblMain.Columns.Clear();
+                    //Statcdif.TickTblMain = Struc.dt.Copy();
                     GridTicket.Visible = true;
                     label1.Visible = false;
-                    GridTicket.DataSource = Statcdif.TickTblMain;
+                    GridTicket.DataSource = Struc.dt;
                     this.Text = "شاشة البحث - نتبجة البحث : " + Struc.dt.Rows.Count.ToString();
                     string Req = Convert.ToString(Struc.dt.Compute("count(TkKind) ", "TkKind = 'طلب'"));
                     string Comp = Convert.ToString(Struc.dt.Compute("count(TkKind) ", "TkKind = 'شكوى'"));
@@ -198,12 +214,6 @@ namespace VOCAC.PL
                 GridTicket.Columns["updtusr"].HeaderText = "محرر آخر تحديث";
                 GridTicket.Columns["EvNm"].Visible = true;
                 GridTicket.Columns["EvNm"].HeaderText = "نوع آخر تحديث";
-
-
-                //for (int i = 37; i < GridTicket.Columns.Count; i++)
-                //{
-                //    GridTicket.Columns[i].Visible = true;
-                //}
             }
             GridTicket.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 14, FontStyle.Bold);
             GridTicket.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
