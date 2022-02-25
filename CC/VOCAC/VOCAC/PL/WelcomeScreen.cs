@@ -206,10 +206,12 @@ namespace VOCAC.PL
             }
             else
             {
-                LblLogin.Text = "";
-                StatBrPnlEn.Text = "Offline";
-                this.Refresh();
-                fn.msg("لم ينجح الإتصال بقواعد البيانات" + Environment.NewLine, "Login", MessageBoxButtons.OK);
+                LblLogin.Text = "لم ينجح الإتصال بقواعد البيانات";
+                LblLogin.ForeColor = Color.Red;
+                StatBrPnlAr.Text = "لم ينجح الإتصال بقواعد البيانات";
+                LblLogin.Image = null;
+                //this.Refresh();
+                //fn.msg("لم ينجح الإتصال بقواعد البيانات" + Environment.NewLine, "Login", MessageBoxButtons.OK);
             }
 
             LogInBtn.Enabled = true;
@@ -467,15 +469,18 @@ namespace VOCAC.PL
             Statcdif.MacTble = new DataTable();
             Statcdif.MacTble = fn.returntbl("SELECT * from AMac WHERE Mac='" + Statcdif._MacStr + "'");
 
-            if (Statcdif.MacTble.Rows.Count > 0)
+            if(Statcdif.MacTble != null)
             {
-                Cmbo.Visible = true;
-            }
-            else
-            {
-                Cmbo.Visible = false;
-                fn.msg("Your Mac Address is : " + Statcdif._MacStr, "MAC Address", MessageBoxButtons.OK);
-                Clipboard.SetText(Statcdif._MacStr.ToString());
+                if (Statcdif.MacTble.Rows.Count > 0)
+                {
+                    Cmbo.Visible = true;
+                }
+                else
+                {
+                    Cmbo.Visible = false;
+                    fn.msg("Your Mac Address is : " + Statcdif._MacStr, "MAC Address", MessageBoxButtons.OK);
+                    Clipboard.SetText(Statcdif._MacStr.ToString());
+                }
             }
         }
         private void TxtUsrPass_KeyDown(object sender, KeyEventArgs e)

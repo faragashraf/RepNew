@@ -378,8 +378,14 @@ namespace VOCAC.PL
                     PerStr[i] = "X";
                 }
             }
-            fn.ExcuteStr("update Int_user set UsrLevel_New= '" + String.Join("", PerStr) + "' WHERE (UsrId = " + UserTree.SelectedNode.Text.ToString().Split('-')[2].Trim() + ");");
-            fn.msg("تم تعديل صلاحية المستخدم", "تعديل الصلاحيات", MessageBoxButtons.OK);
+          if(  fn.ExcuteStr("update Int_user set UsrLevel_New= '" + String.Join("", PerStr) + "' WHERE (UsrId = " + UserTree.SelectedNode.Text.ToString().Split('-')[2].Trim() + ");") == null)
+            {
+                fn.msg("تم تعديل صلاحية المستخدم", "تعديل الصلاحيات", MessageBoxButtons.OK);
+            }
+          else
+            {
+                fn.msg("لم يتم تعديل صلاحية المستخدم"+ Environment.NewLine + "برجاء أعد المحاولة", "تعديل الصلاحيات", MessageBoxButtons.OK);
+            }
         }
         private void BtnCls_Click(object sender, EventArgs e)
         {

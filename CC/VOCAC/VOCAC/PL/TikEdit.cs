@@ -519,7 +519,7 @@ namespace VOCAC.PL
             {
                 String Child1 = "";
                 TreeView1.ImageList = ImgLst;
-                //;
+
                 Statcdif.ProdKTable.DefaultView.RowFilter = "ProdKNm = '" + editStruct.dt.Rows[0]["ProdKNm"].ToString() + "'";
                 for (int i = 0; i < Statcdif.ProdKTable.DefaultView.Count; i++)
                 {
@@ -827,28 +827,31 @@ namespace VOCAC.PL
                 sndr = (TextBox)sender;
                 tbl = new DataTable();
                 tbl = fn.returntbl(sndr.AccessibleName);
-                if (tbl.Rows.Count > 0)
+                if (tbl != null)
                 {
-                    tbl.DefaultView.RowFilter = string.Empty;
-                    addnewTextBox();
-                    addnewGridview();
-                    addnewFowoutpanel();
-                    addnewform_();
+                    if (tbl.Rows.Count > 0)
+                    {
+                        tbl.DefaultView.RowFilter = string.Empty;
+                        addnewTextBox();
+                        addnewGridview();
+                        addnewFowoutpanel();
+                        addnewform_();
 
-                    Frm.Controls.Add(Flow);
-                    Flow.Controls.Add(TxBox);
-                    Flow.Controls.Add(GV);
+                        Frm.Controls.Add(Flow);
+                        Flow.Controls.Add(TxBox);
+                        Flow.Controls.Add(GV);
 
-                    WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "    يرجى الضغط المزدوج على " + GetNextControl((TextBox)sender, false).Text.Substring(0, GetNextControl((TextBox)sender, false).Text.Length - 2) + " للرجوع بالإختيار وإغلاق شاشة البحث.";
-                    Frm.ShowDialog();
-                    WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
-                    tbl.Dispose();
-                    Frm.Dispose();
-                    GC.Collect();
+                        WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "    يرجى الضغط المزدوج على " + GetNextControl((TextBox)sender, false).Text.Substring(0, GetNextControl((TextBox)sender, false).Text.Length - 2) + " للرجوع بالإختيار وإغلاق شاشة البحث.";
+                        Frm.ShowDialog();
+                        WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
+                        tbl.Dispose();
+                        Frm.Dispose();
+                        GC.Collect();
+                    }
                 }
                 else
                 {
-                    //fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "تحميل البيانات");
+                    fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "تحميل البيانات", MessageBoxButtons.OK);
                 }
             }
         }
@@ -1058,6 +1061,7 @@ namespace VOCAC.PL
                     UpTxt.Append(Environment.NewLine + "تم تعديل الشكوى من " + "\"" + editStruct.dt.Rows[0]["CompNm"].ToString().Trim() + "\"" + " إلى " + "\"" + CompNm.Text.Trim() + "\"");
                 }
             }
+
             string UpdtString = UpTxt.ToString();
             string Up_Insrt_Str = string.Join(" ; ", updateStrMend);
             string TickStrUpdateStr = "";
@@ -1130,24 +1134,44 @@ namespace VOCAC.PL
                 selectString.Append("'  order by TkSQL desc");
 
                 customerTable = fn.returntbl(selectString.ToString());
-                if (customerTable.Rows.Count > 0)
+                if (customerTable != null)
                 {
-                    if (mskdTextBox != TkClPh)
+                    if (customerTable.Rows.Count > 0)
                     {
-                        TkClPh.Text = customerTable.Rows[0]["TkClPh"].ToString();
+                        if (mskdTextBox != TkClPh)
+                        {
+                            TkClPh.Text = customerTable.Rows[0]["TkClPh"].ToString();
+                        }
+                        if (mskdTextBox != TkClNtID)
+                        {
+                            bool bol = true;
+                            for (int i = 0; i < customerTable.Rows[0]["TkClNtID"].ToString().Length; i++)
+                            {
+                                if (!char.IsNumber(Convert.ToChar(customerTable.Rows[0]["TkClNtID"].ToString().Substring(i, 1))))
+                                {
+                                    bol = false;
+                                    break;
+                                }
+                            }
+                            if (bol == true)
+                            {
+                                RadNID.Checked = true;
+                            }
+                            else
+                            {
+                                RadPss.Checked = true;
+                            }
+                            TkClNtID.Text = customerTable.Rows[0]["TkClNtID"].ToString();
+                        }
+                        TkClNm.Text = customerTable.Rows[0]["TkClNm"].ToString();
+                        TkClPh1.Text = customerTable.Rows[0]["TkClPh1"].ToString();
+                        TkClAdr.Text = customerTable.Rows[0]["TkClAdr"].ToString();
+                        TkMail.Text = customerTable.Rows[0]["TkMail"].ToString();
                     }
-                    if (mskdTextBox != TkClNtID)
+                    else
                     {
-                        TkClNtID.Text = customerTable.Rows[0]["TkClNtID"].ToString();
+                        clearcustomerdata(mskdTextBox);
                     }
-                    TkClNm.Text = customerTable.Rows[0]["TkClNm"].ToString();
-                    TkClPh1.Text = customerTable.Rows[0]["TkClPh1"].ToString();
-                    TkClAdr.Text = customerTable.Rows[0]["TkClAdr"].ToString();
-                    TkMail.Text = customerTable.Rows[0]["TkMail"].ToString();
-                }
-                else
-                {
-                    clearcustomerdata(mskdTextBox);
                 }
             }
             else
@@ -1449,7 +1473,7 @@ namespace VOCAC.PL
         {
             frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
             frm.FormClosed += new FormClosedEventHandler(frm_Closed);
-            ComRefLbl.Select();
+             ComRefLbl.Select();
         }
     }
 }

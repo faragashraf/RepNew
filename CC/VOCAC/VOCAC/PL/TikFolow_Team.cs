@@ -154,7 +154,7 @@ namespace VOCAC.PL
             {
                 function fn = function.getfn;
                 function.AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), "TikFollowTeam");
-                fn.msg("هناك خطأ في الإتصال بقواعد البيانات" + Environment.NewLine, "متابعة الشكاوى", MessageBoxButtons.OK);
+                fn.msg("هناك مشكله في الإتصال بقواعد البيانات" + Environment.NewLine, "متابعة الشكاوى", MessageBoxButtons.OK);
             }
             DAL.Close();
             return Statcdif.TickTblMain;
@@ -166,7 +166,14 @@ namespace VOCAC.PL
         {
             frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
             frm.FormClosed += new FormClosedEventHandler(frm_Closed);
-
+            if (CurrentUser.UsrLvl.Substring(19, 1) == "A")
+            {
+                btnReassign.Visible = true;
+            }
+            else
+            {
+                btnReassign.Visible = false;
+            }
             //bool bolTikSearch = frms.FormIsOpen(Application.OpenForms, typeof(TikSearchNew));
             //if (bolTikSearch)
             //{
@@ -371,28 +378,27 @@ namespace VOCAC.PL
                     Statcdif.tik360.Rows.Clear();
                     Statcdif.tik360 = fn.returntbl("select TkSQL,TkDtStart,TkClNm,TkClPh,TkClPh1,TkClNtID,PrdNm+' \\ '+CompNm 'comp',Tikfolowusr+' \\ '+TikfolowusrTeam 'Folower',CASE WHEN TkClsStatus = 0 THEN 'مفتوحة' ELSE 'مغلقة' END 'TkClsStatus' " +
                         "from All_Tickets where " + where_.ToString() + ")");
-                    foreach (DataGridViewRow item in GridTicket.Rows)
+                    if (Statcdif.tik360 != null)
                     {
-                        Statcdif.tik360.DefaultView.RowFilter = "TkClPh = '" + item.Cells["TkClPh"].Value + "' or TkClNtID = '" + item.Cells["TkClNtID"].Value + "'";
-                        if (Statcdif.tik360.DefaultView.Count > 0)
+                        if (Statcdif.tik360.Rows.Count > 0)
                         {
-                            item.DefaultCellStyle.ForeColor = Color.Blue;
-                            item.Cells["TkClPh"].Style.BackColor = Color.Yellow;
-                            item.Cells["TkClNtID"].Style.BackColor = Color.Yellow;
-                            item.DefaultCellStyle.Font = new Font("Times new Roman", 12, FontStyle.Bold);
-                            item.Tag = Statcdif.tik360.DefaultView[0][6];
+                            foreach (DataGridViewRow item in GridTicket.Rows)
+                            {
+                                Statcdif.tik360.DefaultView.RowFilter = "TkClPh = '" + item.Cells["TkClPh"].Value + "' or TkClNtID = '" + item.Cells["TkClNtID"].Value + "'";
+                                if (Statcdif.tik360.DefaultView.Count > 0)
+                                {
+                                    item.DefaultCellStyle.ForeColor = Color.Blue;
+                                    if (Statcdif.tik360.DefaultView[0]["TkClPh"].ToString().Equals( item.Cells["TkClPh"].Value.ToString())) { item.Cells["TkClPh"].Style.BackColor = Color.Yellow; }
+                                    if (Statcdif.tik360.DefaultView[0]["TkClNtID"].ToString().Equals(item.Cells["TkClNtID"].Value.ToString())) { item.Cells["TkClNtID"].Style.BackColor = Color.Yellow; }
+                                    item.DefaultCellStyle.Font = new Font("Times new Roman", 12, FontStyle.Bold);
+                                    item.Tag = Statcdif.tik360.DefaultView[0][6];
+                                }
+                            }
                         }
-                        //else
-                        //{
-                        //    Statcdif.tik360.DefaultView.RowFilter = "TkClNtID = '" + item.Cells["TkClNtID"].Value + "'";
-                        //    if (Statcdif.tik360.DefaultView.Count > 0)
-                        //    {
-                        //        item.DefaultCellStyle.ForeColor = Color.Blue;
-                        //        item.Cells["TkClNtID"].Style.BackColor = Color.Yellow;
-                        //        item.DefaultCellStyle.Font = new Font("Times new Roman", 12, FontStyle.Bold);
-                        //        item.Tag = Statcdif.tik360.DefaultView[0][6];
-                        //    }
-                        //}
+                    }
+                    else
+                    {
+                        fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "تحميل البيانات", MessageBoxButtons.OK); ;
                     }
                     //------------- Customer 360 -------------------------------XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                     this.StatBrPnlEn.Text = "إجمالي العدد : " + Statcdif.TickTblMain.Rows.Count.ToString();
@@ -486,7 +492,7 @@ namespace VOCAC.PL
                             bool bolTikPrifile = frms.FormIsOpen(Application.OpenForms, typeof(TikFolow360));
                             if (GridTicket.CurrentRow.DefaultCellStyle.ForeColor == Color.Blue)
                             {
-                         Statcdif.tik360.DefaultView.RowFilter = "TkClPh = '" + GridTicket.CurrentRow.Cells["TkClPh"].Value + "' or TkClNtID = '" + GridTicket.CurrentRow.Cells["TkClNtID"].Value + "'"; 
+                                Statcdif.tik360.DefaultView.RowFilter = "TkClPh = '" + GridTicket.CurrentRow.Cells["TkClPh"].Value + "' or TkClNtID = '" + GridTicket.CurrentRow.Cells["TkClNtID"].Value + "'";
                                 if (GridTicket.CurrentRow.Tag != null) { this.StatBrPnlEn.Text = "آخر متابع شكوى للعميل : " + GridTicket.CurrentRow.Tag.ToString() + "   ( " + Statcdif.tik360.DefaultView.Count + " )"; }
                             }
                             else
@@ -1526,5 +1532,34 @@ namespace VOCAC.PL
             }
         }
         #endregion
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            DataRow DRW = function.DRW(Statcdif.ProdCompTable, GridTicket.CurrentRow.Cells["TkFnPrdCd"].Value, Statcdif.ProdCompTable.Columns[0]);
+            DataRow DRW1 = function.DRW(Statcdif.TreeUsrTbl, DRW.ItemArray[8], Statcdif.TreeUsrTbl.Columns[0]);
+            string UpdateStr = "Update Tickets set TkEmpNm = " + DRW.ItemArray[8].ToString() + " Where TKSQL = " + Convert.ToInt32(GridTicket.CurrentRow.Cells["TkSQL"].Value);
+            string targetTeam = DRW1.ItemArray[5].ToString().Split('-')[0].Trim();
+            if (targetTeam != GridTicket.CurrentRow.Cells["TikfolowusrTeam"].Value.ToString().Trim())
+            {
+                DialogResult dialogResult = MessageBox.Show("سيتم تحويل الشكوى للفريق المختص " + Environment.NewLine + "هل تريد الإستمرار؟", "تحويل للفريق المختص", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                if (dialogResult == DialogResult.Yes)
+                {
+
+                    if (ticketCurrent.addevent(Convert.ToInt32(GridTicket.CurrentRow.Cells["TkSQL"].Value), "The Complaint has been ReAssigned To " + targetTeam, 101, Statcdif._IP, CurrentUser.UsrID, UpdateStr, null, null) == null)
+                    {
+                        fn.msg("تم تحويل الشكوى للفريق المختص", "تحويل للفريق المختص", MessageBoxButtons.OK);
+                    }
+                }
+            }
+            else
+            {
+                fn.msg("الشكوي لدى الفريق المختص بالفعل", "تحويل للفريق المختص", MessageBoxButtons.OK);
+            }
+
+
+
+
+
+        }
     }
 }

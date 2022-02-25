@@ -181,9 +181,8 @@ namespace VOCAC.BL
             TikDetails.gettikdetlsfrm.TxtfolowusrTeam.Text = currntTicket._TikfolowusrTeam;
             TikDetails.gettikdetlsfrm.TxtTikCreat.Text = currntTicket._TikCreat;
             TikDetails.gettikdetlsfrm.TxtTikCreatTeam.Text = currntTicket._TikCreatTeam;
-
-            if (currntTicket._TaskUserNm.Length > 0) { TikDetails.gettikdetlsfrm.lblRegion.Text = "✅     تم تحويل ال" + currntTicket._TkKind + " لـ" + currntTicket._TaskUserNm; } else { TikDetails.gettikdetlsfrm.lblRegion.Text = ""; }
             function fn = function.getfn;
+            if (currntTicket._TaskUserNm.Length > 0) { TikDetails.gettikdetlsfrm.lblRegion.Text = "✅     تم تحويل ال" + currntTicket._TkKind + " لـ" + currntTicket._TaskUserNm; } else { TikDetails.gettikdetlsfrm.lblRegion.Text = ""; }
             TikDetails.gettikdetlsfrm.LblWDays.Text = "تم تسجيل ال" + currntTicket._TkKind + " منذ : " + fn.CalDate(currntTicket._TkDtStart.ToString(), Statcdif.servrTime).ToString() + " يوم عمل";
 
             for (int i = 0; i < currntTicket.SlctdFldLstArr.Length; i++)
@@ -219,7 +218,6 @@ namespace VOCAC.BL
                 if (TikDetails.gettikdetlsfrm.TxtDetails.Lines[i].ToString().Length > 0)
                 {
                     FiledStr += TikDetails.gettikdetlsfrm.TxtDetails.Lines[i].ToString() + Environment.NewLine;
-
                 }
             }
             TikDetails.gettikdetlsfrm.TxtDetails.Text = FiledStr;
@@ -384,11 +382,6 @@ namespace VOCAC.BL
         public static string addevent(int id, string txt,  int EvId, string IP, int user, [Optional] string UpdateSTR, [Optional] byte[] attach, [Optional] string Ext)
         {
             string rslt = null;
-            SqlCommand sqlcmd = new SqlCommand();
-            sqlcmd.CommandType = CommandType.StoredProcedure;
-            sqlcmd.CommandText = "SP_TICKET_EVENT_INSERT";
-            SqlConnection con = new SqlConnection(Statcdif.strConn);
-            sqlcmd.Connection = con;
             SqlParameter[] param = new SqlParameter[8];
             param[0] = new SqlParameter("@TkupTkSql", SqlDbType.Int);
             param[0].Value = id;
@@ -406,14 +399,11 @@ namespace VOCAC.BL
             param[6].Value = attach;
             param[7] = new SqlParameter("@Extention", SqlDbType.NVarChar, 10);
             param[7].Value = Ext;
-            for (int i = 0; i < param.Length; i++)
-            {
-                sqlcmd.Parameters.Add(param[i]);
-            }
+
+            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             try
             {
-                con.Open();
-                sqlcmd.ExecuteNonQuery();
+                DAL.ExcuteCommand("SP_TICKET_NEW_EVENT_INSERT", param);
             }
             catch (Exception Ex)
             {

@@ -66,6 +66,11 @@ namespace VOCAC.PL
                             LblHint.ForeColor = Color.Green;
                             BtSub.Enabled = false;
                         }
+                        else
+                        {
+                            LblHint.Text = "لم يتم تغيير كلمة المرور-برجاء إعادة المحاولة";
+                            LblHint.ForeColor = Color.Red;
+                        }
                     }
                 }
                 else

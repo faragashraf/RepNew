@@ -25,7 +25,14 @@ namespace VOCAC.PL
             function fn = function.getfn;
             DataTable tbl = new DataTable();
             tbl = fn.returntbl("SELECT UsrId, UsrNm, UsrRealNm, UsrSusp, UCatNm FROM Int_user INNER JOIN IntUserCat ON Int_user.UsrCat = IntUserCat.UCatId");
+            if(tbl != null)
+            {
             UsrData.DataSource = tbl;
+            }
+            else
+            {
+                fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "تحميل البيانات", MessageBoxButtons.OK);
+            }
         }
     }
 }

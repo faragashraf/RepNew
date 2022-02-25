@@ -124,10 +124,14 @@ namespace VOCAC
             try
             {
                 MacTble.Rows.Clear();
-                if (returntbl("SELECT * from AMac WHERE Mac='" + _MacStr + "'").Rows.Count > 0)
+                if (returntbl("SELECT * from AMac WHERE Mac='" + _MacStr + "'") != null)
                 {
+                    if (returntbl("SELECT * from AMac WHERE Mac='" + _MacStr + "'").Rows.Count > 0)
+                    {
 
+                    }
                 }
+
             }
             catch (global::System.Exception ex)
             {
@@ -789,7 +793,15 @@ namespace VOCAC
 
             param[0] = new SqlParameter("@slctstat", SqlDbType.VarChar);
             param[0].Value = selct;
-            DAL.Struc = DAL.ExcuteCommand("SP_CHOICE_SLCT", param);
+            try
+            {
+                DAL.Struc = DAL.ExcuteCommand("SP_CHOICE_SLCT", param);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
             return DAL.Struc.msg;
         }
         public DataTable returntbl(string selct)
@@ -799,7 +811,15 @@ namespace VOCAC
 
             param[0] = new SqlParameter("@slctstat", SqlDbType.VarChar);
             param[0].Value = selct;
-            DAL.Struc = DAL.SelectData("SP_CHOICE_SLCT", param);
+            try
+            {
+                DAL.Struc = DAL.SelectData("SP_CHOICE_SLCT", param);
+            }
+            catch (Exception ex)
+            {
+                DAL.Struc.dt = null;
+            }
+
             return DAL.Struc.dt;
         }
     }

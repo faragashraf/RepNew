@@ -314,7 +314,7 @@ namespace VOCAC.PL
                 else if (lblColor >= 10 && lblColor < 150)
                 {
                     lblhelp.ForeColor = Color.FromArgb(0, 255, 0);
-                    lblColor +=30;
+                    lblColor += 30;
                 }
             }
 
@@ -835,28 +835,31 @@ namespace VOCAC.PL
                 sndr = (TextBox)sender;
                 choicetbl = new DataTable();
                 choicetbl = fn.returntbl(sndr.AccessibleName);
-                if (choicetbl.Rows.Count > 0)
+                if (choicetbl != null)
                 {
-                    choicetbl.DefaultView.RowFilter = string.Empty;
-                    addnewTextBox();
-                    addnewGridview();
-                    addnewFowoutpanel();
-                    addnewform_();
+                    if (choicetbl.Rows.Count > 0)
+                    {
+                        choicetbl.DefaultView.RowFilter = string.Empty;
+                        addnewTextBox();
+                        addnewGridview();
+                        addnewFowoutpanel();
+                        addnewform_();
 
-                    Frm.Controls.Add(Flow);
-                    Flow.Controls.Add(TxBox);
-                    Flow.Controls.Add(GV);
+                        Frm.Controls.Add(Flow);
+                        Flow.Controls.Add(TxBox);
+                        Flow.Controls.Add(GV);
 
-                    WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "    يرجى الضغط المزدوج على " + GetNextControl((TextBox)sender, false).Text.Substring(0, GetNextControl((TextBox)sender, false).Text.Length - 2) + " للرجوع بالإختيار وإغلاق شاشة البحث.";
-                    Frm.ShowDialog();
-                    WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
-                    choicetbl.Dispose();
-                    Frm.Dispose();
-                    GC.Collect();
+                        WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "    يرجى الضغط المزدوج على " + GetNextControl((TextBox)sender, false).Text.Substring(0, GetNextControl((TextBox)sender, false).Text.Length - 2) + " للرجوع بالإختيار وإغلاق شاشة البحث.";
+                        Frm.ShowDialog();
+                        WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
+                        choicetbl.Dispose();
+                        Frm.Dispose();
+                        GC.Collect();
+                    }
                 }
                 else
                 {
-                    //fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "تحميل البيانات");
+                    fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "تحميل البيانات", MessageBoxButtons.OK);
                 }
             }
         }
@@ -1128,47 +1131,45 @@ namespace VOCAC.PL
                 selectString.Append("'  order by TkSQL desc");
 
                 customerTable = fn.returntbl(selectString.ToString());
-
-                if (customerTable.Rows.Count > 0)
+                if (customerTable != null)
                 {
-                    if (mskdTextBox != Phon1TxtBx)
+                    if (customerTable.Rows.Count > 0)
                     {
-                        Phon1TxtBx.Text = customerTable.Rows[0]["TkClPh"].ToString();
+                        if (mskdTextBox != Phon1TxtBx)
+                        {
+                            Phon1TxtBx.Text = customerTable.Rows[0]["TkClPh"].ToString();
+                        }
+                        if (mskdTextBox != IDTxtBx)
+                        {
+                            bool bol = true;
+                            for (int i = 0; i < customerTable.Rows[0]["TkClNtID"].ToString().Length; i++)
+                            {
+                                if (!char.IsNumber(Convert.ToChar(customerTable.Rows[0]["TkClNtID"].ToString().Substring(i, 1))))
+                                {
+                                    bol = false;
+                                    break;
+                                }
+                            }
+                            if (bol == true)
+                            {
+                                RadNID.Checked = true;
+                            }
+                            else
+                            {
+                                RadPss.Checked = true;
+                            }
+
+                            IDTxtBx.Text = customerTable.Rows[0]["TkClNtID"].ToString();
+                        }
+                        NameTxtBx.Text = customerTable.Rows[0]["TkClNm"].ToString();
+                        Phon2TxtBx.Text = customerTable.Rows[0]["TkClPh1"].ToString();
+                        AddTxtBx.Text = customerTable.Rows[0]["TkClAdr"].ToString();
+                        MailTxtBx.Text = customerTable.Rows[0]["TkMail"].ToString();
                     }
-                    if (mskdTextBox != IDTxtBx)
+                    else
                     {
-                        bool bol = true;
-                        for (int i = 0; i < customerTable.Rows[0]["TkClNtID"].ToString().Length; i++)
-                        {
-                            try
-                            {
-                                int hh = Convert.ToInt32(customerTable.Rows[0]["TkClNtID"].ToString().Substring(i, 1));
-                            }
-                            catch (Exception)
-                            {
-                                bol = false;
-
-                            }
-                        }
-                        if (bol == true)
-                        {
-                            RadNID.Checked = true;
-                        }
-                        else
-                        {
-                            RadPss.Checked = true;
-                        }
-
-                        IDTxtBx.Text = customerTable.Rows[0]["TkClNtID"].ToString();
+                        clearcustomerdata(mskdTextBox);
                     }
-                    NameTxtBx.Text = customerTable.Rows[0]["TkClNm"].ToString();
-                    Phon2TxtBx.Text = customerTable.Rows[0]["TkClPh1"].ToString();
-                    AddTxtBx.Text = customerTable.Rows[0]["TkClAdr"].ToString();
-                    MailTxtBx.Text = customerTable.Rows[0]["TkMail"].ToString();
-                }
-                else
-                {
-                    clearcustomerdata(mskdTextBox);
                 }
             }
             else
@@ -1253,21 +1254,25 @@ namespace VOCAC.PL
                         bolDublicted = true;
                         choicetbl = fn.returntbl("select TkSQL, TkDtStart, TkClNm, Tikfolowusr + ' \\ ' + TikfolowusrTeam 'Folower' " +
                                 "from All_Tickets where (TkClPh= '" + Phon1TxtBx.Text + "' OR TkClNtID = '" + IDTxtBx.Text + "') AND (TkFnPrdCd = " + TreeView1.SelectedNode.Name + ") AND TkClsStatus = 0");
-                        if (choicetbl.Rows.Count > 0)
+                        if (choicetbl != null)
                         {
-                            FlwMainData.BackColor = Color.FromArgb(128, 255, 128);
-                            string L;
-                            if (TickKind == 0) { L = "طلب"; } else { L = "شكوى"; }
-                            label8.Text = "هناك " + L + " قيد المتابعة الآن من نفس النوع لدى " + choicetbl.Rows[0]["Folower"];
-                            label8.BackColor = Color.Black;
-                            label8.Margin = new Padding(label8.Margin.Left, label8.Margin.Top, (FlwSubMain.Width - label8.Width) / 2, label8.Margin.Bottom);
+                            if (choicetbl.Rows.Count > 0)
+                            {
+                                FlwMainData.BackColor = Color.FromArgb(128, 255, 128);
+                                string L;
+                                if (TickKind == 0) { L = "طلب"; } else { L = "شكوى"; }
+                                label8.Text = "هناك " + L + " قيد المتابعة الآن من نفس النوع لدى " + choicetbl.Rows[0]["Folower"];
+                                label8.BackColor = Color.Black;
+                                label8.Margin = new Padding(label8.Margin.Left, label8.Margin.Top, (FlwSubMain.Width - label8.Width) / 2, label8.Margin.Bottom);
+                            }
+                            else
+                            {
+                                label8.Text = "";
+                                label8.BackColor = Color.White;
+                                FlwMainData.BackColor = Color.FromArgb(192, 255, 255);
+                            }
                         }
-                        else
-                        {
-                            label8.Text = "";
-                            label8.BackColor = Color.White;
-                            FlwMainData.BackColor = Color.FromArgb(192, 255, 255);
-                        }
+
                     }
                 }
             }

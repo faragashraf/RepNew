@@ -579,6 +579,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Frstaid.ico" />
+    <None Include="Resources\TransferTeam.png" />
     <None Include="Resources\owner.png" />
     <None Include="Resources\Distribute.png" />
     <None Include="Resources\print.png" />

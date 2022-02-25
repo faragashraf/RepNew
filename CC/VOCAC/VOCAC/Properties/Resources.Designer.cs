@@ -990,6 +990,16 @@ namespace VOCAC.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TransferTeam {
+            get {
+                object obj = ResourceManager.GetObject("TransferTeam", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to يرجى المحاولة مرة أخرى.
         /// </summary>
         internal static string TryAgain {
