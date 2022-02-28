@@ -12,14 +12,14 @@ namespace VOCAC.BL
 {
     public static class IntUtly
     {
-        public static void ValdtInt(KeyPressEventArgs e) // numeric only int
-        {
-            if (Char.IsControl(e.KeyChar) == false && Char.IsDigit(e.KeyChar) == false)
+            public static void ValdtInt(KeyPressEventArgs e) // numeric only int
             {
-                e.Handled = true;
-                SystemSounds.Beep.Play();
+                if (Char.IsControl(e.KeyChar) == false && Char.IsDigit(e.KeyChar) == false)
+                {
+                    e.Handled = true;
+                    SystemSounds.Beep.Play();
+                }
             }
-        }
         public static void ValdtAll(KeyPressEventArgs e) // numeric only int
         {
             if ((e.KeyChar)==8)

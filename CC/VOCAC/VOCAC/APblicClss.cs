@@ -809,7 +809,7 @@ namespace VOCAC
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             SqlParameter[] param = new SqlParameter[1];
 
-            param[0] = new SqlParameter("@slctstat", SqlDbType.VarChar);
+            param[0] = new SqlParameter("@slctstat", SqlDbType.NVarChar);
             param[0].Value = selct;
             try
             {

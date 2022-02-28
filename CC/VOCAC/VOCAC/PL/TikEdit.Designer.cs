@@ -98,7 +98,6 @@
             this.Panel6 = new System.Windows.Forms.Panel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.Panel5 = new System.Windows.Forms.Panel();
-            this.chckReassign = new System.Windows.Forms.CheckBox();
             this.MyGroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
@@ -645,7 +644,6 @@
             this.FlwSubMain.AutoScroll = true;
             this.FlwSubMain.Controls.Add(this.ComRefLbl);
             this.FlwSubMain.Controls.Add(this.panel7);
-            this.FlwSubMain.Controls.Add(this.chckReassign);
             this.FlwSubMain.Controls.Add(this.TabControl2);
             this.FlwSubMain.Controls.Add(this.FlwMend);
             this.FlwSubMain.Controls.Add(this.Panel6);
@@ -1013,19 +1011,6 @@
             this.Panel5.Size = new System.Drawing.Size(107, 52);
             this.Panel5.TabIndex = 2036;
             // 
-            // chckReassign
-            // 
-            this.chckReassign.AutoSize = true;
-            this.chckReassign.Font = new System.Drawing.Font("Times New Roman", 14F);
-            this.chckReassign.Location = new System.Drawing.Point(668, 14);
-            this.chckReassign.Margin = new System.Windows.Forms.Padding(3, 14, 3, 3);
-            this.chckReassign.Name = "chckReassign";
-            this.chckReassign.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chckReassign.Size = new System.Drawing.Size(166, 25);
-            this.chckReassign.TabIndex = 2051;
-            this.chckReassign.Text = "تحويل للفريق المختص";
-            this.chckReassign.UseVisualStyleBackColor = true;
-            // 
             // TikEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1130,6 +1115,5 @@
         internal System.Windows.Forms.Panel Panel6;
         private System.Windows.Forms.RichTextBox richTextBox1;
         internal System.Windows.Forms.Panel Panel5;
-        private System.Windows.Forms.CheckBox chckReassign;
     }
 }

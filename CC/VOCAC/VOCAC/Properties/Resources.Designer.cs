@@ -143,6 +143,16 @@ namespace VOCAC.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap calculate {
+            get {
+                object obj = ResourceManager.GetObject("calculate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Catch1 {
             get {
                 object obj = ResourceManager.GetObject("Catch1", resourceCulture);

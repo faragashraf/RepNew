@@ -54,10 +54,10 @@ Partial Class Analize
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.DataGridView1.Location = New System.Drawing.Point(0, 181)
+        Me.DataGridView1.Location = New System.Drawing.Point(0, 290)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.Size = New System.Drawing.Size(1174, 396)
+        Me.DataGridView1.Size = New System.Drawing.Size(1792, 439)
         Me.DataGridView1.TabIndex = 0
         '
         'ContextMenuStrip1
@@ -73,7 +73,7 @@ Partial Class Analize
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1176, 70)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1794, 70)
         Me.FlowLayoutPanel1.TabIndex = 1
         '
         'BtnLoad
@@ -137,7 +137,7 @@ Partial Class Analize
         Me.FlowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.FlowLayoutPanel2.Location = New System.Drawing.Point(12, 77)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(864, 98)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(1462, 185)
         Me.FlowLayoutPanel2.TabIndex = 8
         '
         'FlowLayoutPanel3
@@ -147,7 +147,7 @@ Partial Class Analize
         Me.FlowLayoutPanel3.Controls.Add(Me.TxtRevTot)
         Me.FlowLayoutPanel3.Controls.Add(Me.TxtShpTot)
         Me.FlowLayoutPanel3.Controls.Add(Me.BtnExprt)
-        Me.FlowLayoutPanel3.Location = New System.Drawing.Point(879, 75)
+        Me.FlowLayoutPanel3.Location = New System.Drawing.Point(1497, 75)
         Me.FlowLayoutPanel3.Name = "FlowLayoutPanel3"
         Me.FlowLayoutPanel3.Size = New System.Drawing.Size(295, 34)
         Me.FlowLayoutPanel3.TabIndex = 10
@@ -159,7 +159,7 @@ Partial Class Analize
         Me.FlowLayoutPanel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.FlowLayoutPanel4.Controls.Add(Me.RadioButton1)
         Me.FlowLayoutPanel4.Controls.Add(Me.RadioButton2)
-        Me.FlowLayoutPanel4.Location = New System.Drawing.Point(934, 112)
+        Me.FlowLayoutPanel4.Location = New System.Drawing.Point(1552, 112)
         Me.FlowLayoutPanel4.Name = "FlowLayoutPanel4"
         Me.FlowLayoutPanel4.Size = New System.Drawing.Size(215, 63)
         Me.FlowLayoutPanel4.TabIndex = 13
@@ -212,7 +212,7 @@ Partial Class Analize
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1176, 577)
+        Me.ClientSize = New System.Drawing.Size(1794, 741)
         Me.Controls.Add(Me.FlowLayoutPanel4)
         Me.Controls.Add(Me.CheckedListBox2)
         Me.Controls.Add(Me.CheckedListBox1)

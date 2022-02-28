@@ -32,6 +32,7 @@ namespace VOCAC.PL
         private readonly List<TreeNode> NODESTHATMATCH = new List<TreeNode>(); // Tree Search Function
         TreeNode SlctedNode;
         private int NodeCnt = 1;
+        string Privillage = "";
         public UsrPermission()
         {
             InitializeComponent();
@@ -133,7 +134,8 @@ namespace VOCAC.PL
             TreeNode[] TempNode = new TreeNode[0];
             TreeNode TempNode2;
             Statcdif.TreeUsrTbl.DefaultView.RowFilter = " UsrId = " + UserTree.SelectedNode.Text.ToString().Split('-')[2].Trim();
-            for (int i = 0; i < Statcdif.TreeUsrTbl.DefaultView[0]["UsrLevel_New"].ToString().Length; i++)
+            Privillage = Statcdif.TreeUsrTbl.DefaultView[0]["UsrLevel_New"].ToString();
+            for (int i = 0; i < Privillage.Length; i++)
             {
                 TempNode = SecTree.Nodes.Find((i + 1).ToString(), true);
                 if (TempNode.Length > 0)
@@ -261,7 +263,7 @@ namespace VOCAC.PL
                 UserTree.SelectedNode = SearchTheTreeView(UserTree, TreeSrchBx.Text);
                 SlctedNode = UserTree.SelectedNode;
                 SlctedNode.BackColor = Color.LimeGreen;
-                AftrSlct();
+                //AftrSlct();
             }
 
         }
@@ -282,7 +284,7 @@ namespace VOCAC.PL
                 UserTree.SelectedNode = NODESTHATMATCH[NodeCnt - 1];
                 SlctedNode = UserTree.SelectedNode;
                 SlctedNode.BackColor = Color.LimeGreen;
-                AftrSlct();
+                //AftrSlct();
             }
             else if (NodeCnt == NODESTHATMATCH.Count)
             {
@@ -299,7 +301,7 @@ namespace VOCAC.PL
                 UserTree.SelectedNode = NODESTHATMATCH[NodeCnt - 1];
                 SlctedNode = UserTree.SelectedNode;
                 SlctedNode.BackColor = Color.LimeGreen;
-                AftrSlct();
+                //AftrSlct();
             }
             else
             {
@@ -378,18 +380,27 @@ namespace VOCAC.PL
                     PerStr[i] = "X";
                 }
             }
-          if(  fn.ExcuteStr("update Int_user set UsrLevel_New= '" + String.Join("", PerStr) + "' WHERE (UsrId = " + UserTree.SelectedNode.Text.ToString().Split('-')[2].Trim() + ");") == null)
+            if (Privillage.Equals(String.Join("", PerStr)))
             {
-                fn.msg("تم تعديل صلاحية المستخدم", "تعديل الصلاحيات", MessageBoxButtons.OK);
+                fn.msg("لا توجد تعديلات للحفظ", "تعديل الصلاحيات", MessageBoxButtons.OK);
             }
-          else
+            else
             {
-                fn.msg("لم يتم تعديل صلاحية المستخدم"+ Environment.NewLine + "برجاء أعد المحاولة", "تعديل الصلاحيات", MessageBoxButtons.OK);
+                if (fn.ExcuteStr("update Int_user set UsrLevel_New= '" + String.Join("", PerStr) + "' WHERE (UsrId = " + UserTree.SelectedNode.Text.ToString().Split('-')[2].Trim() + ");") == null)
+                {
+                    Privillage = String.Join("", PerStr);
+                    Statcdif.TreeUsrTbl.DefaultView[0]["UsrLevel_New"] = Privillage;
+                    fn.msg("تم تعديل صلاحية المستخدم", "تعديل الصلاحيات", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    fn.msg("لم يتم تعديل صلاحية المستخدم" + Environment.NewLine + "برجاء أعد المحاولة", "تعديل الصلاحيات", MessageBoxButtons.OK);
+                }
             }
         }
         private void BtnCls_Click(object sender, EventArgs e)
         {
-           this.Close();
+            this.Close();
         }
     }
 }

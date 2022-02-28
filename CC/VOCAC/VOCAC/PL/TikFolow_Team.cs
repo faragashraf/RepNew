@@ -221,6 +221,7 @@ namespace VOCAC.PL
                                 btnseting.Visible = false;
                                 this.Text = "متابعة الشكاوى";
                             }
+                            Statcdif.TickTblMain.Columns.Add("Wdays", typeof(int));
                             splitContainer2.Panel1Collapsed = true;
                             btnseting.Visible = false;
                             trackBar2.Visible = false;
@@ -248,6 +249,9 @@ namespace VOCAC.PL
                 WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
             }
         }
+
+
+
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.GridTicket.SelectionChanged -= new EventHandler(this.GridTicket_SelectionChanged);
@@ -695,6 +699,15 @@ namespace VOCAC.PL
 
         #region Void
 
+        private void wdaysCal()
+        {
+            this.StatBrPnlEn.Text = "جاري احتساب ايام العمل ...";
+            for (int i = 0; i < Statcdif.TickTblMain.Rows.Count; i++)
+            {
+                Statcdif.TickTblMain.Rows[i]["Wdays"] = fn.CalDate(Statcdif.TickTblMain.Rows[i]["TkupSTime"].ToString(), Statcdif.servrTime);
+            }
+            this.StatBrPnlEn.Text = "إجمالي العدد : " + Statcdif.TickTblMain.Rows.Count.ToString();
+        }
         private void prepareGrid()
         {
             for (int i = 0; i < GridTicket.Columns.Count; i++)
@@ -971,7 +984,6 @@ namespace VOCAC.PL
                 gridadjst(Statcdif.TickTblMain);
                 Statcdif.TickTblMain.PrimaryKey = new DataColumn[] { Statcdif.TickTblMain.Columns[0] };
                 if (Statcdif.TickTblMain.Rows.Count > 0) { Filtr(); }
-                this.StatBrPnlEn.Text = "إجمالي العدد : " + Statcdif.TickTblMain.Rows.Count.ToString();
             }
             catch (Exception ex)
             {
@@ -1086,7 +1098,8 @@ namespace VOCAC.PL
                 GridTicket.Columns["EvNm"].Visible = true;
                 GridTicket.Columns["EvNm"].HeaderText = "نوع آخر تحديث";
 
-
+                GridTicket.Columns["Wdays"].Visible = true;
+                GridTicket.Columns["Wdays"].HeaderText = "ايام العمل";
                 //for (int i = 37; i < GridTicket.Columns.Count; i++)
                 //{
                 //    GridTicket.Columns[i].Visible = true;
@@ -1560,6 +1573,11 @@ namespace VOCAC.PL
 
 
 
+        }
+
+        private void BtnCalc_Click(object sender, EventArgs e)
+        {
+            wdaysCal();
         }
     }
 }

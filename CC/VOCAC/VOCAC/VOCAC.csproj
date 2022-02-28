@@ -86,8 +86,10 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Management" />
     <Reference Include="System.Messaging" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -107,6 +109,12 @@
     <Compile Include="BL\ticketCurrent.cs" />
     <Compile Include="BL\TicketsSelectBulk.cs" />
     <Compile Include="DAL\DataAccessLayer.cs" />
+    <Compile Include="PL\heldSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\heldSearch.Designer.cs">
+      <DependentUpon>heldSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="PL\TikEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +208,14 @@
     <Compile Include="PL\WelcomeScreen.Designer.cs">
       <DependentUpon>WelcomeScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Web References\VOCAServiceGet\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="PL\heldSearch.resx">
+      <DependentUpon>heldSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PL\TikEdit.resx">
       <DependentUpon>TikEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -266,6 +282,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="VOCAC_TemporaryKey.pfx" />
+    <None Include="Web References\VOCAServiceGet\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\VOCAServiceGet\VOCAServiceGet.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -579,6 +600,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Frstaid.ico" />
+    <None Include="Resources\calculate.png" />
+    <None Include="Web References\VOCAServiceGet\VOCAServiceGet.disco" />
     <None Include="Resources\TransferTeam.png" />
     <None Include="Resources\owner.png" />
     <None Include="Resources\Distribute.png" />
@@ -592,6 +615,25 @@
     <None Include="Resources\SaveRed.png" />
     <None Include="Resources\SaveGreen1.png" />
     <None Include="Resources\SaveGreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://10.10.26.4:8000/VOCAServiceGet.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\VOCAServiceGet\</RelPath>
+      <UpdateFromURL>http://10.10.26.4:8000/VOCAServiceGet.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>VOCAC_VOCAServiceGet_VOCAServiceGet</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

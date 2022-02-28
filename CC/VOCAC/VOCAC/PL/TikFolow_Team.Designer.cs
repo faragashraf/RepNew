@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TikFolow_Team));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Panel3 = new System.Windows.Forms.Panel();
             this.CloseBtn = new System.Windows.Forms.Button();
             this.FlwtopBar = new System.Windows.Forms.FlowLayoutPanel();
@@ -48,6 +48,8 @@
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlBtnExport = new System.Windows.Forms.Panel();
             this.btnExport = new System.Windows.Forms.Button();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.btnCalc = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnReassign = new System.Windows.Forms.Button();
             this.tabDistribute = new System.Windows.Forms.TabPage();
@@ -132,6 +134,7 @@
             this.tabExport.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
             this.pnlBtnExport.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabDistribute.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -361,6 +364,7 @@
             // flowLayoutPanel5
             // 
             this.flowLayoutPanel5.Controls.Add(this.pnlBtnExport);
+            this.flowLayoutPanel5.Controls.Add(this.panel6);
             this.flowLayoutPanel5.Controls.Add(this.panel2);
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 3);
@@ -395,11 +399,38 @@
             this.btnExport.UseVisualStyleBackColor = false;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
+            // panel6
+            // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel6.Controls.Add(this.btnCalc);
+            this.panel6.Location = new System.Drawing.Point(747, 3);
+            this.panel6.Margin = new System.Windows.Forms.Padding(100, 3, 3, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(68, 59);
+            this.panel6.TabIndex = 2183;
+            // 
+            // btnCalc
+            // 
+            this.btnCalc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCalc.BackColor = System.Drawing.Color.White;
+            this.btnCalc.BackgroundImage = global::VOCAC.Properties.Resources.calculate;
+            this.btnCalc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCalc.FlatAppearance.BorderSize = 0;
+            this.btnCalc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCalc.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalc.Location = new System.Drawing.Point(7, 2);
+            this.btnCalc.Name = "btnCalc";
+            this.btnCalc.Size = new System.Drawing.Size(54, 52);
+            this.btnCalc.TabIndex = 129;
+            this.toolTip1.SetToolTip(this.btnCalc, "احتساب أيام العمل");
+            this.btnCalc.UseVisualStyleBackColor = false;
+            this.btnCalc.Click += new System.EventHandler(this.BtnCalc_Click);
+            // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.btnReassign);
-            this.panel2.Location = new System.Drawing.Point(747, 3);
+            this.panel2.Location = new System.Drawing.Point(576, 3);
             this.panel2.Margin = new System.Windows.Forms.Padding(100, 3, 3, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(68, 59);
@@ -899,8 +930,8 @@
             // 
             this.GridTicket.AllowUserToAddRows = false;
             this.GridTicket.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.GridTicket.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.GridTicket.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.GridTicket.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GridTicket.BackgroundColor = System.Drawing.Color.White;
             this.GridTicket.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -1363,6 +1394,7 @@
             this.tabExport.ResumeLayout(false);
             this.flowLayoutPanel5.ResumeLayout(false);
             this.pnlBtnExport.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tabDistribute.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
@@ -1494,5 +1526,7 @@
         internal System.Windows.Forms.Panel panel2;
         internal System.Windows.Forms.Button btnReassign;
         private System.Windows.Forms.ToolTip toolTip1;
+        internal System.Windows.Forms.Panel panel6;
+        internal System.Windows.Forms.Button btnCalc;
     }
 }

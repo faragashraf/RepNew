@@ -45,6 +45,10 @@ namespace VOCAC.PL
         public TikSetup()
         {
             InitializeComponent();
+            if (frm == null)
+            {
+                frm = this;
+            }
         }
         private void TikSetup_Load(object sender, EventArgs e)
         {

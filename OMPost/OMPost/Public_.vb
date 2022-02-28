@@ -11,8 +11,8 @@ Module Public_
     Dim Slctd As Boolean = False
     Dim bolyy As Boolean = False
     Public StrFileName As String = "X"
-    Public OfflineCon As New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Oman\OMPost.mdf;Integrated Security=True")
-    Public ConSTR As New String("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Oman\OMPost.mdf;Integrated Security=True")
+    Public OfflineCon As New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\Abdulazziz\Oman\OMPost.mdf;Integrated Security=True")
+    Public ConSTR As New String("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\Abdulazziz\Oman\OMPost.mdf;Integrated Security=True")
     Public Errmsg As String = ""
     Public MainTbl As New DataTable
     Public sqlComm As New SqlCommand                    'SQL Command

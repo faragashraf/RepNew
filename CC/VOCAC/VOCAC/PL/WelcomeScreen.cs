@@ -596,6 +596,8 @@ namespace VOCAC.PL
         }
         private void Button3_Click(object sender, EventArgs e)
         {
+            VOCAServiceGet.VOCAServiceGet vocaservice = new VOCAServiceGet.VOCAServiceGet();
+            DataTable tbl = vocaservice.ExcuteQury("select * from CDMend");
             string ll = "Ashraf Farag";
             string hhws = function.encrypt(ll);
             string hh = function.discrypt(hhws);

@@ -81,8 +81,8 @@ Public Class Analize
         DataGridView1.AllowUserToAddRows = False
         DataGridView1.AllowUserToDeleteRows = False
         DataGridView1.ReadOnly = True
-        DataGridView1.Size = New Point(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 270)
-        DataGridView1.Dock = DockStyle.Bottom
+        DataGridView1.Size = New Point(Screen.PrimaryScreen.Bounds.Width - 100, Screen.PrimaryScreen.Bounds.Height - 270)
+        'DataGridView1.Dock = DockStyle.Bottom
         Colr()
     End Sub
     Private Sub ClearChecked(sender As Object, e As EventArgs)

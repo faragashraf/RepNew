@@ -791,7 +791,6 @@
             this.ToolTip1.SetToolTip(this.button3, "تسجيل الدخول");
             this.button3.UseCompatibleTextRendering = true;
             this.button3.UseVisualStyleBackColor = false;
-            this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // lblIp

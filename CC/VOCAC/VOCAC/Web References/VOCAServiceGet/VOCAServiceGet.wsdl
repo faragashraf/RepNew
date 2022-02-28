@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://10.10.26.4:8000/vocaservice" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://10.10.26.4:8000/vocaservice" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://10.10.26.4:8000/vocaservice">
+      <s:element name="ExcuteQury">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="STR" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExcuteQuryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExcuteQuryResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ExcuteQurySoapIn">
+    <wsdl:part name="parameters" element="tns:ExcuteQury" />
+  </wsdl:message>
+  <wsdl:message name="ExcuteQurySoapOut">
+    <wsdl:part name="parameters" element="tns:ExcuteQuryResponse" />
+  </wsdl:message>
+  <wsdl:portType name="VOCAServiceGetSoap">
+    <wsdl:operation name="ExcuteQury">
+      <wsdl:input message="tns:ExcuteQurySoapIn" />
+      <wsdl:output message="tns:ExcuteQurySoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="VOCAServiceGetSoap" type="tns:VOCAServiceGetSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ExcuteQury">
+      <soap:operation soapAction="http://10.10.26.4:8000/vocaservice/ExcuteQury" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="VOCAServiceGetSoap12" type="tns:VOCAServiceGetSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ExcuteQury">
+      <soap12:operation soapAction="http://10.10.26.4:8000/vocaservice/ExcuteQury" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="VOCAServiceGet">
+    <wsdl:port name="VOCAServiceGetSoap" binding="tns:VOCAServiceGetSoap">
+      <soap:address location="http://10.10.26.4:8000/VOCAServiceGet.asmx" />
+    </wsdl:port>
+    <wsdl:port name="VOCAServiceGetSoap12" binding="tns:VOCAServiceGetSoap12">
+      <soap12:address location="http://10.10.26.4:8000/VOCAServiceGet.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

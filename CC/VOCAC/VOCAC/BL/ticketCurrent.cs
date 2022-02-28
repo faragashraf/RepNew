@@ -232,7 +232,6 @@ namespace VOCAC.BL
             SqlParameter[] param = new SqlParameter[1];
             param[0] = new SqlParameter("@TkupTkSql", SqlDbType.Int);
             param[0].Value = currntTicket._TkSQL;
-            DataTable gg = new DataTable();
 
 
             DAL.Struc = DAL.SelectData("SP_TICKET_EVENT_SLCT", param);

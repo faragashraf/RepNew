@@ -82,5 +82,15 @@ namespace VOCAC.Properties {
                 this["ClrOperation"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://10.10.26.4:8000/VOCAServiceGet.asmx")]
+        public string VOCAC_VOCAServiceGet_VOCAServiceGet {
+            get {
+                return ((string)(this["VOCAC_VOCAServiceGet_VOCAServiceGet"]));
+            }
+        }
     }
 }
