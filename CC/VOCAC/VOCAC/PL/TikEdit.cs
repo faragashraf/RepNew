@@ -9,10 +9,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using VOCAC.BL;
-using VOCAC.Properties;
+using VOCAUltimate.BL;
+using VOCAUltimate.Properties;
 
-namespace VOCAC.PL
+namespace VOCAUltimate.PL
 {
     public partial class TikEdit : Form
     {

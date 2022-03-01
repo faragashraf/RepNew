@@ -1,4 +1,4 @@
-﻿namespace VOCAC.PL
+﻿namespace VOCAUltimate.PL
 {
     partial class UsrPermission
     {
@@ -134,7 +134,7 @@
             // 
             // BtnSerch
             // 
-            this.BtnSerch.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
+            this.BtnSerch.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
             this.BtnSerch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnSerch.FlatAppearance.BorderSize = 0;
             this.BtnSerch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -159,7 +159,7 @@
             // 
             // BtnNxt
             // 
-            this.BtnNxt.BackgroundImage = global::VOCAC.Properties.Resources.Next;
+            this.BtnNxt.BackgroundImage = global::VOCAUltimate.Properties.Resources.Next;
             this.BtnNxt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnNxt.FlatAppearance.BorderSize = 0;
             this.BtnNxt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -195,7 +195,7 @@
             // 
             // BtnPrvs
             // 
-            this.BtnPrvs.BackgroundImage = global::VOCAC.Properties.Resources.Prev;
+            this.BtnPrvs.BackgroundImage = global::VOCAUltimate.Properties.Resources.Prev;
             this.BtnPrvs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnPrvs.FlatAppearance.BorderSize = 0;
             this.BtnPrvs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -233,7 +233,7 @@
             // 
             // BtnCls
             // 
-            this.BtnCls.BackgroundImage = global::VOCAC.Properties.Resources.recred;
+            this.BtnCls.BackgroundImage = global::VOCAUltimate.Properties.Resources.recred;
             this.BtnCls.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnCls.FlatAppearance.BorderSize = 0;
             this.BtnCls.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -261,7 +261,7 @@
             // 
             // BtnAply
             // 
-            this.BtnAply.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
+            this.BtnAply.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
             this.BtnAply.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnAply.FlatAppearance.BorderSize = 0;
             this.BtnAply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

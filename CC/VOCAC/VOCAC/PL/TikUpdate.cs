@@ -11,11 +11,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using static VOCAC.BL.ticketCurrent;
-using VOCAC.Properties;
-using VOCAC.BL;
+using static VOCAUltimate.BL.ticketCurrent;
+using VOCAUltimate.Properties;
+using VOCAUltimate.BL;
 
-namespace VOCAC.PL
+namespace VOCAUltimate.PL
 {
     public partial class TikUpdate : Form
     {

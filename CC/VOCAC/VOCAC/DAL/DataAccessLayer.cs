@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace VOCAC.DAL
+namespace VOCAUltimate.DAL
 {
     class DataAccessLayer
     {

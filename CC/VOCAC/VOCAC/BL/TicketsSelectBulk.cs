@@ -5,9 +5,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VOCAC.Properties;
+using VOCAUltimate.Properties;
 
-namespace VOCAC.BL
+namespace VOCAUltimate.BL
 {
     class TicketsSelectBulk
     {

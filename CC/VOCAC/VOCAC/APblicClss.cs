@@ -15,11 +15,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using VOCAC.BL;
-using VOCAC.PL;
-using VOCAC.Properties;
+using VOCAUltimate.BL;
+using VOCAUltimate.PL;
+using VOCAUltimate.Properties;
 
-namespace VOCAC
+namespace VOCAUltimate
 {
     //Application Definitions With Current User Class Inheritance
     public class Statcdif
@@ -1078,7 +1078,7 @@ namespace VOCAC
         public void ClkEvntClick(object sender, EventArgs e)
         {
             ToolStripMenuItem _item = (ToolStripMenuItem)sender;
-            String formName = "VOCAC.PL." + _item.Tag;
+            String formName = "VOCAUltimate.PL." + _item.Tag;
             Form frm = (Form)Activator.CreateInstance(Type.GetType(formName));
 
             foreach (Form f in Application.OpenForms)

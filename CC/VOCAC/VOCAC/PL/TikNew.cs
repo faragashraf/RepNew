@@ -9,10 +9,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using VOCAC.BL;
-using VOCAC.Properties;
+using VOCAUltimate.BL;
+using VOCAUltimate.Properties;
 
-namespace VOCAC.PL
+namespace VOCAUltimate.PL
 {
     public partial class TikNew : Form
     {
@@ -1261,7 +1261,7 @@ namespace VOCAC.PL
                                 FlwMainData.BackColor = Color.FromArgb(128, 255, 128);
                                 string L;
                                 if (TickKind == 0) { L = "طلب"; } else { L = "شكوى"; }
-                                label8.Text = "هناك " + L + " قيد المتابعة الآن من نفس النوع لدى " + choicetbl.Rows[0]["Folower"];
+                                label8.Text = "هناك " + L + " قيد المتابعة الآن من نفس النوع لنفس العميل لدى " + choicetbl.Rows[0]["Folower"];
                                 label8.BackColor = Color.Black;
                                 label8.Margin = new Padding(label8.Margin.Left, label8.Margin.Top, (FlwSubMain.Width - label8.Width) / 2, label8.Margin.Bottom);
                             }

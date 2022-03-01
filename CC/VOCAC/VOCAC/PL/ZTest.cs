@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace VOCAC.PL
+namespace VOCAUltimate.PL
 {
     public partial class ZTest : Form
     {

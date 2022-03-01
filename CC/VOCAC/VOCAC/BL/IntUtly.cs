@@ -8,7 +8,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Media;
 
-namespace VOCAC.BL
+namespace VOCAUltimate.BL
 {
     public static class IntUtly
     {

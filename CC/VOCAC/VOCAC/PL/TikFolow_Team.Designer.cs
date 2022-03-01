@@ -1,4 +1,4 @@
-﻿namespace VOCAC.PL
+﻿namespace VOCAUltimate.PL
 {
     partial class TikFolow_Team
     {
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TikFolow_Team));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Panel3 = new System.Windows.Forms.Panel();
             this.CloseBtn = new System.Windows.Forms.Button();
             this.FlwtopBar = new System.Windows.Forms.FlowLayoutPanel();
@@ -179,7 +179,7 @@
             // 
             this.CloseBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CloseBtn.BackColor = System.Drawing.Color.White;
-            this.CloseBtn.BackgroundImage = global::VOCAC.Properties.Resources.Exit1;
+            this.CloseBtn.BackgroundImage = global::VOCAUltimate.Properties.Resources.Exit1;
             this.CloseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CloseBtn.FlatAppearance.BorderSize = 0;
             this.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -316,7 +316,7 @@
             // 
             this.btnseting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnseting.BackColor = System.Drawing.Color.White;
-            this.btnseting.BackgroundImage = global::VOCAC.Properties.Resources.recblue;
+            this.btnseting.BackgroundImage = global::VOCAUltimate.Properties.Resources.recblue;
             this.btnseting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnseting.FlatAppearance.BorderSize = 0;
             this.btnseting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -386,7 +386,7 @@
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExport.BackColor = System.Drawing.Color.White;
-            this.btnExport.BackgroundImage = global::VOCAC.Properties.Resources.Export;
+            this.btnExport.BackgroundImage = global::VOCAUltimate.Properties.Resources.Export;
             this.btnExport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnExport.FlatAppearance.BorderSize = 0;
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -413,14 +413,14 @@
             // 
             this.btnCalc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCalc.BackColor = System.Drawing.Color.White;
-            this.btnCalc.BackgroundImage = global::VOCAC.Properties.Resources.calculate;
+            this.btnCalc.BackgroundImage = global::VOCAUltimate.Properties.Resources.calculate;
             this.btnCalc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnCalc.FlatAppearance.BorderSize = 0;
             this.btnCalc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCalc.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalc.Location = new System.Drawing.Point(7, 2);
+            this.btnCalc.Location = new System.Drawing.Point(11, 7);
             this.btnCalc.Name = "btnCalc";
-            this.btnCalc.Size = new System.Drawing.Size(54, 52);
+            this.btnCalc.Size = new System.Drawing.Size(44, 47);
             this.btnCalc.TabIndex = 129;
             this.toolTip1.SetToolTip(this.btnCalc, "احتساب أيام العمل");
             this.btnCalc.UseVisualStyleBackColor = false;
@@ -440,7 +440,7 @@
             // 
             this.btnReassign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReassign.BackColor = System.Drawing.Color.White;
-            this.btnReassign.BackgroundImage = global::VOCAC.Properties.Resources.TransferTeam;
+            this.btnReassign.BackgroundImage = global::VOCAUltimate.Properties.Resources.TransferTeam;
             this.btnReassign.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnReassign.FlatAppearance.BorderSize = 0;
             this.btnReassign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -487,7 +487,7 @@
             // 
             this.btnDistrebute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDistrebute.BackColor = System.Drawing.Color.White;
-            this.btnDistrebute.BackgroundImage = global::VOCAC.Properties.Resources.Distribute;
+            this.btnDistrebute.BackgroundImage = global::VOCAUltimate.Properties.Resources.Distribute;
             this.btnDistrebute.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnDistrebute.FlatAppearance.BorderSize = 0;
             this.btnDistrebute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -562,7 +562,7 @@
             // 
             this.btnGet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGet.BackColor = System.Drawing.Color.White;
-            this.btnGet.BackgroundImage = global::VOCAC.Properties.Resources.DbGet;
+            this.btnGet.BackgroundImage = global::VOCAUltimate.Properties.Resources.DbGet;
             this.btnGet.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnGet.Enabled = false;
             this.btnGet.FlatAppearance.BorderSize = 0;
@@ -611,7 +611,7 @@
             // 
             this.btnToRegion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnToRegion.BackColor = System.Drawing.Color.White;
-            this.btnToRegion.BackgroundImage = global::VOCAC.Properties.Resources.owner;
+            this.btnToRegion.BackgroundImage = global::VOCAUltimate.Properties.Resources.owner;
             this.btnToRegion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnToRegion.FlatAppearance.BorderSize = 0;
             this.btnToRegion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -774,7 +774,7 @@
             // BtnRefrsh
             // 
             this.BtnRefrsh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnRefrsh.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
+            this.BtnRefrsh.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
             this.BtnRefrsh.Location = new System.Drawing.Point(3, 6);
             this.BtnRefrsh.Name = "BtnRefrsh";
             this.BtnRefrsh.Size = new System.Drawing.Size(122, 30);
@@ -808,7 +808,7 @@
             // btnCls
             // 
             this.btnCls.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCls.BackgroundImage = global::VOCAC.Properties.Resources.CpClose;
+            this.btnCls.BackgroundImage = global::VOCAUltimate.Properties.Resources.CpClose;
             this.btnCls.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnCls.Location = new System.Drawing.Point(17, 4);
             this.btnCls.Name = "btnCls";
@@ -930,8 +930,8 @@
             // 
             this.GridTicket.AllowUserToAddRows = false;
             this.GridTicket.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.GridTicket.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.GridTicket.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.GridTicket.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GridTicket.BackgroundColor = System.Drawing.Color.White;
             this.GridTicket.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;

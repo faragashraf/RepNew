@@ -1,4 +1,4 @@
-﻿namespace VOCAC.PL
+﻿namespace VOCAUltimate.PL
 {
     partial class WelcomeScreen
     {
@@ -329,7 +329,7 @@
             this.LblClrOperation.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.LblClrOperation.Size = new System.Drawing.Size(201, 23);
             this.LblClrOperation.TabIndex = 84;
-            this.LblClrOperation.Text = "-  تحديثات العمليات";
+            this.LblClrOperation.Text = "-  تحديثات الإدارات المختصة";
             this.LblClrOperation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // LblClrUsr
@@ -596,7 +596,7 @@
             // SnOutBt
             // 
             this.SnOutBt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.SnOutBt.BackgroundImage = global::VOCAC.Properties.Resources.recyellow;
+            this.SnOutBt.BackgroundImage = global::VOCAUltimate.Properties.Resources.recyellow;
             this.SnOutBt.Location = new System.Drawing.Point(16, 6);
             this.SnOutBt.Margin = new System.Windows.Forms.Padding(5);
             this.SnOutBt.Name = "SnOutBt";
@@ -610,7 +610,7 @@
             // ExtBt
             // 
             this.ExtBt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExtBt.BackgroundImage = global::VOCAC.Properties.Resources.recred;
+            this.ExtBt.BackgroundImage = global::VOCAUltimate.Properties.Resources.recred;
             this.ExtBt.Location = new System.Drawing.Point(140, 6);
             this.ExtBt.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.ExtBt.Name = "ExtBt";
@@ -656,7 +656,7 @@
             // 
             this.LogInBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LogInBtn.BackColor = System.Drawing.Color.Transparent;
-            this.LogInBtn.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
+            this.LogInBtn.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
             this.LogInBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.LogInBtn.FlatAppearance.BorderSize = 0;
             this.LogInBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -676,7 +676,7 @@
             // 
             this.ExitBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ExitBtn.BackColor = System.Drawing.Color.Transparent;
-            this.ExitBtn.BackgroundImage = global::VOCAC.Properties.Resources.recred;
+            this.ExitBtn.BackgroundImage = global::VOCAUltimate.Properties.Resources.recred;
             this.ExitBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ExitBtn.FlatAppearance.BorderSize = 0;
             this.ExitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -756,7 +756,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
+            this.button1.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -777,7 +777,7 @@
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button3.BackColor = System.Drawing.Color.Transparent;
-            this.button3.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
+            this.button3.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -791,6 +791,7 @@
             this.ToolTip1.SetToolTip(this.button3, "تسجيل الدخول");
             this.button3.UseCompatibleTextRendering = true;
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // lblIp
@@ -907,7 +908,7 @@
             // PictureBox2
             // 
             this.PictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.PictureBox2.BackgroundImage = global::VOCAC.Properties.Resources.usersLogin;
+            this.PictureBox2.BackgroundImage = global::VOCAUltimate.Properties.Resources.usersLogin;
             this.PictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PictureBox2.Location = new System.Drawing.Point(3, 33);
             this.PictureBox2.Name = "PictureBox2";

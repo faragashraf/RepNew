@@ -9,11 +9,11 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using VOCAC.BL;
-using VOCAC.Properties;
-using static VOCAC.BL.ticketCurrent;
+using VOCAUltimate.BL;
+using VOCAUltimate.Properties;
+using static VOCAUltimate.BL.ticketCurrent;
 
-namespace VOCAC.PL
+namespace VOCAUltimate.PL
 {
     public partial class TikFolow_Team : Form
     {

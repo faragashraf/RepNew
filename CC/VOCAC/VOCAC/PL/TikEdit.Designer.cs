@@ -1,4 +1,4 @@
-﻿namespace VOCAC.PL
+﻿namespace VOCAUltimate.PL
 {
     partial class TikEdit
     {
@@ -201,7 +201,7 @@
             // PictureBox2
             // 
             this.PictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.PictureBox2.BackgroundImage = global::VOCAC.Properties.Resources.Phone1;
+            this.PictureBox2.BackgroundImage = global::VOCAUltimate.Properties.Resources.Phone1;
             this.PictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.PictureBox2.Location = new System.Drawing.Point(98, 3);
             this.PictureBox2.Name = "PictureBox2";
@@ -212,7 +212,7 @@
             // PictureBox1
             // 
             this.PictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.PictureBox1.BackgroundImage = global::VOCAC.Properties.Resources.Mobile;
+            this.PictureBox1.BackgroundImage = global::VOCAUltimate.Properties.Resources.Mobile;
             this.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.PictureBox1.Location = new System.Drawing.Point(18, 3);
             this.PictureBox1.Name = "PictureBox1";
@@ -292,7 +292,7 @@
             // 
             // PictureBox4
             // 
-            this.PictureBox4.BackgroundImage = global::VOCAC.Properties.Resources.Phone1;
+            this.PictureBox4.BackgroundImage = global::VOCAUltimate.Properties.Resources.Phone1;
             this.PictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.PictureBox4.Location = new System.Drawing.Point(98, 3);
             this.PictureBox4.Name = "PictureBox4";
@@ -302,7 +302,7 @@
             // 
             // PictureBox3
             // 
-            this.PictureBox3.BackgroundImage = global::VOCAC.Properties.Resources.Mobile;
+            this.PictureBox3.BackgroundImage = global::VOCAUltimate.Properties.Resources.Mobile;
             this.PictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.PictureBox3.Location = new System.Drawing.Point(18, 3);
             this.PictureBox3.Name = "PictureBox3";
@@ -435,7 +435,7 @@
             this.SubmitBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SubmitBtn.BackgroundImage = global::VOCAC.Properties.Resources.SaveFl;
+            this.SubmitBtn.BackgroundImage = global::VOCAUltimate.Properties.Resources.SaveFl;
             this.SubmitBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.SubmitBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.SubmitBtn.FlatAppearance.BorderSize = 0;
@@ -466,7 +466,7 @@
             this.CloseBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.CloseBtn.BackgroundImage = global::VOCAC.Properties.Resources._Exit1;
+            this.CloseBtn.BackgroundImage = global::VOCAUltimate.Properties.Resources._Exit1;
             this.CloseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CloseBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.CloseBtn.FlatAppearance.BorderSize = 0;
@@ -682,7 +682,7 @@
             // btnLoad
             // 
             this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoad.BackgroundImage = global::VOCAC.Properties.Resources.DbGet;
+            this.btnLoad.BackgroundImage = global::VOCAUltimate.Properties.Resources.DbGet;
             this.btnLoad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnLoad.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.btnLoad.Location = new System.Drawing.Point(4, 8);

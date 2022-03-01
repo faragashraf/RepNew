@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using VOCAC.PL;
+using VOCAUltimate.PL;
 
-namespace VOCAC.BL
+namespace VOCAUltimate.BL
 {
     class pictureViewer_
     {

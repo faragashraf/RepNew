@@ -5,9 +5,9 @@ using System.Drawing;
 using System.Linq;
 using System.Media;
 using System.Windows.Forms;
-using VOCAC.Properties;
+using VOCAUltimate.Properties;
 
-namespace VOCAC.PL
+namespace VOCAUltimate.PL
 {
     public partial class TikSetup : Form
     {

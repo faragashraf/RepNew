@@ -1,4 +1,4 @@
-﻿namespace VOCAC.PL
+﻿namespace VOCAUltimate.PL
 {
     partial class TikSetup
     {
@@ -487,7 +487,7 @@
             // 
             // btnsubmit
             // 
-            this.btnsubmit.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
+            this.btnsubmit.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
             this.btnsubmit.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnsubmit.Location = new System.Drawing.Point(6, 8);
             this.btnsubmit.Margin = new System.Windows.Forms.Padding(3, 3, 420, 3);
@@ -514,7 +514,7 @@
             // btncancel
             // 
             this.btncancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btncancel.BackgroundImage = global::VOCAC.Properties.Resources.recred;
+            this.btncancel.BackgroundImage = global::VOCAUltimate.Properties.Resources.recred;
             this.btncancel.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btncancel.Location = new System.Drawing.Point(6, 8);
             this.btncancel.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
@@ -543,7 +543,7 @@
             // btnaddnew
             // 
             this.btnaddnew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnaddnew.BackgroundImage = global::VOCAC.Properties.Resources.recorange;
+            this.btnaddnew.BackgroundImage = global::VOCAUltimate.Properties.Resources.recorange;
             this.btnaddnew.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnaddnew.Location = new System.Drawing.Point(162, 148);
             this.btnaddnew.Name = "btnaddnew";
@@ -723,7 +723,7 @@
             // 
             // button1
             // 
-            this.button1.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
+            this.button1.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(16, 95);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 3, 420, 3);

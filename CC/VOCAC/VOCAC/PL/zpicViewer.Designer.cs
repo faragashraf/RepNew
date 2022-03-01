@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace VOCAC.PL
+namespace VOCAUltimate.PL
 {
     partial class zpicViewer
     {
@@ -112,7 +112,7 @@ namespace VOCAC.PL
             // 
             // btnSave
             // 
-            this.btnSave.BackgroundImage = global::VOCAC.Properties.Resources.SaveGreen1;
+            this.btnSave.BackgroundImage = global::VOCAUltimate.Properties.Resources.SaveGreen1;
             this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnSave.Location = new System.Drawing.Point(120, 5);
             this.btnSave.Margin = new System.Windows.Forms.Padding(0, 5, 10, 10);
@@ -124,7 +124,7 @@ namespace VOCAC.PL
             // 
             // btnprint
             // 
-            this.btnprint.BackgroundImage = global::VOCAC.Properties.Resources.print;
+            this.btnprint.BackgroundImage = global::VOCAUltimate.Properties.Resources.print;
             this.btnprint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnprint.Location = new System.Drawing.Point(73, 15);
             this.btnprint.Margin = new System.Windows.Forms.Padding(0, 15, 10, 10);
@@ -189,7 +189,7 @@ namespace VOCAC.PL
             // 
             // btnchoose
             // 
-            this.btnchoose.BackgroundImage = global::VOCAC.Properties.Resources.Yes;
+            this.btnchoose.BackgroundImage = global::VOCAUltimate.Properties.Resources.Yes;
             this.btnchoose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnchoose.Location = new System.Drawing.Point(52, 6);
             this.btnchoose.Margin = new System.Windows.Forms.Padding(0, 6, 10, 10);
@@ -201,7 +201,7 @@ namespace VOCAC.PL
             // 
             // btncdispose
             // 
-            this.btncdispose.BackgroundImage = global::VOCAC.Properties.Resources.delete1;
+            this.btncdispose.BackgroundImage = global::VOCAUltimate.Properties.Resources.delete1;
             this.btncdispose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btncdispose.Location = new System.Drawing.Point(0, 6);
             this.btncdispose.Margin = new System.Windows.Forms.Padding(0, 6, 10, 10);

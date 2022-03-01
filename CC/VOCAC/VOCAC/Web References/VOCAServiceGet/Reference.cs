@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace VOCAC.VOCAServiceGet {
+namespace VOCAUltimate.VOCAServiceGet {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -36,7 +36,7 @@ namespace VOCAC.VOCAServiceGet {
         
         /// <remarks/>
         public VOCAServiceGet() {
-            this.Url = global::VOCAC.Properties.Settings.Default.VOCAC_VOCAServiceGet_VOCAServiceGet;
+            this.Url = global::VOCAUltimate.Properties.Settings.Default.VOCAC_VOCAServiceGet_VOCAServiceGet;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

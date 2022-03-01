@@ -1,4 +1,4 @@
-﻿namespace VOCAC.PL
+﻿namespace VOCAUltimate.PL
 {
     partial class TikSearchNew
     {
@@ -60,7 +60,7 @@
             // CloseBtn
             // 
             this.CloseBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CloseBtn.BackgroundImage = global::VOCAC.Properties.Resources._Exit1;
+            this.CloseBtn.BackgroundImage = global::VOCAUltimate.Properties.Resources._Exit1;
             this.CloseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CloseBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.CloseBtn.FlatAppearance.BorderSize = 0;
@@ -78,7 +78,7 @@
             // 
             // BtnCncl
             // 
-            this.BtnCncl.BackgroundImage = global::VOCAC.Properties.Resources.recblue;
+            this.BtnCncl.BackgroundImage = global::VOCAUltimate.Properties.Resources.recblue;
             this.BtnCncl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnCncl.FlatAppearance.BorderSize = 0;
             this.BtnCncl.Font = new System.Drawing.Font("Times New Roman", 12F);
@@ -135,7 +135,7 @@
             // 
             // BtnSerch
             // 
-            this.BtnSerch.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
+            this.BtnSerch.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
             this.BtnSerch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnSerch.FlatAppearance.BorderSize = 0;
             this.BtnSerch.Font = new System.Drawing.Font("Times New Roman", 12F);

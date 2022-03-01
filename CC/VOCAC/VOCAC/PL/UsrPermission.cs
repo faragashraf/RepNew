@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace VOCAC.PL
+namespace VOCAUltimate.PL
 {
     public partial class UsrPermission : Form
     {

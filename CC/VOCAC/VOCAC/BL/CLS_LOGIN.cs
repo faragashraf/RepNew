@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
-using VOCAC.Properties;
+using VOCAUltimate.Properties;
 using System.Windows.Forms;
 using System.Windows.Media;
 using Color = System.Drawing.Color;
 
-namespace VOCAC.BL
+namespace VOCAUltimate.BL
 {
     class CLS_LOGIN
     {

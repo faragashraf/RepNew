@@ -1,4 +1,4 @@
-﻿namespace VOCAC.PL
+﻿namespace VOCAUltimate.PL
 {
     partial class TikUpdate
     {
@@ -142,7 +142,7 @@
             // BtnSubmt
             // 
             this.BtnSubmt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnSubmt.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
+            this.BtnSubmt.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
             this.BtnSubmt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnSubmt.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.BtnSubmt.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));

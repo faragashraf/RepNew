@@ -1,4 +1,4 @@
-﻿namespace VOCAC.PL
+﻿namespace VOCAUltimate.PL
 {
     partial class UserResetPassword
     {
@@ -200,7 +200,7 @@
             // BtnFltr
             // 
             this.BtnFltr.BackColor = System.Drawing.Color.Transparent;
-            this.BtnFltr.BackgroundImage = global::VOCAC.Properties.Resources.Search;
+            this.BtnFltr.BackgroundImage = global::VOCAUltimate.Properties.Resources.Search;
             this.BtnFltr.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnFltr.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnFltr.Location = new System.Drawing.Point(1474, 66);

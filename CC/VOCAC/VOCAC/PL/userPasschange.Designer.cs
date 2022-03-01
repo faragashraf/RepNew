@@ -1,4 +1,4 @@
-﻿namespace VOCAC.PL
+﻿namespace VOCAUltimate.PL
 {
     partial class userPasschange
     {
@@ -71,7 +71,7 @@
             // 
             this.ExitBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ExitBtn.BackColor = System.Drawing.Color.Transparent;
-            this.ExitBtn.BackgroundImage = global::VOCAC.Properties.Resources.recred;
+            this.ExitBtn.BackgroundImage = global::VOCAUltimate.Properties.Resources.recred;
             this.ExitBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ExitBtn.FlatAppearance.BorderSize = 0;
             this.ExitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -144,7 +144,7 @@
             // 
             this.BtSub.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtSub.BackColor = System.Drawing.Color.Transparent;
-            this.BtSub.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
+            this.BtSub.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
             this.BtSub.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtSub.FlatAppearance.BorderSize = 0;
             this.BtSub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -200,7 +200,7 @@
             // PictureBox2
             // 
             this.PictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.PictureBox2.BackgroundImage = global::VOCAC.Properties.Resources.ChangePass;
+            this.PictureBox2.BackgroundImage = global::VOCAUltimate.Properties.Resources.ChangePass;
             this.PictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PictureBox2.Location = new System.Drawing.Point(18, 18);
             this.PictureBox2.Margin = new System.Windows.Forms.Padding(4);

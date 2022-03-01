@@ -15,9 +15,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using VOCAC.Properties;
+using VOCAUltimate.Properties;
 
-namespace VOCAC.PL
+namespace VOCAUltimate.PL
 {
     public delegate void delagatethread();
     public partial class WelcomeScreen : Form
@@ -604,7 +604,7 @@ namespace VOCAC.PL
             string[] dd = null;
             dd = function.readLog();
             string jjj = dd.ToString();
-            int oo = CountNumberOfLinesInCSFilesOfDirectory(@"E:\RepNew\CC\VOCAC\VOCAC");
+            int oo = CountNumberOfLinesInCSFilesOfDirectory(@"E:\RepNew\CC\VOCAUltimate\VOCAUltimate");
         }
         #region Project Code Lines Count In any Directory
         private int CountNumberOfLinesInCSFilesOfDirectory(string dirPath)

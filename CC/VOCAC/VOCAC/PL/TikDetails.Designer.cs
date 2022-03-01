@@ -1,4 +1,4 @@
-﻿namespace VOCAC.PL
+﻿namespace VOCAUltimate.PL
 {
     partial class TikDetails
     {
@@ -110,7 +110,7 @@
             // BtnUpd
             // 
             this.BtnUpd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnUpd.BackgroundImage = global::VOCAC.Properties.Resources.recorange;
+            this.BtnUpd.BackgroundImage = global::VOCAUltimate.Properties.Resources.recorange;
             this.BtnUpd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnUpd.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.BtnUpd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
@@ -173,7 +173,7 @@
             // BtnAddEdt
             // 
             this.BtnAddEdt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnAddEdt.BackgroundImage = global::VOCAC.Properties.Resources.recgreen;
+            this.BtnAddEdt.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
             this.BtnAddEdt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnAddEdt.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.BtnAddEdt.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));

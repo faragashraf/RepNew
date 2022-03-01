@@ -1,4 +1,4 @@
-﻿namespace VOCAC.PL
+﻿namespace VOCAUltimate.PL
 {
     partial class heldSearch
     {
@@ -90,7 +90,7 @@
             // 
             // BtnSerch
             // 
-            this.BtnSerch.BackgroundImage = global::VOCAC.Properties.Resources.Search11;
+            this.BtnSerch.BackgroundImage = global::VOCAUltimate.Properties.Resources.Search11;
             this.BtnSerch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnSerch.FlatAppearance.BorderSize = 0;
             this.BtnSerch.Location = new System.Drawing.Point(636, 3);
@@ -225,7 +225,7 @@
             // 
             this.Btn2Bck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Btn2Bck.BackColor = System.Drawing.Color.Transparent;
-            this.Btn2Bck.BackgroundImage = global::VOCAC.Properties.Resources.Back1;
+            this.Btn2Bck.BackgroundImage = global::VOCAUltimate.Properties.Resources.Back1;
             this.Btn2Bck.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Btn2Bck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn2Bck.Location = new System.Drawing.Point(1267, 6);
@@ -367,7 +367,7 @@
             // CloseBtn
             // 
             this.CloseBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.CloseBtn.BackgroundImage = global::VOCAC.Properties.Resources._Exit1;
+            this.CloseBtn.BackgroundImage = global::VOCAUltimate.Properties.Resources._Exit1;
             this.CloseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CloseBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.CloseBtn.FlatAppearance.BorderSize = 0;

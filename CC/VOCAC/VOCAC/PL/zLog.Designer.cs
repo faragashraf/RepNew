@@ -1,4 +1,4 @@
-﻿namespace VOCAC.PL
+﻿namespace VOCAUltimate.PL
 {
     partial class zLog
     {
@@ -88,7 +88,7 @@
             // BtnRdFl
             // 
             this.BtnRdFl.BackColor = System.Drawing.Color.Transparent;
-            this.BtnRdFl.BackgroundImage = global::VOCAC.Properties.Resources.LoadFl;
+            this.BtnRdFl.BackgroundImage = global::VOCAUltimate.Properties.Resources.LoadFl;
             this.BtnRdFl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnRdFl.Location = new System.Drawing.Point(14, 0);
             this.BtnRdFl.Name = "BtnRdFl";
@@ -101,7 +101,7 @@
             // BtnExitFrm
             // 
             this.BtnExitFrm.BackColor = System.Drawing.Color.Transparent;
-            this.BtnExitFrm.BackgroundImage = global::VOCAC.Properties.Resources._Exit1;
+            this.BtnExitFrm.BackgroundImage = global::VOCAUltimate.Properties.Resources._Exit1;
             this.BtnExitFrm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnExitFrm.Location = new System.Drawing.Point(154, 0);
             this.BtnExitFrm.Name = "BtnExitFrm";
@@ -113,7 +113,7 @@
             // BtnWrFl
             // 
             this.BtnWrFl.BackColor = System.Drawing.Color.Transparent;
-            this.BtnWrFl.BackgroundImage = global::VOCAC.Properties.Resources.SaveFl;
+            this.BtnWrFl.BackgroundImage = global::VOCAUltimate.Properties.Resources.SaveFl;
             this.BtnWrFl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnWrFl.Location = new System.Drawing.Point(84, 0);
             this.BtnWrFl.Name = "BtnWrFl";
