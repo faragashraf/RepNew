@@ -466,4 +466,10 @@
   <data name="calculate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\calculate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="VOCAUltimatePicture2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VOCAUltimatePicture2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VOCAUltimatePicture40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VOCAUltimatePicture40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

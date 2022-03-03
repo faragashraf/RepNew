@@ -88,15 +88,14 @@ namespace VOCAUltimate
         public string ConStrFn()
         {
             strConn = null;
-            WelcomeScreen WlcmScren = WelcomeScreen.getwecmscrnfrm;
             if (_ServerCD == "Eg Server")
             {
                 Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237wxz9";
                 _serverNm = "VOCA Server";
-                WlcmScren.BackgroundImage = Resources.VocaWtr;
-                WlcmScren.BackgroundImageLayout = ImageLayout.Stretch;
-                WlcmScren.BackColor = Color.FromArgb(192, 255, 192);
-                WlcmScren.panellgin.BackColor = Color.FromArgb(192, 255, 192);
+                WelcomeScreen.getwecmscrnfrm.BackgroundImage = Resources.VOCAUltimatePicture2;
+                WelcomeScreen.getwecmscrnfrm.BackgroundImageLayout = ImageLayout.Stretch;
+                WelcomeScreen.getwecmscrnfrm.BackColor = Color.FromArgb(192, 255, 192);
+                WelcomeScreen.getwecmscrnfrm.panellgin.BackColor = Color.FromArgb(192, 255, 192);
             }
             else if (_ServerCD == "Lab")
             {
@@ -107,20 +106,20 @@ namespace VOCAUltimate
             {
                 Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237wxz9";
                 _serverNm = "Training";
-                WlcmScren.BackgroundImage = Resources.Empty;
-                WlcmScren.BackColor = Color.White;
-                WlcmScren.panellgin.BackColor = Color.White;
+                WelcomeScreen.getwecmscrnfrm.BackgroundImage = Resources.Empty;
+                WelcomeScreen.getwecmscrnfrm.BackColor = Color.White;
+                WelcomeScreen.getwecmscrnfrm.panellgin.BackColor = Color.White;
             }
             else if (_ServerCD == "servrMe")
             {
                 Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusashraf;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237wxz9";
                 _serverNm = "servrMe";
-                WlcmScren.BackgroundImage = Resources.Demo;
-                WlcmScren.BackgroundImageLayout = ImageLayout.Center;
-                WlcmScren.BackColor = Color.White;
-                WlcmScren.panellgin.BackColor = Color.White;
+                WelcomeScreen.getwecmscrnfrm.BackgroundImage = Resources.Demo;
+                WelcomeScreen.getwecmscrnfrm.BackgroundImageLayout = ImageLayout.Center;
+                WelcomeScreen.getwecmscrnfrm.BackColor = Color.White;
+                WelcomeScreen.getwecmscrnfrm.panellgin.BackColor = Color.White;
             }
-            WlcmScren.LblSrvrNm.Text = Statcdif._ServerCD;
+            WelcomeScreen.getwecmscrnfrm.LblSrvrNm.Text = Statcdif._ServerCD;
             try
             {
                 MacTble.Rows.Clear();

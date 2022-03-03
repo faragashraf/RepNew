@@ -173,6 +173,7 @@
             // BtnSubmt
             // 
             this.BtnSubmt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnSubmt.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
             this.BtnSubmt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnSubmt.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.BtnSubmt.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -185,6 +186,7 @@
             this.BtnSubmt.TabIndex = 2114;
             this.BtnSubmt.Text = "تسجيل";
             this.BtnSubmt.UseVisualStyleBackColor = true;
+            this.BtnSubmt.Visible = false;
             // 
             // GridHeldUpdt
             // 
@@ -199,7 +201,7 @@
             this.GridHeldUpdt.Name = "GridHeldUpdt";
             this.GridHeldUpdt.ReadOnly = true;
             this.GridHeldUpdt.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.GridHeldUpdt.Size = new System.Drawing.Size(786, 374);
+            this.GridHeldUpdt.Size = new System.Drawing.Size(786, 419);
             this.GridHeldUpdt.TabIndex = 2113;
             // 
             // Label60
@@ -210,6 +212,7 @@
             this.Label60.Size = new System.Drawing.Size(100, 23);
             this.Label60.TabIndex = 2112;
             this.Label60.Text = "إضافة تحديث:";
+            this.Label60.Visible = false;
             // 
             // TxtUpdt
             // 
@@ -220,6 +223,7 @@
             this.TxtUpdt.Name = "TxtUpdt";
             this.TxtUpdt.Size = new System.Drawing.Size(522, 125);
             this.TxtUpdt.TabIndex = 2111;
+            this.TxtUpdt.Visible = false;
             // 
             // Btn2Bck
             // 

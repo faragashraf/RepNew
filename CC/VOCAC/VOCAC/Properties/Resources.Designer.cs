@@ -1161,6 +1161,26 @@ namespace VOCAUltimate.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap VOCAUltimatePicture2 {
+            get {
+                object obj = ResourceManager.GetObject("VOCAUltimatePicture2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap VOCAUltimatePicture40 {
+            get {
+                object obj = ResourceManager.GetObject("VOCAUltimatePicture40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap VocaWtr {
             get {
                 object obj = ResourceManager.GetObject("VocaWtr", resourceCulture);

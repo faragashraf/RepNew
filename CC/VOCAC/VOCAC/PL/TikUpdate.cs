@@ -110,7 +110,9 @@ namespace VOCAUltimate.PL
                 }
                 if (ticketCurrent.addevent(currntTicket._TkSQL, TxtUpdt.Text, Convert.ToInt32(CmbEvent.SelectedValue), Statcdif._IP, CurrentUser.UsrID, null, Statcdif.mainImageArray, Statcdif.extAttch) == null)
                 {
-                    if (TikFolow_Team.getTikFolltemfrm != null)
+                    //if (TikFolow_Team.getTikFolltemfrm != null)
+                    bool bolTikSearch = frms.FormIsOpen(Application.OpenForms, typeof(TikFolow_Team));
+                    if (bolTikSearch == true)
                     {
                         DataRow DRW = function.DRW(Statcdif.TickTblMain, currntTicket._TkSQL, Statcdif.TickTblMain.Columns[0]);
                         Statcdif.TickTblMain.Rows[Statcdif.TickTblMain.Rows.IndexOf(DRW)]["TkupTxt"] = TxtUpdt.Text;

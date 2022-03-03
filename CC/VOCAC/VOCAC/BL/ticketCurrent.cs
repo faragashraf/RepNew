@@ -147,21 +147,21 @@ namespace VOCAUltimate.BL
             {
                 TikDetails.gettikdetlsfrm.TcktImg.BackgroundImage = Resources.Tckoff;
                 TikDetails.gettikdetlsfrm.TcktImg.BackgroundImageLayout = ImageLayout.Stretch;
-                TikDetails.gettikdetlsfrm.BtnAddEdt.Enabled = false;
-                TikDetails.gettikdetlsfrm.TxtDetailsAdd.Enabled = false;
-                TikDetails.gettikdetlsfrm.TxtDetailsAdd.Text = "لا يمكن عمل تعديل أو إضافة على تفاصيل شكوى مغلقة";
-                TikDetails.gettikdetlsfrm.TxtDetailsAdd.TextAlign = HorizontalAlignment.Center;
-                TikDetails.gettikdetlsfrm.TxtDetailsAdd.Font = new Font("Times new Roman", 16, FontStyle.Regular);
+                //TikDetails.gettikdetlsfrm.BtnAddEdt.Enabled = false;
+                //TikDetails.gettikdetlsfrm.TxtDetailsAdd.Enabled = false;
+                //TikDetails.gettikdetlsfrm.TxtDetailsAdd.Text = "لا يمكن عمل تعديل أو إضافة على تفاصيل شكوى مغلقة";
+                //TikDetails.gettikdetlsfrm.TxtDetailsAdd.TextAlign = HorizontalAlignment.Center;
+                //TikDetails.gettikdetlsfrm.TxtDetailsAdd.Font = new Font("Times new Roman", 16, FontStyle.Regular);
             }
             else
             {
                 TikDetails.gettikdetlsfrm.TcktImg.BackgroundImage = Resources.Tckon;
                 TikDetails.gettikdetlsfrm.TcktImg.BackgroundImageLayout = ImageLayout.Stretch;
-                TikDetails.gettikdetlsfrm.BtnAddEdt.Enabled = true;
-                TikDetails.gettikdetlsfrm.TxtDetailsAdd.Enabled = true;
-                TikDetails.gettikdetlsfrm.TxtDetailsAdd.Text = "";
-                TikDetails.gettikdetlsfrm.TxtDetailsAdd.Font = new Font("Times new Roman", 12, FontStyle.Regular);
-                TikDetails.gettikdetlsfrm.TxtDetailsAdd.TextAlign = HorizontalAlignment.Left;
+                //TikDetails.gettikdetlsfrm.BtnAddEdt.Enabled = true;
+                //TikDetails.gettikdetlsfrm.TxtDetailsAdd.Enabled = true;
+                //TikDetails.gettikdetlsfrm.TxtDetailsAdd.Text = "";
+                //TikDetails.gettikdetlsfrm.TxtDetailsAdd.Font = new Font("Times new Roman", 12, FontStyle.Regular);
+                //TikDetails.gettikdetlsfrm.TxtDetailsAdd.TextAlign = HorizontalAlignment.Left;
             }
 
             TikDetails.gettikdetlsfrm.TxtPh1.Text = currntTicket._TkClPh;

@@ -121,7 +121,7 @@ namespace VOCAUltimate.PL
 
                 Statcdif._MacStr = fn.GetMACAddressNew();
                 TxtUsrNm.Select();
-                TxtUsrNm.Text = "ahmed_emam";
+                //TxtUsrNm.Text = "ahmed_emam";
                 //TxtUsrPass.Text = "hemonad";
 
                 Cmbo.SelectedItem = "Training";
@@ -137,7 +137,7 @@ namespace VOCAUltimate.PL
                 FlowLayoutPanel1.Visible = true;
                 panellgin.Visible = false;
                 GroupBox1.Visible = false;
-                GrpCounters.Visible = false;
+                //GrpCounters.Visible = false;
                 PictureBox1.Visible = false;
                 LblUsrIP.Visible = false;
                 PubVerLbl.Visible = false;
@@ -226,8 +226,8 @@ namespace VOCAUltimate.PL
                     if (Statcdif._ServerCD == "Eg Server")
                     {
                         FlowLayoutPanel1.BackColor = Color.FromArgb(192, 255, 192);
-                        FlowLayoutPanel1.BackgroundImage = Resources.VocaWtr;
-                        FlowLayoutPanel1.BackgroundImageLayout = ImageLayout.Stretch;
+                        FlowLayoutPanel1.BackgroundImage = Resources.VOCAUltimatePicture2;
+                        FlowLayoutPanel1.BackgroundImageLayout = ImageLayout.Zoom;
                     }
                     else if (Statcdif._ServerCD == "Training")
                     {
@@ -342,28 +342,29 @@ namespace VOCAUltimate.PL
 
 
             LblUsrRNm.Text = "Welcome ( " + CurrentUser.UsrID + " ) " + CurrentUser.UsrRlNm;
-            if (CurrentUser.UsrUCatLvl >= 3 && CurrentUser.UsrUCatLvl <= 5)
-            {
-                GrpCounters.Visible = true;
-                //GrpCounters.Text = "ملخص أرقامي حتى : " & Now
-                //GrpCounters.Visible = True
-                //LblClsN.Text = Usr.PUsrClsN
-                //LblFlN.Text = Usr.PUsrFlN
-                //LblClsYDy.Text = Usr.PUsrClsYDy
-                //LblEvDy.Text = Usr.PUsrEvDy
-                //LblUnRead.Text = Usr.PUsrUnRead
-                //LblReadYDy.Text = Usr.PUsrReadYDy
-                //LblReOpY.Text = Usr.PUsrReOpY
-                //LblRecivDy.Text = Usr.PUsrRecvDy
-                //LblClsUpdted.Text = Usr.PUsrClsUpdtd
-                //LblFolwDy.Text = Usr.PUsrFolwDay
-                ConterWidt = GrpCounters.Width + GrpCounters.Margin.Left + GrpCounters.Margin.Right;
-            }
-            else
-            {
-                GrpCounters.Visible = false;
-                ConterWidt = 0;
-            }
+            ConterWidt = 0;
+            //if (CurrentUser.UsrUCatLvl >= 3 && CurrentUser.UsrUCatLvl <= 5)
+            //{
+            //    GrpCounters.Visible = true;
+            //    //GrpCounters.Text = "ملخص أرقامي حتى : " & Now
+            //    //GrpCounters.Visible = True
+            //    //LblClsN.Text = Usr.PUsrClsN
+            //    //LblFlN.Text = Usr.PUsrFlN
+            //    //LblClsYDy.Text = Usr.PUsrClsYDy
+            //    //LblEvDy.Text = Usr.PUsrEvDy
+            //    //LblUnRead.Text = Usr.PUsrUnRead
+            //    //LblReadYDy.Text = Usr.PUsrReadYDy
+            //    //LblReOpY.Text = Usr.PUsrReOpY
+            //    //LblRecivDy.Text = Usr.PUsrRecvDy
+            //    //LblClsUpdted.Text = Usr.PUsrClsUpdtd
+            //    //LblFolwDy.Text = Usr.PUsrFolwDay
+            //    ConterWidt = GrpCounters.Width + GrpCounters.Margin.Left + GrpCounters.Margin.Right;
+            //}
+            //else
+            //{
+            //    GrpCounters.Visible = false;
+            //    ConterWidt = 0;
+            //}
             AdjustSize();
         }
         private void getusrPic()
@@ -663,7 +664,6 @@ namespace VOCAUltimate.PL
                     || trimmed.StartsWith("protected") //method signature
                     );
         }
-
         #endregion
         private void LblIp_Click(object sender, EventArgs e)
         {

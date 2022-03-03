@@ -249,9 +249,6 @@ namespace VOCAUltimate.PL
                 WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
             }
         }
-
-
-
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.GridTicket.SelectionChanged -= new EventHandler(this.GridTicket_SelectionChanged);
@@ -268,6 +265,8 @@ namespace VOCAUltimate.PL
             if ((treeView1.GetNodeCount(true) > 1 && splitContainer1.Panel1Collapsed == true) || CurrentUser.UsrLvl.Substring(16, 1) == "A")
             {
                 splitContainer1.Panel1Collapsed = false;
+                flwCounters.Visible = true;
+                flowLayoutPanel4.Visible = true;
             }
             if (tabControl1.SelectedTab.Name == "tabDistribute" || tabControl1.SelectedTab.Name == "tabTask")
             {
@@ -310,9 +309,13 @@ namespace VOCAUltimate.PL
                 flowLayoutPanel7.Visible = false;
                 btnGet.BackgroundImage = Resources.DbGet;
                 txtReopen.Focus();
+                flwCounters.Visible = false;
+                flowLayoutPanel4.Visible = false;
             }
             else
             {
+                flwCounters.Visible = true;
+                flowLayoutPanel4.Visible = true;
                 flowLayoutPanel7.Visible = true;
                 splitContainer2.Panel1Collapsed = true;
                 btnseting.Visible = false;
@@ -361,51 +364,57 @@ namespace VOCAUltimate.PL
                 Filtr();
                 if (tabControl1.SelectedTab.Name == "tabDistribute")
                 {
-                    this.StatBrPnlEn.Text = "جاري تحميل بيانات العملاء المرتبطة ...";
-                    //------------- Customer 360 ------------------------------XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                    List<string> TkSQLlst = new List<string>();
-                    List<string> phone1lst = new List<string>();
-                    //List<string> phone2lst = new List<string>();
-                    List<string> NIDlst = new List<string>();
-                    StringBuilder where_ = new StringBuilder();
-                    for (int i = 0; i < Statcdif.TickTblMain.DefaultView.Count; i++)
+                    if (Statcdif.TickTblMain.DefaultView.Count > 0)
                     {
-                        if (Statcdif.TickTblMain.DefaultView[i]["TKSQL"].ToString().Length > 0) { TkSQLlst.Add("'" + Statcdif.TickTblMain.DefaultView[i]["TKSQL"].ToString() + "'"); }
-                        if (Statcdif.TickTblMain.DefaultView[i]["TkClPh"].ToString().Length > 0) { phone1lst.Add("'" + Statcdif.TickTblMain.DefaultView[i]["TkClPh"].ToString() + "'"); }
-                        //if (Statcdif.TickTblMain.DefaultView[i]["TkClPh1"].ToString().Length > 0) { phone2lst.Add("'" + Statcdif.TickTblMain.DefaultView[i]["TkClPh1"].ToString() + "'"); }
-                        if (Statcdif.TickTblMain.DefaultView[i]["TkClNtID"].ToString().Length > 0) { NIDlst.Add("'" + Statcdif.TickTblMain.DefaultView[i]["TkClNtID"].ToString() + "'"); }
-                    }
-                    if (TkSQLlst.Count > 0) { where_.Append(" (TKSQL NOT in (" + string.Join(", ", TkSQLlst) + "))"); }
-                    if (phone1lst.Count > 0) { where_.Append(" AND (TkClPh in (" + string.Join(", ", phone1lst) + ")"); }
-                    //if (phone2lst.Count > 0) { where_.Append(" or TkClPh1 in (" + string.Join(", ", phone2lst) + ")"); }
-                    if (NIDlst.Count > 0) { where_.Append(" or TkClNtID in (" + string.Join(", ", NIDlst) + ")"); }
-                    Statcdif.tik360.Rows.Clear();
-                    Statcdif.tik360 = fn.returntbl("select TkSQL,TkDtStart,TkClNm,TkClPh,TkClPh1,TkClNtID,PrdNm+' \\ '+CompNm 'comp',Tikfolowusr+' \\ '+TikfolowusrTeam 'Folower',CASE WHEN TkClsStatus = 0 THEN 'مفتوحة' ELSE 'مغلقة' END 'TkClsStatus' " +
-                        "from All_Tickets where " + where_.ToString() + ")");
-                    if (Statcdif.tik360 != null)
-                    {
-                        if (Statcdif.tik360.Rows.Count > 0)
+                        this.StatBrPnlEn.Text = "جاري تحميل بيانات العملاء المرتبطة ...";
+                        //------------- Customer 360 ------------------------------XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                        List<string> TkSQLlst = new List<string>();
+                        List<string> phone1lst = new List<string>();
+                        //List<string> phone2lst = new List<string>();
+                        List<string> NIDlst = new List<string>();
+                        StringBuilder where_ = new StringBuilder();
+                        for (int i = 0; i < Statcdif.TickTblMain.DefaultView.Count; i++)
                         {
-                            foreach (DataGridViewRow item in GridTicket.Rows)
+                            if (Statcdif.TickTblMain.DefaultView[i]["TKSQL"].ToString().Length > 0) { TkSQLlst.Add("'" + Statcdif.TickTblMain.DefaultView[i]["TKSQL"].ToString() + "'"); }
+                            if (Statcdif.TickTblMain.DefaultView[i]["TkClPh"].ToString().Length > 0) { phone1lst.Add("'" + Statcdif.TickTblMain.DefaultView[i]["TkClPh"].ToString() + "'"); }
+                            //if (Statcdif.TickTblMain.DefaultView[i]["TkClPh1"].ToString().Length > 0) { phone2lst.Add("'" + Statcdif.TickTblMain.DefaultView[i]["TkClPh1"].ToString() + "'"); }
+                            if (Statcdif.TickTblMain.DefaultView[i]["TkClNtID"].ToString().Length > 0) { NIDlst.Add("'" + Statcdif.TickTblMain.DefaultView[i]["TkClNtID"].ToString() + "'"); }
+                        }
+                        if (TkSQLlst.Count > 0) { where_.Append(" (TKSQL NOT in (" + string.Join(", ", TkSQLlst) + "))"); }
+                        if (phone1lst.Count > 0) { where_.Append(" AND ((TkClPh in (" + string.Join(", ", phone1lst) + ")"); }
+                        //if (phone2lst.Count > 0) { where_.Append(" or TkClPh1 in (" + string.Join(", ", phone2lst) + ")"); }
+                        if (NIDlst.Count > 0) { where_.Append(" or TkClNtID in (" + string.Join(", ", NIDlst) + ")"); }
+                        if (Statcdif.tik360 != null) { Statcdif.tik360.Rows.Clear(); }
+                        Statcdif.tik360 = fn.returntbl("select TkSQL,TkDtStart,TkClNm,TkClPh,TkClPh1,TkClNtID,PrdNm+' \\ '+CompNm 'comp',Tikfolowusr+' \\ '+TikfolowusrTeam 'Folower',CASE WHEN TkClsStatus = 0 THEN 'مفتوحة' ELSE 'مغلقة' END 'TkClsStatus' " +
+                            "from All_Tickets where " + where_.ToString() + "))");
+                        if (Statcdif.tik360 != null)
+                        {
+                            if (Statcdif.tik360.Rows.Count > 0)
                             {
-                                Statcdif.tik360.DefaultView.RowFilter = "TkClPh = '" + item.Cells["TkClPh"].Value + "' or TkClNtID = '" + item.Cells["TkClNtID"].Value + "'";
-                                if (Statcdif.tik360.DefaultView.Count > 0)
+                                foreach (DataGridViewRow item in GridTicket.Rows)
                                 {
-                                    item.DefaultCellStyle.ForeColor = Color.Blue;
-                                    if (Statcdif.tik360.DefaultView[0]["TkClPh"].ToString().Equals( item.Cells["TkClPh"].Value.ToString())) { item.Cells["TkClPh"].Style.BackColor = Color.Yellow; }
-                                    if (Statcdif.tik360.DefaultView[0]["TkClNtID"].ToString().Equals(item.Cells["TkClNtID"].Value.ToString())) { item.Cells["TkClNtID"].Style.BackColor = Color.Yellow; }
-                                    item.DefaultCellStyle.Font = new Font("Times new Roman", 12, FontStyle.Bold);
-                                    item.Tag = Statcdif.tik360.DefaultView[0][6];
+                                    string flterFilter = "";
+                                    if (item.Cells["TkClPh"].Value.ToString().Length > 0) { flterFilter += "TkClPh = '" + item.Cells["TkClPh"].Value + "'"; }
+                                    if (item.Cells["TkClNtID"].Value.ToString().Length > 0) { flterFilter += " OR TkClNtID = '" + item.Cells["TkClNtID"].Value + "'"; }
+                                    Statcdif.tik360.DefaultView.RowFilter = flterFilter;
+                                    if (Statcdif.tik360.DefaultView.Count > 0)
+                                    {
+                                        item.DefaultCellStyle.ForeColor = Color.Blue;
+                                        if (Statcdif.tik360.DefaultView[0]["TkClPh"].ToString().Equals(item.Cells["TkClPh"].Value.ToString())) { item.Cells["TkClPh"].Style.BackColor = Color.Yellow; }
+                                        if (Statcdif.tik360.DefaultView[0]["TkClNtID"].ToString().Equals(item.Cells["TkClNtID"].Value.ToString())) { item.Cells["TkClNtID"].Style.BackColor = Color.Yellow; }
+                                        item.DefaultCellStyle.Font = new Font("Times new Roman", 12, FontStyle.Bold);
+                                        item.Tag = Statcdif.tik360.DefaultView[0]["Folower"];
+                                    }
                                 }
                             }
                         }
+                        else
+                        {
+                            fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "تحميل البيانات", MessageBoxButtons.OK); ;
+                        }
+                        //------------- Customer 360 -------------------------------XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                        this.StatBrPnlEn.Text = "إجمالي العدد : " + Statcdif.TickTblMain.Rows.Count.ToString();
                     }
-                    else
-                    {
-                        fn.msg("هناك خطأ في الإتصال بقواعد البيانات", "تحميل البيانات", MessageBoxButtons.OK); ;
-                    }
-                    //------------- Customer 360 -------------------------------XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                    this.StatBrPnlEn.Text = "إجمالي العدد : " + Statcdif.TickTblMain.Rows.Count.ToString();
                 }
             }
             this.GridTicket.SelectionChanged -= new EventHandler(this.GridTicket_SelectionChanged);
@@ -496,7 +505,10 @@ namespace VOCAUltimate.PL
                             bool bolTikPrifile = frms.FormIsOpen(Application.OpenForms, typeof(TikFolow360));
                             if (GridTicket.CurrentRow.DefaultCellStyle.ForeColor == Color.Blue)
                             {
-                                Statcdif.tik360.DefaultView.RowFilter = "TkClPh = '" + GridTicket.CurrentRow.Cells["TkClPh"].Value + "' or TkClNtID = '" + GridTicket.CurrentRow.Cells["TkClNtID"].Value + "'";
+                                string flterFilter = "";
+                                if (GridTicket.CurrentRow.Cells["TkClPh"].Value.ToString().Length > 0) { flterFilter += "TkClPh = '" + GridTicket.CurrentRow.Cells["TkClPh"].Value + "'"; }
+                                if (GridTicket.CurrentRow.Cells["TkClNtID"].Value.ToString().Length > 0) { flterFilter += " OR TkClNtID = '" + GridTicket.CurrentRow.Cells["TkClNtID"].Value + "'"; }
+                                Statcdif.tik360.DefaultView.RowFilter = flterFilter;
                                 if (GridTicket.CurrentRow.Tag != null) { this.StatBrPnlEn.Text = "آخر متابع شكوى للعميل : " + GridTicket.CurrentRow.Tag.ToString() + "   ( " + Statcdif.tik360.DefaultView.Count + " )"; }
                             }
                             else
@@ -686,9 +698,12 @@ namespace VOCAUltimate.PL
         private void StatusBar1_PanelClick(object sender, StatusBarPanelClickEventArgs e)
         {
             int panelIndex = StatusBar1.Panels.IndexOf(e.StatusBarPanel);
+            string flterFilter = "";
+            if (GridTicket.CurrentRow.Cells["TkClPh"].Value.ToString().Length > 0) { flterFilter += "TkClPh = '" + GridTicket.CurrentRow.Cells["TkClPh"].Value + "'"; }
+            if (GridTicket.CurrentRow.Cells["TkClNtID"].Value.ToString().Length > 0) { flterFilter += " OR TkClNtID = '" + GridTicket.CurrentRow.Cells["TkClNtID"].Value + "'"; }
+            Statcdif.tik360.DefaultView.RowFilter = flterFilter;
             if (tabControl1.TabPages.Contains(tabDistribute) && panelIndex == 0 && Statcdif.tik360.DefaultView.Count > 0)
             {
-                Statcdif.tik360.DefaultView.RowFilter = Statcdif.tik360.DefaultView.RowFilter = "TkClPh = '" + GridTicket.CurrentRow.Cells["TkClPh"].Value + "' or TkClNtID = '" + GridTicket.CurrentRow.Cells["TkClNtID"].Value + "'";
                 TikFolow360.getTikFol360frm.MdiParent = WelcomeScreen.ActiveForm;
                 TikFolow360.getTikFol360frm.WindowState = FormWindowState.Normal;
                 TikFolow360.getTikFol360frm.Show();
@@ -1098,8 +1113,12 @@ namespace VOCAUltimate.PL
                 GridTicket.Columns["EvNm"].Visible = true;
                 GridTicket.Columns["EvNm"].HeaderText = "نوع آخر تحديث";
 
-                GridTicket.Columns["Wdays"].Visible = true;
+                if (tabControl1.SelectedTab.Name != "tabReopen")
+                {
+                    GridTicket.Columns["Wdays"].Visible = true;
                 GridTicket.Columns["Wdays"].HeaderText = "ايام العمل";
+                }
+
                 //for (int i = 37; i < GridTicket.Columns.Count; i++)
                 //{
                 //    GridTicket.Columns[i].Visible = true;
@@ -1494,11 +1513,13 @@ namespace VOCAUltimate.PL
             {
                 if (ticketCurrent.addevent(Convert.ToInt32(txtReopen.Text), "The Complaint has been Reopened", 999, Statcdif._IP, CurrentUser.UsrID) == null)
                 {
+                    GridTicket.Visible = false;
                     refereshtbl();
                     adjustButton("تحميل", Resources.DbGet);
-                    fn.msg("تم فتح الشكوى بنجاح", "إعادة فتح الشكوى", MessageBoxButtons.OK);
                     RsultReOpen.dt.Rows.Clear();
                     GridTicket.DataSource = null;
+                    GridTicket.Visible = true;
+                    fn.msg("تم فتح الشكوى بنجاح", "إعادة فتح الشكوى", MessageBoxButtons.OK);
                 }
             }
         }
@@ -1551,10 +1572,11 @@ namespace VOCAUltimate.PL
             DataRow DRW = function.DRW(Statcdif.ProdCompTable, GridTicket.CurrentRow.Cells["TkFnPrdCd"].Value, Statcdif.ProdCompTable.Columns[0]);
             DataRow DRW1 = function.DRW(Statcdif.TreeUsrTbl, DRW.ItemArray[8], Statcdif.TreeUsrTbl.Columns[0]);
             string UpdateStr = "Update Tickets set TkEmpNm = " + DRW.ItemArray[8].ToString() + " Where TKSQL = " + Convert.ToInt32(GridTicket.CurrentRow.Cells["TkSQL"].Value);
-            string targetTeam = DRW1.ItemArray[5].ToString().Split('-')[0].Trim();
+            string targetTeam = DRW1.ItemArray[5].ToString().Split('-')[1].Trim();
+
             if (targetTeam != GridTicket.CurrentRow.Cells["TikfolowusrTeam"].Value.ToString().Trim())
             {
-                DialogResult dialogResult = MessageBox.Show("سيتم تحويل الشكوى للفريق المختص " + Environment.NewLine + "هل تريد الإستمرار؟", "تحويل للفريق المختص", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                DialogResult dialogResult = MessageBox.Show("سيتم تحويل الشكوى ل"  + targetTeam + Environment.NewLine + "هل تريد الإستمرار؟", "تحويل للفريق المختص", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 if (dialogResult == DialogResult.Yes)
                 {
 

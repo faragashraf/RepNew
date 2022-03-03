@@ -170,7 +170,7 @@
             // Panel3
             // 
             this.Panel3.Controls.Add(this.CloseBtn);
-            this.Panel3.Location = new System.Drawing.Point(242, 740);
+            this.Panel3.Location = new System.Drawing.Point(259, 655);
             this.Panel3.Name = "Panel3";
             this.Panel3.Size = new System.Drawing.Size(76, 72);
             this.Panel3.TabIndex = 2172;
@@ -199,7 +199,7 @@
             this.FlwtopBar.Controls.Add(this.checkAll);
             this.FlwtopBar.Controls.Add(this.flowLayoutPanel7);
             this.FlowLayoutPanel1.SetFlowBreak(this.FlwtopBar, true);
-            this.FlwtopBar.Location = new System.Drawing.Point(49, 3);
+            this.FlwtopBar.Location = new System.Drawing.Point(66, 3);
             this.FlwtopBar.Name = "FlwtopBar";
             this.FlwtopBar.Size = new System.Drawing.Size(1493, 195);
             this.FlwtopBar.TabIndex = 2173;
@@ -848,7 +848,7 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Location = new System.Drawing.Point(49, 204);
+            this.splitContainer1.Location = new System.Drawing.Point(66, 204);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -860,7 +860,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.GridTicket);
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer1.Size = new System.Drawing.Size(1493, 530);
+            this.splitContainer1.Size = new System.Drawing.Size(1493, 445);
             this.splitContainer1.SplitterDistance = 499;
             this.splitContainer1.TabIndex = 2176;
             // 
@@ -879,7 +879,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.treeView1);
             this.splitContainer2.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer2.Size = new System.Drawing.Size(499, 530);
+            this.splitContainer2.Size = new System.Drawing.Size(499, 445);
             this.splitContainer2.SplitterDistance = 213;
             this.splitContainer2.TabIndex = 2179;
             // 
@@ -896,7 +896,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(213, 530);
+            this.dataGridView1.Size = new System.Drawing.Size(213, 445);
             this.dataGridView1.TabIndex = 2176;
             // 
             // treeView1
@@ -912,7 +912,7 @@
             this.treeView1.ShowLines = false;
             this.treeView1.ShowPlusMinus = false;
             this.treeView1.ShowRootLines = false;
-            this.treeView1.Size = new System.Drawing.Size(282, 530);
+            this.treeView1.Size = new System.Drawing.Size(282, 445);
             this.treeView1.StateImageList = this.imageList1;
             this.treeView1.TabIndex = 2175;
             this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeView1_BeforeSelect);
@@ -942,7 +942,7 @@
             this.GridTicket.ReadOnly = true;
             this.GridTicket.RowHeadersVisible = false;
             this.GridTicket.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.GridTicket.Size = new System.Drawing.Size(990, 530);
+            this.GridTicket.Size = new System.Drawing.Size(990, 445);
             this.GridTicket.TabIndex = 123;
             this.GridTicket.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.GridTicket_CellPainting);
             this.GridTicket.DoubleClick += new System.EventHandler(this.GridTicket_DoubleClick);
@@ -973,7 +973,7 @@
             this.flwCounters.Controls.Add(this.LabelCompCount);
             this.flwCounters.Controls.Add(this.LblRequest);
             this.flwCounters.Controls.Add(this.LblRegions);
-            this.flwCounters.Location = new System.Drawing.Point(324, 740);
+            this.flwCounters.Location = new System.Drawing.Point(341, 655);
             this.flwCounters.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.flwCounters.Name = "flwCounters";
             this.flwCounters.Size = new System.Drawing.Size(1221, 72);

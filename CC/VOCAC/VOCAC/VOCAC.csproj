@@ -29,7 +29,7 @@
     <PublisherName>Ashraf Farag</PublisherName>
     <SuiteName>VOCA Ultimate</SuiteName>
     <MinimumRequiredVersion>1.0.0.1</MinimumRequiredVersion>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -602,6 +602,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Frstaid.ico" />
+    <None Include="Resources\VOCAUltimatePicture2.png" />
+    <None Include="Resources\VOCAUltimateWater0.png" />
+    <None Include="Resources\VOCAUltimateWater10.png" />
+    <None Include="Resources\VOCAUltimateWater20.png" />
+    <None Include="Resources\VOCAUltimateWater01.png" />
+    <None Include="Resources\VOCAUltimateWater101.png" />
+    <None Include="Resources\VOCAUltimateWater201.png" />
+    <None Include="Resources\VOCAUltimatePicture40.png" />
     <Content Include="vocaultimate_Wd9_icon.ico" />
     <None Include="Resources\calculate.png" />
     <None Include="Web References\VOCAServiceGet\VOCAServiceGet.disco" />
