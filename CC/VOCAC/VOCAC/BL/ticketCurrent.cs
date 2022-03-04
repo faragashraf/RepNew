@@ -295,6 +295,7 @@ namespace VOCAUltimate.BL
                 {
                     TikUpdate.getTikupdatefrm.Text = "تحديثات طلب رقم : " + currntTicket._TkSQL;
                 }
+                TikUpdate.getTikupdatefrm.Text += "_باسم : " + currntTicket._TkClNm;
                 TikUpdate.getTikupdatefrm.Text += " _ عدد التحديثات : " + DAL.Struc.dt.Rows.Count;
                 TikUpdate.getTikupdatefrm.CmbEvent.DataSource = Statcdif.UpdateKTable;
                 TikUpdate.getTikupdatefrm.CmbEvent.DisplayMember = "EvNm";

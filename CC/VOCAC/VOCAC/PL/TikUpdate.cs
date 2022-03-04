@@ -200,20 +200,25 @@ namespace VOCAUltimate.PL
         {
             if (GridUpdt.CurrentRow != null)
             {
+                var k = attchtbl.Rows.Count;
+                var k1 = attchtbl;
                 if (GridUpdt.CurrentRow.Cells["File"].Value.ToString().Length > 0)
                 {
                     DRW = function.DRW(attchtbl, GridUpdt.CurrentRow.Cells[0].Value, attchtbl.Columns[0]);
-                    data = (byte[])DRW.ItemArray[1];
-                    Statcdif.extAttch = DRW.ItemArray[2].ToString();
-                    //toolTip1.Show("رقم التليفون لابد أن يبدأ بكود المحافظة" + Environment.NewLine + "مثال : \"02XXXXXXXX", GridUpdt, 0, 30, 1000);
-                    ContextMenuStrip2.Items[0].Enabled = true;
-                    if (arr.Contains(Statcdif.extAttch.ToString().ToUpper()))
+                    if(DRW !=null)
                     {
-                        ContextMenuStrip2.Items[0].Text = "DownLoad Picture";
-                    }
-                    else
-                    {
-                        ContextMenuStrip2.Items[0].Text = "DownLoad File";
+                        data = (byte[])DRW.ItemArray[1];
+                        Statcdif.extAttch = DRW.ItemArray[2].ToString();
+                        //toolTip1.Show("رقم التليفون لابد أن يبدأ بكود المحافظة" + Environment.NewLine + "مثال : \"02XXXXXXXX", GridUpdt, 0, 30, 1000);
+                        ContextMenuStrip2.Items[0].Enabled = true;
+                        if (arr.Contains(Statcdif.extAttch.ToString().ToUpper()))
+                        {
+                            ContextMenuStrip2.Items[0].Text = "DownLoad Picture";
+                        }
+                        else
+                        {
+                            ContextMenuStrip2.Items[0].Text = "DownLoad File";
+                        }
                     }
                 }
                 else
