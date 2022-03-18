@@ -578,6 +578,7 @@
             this.MyGroupBox3.Controls.Add(this.RadioButton4);
             this.MyGroupBox3.Controls.Add(this.RadioButton5);
             this.MyGroupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.MyGroupBox3.Enabled = false;
             this.MyGroupBox3.Location = new System.Drawing.Point(294, 3);
             this.MyGroupBox3.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.MyGroupBox3.Name = "MyGroupBox3";

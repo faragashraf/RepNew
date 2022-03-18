@@ -73,6 +73,7 @@ namespace VOCAUltimate.PL
             Statcdif._IP = fn.OsIP();
             LblUsrIP.Text = "IP: " + Statcdif._IP;
             lblIp.Text = "IP: " + Statcdif._IP;
+
             if (Encoding.Default.HeaderName != "windows-1256")
             {
 
@@ -91,10 +92,10 @@ namespace VOCAUltimate.PL
             }
 
             //Cmbo.Items.Add("My Labtop");
-            Cmbo.Items.Add("Training");
             Cmbo.Items.Add("Eg Server");
-            Cmbo.Items.Add("servrMe");
-            Cmbo.Items.Add("Lab");
+            Cmbo.Items.Add("Training");
+            //Cmbo.Items.Add("servrMe");
+            //Cmbo.Items.Add("Lab");
         }
         private void WelcomeScreen_Load(object sender, EventArgs e)
         {
@@ -124,8 +125,8 @@ namespace VOCAUltimate.PL
                 //TxtUsrNm.Text = "ahmed_emam";
                 //TxtUsrPass.Text = "hemonad";
 
-                Cmbo.SelectedItem = "Training";
-                //Cmbo.SelectedItem = "Eg Server";
+                //Cmbo.SelectedItem = "Training";
+                Cmbo.SelectedItem = "Eg Server";
                 Statcdif._ServerCD = Cmbo.SelectedItem.ToString();
                 LblSrvrNm.Text = Statcdif._ServerCD;
                 this.Cmbo.SelectedIndexChanged += new System.EventHandler(this.Cmbo_SelectedIndexChanged);

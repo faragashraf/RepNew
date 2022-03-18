@@ -353,11 +353,11 @@
             // 
             this.tabExport.BackColor = System.Drawing.Color.White;
             this.tabExport.Controls.Add(this.flowLayoutPanel5);
-            this.tabExport.Location = new System.Drawing.Point(4, 39);
+            this.tabExport.Location = new System.Drawing.Point(4, 46);
             this.tabExport.Margin = new System.Windows.Forms.Padding(0);
             this.tabExport.Name = "tabExport";
             this.tabExport.Padding = new System.Windows.Forms.Padding(3);
-            this.tabExport.Size = new System.Drawing.Size(1092, 73);
+            this.tabExport.Size = new System.Drawing.Size(1092, 66);
             this.tabExport.TabIndex = 1;
             this.tabExport.Text = "الرئيسية";
             // 
@@ -369,7 +369,7 @@
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(1086, 67);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(1086, 60);
             this.flowLayoutPanel5.TabIndex = 2182;
             // 
             // pnlBtnExport
@@ -457,10 +457,10 @@
             // 
             this.tabDistribute.BackColor = System.Drawing.Color.White;
             this.tabDistribute.Controls.Add(this.flowLayoutPanel2);
-            this.tabDistribute.Location = new System.Drawing.Point(4, 39);
+            this.tabDistribute.Location = new System.Drawing.Point(4, 46);
             this.tabDistribute.Name = "tabDistribute";
             this.tabDistribute.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDistribute.Size = new System.Drawing.Size(1092, 73);
+            this.tabDistribute.Size = new System.Drawing.Size(1092, 66);
             this.tabDistribute.TabIndex = 2;
             this.tabDistribute.Text = "توزيع وتحويل الشكاوى";
             // 
@@ -470,7 +470,7 @@
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(1086, 67);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(1086, 60);
             this.flowLayoutPanel2.TabIndex = 2189;
             // 
             // panel7
@@ -504,10 +504,10 @@
             // 
             this.tabReopen.BackColor = System.Drawing.Color.White;
             this.tabReopen.Controls.Add(this.flowLayoutPanel3);
-            this.tabReopen.Location = new System.Drawing.Point(4, 39);
+            this.tabReopen.Location = new System.Drawing.Point(4, 46);
             this.tabReopen.Name = "tabReopen";
             this.tabReopen.Padding = new System.Windows.Forms.Padding(3);
-            this.tabReopen.Size = new System.Drawing.Size(1092, 73);
+            this.tabReopen.Size = new System.Drawing.Size(1092, 66);
             this.tabReopen.TabIndex = 3;
             this.tabReopen.Text = "إعادة فتح";
             // 
@@ -519,7 +519,7 @@
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(1086, 67);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(1086, 60);
             this.flowLayoutPanel3.TabIndex = 2186;
             // 
             // Label11
@@ -543,7 +543,7 @@
             this.txtReopen.Margin = new System.Windows.Forms.Padding(3, 22, 3, 3);
             this.txtReopen.Name = "txtReopen";
             this.txtReopen.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtReopen.Size = new System.Drawing.Size(97, 29);
+            this.txtReopen.Size = new System.Drawing.Size(97, 34);
             this.txtReopen.TabIndex = 2184;
             this.txtReopen.Tag = "Arabic-Number";
             this.txtReopen.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -580,10 +580,10 @@
             // 
             this.tabTask.BackColor = System.Drawing.Color.White;
             this.tabTask.Controls.Add(this.flowLayoutPanel6);
-            this.tabTask.Location = new System.Drawing.Point(4, 39);
+            this.tabTask.Location = new System.Drawing.Point(4, 46);
             this.tabTask.Name = "tabTask";
             this.tabTask.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTask.Size = new System.Drawing.Size(1092, 73);
+            this.tabTask.Size = new System.Drawing.Size(1092, 66);
             this.tabTask.TabIndex = 4;
             this.tabTask.Text = "إرسال للمناطق";
             // 
@@ -593,7 +593,7 @@
             this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel6.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(1086, 67);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(1086, 60);
             this.flowLayoutPanel6.TabIndex = 2190;
             // 
             // panel1
@@ -629,11 +629,11 @@
             this.checkAll.AutoSize = true;
             this.checkAll.BackColor = System.Drawing.Color.Red;
             this.checkAll.ForeColor = System.Drawing.Color.Yellow;
-            this.checkAll.Location = new System.Drawing.Point(40, 80);
+            this.checkAll.Location = new System.Drawing.Point(20, 80);
             this.checkAll.Margin = new System.Windows.Forms.Padding(3, 80, 3, 3);
             this.checkAll.Name = "checkAll";
             this.checkAll.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.checkAll.Size = new System.Drawing.Size(83, 23);
+            this.checkAll.Size = new System.Drawing.Size(103, 26);
             this.checkAll.TabIndex = 2188;
             this.checkAll.Text = "اختيار الكل";
             this.checkAll.UseVisualStyleBackColor = false;
@@ -649,11 +649,11 @@
             this.flowLayoutPanel7.Controls.Add(this.PnlBtnRfrsh);
             this.flowLayoutPanel7.Controls.Add(this.chckShwResult);
             this.flowLayoutPanel7.Controls.Add(this.pnlBtnClose);
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(104, 119);
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(72, 119);
             this.flowLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel7.Name = "flowLayoutPanel7";
             this.flowLayoutPanel7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(1389, 65);
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(1421, 65);
             this.flowLayoutPanel7.TabIndex = 2189;
             // 
             // panel4
@@ -662,7 +662,7 @@
             this.panel4.Controls.Add(this.Rd_contain);
             this.panel4.Controls.Add(this.Rd_endwith);
             this.panel4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.panel4.Location = new System.Drawing.Point(846, 3);
+            this.panel4.Location = new System.Drawing.Point(878, 3);
             this.panel4.Margin = new System.Windows.Forms.Padding(275, 3, 3, 3);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(268, 52);
@@ -673,9 +673,9 @@
             this.Rd_strtwith.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Rd_strtwith.AutoSize = true;
             this.Rd_strtwith.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.Rd_strtwith.Location = new System.Drawing.Point(198, 18);
+            this.Rd_strtwith.Location = new System.Drawing.Point(183, 18);
             this.Rd_strtwith.Name = "Rd_strtwith";
-            this.Rd_strtwith.Size = new System.Drawing.Size(63, 26);
+            this.Rd_strtwith.Size = new System.Drawing.Size(78, 30);
             this.Rd_strtwith.TabIndex = 2172;
             this.Rd_strtwith.Text = "يبدأ بـ";
             this.Rd_strtwith.UseVisualStyleBackColor = true;
@@ -687,9 +687,9 @@
             this.Rd_contain.AutoSize = true;
             this.Rd_contain.Checked = true;
             this.Rd_contain.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.Rd_contain.Location = new System.Drawing.Point(9, 18);
+            this.Rd_contain.Location = new System.Drawing.Point(-16, 18);
             this.Rd_contain.Name = "Rd_contain";
-            this.Rd_contain.Size = new System.Drawing.Size(99, 26);
+            this.Rd_contain.Size = new System.Drawing.Size(124, 30);
             this.Rd_contain.TabIndex = 2174;
             this.Rd_contain.TabStop = true;
             this.Rd_contain.Text = "يحتوى على";
@@ -701,9 +701,9 @@
             this.Rd_endwith.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Rd_endwith.AutoSize = true;
             this.Rd_endwith.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.Rd_endwith.Location = new System.Drawing.Point(114, 18);
+            this.Rd_endwith.Location = new System.Drawing.Point(94, 18);
             this.Rd_endwith.Name = "Rd_endwith";
-            this.Rd_endwith.Size = new System.Drawing.Size(77, 26);
+            this.Rd_endwith.Size = new System.Drawing.Size(97, 30);
             this.Rd_endwith.TabIndex = 2173;
             this.Rd_endwith.Text = "ينتهي بـ";
             this.Rd_endwith.UseVisualStyleBackColor = true;
@@ -714,7 +714,7 @@
             this.panel5.Controls.Add(this.Rd_Equal);
             this.panel5.Controls.Add(this.Rd_Like);
             this.panel5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.panel5.Location = new System.Drawing.Point(730, 3);
+            this.panel5.Location = new System.Drawing.Point(762, 3);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(110, 52);
             this.panel5.TabIndex = 2176;
@@ -724,9 +724,9 @@
             this.Rd_Equal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Rd_Equal.AutoSize = true;
             this.Rd_Equal.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.Rd_Equal.Location = new System.Drawing.Point(66, 19);
+            this.Rd_Equal.Location = new System.Drawing.Point(58, 19);
             this.Rd_Equal.Name = "Rd_Equal";
-            this.Rd_Equal.Size = new System.Drawing.Size(39, 26);
+            this.Rd_Equal.Size = new System.Drawing.Size(47, 30);
             this.Rd_Equal.TabIndex = 2172;
             this.Rd_Equal.Text = "=";
             this.Rd_Equal.UseVisualStyleBackColor = true;
@@ -738,9 +738,9 @@
             this.Rd_Like.AutoSize = true;
             this.Rd_Like.Checked = true;
             this.Rd_Like.Font = new System.Drawing.Font("Times New Roman", 14F);
-            this.Rd_Like.Location = new System.Drawing.Point(6, 18);
+            this.Rd_Like.Location = new System.Drawing.Point(-9, 18);
             this.Rd_Like.Name = "Rd_Like";
-            this.Rd_Like.Size = new System.Drawing.Size(53, 25);
+            this.Rd_Like.Size = new System.Drawing.Size(68, 31);
             this.Rd_Like.TabIndex = 2173;
             this.Rd_Like.TabStop = true;
             this.Rd_Like.Text = "like";
@@ -752,11 +752,11 @@
             this.SerchTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SerchTxt.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.SerchTxt.ForeColor = System.Drawing.Color.Black;
-            this.SerchTxt.Location = new System.Drawing.Point(522, 15);
+            this.SerchTxt.Location = new System.Drawing.Point(554, 15);
             this.SerchTxt.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
             this.SerchTxt.Name = "SerchTxt";
             this.SerchTxt.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.SerchTxt.Size = new System.Drawing.Size(202, 29);
+            this.SerchTxt.Size = new System.Drawing.Size(202, 34);
             this.SerchTxt.TabIndex = 2024;
             this.SerchTxt.Tag = "Arabic-All";
             this.SerchTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -765,7 +765,7 @@
             // PnlBtnRfrsh
             // 
             this.PnlBtnRfrsh.Controls.Add(this.BtnRefrsh);
-            this.PnlBtnRfrsh.Location = new System.Drawing.Point(384, 10);
+            this.PnlBtnRfrsh.Location = new System.Drawing.Point(416, 10);
             this.PnlBtnRfrsh.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.PnlBtnRfrsh.Name = "PnlBtnRfrsh";
             this.PnlBtnRfrsh.Size = new System.Drawing.Size(132, 41);
@@ -791,7 +791,7 @@
             this.chckShwResult.Location = new System.Drawing.Point(253, 20);
             this.chckShwResult.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.chckShwResult.Name = "chckShwResult";
-            this.chckShwResult.Size = new System.Drawing.Size(125, 23);
+            this.chckShwResult.Size = new System.Drawing.Size(157, 26);
             this.chckShwResult.TabIndex = 0;
             this.chckShwResult.Text = "إظهار فوري للنتائج";
             this.chckShwResult.UseVisualStyleBackColor = true;
@@ -825,7 +825,7 @@
             this.chckShowClose.Location = new System.Drawing.Point(116, 17);
             this.chckShowClose.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.chckShowClose.Name = "chckShowClose";
-            this.chckShowClose.Size = new System.Drawing.Size(121, 23);
+            this.chckShowClose.Size = new System.Drawing.Size(151, 26);
             this.chckShowClose.TabIndex = 2179;
             this.chckShowClose.Text = "إظهار زر الإغلاق";
             this.chckShowClose.UseVisualStyleBackColor = true;
@@ -896,6 +896,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.Size = new System.Drawing.Size(213, 445);
             this.dataGridView1.TabIndex = 2176;
             // 
@@ -941,6 +942,7 @@
             this.GridTicket.Name = "GridTicket";
             this.GridTicket.ReadOnly = true;
             this.GridTicket.RowHeadersVisible = false;
+            this.GridTicket.RowHeadersWidth = 51;
             this.GridTicket.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.GridTicket.Size = new System.Drawing.Size(990, 445);
             this.GridTicket.TabIndex = 123;
@@ -1305,7 +1307,7 @@
             this.CopyToolStripitem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.CopyToolStripitem.Name = "CopyToolStripitem";
             this.CopyToolStripitem.RightToLeftAutoMirrorImage = true;
-            this.CopyToolStripitem.Size = new System.Drawing.Size(184, 22);
+            this.CopyToolStripitem.Size = new System.Drawing.Size(216, 24);
             this.CopyToolStripitem.Text = "Copy Selected Cell";
             // 
             // UplodAtchToolStripitem
@@ -1315,7 +1317,7 @@
             this.UplodAtchToolStripitem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.UplodAtchToolStripitem.Name = "UplodAtchToolStripitem";
             this.UplodAtchToolStripitem.RightToLeftAutoMirrorImage = true;
-            this.UplodAtchToolStripitem.Size = new System.Drawing.Size(184, 22);
+            this.UplodAtchToolStripitem.Size = new System.Drawing.Size(216, 24);
             this.UplodAtchToolStripitem.Text = "Upload Attachement";
             this.UplodAtchToolStripitem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -1327,7 +1329,7 @@
             this.DonlodAttchToolStripitem.Name = "DonlodAttchToolStripitem";
             this.DonlodAttchToolStripitem.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.DonlodAttchToolStripitem.RightToLeftAutoMirrorImage = true;
-            this.DonlodAttchToolStripitem.Size = new System.Drawing.Size(184, 22);
+            this.DonlodAttchToolStripitem.Size = new System.Drawing.Size(216, 24);
             this.DonlodAttchToolStripitem.Text = "Download attached";
             this.DonlodAttchToolStripitem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -1355,6 +1357,7 @@
             // 
             // ContextMenuStrip2
             // 
+            this.ContextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.ContextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CopyToolStripitem,
             this.UplodAtchToolStripitem,
@@ -1362,11 +1365,11 @@
             this.ContextMenuStrip2.Name = "ContextMenuStrip1";
             this.ContextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.ContextMenuStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.ContextMenuStrip2.Size = new System.Drawing.Size(185, 70);
+            this.ContextMenuStrip2.Size = new System.Drawing.Size(217, 76);
             // 
             // TikFolow_Team
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1562, 775);

@@ -28,7 +28,7 @@ namespace VOCAUltimate
         public static int screenHeight = Screen.PrimaryScreen.Bounds.Height;
         public static InputLanguage EnglishInput;
         public static InputLanguage ArabicInput;
-        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237wxz9";
+        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaultimate;Password=@VocaPlus$21-1237";
         public SqlConnection CONSQL;
         public static String _ServerCD;
         public static String _serverNm;
@@ -90,7 +90,7 @@ namespace VOCAUltimate
             strConn = null;
             if (_ServerCD == "Eg Server")
             {
-                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237wxz9";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaultimate;Password=@VocaPlus$21-1237";
                 _serverNm = "VOCA Server";
                 WelcomeScreen.getwecmscrnfrm.BackgroundImage = Resources.VOCAUltimatePicture2;
                 WelcomeScreen.getwecmscrnfrm.BackgroundImageLayout = ImageLayout.Stretch;
@@ -99,12 +99,12 @@ namespace VOCAUltimate
             }
             else if (_ServerCD == "Lab")
             {
-                Statcdif.strConn = @"Data Source=MyThinkbook\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=sa;Password=Hemonad105046";
+                Statcdif.strConn = @"Data Source=MyThinkbook\ASHRAFSQL;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaultimate;Password=@VocaPlus$21-1237";
                 _serverNm = "Lab";
             }
             else if (_ServerCD == "Training")
             {
-                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=test1;Password=@VocaPlus$21-1237wxz9";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaultimate;Password=@VocaPlus$21-1237";
                 _serverNm = "Training";
                 WelcomeScreen.getwecmscrnfrm.BackgroundImage = Resources.Empty;
                 WelcomeScreen.getwecmscrnfrm.BackColor = Color.White;
@@ -311,10 +311,10 @@ namespace VOCAUltimate
 
                 ToolStripMenuItem NewTab = new ToolStripMenuItem(tabTable.Rows[i].Field<string>("SwNm"));
                 ToolStripMenuItem NewTabCx = new ToolStripMenuItem(tabTable.Rows[i].Field<string>("SwNm"));  //YYYYYYYYYYY
-                if (tabTable.Rows[i].Field<int>("SwID_New") > 0) // To Confirm That SerID not Equal Zero
+                if (tabTable.Rows[i].Field<int>("SwID") > 0) // To Confirm That SerID not Equal Zero
                 {
-                    if (CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID_New") - 1, 1) == "A" ||
-                        CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID_New") - 1, 1) == "H")
+                    if (CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID") - 1, 1) == "A" ||
+                        CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID") - 1, 1) == "H")
                     {
                         Menu_.Items.Add(NewTab);
                         CntxMenu.Items.Add(NewTabCx);                    //YYYYYYYYYYY
@@ -326,14 +326,14 @@ namespace VOCAUltimate
                         {
                             ToolStripMenuItem subItem = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
                             ToolStripMenuItem subItemCx = new ToolStripMenuItem(butTable.Rows[u].Field<string>("SwNm").ToString());
-                            if (butTable.Rows[u].Field<int>("SwID_New") > 0) // To Confirm That SerID not Equal Zero
+                            if (butTable.Rows[u].Field<int>("SwID") > 0) // To Confirm That SerID not Equal Zero
                             {
-                                if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID_New") - 1, 1) == "A")
+                                if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID") - 1, 1) == "A")
                                 {
                                     if (butTable.Rows[u].Field<bool>("NewNew") == true)  // Populate Switchboard Button If form Added
                                     {
                                         subItem.Tag = butTable.Rows[u].Field<string>("SwObjNm1");
-                                        if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID_New") - 1, 1) == "A")
+                                        if (CurrentUser.UsrLvl.ToString().Substring(butTable.Rows[u].Field<int>("SwID") - 1, 1) == "A")
                                         {
                                             subItem.AccessibleName = "True";
                                             subItemCx.AccessibleName = "True";
@@ -472,7 +472,7 @@ namespace VOCAUltimate
                     else
                     {
                         function fn = function.getfn;
-                        fn.msg("لقد تجاوزت حجم المرفق المسموح \" 5 ميجا بايت \"" + Environment.NewLine + "برجاء تقليل مساحة المرفق وإعادة المحاولة", "تحميل مرفق", MessageBoxButtons.OK);
+                        fn.msg("لقد تجاوزت حجم المرفق المسموح  " + Convert.ToInt32(AppSettings.Rows[0]["AttachSize"]) /1024/1024 + "   \" ميجا بايت \"" + Environment.NewLine + "برجاء تقليل مساحة المرفق وإعادة المحاولة", "تحميل مرفق", MessageBoxButtons.OK);
                     }
                 }
                 else

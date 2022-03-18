@@ -761,6 +761,7 @@ namespace VOCAUltimate.PL
         }
         private void Filtr()
         {
+            if (distributeTbl != null) { distributeTbl.Rows.Clear(); }
             this.GridTicket.SelectionChanged -= new EventHandler(this.GridTicket_SelectionChanged);
             FltrStr.Clear();                                                        //Clear Filter string
 

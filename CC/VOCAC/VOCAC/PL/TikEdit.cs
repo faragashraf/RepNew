@@ -122,7 +122,7 @@ namespace VOCAUltimate.PL
 
             TickKind = 0;
             PrdKind = "";
-            MyGroupBox3.Enabled = true;
+            MyGroupBox3.Enabled = false;
             FlwTree.Enabled = true;
             FlwMainData.Enabled = false;
             richTextBox1.Text = "";

@@ -88,33 +88,33 @@ namespace VOCAUltimate.PL
         {
             TreeNode Chldnode2;
 
-            Statcdif.SwitchTbl.DefaultView.RowFilter = "SwType = 'Tab' and SwID_New > 0";
+            Statcdif.SwitchTbl.DefaultView.RowFilter = "SwType = 'Tab' and SwID > 0";
             DataTable tabTbl = new DataTable();
             tabTbl = Statcdif.SwitchTbl.DefaultView.ToTable();
 
             for (int i = 0; i < tabTbl.Rows.Count; i++)
             {
-                SecTree.Nodes[0].Nodes.Add(tabTbl.Rows[i]["SwID_New"].ToString(), tabTbl.Rows[i]["SwID_New"].ToString() + "-" + tabTbl.Rows[i]["SwNm"].ToString());
-                Statcdif.SwitchTbl.DefaultView.RowFilter = "SwType <> 'Tab' and SwID_New > 0 and SwSer = '" + tabTbl.Rows[i]["SwSer"].ToString() + "'";
+                SecTree.Nodes[0].Nodes.Add(tabTbl.Rows[i]["SwID"].ToString(), tabTbl.Rows[i]["SwID"].ToString() + "-" + tabTbl.Rows[i]["SwNm"].ToString());
+                Statcdif.SwitchTbl.DefaultView.RowFilter = "SwType <> 'Tab' and SwID > 0 and SwSer = '" + tabTbl.Rows[i]["SwSer"].ToString() + "'";
                 Chldnode2 = SecTree.Nodes[0].Nodes[i];
                 for (int u = 0; u < Statcdif.SwitchTbl.DefaultView.Count; u++)
                 {
-                    Chldnode2.Nodes.Add(Statcdif.SwitchTbl.DefaultView[u]["SwID_New"].ToString(), Statcdif.SwitchTbl.DefaultView[u]["SwID_New"].ToString() + "-" + Statcdif.SwitchTbl.DefaultView[u]["SwNm"].ToString());
+                    Chldnode2.Nodes.Add(Statcdif.SwitchTbl.DefaultView[u]["SwID"].ToString(), Statcdif.SwitchTbl.DefaultView[u]["SwID"].ToString() + "-" + Statcdif.SwitchTbl.DefaultView[u]["SwNm"].ToString());
                     Chldnode2.BackColor = Color.Aqua;
                     Chldnode2.NodeFont = new Font("Times New Roman", 12, FontStyle.Bold);
                 }
             }
-            Statcdif.SwitchTbl.DefaultView.RowFilter = "SwType = 'System'  and SwID_New > 0";
+            Statcdif.SwitchTbl.DefaultView.RowFilter = "SwType = 'System'  and SwID > 0";
 
             for (int u = 0; u < Statcdif.SwitchTbl.DefaultView.Count; u++)
             {
-                SecTree.Nodes[1].Nodes.Add(Statcdif.SwitchTbl.DefaultView[u]["SwID_New"].ToString(), Statcdif.SwitchTbl.DefaultView[u]["SwID_New"].ToString() + "-" + Statcdif.SwitchTbl.DefaultView[u]["SwNm"].ToString());
+                SecTree.Nodes[1].Nodes.Add(Statcdif.SwitchTbl.DefaultView[u]["SwID"].ToString(), Statcdif.SwitchTbl.DefaultView[u]["SwID"].ToString() + "-" + Statcdif.SwitchTbl.DefaultView[u]["SwNm"].ToString());
             }
-            Statcdif.SwitchTbl.DefaultView.RowFilter = "SwType = 'Button'  and SwID_New > 0";
+            Statcdif.SwitchTbl.DefaultView.RowFilter = "SwType = 'Button'  and SwID > 0";
 
             for (int u = 0; u < Statcdif.SwitchTbl.DefaultView.Count; u++)
             {
-                SecTree.Nodes[2].Nodes.Add(Statcdif.SwitchTbl.DefaultView[u]["SwID_New"].ToString(), Statcdif.SwitchTbl.DefaultView[u]["SwID_New"].ToString() + "-" + Statcdif.SwitchTbl.DefaultView[u]["SwNm"].ToString());
+                SecTree.Nodes[2].Nodes.Add(Statcdif.SwitchTbl.DefaultView[u]["SwID"].ToString(), Statcdif.SwitchTbl.DefaultView[u]["SwID"].ToString() + "-" + Statcdif.SwitchTbl.DefaultView[u]["SwNm"].ToString());
             }
             SecTree.ExpandAll();
             UserTree.SelectedNode = null;

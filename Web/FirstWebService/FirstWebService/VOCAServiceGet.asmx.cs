@@ -9,7 +9,7 @@ namespace FirstWebService
     /// <summary>
     /// Summary description for VOCAServiceGet
     /// </summary>
-    [WebService(Namespace = "http://http://10.10.26.4:8000/vocaservice")]
+    [WebService(Namespace = "http://10.10.26.4:8000/vocaservice")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 

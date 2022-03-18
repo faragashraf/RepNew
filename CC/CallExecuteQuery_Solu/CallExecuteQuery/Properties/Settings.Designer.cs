@@ -12,7 +12,7 @@ namespace CallExecuteQuery.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -30,6 +30,16 @@ namespace CallExecuteQuery.Properties {
         public string CallExecuteQuery_WSTransactionHandler_WSTransactionHandler {
             get {
                 return ((string)(this["CallExecuteQuery_WSTransactionHandler_WSTransactionHandler"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://10.10.31.50/Wipro_NotifyMe/WiproInterface.asmx")]
+        public string CallExecuteQuery_WiproInterface_WiproInterface {
+            get {
+                return ((string)(this["CallExecuteQuery_WiproInterface_WiproInterface"]));
             }
         }
     }

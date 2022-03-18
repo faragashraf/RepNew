@@ -1,0 +1,1129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Payment_Online">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="POST_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PAY_TERMENAL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PAY_USER" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Payment_OnlineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Payment_OnlineResult" type="tns:ResultResource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultResource">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SaveAttchment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="attachResource" type="tns:HD_ATTACHMENT_Resource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HD_ATTACHMENT_Resource">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ATTACHMENT_NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ATTACHMENT_BARCODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ATTACHMENT_IP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ATTACHMENT_PC_NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ATTACHMENT_SIZE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ATTACHMENT_TYPE_FILE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="buffer" type="s:base64Binary" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SaveAttchmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveAttchmentResult" type="tns:ResultResource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetupNotifymeForShipment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="_ListOfNotify" type="tns:ArrayOfListOfNotify" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfListOfNotify">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ListOfNotify" nillable="true" type="tns:ListOfNotify" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ListOfNotify">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BARCODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="List_Status" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetupNotifymeForShipmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetupNotifymeForShipmentResult" type="tns:ResultResource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SEARCH_SETUP_NOTIFYME_FORSHIPMENT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BARCODE" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SEARCH_SETUP_NOTIFYME_FORSHIPMENTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SEARCH_SETUP_NOTIFYME_FORSHIPMENTResult" type="tns:Return_Search_Notify" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Return_Search_Notify">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ListStatus" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status_Code" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ItemTrackingByBarcode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Post_Id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemTrackingByBarcodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemTrackingByBarcodeResult" type="tns:ArrayOfTrackingResource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTrackingResource">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TrackingResource" nillable="true" type="tns:TrackingResource" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TrackingResource">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ITEM_ID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EVENT_DATE" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EVENT_TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LOCATION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PREV_OFFICE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NEXT_OFFICE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CITY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LOCATION_TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="COUNTRY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ITEM_TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NOW_RTS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LATEST_STATUS" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="EVENT_TYPE_EN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EVENT_TYPE_AR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LOCATION_EN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LOCATION_AR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="COUNTRY_EN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="COUNTRY_AR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CITY_EN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CITY_AR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RECEIVER_ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RECEIVER_NAME_AR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RECEIVER_NAME_EN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LATEST_STATUS_DESC_AR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LATEST_STATUS_DESC_EN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EVENT_TYPE_PORTAL_DESC_AR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EVENT_TYPE_PORTAL_DESC_EN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EVENT_TYPE_STATUS_DESC_AR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EVENT_TYPE_STATUS_DESC_EN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SERVICE_DESC_AR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SERVICE_DESC_EN" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="HeldByCust">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="POST_ID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HeldByCustResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HeldByCustResult" type="tns:HeldbycustomResouce" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HeldbycustomResouce">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_ADDRESS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_TEL_NO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_CITY" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SHIPPER_POBOX" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_ZIP" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SHIPPER_ORIGIN_COUNTRY" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_ORIGIN_CITY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CONSIGNEE_NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CONSIGNEE_ADDRESS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CONSIGNEE_TEL_NO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CONSIGNEE_CITY" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CONSIGNEE_POBOX" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CONSIGNEE_ZIP" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CONSIGNEE_DESTN_COUNTRY" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CONSIGNEE_DESTN_CITY" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CUSTOM_FEES" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TAX_AMOUNT" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="POSTAL_FEES" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="LAND_CHARGES" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CREDENTIALS_OPEN_FEES" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PRESENT_FEES" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="FEES_8_PERC" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="heldbycustomContentResouce" type="tns:ArrayOfHELD_BY_CUST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHELD_BY_CUST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HELD_BY_CUST" nillable="true" type="tns:HELD_BY_CUST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HELD_BY_CUST">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PRICE" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ITEM_SERIAL_NUMBER" type="s:short" />
+          <s:element minOccurs="1" maxOccurs="1" name="MAIL_ITEM_INT_ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BATCH_INT_ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="QUANTITY" nillable="true" type="s:short" />
+          <s:element minOccurs="1" maxOccurs="1" name="WEIGHT" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="HSCODE_CUSTOM_UNIT_NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REASON_DESCRIPTION_AR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REASON_DESCRIPTION_EN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REASON_CODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ACTION_DESCRIPTION_AR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ACTION_DESCRIPTION_EN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ACTION_CODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ITEM_STATUS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HSCODE_NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HSCODE_NAME_EN" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CREATED_DATE" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateBooking">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bookingAWBResource" type="tns:BookingAWBResource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BookingAWBResource">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Booking_Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Service_type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Shipper_Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Shipper_Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Shipper_City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Shipper_Post_Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Shipper_Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Shipper_Telephone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Shipper_P_O_box" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Consignee_Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Consignee_Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Consignee_City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Consignee_Postal_Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Consignee_Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Consignee_Telephone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Category" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Gross_Weight" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comments" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Add_on_service" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="content_Details" type="tns:ArrayOfEMS_ContentResources" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEMS_ContentResources">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EMS_ContentResources" nillable="true" type="tns:EMS_ContentResources" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EMS_ContentResources">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="WEIGHT" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="QUANTITY" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UNIT_PRICE" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="MSTR_HS_CHAPTERS_STD_ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NOTES" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateBookingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateBookingResult" type="tns:ResultResource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateOrder_Portal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="order_Portal" type="tns:Order_PortalResource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Order_PortalResource">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Booking_Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Barcode_Format" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STATUS_ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Field_Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Street" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Postal_Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Telephone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Street" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Postal_Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Telephone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderCategory" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comments" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="content_Details" type="tns:ArrayOfEMS_ContentResources" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateOrder_PortalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateOrder_PortalResult" type="tns:ResultResource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAttchmentById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AttachmentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAttchmentByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAttchmentByIdResult" type="tns:AttchementDiscResource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AttchementDiscResource">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ATTACHMENT_FILE" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="ATTACHMENT_FILE_NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ATTACHMENT_FILE_EXTENSION" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateClearanceStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customBatchPaymentStatusResource" type="tns:ArrayOfCustomBatchPaymentStatusResource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCustomBatchPaymentStatusResource">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CustomBatchPaymentStatusResource" nillable="true" type="tns:CustomBatchPaymentStatusResource" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomBatchPaymentStatusResource">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TrackingId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PAYMENT_ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BATCH_INT_ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SERIAL_NUMBER" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESCRIPTION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PAYMENT_REFRENCE_NO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PAYMENT_STATUS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CUSTOMER_ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ATTACHMENTFILE" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="FILE_NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FILE_EXTENSION" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MODIFIED_DATE" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateClearanceStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateClearanceStatusResult" type="tns:PaymentStatusReturn" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PaymentStatusReturn">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FetchDeclaredDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TrackingId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FetchDeclaredDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FetchDeclaredDetailsResult" type="tns:CustomsClearanceResource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CustomsClearanceResource">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Postal_Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Telephone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Postal_Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Telephone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NatureOfGoods" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="shipment_Comments" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TrackingStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reason" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="customsFees" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="landFees" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="otherFees" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="totalAmountDue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CUSTOMSBATCH_ITEMDET" type="tns:ArrayOfContentDetailsResource" />
+          <s:element minOccurs="0" maxOccurs="1" name="resultResource" type="tns:ResultResource" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfContentDetailsResource">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ContentDetailsResource" nillable="true" type="tns:ContentDetailsResource" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ContentDetailsResource">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BATCH_INT_ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SERIAL_NUMBER" type="s:short" />
+          <s:element minOccurs="1" maxOccurs="1" name="ITEM_SERIAL_NUMBER" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="HS_CODE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PRICE" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="QUANTITY" nillable="true" type="s:short" />
+          <s:element minOccurs="1" maxOccurs="1" name="WEIGHT" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="REASON_CODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ACTION_CODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARKS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="STATUS_INT_ID" type="s:unsignedByte" />
+          <s:element minOccurs="0" maxOccurs="1" name="ITEM_STATUS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CREATED_DATE" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CREATED_BY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CREATED_TERMINAL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MODIFIED_DATE" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="MODIFIED_BY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MODIFIED_TERMINAL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateCourierPickup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="courierPickupResource" type="tns:CourierPickupResource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CourierPickupResource">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Shipment_ID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MyProperty" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Full_Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Mobile_Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Area" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Street" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender_Building" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Mobile_Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Area" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient_Street" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Pickup_Date" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Shipment_Ready" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Shipment_Category" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Content_Details" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="License" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Number_of_licenses" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Certificate" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Number_of_Certificates" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Invoice" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Number_of_Invoices" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Service_Charge" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Courier_Charge" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="e_Payment_Submission_Flag" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Payment_upon_Pickup" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateCourierPickupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateCourierPickupResult" type="tns:ResultResource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResultResource" nillable="true" type="tns:ResultResource" />
+      <s:element name="Return_Search_Notify" nillable="true" type="tns:Return_Search_Notify" />
+      <s:element name="ArrayOfTrackingResource" nillable="true" type="tns:ArrayOfTrackingResource" />
+      <s:element name="HeldbycustomResouce" nillable="true" type="tns:HeldbycustomResouce" />
+      <s:element name="AttchementDiscResource" nillable="true" type="tns:AttchementDiscResource" />
+      <s:element name="CustomsClearanceResource" nillable="true" type="tns:CustomsClearanceResource" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="Payment_OnlineSoapIn">
+    <wsdl:part name="parameters" element="tns:Payment_Online" />
+  </wsdl:message>
+  <wsdl:message name="Payment_OnlineSoapOut">
+    <wsdl:part name="parameters" element="tns:Payment_OnlineResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveAttchmentSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveAttchment" />
+  </wsdl:message>
+  <wsdl:message name="SaveAttchmentSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveAttchmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetupNotifymeForShipmentSoapIn">
+    <wsdl:part name="parameters" element="tns:SetupNotifymeForShipment" />
+  </wsdl:message>
+  <wsdl:message name="SetupNotifymeForShipmentSoapOut">
+    <wsdl:part name="parameters" element="tns:SetupNotifymeForShipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="SEARCH_SETUP_NOTIFYME_FORSHIPMENTSoapIn">
+    <wsdl:part name="parameters" element="tns:SEARCH_SETUP_NOTIFYME_FORSHIPMENT" />
+  </wsdl:message>
+  <wsdl:message name="SEARCH_SETUP_NOTIFYME_FORSHIPMENTSoapOut">
+    <wsdl:part name="parameters" element="tns:SEARCH_SETUP_NOTIFYME_FORSHIPMENTResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemTrackingByBarcodeSoapIn">
+    <wsdl:part name="parameters" element="tns:ItemTrackingByBarcode" />
+  </wsdl:message>
+  <wsdl:message name="ItemTrackingByBarcodeSoapOut">
+    <wsdl:part name="parameters" element="tns:ItemTrackingByBarcodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="HeldByCustSoapIn">
+    <wsdl:part name="parameters" element="tns:HeldByCust" />
+  </wsdl:message>
+  <wsdl:message name="HeldByCustSoapOut">
+    <wsdl:part name="parameters" element="tns:HeldByCustResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateBookingSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateBooking" />
+  </wsdl:message>
+  <wsdl:message name="CreateBookingSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateBookingResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateOrder_PortalSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateOrder_Portal" />
+  </wsdl:message>
+  <wsdl:message name="CreateOrder_PortalSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateOrder_PortalResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAttchmentByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAttchmentById" />
+  </wsdl:message>
+  <wsdl:message name="GetAttchmentByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAttchmentByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateClearanceStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateClearanceStatus" />
+  </wsdl:message>
+  <wsdl:message name="UpdateClearanceStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateClearanceStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="FetchDeclaredDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:FetchDeclaredDetails" />
+  </wsdl:message>
+  <wsdl:message name="FetchDeclaredDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:FetchDeclaredDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateCourierPickupSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateCourierPickup" />
+  </wsdl:message>
+  <wsdl:message name="CreateCourierPickupSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateCourierPickupResponse" />
+  </wsdl:message>
+  <wsdl:message name="Payment_OnlineHttpGetIn">
+    <wsdl:part name="POST_ID" type="s:string" />
+    <wsdl:part name="PAY_TERMENAL" type="s:string" />
+    <wsdl:part name="PAY_USER" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Payment_OnlineHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResultResource" />
+  </wsdl:message>
+  <wsdl:message name="SEARCH_SETUP_NOTIFYME_FORSHIPMENTHttpGetIn">
+    <wsdl:part name="BARCODE" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SEARCH_SETUP_NOTIFYME_FORSHIPMENTHttpGetOut">
+    <wsdl:part name="Body" element="tns:Return_Search_Notify" />
+  </wsdl:message>
+  <wsdl:message name="ItemTrackingByBarcodeHttpGetIn">
+    <wsdl:part name="Post_Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemTrackingByBarcodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfTrackingResource" />
+  </wsdl:message>
+  <wsdl:message name="HeldByCustHttpGetIn">
+    <wsdl:part name="POST_ID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HeldByCustHttpGetOut">
+    <wsdl:part name="Body" element="tns:HeldbycustomResouce" />
+  </wsdl:message>
+  <wsdl:message name="GetAttchmentByIdHttpGetIn">
+    <wsdl:part name="AttachmentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAttchmentByIdHttpGetOut">
+    <wsdl:part name="Body" element="tns:AttchementDiscResource" />
+  </wsdl:message>
+  <wsdl:message name="FetchDeclaredDetailsHttpGetIn">
+    <wsdl:part name="TrackingId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FetchDeclaredDetailsHttpGetOut">
+    <wsdl:part name="Body" element="tns:CustomsClearanceResource" />
+  </wsdl:message>
+  <wsdl:message name="Payment_OnlineHttpPostIn">
+    <wsdl:part name="POST_ID" type="s:string" />
+    <wsdl:part name="PAY_TERMENAL" type="s:string" />
+    <wsdl:part name="PAY_USER" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Payment_OnlineHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResultResource" />
+  </wsdl:message>
+  <wsdl:message name="SEARCH_SETUP_NOTIFYME_FORSHIPMENTHttpPostIn">
+    <wsdl:part name="BARCODE" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SEARCH_SETUP_NOTIFYME_FORSHIPMENTHttpPostOut">
+    <wsdl:part name="Body" element="tns:Return_Search_Notify" />
+  </wsdl:message>
+  <wsdl:message name="ItemTrackingByBarcodeHttpPostIn">
+    <wsdl:part name="Post_Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemTrackingByBarcodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfTrackingResource" />
+  </wsdl:message>
+  <wsdl:message name="HeldByCustHttpPostIn">
+    <wsdl:part name="POST_ID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HeldByCustHttpPostOut">
+    <wsdl:part name="Body" element="tns:HeldbycustomResouce" />
+  </wsdl:message>
+  <wsdl:message name="GetAttchmentByIdHttpPostIn">
+    <wsdl:part name="AttachmentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAttchmentByIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:AttchementDiscResource" />
+  </wsdl:message>
+  <wsdl:message name="FetchDeclaredDetailsHttpPostIn">
+    <wsdl:part name="TrackingId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FetchDeclaredDetailsHttpPostOut">
+    <wsdl:part name="Body" element="tns:CustomsClearanceResource" />
+  </wsdl:message>
+  <wsdl:portType name="WiproInterfaceSoap">
+    <wsdl:operation name="Payment_Online">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">this function to Add Attchment ... </wsdl:documentation>
+      <wsdl:input message="tns:Payment_OnlineSoapIn" />
+      <wsdl:output message="tns:Payment_OnlineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveAttchment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">this function to Add Attchment ... </wsdl:documentation>
+      <wsdl:input message="tns:SaveAttchmentSoapIn" />
+      <wsdl:output message="tns:SaveAttchmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetupNotifymeForShipment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">: To ADD LIST OF STATUS FOR SELECTED BARCODE </wsdl:documentation>
+      <wsdl:input message="tns:SetupNotifymeForShipmentSoapIn" />
+      <wsdl:output message="tns:SetupNotifymeForShipmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SEARCH_SETUP_NOTIFYME_FORSHIPMENT">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> SEARCH SELECTED BARCODE TO RETURN STATUS OF IT </wsdl:documentation>
+      <wsdl:input message="tns:SEARCH_SETUP_NOTIFYME_FORSHIPMENTSoapIn" />
+      <wsdl:output message="tns:SEARCH_SETUP_NOTIFYME_FORSHIPMENTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemTrackingByBarcode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get ItemTracking By TrackingId</wsdl:documentation>
+      <wsdl:input message="tns:ItemTrackingByBarcodeSoapIn" />
+      <wsdl:output message="tns:ItemTrackingByBarcodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HeldByCust">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> Held by custom ... </wsdl:documentation>
+      <wsdl:input message="tns:HeldByCustSoapIn" />
+      <wsdl:output message="tns:HeldByCustSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateBooking">
+      <wsdl:input message="tns:CreateBookingSoapIn" />
+      <wsdl:output message="tns:CreateBookingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrder_Portal">
+      <wsdl:input message="tns:CreateOrder_PortalSoapIn" />
+      <wsdl:output message="tns:CreateOrder_PortalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttchmentById">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">this function return blob file by attachment id </wsdl:documentation>
+      <wsdl:input message="tns:GetAttchmentByIdSoapIn" />
+      <wsdl:output message="tns:GetAttchmentByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateClearanceStatus">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> To Update the Custom Clearance details To ENPO Back office after providing the Clearance</wsdl:documentation>
+      <wsdl:input message="tns:UpdateClearanceStatusSoapIn" />
+      <wsdl:output message="tns:UpdateClearanceStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchDeclaredDetails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">: To Fetch the Custom Declaraion details from ENPO Back office by passing the TrackingId</wsdl:documentation>
+      <wsdl:input message="tns:FetchDeclaredDetailsSoapIn" />
+      <wsdl:output message="tns:FetchDeclaredDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateCourierPickup">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">: To Create Courier Pickup </wsdl:documentation>
+      <wsdl:input message="tns:CreateCourierPickupSoapIn" />
+      <wsdl:output message="tns:CreateCourierPickupSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WiproInterfaceHttpGet">
+    <wsdl:operation name="Payment_Online">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">this function to Add Attchment ... </wsdl:documentation>
+      <wsdl:input message="tns:Payment_OnlineHttpGetIn" />
+      <wsdl:output message="tns:Payment_OnlineHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SEARCH_SETUP_NOTIFYME_FORSHIPMENT">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> SEARCH SELECTED BARCODE TO RETURN STATUS OF IT </wsdl:documentation>
+      <wsdl:input message="tns:SEARCH_SETUP_NOTIFYME_FORSHIPMENTHttpGetIn" />
+      <wsdl:output message="tns:SEARCH_SETUP_NOTIFYME_FORSHIPMENTHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemTrackingByBarcode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get ItemTracking By TrackingId</wsdl:documentation>
+      <wsdl:input message="tns:ItemTrackingByBarcodeHttpGetIn" />
+      <wsdl:output message="tns:ItemTrackingByBarcodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HeldByCust">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> Held by custom ... </wsdl:documentation>
+      <wsdl:input message="tns:HeldByCustHttpGetIn" />
+      <wsdl:output message="tns:HeldByCustHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttchmentById">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">this function return blob file by attachment id </wsdl:documentation>
+      <wsdl:input message="tns:GetAttchmentByIdHttpGetIn" />
+      <wsdl:output message="tns:GetAttchmentByIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchDeclaredDetails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">: To Fetch the Custom Declaraion details from ENPO Back office by passing the TrackingId</wsdl:documentation>
+      <wsdl:input message="tns:FetchDeclaredDetailsHttpGetIn" />
+      <wsdl:output message="tns:FetchDeclaredDetailsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WiproInterfaceHttpPost">
+    <wsdl:operation name="Payment_Online">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">this function to Add Attchment ... </wsdl:documentation>
+      <wsdl:input message="tns:Payment_OnlineHttpPostIn" />
+      <wsdl:output message="tns:Payment_OnlineHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SEARCH_SETUP_NOTIFYME_FORSHIPMENT">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> SEARCH SELECTED BARCODE TO RETURN STATUS OF IT </wsdl:documentation>
+      <wsdl:input message="tns:SEARCH_SETUP_NOTIFYME_FORSHIPMENTHttpPostIn" />
+      <wsdl:output message="tns:SEARCH_SETUP_NOTIFYME_FORSHIPMENTHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemTrackingByBarcode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get ItemTracking By TrackingId</wsdl:documentation>
+      <wsdl:input message="tns:ItemTrackingByBarcodeHttpPostIn" />
+      <wsdl:output message="tns:ItemTrackingByBarcodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HeldByCust">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> Held by custom ... </wsdl:documentation>
+      <wsdl:input message="tns:HeldByCustHttpPostIn" />
+      <wsdl:output message="tns:HeldByCustHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttchmentById">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">this function return blob file by attachment id </wsdl:documentation>
+      <wsdl:input message="tns:GetAttchmentByIdHttpPostIn" />
+      <wsdl:output message="tns:GetAttchmentByIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchDeclaredDetails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">: To Fetch the Custom Declaraion details from ENPO Back office by passing the TrackingId</wsdl:documentation>
+      <wsdl:input message="tns:FetchDeclaredDetailsHttpPostIn" />
+      <wsdl:output message="tns:FetchDeclaredDetailsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WiproInterfaceSoap" type="tns:WiproInterfaceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Payment_Online">
+      <soap:operation soapAction="http://tempuri.org/Payment_Online" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveAttchment">
+      <soap:operation soapAction="http://tempuri.org/SaveAttchment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetupNotifymeForShipment">
+      <soap:operation soapAction="http://tempuri.org/SetupNotifymeForShipment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SEARCH_SETUP_NOTIFYME_FORSHIPMENT">
+      <soap:operation soapAction="http://tempuri.org/SEARCH_SETUP_NOTIFYME_FORSHIPMENT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemTrackingByBarcode">
+      <soap:operation soapAction="http://tempuri.org/ItemTrackingByBarcode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HeldByCust">
+      <soap:operation soapAction="http://tempuri.org/HeldByCust" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateBooking">
+      <soap:operation soapAction="http://tempuri.org/CreateBooking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrder_Portal">
+      <soap:operation soapAction="http://tempuri.org/CreateOrder_Portal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttchmentById">
+      <soap:operation soapAction="http://tempuri.org/GetAttchmentById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateClearanceStatus">
+      <soap:operation soapAction="http://tempuri.org/UpdateClearanceStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchDeclaredDetails">
+      <soap:operation soapAction="http://tempuri.org/FetchDeclaredDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCourierPickup">
+      <soap:operation soapAction="http://tempuri.org/CreateCourierPickup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WiproInterfaceSoap12" type="tns:WiproInterfaceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Payment_Online">
+      <soap12:operation soapAction="http://tempuri.org/Payment_Online" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveAttchment">
+      <soap12:operation soapAction="http://tempuri.org/SaveAttchment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetupNotifymeForShipment">
+      <soap12:operation soapAction="http://tempuri.org/SetupNotifymeForShipment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SEARCH_SETUP_NOTIFYME_FORSHIPMENT">
+      <soap12:operation soapAction="http://tempuri.org/SEARCH_SETUP_NOTIFYME_FORSHIPMENT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemTrackingByBarcode">
+      <soap12:operation soapAction="http://tempuri.org/ItemTrackingByBarcode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HeldByCust">
+      <soap12:operation soapAction="http://tempuri.org/HeldByCust" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateBooking">
+      <soap12:operation soapAction="http://tempuri.org/CreateBooking" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrder_Portal">
+      <soap12:operation soapAction="http://tempuri.org/CreateOrder_Portal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttchmentById">
+      <soap12:operation soapAction="http://tempuri.org/GetAttchmentById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateClearanceStatus">
+      <soap12:operation soapAction="http://tempuri.org/UpdateClearanceStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchDeclaredDetails">
+      <soap12:operation soapAction="http://tempuri.org/FetchDeclaredDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCourierPickup">
+      <soap12:operation soapAction="http://tempuri.org/CreateCourierPickup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WiproInterfaceHttpGet" type="tns:WiproInterfaceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Payment_Online">
+      <http:operation location="/Payment_Online" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SEARCH_SETUP_NOTIFYME_FORSHIPMENT">
+      <http:operation location="/SEARCH_SETUP_NOTIFYME_FORSHIPMENT" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemTrackingByBarcode">
+      <http:operation location="/ItemTrackingByBarcode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HeldByCust">
+      <http:operation location="/HeldByCust" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttchmentById">
+      <http:operation location="/GetAttchmentById" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchDeclaredDetails">
+      <http:operation location="/FetchDeclaredDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WiproInterfaceHttpPost" type="tns:WiproInterfaceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Payment_Online">
+      <http:operation location="/Payment_Online" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SEARCH_SETUP_NOTIFYME_FORSHIPMENT">
+      <http:operation location="/SEARCH_SETUP_NOTIFYME_FORSHIPMENT" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemTrackingByBarcode">
+      <http:operation location="/ItemTrackingByBarcode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HeldByCust">
+      <http:operation location="/HeldByCust" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttchmentById">
+      <http:operation location="/GetAttchmentById" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchDeclaredDetails">
+      <http:operation location="/FetchDeclaredDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WiproInterface">
+    <wsdl:port name="WiproInterfaceSoap" binding="tns:WiproInterfaceSoap">
+      <soap:address location="http://10.10.31.50/Wipro_NotifyMe/WiproInterface.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WiproInterfaceSoap12" binding="tns:WiproInterfaceSoap12">
+      <soap12:address location="http://10.10.31.50/Wipro_NotifyMe/WiproInterface.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WiproInterfaceHttpGet" binding="tns:WiproInterfaceHttpGet">
+      <http:address location="http://10.10.31.50/Wipro_NotifyMe/WiproInterface.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WiproInterfaceHttpPost" binding="tns:WiproInterfaceHttpPost">
+      <http:address location="http://10.10.31.50/Wipro_NotifyMe/WiproInterface.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClosedXML.Excel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -219,18 +220,17 @@ namespace CallExecuteQuery
                     }
                 }
             }
-            string KW = string.Join(" AND ", lst2);
-            string kk = "Select " + string.Join(", ", lst) + " From " + tableName + " Where " + KW;
+            string where_ = string.Join(" AND ", lst2);
+            string select_ = "Select " + string.Join(", ", lst) + " From " + tableName + " Where " + where_;
             WSTransactionHandler.WSTransactionHandler ws = new WSTransactionHandler.WSTransactionHandler();
             try
             {
-                dataGridView1.DataSource = ws.ExecuteQuery(kk).Tables[0];
+                dataGridView1.DataSource = ws.ExecuteQuery(select_).Tables[0];
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("لا توجد بيانات للعرض");
             }
-
         }
         private static DataRow DRW(DataTable tbl, object key, DataColumn col)
         {
@@ -247,11 +247,45 @@ namespace CallExecuteQuery
                                       .Concat(controls)
                                       .Where(c => c.GetType() == type);
         }
-
         private void DynamicReport_SizeChanged(object sender, EventArgs e)
         {
             dataGridView1.Width = this.Width - 50;
             dataGridView1.Height = this.Height - 300;
+        }
+
+        public string exportxlsx(DataTable tbl, string filename)
+        {
+            string rslt = null;
+            using (SaveFileDialog d = new SaveFileDialog())
+            {
+                d.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                d.Filter = "Excel File|*.xlsx";
+                d.FilterIndex = 1;
+                d.RestoreDirectory = true;
+                d.Title = "Save Excel File";
+                d.FileName = "Test";
+                if (d.ShowDialog() == DialogResult.OK)
+                {
+                    using (XLWorkbook Workbook = new XLWorkbook())
+                    {
+                        try
+                        {
+                            IXLWorksheet worksheet = Workbook.AddWorksheet(tbl, filename);
+                            worksheet.Style.Alignment.WrapText = false;
+                            Workbook.SaveAs(d.FileName);
+                        }
+                        catch (Exception ex)
+                        {
+                            rslt = ex.Message;
+                        }
+                    }
+                }
+                else
+                {
+                    rslt = "X";
+                }
+            }
+            return rslt;
         }
     }
 }

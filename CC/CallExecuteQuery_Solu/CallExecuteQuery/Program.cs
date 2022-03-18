@@ -16,7 +16,7 @@ namespace CallExecuteQuery
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DynamicReport());
+            Application.Run(new Test());
         }
     }
 }
