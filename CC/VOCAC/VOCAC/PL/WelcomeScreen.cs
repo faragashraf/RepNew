@@ -302,6 +302,7 @@ namespace VOCAUltimate.PL
                 {
                     Statcdif.UpdateKTable.DefaultView.RowFilter = "EvBkOfic = 0";
                 }
+                CurrentUser.UsrTeam = MyTeamOnSelect(CurrentUser.UsrID);         
             }
         }
         private void IntializeUser()
@@ -321,21 +322,11 @@ namespace VOCAUltimate.PL
             if (Statcdif.UserTable.Rows[0]["UsrLastSeen"] != null && Statcdif.UserTable.Rows[0]["UsrLastSeen"].ToString().Length > 0)
             { CurrentUser.UsrLstS = Statcdif.UserTable.Rows[0].Field<DateTime>("UsrLastSeen"); }    //Current User LastSeen
             CurrentUser.UsrSusp = Statcdif.UserTable.Rows[0].Field<bool>("UsrSusp");             //Current User Suspended Or not
-            CurrentUser.UsrTcCnt = Statcdif.UserTable.Rows[0].Field<int>("UsrTkCount");          //Ticket Count
             CurrentUser.UsrSltKy = Statcdif.UserTable.Rows[0].Field<String>("SaltKey");          //SaltKey
             CurrentUser.UsrCatNm = Statcdif.UserTable.Rows[0].Field<String>("UCatNm");           //Catagory name
             CurrentUser.UsrCalCntr = Statcdif.UserTable.Rows[0].Field<bool>("UsrCalCntr");       //Call Center Boolean
             CurrentUser.UsrUCatLvl = Statcdif.UserTable.Rows[0].Field<Int16>("UCatLvl");         //User Cat. Level
-            CurrentUser.UsrClsN = Statcdif.UserTable.Rows[0].Field<int>("UsrClsN");              //Open Complaint Count
-            CurrentUser.UsrFlN = Statcdif.UserTable.Rows[0].Field<int>("UsrFlN");                //No Follow Count
-            CurrentUser.UsrReOpY = Statcdif.UserTable.Rows[0].Field<int>("UsrReOpY");            //ReOPen Couunt
-            CurrentUser.UsrUnRead = Statcdif.UserTable.Rows[0].Field<int>("UsrUnRead");          //Unread Events Count
-            CurrentUser.UsrEvDy = Statcdif.UserTable.Rows[0].Field<int>("UsrEvDy");              //Event Count Per Day
-            CurrentUser.UsrClsYDy = Statcdif.UserTable.Rows[0].Field<int>("UsrClsYDy");          //Closed Complaint Per day
-            CurrentUser.UsrReadYDy = Statcdif.UserTable.Rows[0].Field<int>("UsrReadYDy");        //Read Events Count Per Day
-            CurrentUser.UsrRecvDy = Statcdif.UserTable.Rows[0].Field<int>("UsrRecevDy");         //RecievedTickets Count Per Day
-            CurrentUser.UsrClsUpdtd = Statcdif.UserTable.Rows[0].Field<int>("UsrClsUpdtd");      //Closed Tickets with New Updates
-            CurrentUser.UsrFolwDay = Statcdif.UserTable.Rows[0].Field<int>("UsrTikFlowDy");      //Closed Tickets with New Updates
+
             LblLogin.Text = "          Login has been succeeded";
             LblLogin.Image = Resources.Check_Marks1;
             LblLogin.ForeColor = Color.Green;
@@ -344,30 +335,67 @@ namespace VOCAUltimate.PL
 
             LblUsrRNm.Text = "Welcome ( " + CurrentUser.UsrID + " ) " + CurrentUser.UsrRlNm;
             ConterWidt = 0;
-            //if (CurrentUser.UsrUCatLvl >= 3 && CurrentUser.UsrUCatLvl <= 5)
-            //{
-            //    GrpCounters.Visible = true;
-            //    //GrpCounters.Text = "ملخص أرقامي حتى : " & Now
-            //    //GrpCounters.Visible = True
-            //    //LblClsN.Text = Usr.PUsrClsN
-            //    //LblFlN.Text = Usr.PUsrFlN
-            //    //LblClsYDy.Text = Usr.PUsrClsYDy
-            //    //LblEvDy.Text = Usr.PUsrEvDy
-            //    //LblUnRead.Text = Usr.PUsrUnRead
-            //    //LblReadYDy.Text = Usr.PUsrReadYDy
-            //    //LblReOpY.Text = Usr.PUsrReOpY
-            //    //LblRecivDy.Text = Usr.PUsrRecvDy
-            //    //LblClsUpdted.Text = Usr.PUsrClsUpdtd
-            //    //LblFolwDy.Text = Usr.PUsrFolwDay
-            //    ConterWidt = GrpCounters.Width + GrpCounters.Margin.Left + GrpCounters.Margin.Right;
-            //}
-            //else
-            //{
-            //    GrpCounters.Visible = false;
-            //    ConterWidt = 0;
-            //}
+            if (CurrentUser.UsrUCatLvl >= 3 && CurrentUser.UsrUCatLvl <= 5)
+            {
+                userRecords();
+                ConterWidt = GrpCounters.Width + GrpCounters.Margin.Left + GrpCounters.Margin.Right;
+            }
+            else
+            {
+                GrpCounters.Visible = false;
+                ConterWidt = 0;
+            }
             AdjustSize();
         }
+        private string MyTeamOnSelect(int slctdId)
+        {
+            List<string> UsrStr = new List<string>();
+            TreeNode[] TempNode = new TreeNode[0];
+            TreeView trvw = new TreeView();
+            Statcdif.TreeUsrTbl.DefaultView.RowFilter = "UsrSusp = 0 and UsrId = " + slctdId;
+            trvw.Nodes.Add(Statcdif.TreeUsrTbl.DefaultView[0]["UCatId"].ToString(), Statcdif.TreeUsrTbl.DefaultView[0]["UsrMix"].ToString());
+            UsrStr.Add(slctdId.ToString());
+            Statcdif.TreeUsrTbl.DefaultView.RowFilter = "UsrSusp = 0 and UCatId > = " + CurrentUser.UsrCat;
+            for (int i = 0; i < Statcdif.TreeUsrTbl.DefaultView.Count; i++)
+            {
+                TempNode = trvw.Nodes.Find(Statcdif.TreeUsrTbl.DefaultView[i][2].ToString(), true);
+                if (TempNode.Length > 0)
+                {
+                    TempNode[0].Nodes.Add(Statcdif.TreeUsrTbl.DefaultView[i]["UCatId"].ToString(), Statcdif.TreeUsrTbl.DefaultView[i]["UsrMix"].ToString());
+                    UsrStr.Add(Statcdif.TreeUsrTbl.DefaultView[i][0].ToString());
+                }
+            }
+            trvw.Dispose();
+            return string.Join(", ", UsrStr);
+        }
+        private void userRecords()
+        {
+            DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
+            SqlParameter[] param = new SqlParameter[3];
+            param[0] = new SqlParameter("@dtFrom", SqlDbType.NVarChar, 30);
+            param[0].Value = Statcdif.servrTime;
+            param[1] = new SqlParameter("@dtTo", SqlDbType.NVarChar, 30);
+            param[1].Value = Statcdif.servrTime;
+            param[2] = new SqlParameter("@ID", SqlDbType.NVarChar);
+            param[2].Value = CurrentUser.UsrID;
+            DAL.Struc = DAL.SelectData("SP_USER_COUNTERS", param);
+            GrpCounters.Visible = true;
+            GrpCounters.Text = "ملخص أرقامي حتى : " + fn.ServrTime();
+            GrpCounters.Visible = true;
+            LblClsN.Text = DAL.Struc.dt.Rows[0]["OpnY"].ToString();
+            LblFlN.Text = DAL.Struc.dt.Rows[0]["FlwNOpn"].ToString();
+            LblClsYDy.Text = DAL.Struc.dt.Rows[0]["ClsCnt"].ToString();
+            LblEvDy.Text = DAL.Struc.dt.Rows[0]["EvCnt"].ToString();
+            LblUsrTskOwnr.Text = DAL.Struc.dt.Rows[0]["TskOwnr"].ToString();
+            LblReOpY.Text = DAL.Struc.dt.Rows[0]["ReopnY"].ToString();
+            LblRecivDy.Text = DAL.Struc.dt.Rows[0]["RecvCnt"].ToString();
+            LblClsUpdted.Text = DAL.Struc.dt.Rows[0]["ClsUpdtd"].ToString();
+            LblFolwDy.Text = DAL.Struc.dt.Rows[0]["DealCnt"].ToString();
+            LblUsrEventflowr.Text = DAL.Struc.dt.Rows[0]["Follower"].ToString();
+            LblUsrEventColeg.Text = DAL.Struc.dt.Rows[0]["Colleague"].ToString();
+            LblUsrEventOther.Text = DAL.Struc.dt.Rows[0]["Others"].ToString();
+        }
+
         private void getusrPic()
         {
             try
@@ -471,7 +499,7 @@ namespace VOCAUltimate.PL
             Statcdif.MacTble = new DataTable();
             Statcdif.MacTble = fn.returntbl("SELECT * from AMac WHERE Mac='" + Statcdif._MacStr + "'");
 
-            if(Statcdif.MacTble != null)
+            if (Statcdif.MacTble != null)
             {
                 if (Statcdif.MacTble.Rows.Count > 0)
                 {
@@ -573,7 +601,7 @@ namespace VOCAUltimate.PL
         }
         private void AdjustSize()
         {
-            LblUsrIP.Margin = new Padding(LblUsrIP.Margin.Left, this.Height - (GroupBox1.Height + 370), LblUsrIP.Margin.Right, LblUsrIP.Margin.Bottom);
+            LblUsrIP.Margin = new Padding(LblUsrIP.Margin.Left, this.Height - (GroupBox1.Height + GrpCounters.Height + 370), LblUsrIP.Margin.Right, LblUsrIP.Margin.Bottom);
             panellgin.Location = new Point((this.Width - panellgin.Width) / 2, (this.Height - 150 - panellgin.Height) / 2);
             DbStat.Margin = new Padding(DbStat.Margin.Left, 30, this.Width - 100 - (DbStat.Width + DbStat.Margin.Left), DbStat.Margin.Bottom);
             PictureBox1.Margin = new Padding(PictureBox1.Margin.Left, 50, this.Width - 100 - (GroupBox1.Width + GroupBox1.Margin.Right + GroupBox1.Margin.Left + ConterWidt + PictureBox1.Width + PictureBox1.Margin.Left + 20), PictureBox1.Margin.Bottom);
@@ -669,6 +697,10 @@ namespace VOCAUltimate.PL
         private void LblIp_Click(object sender, EventArgs e)
         {
             getMac();
+        }
+        private void button4_Click(object sender, EventArgs e)
+        {
+            userRecords();
         }
     }
 }

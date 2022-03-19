@@ -132,7 +132,6 @@ namespace VOCAUltimate.PL
         {
             treeView1.Nodes.Clear();
             TreeNode[] TempNode = new TreeNode[0];
-            TreeNode TempNode2;
             Statcdif.TreeUsrTbl.DefaultView.RowFilter = " UsrId = " + UserTree.SelectedNode.Text.ToString().Split('-')[2].Trim();
             Privillage = Statcdif.TreeUsrTbl.DefaultView[0]["UsrLevel_New"].ToString();
             for (int i = 0; i < Privillage.Length; i++)

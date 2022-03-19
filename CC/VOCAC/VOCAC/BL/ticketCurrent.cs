@@ -39,7 +39,6 @@ namespace VOCAUltimate.BL
             public static string _TikfolowusrTeam;
             public static int _TaskUserID;
             public static string _TaskUserNm;
-            public static string _TaskUsrCatNm;
             public static string _TikCreat;
             public static string _TikCreatTeam;
             public static bool _TkReOp;

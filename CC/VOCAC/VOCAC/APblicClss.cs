@@ -313,8 +313,7 @@ namespace VOCAUltimate
                 ToolStripMenuItem NewTabCx = new ToolStripMenuItem(tabTable.Rows[i].Field<string>("SwNm"));  //YYYYYYYYYYY
                 if (tabTable.Rows[i].Field<int>("SwID") > 0) // To Confirm That SerID not Equal Zero
                 {
-                    if (CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID") - 1, 1) == "A" ||
-                        CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID") - 1, 1) == "H")
+                    if (CurrentUser.UsrLvl.ToString().Substring(tabTable.Rows[i].Field<int>("SwID") - 1, 1) == "A" )
                     {
                         Menu_.Items.Add(NewTab);
                         CntxMenu.Items.Add(NewTabCx);                    //YYYYYYYYYYY
@@ -796,7 +795,7 @@ namespace VOCAUltimate
             {
                 DAL.Struc = DAL.ExcuteCommand("SP_CHOICE_SLCT", param);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
             }
@@ -814,7 +813,7 @@ namespace VOCAUltimate
             {
                 DAL.Struc = DAL.SelectData("SP_CHOICE_SLCT", param);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 DAL.Struc.dt = null;
             }
@@ -843,16 +842,6 @@ namespace VOCAUltimate
         public static String UsrCatNm;    //Catagory name
         public static Boolean UsrCalCntr;     //Call Center
         public static Int16 UsrUCatLvl;     //Close Count
-        public static int UsrFlN;         //Follow Count
-        public static int UsrClsN;    //Open Count
-        public static int UsrReOpY;   //ReOpen Count
-        public static int UsrUnRead;  //Read Count
-        public static int UsrEvDy;    //Enent Count
-        public static int UsrReadYDy;  //Read Count
-        public static int UsrClsYDy;      //Close Count
-        public static int UsrRecvDy;      //Recieved Count
-        public static int UsrClsUpdtd;    //Closed updated Count
-        public static int UsrFolwDay;     //Followed Tickets Count
         public static string UsrTeam;     //User Team Agents IDs 
     }
     public class frms

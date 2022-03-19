@@ -125,38 +125,48 @@ namespace VOCAUltimate.PL
             DAL.Close();
             return RsultReOpen.msg;
         }
-        private DataTable filtbl()
+        private DataTable filtbl(int stat, [Optional] string Any)
         {
+            WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "  جاري تحميل البيانات .......";
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
-            SqlParameter[] param = new SqlParameter[2];
-
+            SqlParameter[] param = new SqlParameter[3];
+            //
             param[0] = new SqlParameter("@id", SqlDbType.VarChar);
             param[0].Value = " in (" + CurrentUser.UsrTeam.ToString() + ")";
             param[1] = new SqlParameter("@STATUS_", SqlDbType.Bit);
-            param[1].Value = 0;
+            param[1].Value = stat;
+            param[2] = new SqlParameter("@Any", SqlDbType.NVarChar);
+            param[2].Value = Any;
             cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "SP_TICKETS_SLCT";
             cmd.Connection = sqlcon;
             cmd.Parameters.Add(param[0]);
             cmd.Parameters.Add(param[1]);
+            cmd.Parameters.Add(param[2]);
             da = new SqlDataAdapter(cmd);
             try
             {
                 Statcdif.TickTblMain.PrimaryKey = null;
                 Statcdif.TickTblMain.Rows.Clear();
                 Statcdif.TickTblMain.Columns.Clear();
+                Statcdif.TickTblMain = new DataTable();
                 da.Fill(Statcdif.TickTblMain);
+                Statcdif.TickTblMain.Columns.Add("Wdays", typeof(int));
                 GridTicket.DataSource = Statcdif.TickTblMain.DefaultView;
                 Statcdif.TickTblMain.PrimaryKey = new DataColumn[] { Statcdif.TickTblMain.Columns[0] };
+                gridadjst(Statcdif.TickTblMain);
             }
             catch (Exception ex)
             {
+                Statcdif.TickTblMain.Rows.Clear();
                 function fn = function.getfn;
                 function.AppLog(ex.Message + "$" + ex.InnerException, ex.HResult.ToString(), "TikFollowTeam");
                 fn.msg("هناك مشكله في الإتصال بقواعد البيانات" + Environment.NewLine, "متابعة الشكاوى", MessageBoxButtons.OK);
             }
             DAL.Close();
+            GC.Collect();
+            WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
             return Statcdif.TickTblMain;
         }
 
@@ -166,14 +176,9 @@ namespace VOCAUltimate.PL
         {
             frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
             frm.FormClosed += new FormClosedEventHandler(frm_Closed);
-            if (CurrentUser.UsrLvl.Substring(19, 1) == "A")
-            {
-                btnReassign.Visible = true;
-            }
-            else
-            {
-                btnReassign.Visible = false;
-            }
+            if (CurrentUser.UsrLvl.Substring(89, 1) == "A") { btnReassign.Visible = true; }
+            if (CurrentUser.UsrLvl.Substring(90, 1) == "A") { btnExport.Visible = true; }
+
             //bool bolTikSearch = frms.FormIsOpen(Application.OpenForms, typeof(TikSearchNew));
             //if (bolTikSearch)
             //{
@@ -195,14 +200,13 @@ namespace VOCAUltimate.PL
             {
                 frms forms = new frms();
                 forms.FrmAllSub(this);
-                WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "  جاري تحميل البيانات .......";
                 usercountrsTbl.Columns.Add("ID");
                 usercountrsTbl.Columns.Add("Team");
                 usercountrsTbl.Columns.Add("الاسم");
                 usercountrsTbl.Columns.Add("العدد", typeof(int));
                 MyTeamOnLoad();
                 Statcdif.TickTblMain = new DataTable();
-                if (filtbl().Rows.Count > 0)
+                if (filtbl(0).Rows.Count > 0)
                 {
                     try
                     {
@@ -221,11 +225,9 @@ namespace VOCAUltimate.PL
                                 btnseting.Visible = false;
                                 this.Text = "متابعة الشكاوى";
                             }
-                            Statcdif.TickTblMain.Columns.Add("Wdays", typeof(int));
                             splitContainer2.Panel1Collapsed = true;
                             btnseting.Visible = false;
                             trackBar2.Visible = false;
-                            gridadjst(Statcdif.TickTblMain);
                             Filtr();
                             assignfltrTXTintoCtrlTag();
                             frmAdjust();
@@ -246,7 +248,6 @@ namespace VOCAUltimate.PL
                     fn.msg("لا توجد شكاوى للمتابعة", "متابعة الشكاوى", MessageBoxButtons.OK);
                     flwCounters.Visible = false;
                 }
-                WelcomeScreen.getwecmscrnfrm.StatBrPnlAr.Text = "";
             }
         }
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -257,12 +258,11 @@ namespace VOCAUltimate.PL
             {
                 txtReopen.Clear();
                 GridTicket.DataSource = Statcdif.TickTblMain.DefaultView;
-                gridadjst(Statcdif.TickTblMain);
             }
             checkAll.Visible = false;
             checkAll.Checked = false;
             // Reopen tree if current user is team leader and tree is closed
-            if ((treeView1.GetNodeCount(true) > 1 && splitContainer1.Panel1Collapsed == true) || CurrentUser.UsrLvl.Substring(16, 1) == "A")
+            if ((treeView1.GetNodeCount(true) > 1 && splitContainer1.Panel1Collapsed == true) || CurrentUser.UsrLvl.Substring(70, 1) == "A")
             {
                 splitContainer1.Panel1Collapsed = false;
                 flwCounters.Visible = true;
@@ -314,13 +314,34 @@ namespace VOCAUltimate.PL
             }
             else
             {
+                if (tabControl1.SelectedTab.Name == "tabClosed")
+                {
+
+                    Statcdif.TickTblMain.Rows.Clear();
+                    pikerFrom.Value = Convert.ToDateTime(Statcdif.servrTime).AddDays(-30);
+                    pikerTo.Value = Convert.ToDateTime(Statcdif.servrTime);
+
+                    flowLayoutPanel9.Visible = true;
+                    pnlBtnClose.Visible = false;
+                }
+                else
+                {
+                    filtbl(0);
+
+                    flowLayoutPanel9.Visible = false;
+                    pnlBtnClose.Visible = true;
+                    counersGrid();
+                    GridTicket.ClearSelection();
+                    treeView1.SelectedNode = treeView1.Nodes[0];
+                }
+
                 flwCounters.Visible = true;
                 flowLayoutPanel4.Visible = true;
                 flowLayoutPanel7.Visible = true;
                 splitContainer2.Panel1Collapsed = true;
                 btnseting.Visible = false;
                 trackBar2.Visible = false;
-                pnlBtnClose.Visible = true;
+                // pnlBtnClose.Visible = true;
                 if (tabControl1.TabPages.Contains(tabTask)) { tabControl1.TabPages["tabTask"].Text = "إرسال للمناطق"; }
                 if (bolTeamLeader == true)
                 {
@@ -716,10 +737,13 @@ namespace VOCAUltimate.PL
 
         private void wdaysCal()
         {
-            this.StatBrPnlEn.Text = "جاري احتساب ايام العمل ...";
+            string FromDate;
+            if (rdEventDt.Checked) { FromDate = "TkupSTime"; } else { FromDate = "TkDtStart"; }
+
             for (int i = 0; i < Statcdif.TickTblMain.Rows.Count; i++)
             {
-                Statcdif.TickTblMain.Rows[i]["Wdays"] = fn.CalDate(Statcdif.TickTblMain.Rows[i]["TkupSTime"].ToString(), Statcdif.servrTime);
+                this.StatBrPnlEn.Text = "جاري احتساب ايام العمل ..." + (i + 1).ToString() + " من " + Statcdif.TickTblMain.Rows.Count;
+                Statcdif.TickTblMain.Rows[i]["Wdays"] = fn.CalDate(Statcdif.TickTblMain.Rows[i][FromDate].ToString(), Statcdif.servrTime);
             }
             this.StatBrPnlEn.Text = "إجمالي العدد : " + Statcdif.TickTblMain.Rows.Count.ToString();
         }
@@ -832,6 +856,12 @@ namespace VOCAUltimate.PL
                 this.StatBrPnlAr.Text = "الفلتر يعمل     " + panel4.Tag + "\"" + SerchTxt.Text + "\"" + "     ";
                 this.StatBrPnlAr.Icon = Resources.FilterOn;
                 TikDetails.gettikdetlsfrm.Hide();
+            }
+            else
+            {
+                Fltrreslt = "الفلتر لا يعمل : ";
+                this.StatBrPnlAr.Icon = Resources.FilterOff;
+                this.StatBrPnlAr.Text = "";
             }
             filterUsrCounerTbl();
             Color_();
@@ -1055,6 +1085,7 @@ namespace VOCAUltimate.PL
                 else if (Rd_Like.Checked) { LK = " Like "; };
                 FltrStr.Append("(");
                 FltrStr.Append("Convert([TkSQL],System.String)" + LK + strt + searchbox.Text + end_);
+                FltrStr.Append(" or Convert([TkDtStart],System.String)" + LK + strt + searchbox.Text + end_);
                 FltrStr.Append(" or [TkClNm]" + LK + strt + searchbox.Text + end_);
                 FltrStr.Append(" or [TkClPh]" + LK + strt + searchbox.Text + end_);
                 FltrStr.Append(" or [TkClPh1]" + LK + strt + searchbox.Text + end_);
@@ -1117,7 +1148,12 @@ namespace VOCAUltimate.PL
                 if (tabControl1.SelectedTab.Name != "tabReopen")
                 {
                     GridTicket.Columns["Wdays"].Visible = true;
-                GridTicket.Columns["Wdays"].HeaderText = "ايام العمل";
+                    GridTicket.Columns["Wdays"].HeaderText = "ايام العمل";
+                }
+                if (tabControl1.SelectedTab.Name == "tabClosed" && GridTicket.Columns["TkDtClose"]!=null)
+                {
+                    GridTicket.Columns["TkDtClose"].Visible = true;
+                    GridTicket.Columns["TkDtClose"].HeaderText = "تاريخ الإغلاق";
                 }
 
                 //for (int i = 37; i < GridTicket.Columns.Count; i++)
@@ -1577,7 +1613,7 @@ namespace VOCAUltimate.PL
 
             if (targetTeam != GridTicket.CurrentRow.Cells["TikfolowusrTeam"].Value.ToString().Trim())
             {
-                DialogResult dialogResult = MessageBox.Show("سيتم تحويل الشكوى ل"  + targetTeam + Environment.NewLine + "هل تريد الإستمرار؟", "تحويل للفريق المختص", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                DialogResult dialogResult = MessageBox.Show("سيتم تحويل الشكوى ل" + targetTeam + Environment.NewLine + "هل تريد الإستمرار؟", "تحويل للفريق المختص", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 if (dialogResult == DialogResult.Yes)
                 {
 
@@ -1601,6 +1637,32 @@ namespace VOCAUltimate.PL
         private void BtnCalc_Click(object sender, EventArgs e)
         {
             wdaysCal();
+        }
+
+        private void pikerFrom_ValueChanged(object sender, EventArgs e)
+        {
+            pikerTo.MinDate = Convert.ToDateTime("01/01/1753");
+            pikerTo.MaxDate = Convert.ToDateTime("31/12/9998");
+            pikerTo.MinDate = pikerFrom.Value;
+            pikerTo.MaxDate = pikerFrom.Value.AddDays(30);
+            pikerTo.Value = pikerFrom.Value.AddDays(30);
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.GridTicket.SelectionChanged -= new EventHandler(this.GridTicket_SelectionChanged);
+            string Any = " and (TkDtClose between  CONVERT(VARCHAR,'" + pikerFrom.Value.ToString("yyyy-MM-dd") + "',111) and CONVERT(datetime, '" + pikerTo.Value.ToString("yyyy-MM-dd") + "',111) + 1 )";
+            if (filtbl(1, Any).Rows.Count > 0)
+            {
+                counersGrid();
+                GridTicket.ClearSelection();
+                //treeView1.SelectedNode = treeView1.Nodes[0];
+
+            }
+            Filtr();
+            this.GridTicket.SelectionChanged -= new EventHandler(this.GridTicket_SelectionChanged);
+            this.GridTicket.SelectionChanged += new EventHandler(this.GridTicket_SelectionChanged);
         }
     }
 }
