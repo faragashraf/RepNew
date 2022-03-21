@@ -28,8 +28,8 @@
     <ProductName>VOCA Ultimate</ProductName>
     <PublisherName>Ashraf Farag</PublisherName>
     <SuiteName>VOCA Ultimate</SuiteName>
-    <MinimumRequiredVersion>1.0.0.1</MinimumRequiredVersion>
-    <ApplicationRevision>2</ApplicationRevision>
+    <MinimumRequiredVersion>1.0.0.2</MinimumRequiredVersion>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

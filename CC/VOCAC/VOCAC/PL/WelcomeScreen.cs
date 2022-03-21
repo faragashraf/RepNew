@@ -195,6 +195,7 @@ namespace VOCAUltimate.PL
                     DbStat.BackgroundImage = Resources.DBOn;
                     panellgin.Enabled = true;
                     StatBrPnlEn.Text = "";
+                    pikerFromTo.Value = Convert.ToDateTime(Statcdif.servrTime);
                 }
                 else
                 {
@@ -302,7 +303,7 @@ namespace VOCAUltimate.PL
                 {
                     Statcdif.UpdateKTable.DefaultView.RowFilter = "EvBkOfic = 0";
                 }
-                CurrentUser.UsrTeam = MyTeamOnSelect(CurrentUser.UsrID);         
+                CurrentUser.UsrTeam = MyTeamOnSelect(CurrentUser.UsrID);
             }
         }
         private void IntializeUser()
@@ -370,17 +371,18 @@ namespace VOCAUltimate.PL
         }
         private void userRecords()
         {
+
             DAL.DataAccessLayer DAL = new DAL.DataAccessLayer();
             SqlParameter[] param = new SqlParameter[3];
-            param[0] = new SqlParameter("@dtFrom", SqlDbType.NVarChar, 30);
-            param[0].Value = Statcdif.servrTime;
-            param[1] = new SqlParameter("@dtTo", SqlDbType.NVarChar, 30);
-            param[1].Value = Statcdif.servrTime;
+            param[0] = new SqlParameter("@dtFrom", SqlDbType.Date, 30);
+            param[0].Value = pikerFromTo.Value.ToString();
+            param[1] = new SqlParameter("@dtTo", SqlDbType.Date, 30);
+            param[1].Value = pikerFromTo.Value.ToString();
             param[2] = new SqlParameter("@ID", SqlDbType.NVarChar);
             param[2].Value = CurrentUser.UsrID;
             DAL.Struc = DAL.SelectData("SP_USER_COUNTERS", param);
             GrpCounters.Visible = true;
-            GrpCounters.Text = "ملخص أرقامي حتى : " + fn.ServrTime();
+            GrpCounters.Text = "ملخص أرقامي حتى : " + pikerFromTo.Value.ToString();
             GrpCounters.Visible = true;
             LblClsN.Text = DAL.Struc.dt.Rows[0]["OpnY"].ToString();
             LblFlN.Text = DAL.Struc.dt.Rows[0]["FlwNOpn"].ToString();

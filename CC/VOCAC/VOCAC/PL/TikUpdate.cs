@@ -205,7 +205,7 @@ namespace VOCAUltimate.PL
                 if (GridUpdt.CurrentRow.Cells["File"].Value.ToString().Length > 0)
                 {
                     DRW = function.DRW(attchtbl, GridUpdt.CurrentRow.Cells[0].Value, attchtbl.Columns[0]);
-                    if(DRW !=null)
+                    if (DRW != null)
                     {
                         data = (byte[])DRW.ItemArray[1];
                         Statcdif.extAttch = DRW.ItemArray[2].ToString();
@@ -230,25 +230,39 @@ namespace VOCAUltimate.PL
         }
         private void TimerEscOpen_Tick(object sender, EventArgs e)
         {
-            function fn = function.getfn;
-
-            DateTime Minutws = Convert.ToDateTime(fn.ServrTime());
-            double Minuts = Convert.ToDateTime(Minutws).Subtract(Convert.ToDateTime(GridUpdt.Rows[0].Cells["TkupSTime"].Value)).TotalMinutes;
-            double MinutsDef = (120 - Minuts);
-            if (Convert.ToInt32(GridUpdt.Rows[0].Cells["TkupEvtId"].Value) == 902)
+            if (CurrentUser.UsrUCatLvl < 3 && CurrentUser.UsrUCatLvl > 5)
             {
-                if (Minuts < 120)
+                function fn = function.getfn;
+
+                DateTime Minutws = Convert.ToDateTime(fn.ServrTime());
+                double Minuts = Convert.ToDateTime(Minutws).Subtract(Convert.ToDateTime(GridUpdt.Rows[0].Cells["TkupSTime"].Value)).TotalMinutes;
+                double MinutsDef = (120 - Minuts);
+                if (Convert.ToInt32(GridUpdt.Rows[0].Cells["TkupEvtId"].Value) == 902)
                 {
-                    LblMsg.Text = ("تم عمل متابعه 1 وسيتم الرد عليها خلال " + 120 + " متبقى " + TimeSpan.FromMinutes(MinutsDef).ToString().Split('.')[0]);
-                    //LblMsg.Refresh();
-                    CmbEvent.Enabled = false;
-                    BtnSubmt.Enabled = false;
-                    chkboxattach.Enabled = false;
-                    TxtUpdt.Text = "لا يمكن عمل تحديث أثناء فترة المتابعه، ويتم السماح بإضافة تعديل إما بإنتهاء فترة المتابعه أو عمل تحديث من الخطوط الخلفية";
-                    TxtUpdt.Font = new Font("Times New Roman", 16, FontStyle.Regular);
-                    TxtUpdt.TextAlign = HorizontalAlignment.Center;
-                    TxtUpdt.ReadOnly = true;
-                    return;
+                    if (Minuts < 120)
+                    {
+                        LblMsg.Text = ("تم عمل متابعه 1 وسيتم الرد عليها خلال " + 120 + " متبقى " + TimeSpan.FromMinutes(MinutsDef).ToString().Split('.')[0]);
+                        //LblMsg.Refresh();
+                        CmbEvent.Enabled = false;
+                        BtnSubmt.Enabled = false;
+                        chkboxattach.Enabled = false;
+                        TxtUpdt.Text = "لا يمكن عمل تحديث أثناء فترة المتابعه، ويتم السماح بإضافة تعديل إما بإنتهاء فترة المتابعه أو عمل تحديث من الخطوط الخلفية";
+                        TxtUpdt.Font = new Font("Times New Roman", 16, FontStyle.Regular);
+                        TxtUpdt.TextAlign = HorizontalAlignment.Center;
+                        TxtUpdt.ReadOnly = true;
+                        return;
+                    }
+                    else
+                    {
+                        LblMsg.Text = "";
+                        CmbEvent.Enabled = true;
+                        BtnSubmt.Enabled = true;
+                        chkboxattach.Enabled = true;
+                        // TxtUpdt.Text = ""
+                        TxtUpdt.Font = new Font("Times New Roman", 14, FontStyle.Regular);
+                        TxtUpdt.TextAlign = HorizontalAlignment.Left;
+                        TxtUpdt.ReadOnly = false;
+                    }
                 }
                 else
                 {
@@ -256,22 +270,11 @@ namespace VOCAUltimate.PL
                     CmbEvent.Enabled = true;
                     BtnSubmt.Enabled = true;
                     chkboxattach.Enabled = true;
-                    // TxtUpdt.Text = ""
+                    TxtUpdt.Text = "";
                     TxtUpdt.Font = new Font("Times New Roman", 14, FontStyle.Regular);
                     TxtUpdt.TextAlign = HorizontalAlignment.Left;
                     TxtUpdt.ReadOnly = false;
                 }
-            }
-            else
-            {
-                LblMsg.Text = "";
-                CmbEvent.Enabled = true;
-                BtnSubmt.Enabled = true;
-                chkboxattach.Enabled = true;
-                TxtUpdt.Text = "";
-                TxtUpdt.Font = new Font("Times New Roman", 14, FontStyle.Regular);
-                TxtUpdt.TextAlign = HorizontalAlignment.Left;
-                TxtUpdt.ReadOnly = false;
             }
             GC.Collect();
         }

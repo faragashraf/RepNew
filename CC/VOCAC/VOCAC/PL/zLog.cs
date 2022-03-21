@@ -20,7 +20,7 @@ namespace VOCAUltimate.PL
         private void BtnRdFl_Click(object sender, EventArgs e)
         {
             DataTable tbl = new DataTable();
-            tbl.Columns.Add("Time", typeof(DateTime));
+            tbl.Columns.Add("Time", typeof(string));
             tbl.Columns.Add("Erro Messege", typeof(string));
             tbl.Columns.Add("Inner Messege", typeof(string));
             tbl.Columns.Add("Erro Code", typeof(string));

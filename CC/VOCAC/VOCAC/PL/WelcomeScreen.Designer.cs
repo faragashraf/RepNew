@@ -46,6 +46,32 @@
             this.LblClrUsr = new System.Windows.Forms.Label();
             this.LblClrNotUsr = new System.Windows.Forms.Label();
             this.LblClrSys = new System.Windows.Forms.Label();
+            this.GrpCounters = new System.Windows.Forms.GroupBox();
+            this.LblUsrEventOther = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.LblUsrEventflowr = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.LblFolwDy = new System.Windows.Forms.Label();
+            this.Label10 = new System.Windows.Forms.Label();
+            this.LblClsUpdted = new System.Windows.Forms.Label();
+            this.Label7 = new System.Windows.Forms.Label();
+            this.LblRecivDy = new System.Windows.Forms.Label();
+            this.Label8 = new System.Windows.Forms.Label();
+            this.LblReOpY = new System.Windows.Forms.Label();
+            this.LblUsrEventColeg = new System.Windows.Forms.Label();
+            this.LblUsrTskOwnr = new System.Windows.Forms.Label();
+            this.LblEvDy = new System.Windows.Forms.Label();
+            this.LblClsYDy = new System.Windows.Forms.Label();
+            this.LblFlN = new System.Windows.Forms.Label();
+            this.LblClsN = new System.Windows.Forms.Label();
+            this.Label6 = new System.Windows.Forms.Label();
+            this.Label5 = new System.Windows.Forms.Label();
+            this.Label4 = new System.Windows.Forms.Label();
+            this.Label3 = new System.Windows.Forms.Label();
+            this.Label2 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.Label0 = new System.Windows.Forms.Label();
             this.LblUsrRNm = new System.Windows.Forms.Label();
             this.LblLstSeen = new System.Windows.Forms.Label();
             this.LblUsrIP = new System.Windows.Forms.Label();
@@ -85,37 +111,13 @@
             this.panellgin = new System.Windows.Forms.Panel();
             this.ImageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tmrbringfront = new System.Windows.Forms.Timer(this.components);
-            this.GrpCounters = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.LblFolwDy = new System.Windows.Forms.Label();
-            this.Label10 = new System.Windows.Forms.Label();
-            this.LblClsUpdted = new System.Windows.Forms.Label();
-            this.Label7 = new System.Windows.Forms.Label();
-            this.LblRecivDy = new System.Windows.Forms.Label();
-            this.Label8 = new System.Windows.Forms.Label();
-            this.LblReOpY = new System.Windows.Forms.Label();
-            this.LblUsrEventColeg = new System.Windows.Forms.Label();
-            this.LblUsrTskOwnr = new System.Windows.Forms.Label();
-            this.LblEvDy = new System.Windows.Forms.Label();
-            this.LblClsYDy = new System.Windows.Forms.Label();
-            this.LblFlN = new System.Windows.Forms.Label();
-            this.LblClsN = new System.Windows.Forms.Label();
-            this.Label6 = new System.Windows.Forms.Label();
-            this.Label5 = new System.Windows.Forms.Label();
-            this.Label4 = new System.Windows.Forms.Label();
-            this.Label3 = new System.Windows.Forms.Label();
-            this.Label2 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.Label0 = new System.Windows.Forms.Label();
-            this.LblUsrEventflowr = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.LblUsrEventOther = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
+            this.pikerFromTo = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.CNTXMNUPic.SuspendLayout();
             this.FlowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DbStat)).BeginInit();
             this.GroupBox1.SuspendLayout();
+            this.GrpCounters.SuspendLayout();
             this.Panel2.SuspendLayout();
             this.Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlAr)).BeginInit();
@@ -124,7 +126,6 @@
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).BeginInit();
             this.panellgin.SuspendLayout();
-            this.GrpCounters.SuspendLayout();
             this.SuspendLayout();
             // 
             // PictureBox1
@@ -177,7 +178,7 @@
             this.LblSrvrNm.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.LblSrvrNm.ForeColor = System.Drawing.Color.Red;
             this.LblSrvrNm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LblSrvrNm.Location = new System.Drawing.Point(3, 679);
+            this.LblSrvrNm.Location = new System.Drawing.Point(3, 811);
             this.LblSrvrNm.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.LblSrvrNm.Name = "LblSrvrNm";
             this.LblSrvrNm.Size = new System.Drawing.Size(289, 20);
@@ -205,11 +206,11 @@
             this.FlowLayoutPanel1.Controls.Add(this.Panel2);
             this.FlowLayoutPanel1.Controls.Add(this.Panel3);
             this.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.FlowLayoutPanel1.Location = new System.Drawing.Point(38, 99);
+            this.FlowLayoutPanel1.Location = new System.Drawing.Point(38, 12);
             this.FlowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.FlowLayoutPanel1.Name = "FlowLayoutPanel1";
             this.FlowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.FlowLayoutPanel1.Size = new System.Drawing.Size(711, 484);
+            this.FlowLayoutPanel1.Size = new System.Drawing.Size(711, 571);
             this.FlowLayoutPanel1.TabIndex = 99;
             this.FlowLayoutPanel1.Visible = false;
             // 
@@ -317,6 +318,360 @@
             this.LblClrSys.Text = "-  تحديثات النظام";
             this.LblClrSys.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // GrpCounters
+            // 
+            this.GrpCounters.BackColor = System.Drawing.Color.Transparent;
+            this.GrpCounters.Controls.Add(this.pikerFromTo);
+            this.GrpCounters.Controls.Add(this.LblUsrEventOther);
+            this.GrpCounters.Controls.Add(this.label15);
+            this.GrpCounters.Controls.Add(this.LblUsrEventflowr);
+            this.GrpCounters.Controls.Add(this.label13);
+            this.GrpCounters.Controls.Add(this.button4);
+            this.GrpCounters.Controls.Add(this.LblFolwDy);
+            this.GrpCounters.Controls.Add(this.Label10);
+            this.GrpCounters.Controls.Add(this.LblClsUpdted);
+            this.GrpCounters.Controls.Add(this.Label7);
+            this.GrpCounters.Controls.Add(this.LblRecivDy);
+            this.GrpCounters.Controls.Add(this.Label8);
+            this.GrpCounters.Controls.Add(this.LblReOpY);
+            this.GrpCounters.Controls.Add(this.LblUsrEventColeg);
+            this.GrpCounters.Controls.Add(this.LblUsrTskOwnr);
+            this.GrpCounters.Controls.Add(this.LblEvDy);
+            this.GrpCounters.Controls.Add(this.LblClsYDy);
+            this.GrpCounters.Controls.Add(this.LblFlN);
+            this.GrpCounters.Controls.Add(this.LblClsN);
+            this.GrpCounters.Controls.Add(this.Label6);
+            this.GrpCounters.Controls.Add(this.Label5);
+            this.GrpCounters.Controls.Add(this.Label4);
+            this.GrpCounters.Controls.Add(this.Label3);
+            this.GrpCounters.Controls.Add(this.Label2);
+            this.GrpCounters.Controls.Add(this.label9);
+            this.GrpCounters.Controls.Add(this.Label0);
+            this.GrpCounters.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            this.GrpCounters.ForeColor = System.Drawing.Color.ForestGreen;
+            this.GrpCounters.Location = new System.Drawing.Point(639, 273);
+            this.GrpCounters.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
+            this.GrpCounters.Name = "GrpCounters";
+            this.GrpCounters.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.GrpCounters.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.GrpCounters.Size = new System.Drawing.Size(394, 509);
+            this.GrpCounters.TabIndex = 99;
+            this.GrpCounters.TabStop = false;
+            // 
+            // LblUsrEventOther
+            // 
+            this.LblUsrEventOther.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblUsrEventOther.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblUsrEventOther.ForeColor = System.Drawing.Color.Black;
+            this.LblUsrEventOther.Location = new System.Drawing.Point(52, 144);
+            this.LblUsrEventOther.Name = "LblUsrEventOther";
+            this.LblUsrEventOther.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.LblUsrEventOther.Size = new System.Drawing.Size(160, 25);
+            this.LblUsrEventOther.TabIndex = 24;
+            this.LblUsrEventOther.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Black;
+            this.label15.Location = new System.Drawing.Point(209, 144);
+            this.label15.Name = "label15";
+            this.label15.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label15.Size = new System.Drawing.Size(180, 25);
+            this.label15.TabIndex = 23;
+            this.label15.Text = "تحديثات الغير :";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // LblUsrEventflowr
+            // 
+            this.LblUsrEventflowr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblUsrEventflowr.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblUsrEventflowr.ForeColor = System.Drawing.Color.Black;
+            this.LblUsrEventflowr.Location = new System.Drawing.Point(53, 94);
+            this.LblUsrEventflowr.Name = "LblUsrEventflowr";
+            this.LblUsrEventflowr.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.LblUsrEventflowr.Size = new System.Drawing.Size(160, 25);
+            this.LblUsrEventflowr.TabIndex = 22;
+            this.LblUsrEventflowr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Black;
+            this.label13.Location = new System.Drawing.Point(209, 94);
+            this.label13.Name = "label13";
+            this.label13.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label13.Size = new System.Drawing.Size(180, 25);
+            this.label13.TabIndex = 21;
+            this.label13.Text = "تحديثاتي :";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // button4
+            // 
+            this.button4.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
+            this.button4.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
+            this.button4.ForeColor = System.Drawing.Color.Black;
+            this.button4.Location = new System.Drawing.Point(121, 429);
+            this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(153, 37);
+            this.button4.TabIndex = 20;
+            this.button4.Text = "تحديث الأرقام";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // LblFolwDy
+            // 
+            this.LblFolwDy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblFolwDy.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblFolwDy.ForeColor = System.Drawing.Color.Black;
+            this.LblFolwDy.Location = new System.Drawing.Point(52, 323);
+            this.LblFolwDy.Name = "LblFolwDy";
+            this.LblFolwDy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.LblFolwDy.Size = new System.Drawing.Size(160, 25);
+            this.LblFolwDy.TabIndex = 19;
+            this.LblFolwDy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label10
+            // 
+            this.Label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Label10.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label10.ForeColor = System.Drawing.Color.Black;
+            this.Label10.Location = new System.Drawing.Point(209, 323);
+            this.Label10.Name = "Label10";
+            this.Label10.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.Label10.Size = new System.Drawing.Size(180, 25);
+            this.Label10.TabIndex = 18;
+            this.Label10.Text = "تم التعامل :";
+            this.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // LblClsUpdted
+            // 
+            this.LblClsUpdted.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblClsUpdted.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblClsUpdted.ForeColor = System.Drawing.Color.Black;
+            this.LblClsUpdted.Location = new System.Drawing.Point(53, 397);
+            this.LblClsUpdted.Name = "LblClsUpdted";
+            this.LblClsUpdted.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.LblClsUpdted.Size = new System.Drawing.Size(160, 25);
+            this.LblClsUpdted.TabIndex = 17;
+            this.LblClsUpdted.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label7
+            // 
+            this.Label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Label7.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label7.ForeColor = System.Drawing.Color.Black;
+            this.Label7.Location = new System.Drawing.Point(209, 397);
+            this.Label7.Name = "Label7";
+            this.Label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.Label7.Size = new System.Drawing.Size(180, 25);
+            this.Label7.TabIndex = 16;
+            this.Label7.Text = "تحديثات شكاوى مغلقة :";
+            this.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // LblRecivDy
+            // 
+            this.LblRecivDy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblRecivDy.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblRecivDy.ForeColor = System.Drawing.Color.Black;
+            this.LblRecivDy.Location = new System.Drawing.Point(52, 222);
+            this.LblRecivDy.Name = "LblRecivDy";
+            this.LblRecivDy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.LblRecivDy.Size = new System.Drawing.Size(160, 25);
+            this.LblRecivDy.TabIndex = 15;
+            this.LblRecivDy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label8
+            // 
+            this.Label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Label8.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label8.ForeColor = System.Drawing.Color.Black;
+            this.Label8.Location = new System.Drawing.Point(209, 222);
+            this.Label8.Name = "Label8";
+            this.Label8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.Label8.Size = new System.Drawing.Size(180, 25);
+            this.Label8.TabIndex = 14;
+            this.Label8.Text = "استلام اليوم :";
+            this.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // LblReOpY
+            // 
+            this.LblReOpY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblReOpY.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblReOpY.ForeColor = System.Drawing.Color.Black;
+            this.LblReOpY.Location = new System.Drawing.Point(52, 372);
+            this.LblReOpY.Name = "LblReOpY";
+            this.LblReOpY.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.LblReOpY.Size = new System.Drawing.Size(160, 25);
+            this.LblReOpY.TabIndex = 13;
+            this.LblReOpY.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // LblUsrEventColeg
+            // 
+            this.LblUsrEventColeg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblUsrEventColeg.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblUsrEventColeg.ForeColor = System.Drawing.Color.Black;
+            this.LblUsrEventColeg.Location = new System.Drawing.Point(52, 119);
+            this.LblUsrEventColeg.Name = "LblUsrEventColeg";
+            this.LblUsrEventColeg.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.LblUsrEventColeg.Size = new System.Drawing.Size(160, 25);
+            this.LblUsrEventColeg.TabIndex = 12;
+            this.LblUsrEventColeg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // LblUsrTskOwnr
+            // 
+            this.LblUsrTskOwnr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblUsrTskOwnr.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblUsrTskOwnr.ForeColor = System.Drawing.Color.Black;
+            this.LblUsrTskOwnr.Location = new System.Drawing.Point(52, 347);
+            this.LblUsrTskOwnr.Name = "LblUsrTskOwnr";
+            this.LblUsrTskOwnr.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.LblUsrTskOwnr.Size = new System.Drawing.Size(160, 25);
+            this.LblUsrTskOwnr.TabIndex = 11;
+            this.LblUsrTskOwnr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // LblEvDy
+            // 
+            this.LblEvDy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblEvDy.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblEvDy.ForeColor = System.Drawing.Color.Black;
+            this.LblEvDy.Location = new System.Drawing.Point(52, 297);
+            this.LblEvDy.Name = "LblEvDy";
+            this.LblEvDy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.LblEvDy.Size = new System.Drawing.Size(160, 25);
+            this.LblEvDy.TabIndex = 10;
+            this.LblEvDy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // LblClsYDy
+            // 
+            this.LblClsYDy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblClsYDy.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblClsYDy.ForeColor = System.Drawing.Color.Black;
+            this.LblClsYDy.Location = new System.Drawing.Point(52, 272);
+            this.LblClsYDy.Name = "LblClsYDy";
+            this.LblClsYDy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.LblClsYDy.Size = new System.Drawing.Size(160, 25);
+            this.LblClsYDy.TabIndex = 9;
+            this.LblClsYDy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // LblFlN
+            // 
+            this.LblFlN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblFlN.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblFlN.ForeColor = System.Drawing.Color.Black;
+            this.LblFlN.Location = new System.Drawing.Point(52, 248);
+            this.LblFlN.Name = "LblFlN";
+            this.LblFlN.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.LblFlN.Size = new System.Drawing.Size(160, 25);
+            this.LblFlN.TabIndex = 8;
+            this.LblFlN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // LblClsN
+            // 
+            this.LblClsN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblClsN.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblClsN.ForeColor = System.Drawing.Color.Black;
+            this.LblClsN.Location = new System.Drawing.Point(52, 69);
+            this.LblClsN.Name = "LblClsN";
+            this.LblClsN.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.LblClsN.Size = new System.Drawing.Size(160, 25);
+            this.LblClsN.TabIndex = 7;
+            this.LblClsN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label6
+            // 
+            this.Label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Label6.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label6.ForeColor = System.Drawing.Color.Black;
+            this.Label6.Location = new System.Drawing.Point(209, 372);
+            this.Label6.Name = "Label6";
+            this.Label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.Label6.Size = new System.Drawing.Size(180, 25);
+            this.Label6.TabIndex = 6;
+            this.Label6.Text = "معاد فتحها :";
+            this.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // Label5
+            // 
+            this.Label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Label5.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label5.ForeColor = System.Drawing.Color.Black;
+            this.Label5.Location = new System.Drawing.Point(209, 119);
+            this.Label5.Name = "Label5";
+            this.Label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.Label5.Size = new System.Drawing.Size(180, 25);
+            this.Label5.TabIndex = 5;
+            this.Label5.Text = "تحديثات الزملاء :";
+            this.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // Label4
+            // 
+            this.Label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Label4.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label4.ForeColor = System.Drawing.Color.Black;
+            this.Label4.Location = new System.Drawing.Point(209, 347);
+            this.Label4.Name = "Label4";
+            this.Label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.Label4.Size = new System.Drawing.Size(180, 25);
+            this.Label4.TabIndex = 4;
+            this.Label4.Text = " تحويل الجهه المختصة :";
+            this.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // Label3
+            // 
+            this.Label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Label3.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label3.ForeColor = System.Drawing.Color.Black;
+            this.Label3.Location = new System.Drawing.Point(209, 297);
+            this.Label3.Name = "Label3";
+            this.Label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.Label3.Size = new System.Drawing.Size(180, 25);
+            this.Label3.TabIndex = 3;
+            this.Label3.Text = "عدد تحديثات اليوم :";
+            this.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // Label2
+            // 
+            this.Label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Label2.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label2.ForeColor = System.Drawing.Color.Black;
+            this.Label2.Location = new System.Drawing.Point(209, 272);
+            this.Label2.Name = "Label2";
+            this.Label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.Label2.Size = new System.Drawing.Size(180, 25);
+            this.Label2.TabIndex = 2;
+            this.Label2.Text = "تم الإغلاق :";
+            this.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Black;
+            this.label9.Location = new System.Drawing.Point(209, 248);
+            this.label9.Name = "label9";
+            this.label9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label9.Size = new System.Drawing.Size(180, 25);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "لم يتم التعامل معها :";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // Label0
+            // 
+            this.Label0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Label0.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label0.ForeColor = System.Drawing.Color.Black;
+            this.Label0.Location = new System.Drawing.Point(209, 69);
+            this.Label0.Name = "Label0";
+            this.Label0.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.Label0.Size = new System.Drawing.Size(180, 25);
+            this.Label0.TabIndex = 0;
+            this.Label0.Text = "مفتوحة :";
+            this.Label0.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // LblUsrRNm
             // 
             this.LblUsrRNm.BackColor = System.Drawing.Color.Transparent;
@@ -324,7 +679,7 @@
             this.LblUsrRNm.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
             this.LblUsrRNm.ForeColor = System.Drawing.Color.Blue;
             this.LblUsrRNm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LblUsrRNm.Location = new System.Drawing.Point(3, 653);
+            this.LblUsrRNm.Location = new System.Drawing.Point(3, 785);
             this.LblUsrRNm.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.LblUsrRNm.Name = "LblUsrRNm";
             this.LblUsrRNm.Size = new System.Drawing.Size(289, 20);
@@ -339,7 +694,7 @@
             this.LblLstSeen.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.LblLstSeen.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.LblLstSeen.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LblLstSeen.Location = new System.Drawing.Point(3, 705);
+            this.LblLstSeen.Location = new System.Drawing.Point(3, 837);
             this.LblLstSeen.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.LblLstSeen.Name = "LblLstSeen";
             this.LblLstSeen.Size = new System.Drawing.Size(289, 20);
@@ -352,7 +707,7 @@
             this.FlowLayoutPanel1.SetFlowBreak(this.LblUsrIP, true);
             this.LblUsrIP.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.LblUsrIP.ForeColor = System.Drawing.Color.Red;
-            this.LblUsrIP.Location = new System.Drawing.Point(985, 728);
+            this.LblUsrIP.Location = new System.Drawing.Point(985, 860);
             this.LblUsrIP.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
             this.LblUsrIP.Name = "LblUsrIP";
             this.LblUsrIP.Size = new System.Drawing.Size(297, 20);
@@ -367,7 +722,7 @@
             this.FlowLayoutPanel1.SetFlowBreak(this.PubVerLbl, true);
             this.PubVerLbl.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.PubVerLbl.ForeColor = System.Drawing.Color.Red;
-            this.PubVerLbl.Location = new System.Drawing.Point(985, 748);
+            this.PubVerLbl.Location = new System.Drawing.Point(985, 880);
             this.PubVerLbl.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
             this.PubVerLbl.Name = "PubVerLbl";
             this.PubVerLbl.Size = new System.Drawing.Size(297, 20);
@@ -382,7 +737,7 @@
             this.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.Panel2.Controls.Add(this.SnOutBt);
             this.Panel2.Controls.Add(this.ExtBt);
-            this.Panel2.Location = new System.Drawing.Point(1047, 797);
+            this.Panel2.Location = new System.Drawing.Point(1047, 929);
             this.Panel2.Name = "Panel2";
             this.Panel2.Size = new System.Drawing.Size(242, 40);
             this.Panel2.TabIndex = 97;
@@ -420,7 +775,7 @@
             this.Panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Panel3.BackColor = System.Drawing.Color.Transparent;
             this.Panel3.Controls.Add(this.Button2);
-            this.Panel3.Location = new System.Drawing.Point(917, 798);
+            this.Panel3.Location = new System.Drawing.Point(917, 930);
             this.Panel3.Name = "Panel3";
             this.Panel3.Size = new System.Drawing.Size(124, 39);
             this.Panel3.TabIndex = 97;
@@ -791,358 +1146,16 @@
             this.tmrbringfront.Enabled = true;
             this.tmrbringfront.Tick += new System.EventHandler(this.tmrbringfront1);
             // 
-            // GrpCounters
+            // pikerFromTo
             // 
-            this.GrpCounters.BackColor = System.Drawing.Color.Transparent;
-            this.GrpCounters.Controls.Add(this.LblUsrEventOther);
-            this.GrpCounters.Controls.Add(this.label15);
-            this.GrpCounters.Controls.Add(this.LblUsrEventflowr);
-            this.GrpCounters.Controls.Add(this.label13);
-            this.GrpCounters.Controls.Add(this.button4);
-            this.GrpCounters.Controls.Add(this.LblFolwDy);
-            this.GrpCounters.Controls.Add(this.Label10);
-            this.GrpCounters.Controls.Add(this.LblClsUpdted);
-            this.GrpCounters.Controls.Add(this.Label7);
-            this.GrpCounters.Controls.Add(this.LblRecivDy);
-            this.GrpCounters.Controls.Add(this.Label8);
-            this.GrpCounters.Controls.Add(this.LblReOpY);
-            this.GrpCounters.Controls.Add(this.LblUsrEventColeg);
-            this.GrpCounters.Controls.Add(this.LblUsrTskOwnr);
-            this.GrpCounters.Controls.Add(this.LblEvDy);
-            this.GrpCounters.Controls.Add(this.LblClsYDy);
-            this.GrpCounters.Controls.Add(this.LblFlN);
-            this.GrpCounters.Controls.Add(this.LblClsN);
-            this.GrpCounters.Controls.Add(this.Label6);
-            this.GrpCounters.Controls.Add(this.Label5);
-            this.GrpCounters.Controls.Add(this.Label4);
-            this.GrpCounters.Controls.Add(this.Label3);
-            this.GrpCounters.Controls.Add(this.Label2);
-            this.GrpCounters.Controls.Add(this.label9);
-            this.GrpCounters.Controls.Add(this.Label0);
-            this.GrpCounters.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.GrpCounters.ForeColor = System.Drawing.Color.ForestGreen;
-            this.GrpCounters.Location = new System.Drawing.Point(639, 273);
-            this.GrpCounters.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.GrpCounters.Name = "GrpCounters";
-            this.GrpCounters.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.GrpCounters.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.GrpCounters.Size = new System.Drawing.Size(394, 377);
-            this.GrpCounters.TabIndex = 99;
-            this.GrpCounters.TabStop = false;
-            // 
-            // button4
-            // 
-            this.button4.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
-            this.button4.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.button4.ForeColor = System.Drawing.Color.Black;
-            this.button4.Location = new System.Drawing.Point(139, 331);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(153, 37);
-            this.button4.TabIndex = 20;
-            this.button4.Text = "تحديث الأرقام";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // LblFolwDy
-            // 
-            this.LblFolwDy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblFolwDy.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblFolwDy.ForeColor = System.Drawing.Color.Black;
-            this.LblFolwDy.Location = new System.Drawing.Point(51, 153);
-            this.LblFolwDy.Name = "LblFolwDy";
-            this.LblFolwDy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblFolwDy.Size = new System.Drawing.Size(160, 25);
-            this.LblFolwDy.TabIndex = 19;
-            this.LblFolwDy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Label10
-            // 
-            this.Label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Label10.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label10.ForeColor = System.Drawing.Color.Black;
-            this.Label10.Location = new System.Drawing.Point(208, 153);
-            this.Label10.Name = "Label10";
-            this.Label10.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Label10.Size = new System.Drawing.Size(180, 25);
-            this.Label10.TabIndex = 18;
-            this.Label10.Text = "تم التعامل اليوم :";
-            this.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // LblClsUpdted
-            // 
-            this.LblClsUpdted.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblClsUpdted.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblClsUpdted.ForeColor = System.Drawing.Color.Black;
-            this.LblClsUpdted.Location = new System.Drawing.Point(52, 227);
-            this.LblClsUpdted.Name = "LblClsUpdted";
-            this.LblClsUpdted.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblClsUpdted.Size = new System.Drawing.Size(160, 25);
-            this.LblClsUpdted.TabIndex = 17;
-            this.LblClsUpdted.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Label7
-            // 
-            this.Label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Label7.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label7.ForeColor = System.Drawing.Color.Black;
-            this.Label7.Location = new System.Drawing.Point(208, 227);
-            this.Label7.Name = "Label7";
-            this.Label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Label7.Size = new System.Drawing.Size(180, 25);
-            this.Label7.TabIndex = 16;
-            this.Label7.Text = "تحديثات شكاوى مغلقة :";
-            this.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // LblRecivDy
-            // 
-            this.LblRecivDy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblRecivDy.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblRecivDy.ForeColor = System.Drawing.Color.Black;
-            this.LblRecivDy.Location = new System.Drawing.Point(51, 52);
-            this.LblRecivDy.Name = "LblRecivDy";
-            this.LblRecivDy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblRecivDy.Size = new System.Drawing.Size(160, 25);
-            this.LblRecivDy.TabIndex = 15;
-            this.LblRecivDy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Label8
-            // 
-            this.Label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Label8.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label8.ForeColor = System.Drawing.Color.Black;
-            this.Label8.Location = new System.Drawing.Point(208, 52);
-            this.Label8.Name = "Label8";
-            this.Label8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Label8.Size = new System.Drawing.Size(180, 25);
-            this.Label8.TabIndex = 14;
-            this.Label8.Text = "استلام اليوم :";
-            this.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // LblReOpY
-            // 
-            this.LblReOpY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblReOpY.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblReOpY.ForeColor = System.Drawing.Color.Black;
-            this.LblReOpY.Location = new System.Drawing.Point(51, 202);
-            this.LblReOpY.Name = "LblReOpY";
-            this.LblReOpY.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblReOpY.Size = new System.Drawing.Size(160, 25);
-            this.LblReOpY.TabIndex = 13;
-            this.LblReOpY.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // LblUsrEventColeg
-            // 
-            this.LblUsrEventColeg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblUsrEventColeg.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblUsrEventColeg.ForeColor = System.Drawing.Color.Black;
-            this.LblUsrEventColeg.Location = new System.Drawing.Point(51, 277);
-            this.LblUsrEventColeg.Name = "LblUsrEventColeg";
-            this.LblUsrEventColeg.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblUsrEventColeg.Size = new System.Drawing.Size(160, 25);
-            this.LblUsrEventColeg.TabIndex = 12;
-            this.LblUsrEventColeg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // LblUsrTskOwnr
-            // 
-            this.LblUsrTskOwnr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblUsrTskOwnr.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblUsrTskOwnr.ForeColor = System.Drawing.Color.Black;
-            this.LblUsrTskOwnr.Location = new System.Drawing.Point(51, 177);
-            this.LblUsrTskOwnr.Name = "LblUsrTskOwnr";
-            this.LblUsrTskOwnr.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblUsrTskOwnr.Size = new System.Drawing.Size(160, 25);
-            this.LblUsrTskOwnr.TabIndex = 11;
-            this.LblUsrTskOwnr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // LblEvDy
-            // 
-            this.LblEvDy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblEvDy.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblEvDy.ForeColor = System.Drawing.Color.Black;
-            this.LblEvDy.Location = new System.Drawing.Point(51, 127);
-            this.LblEvDy.Name = "LblEvDy";
-            this.LblEvDy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblEvDy.Size = new System.Drawing.Size(160, 25);
-            this.LblEvDy.TabIndex = 10;
-            this.LblEvDy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // LblClsYDy
-            // 
-            this.LblClsYDy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblClsYDy.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblClsYDy.ForeColor = System.Drawing.Color.Black;
-            this.LblClsYDy.Location = new System.Drawing.Point(51, 102);
-            this.LblClsYDy.Name = "LblClsYDy";
-            this.LblClsYDy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblClsYDy.Size = new System.Drawing.Size(160, 25);
-            this.LblClsYDy.TabIndex = 9;
-            this.LblClsYDy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // LblFlN
-            // 
-            this.LblFlN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblFlN.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblFlN.ForeColor = System.Drawing.Color.Black;
-            this.LblFlN.Location = new System.Drawing.Point(51, 78);
-            this.LblFlN.Name = "LblFlN";
-            this.LblFlN.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblFlN.Size = new System.Drawing.Size(160, 25);
-            this.LblFlN.TabIndex = 8;
-            this.LblFlN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // LblClsN
-            // 
-            this.LblClsN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblClsN.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblClsN.ForeColor = System.Drawing.Color.Black;
-            this.LblClsN.Location = new System.Drawing.Point(51, 27);
-            this.LblClsN.Name = "LblClsN";
-            this.LblClsN.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblClsN.Size = new System.Drawing.Size(160, 25);
-            this.LblClsN.TabIndex = 7;
-            this.LblClsN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Label6
-            // 
-            this.Label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Label6.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label6.ForeColor = System.Drawing.Color.Black;
-            this.Label6.Location = new System.Drawing.Point(208, 202);
-            this.Label6.Name = "Label6";
-            this.Label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Label6.Size = new System.Drawing.Size(180, 25);
-            this.Label6.TabIndex = 6;
-            this.Label6.Text = "معاد فتحها :";
-            this.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // Label5
-            // 
-            this.Label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Label5.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label5.ForeColor = System.Drawing.Color.Black;
-            this.Label5.Location = new System.Drawing.Point(208, 277);
-            this.Label5.Name = "Label5";
-            this.Label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Label5.Size = new System.Drawing.Size(180, 25);
-            this.Label5.TabIndex = 5;
-            this.Label5.Text = "تحديثات الزملاء :";
-            this.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // Label4
-            // 
-            this.Label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Label4.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label4.ForeColor = System.Drawing.Color.Black;
-            this.Label4.Location = new System.Drawing.Point(208, 177);
-            this.Label4.Name = "Label4";
-            this.Label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Label4.Size = new System.Drawing.Size(180, 25);
-            this.Label4.TabIndex = 4;
-            this.Label4.Text = " تحويل الجهه المختصة :";
-            this.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // Label3
-            // 
-            this.Label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Label3.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label3.ForeColor = System.Drawing.Color.Black;
-            this.Label3.Location = new System.Drawing.Point(208, 127);
-            this.Label3.Name = "Label3";
-            this.Label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Label3.Size = new System.Drawing.Size(180, 25);
-            this.Label3.TabIndex = 3;
-            this.Label3.Text = "عدد تحديثات اليوم :";
-            this.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // Label2
-            // 
-            this.Label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Label2.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label2.ForeColor = System.Drawing.Color.Black;
-            this.Label2.Location = new System.Drawing.Point(208, 102);
-            this.Label2.Name = "Label2";
-            this.Label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Label2.Size = new System.Drawing.Size(180, 25);
-            this.Label2.TabIndex = 2;
-            this.Label2.Text = "تم الإغلاق اليوم :";
-            this.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(208, 78);
-            this.label9.Name = "label9";
-            this.label9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label9.Size = new System.Drawing.Size(180, 25);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "لم يتم التعامل معها :";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // Label0
-            // 
-            this.Label0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Label0.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label0.ForeColor = System.Drawing.Color.Black;
-            this.Label0.Location = new System.Drawing.Point(208, 27);
-            this.Label0.Name = "Label0";
-            this.Label0.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Label0.Size = new System.Drawing.Size(180, 25);
-            this.Label0.TabIndex = 0;
-            this.Label0.Text = "مفتوحة :";
-            this.Label0.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // LblUsrEventflowr
-            // 
-            this.LblUsrEventflowr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblUsrEventflowr.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblUsrEventflowr.ForeColor = System.Drawing.Color.Black;
-            this.LblUsrEventflowr.Location = new System.Drawing.Point(52, 252);
-            this.LblUsrEventflowr.Name = "LblUsrEventflowr";
-            this.LblUsrEventflowr.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblUsrEventflowr.Size = new System.Drawing.Size(160, 25);
-            this.LblUsrEventflowr.TabIndex = 22;
-            this.LblUsrEventflowr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label13
-            // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(208, 252);
-            this.label13.Name = "label13";
-            this.label13.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label13.Size = new System.Drawing.Size(180, 25);
-            this.label13.TabIndex = 21;
-            this.label13.Text = "تحديثاتي :";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // LblUsrEventOther
-            // 
-            this.LblUsrEventOther.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblUsrEventOther.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblUsrEventOther.ForeColor = System.Drawing.Color.Black;
-            this.LblUsrEventOther.Location = new System.Drawing.Point(51, 302);
-            this.LblUsrEventOther.Name = "LblUsrEventOther";
-            this.LblUsrEventOther.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblUsrEventOther.Size = new System.Drawing.Size(160, 25);
-            this.LblUsrEventOther.TabIndex = 24;
-            this.LblUsrEventOther.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label15
-            // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label15.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.Black;
-            this.label15.Location = new System.Drawing.Point(208, 302);
-            this.label15.Name = "label15";
-            this.label15.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label15.Size = new System.Drawing.Size(180, 25);
-            this.label15.TabIndex = 23;
-            this.label15.Text = "تحديثات الغير :";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.pikerFromTo.Font = new System.Drawing.Font("Times New Roman", 14F);
+            this.pikerFromTo.Location = new System.Drawing.Point(65, 27);
+            this.pikerFromTo.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
+            this.pikerFromTo.Name = "pikerFromTo";
+            this.pikerFromTo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.pikerFromTo.RightToLeftLayout = true;
+            this.pikerFromTo.Size = new System.Drawing.Size(276, 29);
+            this.pikerFromTo.TabIndex = 25;
             // 
             // WelcomeScreen
             // 
@@ -1167,6 +1180,7 @@
             this.FlowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DbStat)).EndInit();
             this.GroupBox1.ResumeLayout(false);
+            this.GrpCounters.ResumeLayout(false);
             this.Panel2.ResumeLayout(false);
             this.Panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlAr)).EndInit();
@@ -1176,7 +1190,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).EndInit();
             this.panellgin.ResumeLayout(false);
             this.panellgin.PerformLayout();
-            this.GrpCounters.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1263,5 +1276,6 @@
         internal System.Windows.Forms.Label label15;
         internal System.Windows.Forms.Label LblUsrEventflowr;
         internal System.Windows.Forms.Label label13;
+        private System.Windows.Forms.DateTimePicker pikerFromTo;
     }
 }

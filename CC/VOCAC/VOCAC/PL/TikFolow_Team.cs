@@ -65,7 +65,7 @@ namespace VOCAUltimate.PL
             ChckUpdColeg.Tag = "[updtusr] <> folowusr AND UCatLvl >= 3 And UCatLvl <= 5";
             ChckUpdOther.Tag = "[updtusr] <> folowusr AND UCatLvl < 3 or UCatLvl > 5";
             ChckFlN.Tag = "TkFolw = 'False'";
-            ChckTrnsDy.Tag = "TkRecieveDt = '" + DateTime.Parse(Statcdif.servrTime).ToString("yyyy/MM/dd") + "'";
+            ChckTrnsDy.Tag = "TkRecieveDt = '" + (Statcdif.servrTime) + "'";
             ChckRegions.Tag = "TaskUserID > 0";
             ChckEsc1.Tag = "TkupEvtId = 902";
             ChckEsc2.Tag = "TkupEvtId = 903";
@@ -319,7 +319,7 @@ namespace VOCAUltimate.PL
 
                     Statcdif.TickTblMain.Rows.Clear();
                     pikerFrom.Value = Convert.ToDateTime(Statcdif.servrTime).AddDays(-30);
-                    pikerTo.Value = Convert.ToDateTime(Statcdif.servrTime);
+                    pikerTo.Value = (Convert.ToDateTime(Statcdif.servrTime));
 
                     flowLayoutPanel9.Visible = true;
                     pnlBtnClose.Visible = false;
@@ -964,7 +964,7 @@ namespace VOCAUltimate.PL
             LblUpdtColleg.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(updtusr)", "[updtusr] <> folowusr AND UCatLvl >= 3 And UCatLvl <= 5"));
             LblUpdtOthrs.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(updtusr)", "[updtusr] <> folowusr AND UCatLvl < 3 or UCatLvl > 5"));
             LblNoFlwCount.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TkFolw)", "TkFolw = 'False'"));
-            LblRecved.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TkRecieveDt)", "TkRecieveDt = '" + DateTime.Parse(Statcdif.servrTime).ToString("yyyy/MM/dd") + "'"));
+            LblRecved.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TkRecieveDt)", "TkRecieveDt = '" + (Statcdif.servrTime) + "'"));
             LblFl1.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TkupEvtId)", "TkupEvtId = 902"));
             LblFl2.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TkupEvtId)", "TkupEvtId = 903"));
             LblFl3.Text = Convert.ToString(tblfilter.DefaultView.ToTable().Compute("count(TkupEvtId)", "TkupEvtId = 904"));
@@ -1004,10 +1004,10 @@ namespace VOCAUltimate.PL
             for (int i = 0; i < usercountrsTbl.Rows.Count; i++)
             {
                 temptbl.DefaultView.RowFilter = "TkEmpNm = " + usercountrsTbl.Rows[i][0];
-                int cnt = Convert.ToInt32(temptbl.DefaultView.ToTable().Compute("count(TkRecieveDt)", "TkRecieveDt = '" + DateTime.Parse(Statcdif.servrTime).ToString("yyyy/MM/dd") + "'"));
+                int cnt = Convert.ToInt32(temptbl.DefaultView.ToTable().Compute("count(TkRecieveDt)", "TkRecieveDt = '" + (Statcdif.servrTime) + "'"));
                 if (cnt > 0)
                 {
-                    usercountrsTbl.Rows[i]["العدد"] = temptbl.DefaultView.ToTable().Compute("count(TkRecieveDt)", "TkRecieveDt = '" + DateTime.Parse(Statcdif.servrTime).ToString("yyyy/MM/dd") + "'");
+                    usercountrsTbl.Rows[i]["العدد"] = temptbl.DefaultView.ToTable().Compute("count(TkRecieveDt)", "TkRecieveDt = '" + (Statcdif.servrTime) + "'");
                 }
                 else
                 {
@@ -1641,8 +1641,8 @@ namespace VOCAUltimate.PL
 
         private void pikerFrom_ValueChanged(object sender, EventArgs e)
         {
-            pikerTo.MinDate = Convert.ToDateTime("01/01/1753");
-            pikerTo.MaxDate = Convert.ToDateTime("31/12/9998");
+            pikerTo.MinDate = Convert.ToDateTime(Convert.ToDateTime("01/01/1753").ToString("yyyy/MM/dd"));
+            pikerTo.MaxDate = Convert.ToDateTime(DateTime.Parse("01/12/9998").ToString("yyyy/MM/dd"));
             pikerTo.MinDate = pikerFrom.Value;
             pikerTo.MaxDate = pikerFrom.Value.AddDays(30);
             pikerTo.Value = pikerFrom.Value.AddDays(30);

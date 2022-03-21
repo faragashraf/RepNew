@@ -284,9 +284,19 @@ namespace VOCAUltimate
             DataTable TimeTbl = new DataTable();
             if (Gettable("Select GetDate() as Now_", TimeTbl) == null)
             {
-                servrTime = TimeTbl.Rows[0].Field<DateTime>("Now_").ToString(); // TimeTbl.Rows[0].Field<DateTime>("Now_");
+                servrTime = TimeTbl.Rows[0].Field<DateTime>("Now_").ToString("yyyy/MM/dd"); // TimeTbl.Rows[0].Field<DateTime>("Now_");
             }
             return servrTime;
+        }
+        public DateTime ServrTimeTime()
+        {
+            DataTable TimeTbl = new DataTable();
+            DateTime Datetime_ = DateTime.Now;
+            if (Gettable("Select GetDate() as Now_", TimeTbl) == null)
+            {
+                Datetime_ = TimeTbl.Rows[0].Field<DateTime>("Now_"); // TimeTbl.Rows[0].Field<DateTime>("Now_");
+            }
+            return Datetime_;
         }
         public static void AppLog(String LogMsg, String ErrCd, String SSqlStrs)                                  //Insert Exception Into Log FIle
         {

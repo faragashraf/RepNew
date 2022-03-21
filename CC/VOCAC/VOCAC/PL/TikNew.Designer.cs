@@ -539,6 +539,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SubmitBtn.BackgroundImage = global::VOCAUltimate.Properties.Resources.SaveFl;
             this.SubmitBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.SubmitBtn.Enabled = false;
             this.SubmitBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.SubmitBtn.FlatAppearance.BorderSize = 0;
             this.SubmitBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;

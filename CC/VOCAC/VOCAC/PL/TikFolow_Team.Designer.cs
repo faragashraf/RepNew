@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TikFolow_Team));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Panel3 = new System.Windows.Forms.Panel();
             this.CloseBtn = new System.Windows.Forms.Button();
             this.FlwtopBar = new System.Windows.Forms.FlowLayoutPanel();
@@ -49,6 +49,9 @@
             this.pnlBtnExport = new System.Windows.Forms.Panel();
             this.btnExport = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.rdCompDt = new System.Windows.Forms.RadioButton();
+            this.rdEventDt = new System.Windows.Forms.RadioButton();
             this.btnCalc = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnReassign = new System.Windows.Forms.Button();
@@ -73,6 +76,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pikerFrom = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
+            this.pikerTo = new System.Windows.Forms.DateTimePicker();
             this.panel9 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.checkAll = new System.Windows.Forms.CheckBox();
@@ -131,10 +135,6 @@
             this.StatBrPnlEn = new System.Windows.Forms.StatusBarPanel();
             this.ContextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.pikerTo = new System.Windows.Forms.DateTimePicker();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.rdCompDt = new System.Windows.Forms.RadioButton();
-            this.rdEventDt = new System.Windows.Forms.RadioButton();
             this.Panel3.SuspendLayout();
             this.FlwtopBar.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
@@ -148,6 +148,7 @@
             this.flowLayoutPanel5.SuspendLayout();
             this.pnlBtnExport.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel10.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabDistribute.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -182,7 +183,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlAr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlEn)).BeginInit();
             this.ContextMenuStrip2.SuspendLayout();
-            this.panel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // Panel3
@@ -430,6 +430,42 @@
             this.panel6.Size = new System.Drawing.Size(402, 59);
             this.panel6.TabIndex = 2183;
             // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.rdCompDt);
+            this.panel10.Controls.Add(this.rdEventDt);
+            this.panel10.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            this.panel10.Location = new System.Drawing.Point(64, 3);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(331, 52);
+            this.panel10.TabIndex = 2177;
+            // 
+            // rdCompDt
+            // 
+            this.rdCompDt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdCompDt.AutoSize = true;
+            this.rdCompDt.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
+            this.rdCompDt.Location = new System.Drawing.Point(180, 14);
+            this.rdCompDt.Name = "rdCompDt";
+            this.rdCompDt.Size = new System.Drawing.Size(137, 26);
+            this.rdCompDt.TabIndex = 2172;
+            this.rdCompDt.Text = "من تاريخ الشكوى";
+            this.rdCompDt.UseVisualStyleBackColor = true;
+            // 
+            // rdEventDt
+            // 
+            this.rdEventDt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdEventDt.AutoSize = true;
+            this.rdEventDt.Checked = true;
+            this.rdEventDt.Font = new System.Drawing.Font("Times New Roman", 14F);
+            this.rdEventDt.Location = new System.Drawing.Point(15, 14);
+            this.rdEventDt.Name = "rdEventDt";
+            this.rdEventDt.Size = new System.Drawing.Size(156, 25);
+            this.rdEventDt.TabIndex = 2173;
+            this.rdEventDt.TabStop = true;
+            this.rdEventDt.Text = "من تاريخ آخر تحديث";
+            this.rdEventDt.UseVisualStyleBackColor = true;
+            // 
             // btnCalc
             // 
             this.btnCalc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -659,24 +695,26 @@
             // 
             // flowLayoutPanel8
             // 
+            this.flowLayoutPanel8.AutoScroll = true;
             this.flowLayoutPanel8.Controls.Add(this.panel8);
             this.flowLayoutPanel8.Controls.Add(this.flowLayoutPanel9);
             this.flowLayoutPanel8.Controls.Add(this.panel9);
+            this.flowLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel8.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel8.Location = new System.Drawing.Point(0, 3);
+            this.flowLayoutPanel8.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel8.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.flowLayoutPanel8.Name = "flowLayoutPanel8";
             this.flowLayoutPanel8.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.flowLayoutPanel8.Size = new System.Drawing.Size(1089, 67);
+            this.flowLayoutPanel8.Size = new System.Drawing.Size(1086, 67);
             this.flowLayoutPanel8.TabIndex = 2191;
             // 
             // panel8
             // 
             this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.panel8.Location = new System.Drawing.Point(886, 3);
+            this.panel8.Location = new System.Drawing.Point(883, 3);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(200, 58);
+            this.panel8.Size = new System.Drawing.Size(200, 52);
             this.panel8.TabIndex = 2176;
             // 
             // flowLayoutPanel9
@@ -686,9 +724,9 @@
             this.flowLayoutPanel9.Controls.Add(this.label1);
             this.flowLayoutPanel9.Controls.Add(this.pikerTo);
             this.flowLayoutPanel9.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel9.Location = new System.Drawing.Point(224, 3);
+            this.flowLayoutPanel9.Location = new System.Drawing.Point(221, 3);
             this.flowLayoutPanel9.Name = "flowLayoutPanel9";
-            this.flowLayoutPanel9.Size = new System.Drawing.Size(656, 60);
+            this.flowLayoutPanel9.Size = new System.Drawing.Size(656, 51);
             this.flowLayoutPanel9.TabIndex = 2177;
             this.flowLayoutPanel9.Visible = false;
             // 
@@ -727,14 +765,24 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "إلى :";
             // 
+            // pikerTo
+            // 
+            this.pikerTo.Font = new System.Drawing.Font("Times New Roman", 14F);
+            this.pikerTo.Location = new System.Drawing.Point(9, 15);
+            this.pikerTo.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
+            this.pikerTo.Name = "pikerTo";
+            this.pikerTo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.pikerTo.Size = new System.Drawing.Size(276, 29);
+            this.pikerTo.TabIndex = 4;
+            // 
             // panel9
             // 
             this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel9.Controls.Add(this.button1);
-            this.panel9.Location = new System.Drawing.Point(150, 3);
+            this.panel9.Location = new System.Drawing.Point(147, 3);
             this.panel9.Margin = new System.Windows.Forms.Padding(100, 3, 3, 3);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(68, 62);
+            this.panel9.Size = new System.Drawing.Size(68, 60);
             this.panel9.TabIndex = 2183;
             // 
             // button1
@@ -1061,8 +1109,8 @@
             // 
             this.GridTicket.AllowUserToAddRows = false;
             this.GridTicket.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.GridTicket.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.GridTicket.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.GridTicket.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GridTicket.BackgroundColor = System.Drawing.Color.White;
             this.GridTicket.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -1497,52 +1545,6 @@
             this.ContextMenuStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.ContextMenuStrip2.Size = new System.Drawing.Size(185, 70);
             // 
-            // pikerTo
-            // 
-            this.pikerTo.Font = new System.Drawing.Font("Times New Roman", 14F);
-            this.pikerTo.Location = new System.Drawing.Point(9, 15);
-            this.pikerTo.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
-            this.pikerTo.Name = "pikerTo";
-            this.pikerTo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.pikerTo.Size = new System.Drawing.Size(276, 29);
-            this.pikerTo.TabIndex = 4;
-            // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.rdCompDt);
-            this.panel10.Controls.Add(this.rdEventDt);
-            this.panel10.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.panel10.Location = new System.Drawing.Point(64, 3);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(331, 52);
-            this.panel10.TabIndex = 2177;
-            // 
-            // rdCompDt
-            // 
-            this.rdCompDt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.rdCompDt.AutoSize = true;
-            this.rdCompDt.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
-            this.rdCompDt.Location = new System.Drawing.Point(180, 14);
-            this.rdCompDt.Name = "rdCompDt";
-            this.rdCompDt.Size = new System.Drawing.Size(137, 26);
-            this.rdCompDt.TabIndex = 2172;
-            this.rdCompDt.Text = "من تاريخ الشكوى";
-            this.rdCompDt.UseVisualStyleBackColor = true;
-            // 
-            // rdEventDt
-            // 
-            this.rdEventDt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.rdEventDt.AutoSize = true;
-            this.rdEventDt.Checked = true;
-            this.rdEventDt.Font = new System.Drawing.Font("Times New Roman", 14F);
-            this.rdEventDt.Location = new System.Drawing.Point(15, 14);
-            this.rdEventDt.Name = "rdEventDt";
-            this.rdEventDt.Size = new System.Drawing.Size(156, 25);
-            this.rdEventDt.TabIndex = 2173;
-            this.rdEventDt.TabStop = true;
-            this.rdEventDt.Text = "من تاريخ آخر تحديث";
-            this.rdEventDt.UseVisualStyleBackColor = true;
-            // 
             // TikFolow_Team
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -1574,6 +1576,8 @@
             this.flowLayoutPanel5.ResumeLayout(false);
             this.pnlBtnExport.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.tabDistribute.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
@@ -1614,8 +1618,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlAr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StatBrPnlEn)).EndInit();
             this.ContextMenuStrip2.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

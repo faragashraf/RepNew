@@ -1018,7 +1018,6 @@ namespace VOCAUltimate.PL
             {
                 if (Ctrl.GetType() == typeof(TextBox))
                 {
-
                     string KK = GetNextControl(Ctrl, false).Text.Substring(0, GetNextControl(Ctrl, false).Text.Length - 3);
                     mndtbl.Rows.Add(0, KK, Ctrl.Text);
                 }
@@ -1032,7 +1031,7 @@ namespace VOCAUltimate.PL
                     DateTimePicker Dpkr = new DateTimePicker();
                     Dpkr = (DateTimePicker)Ctrl;
                     string KK = GetNextControl(Ctrl, false).Text.Substring(0, GetNextControl(Ctrl, false).Text.Length - 3);
-                    mndtbl.Rows.Add(0, KK, Dpkr.Value);
+                    mndtbl.Rows.Add(0, KK, Dpkr.Value.ToString("yyyy/MM/dd"));
                 }
             }
             //Statcdif.ProdCompTable.DefaultView.RowFilter = "[FnSQL]  = " + TreeView1.SelectedNode.Name;

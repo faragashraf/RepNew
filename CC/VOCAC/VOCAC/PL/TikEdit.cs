@@ -122,7 +122,7 @@ namespace VOCAUltimate.PL
 
             TickKind = 0;
             PrdKind = "";
-            MyGroupBox3.Enabled = false;
+            MyGroupBox3.Enabled = true;
             FlwTree.Enabled = true;
             FlwMainData.Enabled = false;
             richTextBox1.Text = "";
@@ -521,17 +521,17 @@ namespace VOCAUltimate.PL
                 TreeView1.ImageList = ImgLst;
 
                 Statcdif.ProdKTable.DefaultView.RowFilter = "ProdKNm = '" + editStruct.dt.Rows[0]["ProdKNm"].ToString() + "'";
-                for (int i = 0; i < Statcdif.ProdKTable.DefaultView.Count; i++)
+                for (int i = 0; i < Statcdif.ProdKTable.Rows.Count; i++)
                 {
-                    TreeView1.Nodes.Add(Statcdif.ProdKTable.DefaultView[i][0].ToString(), Statcdif.ProdKTable.DefaultView[i][1].ToString(), 1, 3);
+                    TreeView1.Nodes.Add(Statcdif.ProdKTable.Rows[i][0].ToString(), Statcdif.ProdKTable.Rows[i][1].ToString(), 1, 3);
                 }
                 if (TickKind == 0)
                 {
-                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + 1 + " AND PrdKind = '" + Statcdif.ProdKTable.DefaultView[0][0].ToString() + "'";
+                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + 1;// + " AND PrdKind = '" + Statcdif.ProdKTable.DefaultView[0][0].ToString() + "'";
                 }
                 else
                 {
-                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + 0 + " AND PrdKind = '" + Statcdif.ProdKTable.DefaultView[0][0].ToString() + "'";
+                    Statcdif.ProdCompTable.DefaultView.RowFilter = "[CompReqst] = " + 0;// + " AND PrdKind = '" + Statcdif.ProdKTable.DefaultView[0][0].ToString() + "'";
                 }
                 //Populate Products Nodes
                 for (int i = 0; i < Statcdif.ProdCompTable.DefaultView.Count; i++)
@@ -1035,9 +1035,9 @@ namespace VOCAUltimate.PL
                 DateTimePicker c = (DateTimePicker)item;
                 if (ctrlList.Contains(c.Name))
                 {
-                    if (c.Text != editStruct.dt.Rows[0][c.Name].ToString())
+                    if (Convert.ToDateTime(c.Text).ToString("dd/MM/yyyy") != Convert.ToDateTime(editStruct.dt.Rows[0][c.Name].ToString()).ToString("dd/MM/yyyy"))
                     {
-                        UpTxt.Append(Environment.NewLine + "تم تعديل " + c.Name + " من " + "\"" + editStruct.dt.Rows[0][c.Name].ToString() + "\"" + " إلى " + "\"" + c.Text + "\"");
+                        UpTxt.Append(Environment.NewLine + "تم تعديل " + c.Name + " من " + "\"" + Convert.ToDateTime(editStruct.dt.Rows[0][c.Name]).ToString("dd/MM/yyyy") + "\"" + " إلى " + "\"" + Convert.ToDateTime(c.Text).ToString("dd/MM/yyyy") + "\"");
                         updateStrMend.Add("Update TKMendFields set FildTxt = " + "CONVERT(VARCHAR, '" + c.Text + "', 111)" + " where FildKind = '" + c.Name + "' AND FildRelted = " + ComRefLbl.Text);
                     }
                 }
@@ -1446,6 +1446,7 @@ namespace VOCAUltimate.PL
                     pkrtxtBx.Value = DateTime.Now.AddDays(1);
                     FlwMend.Controls.Add(pkrtxtBx);
                 }
+                string kk = editStruct.dt.Rows[0][ctrlList[i].ToString()].ToString();
                 GetNextControl(Lbl, true).Text = editStruct.dt.Rows[0][ctrlList[i].ToString()].ToString();
                 GetNextControl(Lbl, true).Name = Lbl.Text.ToString().Split(':')[0].ToString().Trim();
             }
@@ -1473,7 +1474,7 @@ namespace VOCAUltimate.PL
         {
             frm.FormClosed -= new FormClosedEventHandler(frm_Closed);
             frm.FormClosed += new FormClosedEventHandler(frm_Closed);
-             ComRefLbl.Select();
+            ComRefLbl.Select();
         }
     }
 }

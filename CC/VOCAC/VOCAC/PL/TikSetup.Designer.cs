@@ -59,11 +59,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.txtlength = new System.Windows.Forms.TextBox();
-            this.lblcaution = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnsubmit = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btncancel = new System.Windows.Forms.Button();
+            this.lblcaution = new System.Windows.Forms.Label();
             this.labfldNm = new System.Windows.Forms.Label();
             this.btnaddnew = new System.Windows.Forms.Button();
             this.FlwMend = new System.Windows.Forms.FlowLayoutPanel();
@@ -75,14 +75,14 @@
             this.Label5 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtprodIdent = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.radactive = new System.Windows.Forms.RadioButton();
             this.raddisactive = new System.Windows.Forms.RadioButton();
+            this.radactive = new System.Windows.Forms.RadioButton();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.MyGroupBox3.SuspendLayout();
@@ -462,19 +462,6 @@
             this.txtlength.Text = "0";
             this.txtlength.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Txtlength_KeyPress);
             // 
-            // lblcaution
-            // 
-            this.lblcaution.AutoSize = true;
-            this.flowMend.SetFlowBreak(this.lblcaution, true);
-            this.lblcaution.Font = new System.Drawing.Font("Times New Roman", 13F);
-            this.lblcaution.ForeColor = System.Drawing.Color.Red;
-            this.lblcaution.Location = new System.Drawing.Point(649, 249);
-            this.lblcaution.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.lblcaution.Name = "lblcaution";
-            this.lblcaution.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblcaution.Size = new System.Drawing.Size(0, 20);
-            this.lblcaution.TabIndex = 2050;
-            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Transparent;
@@ -526,6 +513,19 @@
             this.btncancel.Click += new System.EventHandler(this.Btncancel_Click);
             this.btncancel.MouseEnter += new System.EventHandler(this.Btncancel_MouseEnter);
             this.btncancel.MouseLeave += new System.EventHandler(this.Btncancel_MouseLeave);
+            // 
+            // lblcaution
+            // 
+            this.lblcaution.AutoSize = true;
+            this.flowMend.SetFlowBreak(this.lblcaution, true);
+            this.lblcaution.Font = new System.Drawing.Font("Times New Roman", 13F);
+            this.lblcaution.ForeColor = System.Drawing.Color.Red;
+            this.lblcaution.Location = new System.Drawing.Point(649, 249);
+            this.lblcaution.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.lblcaution.Name = "lblcaution";
+            this.lblcaution.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblcaution.Size = new System.Drawing.Size(0, 20);
+            this.lblcaution.TabIndex = 2050;
             // 
             // labfldNm
             // 
@@ -676,6 +676,19 @@
             this.panel2.Size = new System.Drawing.Size(339, 202);
             this.panel2.TabIndex = 2057;
             // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
+            this.button1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(16, 95);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 3, 420, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(70, 29);
+            this.button1.TabIndex = 2052;
+            this.button1.Text = "Submit";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -721,18 +734,6 @@
             this.comboBox1.Size = new System.Drawing.Size(194, 29);
             this.comboBox1.TabIndex = 2056;
             // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::VOCAUltimate.Properties.Resources.recgreen;
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(16, 95);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 3, 420, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(70, 29);
-            this.button1.TabIndex = 2052;
-            this.button1.Text = "Submit";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // panel5
             // 
             this.panel5.Controls.Add(this.raddisactive);
@@ -743,18 +744,6 @@
             this.panel5.Size = new System.Drawing.Size(282, 35);
             this.panel5.TabIndex = 2060;
             this.panel5.Visible = false;
-            // 
-            // radactive
-            // 
-            this.radactive.AutoSize = true;
-            this.radactive.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.radactive.Location = new System.Drawing.Point(175, 3);
-            this.radactive.Name = "radactive";
-            this.radactive.Size = new System.Drawing.Size(93, 23);
-            this.radactive.TabIndex = 0;
-            this.radactive.TabStop = true;
-            this.radactive.Text = "الشكوى تعمل";
-            this.radactive.UseVisualStyleBackColor = true;
             // 
             // raddisactive
             // 
@@ -767,6 +756,18 @@
             this.raddisactive.TabStop = true;
             this.raddisactive.Text = "الشكوى لا تعمل";
             this.raddisactive.UseVisualStyleBackColor = true;
+            // 
+            // radactive
+            // 
+            this.radactive.AutoSize = true;
+            this.radactive.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.radactive.Location = new System.Drawing.Point(175, 3);
+            this.radactive.Name = "radactive";
+            this.radactive.Size = new System.Drawing.Size(93, 23);
+            this.radactive.TabIndex = 0;
+            this.radactive.TabStop = true;
+            this.radactive.Text = "الشكوى تعمل";
+            this.radactive.UseVisualStyleBackColor = true;
             // 
             // label8
             // 

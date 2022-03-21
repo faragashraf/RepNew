@@ -591,7 +591,6 @@
             this.RadioButton4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RadioButton4.CheckAlign = System.Drawing.ContentAlignment.TopRight;
             this.RadioButton4.Cursor = System.Windows.Forms.Cursors.Default;
-            this.RadioButton4.Enabled = false;
             this.RadioButton4.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.RadioButton4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.RadioButton4.Location = new System.Drawing.Point(89, 12);
