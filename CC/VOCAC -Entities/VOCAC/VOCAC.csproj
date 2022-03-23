@@ -1,0 +1,650 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{95433346-A677-4259-9155-1F616F8F8F52}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>VOCAUltimate</RootNamespace>
+    <AssemblyName>VOCAC</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>true</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>http://10.10.26.4:80/</UpdateUrl>
+    <ProductName>VOCA Ultimate</ProductName>
+    <PublisherName>Ashraf Farag</PublisherName>
+    <SuiteName>VOCA Ultimate</SuiteName>
+    <MinimumRequiredVersion>1.0.0.3</MinimumRequiredVersion>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>VOCAUltimate.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>ECEB9DD56DEB3A52466700C0C9B9CBFFDF7F3E84</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>VOCAC_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>vocaultimate_Wd9_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.95.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.95.4\lib\net40\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.15.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.15.0\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="APblicClss.cs" />
+    <Compile Include="BL\CLS_LOGIN.cs" />
+    <Compile Include="BL\IntUtly.cs" />
+    <Compile Include="BL\pictureViewer_.cs" />
+    <Compile Include="BL\ticketCurrent.cs" />
+    <Compile Include="BL\TicketsSelectBulk.cs" />
+    <Compile Include="DAL\DataAccessLayer.cs" />
+    <Compile Include="PL\heldSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\heldSearch.Designer.cs">
+      <DependentUpon>heldSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\TikEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TikEdit.Designer.cs">
+      <DependentUpon>TikEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\TikFolow360.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TikFolow360.Designer.cs">
+      <DependentUpon>TikFolow360.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\userPasschange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\userPasschange.Designer.cs">
+      <DependentUpon>userPasschange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\TikFolow_Team.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TikFolow_Team.Designer.cs">
+      <DependentUpon>TikFolow_Team.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\TikNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TikNew.Designer.cs">
+      <DependentUpon>TikNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\TikUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TikUpdate.Designer.cs">
+      <DependentUpon>TikUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\UserResetPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\UserResetPassword.Designer.cs">
+      <DependentUpon>UserResetPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\UsrPermission.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\UsrPermission.Designer.cs">
+      <DependentUpon>UsrPermission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\zLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\zLog.Designer.cs">
+      <DependentUpon>zLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\zpicViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\zpicViewer.Designer.cs">
+      <DependentUpon>zpicViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\ZTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\ZTest.Designer.cs">
+      <DependentUpon>ZTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PL\TikDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TikDetails.Designer.cs">
+      <DependentUpon>TikDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\TikSearchNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TikSearchNew.Designer.cs">
+      <DependentUpon>TikSearchNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PL\TikSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\TikSetup.Designer.cs">
+      <DependentUpon>TikSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VCtheme.cs" />
+    <Compile Include="PL\WelcomeScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PL\WelcomeScreen.Designer.cs">
+      <DependentUpon>WelcomeScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\VOCAServiceGet\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="PL\heldSearch.resx">
+      <DependentUpon>heldSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\TikEdit.resx">
+      <DependentUpon>TikEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\TikFolow360.resx">
+      <DependentUpon>TikFolow360.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\userPasschange.resx">
+      <DependentUpon>userPasschange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\TikFolow_Team.resx">
+      <DependentUpon>TikFolow_Team.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\TikNew.resx">
+      <DependentUpon>TikNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\TikSetup.resx">
+      <DependentUpon>TikSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\TikUpdate.resx">
+      <DependentUpon>TikUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\UserResetPassword.resx">
+      <DependentUpon>UserResetPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\UsrPermission.resx">
+      <DependentUpon>UsrPermission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\zLog.resx">
+      <DependentUpon>zLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\zpicViewer.resx">
+      <DependentUpon>zpicViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\ZTest.resx">
+      <DependentUpon>ZTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="PL\TikDetails.resx">
+      <DependentUpon>TikDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\TikSearchNew.resx">
+      <DependentUpon>TikSearchNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PL\WelcomeScreen.resx">
+      <DependentUpon>WelcomeScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="VOCAC_TemporaryKey.pfx" />
+    <None Include="Web References\VOCAServiceGet\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\VOCAServiceGet\VOCAServiceGet.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Artiix2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Back1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Back2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browse-button-png-th.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Catch1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ChangePass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Check_Marks1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Check_Marks2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Collapse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CpAdd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CpClose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CpOpen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CpTrns.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DbGet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DBOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DBOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DbUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Demo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dublicte1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Egyptpost.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Empty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\escalate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\escalate1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Expand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Export.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Export1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Format1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Frstaid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FTP.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LandLine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Language for Non Unicode Programs.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Load.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoadFl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mobile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewFolder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paprNtf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paste1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Phone1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pin1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Prev.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Preview1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recblue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recgreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recgrey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recorange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recpurple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recred.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recred1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rectan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recyellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rename.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Reset1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RstPass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SaveFl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Search1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShowN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShowY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tckoff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tckon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UC-Flashing.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\upload-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Upload-Transparent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UPU.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UserC48.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UserCreate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\usersLogin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UsrResm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UsrSusp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VOCAIntro3.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VocaWtr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Yes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DBOff.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DBOn.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Frstaid.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Minus.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VCOff48.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VCOn48.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VocaIcon2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WSOff032.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WSOff048.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WSOn032.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WSOn048.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Frstaid.ico" />
+    <None Include="Resources\VOCAUltimatePicture2.png" />
+    <None Include="Resources\VOCAUltimateWater0.png" />
+    <None Include="Resources\VOCAUltimateWater10.png" />
+    <None Include="Resources\VOCAUltimateWater20.png" />
+    <None Include="Resources\VOCAUltimateWater01.png" />
+    <None Include="Resources\VOCAUltimateWater101.png" />
+    <None Include="Resources\VOCAUltimateWater201.png" />
+    <None Include="Resources\VOCAUltimatePicture40.png" />
+    <Content Include="vocaultimate_Wd9_icon.ico" />
+    <None Include="Resources\calculate.png" />
+    <None Include="Web References\VOCAServiceGet\VOCAServiceGet.disco" />
+    <None Include="Resources\TransferTeam.png" />
+    <None Include="Resources\owner.png" />
+    <None Include="Resources\Distribute.png" />
+    <None Include="Resources\print.png" />
+    <None Include="Resources\team.png" />
+    <None Include="Resources\Male.png" />
+    <None Include="Resources\Female.png" />
+    <None Include="Resources\FilterOff.ico" />
+    <None Include="Resources\FilterOn.ico" />
+    <None Include="Resources\SaveRed1.png" />
+    <None Include="Resources\SaveRed.png" />
+    <None Include="Resources\SaveGreen1.png" />
+    <None Include="Resources\SaveGreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://10.10.26.4:8000/VOCAServiceGet.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\VOCAServiceGet\</RelPath>
+      <UpdateFromURL>http://10.10.26.4:8000/VOCAServiceGet.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>VOCAC_VOCAServiceGet_VOCAServiceGet</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
