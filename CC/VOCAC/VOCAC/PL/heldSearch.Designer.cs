@@ -201,7 +201,7 @@
             this.GridHeldUpdt.Name = "GridHeldUpdt";
             this.GridHeldUpdt.ReadOnly = true;
             this.GridHeldUpdt.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.GridHeldUpdt.Size = new System.Drawing.Size(786, 419);
+            this.GridHeldUpdt.Size = new System.Drawing.Size(786, 452);
             this.GridHeldUpdt.TabIndex = 2113;
             // 
             // Label60

@@ -28,7 +28,7 @@ namespace VOCAUltimate
         public static int screenHeight = Screen.PrimaryScreen.Bounds.Height;
         public static InputLanguage EnglishInput;
         public static InputLanguage ArabicInput;
-        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaultimate;Password=@VocaPlus$21-1237";
+        public static string strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaultimate;Password=@VocaPlus$21-#$%";
         public SqlConnection CONSQL;
         public static String _ServerCD;
         public static String _serverNm;
@@ -90,7 +90,7 @@ namespace VOCAUltimate
             strConn = null;
             if (_ServerCD == "Eg Server")
             {
-                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaultimate;Password=@VocaPlus$21-1237";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlus;Persist Security Info=True;User ID=vocaultimate;Password=@VocaPlus$21-#$%";
                 _serverNm = "VOCA Server";
                 WelcomeScreen.getwecmscrnfrm.BackgroundImage = Resources.VOCAUltimatePicture2;
                 WelcomeScreen.getwecmscrnfrm.BackgroundImageLayout = ImageLayout.Stretch;
@@ -104,7 +104,7 @@ namespace VOCAUltimate
             }
             else if (_ServerCD == "Training")
             {
-                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaultimate;Password=@VocaPlus$21-1237";
+                Statcdif.strConn = "Data Source=10.10.26.4;Initial Catalog=VOCAPlusDemo;Persist Security Info=True;User ID=vocaultimate;Password=@VocaPlus$21-#$%";
                 _serverNm = "Training";
                 WelcomeScreen.getwecmscrnfrm.BackgroundImage = Resources.Empty;
                 WelcomeScreen.getwecmscrnfrm.BackColor = Color.White;

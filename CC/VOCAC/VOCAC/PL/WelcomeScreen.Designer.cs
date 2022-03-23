@@ -133,7 +133,7 @@
             this.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.PictureBox1.ContextMenuStrip = this.CNTXMNUPic;
             this.FlowLayoutPanel1.SetFlowBreak(this.PictureBox1, true);
-            this.PictureBox1.Location = new System.Drawing.Point(439, 269);
+            this.PictureBox1.Location = new System.Drawing.Point(549, 269);
             this.PictureBox1.Margin = new System.Windows.Forms.Padding(40, 0, 0, 0);
             this.PictureBox1.Name = "PictureBox1";
             this.PictureBox1.Size = new System.Drawing.Size(200, 225);
@@ -178,7 +178,7 @@
             this.LblSrvrNm.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.LblSrvrNm.ForeColor = System.Drawing.Color.Red;
             this.LblSrvrNm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LblSrvrNm.Location = new System.Drawing.Point(3, 811);
+            this.LblSrvrNm.Location = new System.Drawing.Point(113, 811);
             this.LblSrvrNm.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.LblSrvrNm.Name = "LblSrvrNm";
             this.LblSrvrNm.Size = new System.Drawing.Size(289, 20);
@@ -206,11 +206,11 @@
             this.FlowLayoutPanel1.Controls.Add(this.Panel2);
             this.FlowLayoutPanel1.Controls.Add(this.Panel3);
             this.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.FlowLayoutPanel1.Location = new System.Drawing.Point(38, 12);
+            this.FlowLayoutPanel1.Location = new System.Drawing.Point(38, 46);
             this.FlowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.FlowLayoutPanel1.Name = "FlowLayoutPanel1";
             this.FlowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.FlowLayoutPanel1.Size = new System.Drawing.Size(711, 571);
+            this.FlowLayoutPanel1.Size = new System.Drawing.Size(1419, 537);
             this.FlowLayoutPanel1.TabIndex = 99;
             this.FlowLayoutPanel1.Visible = false;
             // 
@@ -219,7 +219,7 @@
             this.DbStat.BackColor = System.Drawing.Color.Transparent;
             this.DbStat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.FlowLayoutPanel1.SetFlowBreak(this.DbStat, true);
-            this.DbStat.Location = new System.Drawing.Point(1256, 3);
+            this.DbStat.Location = new System.Drawing.Point(1366, 3);
             this.DbStat.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.DbStat.Name = "DbStat";
             this.DbStat.Size = new System.Drawing.Size(36, 35);
@@ -236,7 +236,7 @@
             this.GroupBox1.Controls.Add(this.LblClrNotUsr);
             this.GroupBox1.Controls.Add(this.LblClrSys);
             this.GroupBox1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GroupBox1.Location = new System.Drawing.Point(1036, 272);
+            this.GroupBox1.Location = new System.Drawing.Point(1146, 272);
             this.GroupBox1.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.GroupBox1.Name = "GroupBox1";
             this.GroupBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -349,7 +349,7 @@
             this.GrpCounters.Controls.Add(this.Label0);
             this.GrpCounters.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.GrpCounters.ForeColor = System.Drawing.Color.ForestGreen;
-            this.GrpCounters.Location = new System.Drawing.Point(639, 273);
+            this.GrpCounters.Location = new System.Drawing.Point(749, 273);
             this.GrpCounters.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
             this.GrpCounters.Name = "GrpCounters";
             this.GrpCounters.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -679,7 +679,7 @@
             this.LblUsrRNm.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold);
             this.LblUsrRNm.ForeColor = System.Drawing.Color.Blue;
             this.LblUsrRNm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LblUsrRNm.Location = new System.Drawing.Point(3, 785);
+            this.LblUsrRNm.Location = new System.Drawing.Point(113, 785);
             this.LblUsrRNm.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.LblUsrRNm.Name = "LblUsrRNm";
             this.LblUsrRNm.Size = new System.Drawing.Size(289, 20);
@@ -694,7 +694,7 @@
             this.LblLstSeen.Font = new System.Drawing.Font("Times New Roman", 14F);
             this.LblLstSeen.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.LblLstSeen.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.LblLstSeen.Location = new System.Drawing.Point(3, 837);
+            this.LblLstSeen.Location = new System.Drawing.Point(113, 837);
             this.LblLstSeen.Margin = new System.Windows.Forms.Padding(3, 3, 1000, 3);
             this.LblLstSeen.Name = "LblLstSeen";
             this.LblLstSeen.Size = new System.Drawing.Size(289, 20);
@@ -707,7 +707,7 @@
             this.FlowLayoutPanel1.SetFlowBreak(this.LblUsrIP, true);
             this.LblUsrIP.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.LblUsrIP.ForeColor = System.Drawing.Color.Red;
-            this.LblUsrIP.Location = new System.Drawing.Point(985, 860);
+            this.LblUsrIP.Location = new System.Drawing.Point(1095, 860);
             this.LblUsrIP.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
             this.LblUsrIP.Name = "LblUsrIP";
             this.LblUsrIP.Size = new System.Drawing.Size(297, 20);
@@ -722,7 +722,7 @@
             this.FlowLayoutPanel1.SetFlowBreak(this.PubVerLbl, true);
             this.PubVerLbl.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.PubVerLbl.ForeColor = System.Drawing.Color.Red;
-            this.PubVerLbl.Location = new System.Drawing.Point(985, 880);
+            this.PubVerLbl.Location = new System.Drawing.Point(1095, 880);
             this.PubVerLbl.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
             this.PubVerLbl.Name = "PubVerLbl";
             this.PubVerLbl.Size = new System.Drawing.Size(297, 20);
@@ -737,7 +737,7 @@
             this.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.Panel2.Controls.Add(this.SnOutBt);
             this.Panel2.Controls.Add(this.ExtBt);
-            this.Panel2.Location = new System.Drawing.Point(1047, 929);
+            this.Panel2.Location = new System.Drawing.Point(1157, 929);
             this.Panel2.Name = "Panel2";
             this.Panel2.Size = new System.Drawing.Size(242, 40);
             this.Panel2.TabIndex = 97;
@@ -775,7 +775,7 @@
             this.Panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Panel3.BackColor = System.Drawing.Color.Transparent;
             this.Panel3.Controls.Add(this.Button2);
-            this.Panel3.Location = new System.Drawing.Point(917, 930);
+            this.Panel3.Location = new System.Drawing.Point(1027, 930);
             this.Panel3.Name = "Panel3";
             this.Panel3.Size = new System.Drawing.Size(124, 39);
             this.Panel3.TabIndex = 97;

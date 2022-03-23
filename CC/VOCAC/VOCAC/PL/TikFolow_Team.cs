@@ -722,13 +722,17 @@ namespace VOCAUltimate.PL
             string flterFilter = "";
             if (GridTicket.CurrentRow.Cells["TkClPh"].Value.ToString().Length > 0) { flterFilter += "TkClPh = '" + GridTicket.CurrentRow.Cells["TkClPh"].Value + "'"; }
             if (GridTicket.CurrentRow.Cells["TkClNtID"].Value.ToString().Length > 0) { flterFilter += " OR TkClNtID = '" + GridTicket.CurrentRow.Cells["TkClNtID"].Value + "'"; }
-            Statcdif.tik360.DefaultView.RowFilter = flterFilter;
-            if (tabControl1.TabPages.Contains(tabDistribute) && panelIndex == 0 && Statcdif.tik360.DefaultView.Count > 0)
+            if (Statcdif.tik360.Columns.Count >0)
             {
-                TikFolow360.getTikFol360frm.MdiParent = WelcomeScreen.ActiveForm;
-                TikFolow360.getTikFol360frm.WindowState = FormWindowState.Normal;
-                TikFolow360.getTikFol360frm.Show();
+                Statcdif.tik360.DefaultView.RowFilter = flterFilter;
+                if (tabControl1.TabPages.Contains(tabDistribute) && panelIndex == 0 && Statcdif.tik360.DefaultView.Count > 0)
+                {
+                    TikFolow360.getTikFol360frm.MdiParent = WelcomeScreen.ActiveForm;
+                    TikFolow360.getTikFol360frm.WindowState = FormWindowState.Normal;
+                    TikFolow360.getTikFol360frm.Show();
+                }
             }
+
         }
 
         #endregion
@@ -1150,7 +1154,7 @@ namespace VOCAUltimate.PL
                     GridTicket.Columns["Wdays"].Visible = true;
                     GridTicket.Columns["Wdays"].HeaderText = "ايام العمل";
                 }
-                if (tabControl1.SelectedTab.Name == "tabClosed" && GridTicket.Columns["TkDtClose"]!=null)
+                if (tabControl1.SelectedTab.Name == "tabClosed" && GridTicket.Columns["TkDtClose"] != null)
                 {
                     GridTicket.Columns["TkDtClose"].Visible = true;
                     GridTicket.Columns["TkDtClose"].HeaderText = "تاريخ الإغلاق";
