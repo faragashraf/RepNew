@@ -1,0 +1,53 @@
+<div class="container">
+    <form [formGroup]="loginfrm" (ngSubmit)="loggggg(loginfrm)">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+
+            </div>
+            <!-- <div style="width: 300px;margin-left: 30%;margin-right: 30%;width: 40%;"> -->
+            <div class="panel body">
+                <div class="row">
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-6"><span style="font-size: x-large;">Login</span>
+                        <br>
+                        <br>
+                        <div class="form-group">
+                            <div *ngIf="invalidlogin" class="alert alert-danger">{{Err_}}</div>
+                            <label for="userName">User Name:</label>
+                            <input id="userName" type="text" required="true" placeholder="Enter User Name"
+                                formControlName="userName" name="userName" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input id="password" type="password" required="true" placeholder="Enter Password"
+                                formControlName="password" name="password" class="form-control">
+                        </div>
+                        <br>
+
+                        <input type="submit" class="btn btn-primary" value="Login">
+                    </div>
+                    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#fff" type="ball-scale-multiple">
+                        <p style="font-size: 20px; color: white">Loading...</p>
+                    </ngx-spinner>
+                </div>
+                <br>
+
+            </div>
+            <!-- </div> -->
+            <div class="panel-footer">
+
+                <br>
+                <br>
+                <button hidden="true" type="button" class="btn btn-primary position-relative">
+                    Inbox
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        99+
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
